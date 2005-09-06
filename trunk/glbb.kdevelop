@@ -1,8 +1,8 @@
 <?xml version = '1.0'?>
 <kdevelop>
   <general>
-    <author>Alex Letkemann</author>
-    <email>alex@letkemann.de</email>
+    <author>Alex Letkemann, Vaceslav Ustinov</author>
+    <email>alex@letkemann.de, v.ustinov@web.de</email>
     <version>0.1</version>
     <projectmanagement>KDevTrollProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
@@ -13,7 +13,7 @@
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
     <description></description>
-    <versioncontrol></versioncontrol>
+    <versioncontrol/>
   </general>
   <kdevfileview>
     <groups>
@@ -122,7 +122,7 @@
     <projectdoc>
       <docsystem>Doxygen Documentation Collection</docsystem>
       <docurl>glbb.tag</docurl>
-      <usermanualurl></usermanualurl>
+      <usermanualurl/>
     </projectdoc>
   </kdevdocumentation>
   <substmap>
@@ -165,8 +165,6 @@
       <inlineGet>false</inlineGet>
       <inlineSet>false</inlineSet>
     </creategettersetter>
-    <references>
-      <pcs>Qt4</pcs>
-    </references>
+    <references/>
   </kdevcppsupport>
 </kdevelop>

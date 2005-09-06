@@ -2,14 +2,14 @@
 <!DOCTYPE KDevPrjSession>
 <KDevPrjSession>
  <DocsAndViews NumberOfDocuments="3" >
-  <Doc0 NumberOfViews="1" URL="file:///home/alex/Studium/SE.Projekt/glbb/editor/bb_workframe.cpp" >
-   <View0 line="22" Type="Source" />
+  <Doc0 NumberOfViews="1" URL="file:///home/high/develop/bbuilder/editor/bb_point.cpp" >
+   <View0 line="23" Type="Source" />
   </Doc0>
-  <Doc1 NumberOfViews="1" URL="file:///home/alex/Studium/SE.Projekt/glbb/editor/bb_workarea.cpp" >
-   <View0 line="30" Type="Source" />
+  <Doc1 NumberOfViews="1" URL="file:///home/high/develop/bbuilder/editor/bb_point.h" >
+   <View0 line="29" Type="Source" />
   </Doc1>
-  <Doc2 NumberOfViews="1" URL="file:///home/alex/Studium/SE.Projekt/glbb/editor/bb_tabbuilding.cpp" >
-   <View0 line="53" Type="Source" />
+  <Doc2 NumberOfViews="1" URL="file:///home/high/develop/bbuilder/editor/bb_line.h" >
+   <View0 line="25" Type="Source" />
   </Doc2>
  </DocsAndViews>
  <pluginList>
