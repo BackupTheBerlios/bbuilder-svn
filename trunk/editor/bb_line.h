@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Alex Letkemann   *
- *   alex@letkemann.de   *
+ *   Copyright (C) 2005 by Vaceslav Ustinov   *
+ *   v.ustinov@web.de   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,16 +17,17 @@
 #define BB_LINE_H
 
 #include <bb_drawobject.h>
+#include <bb_point.h>
 
 /**
 Klasse zum Darstellen von Wänden und Fenstern
 
-@author Alex Letkemann
+@author Vaceslav Ustinov
 */
 class BB_Line : public BB_DrawObject
 {
 public:
-    BB_Line(QPoint p1, QPoint p2);
+	BB_Line(BB_Point *p1, BB_Point *p2);
 
     ~BB_Line();
 

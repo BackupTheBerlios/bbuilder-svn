@@ -1,8 +1,8 @@
 <?xml version = '1.0'?>
 <kdevelop>
   <general>
-    <author>Alex Letkemann, Vaceslav Ustinov</author>
-    <email>alex@letkemann.de, v.ustinov@web.de</email>
+    <author>Vaceslav Ustinov</author>
+    <email>v.ustinov@web.de</email>
     <version>0.1</version>
     <projectmanagement>KDevTrollProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>

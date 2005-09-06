@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Alex Letkemann   *
- *   alex@letkemann.de   *
+ *   Copyright (C) 2005 by Vaceslav Ustinov   						*
+ *   v.ustinov@web.de   											*
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -22,7 +22,7 @@
 eine Klasse zum konvertieren von logischen ins Bildschirmkoordinate und umgekehrt
 <br>Die y Achse wird gespiegelt (y=-y), und x wird mit offset addiert
  
-@author Alex Letkemann, Vaceslav Ustinov
+@author Vaceslav Ustinov
 */
 class BB_Transformer
 {

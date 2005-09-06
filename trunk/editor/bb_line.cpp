@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Alex Letkemann   *
- *   alex@letkemann.de   *
+ *   Copyright (C) 2005 by Vaceslav Ustinov   						*
+ *   v.ustinov@web.de										     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -14,7 +14,7 @@
  ***************************************************************************/
 #include "bb_line.h"
 
-BB_Line::BB_Line(QPoint p): BB_DrawObject(p)
+BB_Line::BB_Line(BB_Point *p1, BB_Point *p2)
 {
 }
 
