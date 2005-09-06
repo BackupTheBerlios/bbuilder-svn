@@ -5,13 +5,17 @@
 \subsection*{Public Member Functions}
 \begin{CompactItemize}
 \item 
-{\bf BB\_\-Main\-Window} (QWidget $\ast$parent, Qt::WFlags flags)
+{\bf BB\_\-Main\-Window} (QWidget $\ast$parent=0, Qt::WFlags flags=0)
 \item 
-void {\bf init\-Menus} ()
+{\bf $\sim$BB\_\-Main\-Window} ()
+\end{CompactItemize}
+\subsection*{Protected Member Functions}
+\begin{CompactItemize}
 \item 
-void {\bf init\-Main\-Window} ()
+virtual void {\bf key\-Press\-Event} (QKey\-Event $\ast$e)
 \item 
-void {\bf init\-Statu\-Bar} ()
+virtual void {\bf key\-Release\-Event} (QKey\-Event $\ast$e)\label{classBB__MainWindow_b1}
+
 \end{CompactItemize}
 \subsection*{Protected Attributes}
 \begin{CompactItemize}
@@ -20,7 +24,17 @@ QMenu\-Bar $\ast$ {\bf m\_\-Main\-Menu\-Bar}
 \item 
 QMenu $\ast$ {\bf m\_\-Menu\-File}
 \item 
+QMenu $\ast$ {\bf m\_\-Menu\-View}
+\item 
 QStatus\-Bar $\ast$ {\bf m\_\-Status\-Bar}
+\item 
+QTab\-Widget $\ast$ {\bf m\_\-Tab\-Widget}
+\item 
+bool {\bf m\_\-Keys} [256]\label{classBB__MainWindow_p5}
+
+\item 
+{\bf BB\_\-Doc} $\ast$ {\bf m\_\-Doc}\label{classBB__MainWindow_p6}
+
 \end{CompactItemize}
 
 
@@ -34,48 +48,25 @@ QStatus\-Bar $\ast$ {\bf m\_\-Status\-Bar}
 \subsection{Constructor \& Destructor Documentation}
 \index{BB_MainWindow@{BB\_\-Main\-Window}!BB_MainWindow@{BB\_\-MainWindow}}
 \index{BB_MainWindow@{BB\_\-MainWindow}!BB_MainWindow@{BB\_\-Main\-Window}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}BB\_\-Main\-Window::BB\_\-Main\-Window (QWidget $\ast$ {\em parent}, Qt::WFlags {\em flags})}\label{classBB__MainWindow_a1}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}BB\_\-Main\-Window::BB\_\-Main\-Window (QWidget $\ast$ {\em parent} = {\tt 0}, Qt::WFlags {\em flags} = {\tt 0})}\label{classBB__MainWindow_a0}
 
 
 \begin{Desc}
-\item[See also:]QMain\-Window \end{Desc}
+\item[See also:]QMain\-Window\end{Desc}
+\index{BB_MainWindow@{BB\_\-Main\-Window}!~BB_MainWindow@{$\sim$BB\_\-MainWindow}}
+\index{~BB_MainWindow@{$\sim$BB\_\-MainWindow}!BB_MainWindow@{BB\_\-Main\-Window}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}BB\_\-Main\-Window::$\sim${\bf BB\_\-Main\-Window} ()}\label{classBB__MainWindow_a1}
 
+
+Destrucktor
 
 \subsection{Member Function Documentation}
-\index{BB_MainWindow@{BB\_\-Main\-Window}!initMainWindow@{initMainWindow}}
-\index{initMainWindow@{initMainWindow}!BB_MainWindow@{BB\_\-Main\-Window}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BB\_\-Main\-Window::init\-Main\-Window ()}\label{classBB__MainWindow_a4}
+\index{BB_MainWindow@{BB\_\-Main\-Window}!keyPressEvent@{keyPressEvent}}
+\index{keyPressEvent@{keyPressEvent}!BB_MainWindow@{BB\_\-Main\-Window}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BB\_\-Main\-Window::key\-Press\-Event (QKey\-Event $\ast$ {\em e})\hspace{0.3cm}{\tt  [protected, virtual]}}\label{classBB__MainWindow_b0}
 
 
-\begin{Desc}
-\item[Author:]Alex Letkemann \end{Desc}
-\begin{Desc}
-\item[Version:]0.1 \end{Desc}
-\begin{Desc}
-\item[Date:]10.08.2005 Setzt die Attribute des Hauptfensters und Erzeugt weitere Fenster \end{Desc}
-\index{BB_MainWindow@{BB\_\-Main\-Window}!initMenus@{initMenus}}
-\index{initMenus@{initMenus}!BB_MainWindow@{BB\_\-Main\-Window}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BB\_\-Main\-Window::init\-Menus ()}\label{classBB__MainWindow_a3}
-
-
-\begin{Desc}
-\item[Author:]Alex Letkemann \end{Desc}
-\begin{Desc}
-\item[Version:]0.1 \end{Desc}
-\begin{Desc}
-\item[Date:]10.08.2005 Initialisiert alle Menus\-Bars und Menus im Hauptfenster \end{Desc}
-\index{BB_MainWindow@{BB\_\-Main\-Window}!initStatuBar@{initStatuBar}}
-\index{initStatuBar@{initStatuBar}!BB_MainWindow@{BB\_\-Main\-Window}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BB\_\-Main\-Window::init\-Statu\-Bar ()}\label{classBB__MainWindow_a5}
-
-
-\begin{Desc}
-\item[Author:]Alex Letkemann \end{Desc}
-\begin{Desc}
-\item[Version:]0.1 \end{Desc}
-\begin{Desc}
-\item[Date:]10.08.2005 Initialisiert die Statusbar des Hauptfensters \end{Desc}
-
+Key\-Press\-Event setzt den Status einer Taste auf true, falls diese gedr\~{A}188ckt wird 
 
 \subsection{Member Data Documentation}
 \index{BB_MainWindow@{BB\_\-Main\-Window}!m_MainMenuBar@{m\_\-MainMenuBar}}
@@ -88,14 +79,24 @@ Menubar des Hauptfensters \index{BB_MainWindow@{BB\_\-Main\-Window}!m_MenuFile@{
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}QMenu$\ast$ {\bf BB\_\-Main\-Window::m\_\-Menu\-File}\hspace{0.3cm}{\tt  [protected]}}\label{classBB__MainWindow_p1}
 
 
-'Datei'-Menu der Menubar \index{BB_MainWindow@{BB\_\-Main\-Window}!m_StatusBar@{m\_\-StatusBar}}
+'Datei'-Menu der Menubar \index{BB_MainWindow@{BB\_\-Main\-Window}!m_MenuView@{m\_\-MenuView}}
+\index{m_MenuView@{m\_\-MenuView}!BB_MainWindow@{BB\_\-Main\-Window}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}QMenu$\ast$ {\bf BB\_\-Main\-Window::m\_\-Menu\-View}\hspace{0.3cm}{\tt  [protected]}}\label{classBB__MainWindow_p2}
+
+
+'Ansicht-Menu der Menubar' \index{BB_MainWindow@{BB\_\-Main\-Window}!m_StatusBar@{m\_\-StatusBar}}
 \index{m_StatusBar@{m\_\-StatusBar}!BB_MainWindow@{BB\_\-Main\-Window}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}QStatus\-Bar$\ast$ {\bf BB\_\-Main\-Window::m\_\-Status\-Bar}\hspace{0.3cm}{\tt  [protected]}}\label{classBB__MainWindow_p2}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}QStatus\-Bar$\ast$ {\bf BB\_\-Main\-Window::m\_\-Status\-Bar}\hspace{0.3cm}{\tt  [protected]}}\label{classBB__MainWindow_p3}
 
 
-Statusbar der Hauptfensters 
+Statusbar der Hauptfensters \index{BB_MainWindow@{BB\_\-Main\-Window}!m_TabWidget@{m\_\-TabWidget}}
+\index{m_TabWidget@{m\_\-TabWidget}!BB_MainWindow@{BB\_\-Main\-Window}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}QTab\-Widget$\ast$ {\bf BB\_\-Main\-Window::m\_\-Tab\-Widget}\hspace{0.3cm}{\tt  [protected]}}\label{classBB__MainWindow_p4}
+
+
+Haupt-Tabwidget des Hauptfensters 
 
 The documentation for this class was generated from the following files:\begin{CompactItemize}
 \item 
-/home/alex/Studium/SE.Projekt/glbb/src/bb\_\-mainwindow.h\item 
-/home/alex/Studium/SE.Projekt/glbb/src/bb\_\-mainwindow.cpp\end{CompactItemize}
+editor/bb\_\-mainwindow.h\item 
+editor/bb\_\-mainwindow.cpp\end{CompactItemize}

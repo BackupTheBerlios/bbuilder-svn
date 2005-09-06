@@ -1,21 +1,363 @@
 <?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
-<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.3.8">
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.4.1">
+  <compound refid="classBB__AbstractTool" kind="class"><name>BB_AbstractTool</name>
+    <member refid="classBB__AbstractTool_1a0" kind="function"><name>BB_AbstractTool</name></member>
+    <member refid="classBB__AbstractTool_1a1" kind="function"><name>~BB_AbstractTool</name></member>
+    <member refid="classBB__AbstractTool_1a2" kind="function"><name>move</name></member>
+    <member refid="classBB__AbstractTool_1a3" kind="function"><name>release</name></member>
+    <member refid="classBB__AbstractTool_1a4" kind="function"><name>click</name></member>
+  </compound>
+  <compound refid="classBB__Building" kind="class"><name>BB_Building</name>
+    <member refid="classBB__Building_1a0" kind="function"><name>BB_Building</name></member>
+    <member refid="classBB__Building_1a1" kind="function"><name>~BB_Building</name></member>
+    <member refid="classBB__Building_1a2" kind="function"><name>keyBoardEdit</name></member>
+    <member refid="classBB__Building_1a3" kind="function"><name>getDrawObjects</name></member>
+    <member refid="classBB__Building_1p0" kind="variable"><name>m_Levels</name></member>
+    <member refid="classBB__Building_1p1" kind="variable"><name>m_DrawObject</name></member>
+  </compound>
+  <compound refid="classBB__Data" kind="class"><name>BB_Data</name>
+    <member refid="classBB__Data_1a0" kind="function"><name>BB_Data</name></member>
+    <member refid="classBB__Data_1a1" kind="function"><name>~BB_Data</name></member>
+  </compound>
+  <compound refid="classBB__Doc" kind="class"><name>BB_Doc</name>
+    <member refid="classBB__Doc_1a0" kind="function"><name>BB_Doc</name></member>
+    <member refid="classBB__Doc_1a1" kind="function"><name>~BB_Doc</name></member>
+    <member refid="classBB__Doc_1a2" kind="function"><name>getTerrain</name></member>
+    <member refid="classBB__Doc_1a3" kind="function"><name>getBuildings</name></member>
+    <member refid="classBB__Doc_1a4" kind="function"><name>getLevels</name></member>
+    <member refid="classBB__Doc_1p0" kind="variable"><name>m_Terrain</name></member>
+    <member refid="classBB__Doc_1p1" kind="variable"><name>m_Buildings</name></member>
+    <member refid="classBB__Doc_1p2" kind="variable"><name>m_Levels</name></member>
+  </compound>
+  <compound refid="classBB__DrawObject" kind="class"><name>BB_DrawObject</name>
+    <member refid="classBB__DrawObject_1a0" kind="function"><name>BB_DrawObject</name></member>
+    <member refid="classBB__DrawObject_1a1" kind="function"><name>BB_DrawObject</name></member>
+    <member refid="classBB__DrawObject_1a2" kind="function"><name>~BB_DrawObject</name></member>
+    <member refid="classBB__DrawObject_1a3" kind="function"><name>moveBy</name></member>
+    <member refid="classBB__DrawObject_1a4" kind="function"><name>show</name></member>
+    <member refid="classBB__DrawObject_1a5" kind="function"><name>getColor</name></member>
+    <member refid="classBB__DrawObject_1a6" kind="function"><name>setColor</name></member>
+    <member refid="classBB__DrawObject_1a7" kind="function"><name>setP0</name></member>
+    <member refid="classBB__DrawObject_1a8" kind="function"><name>getP0</name></member>
+    <member refid="classBB__DrawObject_1a9" kind="function"><name>isHit</name></member>
+    <member refid="classBB__DrawObject_1p0" kind="variable"><name>m_P0</name></member>
+    <member refid="classBB__DrawObject_1p1" kind="variable"><name>m_Color</name></member>
+    <member refid="classBB__DrawObject_1p2" kind="variable"><name>m_hitRange</name></member>
+  </compound>
+  <compound refid="classBB__Level" kind="class"><name>BB_Level</name>
+    <member refid="classBB__Level_1a0" kind="function"><name>BB_Level</name></member>
+    <member refid="classBB__Level_1a1" kind="function"><name>~BB_Level</name></member>
+  </compound>
+  <compound refid="classBB__Line" kind="class"><name>BB_Line</name>
+    <member refid="classBB__Line_1a0" kind="function"><name>BB_Line</name></member>
+    <member refid="classBB__Line_1a1" kind="function"><name>~BB_Line</name></member>
+    <member refid="classBB__Line_1a2" kind="function"><name>getP0</name></member>
+    <member refid="classBB__Line_1a3" kind="function"><name>isHit</name></member>
+    <member refid="classBB__Line_1a4" kind="function"><name>getColor</name></member>
+    <member refid="classBB__Line_1a5" kind="function"><name>moveBy</name></member>
+    <member refid="classBB__Line_1a6" kind="function"><name>setColor</name></member>
+    <member refid="classBB__Line_1a7" kind="function"><name>show</name></member>
+    <member refid="classBB__Line_1a8" kind="function"><name>setP0</name></member>
+    <member refid="classBB__Line_1a9" kind="function"><name>setPos1</name></member>
+    <member refid="classBB__Line_1a10" kind="function"><name>getPos1</name></member>
+    <member refid="classBB__Line_1a11" kind="function"><name>setPos2</name></member>
+    <member refid="classBB__Line_1a12" kind="function"><name>getPos2</name></member>
+    <member refid="classBB__Line_1p0" kind="variable"><name>m_Pos1</name></member>
+    <member refid="classBB__Line_1p1" kind="variable"><name>m_Pos2</name></member>
+  </compound>
   <compound refid="classBB__MainWindow" kind="class"><name>BB_MainWindow</name>
     <member refid="classBB__MainWindow_1a0" kind="function"><name>BB_MainWindow</name></member>
-    <member refid="classBB__MainWindow_1a1" kind="function"><name>BB_MainWindow</name></member>
-    <member refid="classBB__MainWindow_1a2" kind="function"><name>~BB_MainWindow</name></member>
-    <member refid="classBB__MainWindow_1a3" kind="function"><name>initMenus</name></member>
-    <member refid="classBB__MainWindow_1a4" kind="function"><name>initMainWindow</name></member>
-    <member refid="classBB__MainWindow_1a5" kind="function"><name>initStatuBar</name></member>
+    <member refid="classBB__MainWindow_1a1" kind="function"><name>~BB_MainWindow</name></member>
+    <member refid="classBB__MainWindow_1b0" kind="function"><name>keyPressEvent</name></member>
+    <member refid="classBB__MainWindow_1b1" kind="function"><name>keyReleaseEvent</name></member>
     <member refid="classBB__MainWindow_1p0" kind="variable"><name>m_MainMenuBar</name></member>
     <member refid="classBB__MainWindow_1p1" kind="variable"><name>m_MenuFile</name></member>
-    <member refid="classBB__MainWindow_1p2" kind="variable"><name>m_StatusBar</name></member>
+    <member refid="classBB__MainWindow_1p2" kind="variable"><name>m_MenuView</name></member>
+    <member refid="classBB__MainWindow_1p3" kind="variable"><name>m_StatusBar</name></member>
+    <member refid="classBB__MainWindow_1p4" kind="variable"><name>m_TabWidget</name></member>
+    <member refid="classBB__MainWindow_1p5" kind="variable"><name>m_Keys</name></member>
+    <member refid="classBB__MainWindow_1p6" kind="variable"><name>m_Doc</name></member>
+    <member refid="classBB__MainWindow_1d0" kind="function"><name>initMenus</name></member>
+    <member refid="classBB__MainWindow_1d1" kind="function"><name>initStatusBar</name></member>
+    <member refid="classBB__MainWindow_1d2" kind="function"><name>initActions</name></member>
+    <member refid="classBB__MainWindow_1d3" kind="function"><name>initMainWindow</name></member>
+    <member refid="classBB__MainWindow_1d4" kind="function"><name>initDoc</name></member>
+  </compound>
+  <compound refid="classBB__Object" kind="class"><name>BB_Object</name>
+    <member refid="classBB__Object_1a0" kind="function"><name>BB_Object</name></member>
+    <member refid="classBB__Object_1a1" kind="function"><name>BB_Object</name></member>
+    <member refid="classBB__Object_1a2" kind="function"><name>~BB_Object</name></member>
+    <member refid="classBB__Object_1a3" kind="function"><name>getObjectNr</name></member>
+    <member refid="classBB__Object_1a4" kind="function"><name>setName</name></member>
+    <member refid="classBB__Object_1a5" kind="function"><name>getName</name></member>
+    <member refid="classBB__Object_1a6" kind="function"><name>setDescription</name></member>
+    <member refid="classBB__Object_1a7" kind="function"><name>getDescription</name></member>
+    <member refid="classBB__Object_1d0" kind="function"><name>createName</name></member>
+    <member refid="classBB__Object_1r0" kind="variable"><name>m_ObjectNr</name></member>
+    <member refid="classBB__Object_1r1" kind="variable"><name>m_Description</name></member>
+    <member refid="classBB__Object_1r2" kind="variable"><name>m_Name</name></member>
+    <member refid="classBB__Object_1v0" kind="variable"><name>m_Counter</name></member>
+  </compound>
+  <compound refid="classBB__Point" kind="class"><name>BB_Point</name>
+    <member refid="classBB__Point_1a0" kind="function"><name>BB_Point</name></member>
+    <member refid="classBB__Point_1a1" kind="function"><name>BB_Point</name></member>
+    <member refid="classBB__Point_1a2" kind="function"><name>~BB_Point</name></member>
+    <member refid="classBB__Point_1a3" kind="function"><name>moveBy</name></member>
+    <member refid="classBB__Point_1a4" kind="function"><name>show</name></member>
+    <member refid="classBB__Point_1a5" kind="function"><name>getRadius</name></member>
+    <member refid="classBB__Point_1a6" kind="function"><name>setRadius</name></member>
+    <member refid="classBB__Point_1a7" kind="function"><name>isHit</name></member>
+    <member refid="classBB__Point_1r0" kind="variable"><name>m_Radius</name></member>
+  </compound>
+  <compound refid="classBB__Tab" kind="class"><name>BB_Tab</name>
+    <member refid="classBB__Tab_1a0" kind="function"><name>BB_Tab</name></member>
+    <member refid="classBB__Tab_1a1" kind="function"><name>BB_Tab</name></member>
+    <member refid="classBB__Tab_1a2" kind="function"><name>~BB_Tab</name></member>
+    <member refid="classBB__Tab_1a3" kind="function"><name>initTab</name></member>
+    <member refid="classBB__Tab_1a4" kind="function"><name>unsetToolButton</name></member>
+    <member refid="classBB__Tab_1b0" kind="function"><name>addWidgetLeft</name></member>
+    <member refid="classBB__Tab_1b1" kind="function"><name>addWidgetRight</name></member>
+    <member refid="classBB__Tab_1b2" kind="function"><name>createToolButton</name></member>
+    <member refid="classBB__Tab_1p0" kind="variable"><name>m_Center</name></member>
+    <member refid="classBB__Tab_1p1" kind="variable"><name>m_LeftFrame</name></member>
+    <member refid="classBB__Tab_1p2" kind="variable"><name>m_RightFrame</name></member>
+    <member refid="classBB__Tab_1p3" kind="variable"><name>m_ToolsGridLayout</name></member>
+    <member refid="classBB__Tab_1p4" kind="variable"><name>m_ToolButtonCount</name></member>
+    <member refid="classBB__Tab_1p5" kind="variable"><name>m_ToolButtonActions</name></member>
+    <member refid="classBB__Tab_1d0" kind="function"><name>initLayout</name></member>
+  </compound>
+  <compound refid="classBB__TabBuilding" kind="class"><name>BB_TabBuilding</name>
+    <member refid="classBB__TabBuilding_1a0" kind="function"><name>BB_TabBuilding</name></member>
+    <member refid="classBB__TabBuilding_1a1" kind="function"><name>~BB_TabBuilding</name></member>
+    <member refid="classBB__TabBuilding_1a2" kind="function"><name>updateBuildingList</name></member>
+    <member refid="classBB__TabBuilding_1p0" kind="variable"><name>m_ToolZoom</name></member>
+    <member refid="classBB__TabBuilding_1p1" kind="variable"><name>m_ToolPointNew</name></member>
+    <member refid="classBB__TabBuilding_1p2" kind="variable"><name>m_ToolMove</name></member>
+    <member refid="classBB__TabBuilding_1p3" kind="variable"><name>m_Buildings</name></member>
+    <member refid="classBB__TabBuilding_1p4" kind="variable"><name>m_BuildingsListWidget</name></member>
+    <member refid="classBB__TabBuilding_1p5" kind="variable"><name>m_ButtonBuildingDelete</name></member>
+    <member refid="classBB__TabBuilding_1p6" kind="variable"><name>m_ButtonBuildingNew</name></member>
+    <member refid="classBB__TabBuilding_1p7" kind="variable"><name>m_ButtonBuildingProperties</name></member>
+    <member refid="classBB__TabBuilding_1k0" kind="slot"><name>slotZoomTool</name></member>
+    <member refid="classBB__TabBuilding_1k1" kind="slot"><name>slotBuildingProperties</name></member>
+    <member refid="classBB__TabBuilding_1k2" kind="slot"><name>slotBuildingDelete</name></member>
+    <member refid="classBB__TabBuilding_1k3" kind="slot"><name>slotBuildingNew</name></member>
+    <member refid="classBB__TabBuilding_1k4" kind="slot"><name>slotBuildingChanged</name></member>
+    <member refid="classBB__TabBuilding_1k5" kind="slot"><name>slotToolPointNew</name></member>
+    <member refid="classBB__TabBuilding_1k6" kind="slot"><name>slotToolMove</name></member>
+  </compound>
+  <compound refid="classBB__TabLevel" kind="class"><name>BB_TabLevel</name>
+    <member refid="classBB__TabLevel_1a0" kind="function"><name>BB_TabLevel</name></member>
+    <member refid="classBB__TabLevel_1a1" kind="function"><name>~BB_TabLevel</name></member>
+    <member refid="classBB__TabLevel_1p0" kind="variable"><name>m_ButtonLevelProperties</name></member>
+    <member refid="classBB__TabLevel_1p1" kind="variable"><name>m_ButtonLevelDelete</name></member>
+    <member refid="classBB__TabLevel_1p2" kind="variable"><name>m_ButtonLevelNew</name></member>
+    <member refid="classBB__TabLevel_1p3" kind="variable"><name>m_ToolZoom</name></member>
+    <member refid="classBB__TabLevel_1k0" kind="slot"><name>test</name></member>
+    <member refid="classBB__TabLevel_1k1" kind="slot"><name>slotZoomTool</name></member>
+    <member refid="classBB__TabLevel_1k2" kind="slot"><name>slotLevelNew</name></member>
+    <member refid="classBB__TabLevel_1k3" kind="slot"><name>slotLevelProperties</name></member>
+    <member refid="classBB__TabLevel_1k4" kind="slot"><name>slotLevelDelete</name></member>
+  </compound>
+  <compound refid="classBB__TabTerrain" kind="class"><name>BB_TabTerrain</name>
+    <member refid="classBB__TabTerrain_1a0" kind="function"><name>BB_TabTerrain</name></member>
+    <member refid="classBB__TabTerrain_1a1" kind="function"><name>~BB_TabTerrain</name></member>
+  </compound>
+  <compound refid="classBB__Terrain" kind="class"><name>BB_Terrain</name>
+    <member refid="classBB__Terrain_1a0" kind="function"><name>BB_Terrain</name></member>
+    <member refid="classBB__Terrain_1a1" kind="function"><name>~BB_Terrain</name></member>
+  </compound>
+  <compound refid="classBB__ToolMove" kind="class"><name>BB_ToolMove</name>
+    <member refid="classBB__ToolMove_1a0" kind="function"><name>BB_ToolMove</name></member>
+    <member refid="classBB__ToolMove_1a1" kind="function"><name>~BB_ToolMove</name></member>
+    <member refid="classBB__ToolMove_1a2" kind="function"><name>click</name></member>
+    <member refid="classBB__ToolMove_1a3" kind="function"><name>move</name></member>
+    <member refid="classBB__ToolMove_1a4" kind="function"><name>release</name></member>
+    <member refid="classBB__ToolMove_1p0" kind="variable"><name>m_LastLogicMouseClick</name></member>
+    <member refid="classBB__ToolMove_1p1" kind="variable"><name>m_Selection</name></member>
+    <member refid="classBB__ToolMove_1p2" kind="variable"><name>m_pLogic</name></member>
+    <member refid="classBB__ToolMove_1p3" kind="variable"><name>m_pScreen</name></member>
+  </compound>
+  <compound refid="classBB__ToolPointNew" kind="class"><name>BB_ToolPointNew</name>
+    <member refid="classBB__ToolPointNew_1a0" kind="function"><name>BB_ToolPointNew</name></member>
+    <member refid="classBB__ToolPointNew_1a1" kind="function"><name>~BB_ToolPointNew</name></member>
+    <member refid="classBB__ToolPointNew_1a2" kind="function"><name>click</name></member>
+    <member refid="classBB__ToolPointNew_1a3" kind="function"><name>move</name></member>
+    <member refid="classBB__ToolPointNew_1a4" kind="function"><name>release</name></member>
+  </compound>
+  <compound refid="classBB__ToolZoom" kind="class"><name>BB_ToolZoom</name>
+    <member refid="classBB__ToolZoom_1a0" kind="function"><name>BB_ToolZoom</name></member>
+    <member refid="classBB__ToolZoom_1a1" kind="function"><name>~BB_ToolZoom</name></member>
+    <member refid="classBB__ToolZoom_1a2" kind="function"><name>click</name></member>
+    <member refid="classBB__ToolZoom_1a3" kind="function"><name>move</name></member>
+    <member refid="classBB__ToolZoom_1a4" kind="function"><name>release</name></member>
+    <member refid="classBB__ToolZoom_1p0" kind="variable"><name>m_WorkArea</name></member>
+  </compound>
+  <compound refid="classBB__Transformer" kind="class"><name>BB_Transformer</name>
+    <member refid="classBB__Transformer_1a0" kind="function"><name>BB_Transformer</name></member>
+    <member refid="classBB__Transformer_1a1" kind="function"><name>~BB_Transformer</name></member>
+    <member refid="classBB__Transformer_1a2" kind="function"><name>setOffset</name></member>
+    <member refid="classBB__Transformer_1a3" kind="function"><name>getOffset</name></member>
+    <member refid="classBB__Transformer_1a4" kind="function"><name>setScale</name></member>
+    <member refid="classBB__Transformer_1a5" kind="function"><name>getScale</name></member>
+    <member refid="classBB__Transformer_1a6" kind="function"><name>screenToLogical</name></member>
+    <member refid="classBB__Transformer_1a7" kind="function"><name>logicalToScreen</name></member>
+    <member refid="classBB__Transformer_1r0" kind="variable"><name>m_Scale</name></member>
+    <member refid="classBB__Transformer_1r1" kind="variable"><name>m_Offset</name></member>
+  </compound>
+  <compound refid="classBB__WorkArea" kind="class"><name>BB_WorkArea</name>
+    <member refid="classBB__WorkArea_1a0" kind="function"><name>BB_WorkArea</name></member>
+    <member refid="classBB__WorkArea_1a1" kind="function"><name>~BB_WorkArea</name></member>
+    <member refid="classBB__WorkArea_1a2" kind="function"><name>zoom</name></member>
+    <member refid="classBB__WorkArea_1a3" kind="function"><name>getTool</name></member>
+    <member refid="classBB__WorkArea_1a4" kind="function"><name>setTool</name></member>
+    <member refid="classBB__WorkArea_1a5" kind="function"><name>setZoomFaktor</name></member>
+    <member refid="classBB__WorkArea_1a6" kind="function"><name>getDrawObjects</name></member>
+    <member refid="classBB__WorkArea_1a7" kind="function"><name>setDrawObjects</name></member>
+    <member refid="classBB__WorkArea_1p0" kind="variable"><name>m_WorkFrame</name></member>
+    <member refid="classBB__WorkArea_1p1" kind="variable"><name>m_ZoomFaktor</name></member>
+  </compound>
+  <compound refid="classBB__WorkFrame" kind="class"><name>BB_WorkFrame</name>
+    <member refid="classBB__WorkFrame_1a0" kind="function"><name>BB_WorkFrame</name></member>
+    <member refid="classBB__WorkFrame_1a1" kind="function"><name>~BB_WorkFrame</name></member>
+    <member refid="classBB__WorkFrame_1a2" kind="function"><name>setZoomFaktor</name></member>
+    <member refid="classBB__WorkFrame_1a3" kind="function"><name>getTool</name></member>
+    <member refid="classBB__WorkFrame_1a4" kind="function"><name>setTool</name></member>
+    <member refid="classBB__WorkFrame_1a5" kind="function"><name>setDrawObjects</name></member>
+    <member refid="classBB__WorkFrame_1a6" kind="function"><name>getDrawObjects</name></member>
+    <member refid="classBB__WorkFrame_1b0" kind="function"><name>mousePressEvent</name></member>
+    <member refid="classBB__WorkFrame_1b1" kind="function"><name>mouseReleaseEvent</name></member>
+    <member refid="classBB__WorkFrame_1b2" kind="function"><name>paintEvent</name></member>
+    <member refid="classBB__WorkFrame_1b3" kind="function"><name>mouseMoveEvent</name></member>
+    <member refid="classBB__WorkFrame_1p0" kind="variable"><name>m_ZoomFaktor</name></member>
+    <member refid="classBB__WorkFrame_1p1" kind="variable"><name>m_Tool</name></member>
+    <member refid="classBB__WorkFrame_1p2" kind="variable"><name>m_DrawObjects</name></member>
+    <member refid="classBB__WorkFrame_1p3" kind="variable"><name>m_Transformer</name></member>
+  </compound>
+  <compound refid="classUi_1_1BuildingEditDialog" kind="class"><name>Ui::BuildingEditDialog</name>
+  </compound>
+  <compound refid="classUi__BuildingEditDialog" kind="class"><name>Ui_BuildingEditDialog</name>
+    <member refid="classUi__BuildingEditDialog_1a0" kind="function"><name>setupUi</name></member>
+    <member refid="classUi__BuildingEditDialog_1a1" kind="function"><name>retranslateUi</name></member>
+    <member refid="classUi__BuildingEditDialog_1o0" kind="variable"><name>layoutWidget</name></member>
+    <member refid="classUi__BuildingEditDialog_1o1" kind="variable"><name>hboxLayout</name></member>
+    <member refid="classUi__BuildingEditDialog_1o2" kind="variable"><name>spacerItem</name></member>
+    <member refid="classUi__BuildingEditDialog_1o3" kind="variable"><name>okButton</name></member>
+    <member refid="classUi__BuildingEditDialog_1o4" kind="variable"><name>cancelButton</name></member>
+    <member refid="classUi__BuildingEditDialog_1o5" kind="variable"><name>groupBox</name></member>
+    <member refid="classUi__BuildingEditDialog_1o6" kind="variable"><name>widget</name></member>
+    <member refid="classUi__BuildingEditDialog_1o7" kind="variable"><name>widget1</name></member>
+    <member refid="classUi__BuildingEditDialog_1o8" kind="variable"><name>widget2</name></member>
+    <member refid="classUi__BuildingEditDialog_1o9" kind="variable"><name>label</name></member>
+    <member refid="classUi__BuildingEditDialog_1o10" kind="variable"><name>lineEditName</name></member>
+    <member refid="classUi__BuildingEditDialog_1o11" kind="variable"><name>widget3</name></member>
+    <member refid="classUi__BuildingEditDialog_1o12" kind="variable"><name>label_2</name></member>
+    <member refid="classUi__BuildingEditDialog_1o13" kind="variable"><name>lineEditDesc</name></member>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="namespaceUi" kind="namespace"><name>Ui</name>
+  </compound>
+  <compound refid="bb__abstracttool_8cpp" kind="file"><name>bb_abstracttool.cpp</name>
+  </compound>
+  <compound refid="bb__abstracttool_8h" kind="file"><name>bb_abstracttool.h</name>
+  </compound>
+  <compound refid="bb__building_8cpp" kind="file"><name>bb_building.cpp</name>
+  </compound>
+  <compound refid="bb__building_8h" kind="file"><name>bb_building.h</name>
+  </compound>
+  <compound refid="bb__data_8cpp" kind="file"><name>bb_data.cpp</name>
+  </compound>
+  <compound refid="bb__data_8h" kind="file"><name>bb_data.h</name>
+  </compound>
+  <compound refid="bb__doc_8cpp" kind="file"><name>bb_doc.cpp</name>
+  </compound>
+  <compound refid="bb__doc_8h" kind="file"><name>bb_doc.h</name>
+  </compound>
+  <compound refid="bb__drawobject_8cpp" kind="file"><name>bb_drawobject.cpp</name>
+  </compound>
+  <compound refid="bb__drawobject_8h" kind="file"><name>bb_drawobject.h</name>
+  </compound>
+  <compound refid="bb__level_8cpp" kind="file"><name>bb_level.cpp</name>
+  </compound>
+  <compound refid="bb__level_8h" kind="file"><name>bb_level.h</name>
+  </compound>
+  <compound refid="bb__line_8cpp" kind="file"><name>bb_line.cpp</name>
+    <member refid="bb__line_8cpp_1a0" kind="function"><name>getPos1</name></member>
+    <member refid="bb__line_8cpp_1a1" kind="function"><name>setPos1</name></member>
+    <member refid="bb__line_8cpp_1a2" kind="function"><name>getPos2</name></member>
+    <member refid="bb__line_8cpp_1a3" kind="function"><name>setPos2</name></member>
+  </compound>
+  <compound refid="bb__line_8h" kind="file"><name>bb_line.h</name>
   </compound>
   <compound refid="bb__mainwindow_8cpp" kind="file"><name>bb_mainwindow.cpp</name>
   </compound>
   <compound refid="bb__mainwindow_8h" kind="file"><name>bb_mainwindow.h</name>
   </compound>
-  <compound refid="main_8cpp" kind="file"><name>main.cpp</name>
-    <member refid="main_8cpp_1a0" kind="function"><name>main</name></member>
+  <compound refid="bb__object_8cpp" kind="file"><name>bb_object.cpp</name>
+  </compound>
+  <compound refid="bb__object_8h" kind="file"><name>bb_object.h</name>
+  </compound>
+  <compound refid="bb__point_8cpp" kind="file"><name>bb_point.cpp</name>
+  </compound>
+  <compound refid="bb__point_8h" kind="file"><name>bb_point.h</name>
+  </compound>
+  <compound refid="bb__tab_8cpp" kind="file"><name>bb_tab.cpp</name>
+  </compound>
+  <compound refid="bb__tab_8h" kind="file"><name>bb_tab.h</name>
+  </compound>
+  <compound refid="bb__tabbuilding_8cpp" kind="file"><name>bb_tabbuilding.cpp</name>
+  </compound>
+  <compound refid="bb__tabbuilding_8h" kind="file"><name>bb_tabbuilding.h</name>
+  </compound>
+  <compound refid="bb__tablevel_8cpp" kind="file"><name>bb_tablevel.cpp</name>
+  </compound>
+  <compound refid="bb__tablevel_8h" kind="file"><name>bb_tablevel.h</name>
+  </compound>
+  <compound refid="bb__tabterrain_8cpp" kind="file"><name>bb_tabterrain.cpp</name>
+  </compound>
+  <compound refid="bb__tabterrain_8h" kind="file"><name>bb_tabterrain.h</name>
+  </compound>
+  <compound refid="bb__terrain_8cpp" kind="file"><name>bb_terrain.cpp</name>
+  </compound>
+  <compound refid="bb__terrain_8h" kind="file"><name>bb_terrain.h</name>
+  </compound>
+  <compound refid="bb__toolmove_8cpp" kind="file"><name>bb_toolmove.cpp</name>
+  </compound>
+  <compound refid="bb__toolmove_8h" kind="file"><name>bb_toolmove.h</name>
+  </compound>
+  <compound refid="bb__toolpointnew_8cpp" kind="file"><name>bb_toolpointnew.cpp</name>
+  </compound>
+  <compound refid="bb__toolpointnew_8h" kind="file"><name>bb_toolpointnew.h</name>
+  </compound>
+  <compound refid="bb__toolzoom_8cpp" kind="file"><name>bb_toolzoom.cpp</name>
+  </compound>
+  <compound refid="bb__toolzoom_8h" kind="file"><name>bb_toolzoom.h</name>
+  </compound>
+  <compound refid="bb__transformer_8cpp" kind="file"><name>bb_transformer.cpp</name>
+  </compound>
+  <compound refid="bb__transformer_8h" kind="file"><name>bb_transformer.h</name>
+  </compound>
+  <compound refid="bb__workarea_8cpp" kind="file"><name>bb_workarea.cpp</name>
+  </compound>
+  <compound refid="bb__workarea_8h" kind="file"><name>bb_workarea.h</name>
+  </compound>
+  <compound refid="bb__workframe_8cpp" kind="file"><name>bb_workframe.cpp</name>
+  </compound>
+  <compound refid="bb__workframe_8h" kind="file"><name>bb_workframe.h</name>
+  </compound>
+  <compound refid="editor_2main_8cpp" kind="file"><name>main.cpp</name>
+    <member refid="editor_2main_8cpp_1a0" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="renderer_2main_8cpp" kind="file"><name>main.cpp</name>
+    <member refid="renderer_2main_8cpp_1a0" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="ui__buildingEdit_8h" kind="file"><name>ui_buildingEdit.h</name>
+  </compound>
+  <compound refid="todo" kind="page"><name>todo</name>
+  </compound>
+  <compound refid="dir_000000" kind="dir"><name>editor/</name>
+  </compound>
+  <compound refid="dir_000001" kind="dir"><name>renderer/</name>
   </compound>
 </doxygenindex>

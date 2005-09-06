@@ -59,3 +59,27 @@ void BB_Line::setP0(const QPoint& theValue)
     BB_DrawObject::setP0(theValue);
 }
 
+
+
+BB_Point* BB_Line::getPos1() const
+{
+    return m_Pos1;
+}
+
+
+void BB_Line::setPos1(BB_Point* Value)
+{
+    m_Pos1 = Value;
+}
+
+
+BB_Point* BB_Line::getPos2() const
+{
+    return m_Pos2;
+}
+
+
+void BB_Line::setPos2(BB_Point* Value)
+{
+    m_Pos2 = Value;
+}
