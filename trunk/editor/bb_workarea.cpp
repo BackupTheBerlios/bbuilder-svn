@@ -28,7 +28,7 @@ BB_WorkArea::BB_WorkArea(QWidget *parent)
 	m_WorkFrame->setFrameShadow(QFrame::Plain);
 	
 	QImage  *bg = new QImage();
-	bg->load("../img/002.bmp");
+	bg->load("../img/002.png");
  	m_WorkFrame->setPixmap(QPixmap(QPixmap::fromImage(*bg)));
 	m_WorkFrame->setBackgroundRole(QPalette::Base);
 	m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
