@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.3.8">
+  <compound refid="classBB__MainWindow" kind="class"><name>BB_MainWindow</name>
+    <member refid="classBB__MainWindow_1a0" kind="function"><name>BB_MainWindow</name></member>
+    <member refid="classBB__MainWindow_1a1" kind="function"><name>BB_MainWindow</name></member>
+    <member refid="classBB__MainWindow_1a2" kind="function"><name>~BB_MainWindow</name></member>
+    <member refid="classBB__MainWindow_1a3" kind="function"><name>initMenus</name></member>
+    <member refid="classBB__MainWindow_1a4" kind="function"><name>initMainWindow</name></member>
+    <member refid="classBB__MainWindow_1a5" kind="function"><name>initStatuBar</name></member>
+    <member refid="classBB__MainWindow_1p0" kind="variable"><name>m_MainMenuBar</name></member>
+    <member refid="classBB__MainWindow_1p1" kind="variable"><name>m_MenuFile</name></member>
+    <member refid="classBB__MainWindow_1p2" kind="variable"><name>m_StatusBar</name></member>
+  </compound>
+  <compound refid="bb__mainwindow_8cpp" kind="file"><name>bb_mainwindow.cpp</name>
+  </compound>
+  <compound refid="bb__mainwindow_8h" kind="file"><name>bb_mainwindow.h</name>
+  </compound>
+  <compound refid="main_8cpp" kind="file"><name>main.cpp</name>
+    <member refid="main_8cpp_1a0" kind="function"><name>main</name></member>
+  </compound>
+</doxygenindex>

@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.3.8">
+  <compounddef id="classBB__MainWindow" kind="class" prot="public">
+    <compoundname>BB_MainWindow</compoundname>
+    <includes refid="bb__mainwindow_8h" local="no">bb_mainwindow.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classBB__MainWindow_1a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BB_MainWindow::BB_MainWindow</definition>
+        <argsstring>()</argsstring>
+        <name>BB_MainWindow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="28" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classBB__MainWindow_1a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BB_MainWindow::BB_MainWindow</definition>
+        <argsstring>(QWidget *parent, Qt::WFlags flags)</argsstring>
+        <name>BB_MainWindow</name>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>Qt::WFlags</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>QMainWindow </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="30" bodystart="26" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classBB__MainWindow_1a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BB_MainWindow::~BB_MainWindow</definition>
+        <argsstring>()</argsstring>
+        <name>~BB_MainWindow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="32" bodystart="31" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classBB__MainWindow_1a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BB_MainWindow::initMenus</definition>
+        <argsstring>()</argsstring>
+        <name>initMenus</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="author"><para>Alex Letkemann </para></simplesect>
+<simplesect kind="version"><para>0.1 </para></simplesect>
+<simplesect kind="date"><para>10.08.2005 Initialisiert alle MenusBars und Menus im Hauptfenster </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="33" bodystart="44" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classBB__MainWindow_1a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BB_MainWindow::initMainWindow</definition>
+        <argsstring>()</argsstring>
+        <name>initMainWindow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="author"><para>Alex Letkemann </para></simplesect>
+<simplesect kind="version"><para>0.1 </para></simplesect>
+<simplesect kind="date"><para>10.08.2005 Setzt die Attribute des Hauptfensters und Erzeugt weitere Fenster </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="34" bodystart="62" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classBB__MainWindow_1a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BB_MainWindow::initStatuBar</definition>
+        <argsstring>()</argsstring>
+        <name>initStatuBar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="author"><para>Alex Letkemann </para></simplesect>
+<simplesect kind="version"><para>0.1 </para></simplesect>
+<simplesect kind="date"><para>10.08.2005 Initialisiert die Statusbar des Hauptfensters </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="35" bodystart="80" bodyend="83"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classBB__MainWindow_1p0" prot="protected" static="no" volatile="no" mutable="no">
+        <type>QMenuBar *</type>
+        <definition>QMenuBar* BB_MainWindow::m_MainMenuBar</definition>
+        <argsstring></argsstring>
+        <name>m_MainMenuBar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Menubar des Hauptfensters </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="39" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBB__MainWindow_1p1" prot="protected" static="no" volatile="no" mutable="no">
+        <type>QMenu *</type>
+        <definition>QMenu* BB_MainWindow::m_MenuFile</definition>
+        <argsstring></argsstring>
+        <name>m_MenuFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>&apos;Datei&apos;-Menu der Menubar </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="42" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classBB__MainWindow_1p2" prot="protected" static="no" volatile="no" mutable="no">
+        <type>QStatusBar *</type>
+        <definition>QStatusBar* BB_MainWindow::m_StatusBar</definition>
+        <argsstring></argsstring>
+        <name>m_StatusBar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Statusbar der Hauptfensters </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="45" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="author"><para>Alex Letkemann </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/alex/Studium/SE.Projekt/glbb/src/bb_mainwindow.h" line="26" bodystart="25" bodyend="46"/>
+    <listofallmembers>
+      <member refid="classBB__MainWindow_1a0" prot="public" virt="non-virtual"><scope>BB_MainWindow</scope><name>BB_MainWindow</name></member>
+      <member refid="classBB__MainWindow_1a1" prot="public" virt="non-virtual"><scope>BB_MainWindow</scope><name>BB_MainWindow</name></member>
+      <member refid="classBB__MainWindow_1a4" prot="public" virt="non-virtual"><scope>BB_MainWindow</scope><name>initMainWindow</name></member>
+      <member refid="classBB__MainWindow_1a3" prot="public" virt="non-virtual"><scope>BB_MainWindow</scope><name>initMenus</name></member>
+      <member refid="classBB__MainWindow_1a5" prot="public" virt="non-virtual"><scope>BB_MainWindow</scope><name>initStatuBar</name></member>
+      <member refid="classBB__MainWindow_1p0" prot="protected" virt="non-virtual"><scope>BB_MainWindow</scope><name>m_MainMenuBar</name></member>
+      <member refid="classBB__MainWindow_1p1" prot="protected" virt="non-virtual"><scope>BB_MainWindow</scope><name>m_MenuFile</name></member>
+      <member refid="classBB__MainWindow_1p2" prot="protected" virt="non-virtual"><scope>BB_MainWindow</scope><name>m_StatusBar</name></member>
+      <member refid="classBB__MainWindow_1a2" prot="public" virt="non-virtual"><scope>BB_MainWindow</scope><name>~BB_MainWindow</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
