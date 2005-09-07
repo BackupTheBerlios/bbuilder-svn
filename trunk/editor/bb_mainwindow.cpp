@@ -20,15 +20,15 @@
 #include "bb_tablevel.h"
 
 
+
 using namespace std;
 
 BB_MainWindow::BB_MainWindow(QWidget* parent, Qt::WFlags flags): QMainWindow(parent, flags)
 {
 	
-	
+	initActions();
 	initMenus();
 	initStatusBar();
-	initActions();
 	
 	initDoc();
 	
@@ -47,6 +47,11 @@ BB_MainWindow::BB_MainWindow(QWidget* parent, Qt::WFlags flags): QMainWindow(par
 
 BB_MainWindow::~BB_MainWindow()
 {
+	
+	if(!m_Config.save())
+	{
+		cout << "Konfigurationsdatei konnte nicht geschriebenwerden" << endl;
+	}
 }
 
 /**
@@ -61,9 +66,18 @@ void BB_MainWindow::initMenus()
 	
 	m_MenuView = new QMenu(QString::fromUtf8("Ansicht"));
 	
+	m_MenuProject = new QMenu(QString::fromUtf8("Projekt"));
+	
+
+	
+	m_MenuProject->addAction(m_aProjectNew);
+	m_MenuProject->addAction(m_aProjectOpen);
+	m_MenuProject->addAction(m_aProjectClose);
+	
 	m_MainMenuBar = new QMenuBar();
 	m_MainMenuBar->addMenu(m_MenuFile);
 	m_MainMenuBar->addMenu(m_MenuView);
+	m_MainMenuBar->addMenu(m_MenuProject);
 	
 	setMenuBar(m_MainMenuBar);
 }
@@ -80,17 +94,6 @@ void BB_MainWindow::initStatusBar()
 	m_StatusBar = new QStatusBar();
 }
 
-
-/**
- * @author Alex Letkemann
- * @version 0.1
- * @date 10.08.2005
- * Initialisiert alle Aktionen des Haupfensters
- */
-void BB_MainWindow::initActions()
-{
-
-}
 
 
 /**
@@ -154,4 +157,55 @@ void BB_MainWindow::keyReleaseEvent ( QKeyEvent * e )
 void BB_MainWindow::initDoc()
 {
 	m_Doc = new BB_Doc();
+}
+
+
+/**
+ * Erstellt ein neues, leeres Projekt
+ * @author Alex Letkemann
+ */
+void BB_MainWindow::slotProjectNew()
+{
+	cout << "Neues Projekt" << endl;
+    /// @todo implement me
+}
+
+
+/**
+ * Öffnet ein Projekt
+ * @author Alex Letkemann
+ */
+void BB_MainWindow::slotProjectOpen()
+{
+	cout << "Projekt öffnen" << endl;
+    /// @todo implement me
+}
+
+
+/**
+ * Schliesst das aktuelle Projekt
+ * @author Alex Letkemann
+ */
+void BB_MainWindow::slotProjectClose()
+{
+	cout << "Projekt schliessen" << endl;
+    /// @todo implement me
+}
+
+
+/**
+ * Initialisiert die Aktionen des Haupfensters
+ * @author Alex Letkemann
+ * @date 07.09.2005
+ */
+void BB_MainWindow::initActions()
+{
+	m_aProjectNew = new QAction(QString::fromUtf8("Neues Projekt"),this);
+	connect(m_aProjectNew,SIGNAL(triggered()),this,SLOT(slotProjectNew()));
+	
+	m_aProjectOpen = new QAction(QString::fromUtf8("Projekt öffnen"),this);
+	connect(m_aProjectOpen,SIGNAL(triggered()),this,SLOT(slotProjectOpen()));
+	
+	m_aProjectClose = new QAction(QString::fromUtf8("Projekt schliessen"),this);
+	connect(m_aProjectClose,SIGNAL(triggered()),this,SLOT(slotProjectClose()));
 }

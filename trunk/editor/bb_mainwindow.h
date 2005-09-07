@@ -20,6 +20,7 @@
 #include <QtGui>
 
 #include "bb_doc.h"
+#include "bb_config.h"
 
 // TESTEST
 
@@ -40,11 +41,11 @@ public:
 	 * Destrucktor
 	 */
     ~BB_MainWindow();
+    void initActions();
 	
 private:
 	void initMenus();
 	void initStatusBar();
-	void initActions();
 	void initMainWindow();
     void initDoc();
     
@@ -66,10 +67,20 @@ protected:
     QTabWidget *m_TabWidget;
 	bool m_Keys[256];
     BB_Doc* m_Doc;
+    QMenu* m_MenuProject;
+	
+	BB_Config m_Config;
+    QAction* m_aProjectClose;
+    QAction* m_aProjectNew;
+    QAction* m_aProjectOpen;
 	
 protected:
 	virtual void keyPressEvent ( QKeyEvent * e );
     virtual void keyReleaseEvent ( QKeyEvent * e );
+private slots:
+    void slotProjectNew();
+    void slotProjectOpen();
+    void slotProjectClose();
 };
 
 #endif
