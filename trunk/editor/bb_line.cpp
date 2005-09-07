@@ -14,8 +14,11 @@
  ***************************************************************************/
 #include "bb_line.h"
 
-BB_Line::BB_Line(BB_Point *p1, BB_Point *p2)
+BB_Line::BB_Line(BB_DrawObject *p1, BB_DrawObject *p2)
 {
+	m_Pos1 = p1;
+	m_Pos2 = p2;
+	m_Color.setNamedColor("Red");
 }
 
 
@@ -52,6 +55,16 @@ void BB_Line::setColor(const QColor& _newVal)
 void BB_Line::show(BB_Transformer& transformer, QPainter& painter) const
 {
     BB_DrawObject::show(transformer, painter);
+    
+    QPoint dest_Pos1;
+    QPoint dest_Pos2;
+
+    transformer.logicalToScreen(dest_Pos1, m_Pos1->getP0());
+    transformer.logicalToScreen(dest_Pos2, m_Pos2->getP0());
+
+    painter.setPen(m_Color);
+    painter.setBrush(m_Color);
+    painter.drawLine(dest_Pos1.x(), dest_Pos1.y(), dest_Pos2.x(), dest_Pos2.y());
 }
 
 void BB_Line::setP0(const QPoint& theValue)
@@ -61,7 +74,7 @@ void BB_Line::setP0(const QPoint& theValue)
 
 
 
-BB_Point* BB_Line::getPos1() const
+BB_DrawObject* BB_Line::getPos1() const
 {
     return m_Pos1;
 }
@@ -73,7 +86,7 @@ void BB_Line::setPos1(BB_Point* Value)
 }
 
 
-BB_Point* BB_Line::getPos2() const
+BB_DrawObject* BB_Line::getPos2() const
 {
     return m_Pos2;
 }

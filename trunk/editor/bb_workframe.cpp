@@ -26,6 +26,7 @@ BB_WorkFrame::BB_WorkFrame(QWidget * parent, Qt::WFlags f)
     m_ZoomFaktor = 1.0;
     m_Tool = NULL;
     m_DrawObjects = NULL;
+    m_Transformer.setOffset(QPoint(10, 200));
 }
 
 

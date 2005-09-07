@@ -25,7 +25,8 @@ HEADERS += bb_abstracttool.h \
            bb_transformer.h \
            bb_workarea.h \
            bb_workframe.h \
-           bb_line.h 
+           bb_line.h \
+           bb_toollinenew.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_data.cpp \
@@ -47,7 +48,8 @@ SOURCES += bb_abstracttool.cpp \
            bb_workarea.cpp \
            bb_workframe.cpp \
            main.cpp \
-           bb_line.cpp 
+           bb_line.cpp \
+           bb_toollinenew.cpp 
 buildingEdit.ui.target = buildingEdit.ui
 buildingEdit.ui.commands = $$IDL_COMPILER
 TARGET = editor.e

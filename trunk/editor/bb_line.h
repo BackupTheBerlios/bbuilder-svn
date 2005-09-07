@@ -27,7 +27,8 @@ Klasse zum Darstellen von Wänden und Fenstern
 class BB_Line : public BB_DrawObject
 {
 public:
-    BB_Line(BB_Point *p1, BB_Point *p2);
+    BB_Line(BB_DrawObject *p1, BB_DrawObject *p2);
+    BB_Line();
 
     ~BB_Line();
 
@@ -38,20 +39,20 @@ public:
     virtual void setColor(const QColor& _newVal);
     virtual void show(BB_Transformer& transformer, QPainter& painter) const;
     void setP0(const QPoint& theValue);
-    
+
     /**
     Setzt Pointer auf Position 1
     @author Vacelav Ustinov
     @param BB_Point 
     */
     void setPos1(BB_Point* Value);
-    
+
     /**
     gibt Pointer auf Punkt 1 zurück
     @author Vaceslav Ustinov
     @return BB_Point*
     */
-    BB_Point* getPos1() const;
+    BB_DrawObject* getPos1() const;
 
     /**
     Setzt Pointer auf Position 2
@@ -61,18 +62,18 @@ public:
     void setPos2(BB_Point* Value);
 
     /**
-       gibt Pointer auf Punkt 2 zurück
-       @author Vaceslav Ustinov
-       @return BB_Point*
+    gibt Pointer auf Punkt 2 zurück
+    @author Vaceslav Ustinov
+    @return BB_Point*
     */
-    BB_Point* getPos2() const;
+    BB_DrawObject* getPos2() const;
 
 
 
 
 protected:
-    BB_Point * m_Pos1;
-    BB_Point * m_Pos2;
+    BB_DrawObject * m_Pos1;
+    BB_DrawObject * m_Pos2;
 };
 
 #endif

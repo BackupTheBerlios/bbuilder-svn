@@ -73,6 +73,10 @@ BB_TabBuilding::BB_TabBuilding(QVector<BB_Building*>* buildings, QWidget* parent
 	toolPointNew->setStatusTip("Point Werkzeug");
 	createToolButton(toolPointNew,SLOT(slotToolPointNew(QAction*)));
 	
+	QAction *toolLineNew = new QAction("Line",this);
+	toolPointNew->setStatusTip("Line Werkzeug");
+	createToolButton(toolLineNew,SLOT(slotToolLineNew(QAction*)));
+	
 	QAction *toolMove = new QAction("Move",this);
 	toolMove->setStatusTip("Move Werkzeug");
 	createToolButton(toolMove,SLOT(slotToolMove(QAction*)));
@@ -82,6 +86,7 @@ BB_TabBuilding::BB_TabBuilding(QVector<BB_Building*>* buildings, QWidget* parent
 	m_ToolZoom = new BB_ToolZoom(m_Center);
 	m_ToolPointNew = new BB_ToolPointNew();
 	m_ToolMove = new BB_ToolMove();
+	m_ToolLineNew = new BB_ToolLineNew();
 	
 	updateBuildingList();
 	
@@ -229,4 +234,16 @@ void BB_TabBuilding::slotToolMove(QAction* action)
 	action->setChecked(true);
 	m_Center->setTool(m_ToolMove);
 	cout << "m_ToolMove:" << m_ToolMove << endl;
+}
+
+
+/*!
+    \fn BB_TabBuilding::void slotToolLineNew(QAction* action)
+ */
+void BB_TabBuilding::slotToolLineNew(QAction* action)
+{
+	unsetToolButton(action);
+	action->setChecked(true);
+	m_Center->setTool(m_ToolLineNew);
+	cout << "m_ToolLineNew:" << m_ToolLineNew << endl;
 }
