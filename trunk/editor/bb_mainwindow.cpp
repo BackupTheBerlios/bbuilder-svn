@@ -25,7 +25,7 @@ using namespace std;
 
 BB_MainWindow::BB_MainWindow(QWidget* parent, Qt::WFlags flags): QMainWindow(parent, flags)
 {
-	
+	m_Config.open();
 	initActions();
 	initMenus();
 	initStatusBar();

@@ -14,10 +14,15 @@
  ***************************************************************************/
 #include "bb_config.h"
 
+#include <iostream>
+
+
+using namespace std;
 
 
 BB_Config::BB_Config()
 {
+	m_CurrentProjectPath = "";
 }
 
 
@@ -61,12 +66,16 @@ bool BB_Config::save()
 	QTextStream Stream(&file);
 	
 	QDomDocument xmlDoc("BB_Config");
-	QDomElement root = xmlDoc.createElement("BB_Config_Root");
+	QDomElement root(xmlDoc.createElement("BB_Config_Root"));
 	xmlDoc.appendChild(root);
-	root.setAttribute("Version",2);
+
+	/* Aktuelles Projekt-Verzeichnis speichern */
+	QDomElement currentProjectElement(xmlDoc.createElement("CurrentProject"));
+	QDomText currentProjectDoc(xmlDoc.createTextNode(m_CurrentProjectPath));
+	root.appendChild(currentProjectElement);
+	currentProjectElement.appendChild(currentProjectDoc);
 	
 	
-		
 	Stream << xmlDoc.toString() << endl;
 	file.close();
 	
@@ -80,5 +89,51 @@ bool BB_Config::save()
  */
 bool BB_Config::open()
 {
-    /// @todo implement me
+	
+	QFile file("../conf/bb.conf");
+	if(!file.exists())
+	{
+		cout << "Konfigurationsdatei nicht gefunden,\n\
+				beim Beenden des Programms wird eine\n\
+				neue Konfigurationsdatei erstellt" << endl;
+		return false;			
+	}
+	
+		file.open(QFile::ReadOnly | QFile::Text);
+		
+		QString errorStr;
+		int errorLine;
+		int errorColumn;
+		
+		QDomDocument domDocument;
+	
+		if (!domDocument.setContent(&file, true, &errorStr, &errorLine,
+			&errorColumn)) {
+				QMessageBox::information(NULL, "BB_Config",
+										 QString("Parse error at line %1, column %2:\n%3")
+												 .arg(errorLine)
+												 .arg(errorColumn)
+												 .arg(errorStr));					
+				
+				return false;
+		}
+		
+		QDomDocumentType docType = domDocument.doctype();
+
+		QDomElement root = domDocument.documentElement();
+		if (docType.name() != "BB_Config" || root.tagName() != "BB_Config_Root")
+		{
+			cout << "Ungültige Konfigurationsdatei gefunden" << endl;
+			return false;
+		}
+		
+		QDomElement child = root.firstChildElement("CurrentProject");
+		if(!child.isNull())
+		{
+			m_CurrentProjectPath = child.text();
+		}
+        
+		
+		return true;
+
 }

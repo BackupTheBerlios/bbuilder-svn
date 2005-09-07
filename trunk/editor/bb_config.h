@@ -20,8 +20,10 @@
 #include <QtXml>
 
 /**
-@author Alex Letkemann
-*/
+ * Konfiguration
+ * Diese Klasse enthällt alle Einstellungen des Editors, die persistent gespeicher werden.
+ * @author Alex Letkemann 
+ */
 class BB_Config{
 public:
     BB_Config();
@@ -37,6 +39,7 @@ public:
 	
 
 protected:
+	/** Verzeichnis des letzten Projektes*/
     QString m_CurrentProjectPath;
 };
 
