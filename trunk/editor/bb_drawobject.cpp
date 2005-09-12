@@ -18,6 +18,9 @@
 
 using namespace std;
 
+const char * BB_DrawObject::ClassName = "BB_DrawObject";
+
+
 BB_DrawObject::BB_DrawObject()
 {
 }
@@ -78,4 +81,13 @@ void BB_DrawObject::setColor(const QColor& _newVal)
 bool BB_DrawObject::isHit(QPoint hit)
 {
     /// @todo implement me
+}
+
+
+/*!
+    \fn BB_DrawObject::getClassName() const
+ */
+const char * BB_DrawObject::getClassName() const
+{
+	return BB_DrawObject::ClassName;
 }

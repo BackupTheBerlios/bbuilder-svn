@@ -33,10 +33,7 @@ public:
     virtual void release(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer);
 
 protected:
-    QPoint m_LastLogicMouseClick;
     QVector<BB_DrawObject*> m_Selection;
-    QPoint m_pLogic;
-    QPoint m_pScreen;
 };
 
 #endif

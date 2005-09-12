@@ -38,9 +38,11 @@ public:
     int getRadius();
     void setRadius(int r);
     virtual bool isHit(QPoint hit);
+    const char * getClassName() const;
 
 private:
     int m_Radius;
+    static const char * ClassName;
 };
 
 #endif

@@ -14,6 +14,8 @@
  ***************************************************************************/
 #include "bb_line.h"
 
+const char * BB_Line::ClassName = "BB_Line";
+
 BB_Line::BB_Line(BB_DrawObject *p1, BB_DrawObject *p2)
 {
 	m_Pos1 = p1;
@@ -34,7 +36,7 @@ QPoint BB_Line::getP0() const
 
 bool BB_Line::isHit(QPoint hit)
 {
-    return BB_DrawObject::isHit(hit);
+	return false;
 }
 
 const QColor& BB_Line::getColor() const
@@ -80,7 +82,7 @@ BB_DrawObject* BB_Line::getPos1() const
 }
 
 
-void BB_Line::setPos1(BB_Point* Value)
+void BB_Line::setPos1(BB_DrawObject* Value)
 {
     m_Pos1 = Value;
 }
@@ -92,7 +94,13 @@ BB_DrawObject* BB_Line::getPos2() const
 }
 
 
-void BB_Line::setPos2(BB_Point* Value)
+void BB_Line::setPos2(BB_DrawObject* Value)
 {
     m_Pos2 = Value;
+}
+
+
+const char * BB_Line::getClassName() const
+{
+	return BB_Line::ClassName;
 }

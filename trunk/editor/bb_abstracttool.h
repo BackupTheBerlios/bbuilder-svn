@@ -30,10 +30,15 @@ public:
 
     virtual ~BB_AbstractTool();
     virtual void move(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
-	virtual void release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
-	virtual void click(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
+    virtual void release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
+    virtual void click(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
+    bool remove(QVector<BB_DrawObject*>* objects, BB_DrawObject * delObject);
 
 protected:
+	QPoint m_LastLogicMouseClick;
+	QPoint m_pLogic;
+	QPoint m_pScreen;
+	QWidget * parentWidget;
 };
 
 #endif

@@ -45,7 +45,7 @@ public:
     @author Vacelav Ustinov
     @param BB_Point 
     */
-    void setPos1(BB_Point* Value);
+    void setPos1(BB_DrawObject* Value);
 
     /**
     gibt Pointer auf Punkt 1 zurück
@@ -59,7 +59,7 @@ public:
     @author Vacelav Ustinov
     @param BB_Point 
     */
-    void setPos2(BB_Point* Value);
+    void setPos2(BB_DrawObject* Value);
 
     /**
     gibt Pointer auf Punkt 2 zurück
@@ -67,6 +67,8 @@ public:
     @return BB_Point*
     */
     BB_DrawObject* getPos2() const;
+    
+    const char * getClassName() const;
 
 
 
@@ -74,6 +76,8 @@ public:
 protected:
     BB_DrawObject * m_Pos1;
     BB_DrawObject * m_Pos2;
+private:
+	static const char * ClassName;
 };
 
 #endif

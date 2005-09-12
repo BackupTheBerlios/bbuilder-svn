@@ -13,10 +13,13 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_point.h"
-
+ 
 #include <iostream>
+#include <math.h>
 
 using namespace std;
+
+const char * BB_Point::ClassName = "BB_Point";
 
 BB_Point::BB_Point()
         : BB_DrawObject()
@@ -81,3 +84,9 @@ if(abstand <= (m_Radius + m_hitRange))
    return true;
 return false;
 }
+
+const char * BB_Point::getClassName() const
+{
+	return BB_Point::ClassName;
+}
+

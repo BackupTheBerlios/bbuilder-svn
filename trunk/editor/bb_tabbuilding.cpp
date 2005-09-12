@@ -86,7 +86,7 @@ BB_TabBuilding::BB_TabBuilding(QVector<BB_Building*>* buildings, QWidget* parent
 	m_ToolZoom = new BB_ToolZoom(m_Center);
 	m_ToolPointNew = new BB_ToolPointNew();
 	m_ToolMove = new BB_ToolMove();
-	m_ToolLineNew = new BB_ToolLineNew();
+	m_ToolLineNew = new BB_ToolLineNew(m_Center);
 	
 	updateBuildingList();
 	

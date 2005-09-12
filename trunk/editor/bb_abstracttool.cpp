@@ -14,13 +14,33 @@
  ***************************************************************************/
 #include "bb_abstracttool.h"
 
+#include <iostream>
+
+using namespace std;
+
 BB_AbstractTool::BB_AbstractTool()
 {
 }
 
-
 BB_AbstractTool::~BB_AbstractTool()
 {
+}
+
+bool BB_AbstractTool::remove(QVector<BB_DrawObject*>* objects, BB_DrawObject * delObject)
+{
+	BB_DrawObject * tmpObject;
+	int objectPosition;
+	objectPosition = -1;
+	for (int i=0; i<objects->count(); i++)
+	{
+		tmpObject = objects->at(i);
+		if (tmpObject == delObject)
+		{
+			objectPosition = i;
+		}
+	}
+	cout << objectPosition <<endl;
+	objects->remove(objectPosition);
 }
 
 

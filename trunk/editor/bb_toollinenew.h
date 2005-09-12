@@ -29,12 +29,16 @@ class BB_ToolLineNew : public BB_AbstractTool
 {
 public:
     BB_ToolLineNew();
+    BB_ToolLineNew(QWidget *parent);
 
     ~BB_ToolLineNew();
 
     virtual void click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer);
     virtual void move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer);
     virtual void release(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer);
+protected:
+	BB_DrawObject * m_movedPoint;
+	BB_Line * tmpLine;
 
 };
 
