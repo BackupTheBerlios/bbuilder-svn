@@ -161,34 +161,68 @@ void BB_MainWindow::initDoc()
 
 
 /**
- * Erstellt ein neues, leeres Projekt
+ * Erstellt ein neues, leeres Projekt.
+ * Der User kann im Dialog, der getsartet wird, den Pfad angeben, wo der Projekt erzeugt werden soll.
  * @author Alex Letkemann
+ * @date 12.09.2005
  */
 void BB_MainWindow::slotProjectNew()
 {
 	cout << "Neues Projekt" << endl;
-    /// @todo implement me
+	
+	QString filename = QFileDialog::getSaveFileName(
+			this,
+			"Neues Projekt anlegen",
+			"/home",
+			"glBB Projekt-Ordner",0,QFileDialog::ShowDirsOnly);
+	
+	QMessageBox::information(NULL,"test",filename);
+	
+	if(filename != "")
+		m_Config.setCurrentProjectPath(filename);
+    /// @todo Ein Dialog muss erstellt werden
 }
 
 
 /**
- * Öffnet ein Projekt
+ * Öffnet ein Projekt.
+ * Der User muss in einem File-Dialog eine Projekt-Datei auswählen.
  * @author Alex Letkemann
+ * @date 12.09.2005
  */
 void BB_MainWindow::slotProjectOpen()
 {
+	
+	
 	cout << "Projekt öffnen" << endl;
+	
+	QString filename;
+	filename = QFileDialog::getOpenFileName(
+			this,
+			QString::fromUtf8("Öffnen"),
+			m_Config.getCurrentProjectPath(),
+			"glBB Projekt-Datei (*.glbb)");
+	
+	if(filename != "")
+		m_Config.setCurrentProjectPath(filename);
+	
     /// @todo implement me
 }
 
 
 /**
- * Schliesst das aktuelle Projekt
+ * Schliesst das aktuelle Projekt.
+ * Das Tabwidget des Hauptfensters wird deaktiviert.
  * @author Alex Letkemann
+ * @date 12.09.2005
  */
 void BB_MainWindow::slotProjectClose()
 {
 	cout << "Projekt schliessen" << endl;
+	
+	m_Doc->clear();
+	m_TabWidget->setEnabled(false);
+	
     /// @todo implement me
 }
 

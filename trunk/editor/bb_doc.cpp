@@ -20,10 +20,7 @@ using namespace std;
 
 BB_Doc::BB_Doc()
 {
-	m_Terrain = new BB_Terrain();
-	m_Buildings = NULL;
-	m_Buildings = new QVector<BB_Building*>();
-	m_Levels = new QVector<BB_Level> ();	
+	m_Terrain = NULL;
 }
 
 
@@ -39,17 +36,48 @@ BB_Doc::~BB_Doc()
  */
 QVector< BB_Building*>* BB_Doc::getBuildings()
 {
-	return m_Buildings;
+	return &m_Buildings;
 }
 
 
-QVector< BB_Level>* BB_Doc::getLevels()
+QVector<BB_Level*>* BB_Doc::getLevels()
 {
-    return m_Levels;
+    return &m_Levels;
 }
 
 
 BB_Terrain* BB_Doc::getTerrain()
 {
     return m_Terrain;
+}
+
+
+/**
+ * Löscht den Inhalt des Dokumentes
+ */
+void BB_Doc::clear()
+{
+
+	if(m_Terrain != NULL)
+	{
+		delete m_Terrain;
+		m_Terrain = NULL;
+	}
+	
+	BB_Object* object;
+	
+	for(int i = 0; i < m_Buildings.count(); i++)
+	{
+		object = m_Buildings.at(i);
+		delete object;
+		m_Buildings.remove(i);
+	}
+	
+	
+	for(int i = 0; i < m_Levels.count(); i++)
+	{
+		object = m_Levels.at(i);
+		delete object;
+		m_Levels.remove(i);
+	}
 }

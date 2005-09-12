@@ -33,13 +33,14 @@ public:
 	
 	BB_Terrain* BB_Doc::getTerrain();
 	QVector<BB_Building*>* getBuildings();
-	QVector<BB_Level>* getLevels();
+	QVector<BB_Level*>* getLevels();
+    void clear();
 
 protected:
 	
 	BB_Terrain *m_Terrain;	
-	QVector<BB_Building*> *m_Buildings;
-    QVector<BB_Level> *m_Levels;
+	QVector<BB_Building*> m_Buildings;
+    QVector<BB_Level*> m_Levels;
 };
 
 #endif
