@@ -170,6 +170,20 @@ void BB_MainWindow::slotProjectNew()
 {
 	cout << "Neues Projekt" << endl;
 	
+
+	int result;
+	QDialog dialog(this);
+	Ui_NewProjectDialog dlg;
+	
+	dlg.setupUi(&dialog);
+	
+	
+	result = dialog.exec();
+	
+	
+	
+	
+/*	
 	QString filename = QFileDialog::getSaveFileName(
 			this,
 			"Neues Projekt anlegen",
@@ -179,7 +193,7 @@ void BB_MainWindow::slotProjectNew()
 	QMessageBox::information(NULL,"test",filename);
 	
 	if(filename != "")
-		m_Config.setCurrentProjectPath(filename);
+		m_Config.setCurrentProjectPath(filename);*/
     /// @todo Ein Dialog muss erstellt werden
 }
 

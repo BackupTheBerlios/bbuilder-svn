@@ -22,6 +22,9 @@
 #include "bb_doc.h"
 #include "bb_config.h"
 
+
+#include "ui_newProject.h"
+
 // TESTEST
 
 /**

@@ -26,7 +26,7 @@ BB_WorkFrame::BB_WorkFrame(QWidget * parent, Qt::WFlags f)
     m_ZoomFaktor = 1.0;
     m_Tool = NULL;
     m_DrawObjects = NULL;
-    m_Transformer.setOffset(QPoint(10, 200));
+    m_Transformer.setOffset(QPoint(100, 100));
 }
 
 
@@ -34,14 +34,16 @@ BB_WorkFrame::~BB_WorkFrame()
 {}
 
 
-/*!
-    \fn BB_WorkFrame::paintEvent ( QPaintEvent * pe)
+/**
+ * Wird beim ...
  */
 void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
 {
     QLabel::paintEvent(pe);
 
+	
     QPainter painter(this);
+	drawCenter(painter);
 //     painter.scale(m_ZoomFaktor, m_ZoomFaktor);
 //     painter.setPen(QColor("Blue"));
 //     painter.drawLine(0,0,100,100);
@@ -61,8 +63,9 @@ void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
 }
 
 
-/*!
-    \fn BB_WorkFrame::setZoomFaktor(double faktor)
+/**
+ * Setzt den Zoomfaktor, mit dem dargestellt werden soll.
+ * @param faktor Zoomfaktor
  */
 void BB_WorkFrame::setZoomFaktor(double faktor)
 {
@@ -98,8 +101,8 @@ void BB_WorkFrame::setTool(BB_AbstractTool* tool)
     }
 }
 
-/*!
-    \fn BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
+/**
+ * Wird aufgeruffen, wenn eine Maustaste gedrückt wird.
  */
 void BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
 {
@@ -112,8 +115,8 @@ void BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
         cout << "Kein Tool ausgewählt" << endl;
 }
 
-/*!
-    \fn BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
+/**
+ * Wird aufgeruffen, wenn eine Maustaste los gelassen wird.
  */
 void BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
 {
@@ -127,8 +130,8 @@ void BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
 }
 
 
-/*!
-    \fn BB_WorkFrame::mouseMoveEvent(QMouseEvent* me);
+/**
+ * Wird aufgeruffen, wenn die Maus mit einer gedrückten Maustaste bewegt wird.
  */
 void BB_WorkFrame::mouseMoveEvent(QMouseEvent* me)
 {
@@ -151,4 +154,24 @@ QVector< BB_DrawObject *>* BB_WorkFrame::getDrawObjects() const
 void BB_WorkFrame::setDrawObjects(QVector< BB_DrawObject *>* theValue)
 {
     m_DrawObjects = theValue;
+}
+
+
+/**
+ * Zeichnet einen blauen Kreutz am logischen Koordinatenursprung
+ * @param painter Painter, mit dem gezeichnet wird
+ * @author Alex Letkemann
+ * @date 13.09.2005
+ */
+void BB_WorkFrame::drawCenter(QPainter &painter)
+{
+	
+	QPoint dest, src(0,0);
+	m_Transformer.logicalToScreen(dest,src);
+	
+	painter.save();
+	painter.setPen(QColor("Blue"));
+	painter.drawLine(dest.x() - 10,dest.y(),dest.x() + 10,dest.y());
+	painter.drawLine(dest.x(),dest.y() -10,dest.x(), dest.y() + 10);
+	painter.restore();
 }

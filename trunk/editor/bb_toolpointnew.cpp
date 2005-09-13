@@ -31,13 +31,14 @@ BB_ToolPointNew::~BB_ToolPointNew()
 
 void BB_ToolPointNew::click(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer)
 {
-	cout << "New Point" << endl;
+	
 	if(objects != NULL)
 	{	
 		QPoint pScreen,pLogic;
 		pScreen.setX(me->x());
 		pScreen.setY(me->y());
 		transformer->screenToLogical(pLogic,pScreen);
+// 		cout << "New Point (" << pLogic.x() << "|" << pLogic.y() << ")" << endl;
 		BB_Point *point = new BB_Point(pLogic);
 		objects->append(point);
 	}

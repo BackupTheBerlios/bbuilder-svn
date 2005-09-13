@@ -46,6 +46,7 @@ protected:
     virtual void mouseReleaseEvent ( QMouseEvent* me);
     virtual void paintEvent ( QPaintEvent * pe);
     virtual void mouseMoveEvent ( QMouseEvent* me);
+    void drawCenter(QPainter &painter);
 protected:
     double m_ZoomFaktor;
     BB_AbstractTool* m_Tool;

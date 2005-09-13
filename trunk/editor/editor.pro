@@ -9,7 +9,8 @@ CONFIG += release \
 warn_on
 TEMPLATE = app
 
-FORMS += buildingEdit.ui 
+FORMS += buildingEdit.ui \
+        newProject.ui
 HEADERS += bb_abstracttool.h \
            bb_building.h \
            bb_data.h \

@@ -14,11 +14,15 @@
  ***************************************************************************/
 #include "bb_transformer.h"
 
+#include "iostream"
+
+using namespace std;
+
 BB_Transformer::BB_Transformer()
 {
 	m_Scale = 1.0;
-	m_Offset.setX(1);
-	m_Offset.setY(1);
+	m_Offset.setX(0);
+	m_Offset.setY(0);
 }
 
 
@@ -53,12 +57,12 @@ void BB_Transformer::setScale(double theValue)
 
 void BB_Transformer::screenToLogical(QPoint & dest, const QPoint & source) const
 {
-	dest.setX((int)(source.x() - m_Offset.x()) / m_Scale);
-	dest.setY((int)-((source.y() - m_Offset.y()) / m_Scale));
+	dest.setX((int)(source.x() / m_Scale - m_Offset.x()));
+	dest.setY((int)(-(source.y() / m_Scale - m_Offset.x())));
 }
 
 void BB_Transformer::logicalToScreen(QPoint & dest, const QPoint & source) const
 {
-	dest.setX((int) (source.x() * m_Scale) + m_Offset.x());
-	dest.setY((int) (-source.y() * m_Scale) + m_Offset.y());
+	dest.setX((int) ((source.x() + m_Offset.x()) * m_Scale));
+	dest.setY((int) ((-source.y() + m_Offset.y()) * m_Scale));
 }
