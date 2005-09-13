@@ -45,7 +45,7 @@ public:
     @author Vacelav Ustinov
     @param BB_Point 
     */
-    void setPos1(BB_DrawObject* Value);
+    bool setPos1(BB_DrawObject* Value);
 
     /**
     gibt Pointer auf Punkt 1 zurück
@@ -59,7 +59,7 @@ public:
     @author Vacelav Ustinov
     @param BB_Point 
     */
-    void setPos2(BB_DrawObject* Value);
+    bool setPos2(BB_DrawObject* Value);
 
     /**
     gibt Pointer auf Punkt 2 zurück

@@ -21,13 +21,14 @@ using namespace std;
 BB_ToolLineNew::BB_ToolLineNew()
         : BB_AbstractTool()
 {
-    // 	m_movedPoint = NULL;
+     	m_movedPoint = NULL;
 }
 
 BB_ToolLineNew::BB_ToolLineNew(QWidget *parent)
 	: BB_AbstractTool()
 {
 	parentWidget = parent;
+	m_movedPoint = NULL;
 }
 
 
@@ -56,7 +57,6 @@ void BB_ToolLineNew::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects,
 			 tmpLine = line;
                 objects->append(line);
                 m_LastLogicMouseClick = pLogic;
- 			 parentWidget->setMouseTracking(true);
                 return;
             }
         }
@@ -65,8 +65,6 @@ void BB_ToolLineNew::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects,
 
 void BB_ToolLineNew::move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
 {
-    cout << "move" <<endl;
-
     if(objects != NULL && me != NULL && transformer != NULL && m_movedPoint != NULL)
     {
         QPoint moveTmp;
@@ -103,7 +101,10 @@ void BB_ToolLineNew::release(QMouseEvent* me, QVector< BB_DrawObject * >* object
 				{
 					QPoint fromhitobject = object->getP0();
 					cout << "Old Line : Point :" << fromhitobject.x()<<endl;
-					tmpLine->setPos2(object);
+					if (!tmpLine->setPos2(object))
+						remove(objects, tmpLine);
+					tmpLine = NULL;
+					m_movedPoint = NULL;
 					return;
 				}
 			}
@@ -111,6 +112,5 @@ void BB_ToolLineNew::release(QMouseEvent* me, QVector< BB_DrawObject * >* object
 			tmpLine = NULL;
 			m_movedPoint = NULL;
 		}
-		parentWidget->setMouseTracking(false);
 }
 

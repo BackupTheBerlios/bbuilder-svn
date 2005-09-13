@@ -25,6 +25,7 @@ BB_Point::BB_Point()
         : BB_DrawObject()
 {
     m_Radius = 10;
+    m_hitRange = 2;
 }
 
 BB_Point::BB_Point(QPoint p)
@@ -89,4 +90,5 @@ const char * BB_Point::getClassName() const
 {
 	return BB_Point::ClassName;
 }
+
 
