@@ -17,7 +17,7 @@
 #define BB_TOOLLINENEW_H
 
 #include <bb_abstracttool.h>
-#include "bb_line.h"
+#include "bb_wall.h"
 //#include "bb_drawobject.h"
 
 /**
@@ -38,7 +38,7 @@ public:
     virtual void release(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer);
 protected:
 	BB_DrawObject * m_movedPoint;
-	BB_Line * tmpLine;
+	BB_Wall * tmpWall;
 
 };
 

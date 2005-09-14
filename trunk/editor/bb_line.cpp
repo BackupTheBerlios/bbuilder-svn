@@ -13,6 +13,10 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_line.h"
+#include <iostream>
+#include <math.h>
+
+using namespace std;
 
 const char * BB_Line::ClassName = "BB_Line";
 
@@ -21,7 +25,7 @@ BB_Line::BB_Line(BB_DrawObject *p1, BB_DrawObject *p2)
     m_Pos1 = p1;
     m_Pos2 = p2;
     m_Color.setNamedColor("Red");
-    m_hitRange = 2;
+    m_hitRange = 3;
 }
 
 
@@ -37,26 +41,21 @@ QPoint BB_Line::getP0() const
 bool BB_Line::isHit(QPoint hit)
 {
     //hier wird eine Gleichung ermittelt y=mx+b
-    int m, 	//Steigung
+    double m, 	//Steigung
     b,		//verschiebung
     y,		//y ist y :-)
     min,		//man muss feststellen welcher Punkt ist kleiner. In X-Achse
-    max;
-    
+    max,
+    min_y,		//man muss feststellen welcher Punkt ist kleiner. In Y-Achse
+    max_y;
+
     QPoint P1, P2;
-    
+
     P2 = m_Pos2->getP0();
     P1 = m_Pos1->getP0();
 
-    //Steigung ermitteln
-    //     m=(getY2()-getY())/(getX2()-getX());
-    m = (P2.y() - P1.y()) /(P2.x() - P1.x());
-    //b finden
-    //     b=getY()-m*getX();
-    b = P1.y() - m * P1.y();
-    //y finden, also die mogliche Position von y wenn die X-Position von maus ist :
-    y = m * hit.x() + b;
     //minimum maximum ermitteln
+
     if (P1.x() < P2.x())
     {
         min = P1.x();
@@ -64,14 +63,65 @@ bool BB_Line::isHit(QPoint hit)
     }
     else
     {
-        max = P2.x();
-        min = P1.x();
+        max = P1.x();
+        min = P2.x();
     }
 
+    if ((P2.x() - P1.x()) > 20 || (P2.x() - P1.x()) < -20)
+    {
 
-    if (hit.x() >= (min - m_hitRange) && hit.x() <= (max + m_hitRange))
-        if (hit.y() >= (y - m_hitRange) && hit.y() <= (y + m_hitRange))
-            return true;
+        //Steigung ermitteln
+        //m=(getY2()-getY())/(getX2()-getX());
+        double zaehler, nenner;
+        zaehler = (P2.y() - P1.y());
+        nenner = (P2.x() - P1.x());
+        m = zaehler/ nenner;
+        //b finden
+        //b=getY()-m*getX();
+        b = P2.y() - (m * P2.x());
+        //y finden, also die mogliche Position von y wenn die X-Position von maus ist :
+        y = m * hit.x() + b;
+
+
+
+        //         cout <<"y:"<<y<<"m"<<m<<endl;
+        //         cout <<"b:"<<b<<endl;
+        //         cout <<"min:" << min<< ":::max"<< max<< endl;
+        //         cout <<"hit.x:" << hit.x()<< ":::hit.y:"<< hit.y()<< endl;
+        //         cout <<"P1.x:" << P1.x()<< ":::P1.y:"<< P1.y()<< endl;
+        //         cout <<"P2.x:" << P2.x()<< ":::P2.y:"<< P2.y()<< endl;
+        
+	   
+	   if (hit.x() >= (min - m_hitRange) && hit.x() <= (max + m_hitRange))
+        {
+            cout << "ich bin drin"<<endl;
+            if (hit.y() >= (y - m_hitRange) && hit.y() <= (y + m_hitRange))
+            {
+                cout <<"hit line true" <<endl;
+                return true;
+            }
+        }
+    }
+    else
+    {
+        if (P1.y() < P2.y())
+        {
+            min_y = P1.y();
+            max_y = P2.y();
+        }
+        else
+        {
+            max_y = P1.y();
+            min_y = P2.y();
+        }
+        cout << "else"<<endl;
+        if (hit.x() >= (min - m_hitRange) && hit.x() <= (max + m_hitRange))
+            if (hit.y() >= (min_y - m_hitRange) && hit.y() <= (max_y + m_hitRange))
+            {
+                cout <<"hit line true" <<endl;
+                return true;
+            }
+    }
     return false;
 }
 

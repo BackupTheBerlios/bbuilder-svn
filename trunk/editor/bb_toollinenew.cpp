@@ -53,9 +53,9 @@ void BB_ToolLineNew::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects,
                 cout << "New Line : Point :" << fromhitobject.x()<<endl;
                 BB_Point *tmpPoint = new BB_Point(pLogic);
                 m_movedPoint = tmpPoint;
-                BB_Line *line = new BB_Line(object, tmpPoint);
-			 tmpLine = line;
-                objects->append(line);
+                BB_Wall *wall = new BB_Wall(object, tmpPoint);
+			 tmpWall = wall;
+                objects->append(wall);
                 m_LastLogicMouseClick = pLogic;
                 return;
             }
@@ -101,15 +101,15 @@ void BB_ToolLineNew::release(QMouseEvent* me, QVector< BB_DrawObject * >* object
 				{
 					QPoint fromhitobject = object->getP0();
 					cout << "Old Line : Point :" << fromhitobject.x()<<endl;
-					if (!tmpLine->setPos2(object))
-						remove(objects, tmpLine);
-					tmpLine = NULL;
+					if (!tmpWall->setPos2(object))
+						remove(objects, tmpWall);
+					tmpWall = NULL;
 					m_movedPoint = NULL;
 					return;
 				}
 			}
-			remove(objects, tmpLine);
-			tmpLine = NULL;
+			remove(objects, tmpWall);
+			tmpWall = NULL;
 			m_movedPoint = NULL;
 		}
 }

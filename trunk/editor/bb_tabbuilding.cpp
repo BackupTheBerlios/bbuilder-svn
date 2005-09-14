@@ -73,7 +73,7 @@ BB_TabBuilding::BB_TabBuilding(QVector<BB_Building*>* buildings, QWidget* parent
 	toolPointNew->setStatusTip("Point Werkzeug");
 	createToolButton(toolPointNew,SLOT(slotToolPointNew(QAction*)));
 	
-	QAction *toolLineNew = new QAction("Line",this);
+	QAction *toolLineNew = new QAction("Wand",this);
 	toolPointNew->setStatusTip("Line Werkzeug");
 	createToolButton(toolLineNew,SLOT(slotToolLineNew(QAction*)));
 	
