@@ -171,34 +171,16 @@ void BB_MainWindow::slotProjectNew()
 {
 	cout << "Neues Projekt" << endl;
 	
-	BB_DlgProjectNew dlg;
-	
-	dlg.exec();
-
-// 	int result;
-// 	QDialog dialog(this);
-// 	BB_DlgProjectNew dlg;
-// 	
-// // 	dlg.setupUi(&dialog);
-// 	
-// 	
-// 	result = dialog.exec();
-	
-	
-	
-	
-/*	
-	QString filename = QFileDialog::getSaveFileName(
-			this,
-			"Neues Projekt anlegen",
-			"/home",
-			"glBB Projekt-Ordner",0,QFileDialog::ShowDirsOnly);
-	
-	QMessageBox::information(NULL,"test",filename);
-	
-	if(filename != "")
-		m_Config.setCurrentProjectPath(filename);*/
-    /// @todo Ein Dialog muss erstellt werden
+	BB_DlgProjectNew dlg;	
+	if(dlg.exec() == QDialog::QDialog::Accepted)
+	{
+		QString dir = dlg.projectDir();
+		QDir path = dlg.projectPath();
+		
+		path.mkdir(dir);
+		// TODO !!!
+	}
+	//TODO !!!	
 }
 
 

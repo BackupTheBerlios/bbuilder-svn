@@ -32,6 +32,15 @@ public:
 
     ~BB_DlgProjectNew();
 
+	void setProjectDir(const QString& theValue);
+	QString projectDir() const;
+	void setProjectPath(const QString& theValue);
+	void setProjectPath(const QDir& theValue);
+	QDir projectPath() const;
+	
+	
+	
+
 private slots:
     void slotShowDir();
 	void slotPathChanged(const QString & text);
@@ -40,8 +49,10 @@ protected:
     Ui_ProjectNewDialog m_Dlg;
     QString m_Slash;
     QDir m_Dir;
+    QString m_ProjectPath;
+    QString m_ProjectDir;
 private:
-    bool checkDir();
+    void checkDir();
 };
 
 #endif

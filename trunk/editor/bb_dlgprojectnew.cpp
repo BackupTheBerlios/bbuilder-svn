@@ -24,7 +24,7 @@ BB_DlgProjectNew::BB_DlgProjectNew(QWidget * parent, Qt::WFlags f)
 	
 #if defined(Q_WS_WIN32) || defined(Q_WS_WIN64)
 	m_Slash = "\\";
-#elif defined(Q_WS_X11)
+#elif defined(Q_WS_X11) || defined(Q_WS_MACX)
 	m_Slash = "/";
 #endif
 	
@@ -33,7 +33,9 @@ BB_DlgProjectNew::BB_DlgProjectNew(QWidget * parent, Qt::WFlags f)
 	
 	m_Dlg.lineEditProjectName->setValidator(new QRegExpValidator(QRegExp("[A-Za-z][A-Za-z0-9\\s._]+"), this ));
 	
-	m_Dlg.lineEditProjectPath->setText(QDir::homePath());
+	m_ProjectPath = QDir::homePath();
+	m_Dlg.lineEditProjectPath->setText(m_ProjectPath);
+	checkDir();
 	
 	connect(m_Dlg.buttonShowDir,
 			SIGNAL(clicked()),
@@ -87,12 +89,8 @@ void BB_DlgProjectNew::slotShowDir()
  */
 void BB_DlgProjectNew::slotPathChanged(const QString & text)
 {
-	m_Dlg.lineEditFinalPath->setText(text
-			+ m_Slash
-			+ m_Dlg.lineEditProjectName->text());
-	
-	m_Dir = m_Dlg.lineEditFinalPath->text();
-	
+
+	m_ProjectPath = m_Dlg.lineEditProjectPath->text();
 	checkDir();
 }
 
@@ -102,18 +100,84 @@ void BB_DlgProjectNew::slotPathChanged(const QString & text)
  */
 void BB_DlgProjectNew::slotNameChanged(const QString & text)
 {
-	m_Dlg.lineEditFinalPath->setText(m_Dlg.lineEditProjectPath->text()
-			+ m_Slash
-			+ text.toLower().remove(QRegExp("\\W")));
+	m_ProjectDir = text.toLower().remove(QRegExp("\\W"));	
+	checkDir();
 
 }
 
 
 
-/*!
-    \fn BB_DlgProjectNew::checkDie(const QDir& dir)
+/**
+ * Prüft ob, der angegebene Pfad für das neue Projekt gültig ist,
+ * schaltet den OK Button ein bzw. aus und
+ * Setzt schreibt ein "Ungültig" hinter dem Pfad im Anzeigelabel im Dialog.
+ * @author Alex Letkemann
+ * @date 17.09.2005
  */
-bool BB_DlgProjectNew::checkDir()
+void BB_DlgProjectNew::checkDir()
 {
-	return m_Dir.exists();
+	m_Dir = m_ProjectPath;
+	QDir fullPath(m_ProjectPath + m_Slash + m_ProjectDir);
+	bool fullPathExists = fullPath.exists();
+// 	cout <<  "PATH: " << m_ProjectPath.toStdString() 
+// 			<< "\nDIR: " << m_ProjectDir.toStdString() 
+// 			<< "\nPATH + DIR" << m_Dir.path().toStdString() 
+// 			<< endl; 
+	
+	if(m_Dir.exists() && m_ProjectDir != "" && !fullPathExists)
+	{
+		m_Dlg.okButton->setEnabled(true);
+		m_Dlg.lineEditFinalPath->setText(m_Dir.path() 
+				+ m_Slash 
+				+ m_ProjectDir);
+	}
+	else
+	{
+		m_Dlg.okButton->setEnabled(false);
+		m_Dlg.lineEditFinalPath->setText(m_Dir.path() 
+				+ m_Slash 
+				+ m_ProjectDir);
+		
+		if(fullPathExists && m_ProjectDir != "")
+		{
+			m_Dlg.lineEditFinalPath->setText(m_Dlg.lineEditFinalPath->text() 
+					+ QString::fromUtf8(" ( existiert bereits )")); 
+		}
+		else
+		{
+			m_Dlg.lineEditFinalPath->setText(m_Dlg.lineEditFinalPath->text() 
+					+ QString::fromUtf8(" ( ungültig )")); 
+		}
+
+	}
+}
+
+
+QString BB_DlgProjectNew::projectDir() const
+{
+    return m_ProjectDir;
+}
+
+
+void BB_DlgProjectNew::setProjectDir(const QString& theValue)
+{
+    m_ProjectDir = theValue;
+}
+
+
+void BB_DlgProjectNew::setProjectPath(const QString& theValue)
+{
+    m_ProjectPath = theValue;
+}
+
+
+QDir BB_DlgProjectNew::projectPath() const
+{
+    return m_Dir;
+}
+
+
+void BB_DlgProjectNew::setProjectPath(const QDir& theValue)
+{
+    m_Dir = theValue;
 }
