@@ -65,6 +65,7 @@ public:
   */
  // QDomElement createDomElement(QDomDocument & doc)const;
   const char * getClassName()const;
+    void print();
 protected: // Protected attributes
   /** X coordinate.
   */

@@ -14,9 +14,10 @@
  ***************************************************************************/
 #include "bb_dwpoint.h"
 
-BB_DWPoint::BB_DWPoint(BB_Wall * wall)
+BB_DWPoint::BB_DWPoint(BB_Wall * wall, bool first)
 {
 	m_wall = wall;
+	m_first = first;
 }
 
 
@@ -25,3 +26,8 @@ BB_DWPoint::~BB_DWPoint()
 }
 
 
+
+bool BB_DWPoint::isFirst()
+{
+	return m_first;
+}

@@ -27,18 +27,13 @@ Klasse zum Darstellen von Wänden und Fenstern
 class BB_Line : public BB_DrawObject
 {
 public:
-	BB_Line(BB_Point *p1, BB_Point *p2);
+    BB_Line(BB_Point *p1, BB_Point *p2);
     BB_Line();
 
     ~BB_Line();
 
-//     QPoint getP0() const;
     virtual bool isHit(C2dVector hit);
-    virtual const QColor& getColor() const;
-    virtual void moveBy(QPoint pMove);
-    virtual void setColor(const QColor& _newVal);
     virtual void show(BB_Transformer& transformer, QPainter& painter) const;
-//     void setP0(const QPoint& theValue);
 
     /**
     Setzt Pointer auf Position 1
@@ -67,9 +62,8 @@ public:
     @return BB_Point*
     */
     BB_Point* getPos2() const;
-    
+
     const char * getClassName() const;
-    double getLaenge();
 
 
 
@@ -79,7 +73,7 @@ protected:
     BB_Point * m_Pos2;
     C2dVector m_Richtung;
 private:
-	static const char * ClassName;
+    static const char * ClassName;
 };
 
 #endif

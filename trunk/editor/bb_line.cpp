@@ -22,7 +22,7 @@ const char * BB_Line::ClassName = "BB_Line";
 
 BB_Line::BB_Line(BB_Point *p1, BB_Point *p2)
 {
-	m_Pos1 = p1;
+    m_Pos1 = p1;
     m_Pos2 = p2;
     m_Color.setNamedColor("Red");
     m_hitRange = 3;
@@ -32,121 +32,38 @@ BB_Line::BB_Line(BB_Point *p1, BB_Point *p2)
 BB_Line::~BB_Line()
 {}
 
-
-// QPoint BB_Line::getP0() const
-// {
-//     return BB_DrawObject::getP0();
-// }
-
 bool BB_Line::isHit(C2dVector hit)
 {
-	/*
-    //hier wird eine Gleichung ermittelt y=mx+b
-    double m, 	//Steigung
-    b,		//verschiebung
-    y,		//y ist y :-)
-    min,		//man muss feststellen welcher Punkt ist kleiner. In X-Achse
-    max,
-    min_y,		//man muss feststellen welcher Punkt ist kleiner. In Y-Achse
-    max_y;
-
-    QPoint P1, P2;
-
-    P2 = m_Pos2->getP0();
-    P1 = m_Pos1->getP0();
-
-    //minimum maximum ermitteln
-
-    if (P1.x() < P2.x())
+    //Richtungsvektor von Pos1 zu Pos2
+    m_Richtung = m_Pos2->getPos() - m_Pos1->getPos();
+    //Richtungsvektor von Pos1 zu hit (also da wo mann mit muas klickt)
+    C2dVector Pos1Tohit = hit - m_Pos1->getPos();
+    //wenn der Abstand von Pos1 zu hit kleiner is als
+    //Abstand von Pos1 zu Pos2, dann mache weiter
+    //es heist also, dass Mausposition zwieschen den beiden Punkten ist
+    if (Pos1Tohit.getLength() < m_Richtung.getLength())
     {
-        min = P1.x();
-        max = P2.x();
-    }
-    else
-    {
-        max = P1.x();
-        min = P2.x();
-    }
+        //Normierte Vektor von m_Richtung, also Laenge = 1
+        //dass brauchen wir um den Abstand von von hit zu Wand zu finden
+        C2dVector norm_m_Richtung = m_Richtung.getNormalVector();
+        //Normierte Vektor von Pos1Tohit
+        C2dVector norm_Pos1Tohit = Pos1Tohit.getNormalVector();
+        //Vektor zwieschen den beiden normierten Vektoren
+        C2dVector differenz = norm_Pos1Tohit - norm_m_Richtung;
 
-    if ((P2.x() - P1.x()) > 20 || (P2.x() - P1.x()) < -20)
-    {
-
-        //Steigung ermitteln
-        //m=(getY2()-getY())/(getX2()-getX());
-        double zaehler, nenner;
-        zaehler = (P2.y() - P1.y());
-        nenner = (P2.x() - P1.x());
-        m = zaehler/ nenner;
-        //b finden
-        //b=getY()-m*getX();
-        b = P2.y() - (m * P2.x());
-        //y finden, also die mogliche Position von y wenn die X-Position von maus ist :
-        y = m * hit.x() + b;
-
-
-
-        //         cout <<"y:"<<y<<"m"<<m<<endl;
-        //         cout <<"b:"<<b<<endl;
-        //         cout <<"min:" << min<< ":::max"<< max<< endl;
-        //         cout <<"hit.x:" << hit.x()<< ":::hit.y:"<< hit.y()<< endl;
-        //         cout <<"P1.x:" << P1.x()<< ":::P1.y:"<< P1.y()<< endl;
-        //         cout <<"P2.x:" << P2.x()<< ":::P2.y:"<< P2.y()<< endl;
-        
-	   
-	   if (hit.x() >= (min - m_hitRange) && hit.x() <= (max + m_hitRange))
+        //um den Maximalen erlaubten Abstand von einem Punkt zu einer Gerade
+        //zu ermitteln, braucht man auch m_hitRange zu dividieren
+        double nenner = Pos1Tohit.getLength() / norm_Pos1Tohit.getLength();
+        //wenn jetzt den Abstand kleiner ist als erlaubt, dann return true
+        if ((norm_Pos1Tohit - norm_m_Richtung).getLength() < (m_hitRange / nenner))
         {
-//             cout << "ich bin drin"<<endl;
-            if (hit.y() >= (y - m_hitRange) && hit.y() <= (y + m_hitRange))
-            {
-//                 cout <<"hit line true" <<endl;
-                return true;
-            }
+
+            cout << "hitline true: diff: "<< differenz.getLength()<< "line lenght: "<< m_Richtung.getLength() <<endl;
+            return true;
         }
     }
-    else
-    {
-        if (P1.y() < P2.y())
-        {
-            min_y = P1.y();
-            max_y = P2.y();
-        }
-        else
-        {
-            max_y = P1.y();
-            min_y = P2.y();
-        }
-//         cout << "else"<<endl;
-        if (hit.x() >= (min - m_hitRange) && hit.x() <= (max + m_hitRange))
-            if (hit.y() >= (min_y - m_hitRange) && hit.y() <= (max_y + m_hitRange))
-            {
-//                 cout <<"hit line true" <<endl;
-                return true;
-            }
-    }
+    cout << "hitline false"<<endl;
     return false;
-	*/
-// 	m_Richtung = m_Pos2 -m_Pos1;
-// 	C2dVector Pos1Tohit = hit - m_Pos1;
-// 	if (Pos1Tohit.getLength() < m_Richtung.getLength())
-// 	{
-// 		
-// 	}
-	return false;
-}
-
-const QColor& BB_Line::getColor() const
-{
-    return BB_DrawObject::getColor();
-}
-
-void BB_Line::moveBy(QPoint pMove)
-{
-    //BB_DrawObject::moveBy(pMove);
-}
-
-void BB_Line::setColor(const QColor& _newVal)
-{
-    BB_DrawObject::setColor(_newVal);
 }
 
 void BB_Line::show(BB_Transformer& transformer, QPainter& painter) const
@@ -203,13 +120,4 @@ bool BB_Line::setPos2(BB_Point* Value)
 const char * BB_Line::getClassName() const
 {
     return BB_Line::ClassName;
-}
-
-
-/*!
-    \fn BB_Line::getLaenge()
- */
-double BB_Line::getLaenge()
-{
-    /// @todo implement me
 }

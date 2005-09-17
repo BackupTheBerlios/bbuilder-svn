@@ -17,6 +17,10 @@
 
 #include "c2dvector.h"
 
+#include <iostream>
+
+using namespace std;
+
 const char * C2dVector::ClassName = "C2dVector";
 
 /** Standard constructor, accepts no to all parameters.
@@ -94,3 +98,12 @@ double C2dVector::getAbstand(C2dVector v2)
 
 
 
+
+
+/*!
+    \fn C2dVector::print()
+ */
+void C2dVector::print()
+{
+	cout << "x: " << m_X << "--y: "<< m_Y<<endl;
+}
