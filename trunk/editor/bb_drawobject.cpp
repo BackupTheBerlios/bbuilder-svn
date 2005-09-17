@@ -26,11 +26,6 @@ BB_DrawObject::BB_DrawObject()
 }
 
 
-BB_DrawObject::BB_DrawObject(QPoint p)
-{
-	m_P0 = p;
-}
-
 BB_DrawObject::~BB_DrawObject()
 {
 }
@@ -41,7 +36,7 @@ BB_DrawObject::~BB_DrawObject()
 /*!
     \fn BB_DrawObject::moveBy(const QPoint &pMove)
  */
-void BB_DrawObject::moveBy(QPoint pMove)
+void BB_DrawObject::moveBy(C2dVector pMove)
 {
     /// @todo implement me
 }
@@ -78,7 +73,7 @@ void BB_DrawObject::setColor(const QColor& _newVal)
 /*!
     \fn BB_DrawObject::isHit(QPoint p)
  */
-bool BB_DrawObject::isHit(QPoint hit)
+bool BB_DrawObject::isHit(C2dVector hit)
 {
     /// @todo implement me
 }

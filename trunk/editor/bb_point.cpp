@@ -28,9 +28,9 @@ BB_Point::BB_Point()
     m_hitRange = 2;
 }
 
-BB_Point::BB_Point(QPoint p)
-        : BB_DrawObject(p)
+BB_Point::BB_Point(C2dVector p)
 {
+	m_Pos = p;
     m_Radius = 10;
     m_Color.setNamedColor("Red");
     m_hitRange = 2;
@@ -41,17 +41,22 @@ BB_Point::~BB_Point()
 {}
 
 
-void BB_Point::moveBy(QPoint pMove)
+// void BB_Point::moveBy(QPoint pMove)
+// {
+//     m_P0.setX(m_P0.x() + pMove.x());
+//     m_P0.setY(m_P0.y() + pMove.y());
+// }
+
+void BB_Point::moveBy(C2dVector vMove)
 {
-    m_P0.setX(m_P0.x() + pMove.x());
-    m_P0.setY(m_P0.y() + pMove.y());
+	m_Pos = m_Pos + vMove;
 }
 
 void BB_Point::show(BB_Transformer& transformer, QPainter& painter) const
 {
     QPoint dest;
 
-    transformer.logicalToScreen(dest, m_P0);
+    transformer.logicalToScreen(dest, m_Pos);
 
     painter.setPen(m_Color);
     painter.setBrush(m_Color);
@@ -77,10 +82,10 @@ void BB_Point::setRadius(int r)
     m_Radius = r;
 }
 
-bool BB_Point::isHit(QPoint hit)
+bool BB_Point::isHit(C2dVector hit)
 {
 
-double abstand = sqrt((double)((m_P0.x() - hit.x()) * (m_P0.x() - hit.x())) + ((m_P0.y() - hit.y()) * (m_P0.y() - hit.y())));
+double abstand = m_Pos.getAbstand(hit);
 if(abstand <= (m_Radius + m_hitRange))
    return true;
 return false;
@@ -92,3 +97,15 @@ const char * BB_Point::getClassName() const
 }
 
 
+
+
+C2dVector BB_Point::getPos() const
+{
+    return m_Pos;
+}
+
+
+void BB_Point::setPos(const C2dVector& theValue)
+{
+    m_Pos = theValue;
+}

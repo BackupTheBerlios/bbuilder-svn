@@ -166,7 +166,8 @@ void BB_WorkFrame::setDrawObjects(QVector< BB_DrawObject *>* theValue)
 void BB_WorkFrame::drawCenter(QPainter &painter)
 {
 	
-	QPoint dest, src(0,0);
+	QPoint dest; 
+	C2dVector src(0,0);
 	m_Transformer.logicalToScreen(dest,src);
 	
 	painter.save();

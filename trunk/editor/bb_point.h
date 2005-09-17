@@ -17,6 +17,7 @@
 #define BB_POINT_H
 
 #include <bb_drawobject.h>
+#include "c2dvector.h"
 using namespace std;
 
 /**
@@ -28,21 +29,30 @@ class BB_Point : public BB_DrawObject
 {
 public:
     BB_Point();
-    BB_Point(QPoint p);
+    BB_Point(C2dVector p);
 
     ~BB_Point();
 
 
-    virtual void moveBy( QPoint pMove);
+//     virtual void moveBy( QPoint pMove);
+    virtual void moveBy( C2dVector pMove);
 	virtual void show(BB_Transformer& transformer, QPainter& painter) const;
     int getRadius();
     void setRadius(int r);
-    virtual bool isHit(QPoint hit);
+    virtual bool isHit(C2dVector hit);
     const char * getClassName() const;
+
+	void setPos(const C2dVector& theValue);
+	
+
+	C2dVector getPos() const;
+	
 
 private:
     int m_Radius;
     static const char * ClassName;
+protected:
+	C2dVector m_Pos;
 };
 
 #endif

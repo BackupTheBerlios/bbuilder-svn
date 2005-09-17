@@ -20,6 +20,7 @@
 
 #include "bb_drawobject.h"
 #include "bb_transformer.h"
+#include "c2dvector.h"
 
 /**
 @author Alex Letkemann
@@ -35,8 +36,8 @@ public:
     bool remove(QVector<BB_DrawObject*>* objects, BB_DrawObject * delObject);
 
 protected:
-	QPoint m_LastLogicMouseClick;
-	QPoint m_pLogic;
+	C2dVector m_LastLogicMouseClick;
+	C2dVector m_pLogic;
 	QPoint m_pScreen;
 	QWidget * parentWidget;
 };

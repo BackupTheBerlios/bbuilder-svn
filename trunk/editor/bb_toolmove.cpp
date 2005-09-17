@@ -58,10 +58,10 @@ void BB_ToolMove::move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_
 
 		for(int i = 0; i < m_Selection.count(); i++)
 		{
-			QPoint moveTmp,pLogic;
-			transformer->screenToLogical(pLogic,me->pos());
-			moveTmp.setX(pLogic.x() - m_LastLogicMouseClick.x());
-			moveTmp.setY(pLogic.y() - m_LastLogicMouseClick.y());
+			C2dVector moveTmp;
+			transformer->screenToLogical(m_pLogic,me->pos());
+			moveTmp.setX(m_pLogic.x() - m_LastLogicMouseClick.x());
+			moveTmp.setY(m_pLogic.y() - m_LastLogicMouseClick.y());
 
 			m_Selection.at(i)->moveBy(moveTmp);
 		}

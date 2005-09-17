@@ -40,23 +40,22 @@ void BB_ToolLineNew::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects,
 {
     if(objects != NULL && me != NULL && transformer != NULL)
     {
-        QPoint pScreen, pLogic;
         BB_DrawObject *object;
-        pScreen = me->pos();
-        transformer->screenToLogical(pLogic,pScreen);
+        m_pScreen = me->pos();
+        transformer->screenToLogical(m_pLogic,m_pScreen);
         for(int i = 0; i < objects->count(); i++)
         {
             object = objects->at(i);
-            if(object->isHit(pLogic) && (object->getClassName() == "BB_Point"))
+            if(object->isHit(m_pLogic) && (object->getClassName() == "BB_Point"))
             {
-                QPoint fromhitobject = object->getP0();
+			  C2dVector fromhitobject = ((BB_Point*)object)->getPos();
                 cout << "New Line : Point :" << fromhitobject.x()<<endl;
-                BB_Point *tmpPoint = new BB_Point(pLogic);
+                BB_Point *tmpPoint = new BB_Point(m_pLogic);
                 m_movedPoint = tmpPoint;
-                BB_Wall *wall = new BB_Wall(object, tmpPoint);
+                BB_Wall *wall = new BB_Wall((BB_Point*)object, tmpPoint);
 			 tmpWall = wall;
                 objects->append(wall);
-                m_LastLogicMouseClick = pLogic;
+                m_LastLogicMouseClick = m_pLogic;
                 return;
             }
         }
@@ -67,7 +66,7 @@ void BB_ToolLineNew::move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, 
 {
     if(objects != NULL && me != NULL && transformer != NULL && m_movedPoint != NULL)
     {
-        QPoint moveTmp;
+        C2dVector moveTmp;
         transformer->screenToLogical(m_pLogic,me->pos());
         moveTmp.setX(m_pLogic.x() - m_LastLogicMouseClick.x());
         moveTmp.setY(m_pLogic.y() - m_LastLogicMouseClick.y());
@@ -90,18 +89,17 @@ void BB_ToolLineNew::release(QMouseEvent* me, QVector< BB_DrawObject * >* object
 {		
 		if(objects != NULL && me != NULL && transformer != NULL && m_movedPoint != NULL)
 		{
-			QPoint pScreen, pLogic;
 			BB_DrawObject *object;
-			pScreen = me->pos();
-			transformer->screenToLogical(pLogic,pScreen);
+			m_pScreen = me->pos();
+			transformer->screenToLogical(m_pLogic,m_pScreen);
 			for(int i = 0; i < objects->count(); i++)
 			{
 				object = objects->at(i);
-				if(object->isHit(pLogic) && (object->getClassName() == "BB_Point"))
+				if(object->isHit(m_pLogic) && (object->getClassName() == "BB_Point"))
 				{
-					QPoint fromhitobject = object->getP0();
+					C2dVector fromhitobject = ((BB_Point*)object)->getPos();
 					cout << "Old Line : Point :" << fromhitobject.x()<<endl;
-					if (!tmpWall->setPos2(object))
+					if (!tmpWall->setPos2((BB_Point*)object))
 						remove(objects, tmpWall);
 					tmpWall = NULL;
 					m_movedPoint = NULL;

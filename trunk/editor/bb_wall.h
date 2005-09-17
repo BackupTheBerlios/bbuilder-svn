@@ -28,7 +28,7 @@ Eigene Pinkten hat sie nicht
 class BB_Wall : public BB_Line
 {
 public:
-    BB_Wall(BB_DrawObject* p1, BB_DrawObject* p2);
+    BB_Wall(BB_Point* p1, BB_Point* p2);
 
     ~BB_Wall();
 

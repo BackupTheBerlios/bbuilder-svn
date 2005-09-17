@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2005 by Vaceslav Ustinov                                *
- *   V.Ustinov@web.de                                                      *
+ *   v.ustinov@web.de                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -11,23 +11,27 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
  *   GNU General Public License for more details.                          *
+ *                                                                         *
  ***************************************************************************/
+#ifndef BB_DWPOINT_H
+#define BB_DWPOINT_H
+
 #include "bb_wall.h"
 
-const char * BB_Wall::ClassName = "BB_Wall";
+/**
+BB_DWPoint - Door or Window Point
 
-BB_Wall::BB_Wall(BB_Point* p1, BB_Point* p2): BB_Line(p1, p2)
-{
-}
+@author Vaceslav Ustinov
+*/
+class BB_DWPoint{
+public:
+    BB_DWPoint(BB_Wall * wall);
 
+    ~BB_DWPoint();
+private:
+	BB_Wall * m_wall;
+	double m_Pos;
 
-BB_Wall::~BB_Wall()
-{
-}
+};
 
-
-const char* BB_Wall::getClassName() const
-{
-	return BB_Wall::ClassName;
-}
-
+#endif

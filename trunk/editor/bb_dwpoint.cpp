@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2005 by Vaceslav Ustinov                                *
- *   V.Ustinov@web.de                                                      *
+ *   v.ustinov@web.de                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -12,22 +12,16 @@
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
-#include "bb_wall.h"
+#include "bb_dwpoint.h"
 
-const char * BB_Wall::ClassName = "BB_Wall";
-
-BB_Wall::BB_Wall(BB_Point* p1, BB_Point* p2): BB_Line(p1, p2)
+BB_DWPoint::BB_DWPoint(BB_Wall * wall)
 {
+	m_wall = wall;
 }
 
 
-BB_Wall::~BB_Wall()
+BB_DWPoint::~BB_DWPoint()
 {
 }
 
-
-const char* BB_Wall::getClassName() const
-{
-	return BB_Wall::ClassName;
-}
 

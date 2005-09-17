@@ -55,13 +55,13 @@ void BB_Transformer::setScale(double theValue)
     m_Scale = theValue;
 }
 
-void BB_Transformer::screenToLogical(QPoint & dest, const QPoint & source) const
+void BB_Transformer::screenToLogical(C2dVector & dest, const QPoint & source) const
 {
 	dest.setX((int)(source.x() / m_Scale - m_Offset.x()));
 	dest.setY((int)(-(source.y() / m_Scale - m_Offset.x())));
 }
 
-void BB_Transformer::logicalToScreen(QPoint & dest, const QPoint & source) const
+void BB_Transformer::logicalToScreen(QPoint & dest, const C2dVector & source) const
 {
 	dest.setX((int) ((source.x() + m_Offset.x()) * m_Scale));
 	dest.setY((int) ((-source.y() + m_Offset.y()) * m_Scale));

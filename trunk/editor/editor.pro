@@ -28,7 +28,9 @@ HEADERS += bb_abstracttool.h \
            bb_line.h \
            bb_config.h \
            bb_toollinenew.h \
-           bb_wall.h 
+           bb_wall.h \
+           bb_dwpoint.h \
+           c2dvector.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_data.cpp \
@@ -53,7 +55,9 @@ SOURCES += bb_abstracttool.cpp \
            bb_line.cpp \
            bb_config.cpp \
            bb_toollinenew.cpp \
-           bb_wall.cpp 
+           bb_wall.cpp \
+           bb_dwpoint.cpp \
+           c2dvector.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += release \

@@ -17,6 +17,7 @@
 #define BB_TRANSFORMER_H
 
 #include <QPoint>
+#include "c2dvector.h"
 
 /**
 eine Klasse zum konvertieren von logischen ins Bildschirmkoordinate und umgekehrt
@@ -45,14 +46,14 @@ public:
     @param dest ein Vektor mit Bildschirmkoordinaten
     @param source Ein punkt mit logischen koordinaten
     */
-    void screenToLogical(QPoint & dest, const QPoint & source) const;
+    void screenToLogical(C2dVector & dest, const QPoint & source) const;
     
     
     /** diese Funktion convertiert von logischen ins Bildschirmkoordinate
     @param dest ein Vektor mit Bildschirmkoordinaten
     @param source Ein punkt mit logischen koordinaten
      */
-    void logicalToScreen(QPoint & dest, const QPoint & source) const;
+    void logicalToScreen(QPoint & dest, const C2dVector & source) const;
 
 
 private:

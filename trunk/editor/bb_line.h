@@ -27,55 +27,57 @@ Klasse zum Darstellen von Wänden und Fenstern
 class BB_Line : public BB_DrawObject
 {
 public:
-    BB_Line(BB_DrawObject *p1, BB_DrawObject *p2);
+	BB_Line(BB_Point *p1, BB_Point *p2);
     BB_Line();
 
     ~BB_Line();
 
-    QPoint getP0() const;
-    virtual bool isHit(QPoint hit);
+//     QPoint getP0() const;
+    virtual bool isHit(C2dVector hit);
     virtual const QColor& getColor() const;
     virtual void moveBy(QPoint pMove);
     virtual void setColor(const QColor& _newVal);
     virtual void show(BB_Transformer& transformer, QPainter& painter) const;
-    void setP0(const QPoint& theValue);
+//     void setP0(const QPoint& theValue);
 
     /**
     Setzt Pointer auf Position 1
     @author Vacelav Ustinov
     @param BB_Point 
     */
-    bool setPos1(BB_DrawObject* Value);
+    bool setPos1(BB_Point* Value);
 
     /**
     gibt Pointer auf Punkt 1 zurück
     @author Vaceslav Ustinov
     @return BB_Point*
     */
-    BB_DrawObject* getPos1() const;
+    BB_Point* getPos1() const;
 
     /**
     Setzt Pointer auf Position 2
     @author Vacelav Ustinov
     @param BB_Point 
     */
-    bool setPos2(BB_DrawObject* Value);
+    bool setPos2(BB_Point* Value);
 
     /**
     gibt Pointer auf Punkt 2 zurück
     @author Vaceslav Ustinov
     @return BB_Point*
     */
-    BB_DrawObject* getPos2() const;
+    BB_Point* getPos2() const;
     
     const char * getClassName() const;
+    double getLaenge();
 
 
 
 
 protected:
-    BB_DrawObject * m_Pos1;
-    BB_DrawObject * m_Pos2;
+    BB_Point * m_Pos1;
+    BB_Point * m_Pos2;
+    C2dVector m_Richtung;
 private:
 	static const char * ClassName;
 };

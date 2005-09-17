@@ -34,19 +34,18 @@ class BB_DrawObject : public BB_Object
 {
 public:
     BB_DrawObject();
-    BB_DrawObject(QPoint p);
 
     virtual ~BB_DrawObject();
-    virtual void moveBy(QPoint pMove);
+    virtual void moveBy(C2dVector pMove);
     virtual void show(BB_Transformer& transformer, QPainter& painter) const;
     virtual const QColor & getColor()const;
     virtual void setColor(const QColor& _newVal = "Green");
-    void setP0(const QPoint& theValue){m_P0 = theValue;}
-    QPoint getP0() const{return m_P0;}
-    virtual bool isHit(QPoint hit);
+    //void setP0(const QPoint& theValue){m_P0 = theValue;}
+    //QPoint getP0() const{return m_P0;}
+    virtual bool isHit(C2dVector hit);
     virtual const char * getClassName() const;
 protected:
-    QPoint m_P0;
+    //QPoint m_P0;
     QColor m_Color;
     int m_hitRange;
 private:

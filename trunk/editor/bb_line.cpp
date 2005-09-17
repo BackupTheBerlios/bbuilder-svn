@@ -20,9 +20,9 @@ using namespace std;
 
 const char * BB_Line::ClassName = "BB_Line";
 
-BB_Line::BB_Line(BB_DrawObject *p1, BB_DrawObject *p2)
+BB_Line::BB_Line(BB_Point *p1, BB_Point *p2)
 {
-    m_Pos1 = p1;
+	m_Pos1 = p1;
     m_Pos2 = p2;
     m_Color.setNamedColor("Red");
     m_hitRange = 3;
@@ -33,13 +33,14 @@ BB_Line::~BB_Line()
 {}
 
 
-QPoint BB_Line::getP0() const
-{
-    return BB_DrawObject::getP0();
-}
+// QPoint BB_Line::getP0() const
+// {
+//     return BB_DrawObject::getP0();
+// }
 
-bool BB_Line::isHit(QPoint hit)
+bool BB_Line::isHit(C2dVector hit)
 {
+	/*
     //hier wird eine Gleichung ermittelt y=mx+b
     double m, 	//Steigung
     b,		//verschiebung
@@ -94,10 +95,10 @@ bool BB_Line::isHit(QPoint hit)
 	   
 	   if (hit.x() >= (min - m_hitRange) && hit.x() <= (max + m_hitRange))
         {
-            cout << "ich bin drin"<<endl;
+//             cout << "ich bin drin"<<endl;
             if (hit.y() >= (y - m_hitRange) && hit.y() <= (y + m_hitRange))
             {
-                cout <<"hit line true" <<endl;
+//                 cout <<"hit line true" <<endl;
                 return true;
             }
         }
@@ -114,15 +115,23 @@ bool BB_Line::isHit(QPoint hit)
             max_y = P1.y();
             min_y = P2.y();
         }
-        cout << "else"<<endl;
+//         cout << "else"<<endl;
         if (hit.x() >= (min - m_hitRange) && hit.x() <= (max + m_hitRange))
             if (hit.y() >= (min_y - m_hitRange) && hit.y() <= (max_y + m_hitRange))
             {
-                cout <<"hit line true" <<endl;
+//                 cout <<"hit line true" <<endl;
                 return true;
             }
     }
     return false;
+	*/
+// 	m_Richtung = m_Pos2 -m_Pos1;
+// 	C2dVector Pos1Tohit = hit - m_Pos1;
+// 	if (Pos1Tohit.getLength() < m_Richtung.getLength())
+// 	{
+// 		
+// 	}
+	return false;
 }
 
 const QColor& BB_Line::getColor() const
@@ -132,7 +141,7 @@ const QColor& BB_Line::getColor() const
 
 void BB_Line::moveBy(QPoint pMove)
 {
-    BB_DrawObject::moveBy(pMove);
+    //BB_DrawObject::moveBy(pMove);
 }
 
 void BB_Line::setColor(const QColor& _newVal)
@@ -144,31 +153,26 @@ void BB_Line::show(BB_Transformer& transformer, QPainter& painter) const
 {
     BB_DrawObject::show(transformer, painter);
 
-    QPoint dest_Pos1;
-    QPoint dest_Pos2;
+    QPoint dest_Pos1, dest_Pos2;
 
-    transformer.logicalToScreen(dest_Pos1, m_Pos1->getP0());
-    transformer.logicalToScreen(dest_Pos2, m_Pos2->getP0());
+    transformer.logicalToScreen(dest_Pos1, m_Pos1->getPos());
+    transformer.logicalToScreen(dest_Pos2, m_Pos2->getPos());
 
     painter.setPen(m_Color);
     painter.setBrush(m_Color);
     painter.drawLine(dest_Pos1.x(), dest_Pos1.y(), dest_Pos2.x(), dest_Pos2.y());
 }
 
-void BB_Line::setP0(const QPoint& theValue)
-{
-    BB_DrawObject::setP0(theValue);
-}
 
 
 
-BB_DrawObject* BB_Line::getPos1() const
+BB_Point* BB_Line::getPos1() const
 {
     return m_Pos1;
 }
 
 
-bool BB_Line::setPos1(BB_DrawObject* Value)
+bool BB_Line::setPos1(BB_Point* Value)
 {
     if (Value != NULL)
     {
@@ -179,13 +183,13 @@ bool BB_Line::setPos1(BB_DrawObject* Value)
 }
 
 
-BB_DrawObject* BB_Line::getPos2() const
+BB_Point* BB_Line::getPos2() const
 {
     return m_Pos2;
 }
 
 
-bool BB_Line::setPos2(BB_DrawObject* Value)
+bool BB_Line::setPos2(BB_Point* Value)
 {
     if (m_Pos1 != Value && Value != NULL)
     {
@@ -199,4 +203,13 @@ bool BB_Line::setPos2(BB_DrawObject* Value)
 const char * BB_Line::getClassName() const
 {
     return BB_Line::ClassName;
+}
+
+
+/*!
+    \fn BB_Line::getLaenge()
+ */
+double BB_Line::getLaenge()
+{
+    /// @todo implement me
 }
