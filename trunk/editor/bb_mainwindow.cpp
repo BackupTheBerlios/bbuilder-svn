@@ -19,6 +19,7 @@
 #include "bb_tabbuilding.h"
 #include "bb_tablevel.h"
 
+#include "bb_dlgprojectnew.h"
 
 
 using namespace std;
@@ -170,15 +171,18 @@ void BB_MainWindow::slotProjectNew()
 {
 	cout << "Neues Projekt" << endl;
 	
+	BB_DlgProjectNew dlg;
+	
+	dlg.exec();
 
-	int result;
-	QDialog dialog(this);
-	Ui_NewProjectDialog dlg;
-	
-	dlg.setupUi(&dialog);
-	
-	
-	result = dialog.exec();
+// 	int result;
+// 	QDialog dialog(this);
+// 	BB_DlgProjectNew dlg;
+// 	
+// // 	dlg.setupUi(&dialog);
+// 	
+// 	
+// 	result = dialog.exec();
 	
 	
 	
