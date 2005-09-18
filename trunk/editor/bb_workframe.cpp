@@ -35,31 +35,31 @@ BB_WorkFrame::~BB_WorkFrame()
 
 
 /**
- * Wird beim ...
+ * Zeichnet den Hintergrund und alle Objekte
  */
 void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
 {
-    QLabel::paintEvent(pe);
-
 	
-    QPainter painter(this);
-	drawCenter(painter);
-//     painter.scale(m_ZoomFaktor, m_ZoomFaktor);
-//     painter.setPen(QColor("Blue"));
-//     painter.drawLine(0,0,100,100);
-	
-
-    if(m_DrawObjects != NULL)
+    if(isEnabled())
     {
-        for(int i = 0; i < m_DrawObjects->count(); i++)
+        QLabel::paintEvent(pe);
+
+        QPainter painter(this);
+        drawCenter(painter);
+
+        if(m_DrawObjects != NULL)
         {
-			m_DrawObjects->at(i)->show(m_Transformer,painter);
+            for(int i = 0; i < m_DrawObjects->count(); i++)
+            {
+                m_DrawObjects->at(i)->show(m_Transformer,painter);
+
+            }
+        }
+        else
+        {
+            cout << "m_DrawObjects nicht initialisiert!" << endl;
         }
     }
-    else
-    {
-		cout << "m_DrawObjects nicht initialisiert!" << endl;
-	}
 }
 
 
@@ -70,8 +70,8 @@ void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
 void BB_WorkFrame::setZoomFaktor(double faktor)
 {
     m_ZoomFaktor = faktor;
-	cout << "Zoom: " << m_ZoomFaktor << endl;
-	m_Transformer.setScale(m_ZoomFaktor);
+    cout << "Zoom: " << m_ZoomFaktor << endl;
+    m_Transformer.setScale(m_ZoomFaktor);
 }
 
 
@@ -108,8 +108,8 @@ void BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
 {
     if(m_Tool != NULL)
     {
-		m_Tool->click(me,m_DrawObjects,&m_Transformer);
-// 		update();
+        m_Tool->click(me,m_DrawObjects,&m_Transformer);
+        // 		update();
     }
     else
         cout << "Kein Tool ausgewählt" << endl;
@@ -122,8 +122,8 @@ void BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
 {
     if(m_Tool != NULL)
     {
-		m_Tool->release(me,m_DrawObjects,&m_Transformer);
-		update();
+        m_Tool->release(me,m_DrawObjects,&m_Transformer);
+        update();
     }
     else
         cout << "Kein Tool ausgewählt" << endl;
@@ -138,7 +138,7 @@ void BB_WorkFrame::mouseMoveEvent(QMouseEvent* me)
     if(m_Tool != NULL)
     {
         m_Tool->move(me,m_DrawObjects,&m_Transformer);
-		update();
+        update();
     }
     else
         cout << "Kein Tool ausgewählt" << endl;
@@ -165,14 +165,14 @@ void BB_WorkFrame::setDrawObjects(QVector< BB_DrawObject *>* theValue)
  */
 void BB_WorkFrame::drawCenter(QPainter &painter)
 {
-	
-	QPoint dest; 
-	C2dVector src(0,0);
-	m_Transformer.logicalToScreen(dest,src);
-	
-	painter.save();
-	painter.setPen(QColor("Blue"));
-	painter.drawLine(dest.x() - 10,dest.y(),dest.x() + 10,dest.y());
-	painter.drawLine(dest.x(),dest.y() -10,dest.x(), dest.y() + 10);
-	painter.restore();
+
+    QPoint dest;
+    C2dVector src(0,0);
+    m_Transformer.logicalToScreen(dest,src);
+
+    painter.save();
+    painter.setPen(QColor("Blue"));
+    painter.drawLine(dest.x() - 10,dest.y(),dest.x() + 10,dest.y());
+    painter.drawLine(dest.x(),dest.y() -10,dest.x(), dest.y() + 10);
+    painter.restore();
 }

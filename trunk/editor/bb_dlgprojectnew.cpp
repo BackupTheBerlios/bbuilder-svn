@@ -22,13 +22,6 @@ BB_DlgProjectNew::BB_DlgProjectNew(QWidget * parent, Qt::WFlags f)
  : QDialog(parent,f)
 {
 	
-#if defined(Q_WS_WIN32) || defined(Q_WS_WIN64)
-	m_Slash = "\\";
-#elif defined(Q_WS_X11) || defined(Q_WS_MACX)
-	m_Slash = "/";
-#endif
-	
-	
 	m_Dlg.setupUi(this);
 	
 	m_Dlg.lineEditProjectName->setValidator(new QRegExpValidator(QRegExp("[A-Za-z][A-Za-z0-9\\s._]+"), this ));
@@ -117,7 +110,7 @@ void BB_DlgProjectNew::slotNameChanged(const QString & text)
 void BB_DlgProjectNew::checkDir()
 {
 	m_Dir = m_ProjectPath;
-	QDir fullPath(m_ProjectPath + m_Slash + m_ProjectDir);
+	QDir fullPath(m_ProjectPath + "/" + m_ProjectDir);
 	bool fullPathExists = fullPath.exists();
 // 	cout <<  "PATH: " << m_ProjectPath.toStdString() 
 // 			<< "\nDIR: " << m_ProjectDir.toStdString() 
@@ -128,14 +121,14 @@ void BB_DlgProjectNew::checkDir()
 	{
 		m_Dlg.okButton->setEnabled(true);
 		m_Dlg.lineEditFinalPath->setText(m_Dir.path() 
-				+ m_Slash 
+				+ "/" 
 				+ m_ProjectDir);
 	}
 	else
 	{
 		m_Dlg.okButton->setEnabled(false);
 		m_Dlg.lineEditFinalPath->setText(m_Dir.path() 
-				+ m_Slash 
+				+ "/" 
 				+ m_ProjectDir);
 		
 		if(fullPathExists && m_ProjectDir != "")

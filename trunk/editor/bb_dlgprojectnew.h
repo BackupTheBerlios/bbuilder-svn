@@ -47,7 +47,6 @@ private slots:
 	void slotNameChanged(const QString & text);
 protected:
     Ui_ProjectNewDialog m_Dlg;
-    QString m_Slash;
     QDir m_Dir;
     QString m_ProjectPath;
     QString m_ProjectDir;

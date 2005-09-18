@@ -155,6 +155,9 @@ void BB_TabBuilding::slotBuildingNew()
 		cout << "Gelöscht" << endl;
 	}
 	
+	m_BuildingsListWidget->setCurrentRow (m_Buildings->count()-1);
+
+	
 	updateBuildingList();
 }
 
@@ -190,11 +193,13 @@ void BB_TabBuilding::updateBuildingList()
 	{
 		m_ButtonBuildingDelete->setEnabled(false);
 		m_ButtonBuildingProperties->setEnabled(false);
+		m_Center->setEnabled(false);
 	}
 	else if(m_Buildings->count() >= 0)
 	{
 		m_ButtonBuildingDelete->setEnabled(true);
 		m_ButtonBuildingProperties->setEnabled(true);
+		m_Center->setEnabled(true);
 	}
 }
 
@@ -204,7 +209,7 @@ void BB_TabBuilding::updateBuildingList()
  */
 void BB_TabBuilding::slotBuildingChanged(int index)
 {
-	cout << index << endl;
+	cout << "slotBuildingChanged(" << index << ")" << endl;
 	
 	if(index >= 0)
 	{
