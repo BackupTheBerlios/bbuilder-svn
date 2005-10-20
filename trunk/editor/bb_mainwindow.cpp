@@ -163,7 +163,7 @@ void BB_MainWindow::initDoc()
 
 /**
  * Erstellt ein neues, leeres Projekt.
- * Der User kann im Dialog, der getsartet wird, den Pfad angeben, wo der Projekt erzeugt werden soll.
+ * Der User kann im Dialog, der getsartet wird, den Pfad angeben, wo das neue Projekt erzeugt werden soll.
  * @author Alex Letkemann
  * @date 12.09.2005
  */
@@ -172,7 +172,7 @@ void BB_MainWindow::slotProjectNew()
 	cout << "Neues Projekt" << endl;
 	
 	BB_DlgProjectNew dlg;	
-	if(dlg.exec() == QDialog::QDialog::Accepted)
+	if(dlg.exec() == QDialog::Accepted)
 	{
 		QString dir = dlg.projectDir();
 		QDir path = dlg.projectPath();
@@ -203,8 +203,9 @@ void BB_MainWindow::slotProjectOpen()
 			m_Config.getCurrentProjectPath(),
 			"glBB Projekt-Datei (*.glbb)");
 	
-	if(filename != "")
+	if(m_Doc->open(filename))
 		m_Config.setCurrentProjectPath(filename);
+	
 	
     /// @todo implement me
 }

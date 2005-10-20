@@ -159,20 +159,20 @@ public:
 
     void retranslateUi(QDialog *ProjectNewDialog)
     {
-    ProjectNewDialog->setWindowTitle(QApplication::translate("ProjectNewDialog", "Neues Projekt erstellen"));
-    okButton->setText(QApplication::translate("ProjectNewDialog", "OK"));
-    cancelButton->setText(QApplication::translate("ProjectNewDialog", "Cancel"));
-    groupBox->setTitle(QApplication::translate("ProjectNewDialog", "Neues Projekt erstellen"));
-    labelPath->setText(QApplication::translate("ProjectNewDialog", ""));
-    buttonShowDir->setText(QApplication::translate("ProjectNewDialog", "..."));
-    label_2->setText(QApplication::translate("ProjectNewDialog", "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style=\" white-space: pre-wrap; font-family:Sans Serif; font-weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Name</p></body></html>"));
-    lineEditProjectName->setStatusTip(QApplication::translate("ProjectNewDialog", "Name des neuen Projektes"));
-    lineEditProjectName->setInputMask(QApplication::translate("ProjectNewDialog", ""));
-    lineEditProjectName->setText(QApplication::translate("ProjectNewDialog", ""));
-    textEditProjectDesc->setStatusTip(QApplication::translate("ProjectNewDialog", "Beschreibung des neuen Projektes"));
-    label_4->setText(QApplication::translate("ProjectNewDialog", "Pfad"));
-    label_4_2->setText(QApplication::translate("ProjectNewDialog", ""));
-    label_3->setText(QApplication::translate("ProjectNewDialog", "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style=\" white-space: pre-wrap; font-family:Sans Serif; font-weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Beschreibung</p></body></html>"));
+    ProjectNewDialog->setWindowTitle(QApplication::translate("ProjectNewDialog", "Neues Projekt erstellen", 0, QApplication::UnicodeUTF8));
+    okButton->setText(QApplication::translate("ProjectNewDialog", "OK", 0, QApplication::UnicodeUTF8));
+    cancelButton->setText(QApplication::translate("ProjectNewDialog", "Cancel", 0, QApplication::UnicodeUTF8));
+    groupBox->setTitle(QApplication::translate("ProjectNewDialog", "Neues Projekt erstellen", 0, QApplication::UnicodeUTF8));
+    labelPath->setText(QApplication::translate("ProjectNewDialog", "", 0, QApplication::UnicodeUTF8));
+    buttonShowDir->setText(QApplication::translate("ProjectNewDialog", "...", 0, QApplication::UnicodeUTF8));
+    label_2->setText(QApplication::translate("ProjectNewDialog", "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style=\" white-space: pre-wrap; font-family:Sans Serif; font-weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Name</p></body></html>", 0, QApplication::UnicodeUTF8));
+    lineEditProjectName->setStatusTip(QApplication::translate("ProjectNewDialog", "Name des neuen Projektes", 0, QApplication::UnicodeUTF8));
+    lineEditProjectName->setInputMask(QApplication::translate("ProjectNewDialog", "", 0, QApplication::UnicodeUTF8));
+    lineEditProjectName->setText(QApplication::translate("ProjectNewDialog", "", 0, QApplication::UnicodeUTF8));
+    textEditProjectDesc->setStatusTip(QApplication::translate("ProjectNewDialog", "Beschreibung des neuen Projektes", 0, QApplication::UnicodeUTF8));
+    label_4->setText(QApplication::translate("ProjectNewDialog", "Pfad", 0, QApplication::UnicodeUTF8));
+    label_4_2->setText(QApplication::translate("ProjectNewDialog", "", 0, QApplication::UnicodeUTF8));
+    label_3->setText(QApplication::translate("ProjectNewDialog", "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style=\" white-space: pre-wrap; font-family:Sans Serif; font-weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Beschreibung</p></body></html>", 0, QApplication::UnicodeUTF8));
     Q_UNUSED(ProjectNewDialog);
     } // retranslateUi
 

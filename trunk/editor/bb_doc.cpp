@@ -21,6 +21,7 @@ using namespace std;
 BB_Doc::BB_Doc()
 {
 	m_Terrain = NULL;
+	m_ProjectPath = NULL;
 }
 
 
@@ -80,4 +81,45 @@ void BB_Doc::clear()
 		delete object;
 		m_Levels.remove(i);
 	}
+}
+
+
+/*!
+    \fn BB_Doc::open(QDir &dir)
+ */
+bool BB_Doc::open(QString &fileName)
+{
+	/* Dokument leeren */
+	clear();
+	
+	if(fileName != NULL )
+	{
+		
+		QDir dir(fileName);
+		m_ProjectFile = dir.dirName();
+		
+		dir.cdUp();
+		m_ProjectPath = dir;
+		
+	}
+	else 
+	{
+		return false;
+	}
+	
+	cout << "m_ProjectPath: " << m_ProjectPath.path().toStdString() << endl;
+	cout << "m_ProjectFile: " << m_ProjectFile.toStdString() << endl;
+	
+	return true;
+}
+
+
+/*!
+    \fn BB_Doc::save()
+ */
+bool BB_Doc::save()
+{
+    /// @todo implement me
+
+	return false;
 }

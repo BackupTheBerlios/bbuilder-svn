@@ -83,7 +83,8 @@ void BB_DlgProjectNew::slotShowDir()
 void BB_DlgProjectNew::slotPathChanged(const QString & text)
 {
 
-	m_ProjectPath = m_Dlg.lineEditProjectPath->text();
+// 	m_ProjectPath = m_Dlg.lineEditProjectPath->text();
+	m_ProjectPath = text;
 	checkDir();
 }
 
@@ -111,12 +112,9 @@ void BB_DlgProjectNew::checkDir()
 {
 	m_Dir = m_ProjectPath;
 	QDir fullPath(m_ProjectPath + "/" + m_ProjectDir);
+
 	bool fullPathExists = fullPath.exists();
-// 	cout <<  "PATH: " << m_ProjectPath.toStdString() 
-// 			<< "\nDIR: " << m_ProjectDir.toStdString() 
-// 			<< "\nPATH + DIR" << m_Dir.path().toStdString() 
-// 			<< endl; 
-	
+
 	if(m_Dir.exists() && m_ProjectDir != "" && !fullPathExists)
 	{
 		m_Dlg.okButton->setEnabled(true);

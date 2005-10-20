@@ -45,11 +45,13 @@ private slots:
     void slotShowDir();
 	void slotPathChanged(const QString & text);
 	void slotNameChanged(const QString & text);
+	
 protected:
     Ui_ProjectNewDialog m_Dlg;
     QDir m_Dir;
     QString m_ProjectPath;
     QString m_ProjectDir;
+	
 private:
     void checkDir();
 };

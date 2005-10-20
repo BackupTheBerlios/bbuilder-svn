@@ -17,6 +17,7 @@
 #define BB_DOC_H
 
 #include <QVector>
+#include <QDir>
 
 #include "bb_terrain.h"
 #include "bb_building.h"
@@ -35,12 +36,16 @@ public:
 	QVector<BB_Building*>* getBuildings();
 	QVector<BB_Level*>* getLevels();
     void clear();
+	bool open(QString &fileName);
+    bool save();
 
 protected:
 	
 	BB_Terrain *m_Terrain;	
 	QVector<BB_Building*> m_Buildings;
     QVector<BB_Level*> m_Levels;
+	QDir m_ProjectPath;
+	QString m_ProjectFile;
 };
 
 #endif

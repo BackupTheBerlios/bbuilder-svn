@@ -30,7 +30,9 @@ HEADERS += bb_abstracttool.h \
            bb_dlgprojectnew.h \
            bb_wall.h \
            bb_dwpoint.h \
-           c2dvector.h 
+           c2dvector.h \
+           bb_xdocgenerator.h \
+           bb_xgenerator.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -57,7 +59,9 @@ SOURCES += bb_abstracttool.cpp \
            bb_dlgprojectnew.cpp \
            bb_wall.cpp \
            bb_dwpoint.cpp \
-           c2dvector.cpp 
+           c2dvector.cpp \
+           bb_xdocgenerator.cpp \
+           bb_xgenerator.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += release \

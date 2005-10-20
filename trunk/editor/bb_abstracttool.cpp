@@ -41,6 +41,11 @@ bool BB_AbstractTool::remove(QVector<BB_DrawObject*>* objects, BB_DrawObject * d
 	}
 	cout << objectPosition <<endl;
 	objects->remove(objectPosition);
+	
+	if(objectPosition == -1) 
+		return false;
+	else
+		return true;
 }
 
 
