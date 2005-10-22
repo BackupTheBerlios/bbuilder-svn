@@ -70,6 +70,7 @@ public:
         void setY(double value);
         double getX(){return m_Pos.x();};
         double getY(){return m_Pos.y();};
+    virtual void generateXElement(QTextStream &out, int depth);
 
 
 private:

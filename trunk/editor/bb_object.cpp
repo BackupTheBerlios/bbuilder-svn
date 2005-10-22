@@ -135,18 +135,11 @@ void BB_Object::createName()
 void BB_Object::generateXElement(QTextStream &out, int depth)
 {
 	out << BB::indent(depth) << "<name>" << BB::escapedText(getName()) << "</name>\n";
-	out << BB::indent(depth);
-
-	if(getDescription().isEmpty())
-	{
-		out << "<description />";
-	}
-	else
-	{
-		out << "<description>" << BB::escapedText(getDescription()) << "</description>";
-	}
 	
-	out << "\n";
+	if(!getDescription().isEmpty())
+	{
+		out << BB::indent(depth) << "<description>" << BB::escapedText(getDescription()) << "</description>\n";
+	}
 }
 
 

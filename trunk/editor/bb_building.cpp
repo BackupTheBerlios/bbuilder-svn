@@ -134,6 +134,22 @@ bool BB_Building::write(QTextStream &out)
 		out << "<points />";
 	}
 	
+	if(walls.count())
+	{
+		out << BB::indent(depth) << "<walls>\n";
+		
+		for(int i = 0; i < walls.count(); i++)
+		{
+			walls.at(i)->generateXElement(out,depth + 1);
+		}
+		
+		out << BB::indent(depth) << "</walls>\n";
+	}
+	else
+	{
+		out << "<walls />";
+	}
+	
 	out << "</bb_building>\n";
 	return true;
 }

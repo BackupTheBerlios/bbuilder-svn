@@ -14,6 +14,8 @@
  ***************************************************************************/
 #include "bb_wall.h"
 
+#include "bb_point.h"
+
 BB_Wall::BB_Wall(BB_Point* p1, BB_Point* p2): BB_Line(p1, p2)
 {
 }
@@ -31,4 +33,18 @@ BB_Wall::~BB_Wall()
 const QString BB_Wall::getClassName()
 {
 	return QString("BB_Wall");
+}
+
+
+/*!
+    \fn BB_Wall::generateXElement(QTextStream &out, int depth)
+ */
+void BB_Wall::generateXElement(QTextStream &out, int depth)
+{
+	out << BB::indent(depth) << "<bb_wall id=\"" << getObjectNr() 
+			<< "\" p1=\"" << getPos1()->getObjectNr() 
+			<< "\" p2=\"" << getPos2()->getObjectNr() << "\">\n";
+	
+	BB_Object::generateXElement(out,depth+1);
+	out << BB::indent(depth) << "</bb_wall>\n";
 }

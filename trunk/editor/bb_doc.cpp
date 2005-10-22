@@ -286,6 +286,8 @@ BB_Building* BB_Doc::newBuilding(QWidget * parent)
 		building->setFileName(fileName.sprintf("%08d.xml",building->getObjectNr()));
 		building->save();
 		m_Buildings.append(building);
+		
+		save();
 	}
 	else
 	{
@@ -313,6 +315,7 @@ BB_Level* BB_Doc::newLevel(QWidget * parent)
 // 		level->setFileName(fileName.sprintf("%08d.xml",level->getObjectNr()));
 // 		level->save();
 // 		m_Levels.append(level);
+// 		save();
 // 	}
 // 	else
 // 	{

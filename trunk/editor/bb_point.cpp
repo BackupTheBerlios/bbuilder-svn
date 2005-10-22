@@ -186,3 +186,14 @@ void BB_Point::setX(double value){
 void BB_Point::setY(double value){
   m_Pos.setY(value);
 }
+
+
+/*!
+    \fn BB_Point::generateXElement(QTextStream &out, int depth)
+ */
+void BB_Point::generateXElement(QTextStream &out, int depth)
+{
+	out << BB::indent(depth) << "<bb_point id=\"" << getObjectNr() << "\" x=\"" << getX() << "\" y=\"" << getY() << "\">\n";
+	BB_Object::generateXElement(out,depth+1);
+	out << BB::indent(depth) << "</bb_point>\n";
+}
