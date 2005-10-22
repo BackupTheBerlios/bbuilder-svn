@@ -17,7 +17,9 @@
 #define BB_LINE_H
 
 #include <bb_drawobject.h>
-#include <bb_point.h>
+
+
+class BB_Point;
 
 /**
 Klasse zum Darstellen von Wänden und Fenstern
@@ -64,6 +66,7 @@ public:
     BB_Point* getPos2() const;
 
     const char * getClassName() const;
+    void remove(BB_Point * point);
 
 
 

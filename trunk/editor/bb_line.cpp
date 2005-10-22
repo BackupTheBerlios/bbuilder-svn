@@ -15,6 +15,7 @@
 #include "bb_line.h"
 #include <iostream>
 #include <math.h>
+#include <bb_point.h>
 
 using namespace std;
 
@@ -111,6 +112,8 @@ bool BB_Line::setPos2(BB_Point* Value)
     if (m_Pos1 != Value && Value != NULL)
     {
         m_Pos2 = Value;
+        m_Pos1->addLine(this);
+        m_Pos2->addLine(this);
         return true;
     }
     return false;
@@ -120,4 +123,16 @@ bool BB_Line::setPos2(BB_Point* Value)
 const char * BB_Line::getClassName() const
 {
     return BB_Line::ClassName;
+}
+
+
+/*!
+    \fn BB_Line::delete(BB_Point * point)
+ */
+void BB_Line::remove(BB_Point * point)
+{
+  if (m_Pos1 == point)
+    m_Pos2->removeLine(this);
+  else
+    m_Pos1->removeLine(this);
 }

@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Vaceslav Ustinov   						*
- *   alex@letkemann.de   										*
+ *   Copyright (C) 2005 by Vaceslav Ustinov                                             *
+ *   alex@letkemann.de                                                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,39 +20,65 @@
 #include "c2dvector.h"
 using namespace std;
 
+class BB_Line;
+
 /**
 Klasse zum darstellen von einem verbindungs-Punkt
-
+ 
 @author Vaceslav Ustinov
 */
 class BB_Point : public BB_DrawObject
 {
 public:
-    BB_Point();
-    BB_Point(C2dVector p);
+        BB_Point();
+        BB_Point(C2dVector p);
 
-    ~BB_Point();
+        ~BB_Point();
 
 
-//     virtual void moveBy( QPoint pMove);
-    virtual void moveBy( C2dVector pMove);
-	virtual void show(BB_Transformer& transformer, QPainter& painter) const;
-    int getRadius();
-    void setRadius(int r);
-    virtual bool isHit(C2dVector hit);
-    const char * getClassName() const;
+        //     virtual void moveBy( QPoint pMove);
+        virtual void moveBy( C2dVector pMove);
+        virtual void show(BB_Transformer& transformer, QPainter& painter) const;
+        int getRadius();
+        void setRadius(int r);
+        virtual bool isHit(C2dVector hit);
+        const char * getClassName() const;
+        void setPos(const C2dVector& theValue);
+        C2dVector getPos() const;
+        QVector<BB_Line*>* getLines();
+        /**
+        @author Vaceslav ustinov
+        L&ouml;scht eine Linie (line) aus dem m_Lines vector
+        @param  line BB_Line zu loeschende Linie
+        @date 20.10.2005
+        */
+        void removeLine(BB_Line * line);
+        /**
+        @author Vaceslav ustinov
+        F&uuml;gt eine neue Linie zu m_Lines Vector hinzu.
+        @param line BB_Line eine neue Linie
+        @date 20.10.2005
+        */
+        void addLine(BB_Line * line);
+        /**
+        @author Vaceslav Ustinov
+        L&ouml;scht alle BB_lines aus dem Vector m_Lines
+        @date 20.10.2005
+         */
+        void deleteLines(QVector< BB_DrawObject * >* objects);
 
-	void setPos(const C2dVector& theValue);
-	
-
-	C2dVector getPos() const;
-	
 
 private:
-    int m_Radius;
-    static const char * ClassName;
+        int m_Radius;
+        static const char * ClassName;
 protected:
-	C2dVector m_Pos;
+        C2dVector m_Pos;
+        /**
+        @author Vaceslav Ustinov
+        QVector mit allen Linien, die zu diesem Punkt gehoeren.
+        @date 20.10.2005
+        */
+        QVector<BB_Line*> m_Lines;
 };
 
 #endif

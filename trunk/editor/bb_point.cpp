@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Vaceslav Ustinov   						*
- *   v.ustinov@web.de   											*
+ *   Copyright (C) 2005 by Vaceslav Ustinov                                             *
+ *   v.ustinov@web.de                                                                                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -13,27 +13,28 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_point.h"
- 
+
 #include <iostream>
 #include <math.h>
+#include "bb_line.h"
 
 using namespace std;
 
 const char * BB_Point::ClassName = "BB_Point";
 
 BB_Point::BB_Point()
-        : BB_DrawObject()
+                : BB_DrawObject()
 {
-    m_Radius = 10;
-    m_hitRange = 2;
+        m_Radius = 10;
+        m_hitRange = 2;
 }
 
 BB_Point::BB_Point(C2dVector p)
 {
-	m_Pos = p;
-    m_Radius = 10;
-    m_Color.setNamedColor("Red");
-    m_hitRange = 2;
+        m_Pos = p;
+        m_Radius = 10;
+        m_Color.setNamedColor("Red");
+        m_hitRange = 2;
 }
 
 
@@ -49,18 +50,18 @@ BB_Point::~BB_Point()
 
 void BB_Point::moveBy(C2dVector vMove)
 {
-	m_Pos = m_Pos + vMove;
+        m_Pos = m_Pos + vMove;
 }
 
 void BB_Point::show(BB_Transformer& transformer, QPainter& painter) const
 {
-    QPoint dest;
+        QPoint dest;
 
-    transformer.logicalToScreen(dest, m_Pos);
+        transformer.logicalToScreen(dest, m_Pos);
 
-    painter.setPen(m_Color);
-    painter.setBrush(m_Color);
-    painter.drawEllipse(dest.x() - m_Radius, dest.y() - m_Radius, m_Radius*2, m_Radius*2);
+        painter.setPen(m_Color);
+        painter.setBrush(m_Color);
+        painter.drawEllipse(dest.x() - m_Radius, dest.y() - m_Radius, m_Radius*2, m_Radius*2);
 }
 
 
@@ -70,7 +71,7 @@ void BB_Point::show(BB_Transformer& transformer, QPainter& painter) const
  */
 int BB_Point::getRadius()
 {
-    return m_Radius;
+        return m_Radius;
 }
 
 
@@ -79,21 +80,21 @@ int BB_Point::getRadius()
  */
 void BB_Point::setRadius(int r)
 {
-    m_Radius = r;
+        m_Radius = r;
 }
 
 bool BB_Point::isHit(C2dVector hit)
 {
 
-double abstand = m_Pos.getAbstand(hit);
-if(abstand <= (m_Radius + m_hitRange))
-   return true;
-return false;
+        double abstand = m_Pos.getAbstand(hit);
+        if(abstand <= (m_Radius + m_hitRange))
+                return true;
+        return false;
 }
 
 const char * BB_Point::getClassName() const
 {
-	return BB_Point::ClassName;
+        return BB_Point::ClassName;
 }
 
 
@@ -101,11 +102,59 @@ const char * BB_Point::getClassName() const
 
 C2dVector BB_Point::getPos() const
 {
-    return m_Pos;
+        return m_Pos;
 }
 
 
 void BB_Point::setPos(const C2dVector& theValue)
 {
-    m_Pos = theValue;
+        m_Pos = theValue;
+}
+
+
+/*!
+    \fn BB_Point::deleteLines()
+ */
+void BB_Point::deleteLines(QVector< BB_DrawObject * >* objects)
+{
+        BB_Line * tmp;
+        for (int i = 0; i < m_Lines.count(); i++) {
+                tmp = m_Lines.at(i);
+                BB_DrawObject * tmp_object;
+                for (int j = 0; j < objects->count(); j++) {
+                        tmp_object = objects->at(j);
+                        if(tmp_object == tmp)
+                                objects->remove(j);
+                }
+                //m_Lines.remove(i);
+                cout <<"linie nummer "<< i << ":" << tmp <<endl;
+                tmp->remove(this);
+                cout <<"linie nummer(delete) "<< i << ":" << tmp <<endl;
+        }
+        m_Lines.clear();
+}
+
+
+/*!
+    \fn BB_Point::removeMe(BB_Line * line)
+ */
+void BB_Point::removeLine(BB_Line * line)
+{
+        BB_Line * tmp;
+        for (int i = 0; i<m_Lines.count(); i++) {
+                tmp = m_Lines.at(i);
+                if (tmp == line) {
+                        m_Lines.remove(i);
+                        delete line;
+                }
+        }
+}
+
+
+/*!
+    \fn BB_Point::addLine()
+ */
+void BB_Point::addLine(BB_Line * line)
+{
+        m_Lines.insert(m_Lines.count(), line);
 }

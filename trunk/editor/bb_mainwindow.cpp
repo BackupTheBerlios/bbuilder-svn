@@ -215,7 +215,7 @@ void BB_MainWindow::slotProjectOpen()
 	QString filename;
 	filename = QFileDialog::getOpenFileName(
 			this,
-			QString::fromUtf8("Öffnen"),
+                        QString::fromUtf8("Öffnen"),
 			m_Config.getCurrentProjectPath(),
 			"glBB Projekt-Datei (*.glbb)");
 	
