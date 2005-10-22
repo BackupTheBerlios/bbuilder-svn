@@ -18,7 +18,7 @@
 
 
 BB_Building::BB_Building()
-	: BB_Object()
+	: BB_FileObject(QDir("/"),QString("sdfsdf")) /// @todo !!!
 {
 	m_DrawObject = new QVector<BB_DrawObject*>();
 }
@@ -72,4 +72,13 @@ int BB_Building::keyBoardEdit(QWidget* parent)
 QVector<BB_DrawObject*>* BB_Building::getDrawObjects()
 {
 	return m_DrawObject;
+}
+
+
+/*!
+    \fn BB_Building::write(QIODevice *device)
+ */
+bool BB_Building::write(QIODevice *device)
+{
+    /// @todo implement me
 }

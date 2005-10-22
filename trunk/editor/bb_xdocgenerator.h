@@ -26,6 +26,7 @@ public:
     BB_XDocGenerator(BB_Doc * doc);
 
     virtual ~BB_XDocGenerator();
+    virtual bool write(QIODevice *device);
 
 protected:
     BB_Doc* m_Doc;

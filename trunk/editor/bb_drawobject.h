@@ -33,16 +33,16 @@ Die Klasse beeinhaelt grundlegende Funktionen.
 class BB_DrawObject : public BB_Object 
 {
 public:
-    BB_DrawObject();
+    BB_DrawObject(QString name = "");
 
     virtual ~BB_DrawObject();
     virtual void moveBy(C2dVector pMove);
-    virtual void show(BB_Transformer& transformer, QPainter& painter) const;
+    virtual void show(BB_Transformer& transformer, QPainter& painter) const = 0;
     virtual const QColor & getColor()const;
     virtual void setColor(const QColor& _newVal = "Green");
     //void setP0(const QPoint& theValue){m_P0 = theValue;}
     //QPoint getP0() const{return m_P0;}
-    virtual bool isHit(C2dVector hit);
+    virtual bool isHit(C2dVector hit) = 0;
     virtual const char * getClassName() const;
 protected:
     //QPoint m_P0;

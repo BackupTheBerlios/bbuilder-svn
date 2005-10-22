@@ -68,7 +68,7 @@ bool BB_Line::isHit(C2dVector hit)
 
 void BB_Line::show(BB_Transformer& transformer, QPainter& painter) const
 {
-    BB_DrawObject::show(transformer, painter);
+//     BB_DrawObject::show(transformer, painter);
 
     QPoint dest_Pos1, dest_Pos2;
 

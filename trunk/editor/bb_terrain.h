@@ -16,16 +16,20 @@
 #ifndef BB_TERRAIN_H
 #define BB_TERRAIN_H
 
-#include "bb_object.h"
+#include "bb_fileobject.h"
+
+#include <QTextStream>
 
 /**
 @author Alex Letkemann
 */
-class BB_Terrain : public BB_Object{
+class BB_Terrain : public BB_FileObject{
 public:
     BB_Terrain();
 
-    ~BB_Terrain();
+    virtual ~BB_Terrain();
+	virtual QString generateXElement(QTextStream &stream, int depth);
+    virtual bool write(QIODevice *device);
 
 };
 

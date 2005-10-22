@@ -128,6 +128,7 @@ void BB_TabBuilding::slotBuildingDelete()
 		building = m_Buildings->at(row);
 		m_Buildings->remove(row);
 		delete building;
+		building = NULL;
 	}
 	
 	updateBuildingList();
@@ -152,6 +153,7 @@ void BB_TabBuilding::slotBuildingNew()
 	else
 	{
 		delete building;
+		building = NULL;
 		cout << "Gelöscht" << endl;
 	}
 	

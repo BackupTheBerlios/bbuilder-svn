@@ -25,24 +25,32 @@ int BB_Object::m_Counter = 0;
  * Konstrucktor
  * Erzeugt ein neues Objekt. Name des Objektes wird aus der Objektnummer erzeugt.
  */
-BB_Object::BB_Object()
-{
-	m_ObjectNr = m_Counter++;
-	
-	createName();
-	
-	
-}
+// BB_Object::BB_Object()
+// {
+// 	m_ObjectNr = m_Counter++;
+// 	
+// 	createName();
+// 	
+// 	
+// }
 
 /**
  * Konstrucktor
  * Erzeugt ein neues Objekt mit dem namen <i>name</i>
  * @param name Name des Objektes
  */
-BB_Object::BB_Object(QString& name)
+BB_Object::BB_Object(QString name)
 {
 	m_ObjectNr = m_Counter++;
-	setName(name);
+	if(name != NULL && name != "")
+	{
+		setName(name);
+	}
+	else
+	{
+		createName();
+	}
+	
 	
 }
 
@@ -73,7 +81,7 @@ QString BB_Object::getName() const
 
 
 /**
- * Setzt den Namen des Objektes auf <i>name</i>
+ * Setzt den Namen des Objektes
  * @param name Name des Objektes 
  */
 void BB_Object::setName(const QString& name)
@@ -99,18 +107,14 @@ QString BB_Object::getDescription() const
 
 
 /**
- * Setzt die Beschreibung des Objektes auf <i>desc</i>
- * @param theValue Beschreibung des Objektes 
+ * Setzt die Beschreibung des Objektes
+ * @param desc Beschreibung des Objektes 
  */
 void BB_Object::setDescription(const QString& desc)
 {
 	if(desc != NULL)
 	{
 		m_Description = desc;
-	}
-	else
-	{
-		cout << "Object_" << m_ObjectNr << ": " << "Ungültige Beschreibung" << endl;
 	}
 }
 

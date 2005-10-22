@@ -19,7 +19,7 @@
 #include <QVector>
 #include <QtGui>
 
-#include "bb_object.h"
+#include "bb_fileobject.h"
 #include "bb_level.h"
 #include "bb_point.h"
 
@@ -28,13 +28,14 @@
 /**
 @author Alex Letkemann
 */
-class BB_Building : public BB_Object{
+class BB_Building : public BB_FileObject{
 public:
     BB_Building();
 
-    ~BB_Building();
+    virtual ~BB_Building();
     int keyBoardEdit(QWidget* parent);
     QVector<BB_DrawObject*>* getDrawObjects();
+    virtual bool write(QIODevice *device);
 
 protected:
     QVector<BB_Level>* m_Levels;

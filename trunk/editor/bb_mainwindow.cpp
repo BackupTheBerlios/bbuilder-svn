@@ -168,19 +168,35 @@ void BB_MainWindow::initDoc()
  * @date 12.09.2005
  */
 void BB_MainWindow::slotProjectNew()
-{
-	cout << "Neues Projekt" << endl;
-	
+{	bool result;
 	BB_DlgProjectNew dlg;	
-	if(dlg.exec() == QDialog::Accepted)
-	{
+	do
+	{	
+		result = dlg.exec();
 		QString dir = dlg.projectDir();
 		QDir path = dlg.projectPath();
 		
-		path.mkdir(dir);
-		// TODO !!!
+		if(result == QDialog::Accepted)
+		{
+			m_Doc->close();
+			m_TabWidget->setEnabled(false);
+			
+			if(path.mkdir(dir) && path.cd(dir) && m_Doc->createNew(path))
+			{
+				m_TabWidget->setEnabled(true);
+				break;
+			}
+			else
+			{
+				QMessageBox::critical(	&dlg,
+									   QString::fromUtf8("Fehler beim Erstellen des Projektes"),
+									   QString::fromUtf8("Projekt konnte nicht erstellt werden, bitte  überprüfen Sie die Pfade.")
+									 );
+			}
+		}
 	}
-	//TODO !!!	
+	while(result != QDialog::Rejected);
+	
 }
 
 
@@ -203,9 +219,22 @@ void BB_MainWindow::slotProjectOpen()
 			m_Config.getCurrentProjectPath(),
 			"glBB Projekt-Datei (*.glbb)");
 	
-	if(m_Doc->open(filename))
-		m_Config.setCurrentProjectPath(filename);
+	cout << "filename : " << filename.toStdString() << endl;
 	
+	if(!filename.isEmpty())
+	{
+		if(m_Doc->open(filename))
+		{
+			m_TabWidget->setEnabled(true);
+			m_Config.setCurrentProjectPath(filename);
+		}
+		else
+		{
+			QMessageBox::critical(this,
+								QString::fromUtf8("Fehler beim Öffnen des Projektes"),
+								QString::fromUtf8("Projekt konnte nicht geöffnet werden"));
+		}
+	}
 	
     /// @todo implement me
 }
@@ -215,16 +244,12 @@ void BB_MainWindow::slotProjectOpen()
  * Schliesst das aktuelle Projekt.
  * Das Tabwidget des Hauptfensters wird deaktiviert.
  * @author Alex Letkemann
- * @date 12.09.2005
+ * @date 20.10.2005
  */
 void BB_MainWindow::slotProjectClose()
-{
-	cout << "Projekt schliessen" << endl;
-	
-	m_Doc->clear();
+{	
+	m_Doc->close();
 	m_TabWidget->setEnabled(false);
-	
-    /// @todo implement me
 }
 
 

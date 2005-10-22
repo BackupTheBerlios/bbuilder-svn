@@ -26,18 +26,20 @@
 /**
 @author Alex Letkemann
 */
-class BB_Doc{
+class BB_Doc : public QObject {
+Q_OBJECT
 public:
     BB_Doc();
 
-    ~BB_Doc();
+    virtual ~BB_Doc();
 	
-	BB_Terrain* BB_Doc::getTerrain();
-	QVector<BB_Building*>* getBuildings();
-	QVector<BB_Level*>* getLevels();
-    void clear();
-	bool open(QString &fileName);
-    bool save();
+	virtual BB_Terrain* BB_Doc::getTerrain();
+	virtual QVector<BB_Building*>* getBuildings();
+	virtual QVector<BB_Level*>* getLevels();
+	virtual bool open(QString &fileName);
+	virtual bool save();
+    virtual bool close();
+	virtual bool createNew(QDir &path);
 
 protected:
 	
@@ -46,6 +48,9 @@ protected:
     QVector<BB_Level*> m_Levels;
 	QDir m_ProjectPath;
 	QString m_ProjectFile;
+	
+	virtual bool clear();
+	
 };
 
 #endif

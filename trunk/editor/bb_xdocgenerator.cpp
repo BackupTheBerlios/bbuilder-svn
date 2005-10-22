@@ -10,6 +10,10 @@
 //
 //
 #include "bb_xdocgenerator.h"
+#include <iostream>
+
+
+using namespace std;
 
 BB_XDocGenerator::BB_XDocGenerator(BB_Doc * doc)
 	: BB_XGenerator() 
@@ -30,3 +34,23 @@ BB_XDocGenerator::~BB_XDocGenerator()
 }
 
 
+
+
+/**
+ *
+ */
+bool BB_XDocGenerator::write(QIODevice *device)
+{
+	m_Stream.setDevice(device);
+	m_Stream.setCodec("UTF-8");
+	
+	m_Stream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+			<< "<!DOCTYPE bb_doc>\n"
+			<< "<bb_doc version=\"1.0\">\n";
+	
+	m_Doc->getTerrain()->generateXElement(m_Stream, 1);
+	
+	m_Stream << "</bb_doc>\n";
+	
+	return true;
+}

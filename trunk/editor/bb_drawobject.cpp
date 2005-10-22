@@ -21,8 +21,10 @@ using namespace std;
 const char * BB_DrawObject::ClassName = "BB_DrawObject";
 
 
-BB_DrawObject::BB_DrawObject()
+BB_DrawObject::BB_DrawObject(QString name) 
+	: BB_Object(name)
 {
+	BB::indent(2);
 }
 
 
@@ -45,10 +47,10 @@ void BB_DrawObject::moveBy(C2dVector pMove)
 /*!
     \fn BB_DrawObject::show()
  */
-void BB_DrawObject::show(BB_Transformer& transformer,QPainter& painter) const
-{
-    /// @todo implement me
-}
+// void BB_DrawObject::show(BB_Transformer& transformer,QPainter& painter) const
+// {
+//     /// @todo implement me
+// }
 
 
 /*!
@@ -73,10 +75,10 @@ void BB_DrawObject::setColor(const QColor& _newVal)
 /*!
     \fn BB_DrawObject::isHit(QPoint p)
  */
-bool BB_DrawObject::isHit(C2dVector hit)
-{
-    /// @todo implement me
-}
+// bool BB_DrawObject::isHit(C2dVector hit)
+// {
+//     /// @todo implement me
+// }
 
 
 /*!

@@ -16,16 +16,17 @@
 #ifndef BB_OBJECT_H
 #define BB_OBJECT_H
 
-#include "QString"
+#include <QString>
+#include "bb.h"
 
 /**
 @author Alex Letkemann
 */
 class BB_Object{
 public:
-    BB_Object();
+//     BB_Object();
 	
-	BB_Object(QString& name);
+	BB_Object(QString name = "");
 
     ~BB_Object();
 

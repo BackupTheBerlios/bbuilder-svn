@@ -15,7 +15,7 @@
 #include "bb_level.h"
 
 BB_Level::BB_Level()
-	: BB_Object()
+	: BB_FileObject(QDir("/"),QString("asd")) /// @todo
 {
 }
 

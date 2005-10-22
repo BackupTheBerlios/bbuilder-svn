@@ -23,8 +23,6 @@
 #include "bb_config.h"
 
 
-// TESTEST
-
 /**
   @author Alex Letkemann
 */

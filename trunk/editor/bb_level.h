@@ -16,16 +16,16 @@
 #ifndef BB_LEVEL_H
 #define BB_LEVEL_H
 
-#include "bb_object.h"
+#include "bb_fileobject.h"
 
 /**
 @author Alex Letkemann
 */
-class BB_Level : public BB_Object {
+class BB_Level : public BB_FileObject {
 public:
     BB_Level();
 
-    ~BB_Level();
+    virtual ~BB_Level();
 
 };
 

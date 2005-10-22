@@ -12,6 +12,7 @@
 #ifndef BB_XGENERATOR_H
 #define BB_XGENERATOR_H
 
+#include <QTextStream>
 #include <QIODevice>
 #include <QString>
 
@@ -23,12 +24,12 @@ public:
     BB_XGenerator();
 
     virtual ~BB_XGenerator();
-    virtual bool write(QIODevice *device);
-
+    virtual bool write(QIODevice *device) = 0;
+	
+	static QString indent(int depth);
+   
 protected:
-    virtual QString escapedAttribute(const QString &str);
-    virtual QString escapedText(const QString &str);
-    virtual QString indent(int depth);
+    QTextStream m_Stream;
 };
 
 #endif

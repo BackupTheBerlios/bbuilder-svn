@@ -15,10 +15,12 @@
 #include "bb_doc.h"
 
 #include <iostream>
+#include "bb_xdocgenerator.h"
 
 using namespace std;
 
 BB_Doc::BB_Doc()
+	: QObject()
 {
 	m_Terrain = NULL;
 	m_ProjectPath = NULL;
@@ -56,7 +58,7 @@ BB_Terrain* BB_Doc::getTerrain()
 /**
  * Löscht den Inhalt des Dokumentes
  */
-void BB_Doc::clear()
+bool BB_Doc::clear()
 {
 
 	if(m_Terrain != NULL)
@@ -70,17 +72,23 @@ void BB_Doc::clear()
 	for(int i = 0; i < m_Buildings.count(); i++)
 	{
 		object = m_Buildings.at(i);
-		delete object;
 		m_Buildings.remove(i);
+		
+		delete object;
+		object = NULL;
 	}
 	
 	
 	for(int i = 0; i < m_Levels.count(); i++)
 	{
 		object = m_Levels.at(i);
-		delete object;
 		m_Levels.remove(i);
+		delete object;
+		object = NULL;
+		
 	}
+	
+	return true;
 }
 
 
@@ -104,6 +112,7 @@ bool BB_Doc::open(QString &fileName)
 	}
 	else 
 	{
+		cout << "BB_Doc::open(): ungültigen Dateinamen erhalten" << endl;
 		return false;
 	}
 	
@@ -121,5 +130,64 @@ bool BB_Doc::save()
 {
     /// @todo implement me
 
-	return false;
+	return true;
+}
+
+
+/*!
+    \fn BB_Doc::close()
+ */
+bool BB_Doc::close()
+{
+	m_ProjectFile = "";
+	m_ProjectPath = QDir("");
+	
+	return clear();
+}
+
+
+/*!
+    \fn BB_Doc::new(QDir &path)
+ */
+bool BB_Doc::createNew(QDir &path)
+{
+
+	if(&path == NULL)
+	{
+		return false;
+	}
+	
+	m_ProjectFile = path.dirName();
+	m_ProjectPath = path.path();
+	
+	QString fileName = path.path() + QDir::separator() + path.dirName() + ".glbb";
+	QFile file(fileName);
+	
+	if(!file.open(QFile::WriteOnly | QFile::Text))
+	{
+		file.close();
+		return false;
+	}
+	
+
+	
+	
+	
+	path.mkdir("terrain");
+	path.mkdir("buildings");
+	path.mkdir("levels");
+	path.mkdir("textures");
+	
+	m_Terrain = new BB_Terrain();
+	
+	BB_XDocGenerator docGenerator(this);
+	
+	if(!docGenerator.write(&file))
+	{
+		file.close();
+		return false;
+	}
+	
+	file.close();
+	return true;
 }
