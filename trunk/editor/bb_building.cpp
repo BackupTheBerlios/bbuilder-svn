@@ -16,9 +16,15 @@
 #include "ui_buildingEdit.h"
 
 
+#include "bb_line.h"
+#include "bb_wall.h"
 
-BB_Building::BB_Building()
-	: BB_FileObject(QDir("/"),QString("sdfsdf")) /// @todo !!!
+#include <iostream>
+
+using namespace std;
+
+BB_Building::BB_Building(const QDir& path, const QString &fileName, const QString &name)
+	: BB_FileObject(path,fileName,name)
 {
 	m_DrawObject = new QVector<BB_DrawObject*>();
 }
@@ -78,7 +84,74 @@ QVector<BB_DrawObject*>* BB_Building::getDrawObjects()
 /*!
     \fn BB_Building::write(QIODevice *device)
  */
-bool BB_Building::write(QIODevice *device)
+bool BB_Building::write(QTextStream &out)
 {
-    /// @todo implement me
+	int depth = 1;
+	
+ 	QVector<BB_Point*> points;
+ 	QVector<BB_Wall*> walls; 
+	
+	BB_Object* object;
+	
+	for(int i = 0; i < m_DrawObject->count(); i++)
+	{
+		object = m_DrawObject->at(i);
+		
+		if(typeid(*object) == typeid(BB_Point))
+		{
+			points.append((BB_Point*)object);
+		} 
+		else if (typeid(*object) == typeid(BB_Wall))
+		{
+			walls.append((BB_Wall*)object);
+		}
+		else
+		{
+			cout << "Unbekanntes Objekt gefunden" << endl;
+		}
+	}
+	
+	
+	
+	out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+			<< "<!DOCTYPE bb_building>\n"
+			<< "<bb_building version=\"1.0\">\n";
+	BB_Object::generateXElement(out, depth);
+	
+	if(points.count())
+	{
+		out << BB::indent(depth) << "<points>\n";
+		
+		for(int i = 0; i < points.count(); i++)
+		{
+			points.at(i)->generateXElement(out,depth + 1);
+		}
+		
+		out << BB::indent(depth) << "</points>\n";
+	}
+	else
+	{
+		out << "<points />";
+	}
+	
+	out << "</bb_building>\n";
+	return true;
+}
+
+
+/*!
+    \fn BB_Building::generateXElement(QTextStream &out, int depth)
+ */
+void BB_Building::generateXElement(QTextStream &out, int depth)
+{
+	out << BB::indent(depth) << "<bb_building>" << BB::escapedText(getFileName()) << "</bb_building>\n";
+}
+
+
+/*!
+    \fn BB_Building::getClassName()
+ */
+const QString BB_Building::getClassName()
+{
+	return QString("BB_Building");
 }

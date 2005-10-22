@@ -20,7 +20,6 @@ using namespace std;
 
 int BB_Object::m_Counter = 0;
 
-
 /**
  * Konstrucktor
  * Erzeugt ein neues Objekt. Name des Objektes wird aus der Objektnummer erzeugt.
@@ -125,4 +124,36 @@ void BB_Object::setDescription(const QString& desc)
 void BB_Object::createName()
 {
 	m_Name = QString("Object_") + QString::number(m_ObjectNr,10);
+}
+
+
+/*!
+    \fn BB_Object::generateXElement(QTextStream &stream, int depth)
+				@author Alex Letkemann
+				@date 22.10.2005
+ */
+void BB_Object::generateXElement(QTextStream &out, int depth)
+{
+	out << BB::indent(depth) << "<name>" << BB::escapedText(getName()) << "</name>\n";
+	out << BB::indent(depth);
+
+	if(getDescription().isEmpty())
+	{
+		out << "<description />";
+	}
+	else
+	{
+		out << "<description>" << BB::escapedText(getDescription()) << "</description>";
+	}
+	
+	out << "\n";
+}
+
+
+/*!
+    \fn BB_Object::getClassName() const;
+ */
+const QString BB_Object::getClassName()
+{
+	return QString("BB_Object");
 }

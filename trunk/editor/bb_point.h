@@ -42,7 +42,6 @@ public:
         int getRadius();
         void setRadius(int r);
         virtual bool isHit(C2dVector hit);
-        const char * getClassName() const;
         void setPos(const C2dVector& theValue);
         C2dVector getPos() const;
         QVector<BB_Line*>* getLines();
@@ -66,6 +65,7 @@ public:
         @date 20.10.2005
          */
         void deleteLines(QVector< BB_DrawObject * >* objects);
+    	virtual const QString getClassName();
         void setX(double value);
         void setY(double value);
         double getX(){return m_Pos.x();};
@@ -74,7 +74,6 @@ public:
 
 private:
         int m_Radius;
-        static const char * ClassName;
 protected:
         C2dVector m_Pos;
         /**

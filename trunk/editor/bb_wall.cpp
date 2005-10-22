@@ -14,8 +14,6 @@
  ***************************************************************************/
 #include "bb_wall.h"
 
-const char * BB_Wall::ClassName = "BB_Wall";
-
 BB_Wall::BB_Wall(BB_Point* p1, BB_Point* p2): BB_Line(p1, p2)
 {
 }
@@ -26,8 +24,11 @@ BB_Wall::~BB_Wall()
 }
 
 
-const char* BB_Wall::getClassName() const
-{
-	return BB_Wall::ClassName;
-}
 
+/*!
+    \fn BB_Wall::getClassName()
+ */
+const QString BB_Wall::getClassName()
+{
+	return QString("BB_Wall");
+}

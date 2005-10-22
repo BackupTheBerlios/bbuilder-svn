@@ -23,10 +23,12 @@
 */
 class BB_Level : public BB_FileObject {
 public:
-    BB_Level();
+	BB_Level(const QDir& path, const QString &fileName, const QString &name = QString(""));
 
     virtual ~BB_Level();
-
+    virtual void generateXElement(QTextStream &out, int depth);
+    virtual bool write(QTextStream &out);
+    virtual const QString getClassName();
 };
 
 #endif

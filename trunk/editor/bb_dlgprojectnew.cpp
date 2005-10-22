@@ -44,6 +44,11 @@ BB_DlgProjectNew::BB_DlgProjectNew(QWidget * parent, Qt::WFlags f)
 			SIGNAL(textChanged(const QString&)),
 			this,
 			SLOT(slotPathChanged(const QString&)));
+	
+	connect(m_Dlg.textEditProjectDesc,
+			SIGNAL(textChanged()),
+			this,
+			SLOT(slotDescChanged()));
 
 }
 
@@ -94,9 +99,10 @@ void BB_DlgProjectNew::slotPathChanged(const QString & text)
  */
 void BB_DlgProjectNew::slotNameChanged(const QString & text)
 {
+	m_ProjectName = text;
 	m_ProjectDir = text.toLower().remove(QRegExp("\\W"));	
 	checkDir();
-
+	cout << "test" << endl;
 }
 
 
@@ -144,31 +150,34 @@ void BB_DlgProjectNew::checkDir()
 }
 
 
-QString BB_DlgProjectNew::projectDir() const
+QString BB_DlgProjectNew::getProjectDir() const
 {
     return m_ProjectDir;
 }
 
-
-void BB_DlgProjectNew::setProjectDir(const QString& theValue)
-{
-    m_ProjectDir = theValue;
-}
-
-
-void BB_DlgProjectNew::setProjectPath(const QString& theValue)
-{
-    m_ProjectPath = theValue;
-}
-
-
-QDir BB_DlgProjectNew::projectPath() const
+QDir BB_DlgProjectNew::getProjectPath() const
 {
     return m_Dir;
 }
 
 
-void BB_DlgProjectNew::setProjectPath(const QDir& theValue)
+
+/*!
+    \fn BB_DlgProjectNew::slotDescChanged(const QString & text)
+ */
+void BB_DlgProjectNew::slotDescChanged()
 {
-    m_Dir = theValue;
+	m_ProjectDescription = m_Dlg.textEditProjectDesc->toPlainText(); 
+}
+
+
+QString BB_DlgProjectNew::getProjectName() const
+{
+    return m_ProjectName;
+}
+
+
+QString BB_DlgProjectNew::getProjectDescription() const
+{
+    return m_ProjectDescription;
 }

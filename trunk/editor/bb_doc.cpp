@@ -15,7 +15,6 @@
 #include "bb_doc.h"
 
 #include <iostream>
-#include "bb_xdocgenerator.h"
 
 using namespace std;
 
@@ -154,46 +153,63 @@ bool BB_Doc::close()
 /*!
     \fn BB_Doc::new(QDir &path)
  */
-bool BB_Doc::createNew(QDir &path)
+bool BB_Doc::createNew(const QString &name, const QString &desc, const QDir &path)
 {
 
-	if(&path == NULL)
+	if(&name == NULL || name.isEmpty() || &desc == NULL || &path == NULL)
 	{
 		return false;
 	}
 	
-	m_ProjectFile = path.dirName();
+	QDir tmpPath;
+	
+	setName(name);
+	setDescription(desc);
+	
+	m_ProjectFile = path.dirName() + ".glbb";
 	m_ProjectPath = path.path();
 	
-	QString fileName = path.path() + QDir::separator() + path.dirName() + ".glbb";
-	QFile file(fileName);
+	m_FilePath = m_ProjectPath;
+	m_FileName = m_ProjectFile;
 	
-	if(!file.open(QFile::WriteOnly | QFile::Text))
-	{
-		file.close();
-		return false;
-	}
+// 	QString fileName = path.path() + QDir::separator() + path.dirName() + ".glbb";
+// 	QFile file(fileName);
+// 	
+// 	if(!file.open(QFile::WriteOnly | QFile::Text))
+// 	{
+// 		file.close();
+// 		return false;
+// 	}
 	
 
 	
 	
 	
-	path.mkdir("terrain");
-	path.mkdir("buildings");
-	path.mkdir("levels");
-	path.mkdir("textures");
+	m_ProjectPath.mkdir("terrain");
+	m_ProjectPath.mkdir("buildings");
+	m_ProjectPath.mkdir("levels");
+	m_ProjectPath.mkdir("textures");
 	
-	m_Terrain = new BB_Terrain();
+	tmpPath = m_ProjectPath;
+	tmpPath.cd("terrain");
 	
-	BB_XDocGenerator docGenerator(this);
+	m_Terrain = new BB_Terrain(tmpPath,"terrain.xml","Terrain");
 	
-	if(!docGenerator.write(&file))
-	{
-		file.close();
-		return false;
-	}
 	
-	file.close();
+	
+	save();
+	
+	
+	
+// 	BB_XDocGenerator docGenerator(this);
+// 	
+// 	if(!docGenerator.write(&file))
+// 	{
+// 		file.close();
+// 		return false;
+// 	}
+// 	
+// 	file.close();
 	return true;
 }
 
@@ -201,10 +217,108 @@ bool BB_Doc::createNew(QDir &path)
 /**
  * 
  */
-bool BB_Doc::write(QIODevice*)
-
+bool BB_Doc::write(QTextStream &out)
 {
-    /// @todo implement me
+	int depth = 1;
+	
+	out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+			<< "<!DOCTYPE bb_doc>\n"
+			<< "<bb_doc version=\"1.0\">\n";
+
+	BB_Object::generateXElement(out,depth);
+	
+	if(getTerrain() != NULL)
+	{
+		m_Terrain->generateXElement(out, depth);
+	}
+	
+	if(m_Buildings.count() == 0)
+	{
+		out << BB::indent(depth) << "<buildings />\n";
+	}
+	else
+	{
+		out << BB::indent(depth) << "<buildings>\n";
+		
+		for(int i = 0; i < m_Buildings.count(); i++)
+		{
+			m_Buildings.at(i)->generateXElement(out, depth + 1);
+		}
+		
+		out << BB::indent(depth) << "</buildings>\n";
+	}
+	
+	if(m_Levels.count() == 0)
+	{
+		out << BB::indent(depth) << "<levels />\n";
+	}
+	else
+	{
+		out << BB::indent(depth) << "<levels>\n";
+		
+		for(int i = 0; i < m_Levels.count(); i++)
+		{
+			m_Levels.at(i)->generateXElement(out, depth + 1);
+		}
+		
+		out << BB::indent(depth) << "</levels>\n";
+	}
+	
+	out << "</bb_doc>\n";
 
 	return true;
+}
+
+
+/*!
+    \fn BB_Doc::newBuilding()
+ */
+BB_Building* BB_Doc::newBuilding(QWidget * parent)
+{
+	QString fileName;
+	QDir path = m_ProjectPath;
+	path.cd("buildings");
+	
+	BB_Building* building = new BB_Building(path,"tempFile");
+	
+	if(building->keyBoardEdit(parent) == QDialog::Accepted)
+	{
+		building->setFileName(fileName.sprintf("%08d.xml",building->getObjectNr()));
+		building->save();
+		m_Buildings.append(building);
+	}
+	else
+	{
+		delete building;
+		building = NULL;
+	}
+	
+	return building;
+}
+
+
+/*!
+    \fn BB_Doc::newLevel()
+ */
+BB_Level* BB_Doc::newLevel(QWidget * parent)
+{
+// 	QString fileName;
+// 	QDir path = m_ProjectPath;
+// 	path.cd("levels");
+// 	
+// 	BB_Level* level = new BB_Level(path,"tempFile");
+// 	
+// 	if(level->keyBoardEdit(parent) == QDialog::Accepted)
+// 	{
+// 		level->setFileName(fileName.sprintf("%08d.xml",level->getObjectNr()));
+// 		level->save();
+// 		m_Levels.append(level);
+// 	}
+// 	else
+// 	{
+// 		delete level;
+// 		level = NULL;
+// 	}
+// 	
+// 	return level;
 }

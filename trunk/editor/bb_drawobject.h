@@ -43,13 +43,12 @@ public:
     //void setP0(const QPoint& theValue){m_P0 = theValue;}
     //QPoint getP0() const{return m_P0;}
     virtual bool isHit(C2dVector hit) = 0;
-    virtual const char * getClassName() const;
+    virtual const QString getClassName();
+    
 protected:
     //QPoint m_P0;
     QColor m_Color;
     int m_hitRange;
-private:
-	static const char * ClassName;
 };
 
 #endif

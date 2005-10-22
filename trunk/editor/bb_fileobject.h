@@ -12,9 +12,11 @@
 #ifndef BB_FILEOBJECT_H
 #define BB_FILEOBJECT_H
 
-#include <bb_object.h>
+#include "bb_object.h"
+
 #include <QIODevice>
 #include <QDir>
+#include <QTextStream>
 
 /**
 @author Alex Letkemann
@@ -22,10 +24,23 @@
 class BB_FileObject : public BB_Object
 {
 public:
-	BB_FileObject(const QDir &path, const QString &filename, QString name = "");
+	BB_FileObject(const QDir &path, const QString &filename, const QString &name = QString(""));
 
     virtual	~BB_FileObject();
-    void save();
+    bool save();
+
+	QString getFileName() const;
+
+	QDir getFilePath() const;
+
+	void setFileName(const QString& theValue);
+
+	void setFilePath(const QDir& theValue);
+    virtual const QString getClassName();
+	
+	
+	
+	
 
 protected:
 	/** Gibt an, ob das Objekt modifiziert wurde */
@@ -37,7 +52,8 @@ protected:
 	/** Pfad zur Datei im Dateisystem */
     QDir m_FilePath;
 protected:
-    virtual bool write(QIODevice *device)  = 0;
+	virtual bool write(QTextStream &out)  = 0;
+
 };
 
 #endif

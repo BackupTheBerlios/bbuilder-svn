@@ -41,6 +41,7 @@ public:
     *@return boolean m_first
     */
     bool isFirst();
+    virtual const QString getClassName();
 private:
 	/**
 	Pointer auf BB_Wall zu der dieser Punkt gehoert
@@ -55,6 +56,7 @@ private:
 	wenn false, dann steht dieser Punkt weiter als der "andere"
 	*/
 	bool m_first;
+
 
 };
 

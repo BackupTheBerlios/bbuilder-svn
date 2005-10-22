@@ -30,12 +30,14 @@
 */
 class BB_Building : public BB_FileObject{
 public:
-    BB_Building();
+	BB_Building(const QDir& path, const QString &fileName, const QString &name = QString(""));
 
     virtual ~BB_Building();
     int keyBoardEdit(QWidget* parent);
     QVector<BB_DrawObject*>* getDrawObjects();
-    virtual bool write(QIODevice *device);
+	virtual bool write(QTextStream &out);
+    virtual void generateXElement(QTextStream &out, int depth);
+    virtual const QString getClassName();
 
 protected:
     QVector<BB_Level>* m_Levels;

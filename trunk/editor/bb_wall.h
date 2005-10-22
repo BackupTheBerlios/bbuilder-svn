@@ -31,11 +31,8 @@ public:
     BB_Wall(BB_Point* p1, BB_Point* p2);
 
     ~BB_Wall();
-
-    const char* getClassName() const;
+    virtual const QString getClassName();
     
-private:
-	static const char * ClassName;
 
 };
 

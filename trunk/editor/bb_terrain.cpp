@@ -13,13 +13,13 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_terrain.h"
-#include "bb_xgenerator.h"
 
-BB_Terrain::BB_Terrain()
-	: BB_FileObject(QDir("sdf"),QString("sdfs"))	/// @todo
+const QString BB_Terrain::s_ClassName = "BB_Terrain";
+
+BB_Terrain::BB_Terrain(const QDir& path, const QString &fileName, const QString &name)
+	: BB_FileObject(path, fileName, name)
 {
-	//TODO nur test ...
-	m_FileName = "test";
+
 }
 
 
@@ -33,19 +33,17 @@ BB_Terrain::~BB_Terrain()
 /*!
     \fn BB_Terrain::generateXElement(QIODevice *device, int depth)
  */
-QString BB_Terrain::generateXElement(QTextStream &stream, int depth)
+void BB_Terrain::generateXElement(QTextStream &out, int depth)
 {
-	stream << BB_XGenerator::indent(depth) << "<bb_terrain>\n";
-	stream << BB_XGenerator::indent(depth + 1) << m_FileName << "\n";
-	stream << BB_XGenerator::indent(depth) << "</bb_terrain>\n";
-	return QString("");
+	out << BB::indent(depth) << "<bb_terrain>" << BB::escapedText(getFileName()) << "</bb_terrain>\n";
 }
 
 
 /*!
     \fn BB_Terrain::write(QIODevice *device)
  */
-bool BB_Terrain::write(QIODevice *device)
+bool BB_Terrain::write(QTextStream &out)
 {
     /// @todo implement me
+	return true;
 }

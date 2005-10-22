@@ -65,8 +65,8 @@ public:
     */
     BB_Point* getPos2() const;
 
-    const char * getClassName() const;
     void remove(BB_Point * point);
+    virtual const QString getClassName();
 
 
 
@@ -75,8 +75,6 @@ protected:
     BB_Point * m_Pos1;
     BB_Point * m_Pos2;
     C2dVector m_Richtung;
-private:
-    static const char * ClassName;
 };
 
 #endif

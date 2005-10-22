@@ -20,7 +20,6 @@
 
 using namespace std;
 
-const char * BB_Point::ClassName = "BB_Point";
 
 BB_Point::BB_Point()
                 : BB_DrawObject()
@@ -112,11 +111,6 @@ bool BB_Point::isHit(C2dVector hit)
   return false;
 }
 
-const char * BB_Point::getClassName() const
-{
-        return BB_Point::ClassName;
-}
-
 
 
 
@@ -177,6 +171,14 @@ void BB_Point::removeLine(BB_Line * line)
 void BB_Point::addLine(BB_Line * line)
 {
         m_Lines.insert(m_Lines.count(), line);
+}
+
+/*!
+    \fn BB_Point::getClassName()
+ */
+const QString BB_Point::getClassName()
+{
+	return QString("BB_Point");
 }
 void BB_Point::setX(double value){
   m_Pos.setX(value);

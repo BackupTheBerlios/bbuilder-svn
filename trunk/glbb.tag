@@ -89,6 +89,13 @@
     <name>BB_Building</name>
     <filename>classBB__Building.html</filename>
     <base>BB_FileObject</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_Building</name>
+      <anchorfile>classBB__Building.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(const QDir &amp;path, const QString &amp;fileName, const QString &amp;name=QString(&quot;&quot;))</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual</type>
       <name>~BB_Building</name>
@@ -115,7 +122,14 @@
       <name>write</name>
       <anchorfile>classBB__Building.html</anchorfile>
       <anchor>a4</anchor>
-      <arglist>(QIODevice *device)</arglist>
+      <arglist>(QTextStream &amp;out)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>generateXElement</name>
+      <anchorfile>classBB__Building.html</anchorfile>
+      <anchor>a5</anchor>
+      <arglist>(QTextStream &amp;out, int depth)</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QVector&lt; BB_Level &gt; *</type>
@@ -182,38 +196,31 @@
       <arglist>(QWidget *parent=0, Qt::WFlags f=0)</arglist>
     </member>
     <member kind="function">
-      <type>void</type>
-      <name>setProjectDir</name>
+      <type>QString</type>
+      <name>getProjectDir</name>
       <anchorfile>classBB__DlgProjectNew.html</anchorfile>
       <anchor>a2</anchor>
-      <arglist>(const QString &amp;theValue)</arglist>
+      <arglist>() const </arglist>
     </member>
     <member kind="function">
-      <type>QString</type>
-      <name>projectDir</name>
+      <type>QDir</type>
+      <name>getProjectPath</name>
       <anchorfile>classBB__DlgProjectNew.html</anchorfile>
       <anchor>a3</anchor>
       <arglist>() const </arglist>
     </member>
     <member kind="function">
-      <type>void</type>
-      <name>setProjectPath</name>
+      <type>QString</type>
+      <name>getProjectName</name>
       <anchorfile>classBB__DlgProjectNew.html</anchorfile>
       <anchor>a4</anchor>
-      <arglist>(const QString &amp;theValue)</arglist>
+      <arglist>() const </arglist>
     </member>
     <member kind="function">
-      <type>void</type>
-      <name>setProjectPath</name>
+      <type>QString</type>
+      <name>getProjectDescription</name>
       <anchorfile>classBB__DlgProjectNew.html</anchorfile>
       <anchor>a5</anchor>
-      <arglist>(const QDir &amp;theValue)</arglist>
-    </member>
-    <member kind="function">
-      <type>QDir</type>
-      <name>projectPath</name>
-      <anchorfile>classBB__DlgProjectNew.html</anchorfile>
-      <anchor>a6</anchor>
       <arglist>() const </arglist>
     </member>
     <member kind="variable" protection="protected">
@@ -242,6 +249,20 @@
       <name>m_ProjectDir</name>
       <anchorfile>classBB__DlgProjectNew.html</anchorfile>
       <anchor>p3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QString</type>
+      <name>m_ProjectName</name>
+      <anchorfile>classBB__DlgProjectNew.html</anchorfile>
+      <anchor>p4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QString</type>
+      <name>m_ProjectDescription</name>
+      <anchorfile>classBB__DlgProjectNew.html</anchorfile>
+      <anchor>p5</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -289,14 +310,28 @@
       <name>createNew</name>
       <anchorfile>classBB__Doc.html</anchorfile>
       <anchor>a7</anchor>
-      <arglist>(QDir &amp;path)</arglist>
+      <arglist>(const QString &amp;name, const QString &amp;desc, const QDir &amp;path)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
       <name>write</name>
       <anchorfile>classBB__Doc.html</anchorfile>
       <anchor>a8</anchor>
-      <arglist>(QIODevice *)</arglist>
+      <arglist>(QTextStream &amp;out)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual BB_Building *</type>
+      <name>newBuilding</name>
+      <anchorfile>classBB__Doc.html</anchorfile>
+      <anchor>a9</anchor>
+      <arglist>(QWidget *parent)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual BB_Level *</type>
+      <name>newLevel</name>
+      <anchorfile>classBB__Doc.html</anchorfile>
+      <anchor>a10</anchor>
+      <arglist>(QWidget *parent)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual bool</type>
@@ -387,13 +422,6 @@
       <anchor>a6</anchor>
       <arglist>(C2dVector hit)=0</arglist>
     </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual const char *</type>
-      <name>getClassName</name>
-      <anchorfile>classBB__DrawObject.html</anchorfile>
-      <anchor>a7</anchor>
-      <arglist>() const </arglist>
-    </member>
     <member kind="variable" protection="protected">
       <type>QColor</type>
       <name>m_Color</name>
@@ -437,7 +465,7 @@
       <name>BB_FileObject</name>
       <anchorfile>classBB__FileObject.html</anchorfile>
       <anchor>a0</anchor>
-      <arglist>(const QDir &amp;path, const QString &amp;filename, QString name=&quot;&quot;)</arglist>
+      <arglist>(const QDir &amp;path, const QString &amp;filename, const QString &amp;name=QString(&quot;&quot;))</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual</type>
@@ -447,18 +475,46 @@
       <arglist>()</arglist>
     </member>
     <member kind="function">
-      <type>void</type>
+      <type>bool</type>
       <name>save</name>
       <anchorfile>classBB__FileObject.html</anchorfile>
       <anchor>a2</anchor>
       <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>QString</type>
+      <name>getFileName</name>
+      <anchorfile>classBB__FileObject.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function">
+      <type>QDir</type>
+      <name>getFilePath</name>
+      <anchorfile>classBB__FileObject.html</anchorfile>
+      <anchor>a4</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setFileName</name>
+      <anchorfile>classBB__FileObject.html</anchorfile>
+      <anchor>a5</anchor>
+      <arglist>(const QString &amp;theValue)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setFilePath</name>
+      <anchorfile>classBB__FileObject.html</anchorfile>
+      <anchor>a6</anchor>
+      <arglist>(const QDir &amp;theValue)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="pure">
       <type>virtual bool</type>
       <name>write</name>
       <anchorfile>classBB__FileObject.html</anchorfile>
       <anchor>b0</anchor>
-      <arglist>(QIODevice *device)=0</arglist>
+      <arglist>(QTextStream &amp;out)=0</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>bool</type>
@@ -486,6 +542,27 @@
     <name>BB_Level</name>
     <filename>classBB__Level.html</filename>
     <base>BB_FileObject</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_Level</name>
+      <anchorfile>classBB__Level.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(const QDir &amp;path, const QString &amp;fileName, const QString &amp;name=QString(&quot;&quot;))</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>generateXElement</name>
+      <anchorfile>classBB__Level.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(QTextStream &amp;out, int depth)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>write</name>
+      <anchorfile>classBB__Level.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>(QTextStream &amp;out)</arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>BB_Line</name>
@@ -541,11 +618,11 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function">
-      <type>const char *</type>
-      <name>getClassName</name>
+      <type>void</type>
+      <name>remove</name>
       <anchorfile>classBB__Line.html</anchorfile>
       <anchor>a9</anchor>
-      <arglist>() const </arglist>
+      <arglist>(BB_Point *point)</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_Point *</type>
@@ -702,8 +779,8 @@
       <anchor>a0</anchor>
       <arglist>(QString name=&quot;&quot;)</arglist>
     </member>
-    <member kind="function">
-      <type></type>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
       <name>~BB_Object</name>
       <anchorfile>classBB__Object.html</anchorfile>
       <anchor>a1</anchor>
@@ -743,6 +820,20 @@
       <anchorfile>classBB__Object.html</anchorfile>
       <anchor>a6</anchor>
       <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>generateXElement</name>
+      <anchorfile>classBB__Object.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>(QTextStream &amp;out, int depth)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static const QString</type>
+      <name>getClassName</name>
+      <anchorfile>classBB__Object.html</anchorfile>
+      <anchor>e0</anchor>
+      <arglist>()</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -792,31 +883,59 @@
       <arglist>(C2dVector hit)</arglist>
     </member>
     <member kind="function">
-      <type>const char *</type>
-      <name>getClassName</name>
-      <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a8</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function">
       <type>void</type>
       <name>setPos</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a9</anchor>
+      <anchor>a8</anchor>
       <arglist>(const C2dVector &amp;theValue)</arglist>
     </member>
     <member kind="function">
       <type>C2dVector</type>
       <name>getPos</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a10</anchor>
+      <anchor>a9</anchor>
       <arglist>() const </arglist>
+    </member>
+    <member kind="function">
+      <type>QVector&lt; BB_Line * &gt; *</type>
+      <name>getLines</name>
+      <anchorfile>classBB__Point.html</anchorfile>
+      <anchor>a10</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>removeLine</name>
+      <anchorfile>classBB__Point.html</anchorfile>
+      <anchor>a11</anchor>
+      <arglist>(BB_Line *line)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>addLine</name>
+      <anchorfile>classBB__Point.html</anchorfile>
+      <anchor>a12</anchor>
+      <arglist>(BB_Line *line)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>deleteLines</name>
+      <anchorfile>classBB__Point.html</anchorfile>
+      <anchor>a13</anchor>
+      <arglist>(QVector&lt; BB_DrawObject * &gt; *objects)</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>C2dVector</type>
       <name>m_Pos</name>
       <anchorfile>classBB__Point.html</anchorfile>
       <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; BB_Line * &gt;</type>
+      <name>m_Lines</name>
+      <anchorfile>classBB__Point.html</anchorfile>
+      <anchor>p1</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -1060,19 +1179,26 @@
     <name>BB_Terrain</name>
     <filename>classBB__Terrain.html</filename>
     <base>BB_FileObject</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_Terrain</name>
+      <anchorfile>classBB__Terrain.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(const QDir &amp;path, const QString &amp;fileName, const QString &amp;name=QString(&quot;&quot;))</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
-      <type>virtual QString</type>
+      <type>virtual void</type>
       <name>generateXElement</name>
       <anchorfile>classBB__Terrain.html</anchorfile>
       <anchor>a2</anchor>
-      <arglist>(QTextStream &amp;stream, int depth)</arglist>
+      <arglist>(QTextStream &amp;out, int depth)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
       <name>write</name>
       <anchorfile>classBB__Terrain.html</anchorfile>
       <anchor>a3</anchor>
-      <arglist>(QIODevice *device)</arglist>
+      <arglist>(QTextStream &amp;out)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -1278,13 +1404,6 @@
       <anchor>a0</anchor>
       <arglist>(BB_Point *p1, BB_Point *p2)</arglist>
     </member>
-    <member kind="function">
-      <type>const char *</type>
-      <name>getClassName</name>
-      <anchorfile>classBB__Wall.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>() const </arglist>
-    </member>
   </compound>
   <compound kind="class">
     <name>BB_WorkArea</name>
@@ -1463,71 +1582,6 @@
     </member>
   </compound>
   <compound kind="class">
-    <name>BB_XDocGenerator</name>
-    <filename>classBB__XDocGenerator.html</filename>
-    <base>BB_XGenerator</base>
-    <member kind="function">
-      <type></type>
-      <name>BB_XDocGenerator</name>
-      <anchorfile>classBB__XDocGenerator.html</anchorfile>
-      <anchor>a0</anchor>
-      <arglist>(BB_Doc *doc)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual bool</type>
-      <name>write</name>
-      <anchorfile>classBB__XDocGenerator.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>(QIODevice *device)</arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>BB_Doc *</type>
-      <name>m_Doc</name>
-      <anchorfile>classBB__XDocGenerator.html</anchorfile>
-      <anchor>p0</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>BB_XGenerator</name>
-    <filename>classBB__XGenerator.html</filename>
-    <member kind="function">
-      <type></type>
-      <name>BB_XGenerator</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>a0</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual</type>
-      <name>~BB_XGenerator</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>a1</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual bool</type>
-      <name>write</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>(QIODevice *device)=0</arglist>
-    </member>
-    <member kind="function" static="yes">
-      <type>static QString</type>
-      <name>indent</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>e0</anchor>
-      <arglist>(int depth)</arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>QTextStream</type>
-      <name>m_Stream</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>p0</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
     <name>C2dVector</name>
     <filename>classC2dVector.html</filename>
     <member kind="function">
@@ -1694,10 +1748,6 @@
     <file>bb_workarea.h</file>
     <file>bb_workframe.cpp</file>
     <file>bb_workframe.h</file>
-    <file>bb_xdocgenerator.cpp</file>
-    <file>bb_xdocgenerator.h</file>
-    <file>bb_xgenerator.cpp</file>
-    <file>bb_xgenerator.h</file>
     <file>c2dvector.cpp</file>
     <file>c2dvector.h</file>
     <file>main.cpp</file>

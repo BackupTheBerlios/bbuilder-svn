@@ -143,26 +143,32 @@ void BB_TabBuilding::slotBuildingDelete()
 void BB_TabBuilding::slotBuildingNew()
 {
 
-	BB_Building* building = new BB_Building();
-	if(building->keyBoardEdit(this) == QDialog::Accepted)
-	{
-		m_BuildingsListWidget->addItem(building->getName());
-		
-		cout << "Gebäude hinzugefügt (" << building << ")" << endl;
-		
-		m_Buildings->append(building);
-	}
-	else
-	{
-		delete building;
-		building = NULL;
-		cout << "Gelöscht" << endl;
-	}
+// 	BB_Building* building = new BB_Building();
+// 	if(building->keyBoardEdit(this) == QDialog::Accepted)
+// 	{
+// 		m_BuildingsListWidget->addItem(building->getName());
+// 		
+// 		cout << "Gebäude hinzugefügt (" << building << ")" << endl;
+// 		
+// 		m_Buildings->append(building);
+// 	}
+// 	else
+// 	{
+// 		delete building;
+// 		building = NULL;
+// 		cout << "Gelöscht" << endl;
+// 	}
+// 	
+// 	m_BuildingsListWidget->setCurrentRow (m_Buildings->count()-1);
+// 
+// 	
+// 	updateBuildingList();
 	
-	m_BuildingsListWidget->setCurrentRow (m_Buildings->count()-1);
-
 	
-	updateBuildingList();
+	if(m_Doc->newBuilding(this) != NULL)
+	{
+		updateBuildingList();
+	}
 }
 
 
@@ -174,7 +180,9 @@ void BB_TabBuilding::slotBuildingProperties()
 	int row = m_BuildingsListWidget->currentRow();
 	if(row >= 0)
 	{
-		m_Buildings->at(row)->keyBoardEdit(this);
+// 		m_Buildings->at(row)->keyBoardEdit(this);
+		m_Buildings->at(row)->save();
+		
 	}
 	
 	updateBuildingList();

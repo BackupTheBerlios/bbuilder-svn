@@ -11,6 +11,12 @@
 //
 #include "bb_fileobject.h"
 
+#include <QMessageBox>
+#include <iostream>
+
+
+using namespace std;
+
 /**
  * Konstrucktor. Erzeugt ein neues FileObjekt.
  * Falls einer der Parameter 'path' oder 'filename' NULL oder leer ist, wird der Path der Datei auf das
@@ -22,7 +28,7 @@
  * @author Alex Letkemann
  * @date 22.10.2005
  */
-BB_FileObject::BB_FileObject(const QDir &path, const QString &filename, QString name): BB_Object(name)
+BB_FileObject::BB_FileObject(const QDir &path, const QString &filename, const QString &name): BB_Object(name)
 {
 	if(&path != NULL || &filename != NULL || filename.isEmpty())
 	{
@@ -51,7 +57,62 @@ BB_FileObject::~BB_FileObject()
  * @author Alex Letkemann
  * @date 22.10.2005
  */
-void BB_FileObject::save()
+bool BB_FileObject::save()
 {
-    /// @todo implement me
+	QFile file(m_FilePath.path() + QDir::separator() + m_FileName);
+
+	if(!file.open(QIODevice::WriteOnly))
+	{
+		QMessageBox::critical(NULL,"Fehler", QString::fromUtf8("Datei konnte nicht geöffnet werden: \n") + file.fileName());
+		file.close();
+		return false;
+	}
+	
+	QTextStream Stream;
+	Stream.setDevice(&file);
+	Stream.setCodec("UTF-8");
+	
+	if(!write(Stream))
+	{
+		QMessageBox::critical(NULL,"Fehler", QString::fromUtf8("Fehler beim Schreiben in Datei: \n") + file.fileName());
+		file.close();
+		return false;
+	}
+	
+	
+	file.close();
+	return true;
+}
+
+
+QString BB_FileObject::getFileName() const
+{
+    return m_FileName;
+}
+
+
+QDir BB_FileObject::getFilePath() const
+{
+    return m_FilePath;
+}
+
+
+void BB_FileObject::setFileName(const QString& theValue)
+{
+    m_FileName = theValue;
+}
+
+
+void BB_FileObject::setFilePath(const QDir& theValue)
+{
+    m_FilePath = theValue;
+}
+
+
+/*!
+    \fn BB_FileObject::getClassName()
+ */
+const QString BB_FileObject::getClassName()
+{
+	return QString("BB_FileObject");
 }

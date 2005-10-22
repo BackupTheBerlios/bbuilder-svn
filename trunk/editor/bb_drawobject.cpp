@@ -18,13 +18,10 @@
 
 using namespace std;
 
-const char * BB_DrawObject::ClassName = "BB_DrawObject";
-
-
 BB_DrawObject::BB_DrawObject(QString name) 
 	: BB_Object(name)
 {
-	BB::indent(2);
+
 }
 
 
@@ -82,9 +79,9 @@ void BB_DrawObject::setColor(const QColor& _newVal)
 
 
 /*!
-    \fn BB_DrawObject::getClassName() const
+    \fn BB_DrawObject::getClassName()
  */
-const char * BB_DrawObject::getClassName() const
+const QString BB_DrawObject::getClassName()
 {
-	return BB_DrawObject::ClassName;
+	return QString("BB_DrawObject");
 }

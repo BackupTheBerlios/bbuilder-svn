@@ -16,6 +16,7 @@
 #ifndef BB_DOC_H
 #define BB_DOC_H
 
+#include <QWidget>
 #include <QVector>
 #include <QDir>
 
@@ -39,8 +40,10 @@ public:
 	virtual QVector<BB_Level*>* getLevels();
 	virtual bool open(QString &fileName);
     virtual bool close();
-	virtual bool createNew(QDir &path);
-    virtual bool write(QIODevice*)
+	virtual bool createNew(const QString &name, const QString &desc, const QDir &path);
+	virtual bool write(QTextStream &out);
+	virtual BB_Building* newBuilding(QWidget * parent);
+	virtual BB_Level* newLevel(QWidget * parent);
 ;
 
 protected:

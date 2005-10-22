@@ -25,12 +25,14 @@
 */
 class BB_Terrain : public BB_FileObject{
 public:
-    BB_Terrain();
+	BB_Terrain(const QDir& path, const QString &fileName, const QString &name = QString(""));
 
     virtual ~BB_Terrain();
-	virtual QString generateXElement(QTextStream &stream, int depth);
-    virtual bool write(QIODevice *device);
+	virtual void generateXElement(QTextStream &out, int depth);
+	virtual bool write(QTextStream &out);
 
+private:
+	static const QString s_ClassName;
 };
 
 #endif

@@ -16,6 +16,7 @@
 #ifndef BB_OBJECT_H
 #define BB_OBJECT_H
 
+#include <QTextStream>
 #include <QString>
 #include "bb.h"
 
@@ -28,7 +29,7 @@ public:
 	
 	BB_Object(QString name = "");
 
-    ~BB_Object();
+    virtual ~BB_Object();
 
 	int BB_Object::getObjectNr() const;
 
@@ -42,16 +43,21 @@ public:
 
 	QString BB_Object::getDescription() const;
 	
-	
-	
+	virtual void generateXElement(QTextStream &out, int depth);	
+    virtual const QString getClassName();
+
 
 private:
     static int m_Counter;
     int m_ObjectNr;
     QString m_Description;
     QString m_Name;
+	
+	
+	
 private:
     void createName();
+
 };
 
 #endif

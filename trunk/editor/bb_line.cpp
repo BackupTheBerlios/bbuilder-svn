@@ -19,7 +19,6 @@
 
 using namespace std;
 
-const char * BB_Line::ClassName = "BB_Line";
 
 BB_Line::BB_Line(BB_Point *p1, BB_Point *p2)
 {
@@ -120,12 +119,6 @@ bool BB_Line::setPos2(BB_Point* Value)
 }
 
 
-const char * BB_Line::getClassName() const
-{
-    return BB_Line::ClassName;
-}
-
-
 /*!
     \fn BB_Line::delete(BB_Point * point)
  */
@@ -135,4 +128,13 @@ void BB_Line::remove(BB_Point * point)
     m_Pos2->removeLine(this);
   else
     m_Pos1->removeLine(this);
+}
+
+
+/*!
+    \fn BB_Line::getClassName()
+ */
+const QString BB_Line::getClassName()
+{
+	return QString("BB_Line");
 }

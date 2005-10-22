@@ -122,6 +122,8 @@ void BB_MainWindow::initMainWindow()
 	m_TabWidget->addTab(tabBuilding,QString::fromUtf8("Gebäude"));	//TODO
 	m_TabWidget->addTab(tabLevel,QString::fromUtf8("Etagen"));
 	
+	m_TabWidget->setEnabled(false);
+	
 	setCentralWidget(m_TabWidget);
 }
 
@@ -173,15 +175,18 @@ void BB_MainWindow::slotProjectNew()
 	do
 	{	
 		result = dlg.exec();
-		QString dir = dlg.projectDir();
-		QDir path = dlg.projectPath();
+		QString dir = dlg.getProjectDir();
+		QDir path = dlg.getProjectPath();
+		
+		QString name = dlg.getProjectName();
+		QString desc = dlg.getProjectDescription();
 		
 		if(result == QDialog::Accepted)
 		{
 			m_Doc->close();
 			m_TabWidget->setEnabled(false);
 			
-			if(path.mkdir(dir) && path.cd(dir) && m_Doc->createNew(path))
+			if(path.mkdir(dir) && path.cd(dir) && m_Doc->createNew(name, desc, path))
 			{
 				m_TabWidget->setEnabled(true);
 				break;

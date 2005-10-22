@@ -4,7 +4,7 @@
 # Target is an application:  editor.e
 
 FORMS += buildingEdit.ui \
-         projectNew.ui
+         projectNew.ui 
 HEADERS += bb_abstracttool.h \
            bb_building.h \
            bb_doc.h \
@@ -31,8 +31,6 @@ HEADERS += bb_abstracttool.h \
            bb_wall.h \
            bb_dwpoint.h \
            c2dvector.h \
-           bb_xdocgenerator.h \
-           bb_xgenerator.h \
            bb_fileobject.h \
            bb.h 
 SOURCES += bb_abstracttool.cpp \
@@ -62,8 +60,6 @@ SOURCES += bb_abstracttool.cpp \
            bb_wall.cpp \
            bb_dwpoint.cpp \
            c2dvector.cpp \
-           bb_xdocgenerator.cpp \
-           bb_xgenerator.cpp \
            bb_fileobject.cpp \
            bb.cpp 
 TARGET = editor.e

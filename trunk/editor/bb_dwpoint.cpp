@@ -31,3 +31,12 @@ bool BB_DWPoint::isFirst()
 {
 	return m_first;
 }
+
+
+/*!
+    \fn BB_DWPoint::getClassName()
+ */
+const QString BB_DWPoint::getClassName()
+{
+	return QString("BB_DWPoint");
+}

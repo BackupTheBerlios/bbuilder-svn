@@ -14,8 +14,8 @@
  ***************************************************************************/
 #include "bb_level.h"
 
-BB_Level::BB_Level()
-	: BB_FileObject(QDir("/"),QString("asd")) /// @todo
+BB_Level::BB_Level(const QDir& path, const QString &fileName, const QString &name)
+	: BB_FileObject(path,fileName,name)
 {
 }
 
@@ -25,3 +25,30 @@ BB_Level::~BB_Level()
 }
 
 
+
+
+/*!
+    \fn BB_Level::generateXElement(QTextStream &out, int depth)
+ */
+void BB_Level::generateXElement(QTextStream &out, int depth)
+{
+	out << BB::indent(depth) << "<bb_level>" << BB::escapedText(getFileName()) << "</bb_level>\n";
+}
+
+
+/*!
+    \fn BB_Level::write(QTextStream &out)
+ */
+bool BB_Level::write(QTextStream &out)
+{
+    /// @todo implement me
+}
+
+
+/*!
+    \fn BB_Level::getClassName()
+ */
+const QString BB_Level::getClassName()
+{
+	return QString("BB_Level");
+}
