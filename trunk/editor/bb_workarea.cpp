@@ -28,7 +28,7 @@ BB_WorkArea::BB_WorkArea(QWidget *parent)
 	m_WorkFrame->setFrameShadow(QFrame::Plain);
 	
 	QImage  *bg = new QImage();
-	bg->load("../img/002.png");
+	bg->load("../img/RettungsPlan.png");
  	m_WorkFrame->setPixmap(QPixmap(QPixmap::fromImage(*bg)));
 	m_WorkFrame->setBackgroundRole(QPalette::Base);
 	m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
@@ -53,7 +53,7 @@ void BB_WorkArea::zoom(double faktor)
 	
 	m_ZoomFaktor += faktor;
 	
-	if(m_ZoomFaktor > 2.0)
+	if(m_ZoomFaktor > 5.0)
 	{
 		m_ZoomFaktor = 2.0;
 	}

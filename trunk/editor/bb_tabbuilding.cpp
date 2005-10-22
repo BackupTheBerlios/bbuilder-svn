@@ -69,15 +69,17 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	toolZoom->setStatusTip("Zoom Werkzeug");
 	createToolButton(toolZoom,SLOT(slotZoomTool(QAction*)));
 	
-	QAction *toolPointNew = new QAction("Point",this);
+	QIcon knote("../img/toolPoint.png");
+// 	QAction *toolPointNew = new QAction("Point",this);
+	QAction *toolPointNew = new QAction(knote,"Point",this);
 	toolPointNew->setStatusTip("Point Werkzeug");
 	createToolButton(toolPointNew,SLOT(slotToolPointNew(QAction*)));
-	
-	QAction *toolLineNew = new QAction("Wand",this);
+
+	QAction *toolLineNew = new QAction(QIcon("../img/toolWall.png"),"Wand",this);
 	toolPointNew->setStatusTip("Line Werkzeug");
 	createToolButton(toolLineNew,SLOT(slotToolLineNew(QAction*)));
 	
-	QAction *toolMove = new QAction("Move",this);
+	QAction *toolMove = new QAction(QIcon("../img/toolMove.png"), "Move",this);
 	toolMove->setStatusTip("Move Werkzeug");
 	createToolButton(toolMove,SLOT(slotToolMove(QAction*)));
 	

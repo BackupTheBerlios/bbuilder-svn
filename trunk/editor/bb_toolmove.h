@@ -16,7 +16,8 @@
 #ifndef BB_TOOLMOVE_H
 #define BB_TOOLMOVE_H
 
-#include <bb_abstracttool.h>
+#include "bb_abstracttool.h"
+#include "bb_point.h"
 
 /**
 @author Alex Letkemann
@@ -34,6 +35,22 @@ public:
 
 protected:
     QVector<BB_DrawObject*> m_Selection;
+    /**
+    Punkt mit dem ausgeglichen wird
+    */
+    BB_Point* comparePoint;
+private:
+  /**
+  Funktion zum Ausgleichen von zwei Punkten<br>
+  Bei erstem klick(MausRAd) auf ein Punkt. wird deieser
+  in comparepoint gespeichert.<br>
+  Bei zweitem Klick werden die punkte verglichen und
+  enweder senkrecht oder waagerecht ausgeglichen.
+  @author Vaceslav Ustinov
+  @param point zeiger auf einen BB_Point
+  @date 22.10.2005
+  */
+  void bringToLine(BB_Point *point);
 };
 
 #endif

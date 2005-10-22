@@ -66,6 +66,10 @@ public:
         @date 20.10.2005
          */
         void deleteLines(QVector< BB_DrawObject * >* objects);
+        void setX(double value);
+        void setY(double value);
+        double getX(){return m_Pos.x();};
+        double getY(){return m_Pos.y();};
 
 
 private:

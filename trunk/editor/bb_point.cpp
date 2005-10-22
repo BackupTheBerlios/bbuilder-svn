@@ -32,7 +32,7 @@ BB_Point::BB_Point()
 BB_Point::BB_Point(C2dVector p)
 {
         m_Pos = p;
-        m_Radius = 10;
+        m_Radius = 7;
         m_Color.setNamedColor("Red");
         m_hitRange = 2;
 }
@@ -56,12 +56,25 @@ void BB_Point::moveBy(C2dVector vMove)
 void BB_Point::show(BB_Transformer& transformer, QPainter& painter) const
 {
         QPoint dest;
+        double breite = m_Radius / 3;
 
         transformer.logicalToScreen(dest, m_Pos);
 
         painter.setPen(m_Color);
         painter.setBrush(m_Color);
-        painter.drawEllipse(dest.x() - m_Radius, dest.y() - m_Radius, m_Radius*2, m_Radius*2);
+        //painter.drawEllipse(dest.x() - m_Radius, dest.y() - m_Radius, m_Radius*2, m_Radius*2);
+        painter.drawRect(dest.x() - m_Radius, dest.y() - m_Radius,
+                         m_Radius*2, breite);
+        painter.drawRect(dest.x() - m_Radius, dest.y() + m_Radius - breite,
+                         m_Radius*2, breite);
+        painter.drawRect(dest.x() - m_Radius, dest.y() - m_Radius + breite,
+                         breite, m_Radius * 2 - breite * 2);
+        painter.drawRect(dest.x() + m_Radius -breite, dest.y() - m_Radius + breite,
+                         breite, m_Radius * 2 - breite * 2);
+        painter.setBrush(QColor(0,200,0));
+        painter.setPen(QColor(0,200,0));
+        painter.drawRect(dest.x() - breite, dest.y() - breite,
+                         breite * 2, breite * 2);
 }
 
 
@@ -85,11 +98,18 @@ void BB_Point::setRadius(int r)
 
 bool BB_Point::isHit(C2dVector hit)
 {
+  //isHit von Kreis
+//         double abstand = m_Pos.getAbstand(hit);
+//         if(abstand <= (m_Radius + m_hitRange))
+//                 return true;
+//         return false;
 
-        double abstand = m_Pos.getAbstand(hit);
-        if(abstand <= (m_Radius + m_hitRange))
-                return true;
-        return false;
+  //isHit von Viereck
+  double abstandX = abs ((int) (hit.x() - m_Pos.x()));
+  double abstandY = abs ((int) (hit.y() - m_Pos.y()));
+  if (abstandX <= m_Radius && abstandY <= m_Radius)
+    return true;
+  return false;
 }
 
 const char * BB_Point::getClassName() const
@@ -157,4 +177,10 @@ void BB_Point::removeLine(BB_Line * line)
 void BB_Point::addLine(BB_Line * line)
 {
         m_Lines.insert(m_Lines.count(), line);
+}
+void BB_Point::setX(double value){
+  m_Pos.setX(value);
+}
+void BB_Point::setY(double value){
+  m_Pos.setY(value);
 }

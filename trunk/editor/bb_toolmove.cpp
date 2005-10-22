@@ -14,11 +14,14 @@
  ***************************************************************************/
 #include "bb_toolmove.h"
 #include <iostream.h>
-#include "bb_point.h"
+#include <math.h>
+
 
 BB_ToolMove::BB_ToolMove()
-                : BB_AbstractTool()
-{}
+        : BB_AbstractTool()
+{
+    comparePoint = NULL;
+}
 
 
 BB_ToolMove::~BB_ToolMove()
@@ -27,55 +30,92 @@ BB_ToolMove::~BB_ToolMove()
 
 void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
 {
-        if(objects != NULL && me != NULL && transformer != NULL) {
-                m_Selection.clear();
-                BB_DrawObject *object;
+    if(objects != NULL && me != NULL && transformer != NULL)
+    {
+        m_Selection.clear();
+        BB_DrawObject *object;
 
 
-                m_pScreen = me->pos();
-                transformer->screenToLogical(m_pLogic,m_pScreen);
-                m_LastLogicMouseClick = m_pLogic;
+        m_pScreen = me->pos();
+        transformer->screenToLogical(m_pLogic,m_pScreen);
+        m_LastLogicMouseClick = m_pLogic;
 
 
-                for(int i = 0; i < objects->count(); i++) {
-                        object = objects->at(i);
-                        if(object->isHit(m_pLogic)) {
-                                if (me->button () ==  Qt::RightButton) {
-                                        remove (objects, object);
-                                        ((BB_Point *)object)->deleteLines(objects);
-                                        delete object;
-                                        return;
-                                }
-                                m_Selection.append(object);
-                        }
+        for(int i = 0; i < objects->count(); i++)
+        {
+            object = objects->at(i);
+            if(object->isHit(m_pLogic))
+            {
+              //punkt loeschen
+              if (me->button () ==  Qt::RightButton)
+                {
+                    remove(objects, object);
+                    ((BB_Point *)object)->deleteLines(objects);
+                    delete object;
+                    return;
                 }
+                //Punkten ausrichten
+                if (me->button() == Qt::MidButton)
+                {
+                  bringToLine((BB_Point *)object);
+                }
+                m_Selection.append(object);
+            }
         }
+    }
 }
 
 void BB_ToolMove::move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
 {
 
-        if(objects != NULL && me != NULL && transformer != NULL) {
+    if(objects != NULL && me != NULL && transformer != NULL)
+    {
 
-                for(int i = 0; i < m_Selection.count(); i++) {
-                        C2dVector moveTmp;
-                        transformer->screenToLogical(m_pLogic,me->pos());
-                        moveTmp.setX(m_pLogic.x() - m_LastLogicMouseClick.x());
-                        moveTmp.setY(m_pLogic.y() - m_LastLogicMouseClick.y());
+        for(int i = 0; i < m_Selection.count(); i++)
+        {
+            C2dVector moveTmp;
+            transformer->screenToLogical(m_pLogic,me->pos());
+            moveTmp.setX(m_pLogic.x() - m_LastLogicMouseClick.x());
+            moveTmp.setY(m_pLogic.y() - m_LastLogicMouseClick.y());
 
-                        m_Selection.at(i)->moveBy(moveTmp);
-                }
-
-                transformer->screenToLogical(m_LastLogicMouseClick,me->pos());
+            m_Selection.at(i)->moveBy(moveTmp);
         }
+
+        transformer->screenToLogical(m_LastLogicMouseClick,me->pos());
+    }
+    comparePoint = NULL;
 }
 
 void BB_ToolMove::release(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
 {
-	/* Übergebene Varieblen, die nicht verwendet werden */	
-	me = NULL;
-	objects = NULL;
-	transformer = NULL;
+    /* Übergebene Varieblen, die nicht verwendet werden */
+    me = NULL;
+    objects = NULL;
+    transformer = NULL;
 }
 
 
+
+
+
+void BB_ToolMove::bringToLine(BB_Point *point)
+{
+  if(comparePoint!=NULL)
+  {
+    double x = point->getX() - comparePoint->getX();
+    double y = point->getY() - comparePoint->getY();
+    double winkel = atan((y / x));//radiant
+    winkel = winkel * 180.0  / M_PI; //gradient
+    winkel = abs ((int) winkel);
+    cout << "Winkel"<< winkel <<endl;
+    if (winkel <= 45)
+      point->setY(comparePoint->getY());
+    else
+      point->setX(comparePoint->getX());
+    comparePoint = NULL;
+//                       cout << "ausrichten"<<endl;
+  }else{
+    comparePoint = (BB_Point *) point;
+//                       cout << "setzen von bringToLinePoint"<<endl;
+  }
+}
