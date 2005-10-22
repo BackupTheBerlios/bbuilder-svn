@@ -53,10 +53,6 @@ void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB
 void BB_ToolMove::move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
 {
 	
-	/* Übergebene Varieblen, die nicht verwendet werden */	
-	me = NULL;
-	objects = NULL;
-	transformer = NULL;
 		
 	if(objects != NULL && me != NULL && transformer != NULL)
 	{

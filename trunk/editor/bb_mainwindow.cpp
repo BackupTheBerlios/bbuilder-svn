@@ -113,9 +113,9 @@ void BB_MainWindow::initMainWindow()
 	setWindowTitle(QString::fromUtf8("glBuildingBuilder - Editor"));
 	setStatusBar(m_StatusBar);
 	
-	BB_Tab *tabTerrain = new BB_TabTerrain(m_Doc->getTerrain());
-	BB_Tab *tabBuilding = new BB_TabBuilding(m_Doc->getBuildings());
-	BB_Tab *tabLevel = new BB_TabLevel();
+	BB_Tab *tabTerrain = new BB_TabTerrain(m_Doc);
+	BB_Tab *tabBuilding = new BB_TabBuilding(m_Doc);
+	BB_Tab *tabLevel = new BB_TabLevel(m_Doc);
 	
 	m_TabWidget = new QTabWidget();
 	m_TabWidget->addTab(tabTerrain,QString::fromUtf8("Gelände"));	//TODO

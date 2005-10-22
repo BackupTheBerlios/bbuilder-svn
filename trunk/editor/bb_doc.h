@@ -19,6 +19,8 @@
 #include <QVector>
 #include <QDir>
 
+#include "bb_fileobject.h"
+
 #include "bb_terrain.h"
 #include "bb_building.h"
 #include "bb_level.h"
@@ -26,8 +28,7 @@
 /**
 @author Alex Letkemann
 */
-class BB_Doc : public QObject {
-Q_OBJECT
+class BB_Doc : public BB_FileObject {
 public:
     BB_Doc();
 
@@ -37,9 +38,10 @@ public:
 	virtual QVector<BB_Building*>* getBuildings();
 	virtual QVector<BB_Level*>* getLevels();
 	virtual bool open(QString &fileName);
-	virtual bool save();
     virtual bool close();
 	virtual bool createNew(QDir &path);
+    virtual bool write(QIODevice*)
+;
 
 protected:
 	

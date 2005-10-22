@@ -14,7 +14,7 @@
  ***************************************************************************/
 #include "bb_tabterrain.h"
 
-BB_TabTerrain::BB_TabTerrain(BB_Terrain* terrain, QWidget* parent, Qt::WFlags f): BB_Tab(true, false, parent, f)
+BB_TabTerrain::BB_TabTerrain(BB_Doc* doc, QWidget* parent, Qt::WFlags f): BB_Tab(doc, true, false, parent, f)
 {
 }
 

@@ -17,16 +17,20 @@
 #include <QHBoxLayout>
 
 
-BB_Tab::BB_Tab(QWidget* parent, Qt::WFlags f): QWidget(parent, f)
+BB_Tab::BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): QWidget(parent, f)
 {
+	setDoc(doc);
+	
 	initTab();
     initLayout(true, true);
 	
 	
 }
 
-BB_Tab::BB_Tab(bool leftFrame, bool rightFrame,QWidget* parent, Qt::WFlags f): QWidget(parent, f)
+BB_Tab::BB_Tab(BB_Doc* doc, bool leftFrame, bool rightFrame,QWidget* parent, Qt::WFlags f): QWidget(parent, f)
 {
+	setDoc(doc);
+	
 	initTab();
     initLayout(leftFrame, rightFrame);
 }
@@ -34,6 +38,8 @@ BB_Tab::BB_Tab(bool leftFrame, bool rightFrame,QWidget* parent, Qt::WFlags f): Q
 
 BB_Tab::~BB_Tab()
 {
+	m_Doc = NULL;
+	
 	delete m_ToolButtonActions;
 	delete m_Center;
 	if(m_LeftFrame != NULL)
@@ -156,7 +162,7 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
  * Erzeugt einen QToolButton und plaziert diesen im linken Frame.
  * Der QToolButton übernimmt die Eigenschaften wie Text, Icon usw. von action und wird 'connected' zu method.
  * @param action Die QAction, aus der der QToolButton erzeugt werden soll.
- * @param method Slot, an der die QAction 'connected' werden soll.<BR>Achtung: Slot muss mit dem Qt-Makro SLOT() erzeugt werden.
+ * @param method Slot, an der die QAction 'connected' werden soll.<br /><b>Achtung: Slot muss mit dem Qt-Makro SLOT() erzeugt werden.</b>
  * @return Gibt false im Fehlerfall zurück, sonst true
  * @author Alex Letkemann
  * @date 21.08.2005
@@ -223,7 +229,7 @@ bool BB_Tab::addWidgetRight(QWidget *widget, int stretchFaktor)
 
 
 /**
- * Setzt alle Actions der Toolbuttons außer <i>action</i> auf unchecked.
+ * Setzt alle Actions der Toolbuttons außer 'action' auf unchecked.
  * @param action Aktion, welche nicht auf unchecked gesetzt werden soll. 
  */
 void BB_Tab::unsetToolButton(QAction *action)
@@ -232,5 +238,24 @@ void BB_Tab::unsetToolButton(QAction *action)
 	{
 		if(m_ToolButtonActions->at(i) != action)
 			((QAction*)m_ToolButtonActions->at(i))->setChecked(false);
+	}
+}
+
+
+/**
+ * Prüft und setzt das Doc, welches verwendet wird.
+ * @param doc Doc, welches verwendet wird.
+ * @author Alex Letkemann
+ * @date 22.10.2005
+ */
+void BB_Tab::setDoc(BB_Doc* doc)
+{
+	if(doc != NULL)
+	{
+		m_Doc = doc;
+	}
+	else
+	{
+		cout << "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" << endl;
 	}
 }

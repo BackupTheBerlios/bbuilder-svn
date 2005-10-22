@@ -26,7 +26,7 @@ class BB_TabTerrain : public BB_Tab
 {
 	Q_OBJECT
 public:
-    BB_TabTerrain(BB_Terrain* terrain, QWidget* parent = 0, Qt::WFlags f = 0);
+    BB_TabTerrain(BB_Doc* doc, QWidget* parent = 0, Qt::WFlags f = 0);
 
     ~BB_TabTerrain();
 

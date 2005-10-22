@@ -17,10 +17,10 @@
 #define BB_TAB_H
 
 #include <QtGui>
-#include "bb_workarea.h"
-
 #include <iostream>
-#include <iomanip>
+
+#include "bb_doc.h"
+#include "bb_workarea.h"
 
 using namespace std;
 
@@ -31,8 +31,8 @@ class BB_Tab : public QWidget
 {
 Q_OBJECT
 public:
-	BB_Tab(QWidget* parent = 0, Qt::WFlags f = 0);
-    BB_Tab(bool leftFrame, bool rightFrame, QWidget* parent = 0, Qt::WFlags f = 0);
+	BB_Tab(BB_Doc* doc, QWidget* parent = 0, Qt::WFlags f = 0);
+	BB_Tab(BB_Doc* doc, bool leftFrame, bool rightFrame, QWidget* parent = 0, Qt::WFlags f = 0);
 
     ~BB_Tab();
     void initTab();
@@ -41,12 +41,14 @@ public:
 	
 private:	
 	void initLayout(bool leftFrame, bool rightFrame);
+    void setDoc(BB_Doc* doc);
 	
 	
 protected:	
     bool addWidgetLeft(QWidget *widget, int stretchFaktor = 0);
 	bool addWidgetRight(QWidget *widget, int stretchFaktor = 0);
-
+	
+	BB_Doc * m_Doc;
 	BB_WorkArea *m_Center;
 	QFrame *m_LeftFrame;
     QFrame *m_RightFrame;

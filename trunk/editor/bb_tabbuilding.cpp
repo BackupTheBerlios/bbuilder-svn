@@ -20,12 +20,12 @@
 
 using namespace std;
 
-BB_TabBuilding::BB_TabBuilding(QVector<BB_Building*>* buildings, QWidget* parent, Qt::WFlags f)
-	: BB_Tab(true, true, parent, f)
+BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
+	: BB_Tab(doc, true, true, parent, f)
 {
 
-	if(buildings != NULL)
-		m_Buildings = buildings;
+	if(m_Doc->getBuildings() != NULL)
+		m_Buildings = m_Doc->getBuildings();
 	else
 	{
 		cout << "BB_TabBuilding::BB_TabBuilding(): Ungültiger Vector (NULL)" << endl;

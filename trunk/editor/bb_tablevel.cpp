@@ -14,8 +14,8 @@
  ***************************************************************************/
 #include "bb_tablevel.h"
 
-BB_TabLevel::BB_TabLevel(QWidget* parent, Qt::WFlags f)
- : BB_Tab(parent, f)
+BB_TabLevel::BB_TabLevel(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
+ : BB_Tab(doc, parent, f)
 {
 		
 	QGroupBox *gB_Buildings = new QGroupBox();

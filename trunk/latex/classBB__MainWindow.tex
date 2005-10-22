@@ -8,6 +8,8 @@
 {\bf BB\_\-Main\-Window} (QWidget $\ast$parent=0, Qt::WFlags flags=0)
 \item 
 {\bf $\sim$BB\_\-Main\-Window} ()
+\item 
+void {\bf init\-Actions} ()
 \end{CompactItemize}
 \subsection*{Protected Member Functions}
 \begin{CompactItemize}
@@ -35,12 +37,27 @@ bool {\bf m\_\-Keys} [256]\label{classBB__MainWindow_p5}
 \item 
 {\bf BB\_\-Doc} $\ast$ {\bf m\_\-Doc}\label{classBB__MainWindow_p6}
 
+\item 
+QMenu $\ast$ {\bf m\_\-Menu\-Project}\label{classBB__MainWindow_p7}
+
+\item 
+{\bf BB\_\-Config} {\bf m\_\-Config}\label{classBB__MainWindow_p8}
+
+\item 
+QAction $\ast$ {\bf m\_\-a\-Project\-Close}\label{classBB__MainWindow_p9}
+
+\item 
+QAction $\ast$ {\bf m\_\-a\-Project\-New}\label{classBB__MainWindow_p10}
+
+\item 
+QAction $\ast$ {\bf m\_\-a\-Project\-Open}\label{classBB__MainWindow_p11}
+
 \end{CompactItemize}
 
 
 \subsection{Detailed Description}
 \begin{Desc}
-\item[Author:]Alex Letkemann \end{Desc}
+\item[Author:]Alex Letkemann\end{Desc}
 
 
 
@@ -55,18 +72,27 @@ bool {\bf m\_\-Keys} [256]\label{classBB__MainWindow_p5}
 \item[See also:]QMain\-Window\end{Desc}
 \index{BB_MainWindow@{BB\_\-Main\-Window}!~BB_MainWindow@{$\sim$BB\_\-MainWindow}}
 \index{~BB_MainWindow@{$\sim$BB\_\-MainWindow}!BB_MainWindow@{BB\_\-Main\-Window}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}BB\_\-Main\-Window::$\sim${\bf BB\_\-Main\-Window} ()}\label{classBB__MainWindow_a1}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}BB\_\-Main\-Window::$\sim$BB\_\-Main\-Window ()}\label{classBB__MainWindow_a1}
 
 
 Destrucktor
 
 \subsection{Member Function Documentation}
+\index{BB_MainWindow@{BB\_\-Main\-Window}!initActions@{initActions}}
+\index{initActions@{initActions}!BB_MainWindow@{BB\_\-Main\-Window}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BB\_\-Main\-Window::init\-Actions ()}\label{classBB__MainWindow_a2}
+
+
+Initialisiert die Aktionen des Haupfensters \begin{Desc}
+\item[Author:]Alex Letkemann \end{Desc}
+\begin{Desc}
+\item[Date:]07.09.2005\end{Desc}
 \index{BB_MainWindow@{BB\_\-Main\-Window}!keyPressEvent@{keyPressEvent}}
 \index{keyPressEvent@{keyPressEvent}!BB_MainWindow@{BB\_\-Main\-Window}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BB\_\-Main\-Window::key\-Press\-Event (QKey\-Event $\ast$ {\em e})\hspace{0.3cm}{\tt  [protected, virtual]}}\label{classBB__MainWindow_b0}
 
 
-Key\-Press\-Event setzt den Status einer Taste auf true, falls diese gedr\~{A}188ckt wird 
+Key\-Press\-Event setzt den Status einer Taste auf true, falls diese gedr\~{A}188ckt wird
 
 \subsection{Member Data Documentation}
 \index{BB_MainWindow@{BB\_\-Main\-Window}!m_MainMenuBar@{m\_\-MainMenuBar}}

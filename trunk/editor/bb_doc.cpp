@@ -20,10 +20,14 @@
 using namespace std;
 
 BB_Doc::BB_Doc()
-	: QObject()
+		// Bei der Initialisierung hat das Projekt noch keinen Path und keinen Dateiname,
+		// deswegen wird ein leerer Path und ein leerer Dateiname übergeben.
+		// Es werden temporäre Daten von BB_FileObject erzeugt.
+		// Die echten Daten werden mit open() oder createNew() erzeugt.
+	:	BB_FileObject(QDir(),QString(),QString("bb_doc"))
 {
 	m_Terrain = NULL;
-	m_ProjectPath = NULL;
+
 }
 
 
@@ -57,10 +61,14 @@ BB_Terrain* BB_Doc::getTerrain()
 
 /**
  * Löscht den Inhalt des Dokumentes
+ * @return Liefert 'false' im Fehlerfall zurück, sonst 'true'.
+ * @author Alex Letkemann
+ * @date 22.10.2005
  */
 bool BB_Doc::clear()
 {
 
+	/* Terrain löschen */
 	if(m_Terrain != NULL)
 	{
 		delete m_Terrain;
@@ -69,24 +77,32 @@ bool BB_Doc::clear()
 	
 	BB_Object* object;
 	
+	/* Alle Gebäude löschen */
 	for(int i = 0; i < m_Buildings.count(); i++)
 	{
 		object = m_Buildings.at(i);
 		m_Buildings.remove(i);
-		
-		delete object;
-		object = NULL;
+		if(object != NULL)
+		{
+			delete object;
+			object = NULL;
+		}
 	}
+	m_Buildings.clear();
 	
 	
+	/* Alle Etagen löschen */
 	for(int i = 0; i < m_Levels.count(); i++)
 	{
 		object = m_Levels.at(i);
 		m_Levels.remove(i);
-		delete object;
-		object = NULL;
-		
+		if(object != NULL)
+		{
+			delete object;
+			object = NULL;
+		}
 	}
+	m_Levels.clear();
 	
 	return true;
 }
@@ -116,20 +132,9 @@ bool BB_Doc::open(QString &fileName)
 		return false;
 	}
 	
-	cout << "m_ProjectPath: " << m_ProjectPath.path().toStdString() << endl;
-	cout << "m_ProjectFile: " << m_ProjectFile.toStdString() << endl;
+// 	cout << "m_ProjectPath: " << m_ProjectPath.path().toStdString() << endl;
+// 	cout << "m_ProjectFile: " << m_ProjectFile.toStdString() << endl;
 	
-	return true;
-}
-
-
-/*!
-    \fn BB_Doc::save()
- */
-bool BB_Doc::save()
-{
-    /// @todo implement me
-
 	return true;
 }
 
@@ -189,5 +194,17 @@ bool BB_Doc::createNew(QDir &path)
 	}
 	
 	file.close();
+	return true;
+}
+
+
+/**
+ * 
+ */
+bool BB_Doc::write(QIODevice*)
+
+{
+    /// @todo implement me
+
 	return true;
 }

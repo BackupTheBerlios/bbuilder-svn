@@ -1,118 +1,180 @@
 <?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.4">
   <compounddef id="bb__mainwindow_8h" kind="file">
     <compoundname>bb_mainwindow.h</compoundname>
     <includes local="no">qmainwindow.h</includes>
     <includes local="no">QtGui</includes>
     <includes refid="bb__doc_8h" local="yes">bb_doc.h</includes>
+    <includes refid="bb__config_8h" local="yes">bb_config.h</includes>
     <includedby refid="bb__mainwindow_8cpp" local="yes">editor/bb_mainwindow.cpp</includedby>
     <includedby refid="bb__workframe_8cpp" local="yes">editor/bb_workframe.cpp</includedby>
     <includedby refid="editor_2main_8cpp" local="yes">editor/main.cpp</includedby>
+    <includedby refid="moc__bb__mainwindow_8cpp" local="yes">editor/moc_bb_mainwindow.cpp</includedby>
     <incdepgraph>
-      <node id="218">
-        <label>bb_level.h</label>
-        <link refid="bb__level_8h-source"/>
-        <childnode refid="215" relation="include">
-        </childnode>
-      </node>
-      <node id="224">
-        <label>bb_transformer.h</label>
-        <link refid="bb__transformer_8h-source"/>
-        <childnode refid="221" relation="include">
-        </childnode>
-      </node>
-      <node id="214">
-        <label>bb_terrain.h</label>
-        <link refid="bb__terrain_8h-source"/>
-        <childnode refid="215" relation="include">
-        </childnode>
-      </node>
-      <node id="209">
-        <label>editor/bb_mainwindow.h</label>
-        <link refid="bb_mainwindow.h"/>
-        <childnode refid="210" relation="include">
-        </childnode>
-        <childnode refid="211" relation="include">
-        </childnode>
-        <childnode refid="212" relation="include">
-        </childnode>
-      </node>
-      <node id="212">
-        <label>bb_doc.h</label>
-        <link refid="bb__doc_8h-source"/>
-        <childnode refid="213" relation="include">
-        </childnode>
-        <childnode refid="214" relation="include">
-        </childnode>
-        <childnode refid="217" relation="include">
-        </childnode>
-        <childnode refid="218" relation="include">
-        </childnode>
-      </node>
-      <node id="221">
-        <label>QPoint</label>
-      </node>
-      <node id="222">
-        <label>QPainter</label>
-      </node>
-      <node id="217">
-        <label>bb_building.h</label>
-        <link refid="bb__building_8h-source"/>
-        <childnode refid="213" relation="include">
-        </childnode>
-        <childnode refid="211" relation="include">
-        </childnode>
-        <childnode refid="215" relation="include">
-        </childnode>
-        <childnode refid="218" relation="include">
-        </childnode>
-        <childnode refid="219" relation="include">
-        </childnode>
-        <childnode refid="220" relation="include">
-        </childnode>
-      </node>
-      <node id="215">
-        <label>bb_object.h</label>
-        <link refid="bb__object_8h-source"/>
-        <childnode refid="216" relation="include">
-        </childnode>
-      </node>
-      <node id="216">
-        <label>QString</label>
-      </node>
-      <node id="223">
-        <label>QColor</label>
-      </node>
-      <node id="220">
+      <node id="468">
         <label>bb_drawobject.h</label>
         <link refid="bb__drawobject_8h-source"/>
-        <childnode refid="221" relation="include">
+        <childnode refid="469" relation="include">
         </childnode>
-        <childnode refid="222" relation="include">
+        <childnode refid="470" relation="include">
         </childnode>
-        <childnode refid="223" relation="include">
+        <childnode refid="471" relation="include">
         </childnode>
-        <childnode refid="215" relation="include">
+        <childnode refid="459" relation="include">
         </childnode>
-        <childnode refid="224" relation="include">
+        <childnode refid="472" relation="include">
         </childnode>
       </node>
-      <node id="210">
-        <label>qmainwindow.h</label>
+      <node id="476">
+        <label>QtXml</label>
       </node>
-      <node id="211">
-        <label>QtGui</label>
+      <node id="469">
+        <label>QPoint</label>
       </node>
-      <node id="219">
+      <node id="459">
+        <label>bb_object.h</label>
+        <link refid="bb__object_8h-source"/>
+        <childnode refid="460" relation="include">
+        </childnode>
+        <childnode refid="461" relation="include">
+        </childnode>
+      </node>
+      <node id="455">
+        <label>bb_doc.h</label>
+        <link refid="bb__doc_8h-source"/>
+        <childnode refid="456" relation="include">
+        </childnode>
+        <childnode refid="457" relation="include">
+        </childnode>
+        <childnode refid="458" relation="include">
+        </childnode>
+        <childnode refid="463" relation="include">
+        </childnode>
+        <childnode refid="465" relation="include">
+        </childnode>
+        <childnode refid="466" relation="include">
+        </childnode>
+      </node>
+      <node id="470">
+        <label>QPainter</label>
+      </node>
+      <node id="465">
+        <label>bb_building.h</label>
+        <link refid="bb__building_8h-source"/>
+        <childnode refid="456" relation="include">
+        </childnode>
+        <childnode refid="454" relation="include">
+        </childnode>
+        <childnode refid="458" relation="include">
+        </childnode>
+        <childnode refid="466" relation="include">
+        </childnode>
+        <childnode refid="467" relation="include">
+        </childnode>
+        <childnode refid="468" relation="include">
+        </childnode>
+      </node>
+      <node id="473">
+        <label>c2dvector.h</label>
+        <link refid="c2dvector_8h-source"/>
+        <childnode refid="474" relation="include">
+        </childnode>
+      </node>
+      <node id="466">
+        <label>bb_level.h</label>
+        <link refid="bb__level_8h-source"/>
+        <childnode refid="458" relation="include">
+        </childnode>
+      </node>
+      <node id="461">
+        <label>bb.h</label>
+        <link refid="bb_8h-source"/>
+        <childnode refid="460" relation="include">
+        </childnode>
+      </node>
+      <node id="462">
+        <label>QIODevice</label>
+      </node>
+      <node id="472">
+        <label>bb_transformer.h</label>
+        <link refid="bb__transformer_8h-source"/>
+        <childnode refid="469" relation="include">
+        </childnode>
+        <childnode refid="473" relation="include">
+        </childnode>
+      </node>
+      <node id="452">
+        <label>editor/bb_mainwindow.h</label>
+        <link refid="bb_mainwindow.h"/>
+        <childnode refid="453" relation="include">
+        </childnode>
+        <childnode refid="454" relation="include">
+        </childnode>
+        <childnode refid="455" relation="include">
+        </childnode>
+        <childnode refid="475" relation="include">
+        </childnode>
+      </node>
+      <node id="467">
         <label>bb_point.h</label>
         <link refid="bb__point_8h-source"/>
-        <childnode refid="220" relation="include">
+        <childnode refid="468" relation="include">
+        </childnode>
+        <childnode refid="473" relation="include">
         </childnode>
       </node>
-      <node id="213">
+      <node id="458">
+        <label>bb_fileobject.h</label>
+        <link refid="bb__fileobject_8h-source"/>
+        <childnode refid="459" relation="include">
+        </childnode>
+        <childnode refid="462" relation="include">
+        </childnode>
+        <childnode refid="457" relation="include">
+        </childnode>
+      </node>
+      <node id="460">
+        <label>QString</label>
+      </node>
+      <node id="471">
+        <label>QColor</label>
+      </node>
+      <node id="474">
+        <label>math.h</label>
+      </node>
+      <node id="475">
+        <label>bb_config.h</label>
+        <link refid="bb__config_8h-source"/>
+        <childnode refid="454" relation="include">
+        </childnode>
+        <childnode refid="476" relation="include">
+        </childnode>
+      </node>
+      <node id="453">
+        <label>qmainwindow.h</label>
+      </node>
+      <node id="457">
+        <label>QDir</label>
+      </node>
+      <node id="464">
+        <label>QTextStream</label>
+      </node>
+      <node id="463">
+        <label>bb_terrain.h</label>
+        <link refid="bb__terrain_8h-source"/>
+        <childnode refid="458" relation="include">
+        </childnode>
+        <childnode refid="464" relation="include">
+        </childnode>
+      </node>
+      <node id="454">
+        <label>QtGui</label>
+      </node>
+      <node id="456">
         <label>QVector</label>
       </node>
     </incdepgraph>
+    <innerclass refid="classBB__MainWindow">BB_MainWindow</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -140,8 +202,8 @@
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;QtGui&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;bb_doc.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/>TESTEST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;bb_config.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
 <codeline lineno="29" refid="classBB__MainWindow" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBB__MainWindow" kindref="compound">BB_MainWindow</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>QMainWindow</highlight></codeline>
 <codeline lineno="30"><highlight class="normal">{</highlight></codeline>
@@ -151,11 +213,11 @@
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBB__MainWindow_1a0" kindref="member">BB_MainWindow</ref>(QWidget*<sp/>parent<sp/>=<sp/>0,<sp/>Qt::WFlags<sp/>flags<sp/>=<sp/>0);</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBB__MainWindow_1a1" kindref="member">~BB_MainWindow</ref>();</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initMenus();</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initStatusBar();</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initActions();</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classBB__MainWindow_1a2" kindref="member">initActions</ref>();</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initMenus();</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initStatusBar();</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initMainWindow();</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initDoc();</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
@@ -172,14 +234,24 @@
 <codeline lineno="66" refid="classBB__MainWindow_1p4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>QTabWidget<sp/>*<ref refid="classBB__MainWindow_1p4" kindref="member">m_TabWidget</ref>;</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_Keys[256];</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBB__Doc" kindref="compound">BB_Doc</ref>*<sp/>m_Doc;</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classBB__MainWindow_1b0" kindref="member">keyPressEvent</ref><sp/>(<sp/>QKeyEvent<sp/>*<sp/>e<sp/>);</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>keyReleaseEvent<sp/>(<sp/>QKeyEvent<sp/>*<sp/>e<sp/>);</highlight></codeline>
-<codeline lineno="73"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>QMenu*<sp/>m_MenuProject;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classBB__Config" kindref="compound">BB_Config</ref><sp/>m_Config;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>QAction*<sp/>m_aProjectClose;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>QAction*<sp/>m_aProjectNew;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>QAction*<sp/>m_aProjectOpen;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classBB__MainWindow_1b0" kindref="member">keyPressEvent</ref><sp/>(<sp/>QKeyEvent<sp/>*<sp/>e<sp/>);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>keyReleaseEvent<sp/>(<sp/>QKeyEvent<sp/>*<sp/>e<sp/>);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>slots:</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>slotProjectNew();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>slotProjectOpen();</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>slotProjectClose();</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
-    <location file="/home/high/develop/bbuilder/editor/bb_mainwindow.h"/>
+    <location file="/home/alex/Studium/SE.Projekt/glbb/editor/bb_mainwindow.h"/>
   </compounddef>
 </doxygen>

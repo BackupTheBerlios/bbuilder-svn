@@ -31,7 +31,7 @@ class BB_TabBuilding : public BB_Tab
 {
 	Q_OBJECT
 public:
-    BB_TabBuilding(QVector<BB_Building*>* buildings, QWidget* parent = 0, Qt::WFlags f = 0);
+    BB_TabBuilding(BB_Doc * doc, QWidget* parent = 0, Qt::WFlags f = 0);
 
     ~BB_TabBuilding();
     void updateBuildingList();

@@ -26,7 +26,7 @@ class BB_TabLevel : public BB_Tab
 {
 Q_OBJECT
 public:
-	BB_TabLevel(QWidget* parent = 0, Qt::WFlags f = 0);
+	BB_TabLevel(BB_Doc * doc, QWidget* parent = 0, Qt::WFlags f = 0);
 
     ~BB_TabLevel();
     
