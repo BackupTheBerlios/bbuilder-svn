@@ -102,7 +102,6 @@ void BB_DlgProjectNew::slotNameChanged(const QString & text)
 	m_ProjectName = text;
 	m_ProjectDir = text.toLower().remove(QRegExp("\\W"));	
 	checkDir();
-	cout << "test" << endl;
 }
 
 

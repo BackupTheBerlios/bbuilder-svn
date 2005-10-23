@@ -52,6 +52,7 @@ private:
     int m_ObjectNr;
     QString m_Description;
     QString m_Name;
+	bool m_AutoName;
 	
 	
 	

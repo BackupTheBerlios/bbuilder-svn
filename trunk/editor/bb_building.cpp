@@ -27,6 +27,7 @@ BB_Building::BB_Building(const QDir& path, const QString &fileName, const QStrin
 	: BB_FileObject(path,fileName,name)
 {
 	m_DrawObject = new QVector<BB_DrawObject*>();
+
 }
 
 
@@ -147,7 +148,7 @@ bool BB_Building::write(QTextStream &out)
 	}
 	else
 	{
-		out << "<walls />";
+		out << BB::indent(depth) << "<walls />\n";
 	}
 	
 	out << "</bb_building>\n";
@@ -171,3 +172,6 @@ const QString BB_Building::getClassName()
 {
 	return QString("BB_Building");
 }
+
+
+

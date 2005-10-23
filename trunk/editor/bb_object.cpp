@@ -44,10 +44,12 @@ BB_Object::BB_Object(QString name)
 	if(name != NULL && name != "")
 	{
 		setName(name);
+		m_AutoName = false;
 	}
 	else
 	{
 		createName();
+		m_AutoName = true;
 	}
 	
 	
@@ -80,17 +82,23 @@ QString BB_Object::getName() const
 
 
 /**
- * Setzt den Namen des Objektes
+ * Setzt den Namen des Objektes. Falls der Name leer ist, wird ein Name aus der Objektnummer erzeugt.
  * @param name Name des Objektes 
+ * @author Alex Letkemann
+ * @date 23.10.2005
  */
 void BB_Object::setName(const QString& name)
 {
 	if(name != NULL)
+	{
 		m_Name = name;
+		m_AutoName = false;
+	}
 	else
 	{
 		cout << "Object_" << m_ObjectNr << ": " << "Ungültiger Name" << endl;
 		createName();
+		m_AutoName = true;
 	}
 		
 }
@@ -106,8 +114,8 @@ QString BB_Object::getDescription() const
 
 
 /**
- * Setzt die Beschreibung des Objektes
- * @param desc Beschreibung des Objektes 
+ * Setzt die Beschreibung des Objektes.
+ * @param desc Beschreibung des Objektes. 
  */
 void BB_Object::setDescription(const QString& desc)
 {
@@ -119,7 +127,9 @@ void BB_Object::setDescription(const QString& desc)
 
 
 /**
- * Erzeugt den Objektnamen aus der Objektnummer
+ * Erzeugt den Objektnamen aus der Objektnummer (<i>'Object_' + Onjektnummer</i>).
+ * @author Alex Letkemann
+ * @date 20.09.2005
  */
 void BB_Object::createName()
 {
@@ -127,14 +137,17 @@ void BB_Object::createName()
 }
 
 
-/*!
-    \fn BB_Object::generateXElement(QTextStream &stream, int depth)
-				@author Alex Letkemann
-				@date 22.10.2005
+/**
+ * Erzeugt die XML-Elemente &ltname&gt und &ltdescription&gt des Objektes, falls diese gesetzt sind.
+ * @author Alex Letkemann
+ * @date 22.10.2005
  */
 void BB_Object::generateXElement(QTextStream &out, int depth)
 {
-	out << BB::indent(depth) << "<name>" << BB::escapedText(getName()) << "</name>\n";
+	if(m_AutoName == false)
+	{
+		out << BB::indent(depth) << "<name>" << BB::escapedText(getName()) << "</name>\n";
+	}
 	
 	if(!getDescription().isEmpty())
 	{

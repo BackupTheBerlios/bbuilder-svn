@@ -38,10 +38,12 @@ public:
 	virtual bool write(QTextStream &out);
     virtual void generateXElement(QTextStream &out, int depth);
     virtual const QString getClassName();
+    
 
 protected:
     QVector<BB_Level>* m_Levels;
     QVector<BB_DrawObject*>* m_DrawObject;
+    
 };
 
 #endif

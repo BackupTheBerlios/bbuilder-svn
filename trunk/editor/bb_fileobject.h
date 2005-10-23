@@ -17,6 +17,7 @@
 #include <QIODevice>
 #include <QDir>
 #include <QTextStream>
+#include <QListWidgetItem>
 
 /**
 @author Alex Letkemann
@@ -37,8 +38,8 @@ public:
 
 	void setFilePath(const QDir& theValue);
     virtual const QString getClassName();
-	
-	
+	virtual QListWidgetItem* getListWidgetItem();
+    virtual void setName(const QString& name);
 	
 	
 
@@ -51,6 +52,8 @@ protected:
 	
 	/** Pfad zur Datei im Dateisystem */
     QDir m_FilePath;
+	
+	QListWidgetItem* m_ListWidgetItem;
 protected:
 	virtual bool write(QTextStream &out)  = 0;
 

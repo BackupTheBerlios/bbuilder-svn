@@ -134,6 +134,7 @@ void BB_TabBuilding::slotBuildingDelete()
 	}
 	
 	updateBuildingList();
+	m_Center->setEnabled(false);
 }
 
 
@@ -147,9 +148,9 @@ void BB_TabBuilding::slotBuildingNew()
 // 	if(building->keyBoardEdit(this) == QDialog::Accepted)
 // 	{
 // 		m_BuildingsListWidget->addItem(building->getName());
-// 		
+	// 		
 // 		cout << "Gebäude hinzugefügt (" << building << ")" << endl;
-// 		
+	// 		
 // 		m_Buildings->append(building);
 // 	}
 // 	else
@@ -158,17 +159,21 @@ void BB_TabBuilding::slotBuildingNew()
 // 		building = NULL;
 // 		cout << "Gelöscht" << endl;
 // 	}
-// 	
+	// 	
 // 	m_BuildingsListWidget->setCurrentRow (m_Buildings->count()-1);
-// 
-// 	
+	// 
+	// 	
 // 	updateBuildingList();
 	
 	
 	if(m_Doc->newBuilding(this) != NULL)
 	{
+		m_BuildingsListWidget->setCurrentRow (m_BuildingsListWidget->count()-1);
 		updateBuildingList();
 	}
+	
+	
+	cout << "BuildingNew" << endl;
 }
 
 
@@ -226,6 +231,7 @@ void BB_TabBuilding::slotBuildingChanged(int index)
 	if(index >= 0)
 	{
 		m_Center->setDrawObjects(m_Buildings->at(index)->getDrawObjects());
+		m_Center->setEnabled(true);
 	}
 }
 
@@ -233,7 +239,7 @@ void BB_TabBuilding::slotBuildingChanged(int index)
 /*!
     \fn BB_TabBuilding::slotToolPointNew(QAction* action)
  */
-void BB_TabBuilding::slotToolPointNew(QAction* action)
+				void BB_TabBuilding::slotToolPointNew(QAction* action)
 {
 	unsetToolButton(action);
 	action->setChecked(true);
@@ -245,7 +251,7 @@ void BB_TabBuilding::slotToolPointNew(QAction* action)
 /*!
     \fn BB_TabBuilding::slotToolMove(QAction* action)
  */
-void BB_TabBuilding::slotToolMove(QAction* action)
+				void BB_TabBuilding::slotToolMove(QAction* action)
 {
 	unsetToolButton(action);
 	action->setChecked(true);
@@ -257,7 +263,7 @@ void BB_TabBuilding::slotToolMove(QAction* action)
 /*!
     \fn BB_TabBuilding::void slotToolLineNew(QAction* action)
  */
-void BB_TabBuilding::slotToolLineNew(QAction* action)
+				void BB_TabBuilding::slotToolLineNew(QAction* action)
 {
 	unsetToolButton(action);
 	action->setChecked(true);

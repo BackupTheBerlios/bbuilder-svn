@@ -40,6 +40,8 @@ BB_FileObject::BB_FileObject(const QDir &path, const QString &filename, const QS
 		m_FilePath = QDir::temp();
 		m_FileName = getName() + ".tmp";
 	}
+	
+	m_ListWidgetItem = NULL;
 }
 
 
@@ -109,10 +111,48 @@ void BB_FileObject::setFilePath(const QDir& theValue)
 }
 
 
-/*!
-    \fn BB_FileObject::getClassName()
+/**
+ * Gibt den Namen der Klasse zurück.
+ * @return Klassenname
  */
 const QString BB_FileObject::getClassName()
 {
 	return QString("BB_FileObject");
+}
+
+
+/**
+ * Gibt ein QListWidgetItem zurück, welches in einer QListWidget verwendet werden kann.
+ * Der Text des QListWidgetItems entspricht dem Namen des Objektes.
+ * Falls das QListWidgetItem noch nicht erzeugt wurde, wird es hier erzeugt und zurückgegeben.
+ * @author Alex Letkemann
+ * @date 23.10.2005
+ */
+QListWidgetItem* BB_FileObject::getListWidgetItem()
+{
+	if(m_ListWidgetItem == NULL)
+	{
+		m_ListWidgetItem = new QListWidgetItem(getName());
+	}
+	
+	return m_ListWidgetItem;
+}
+
+
+
+/**
+ * Überladene Funktion des BB_Object.
+ * Ruft die Funktion des BB_Object auf und ersetzt den Text im QListWidgetItem 
+ * (falls dieses Initialisiert ist) durch den neuen Namen.
+ * @param name Neuer Objektname
+ * @author Alex Letkemann
+ * @date 23.10.2005
+ */
+void BB_FileObject::setName(const QString& name)
+{
+	BB_Object::setName(name);
+	if(m_ListWidgetItem != NULL)
+	{
+		m_ListWidgetItem->setText(getName());
+	}
 }

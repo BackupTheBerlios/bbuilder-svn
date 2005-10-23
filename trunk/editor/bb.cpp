@@ -12,11 +12,13 @@
 #include "bb.h"
 
 
+/** Konstrucktor */
 BB::BB()
 {
 }
 
 
+/** Destrucktor */
 BB::~BB()
 {
 }
@@ -70,6 +72,13 @@ QString BB::escapedText(const QString &str)
 	result.replace("&", "&amp;");
 	result.replace("<", "&lt;");
 	result.replace(">", "&gt;");
+	result.replace(QString::fromUtf8("Ä"), "&Auml;");
+	result.replace(QString::fromUtf8("Ö"), "&Ouml;");
+	result.replace(QString::fromUtf8("Ü"), "&Uuml;");
+	result.replace(QString::fromUtf8("ä"), "&auml;");
+	result.replace(QString::fromUtf8("ö"), "&ouml;");
+	result.replace(QString::fromUtf8("ü"), "&uuml;");
+	result.replace(QString::fromUtf8("ß"), "&szlig;");
 	return result;
 }
 
