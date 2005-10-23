@@ -39,7 +39,6 @@ BB_WorkFrame::~BB_WorkFrame()
  */
 void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
 {
-	
     if(isEnabled())
     {
         QLabel::paintEvent(pe);

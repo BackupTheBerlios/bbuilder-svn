@@ -121,13 +121,14 @@ QVector<BB_DrawObject*>* BB_WorkArea::getDrawObjects() const
  */
 void BB_WorkArea::setDrawObjects(QVector<BB_DrawObject*>* objectsVector)
 {
-	if(objectsVector != NULL)
+	if(objectsVector == NULL)
 	{
-		m_WorkFrame->setDrawObjects(objectsVector);
-		m_WorkFrame->update();
-	}
+		m_WorkFrame->setEnabled(false);
+	}	
 	else
 	{
-		cout << "BB_WorkArea::setDrawObjects(): NULL-Pointer erhalten" << endl;
+		m_WorkFrame->setEnabled(true);
 	}
+	m_WorkFrame->setDrawObjects(objectsVector);
+	m_WorkFrame->update();
 }

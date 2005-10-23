@@ -58,6 +58,8 @@ private:
 	
 private:
     void createName();
+	
+	friend class BB_XBuildingHandler;
 
 };
 

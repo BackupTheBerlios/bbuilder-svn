@@ -35,6 +35,7 @@ public:
 
     ~BB_TabBuilding();
     void updateBuildingList();
+	virtual void changeEvent ( QEvent * event ) ;
 private slots:
     void slotZoomTool(QAction* action);
     void slotBuildingProperties();

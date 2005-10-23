@@ -22,6 +22,9 @@
 #include "bb_doc.h"
 #include "bb_config.h"
 
+#include "bb_tabterrain.h"
+#include "bb_tabbuilding.h"
+#include "bb_tablevel.h"
 
 /**
   @author Alex Letkemann
@@ -40,9 +43,10 @@ public:
 	 * Destrucktor
 	 */
     ~BB_MainWindow();
-    void initActions();
+   
 	
 private:
+	void initActions();
 	void initMenus();
 	void initStatusBar();
 	void initMainWindow();
@@ -71,7 +75,12 @@ protected:
 	BB_Config m_Config;
     QAction* m_aProjectClose;
     QAction* m_aProjectNew;
-    QAction* m_aProjectOpen;
+	QAction* m_aProjectOpen;
+			
+    BB_Tab* m_TabBuilding;
+    BB_Tab* m_TabTerrain;
+    BB_Tab* m_TabLevel;
+    QAction* m_aFileSave;
 	
 protected:
 	virtual void keyPressEvent ( QKeyEvent * e );
@@ -80,6 +89,7 @@ private slots:
     void slotProjectNew();
     void slotProjectOpen();
     void slotProjectClose();
+    void slotFileSave();
 };
 
 #endif

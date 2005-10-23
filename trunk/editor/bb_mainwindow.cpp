@@ -57,7 +57,6 @@ BB_MainWindow::~BB_MainWindow()
 
 /**
  * @author Alex Letkemann
- * @version 0.1
  * @date 10.08.2005
  * Initialisiert alle MenusBars und Menus im Hauptfenster
  */
@@ -69,7 +68,9 @@ void BB_MainWindow::initMenus()
 	
 	m_MenuProject = new QMenu(QString::fromUtf8("Projekt"));
 	
-
+	m_MenuFile->addAction(m_aFileSave);
+	m_MenuFile->addSeparator();
+	m_MenuFile->addAction(QString("Beenden"));
 	
 	m_MenuProject->addAction(m_aProjectNew);
 	m_MenuProject->addAction(m_aProjectOpen);
@@ -77,7 +78,7 @@ void BB_MainWindow::initMenus()
 	
 	m_MainMenuBar = new QMenuBar();
 	m_MainMenuBar->addMenu(m_MenuFile);
-	m_MainMenuBar->addMenu(m_MenuView);
+// 	m_MainMenuBar->addMenu(m_MenuView);
 	m_MainMenuBar->addMenu(m_MenuProject);
 	
 	setMenuBar(m_MainMenuBar);
@@ -113,14 +114,14 @@ void BB_MainWindow::initMainWindow()
 	setWindowTitle(QString::fromUtf8("glBuildingBuilder - Editor"));
 	setStatusBar(m_StatusBar);
 	
-	BB_Tab *tabTerrain = new BB_TabTerrain(m_Doc);
-	BB_Tab *tabBuilding = new BB_TabBuilding(m_Doc);
-	BB_Tab *tabLevel = new BB_TabLevel(m_Doc);
+	m_TabTerrain = new BB_TabTerrain(m_Doc);
+	m_TabBuilding = new BB_TabBuilding(m_Doc);
+	m_TabLevel = new BB_TabLevel(m_Doc);
 	
 	m_TabWidget = new QTabWidget();
-	m_TabWidget->addTab(tabTerrain,QString::fromUtf8("Gelände"));	//TODO
-	m_TabWidget->addTab(tabBuilding,QString::fromUtf8("Gebäude"));	//TODO
-	m_TabWidget->addTab(tabLevel,QString::fromUtf8("Etagen"));
+	m_TabWidget->addTab(m_TabTerrain,QString::fromUtf8("Gelände"));	//TODO
+	m_TabWidget->addTab(m_TabBuilding,QString::fromUtf8("Gebäude"));	//TODO
+	m_TabWidget->addTab(m_TabLevel,QString::fromUtf8("Etagen"));
 	
 	m_TabWidget->setEnabled(false);
 	
@@ -133,7 +134,7 @@ void BB_MainWindow::initMainWindow()
  */
 void BB_MainWindow::keyPressEvent ( QKeyEvent * e )
 {
-	cout << "Press! (" << e->key() << ")" << endl;
+// 	cout << "Press! (" << e->key() << ")" << endl;
 	if(e->key() < 256 && e->key() >= 0)
 	{
 		m_Keys[e->key()] = true;
@@ -146,7 +147,7 @@ void BB_MainWindow::keyPressEvent ( QKeyEvent * e )
  */
 void BB_MainWindow::keyReleaseEvent ( QKeyEvent * e )
 {
-	cout << "Release! (" << e->key() << ")" << endl;
+// 	cout << "Release! (" << e->key() << ")" << endl;
 	if(e->key() < 256 && e->key() >= 0)
 	{
 		m_Keys[e->key()] = false;
@@ -214,8 +215,12 @@ void BB_MainWindow::slotProjectNew()
 void BB_MainWindow::slotProjectOpen()
 {
 	
+	m_TabTerrain->unsetDrawObjects();
+	m_TabBuilding->unsetDrawObjects();
+	m_TabLevel->unsetDrawObjects();
 	
-	cout << "Projekt öffnen" << endl;
+	m_TabWidget->setEnabled(false);
+// 	cout << "Projekt öffnen" << endl;
 	
 	QString filename;
 	filename = QFileDialog::getOpenFileName(
@@ -224,13 +229,15 @@ void BB_MainWindow::slotProjectOpen()
 			m_Config.getCurrentProjectPath(),
 			"glBB Projekt-Datei (*.glbb)");
 	
-	cout << "filename : " << filename.toStdString() << endl;
+// 	cout << "filename : " << filename.toStdString() << endl;
 	
 	if(!filename.isEmpty())
 	{
 		if(m_Doc->open(filename))
 		{
+// 			cout << "test1" << endl;
 			m_TabWidget->setEnabled(true);
+// 			cout << "test2" << endl;
 			m_Config.setCurrentProjectPath(filename);
 		}
 		else
@@ -255,6 +262,10 @@ void BB_MainWindow::slotProjectClose()
 {	
 	m_Doc->close();
 	m_TabWidget->setEnabled(false);
+	
+	m_TabTerrain->unsetDrawObjects();
+	m_TabBuilding->unsetDrawObjects();
+	m_TabLevel->unsetDrawObjects();
 }
 
 
@@ -265,6 +276,9 @@ void BB_MainWindow::slotProjectClose()
  */
 void BB_MainWindow::initActions()
 {
+	m_aFileSave = new QAction(QString::fromUtf8("Datei speichern"),this);
+	connect(m_aFileSave,SIGNAL(triggered()),this,SLOT(slotFileSave()));
+	
 	m_aProjectNew = new QAction(QString::fromUtf8("Neues Projekt"),this);
 	connect(m_aProjectNew,SIGNAL(triggered()),this,SLOT(slotProjectNew()));
 	
@@ -273,4 +287,13 @@ void BB_MainWindow::initActions()
 	
 	m_aProjectClose = new QAction(QString::fromUtf8("Projekt schliessen"),this);
 	connect(m_aProjectClose,SIGNAL(triggered()),this,SLOT(slotProjectClose()));
+}
+
+
+/*!
+    \fn BB_MainWindow::slotFileSave()
+ */
+void BB_MainWindow::slotFileSave()
+{
+	cout << "Datei speichern" << endl;
 }

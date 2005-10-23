@@ -37,6 +37,7 @@ public:
     ~BB_Tab();
     void initTab();
     void unsetToolButton(QAction *action);
+	void unsetDrawObjects();
 	
 	
 private:	
@@ -57,6 +58,7 @@ protected:
     QList<QAction*> *m_ToolButtonActions;
 	
 	virtual bool createToolButton(QAction *action, const char* method);
+
 	
 };
 

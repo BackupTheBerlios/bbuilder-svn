@@ -259,3 +259,12 @@ void BB_Tab::setDoc(BB_Doc* doc)
 		cout << "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" << endl;
 	}
 }
+
+
+/**
+ * Setzt den DrawObjects-Vektor auf null;
+ */
+void BB_Tab::unsetDrawObjects()
+{
+	m_Center->setDrawObjects(NULL);
+}

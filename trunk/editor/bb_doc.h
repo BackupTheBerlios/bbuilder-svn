@@ -26,6 +26,8 @@
 #include "bb_building.h"
 #include "bb_level.h"
 
+#include "bb_xdochandler.h"
+
 /**
 @author Alex Letkemann
 */
@@ -44,7 +46,9 @@ public:
 	virtual bool write(QTextStream &out);
 	virtual BB_Building* newBuilding(QWidget * parent);
 	virtual BB_Level* newLevel(QWidget * parent);
-;
+    virtual BB_Building* newBuilding(QDir& path, QString& fileName);
+    virtual BB_Level* newLevel(QDir& path, QString& fileName);
+    virtual BB_Terrain* newTerrain(QDir& path, QString& fileName);
 
 protected:
 	
@@ -55,6 +59,9 @@ protected:
 	QString m_ProjectFile;
 	
 	virtual bool clear();
+	
+	
+	friend class BB_XDocHandler;
 	
 };
 

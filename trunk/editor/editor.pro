@@ -32,7 +32,10 @@ HEADERS += bb_abstracttool.h \
            bb_dwpoint.h \
            c2dvector.h \
            bb_fileobject.h \
-           bb.h 
+           bb.h \
+           bb_xdochandler.h \
+           bb_xhandler.h \
+           bb_xbuildinghandler.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -61,7 +64,10 @@ SOURCES += bb_abstracttool.cpp \
            bb_dwpoint.cpp \
            c2dvector.cpp \
            bb_fileobject.cpp \
-           bb.cpp 
+           bb.cpp \
+           bb_xdochandler.cpp \
+           bb_xhandler.cpp \
+           bb_xbuildinghandler.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += release \

@@ -13,6 +13,7 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_doc.h"
+#include "bb_xdochandler.h"
 
 #include <iostream>
 
@@ -26,6 +27,7 @@ BB_Doc::BB_Doc()
 	:	BB_FileObject(QDir(),QString(),QString("bb_doc"))
 {
 	m_Terrain = NULL;
+ 	m_Handler = new BB_XDocHandler(this);
 
 }
 
@@ -124,6 +126,26 @@ bool BB_Doc::open(QString &fileName)
 		dir.cdUp();
 		m_ProjectPath = dir;
 		
+		
+		
+		m_FileName = m_ProjectFile;
+		m_FilePath = m_ProjectPath;
+		
+		
+		BB_FileObject::open();
+		
+// 		m_Terrain->open();
+		
+		for(int i = 0; i < m_Buildings.count(); i++)
+		{
+			m_Buildings.at(i)->open();
+		}
+		
+// 		for(int i = 0; i < m_Levels.count(); i++)
+// 		{
+// 			m_Levels.at(i)->open();
+// 		}
+		
 	}
 	else 
 	{
@@ -193,12 +215,14 @@ bool BB_Doc::createNew(const QString &name, const QString &desc, const QDir &pat
 	tmpPath = m_ProjectPath;
 	tmpPath.cd("terrain");
 	
-	m_Terrain = new BB_Terrain(tmpPath,"terrain.xml","Terrain");
+	QString s = "terrain.xml";
+	
+	newTerrain(tmpPath, s);
+	m_Terrain->setName("Terrain");
 	
 	
 	
 	save();
-	
 	
 	
 // 	BB_XDocGenerator docGenerator(this);
@@ -324,4 +348,37 @@ BB_Level* BB_Doc::newLevel(QWidget * parent)
 // 	}
 // 	
 // 	return level;
+}
+
+
+/*!
+    \fn BB_Doc::newBuilding(QDir& path, QString& fileName)
+ */
+BB_Building* BB_Doc::newBuilding(QDir& path, QString& fileName)
+{
+	BB_Building* building = new BB_Building(path,fileName);
+	m_Buildings.append(building);
+		
+	return building;
+}
+
+
+/*!
+    \fn BB_Doc::newLevel(QDir& path, QString& fileName)
+ */
+BB_Level* BB_Doc::newLevel(QDir& path, QString& fileName)
+{
+	BB_Level* level = new BB_Level(path,fileName);
+	m_Levels.append(level);
+		
+	return level;
+}
+
+
+/*!
+    \fn BB_Doc::newTerrain(QDir& path, QString& fileName)
+ */
+BB_Terrain* BB_Doc::newTerrain(QDir& path, QString& fileName)
+{
+	m_Terrain = new BB_Terrain(path,fileName,"Terrain");
 }

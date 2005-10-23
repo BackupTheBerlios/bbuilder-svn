@@ -118,23 +118,26 @@ void BB_TabBuilding::slotZoomTool(QAction* action)
  */
 void BB_TabBuilding::slotBuildingDelete()
 {
-	cout << m_BuildingsListWidget->currentRow() << endl;
-	
-	BB_Building *building;
-	int row = m_BuildingsListWidget->currentRow();
-		
-	if(row != -1)
+// 	cout << m_BuildingsListWidget->currentRow() << endl;
+	if(QMessageBox::question(this,QString::fromUtf8("Bestätigung"),QString::fromUtf8("Möchten Sie dieses Gebäude wirklich löschen?"),QMessageBox::Yes,QMessageBox::No) == QMessageBox::Yes)
 	{
-		m_BuildingsListWidget->takeItem(row);	
+
+		BB_Building *building;
+		int row = m_BuildingsListWidget->currentRow();
+			
+		if(row != -1)
+		{
+			m_BuildingsListWidget->takeItem(row);	
+			
+			building = m_Buildings->at(row);
+			m_Buildings->remove(row);
+			delete building;
+			building = NULL;
+		}
 		
-		building = m_Buildings->at(row);
-		m_Buildings->remove(row);
-		delete building;
-		building = NULL;
+		updateBuildingList();
+		m_Center->setEnabled(false);
 	}
-	
-	updateBuildingList();
-	m_Center->setEnabled(false);
 }
 
 
@@ -269,4 +272,13 @@ void BB_TabBuilding::slotBuildingChanged(int index)
 	action->setChecked(true);
 	m_Center->setTool(m_ToolLineNew);
 	cout << "m_ToolLineNew:" << m_ToolLineNew << endl;
+}
+
+
+/*!
+    \fn BB_TabBuilding::focusInEvent ( QFocusEvent * event ) 
+ */
+void BB_TabBuilding::changeEvent ( QEvent * event ) 
+{
+	updateBuildingList();
 }

@@ -42,6 +42,7 @@ BB_FileObject::BB_FileObject(const QDir &path, const QString &filename, const QS
 	}
 	
 	m_ListWidgetItem = NULL;
+	m_Handler = NULL;
 }
 
 
@@ -63,7 +64,7 @@ bool BB_FileObject::save()
 {
 	QFile file(m_FilePath.path() + QDir::separator() + m_FileName);
 
-	if(!file.open(QIODevice::WriteOnly))
+	if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		QMessageBox::critical(NULL,"Fehler", QString::fromUtf8("Datei konnte nicht geöffnet werden: \n") + file.fileName());
 		file.close();
@@ -155,4 +156,56 @@ void BB_FileObject::setName(const QString& name)
 	{
 		m_ListWidgetItem->setText(getName());
 	}
+}
+
+
+/**
+ * Liest die Datei eine.
+ * @return false im Fehlerfall sonst true
+ */
+bool BB_FileObject::open()
+{
+	if(m_Handler != NULL)
+	{
+		QFile file(m_FilePath.path() + QDir::separator() + m_FileName);
+	
+		if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			QMessageBox::critical(NULL,"Fehler", QString::fromUtf8("Datei konnte nicht geöffnet werden: \n") + file.fileName());
+			file.close();
+			return false;
+		}
+		
+		
+		if(!read(*m_Handler, &file))
+		{
+			QMessageBox::critical(NULL,"Fehler", QString::fromUtf8("Fehler beim Parsen der Datei: \n") + file.fileName());
+			file.close();
+			return false;
+		}
+				
+		file.close();
+		return true;
+	}
+	else
+	{
+		QMessageBox::critical(NULL,"Datei kann nicht gelesen werden", QString::fromUtf8("Für '") + getClassName() + "' ist kein Handler definiert!");
+	}
+	
+	return false;
+}
+
+
+/*!
+    \fn BB_FileObject::read()
+ */
+bool BB_FileObject::read(QXmlDefaultHandler &handler, QIODevice * dev)
+{
+	QXmlSimpleReader reader;
+	reader.setContentHandler(&handler);
+	reader.setErrorHandler(&handler);
+
+	QXmlInputSource xmlInputSource(dev);
+	
+	return reader.parse(xmlInputSource);
 }

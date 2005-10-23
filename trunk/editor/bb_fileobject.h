@@ -18,6 +18,7 @@
 #include <QDir>
 #include <QTextStream>
 #include <QListWidgetItem>
+#include <QXmlDefaultHandler>
 
 /**
 @author Alex Letkemann
@@ -29,7 +30,8 @@ public:
 
     virtual	~BB_FileObject();
     bool save();
-
+    bool open();
+	
 	QString getFileName() const;
 
 	QDir getFilePath() const;
@@ -40,6 +42,7 @@ public:
     virtual const QString getClassName();
 	virtual QListWidgetItem* getListWidgetItem();
     virtual void setName(const QString& name);
+	virtual bool read(QXmlDefaultHandler &handler, QIODevice * dev);
 	
 	
 
@@ -54,8 +57,10 @@ protected:
     QDir m_FilePath;
 	
 	QListWidgetItem* m_ListWidgetItem;
+    QXmlDefaultHandler* m_Handler;
 protected:
 	virtual bool write(QTextStream &out)  = 0;
+
 
 };
 

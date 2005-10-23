@@ -15,6 +15,8 @@
 #include "bb_building.h"
 #include "ui_buildingEdit.h"
 
+#include "bb_xbuildinghandler.h"
+
 
 #include "bb_line.h"
 #include "bb_wall.h"
@@ -27,7 +29,7 @@ BB_Building::BB_Building(const QDir& path, const QString &fileName, const QStrin
 	: BB_FileObject(path,fileName,name)
 {
 	m_DrawObject = new QVector<BB_DrawObject*>();
-
+	m_Handler = new BB_XBuildingHandler(this);
 }
 
 
@@ -42,6 +44,7 @@ BB_Building::~BB_Building()
 	}
 	
 	delete m_DrawObject;
+	
 }
 
 
