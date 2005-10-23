@@ -85,3 +85,15 @@ const QString BB_DrawObject::getClassName()
 {
 	return QString("BB_DrawObject");
 }
+
+
+bool BB_DrawObject::isSelected() const
+{
+    return m_Selected;
+}
+
+
+void BB_DrawObject::setSelected(bool theValue)
+{
+    m_Selected = theValue;
+}

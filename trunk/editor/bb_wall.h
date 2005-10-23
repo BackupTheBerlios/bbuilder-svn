@@ -33,6 +33,7 @@ public:
     ~BB_Wall();
     virtual const QString getClassName();
     virtual void generateXElement(QTextStream &out, int depth);
+    virtual void show(BB_Transformer& transformer, QPainter& painter) const;
     
 
 };

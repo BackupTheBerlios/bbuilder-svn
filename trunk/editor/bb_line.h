@@ -61,7 +61,7 @@ public:
     /**
     gibt Pointer auf Punkt 2 zurück
     @author Vaceslav Ustinov
-    @return BB_Point*
+    @return BB_Point *.
     */
     BB_Point* getPos2() const;
 

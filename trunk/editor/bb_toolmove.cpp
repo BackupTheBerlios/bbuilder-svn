@@ -55,7 +55,7 @@ void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB
                     return;
                 }
                 //Punkten ausrichten
-                if (me->button() == Qt::MidButton)
+                if (me->button() == Qt::MidButton && object->getClassName() == "BB_Point")
                 {
                   bringToLine((BB_Point *)object);
                 }
@@ -83,15 +83,18 @@ void BB_ToolMove::move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_
 
         transformer->screenToLogical(m_LastLogicMouseClick,me->pos());
     }
-    comparePoint = NULL;
 }
 
 void BB_ToolMove::release(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
 {
-    /* Übergebene Varieblen, die nicht verwendet werden */
+    /* Übergebene Variablen, die nicht verwendet werden */
     me = NULL;
     objects = NULL;
     transformer = NULL;
+//     if (comparePoint != NULL){
+//       comparePoint->setSelected(false);
+//       comparePoint = NULL;
+//     }
 }
 
 
@@ -102,6 +105,11 @@ void BB_ToolMove::bringToLine(BB_Point *point)
 {
   if(comparePoint!=NULL)
   {
+    if (comparePoint == point){
+      comparePoint->setSelected(false);
+      comparePoint = NULL;
+      return;
+    }
     double x = point->getX() - comparePoint->getX();
     double y = point->getY() - comparePoint->getY();
     double winkel = atan((y / x));//radiant
@@ -112,10 +120,12 @@ void BB_ToolMove::bringToLine(BB_Point *point)
       point->setY(comparePoint->getY());
     else
       point->setX(comparePoint->getX());
+    comparePoint->setSelected(false);
     comparePoint = NULL;
 //                       cout << "ausrichten"<<endl;
   }else{
     comparePoint = (BB_Point *) point;
-//                       cout << "setzen von bringToLinePoint"<<endl;
+    point->setSelected(true);
+                      cout << "setzen von bringToLinePoint"<<endl;
   }
 }

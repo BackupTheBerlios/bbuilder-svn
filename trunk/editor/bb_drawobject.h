@@ -44,11 +44,18 @@ public:
     //QPoint getP0() const{return m_P0;}
     virtual bool isHit(C2dVector hit) = 0;
     virtual const QString getClassName();
+
+        void setSelected(bool theValue);
+        
+
+        bool isSelected() const;
+        
     
 protected:
     //QPoint m_P0;
     QColor m_Color;
     int m_hitRange;
+    bool m_Selected;
 };
 
 #endif

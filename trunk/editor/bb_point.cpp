@@ -24,8 +24,9 @@ using namespace std;
 BB_Point::BB_Point()
                 : BB_DrawObject()
 {
-        m_Radius = 10;
+        m_Radius = 7;
         m_hitRange = 2;
+        m_Color.setNamedColor("Red");
 }
 
 BB_Point::BB_Point(C2dVector p)
@@ -34,6 +35,7 @@ BB_Point::BB_Point(C2dVector p)
         m_Radius = 7;
         m_Color.setNamedColor("Red");
         m_hitRange = 2;
+        m_Selected = false;
 }
 
 
@@ -74,6 +76,19 @@ void BB_Point::show(BB_Transformer& transformer, QPainter& painter) const
         painter.setPen(QColor(0,200,0));
         painter.drawRect(dest.x() - breite, dest.y() - breite,
                          breite * 2, breite * 2);
+        if(m_Selected){
+          painter.setBrush(QColor(0,0,200));
+          painter.setPen(QColor(0,0,200));
+          painter.drawText(dest.x() - m_Radius - breite, dest.y() - m_Radius -breite,"->");
+          painter.drawRect(dest.x() - m_Radius - breite, dest.y() - m_Radius -breite,
+                           breite, breite);
+          painter.drawRect(dest.x() - m_Radius - breite, dest.y() + m_Radius,
+                           breite, breite);
+          painter.drawRect(dest.x() + m_Radius, dest.y() - m_Radius - breite,
+                           breite, breite);
+          painter.drawRect(dest.x() + m_Radius, dest.y() + m_Radius,
+                           breite, breite);
+        }
 }
 
 
