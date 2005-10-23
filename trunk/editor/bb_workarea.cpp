@@ -18,12 +18,12 @@
 
 using namespace std;
 
-BB_WorkArea::BB_WorkArea(QWidget *parent)
+BB_WorkArea::BB_WorkArea(BB_Tab *tabCreator, QWidget *parent)
  : QScrollArea(parent)
 {
 	m_ZoomFaktor = 1.0;
 	
-	m_WorkFrame = new BB_WorkFrame(this);
+	m_WorkFrame = new BB_WorkFrame(tabCreator);
 	m_WorkFrame->setFrameShape(QFrame::Box);
 	m_WorkFrame->setFrameShadow(QFrame::Plain);
 	

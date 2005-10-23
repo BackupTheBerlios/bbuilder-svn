@@ -28,7 +28,7 @@ BB_ToolMove::~BB_ToolMove()
 {}
 
 
-void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
+void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Tab * tabCreator, BB_Transformer* transformer)
 {
     if(objects != NULL && me != NULL && transformer != NULL)
     {
@@ -58,6 +58,8 @@ void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB
                 if (me->button() == Qt::MidButton && object->getClassName() == "BB_Point")
                 {
                   bringToLine((BB_Point *)object);
+                  //if(tabCreator != NULL)
+                   // tabCreator->createProperties(((BB_Point *)object)->getItemModel());
                 }
                 m_Selection.append(object);
             }

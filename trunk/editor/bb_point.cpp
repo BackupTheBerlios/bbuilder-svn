@@ -212,3 +212,17 @@ void BB_Point::generateXElement(QTextStream &out, int depth)
 	BB_Object::generateXElement(out,depth+1);
 	out << BB::indent(depth) << "</bb_point>\n";
 }
+
+
+/*!
+    \fn BB_Point::getItemModel()
+ */
+QStandardItemModel * BB_Point::getItemModel()
+{
+  QStandardItemModel *model = new QStandardItemModel(4,2);
+      QModelIndex index = model->index(0, 0, QModelIndex());
+      //model->setData(index, QVariant((row+1) * (column+1)));
+      model->setData(index, QVariant("m_Color"));
+      index = model->index(0, 1, QModelIndex());
+      model->setData(index, QVariant("Red"));
+}

@@ -1,0 +1,97 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>fileOptionsDialog</class>
+ <widget class="QWidget" name="fileOptionsDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>596</width>
+    <height>437</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <widget class="QToolBox" name="toolBox" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>581</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <property name="currentIndex" >
+    <number>2</number>
+   </property>
+   <widget class="QWidget" name="page" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>581</width>
+      <height>322</height>
+     </rect>
+    </property>
+    <attribute name="label" >
+     <string>Page</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="page" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>96</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <attribute name="label" >
+     <string>Page 1</string>
+    </attribute>
+    <widget class="QListView" name="listView" >
+     <property name="geometry" >
+      <rect>
+       <x>50</x>
+       <y>160</y>
+       <width>120</width>
+       <height>80</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTreeView" name="treeView" >
+     <property name="geometry" >
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>120</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="alternatingRowColors" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>581</width>
+      <height>322</height>
+     </rect>
+    </property>
+    <attribute name="label" >
+     <string>Page 2</string>
+    </attribute>
+   </widget>
+  </widget>
+ </widget>
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</ui>

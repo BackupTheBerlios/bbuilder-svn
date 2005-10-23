@@ -18,6 +18,7 @@
 
 #include <QScrollArea>
 #include "bb_workframe.h"
+#include "bb_tab.h"
 
 
 /**
@@ -27,7 +28,7 @@ class BB_WorkArea : public QScrollArea
 {
 Q_OBJECT
 public:
-    BB_WorkArea(QWidget *parent = 0);
+    BB_WorkArea(BB_Tab *tabCreator, QWidget *parent = 0);
 
     ~BB_WorkArea();
     void zoom(double faktor);

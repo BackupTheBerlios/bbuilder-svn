@@ -242,7 +242,7 @@ void BB_TabBuilding::slotBuildingChanged(int index)
 /*!
     \fn BB_TabBuilding::slotToolPointNew(QAction* action)
  */
-				void BB_TabBuilding::slotToolPointNew(QAction* action)
+void BB_TabBuilding::slotToolPointNew(QAction* action)
 {
 	unsetToolButton(action);
 	action->setChecked(true);
@@ -254,7 +254,7 @@ void BB_TabBuilding::slotBuildingChanged(int index)
 /*!
     \fn BB_TabBuilding::slotToolMove(QAction* action)
  */
-				void BB_TabBuilding::slotToolMove(QAction* action)
+void BB_TabBuilding::slotToolMove(QAction* action)
 {
 	unsetToolButton(action);
 	action->setChecked(true);
@@ -266,7 +266,7 @@ void BB_TabBuilding::slotBuildingChanged(int index)
 /*!
     \fn BB_TabBuilding::void slotToolLineNew(QAction* action)
  */
-				void BB_TabBuilding::slotToolLineNew(QAction* action)
+void BB_TabBuilding::slotToolLineNew(QAction* action)
 {
 	unsetToolButton(action);
 	action->setChecked(true);

@@ -75,7 +75,9 @@ protected:
 	BB_Config m_Config;
     QAction* m_aProjectClose;
     QAction* m_aProjectNew;
-	QAction* m_aProjectOpen;
+    QAction* m_aProjectOpen;
+    QAction* m_aFileOptions;
+
 			
     BB_Tab* m_TabBuilding;
     BB_Tab* m_TabTerrain;
@@ -89,6 +91,7 @@ private slots:
     void slotProjectNew();
     void slotProjectOpen();
     void slotProjectClose();
+    void slotFileOptions();
     void slotFileSave();
 };
 

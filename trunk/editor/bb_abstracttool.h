@@ -21,6 +21,7 @@
 #include "bb_drawobject.h"
 #include "bb_transformer.h"
 #include "c2dvector.h"
+#include "bb_tab.h"
 
 /**
 @author Alex Letkemann
@@ -32,8 +33,9 @@ public:
     virtual ~BB_AbstractTool();
     virtual void move(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
     virtual void release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
-    virtual void click(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
+    virtual void click(QMouseEvent* me, QVector<BB_DrawObject*>* objects,BB_Tab * tabCreator, BB_Transformer* transformer) = 0;
     virtual bool remove(QVector<BB_DrawObject*>* objects, BB_DrawObject * delObject);
+
 
 protected:
 	C2dVector m_LastLogicMouseClick;

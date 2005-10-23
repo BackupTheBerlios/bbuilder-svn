@@ -18,6 +18,7 @@
 
 #include <bb_drawobject.h>
 #include "c2dvector.h"
+#include <QStandardItemModel>
 using namespace std;
 
 class BB_Line;
@@ -71,6 +72,7 @@ public:
         double getX(){return m_Pos.x();};
         double getY(){return m_Pos.y();};
     virtual void generateXElement(QTextStream &out, int depth);
+    QStandardItemModel * getItemModel();
 
 
 private:

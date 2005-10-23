@@ -48,4 +48,3 @@ bool BB_AbstractTool::remove(QVector<BB_DrawObject*>* objects, BB_DrawObject * d
 		return true;
 }
 
-

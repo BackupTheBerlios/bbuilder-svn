@@ -20,7 +20,8 @@
 #include <iostream>
 
 #include "bb_doc.h"
-#include "bb_workarea.h"
+
+class BB_WorkArea;
 
 using namespace std;
 
@@ -37,6 +38,7 @@ public:
     ~BB_Tab();
     void initTab();
     void unsetToolButton(QAction *action);
+    void createProperties(QStandardItemModel * model);
 	void unsetDrawObjects();
 	
 	

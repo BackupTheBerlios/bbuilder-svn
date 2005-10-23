@@ -29,7 +29,7 @@ BB_ToolPointNew::~BB_ToolPointNew()
 }
 
 
-void BB_ToolPointNew::click(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer)
+void BB_ToolPointNew::click(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Tab * tabCreator, BB_Transformer* transformer)
 {
 	
 	if(objects != NULL)

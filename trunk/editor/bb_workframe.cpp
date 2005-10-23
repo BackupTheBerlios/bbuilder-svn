@@ -20,13 +20,14 @@
 
 using namespace std;
 
-BB_WorkFrame::BB_WorkFrame(QWidget * parent, Qt::WFlags f)
+BB_WorkFrame::BB_WorkFrame(BB_Tab *tabCreator, QWidget * parent, Qt::WFlags f)
         :QLabel(parent,f)
 {
     m_ZoomFaktor = 1.0;
     m_Tool = NULL;
     m_DrawObjects = NULL;
     m_Transformer.setOffset(QPoint(100, 100));
+    m_TabCreator = tabCreator;
 }
 
 
@@ -107,7 +108,7 @@ void BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
 {
     if(m_Tool != NULL)
     {
-        m_Tool->click(me,m_DrawObjects,&m_Transformer);
+        m_Tool->click(me,m_DrawObjects,m_TabCreator, &m_Transformer);
         // 		update();
     }
     else

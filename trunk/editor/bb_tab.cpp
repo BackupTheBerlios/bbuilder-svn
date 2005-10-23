@@ -15,6 +15,7 @@
 #include "bb_tab.h"
 
 #include <QHBoxLayout>
+#include "bb_workarea.h"
 
 
 BB_Tab::BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): QWidget(parent, f)
@@ -119,7 +120,7 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
     else
         m_LeftFrame = NULL;
 
-    m_Center = new BB_WorkArea();
+    m_Center = new BB_WorkArea(this);
     m_Center->setFrameShape(QFrame::Box);
     m_Center->setFrameShadow(QFrame::Sunken);
 
@@ -136,6 +137,54 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
         m_RightFrame->setFrameShadow(QFrame::Sunken);
         m_RightFrame->setMinimumSize(160, 400);
         m_RightFrame->setMaximumSize(400,10000);
+        //-------------nur zum testen und praesentation
+        QVBoxLayout *rightLayout = new QVBoxLayout();
+        rightLayout->setMargin(0);
+        rightLayout->setSpacing(5);
+        QTableView *tableView = new QTableView;
+
+
+        QStandardItemModel *model = new QStandardItemModel(7,2);
+        QModelIndex index = model->index(0, 0, QModelIndex());
+      //model->setData(index, QVariant((row+1) * (column+1)));
+        model->setData(index, QVariant("X-Position"));
+        index = model->index(0, 1, QModelIndex());
+        model->setData(index, QVariant(25));
+
+        index = model->index(1, 0, QModelIndex());
+        model->setData(index, QVariant("Y-Position"));
+        index = model->index(1, 1, QModelIndex());
+        model->setData(index, QVariant(-55));
+
+        index = model->index(2, 0, QModelIndex());
+        model->setData(index, QVariant("Color"));
+        index = model->index(2, 1, QModelIndex());
+        model->setData(index, QVariant(QColor("Red")));
+
+        index = model->index(3, 0, QModelIndex());
+        model->setData(index, QVariant("Texture"));
+        index = model->index(3, 1, QModelIndex());
+        model->setData(index, QVariant("NULL"));
+
+        index = model->index(4, 0, QModelIndex());
+        model->setData(index, QVariant("Breite"));
+        index = model->index(4, 1, QModelIndex());
+        model->setData(index, QVariant(7));
+
+        index = model->index(5, 0, QModelIndex());
+        model->setData(index, QVariant(QString::fromUtf8("Höhe")));
+        index = model->index(5, 1, QModelIndex());
+        model->setData(index, QVariant(7));
+
+        index = model->index(6, 0, QModelIndex());
+        model->setData(index, QVariant("HitRange"));
+        index = model->index(6, 1, QModelIndex());
+        model->setData(index, QVariant(2));
+
+        tableView->setModel(model);
+        rightLayout->addWidget(tableView);
+        m_RightFrame->setLayout(rightLayout);
+        //---------------------------------------------
 
         splitter->addWidget(m_RightFrame);
         splitter->setCollapsible(iFrames,true);
@@ -162,7 +211,8 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
  * Erzeugt einen QToolButton und plaziert diesen im linken Frame.
  * Der QToolButton übernimmt die Eigenschaften wie Text, Icon usw. von action und wird 'connected' zu method.
  * @param action Die QAction, aus der der QToolButton erzeugt werden soll.
- * @param method Slot, an der die QAction 'connected' werden soll.<br /><b>Achtung: Slot muss mit dem Qt-Makro SLOT() erzeugt werden.</b>
+ * @param method Slot, an der die QAction 'connected' werden soll.<br />
+ * <b>Achtung: Slot muss mit dem Qt-Makro SLOT() erzeugt werden.</b>
  * @return Gibt false im Fehlerfall zurück, sonst true
  * @author Alex Letkemann
  * @date 21.08.2005
@@ -258,6 +308,12 @@ void BB_Tab::setDoc(BB_Doc* doc)
 	{
 		cout << "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" << endl;
 	}
+}
+void BB_Tab::createProperties(QStandardItemModel * model){
+          //-------------------
+//   initLayout(false, true);
+
+        //---------------------
 }
 
 

@@ -21,6 +21,8 @@
 
 #include "bb_dlgprojectnew.h"
 
+#include "ui_fileOptions.h"
+
 
 using namespace std;
 
@@ -72,7 +74,9 @@ void BB_MainWindow::initMenus()
 	m_MenuFile->addSeparator();
 	m_MenuFile->addAction(QString("Beenden"));
 	
-	m_MenuProject->addAction(m_aProjectNew);
+        m_MenuFile->addAction(m_aFileOptions);
+
+        m_MenuProject->addAction(m_aProjectNew);
 	m_MenuProject->addAction(m_aProjectOpen);
 	m_MenuProject->addAction(m_aProjectClose);
 	
@@ -268,6 +272,11 @@ void BB_MainWindow::slotProjectClose()
 	m_TabLevel->unsetDrawObjects();
 }
 
+void BB_MainWindow::slotFileOptions(){
+  Ui_fileOptionsDialog dlg;
+  dlg.setupUi(this);
+}
+
 
 /**
  * Initialisiert die Aktionen des Haupfensters
@@ -287,6 +296,9 @@ void BB_MainWindow::initActions()
 	
 	m_aProjectClose = new QAction(QString::fromUtf8("Projekt schliessen"),this);
 	connect(m_aProjectClose,SIGNAL(triggered()),this,SLOT(slotProjectClose()));
+
+        m_aFileOptions = new QAction(QString::fromUtf8("Einstellungen"),this);
+        connect(m_aFileOptions,SIGNAL(triggered()),this,SLOT(slotFileOptions()));
 }
 
 

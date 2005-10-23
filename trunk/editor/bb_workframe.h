@@ -20,6 +20,7 @@
 #include "bb_abstracttool.h"
 #include "bb_drawobject.h"
 #include "bb_transformer.h"
+#include "bb_tab.h"
 
 /**
 @author Alex Letkemann
@@ -27,7 +28,7 @@
 class BB_WorkFrame : public QLabel
 {
 public:
-    BB_WorkFrame(QWidget * parent = 0, Qt::WFlags f = 0);
+  BB_WorkFrame(BB_Tab *tabCreator, QWidget * parent = 0, Qt::WFlags f = 0);
 
     ~BB_WorkFrame();
     void setZoomFaktor(double faktor);
@@ -42,7 +43,7 @@ public:
 	
 	
 protected:
-	virtual void mousePressEvent ( QMouseEvent * me);
+    virtual void mousePressEvent ( QMouseEvent * me);
     virtual void mouseReleaseEvent ( QMouseEvent* me);
     virtual void paintEvent ( QPaintEvent * pe);
     virtual void mouseMoveEvent ( QMouseEvent* me);
@@ -51,7 +52,8 @@ protected:
     double m_ZoomFaktor;
     BB_AbstractTool* m_Tool;
     QVector<BB_DrawObject*>* m_DrawObjects;
-	BB_Transformer m_Transformer;
+    BB_Transformer m_Transformer;
+    BB_Tab *m_TabCreator;
 
 };
 
