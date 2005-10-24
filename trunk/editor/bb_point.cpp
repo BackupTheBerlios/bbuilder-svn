@@ -27,6 +27,7 @@ BB_Point::BB_Point()
         m_Radius = 7;
         m_hitRange = 2;
         m_Color.setNamedColor("Red");
+        m_scale = 1.0;
 }
 
 BB_Point::BB_Point(C2dVector p)
@@ -36,6 +37,7 @@ BB_Point::BB_Point(C2dVector p)
         m_Color.setNamedColor("Red");
         m_hitRange = 2;
         m_Selected = false;
+        m_scale = 1.0;
 }
 
 
@@ -121,8 +123,11 @@ bool BB_Point::isHit(C2dVector hit)
   //isHit von Viereck
   double abstandX = abs ((int) (hit.x() - m_Pos.x()));
   double abstandY = abs ((int) (hit.y() - m_Pos.y()));
-  if (abstandX <= m_Radius && abstandY <= m_Radius)
+//   cout << "scale:" << m_scale<<endl;
+  if (abstandX <= (m_Radius / m_scale) && abstandY <= (m_Radius/ m_scale)){
+    cout << "hittrue" << m_scale<<endl;
     return true;
+  }
   return false;
 }
 

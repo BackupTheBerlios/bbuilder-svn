@@ -145,41 +145,46 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
 
 
         QStandardItemModel *model = new QStandardItemModel(7,2);
+        model->setHeaderData(0, Qt::Horizontal, tr("Attribut"));
+        model->setHeaderData(1, Qt::Horizontal, tr("Wert"));
+
         QModelIndex index = model->index(0, 0, QModelIndex());
-      //model->setData(index, QVariant((row+1) * (column+1)));
-        model->setData(index, QVariant("X-Position"));
+        model->setData(index, QVariant("Name"));
         index = model->index(0, 1, QModelIndex());
-        model->setData(index, QVariant(25));
+        model->setData(index, QVariant("Object_x"));
 
         index = model->index(1, 0, QModelIndex());
-        model->setData(index, QVariant("Y-Position"));
+      //model->setData(index, QVariant((row+1) * (column+1)));
+        model->setData(index, QVariant("X-Position"));
         index = model->index(1, 1, QModelIndex());
-        model->setData(index, QVariant(-55));
+        model->setData(index, QVariant(25));
 
         index = model->index(2, 0, QModelIndex());
-        model->setData(index, QVariant("Color"));
+        model->setData(index, QVariant("Y-Position"));
         index = model->index(2, 1, QModelIndex());
-        model->setData(index, QVariant(QColor("Red")));
+        model->setData(index, QVariant(-55));
 
         index = model->index(3, 0, QModelIndex());
-        model->setData(index, QVariant("Texture"));
+        model->setData(index, QVariant("Color"));
         index = model->index(3, 1, QModelIndex());
-        model->setData(index, QVariant("NULL"));
+        model->setData(index, QVariant(QColor("Red")));
 
         index = model->index(4, 0, QModelIndex());
-        model->setData(index, QVariant("Breite"));
+        model->setData(index, QVariant("Texture"));
         index = model->index(4, 1, QModelIndex());
-        model->setData(index, QVariant(7));
+        model->setData(index, QVariant("NULL"));
 
         index = model->index(5, 0, QModelIndex());
-        model->setData(index, QVariant(QString::fromUtf8("Höhe")));
+        model->setData(index, QVariant("Breite"));
         index = model->index(5, 1, QModelIndex());
         model->setData(index, QVariant(7));
 
         index = model->index(6, 0, QModelIndex());
-        model->setData(index, QVariant("HitRange"));
+        model->setData(index, QVariant(QString::fromUtf8("Höhe")));
         index = model->index(6, 1, QModelIndex());
-        model->setData(index, QVariant(2));
+        model->setData(index, QVariant(7));
+
+        
 
         tableView->setModel(model);
         rightLayout->addWidget(tableView);

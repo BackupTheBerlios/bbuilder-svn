@@ -74,9 +74,16 @@ public:
     virtual void generateXElement(QTextStream &out, int depth);
     QStandardItemModel * getItemModel();
 
+        void setScale(double theValue)
+        {
+                m_scale = theValue;
+        }
+        
+
 
 private:
         int m_Radius;
+        double m_scale;
 protected:
         C2dVector m_Pos;
         /**

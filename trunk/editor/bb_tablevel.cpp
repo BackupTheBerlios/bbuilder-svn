@@ -23,10 +23,10 @@ BB_TabLevel::BB_TabLevel(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	gB_Buildings->setFlat(true);
 	
 	QComboBox *cB_Buildings = new QComboBox();
-	cB_Buildings->addItem("b1");
-	cB_Buildings->addItem("b2");
-	cB_Buildings->addItem("b3");
-	cB_Buildings->addItem("b4");
+        cB_Buildings->addItem(QString::fromUtf8("Gebäude 1"));
+        cB_Buildings->addItem(QString::fromUtf8("Gebäude 2"));
+        cB_Buildings->addItem(QString::fromUtf8("Gebäude 3"));
+        cB_Buildings->addItem(QString::fromUtf8("Gebäude 4"));
 	
 	QVBoxLayout *gBL_Building = new QVBoxLayout();
 	gBL_Building->setMargin(0);
@@ -41,17 +41,17 @@ BB_TabLevel::BB_TabLevel(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	gB_Levels->setFlat(true);
 		
 	QListWidget *lB_Levels = new QListWidget();
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
-	lB_Levels->addItem("test_01");
+	lB_Levels->addItem("Etage 1");
+        lB_Levels->addItem("Etage 2");
+        lB_Levels->addItem("Etage 3");
+        lB_Levels->addItem("Etage 4");
+        lB_Levels->addItem("Etage 5");
+        lB_Levels->addItem("Etage 6");
+        lB_Levels->addItem("Etage 7");
+        lB_Levels->addItem("Etage 8");
+        lB_Levels->addItem("Etage 9");
+        lB_Levels->addItem("Etage 10");
+        lB_Levels->addItem("Etage 11");
 
 	
 	QVBoxLayout *gBL_Levels = new QVBoxLayout();
@@ -80,7 +80,7 @@ BB_TabLevel::BB_TabLevel(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	
 	addWidgetLeft(gB_Levels,1);
 	
-	QIcon zoom("/home/alex/Studium/SE.Projekt/glbb/img/toolZoom.png");
+        QIcon zoom("../img/toolZoom.png");
 	QAction *toolZoom = new QAction(zoom,"Zoom",this);
 	toolZoom->setStatusTip("Zoom Werkzeug");
 	createToolButton(toolZoom,SLOT(slotZoomTool(QAction*)));

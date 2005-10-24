@@ -44,6 +44,10 @@ void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB
         for(int i = 0; i < objects->count(); i++)
         {
             object = objects->at(i);
+            //--------zur presentation
+            if (object->getClassName() == "BB_Point")
+              ((BB_Point *)object)->setScale(transformer->getScale());
+            //---------ende-----------
             if(object->isHit(m_pLogic))
             {
               //punkt loeschen

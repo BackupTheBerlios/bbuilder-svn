@@ -48,7 +48,7 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	m_ButtonBuildingDelete = new QPushButton(QString::fromUtf8("Löschen"));
 // 	m_ButtonLevelDelete->setEnabled(false);
 	
-	m_ButtonBuildingProperties = new QPushButton(QString::fromUtf8("Eigenschaften"));
+	m_ButtonBuildingProperties = new QPushButton(QString::fromUtf8("Speichern"));
 // 	m_ButtonLevelProperties->setEnabled(false);
 	
 	connect(m_ButtonBuildingNew,SIGNAL(clicked(bool)),this,SLOT(slotBuildingNew()));

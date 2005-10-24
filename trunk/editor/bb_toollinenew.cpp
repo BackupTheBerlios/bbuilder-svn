@@ -45,6 +45,10 @@ void BB_ToolLineNew::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects,
                 transformer->screenToLogical(m_pLogic,m_pScreen);
                 for(int i = 0; i < objects->count(); i++) {
                         object = objects->at(i);
+                        //--------zur presentation
+                        if (object->getClassName() == "BB_Point")
+                          ((BB_Point *)object)->setScale(transformer->getScale());
+                         //---------ende-----------
                         if(object->isHit(m_pLogic) && (object->getClassName() == "BB_Point")) {
                                 C2dVector fromhitobject = ((BB_Point*)object)->getPos();
                                 cout << "New Line : Point :" << fromhitobject.x()<<endl;
@@ -98,12 +102,12 @@ void BB_ToolLineNew::release(QMouseEvent* me, QVector< BB_DrawObject * >* object
                                         delete tmpWall;
                                 }
                                 tmpWall = NULL;
+                                //delete m_movedPoint;
                                 m_movedPoint = NULL;
                                 return;
                         }
                 }
-                remove
-                        (objects, tmpWall);
+                remove(objects, tmpWall);
                 tmpWall = NULL;
                 m_movedPoint = NULL;
         }

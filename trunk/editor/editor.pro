@@ -60,7 +60,7 @@ SOURCES += bb_abstracttool.cpp \
            main.cpp \
            bb_line.cpp \
            bb_config.cpp \
-           bb_toollinenew.cpp \
+           bb_toollinenew.cpp \ 
            bb_dlgprojectnew.cpp \
            bb_wall.cpp \
            bb_dwpoint.cpp \
@@ -69,7 +69,7 @@ SOURCES += bb_abstracttool.cpp \
            bb.cpp \
            bb_xdochandler.cpp \
            bb_xhandler.cpp \
-           bb_xbuildinghandler.cpp 
+           bb_xbuildinghandler.cpp
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \
