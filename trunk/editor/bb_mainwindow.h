@@ -76,13 +76,13 @@ protected:
     QAction* m_aProjectClose;
     QAction* m_aProjectNew;
     QAction* m_aProjectOpen;
-    QAction* m_aFileOptions;
-
+    QAction* m_aViewOptions;
+	QAction* m_aFileSave;
 			
     BB_Tab* m_TabBuilding;
     BB_Tab* m_TabTerrain;
     BB_Tab* m_TabLevel;
-    QAction* m_aFileSave;
+    
 	
 protected:
 	virtual void keyPressEvent ( QKeyEvent * e );
@@ -91,7 +91,7 @@ private slots:
     void slotProjectNew();
     void slotProjectOpen();
     void slotProjectClose();
-    void slotFileOptions();
+	void slotViewOptions();
     void slotFileSave();
 };
 

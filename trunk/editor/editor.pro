@@ -72,7 +72,7 @@ SOURCES += bb_abstracttool.cpp \
            bb_xbuildinghandler.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
-CONFIG += release \
+CONFIG += debug \
 warn_on
 TEMPLATE = app
 QT += xml

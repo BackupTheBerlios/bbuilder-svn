@@ -16,7 +16,7 @@
 #include "iostream"
 
 #include "bb_tabterrain.h"
-#include "bb_tabbuilding.h"
+#include "bb_tabbuilding.h" 
 #include "bb_tablevel.h"
 
 #include "bb_dlgprojectnew.h"
@@ -74,15 +74,16 @@ void BB_MainWindow::initMenus()
 	m_MenuFile->addSeparator();
 	m_MenuFile->addAction(QString("Beenden"));
 	
-        m_MenuFile->addAction(m_aFileOptions);
+    m_MenuView->addAction(m_aViewOptions);
 
-        m_MenuProject->addAction(m_aProjectNew);
+    m_MenuProject->addAction(m_aProjectNew);
 	m_MenuProject->addAction(m_aProjectOpen);
 	m_MenuProject->addAction(m_aProjectClose);
 	
 	m_MainMenuBar = new QMenuBar();
+	
 	m_MainMenuBar->addMenu(m_MenuFile);
-// 	m_MainMenuBar->addMenu(m_MenuView);
+	m_MainMenuBar->addMenu(m_MenuView);
 	m_MainMenuBar->addMenu(m_MenuProject);
 	
 	setMenuBar(m_MainMenuBar);
@@ -272,9 +273,13 @@ void BB_MainWindow::slotProjectClose()
 	m_TabLevel->unsetDrawObjects();
 }
 
-void BB_MainWindow::slotFileOptions(){
+void BB_MainWindow::slotViewOptions(){
   Ui_fileOptionsDialog dlg;
-  dlg.setupUi(this);
+  
+  QDialog dialog;
+  
+  dlg.setupUi(&dialog);
+  dialog.exec();
 }
 
 
@@ -297,8 +302,8 @@ void BB_MainWindow::initActions()
 	m_aProjectClose = new QAction(QString::fromUtf8("Projekt schliessen"),this);
 	connect(m_aProjectClose,SIGNAL(triggered()),this,SLOT(slotProjectClose()));
 
-        m_aFileOptions = new QAction(QString::fromUtf8("Einstellungen"),this);
-        connect(m_aFileOptions,SIGNAL(triggered()),this,SLOT(slotFileOptions()));
+	m_aViewOptions = new QAction(QString::fromUtf8("Einstellungen"),this);
+	connect(m_aViewOptions,SIGNAL(triggered()),this,SLOT(slotViewOptions()));
 }
 
 
