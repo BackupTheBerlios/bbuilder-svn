@@ -47,7 +47,7 @@ void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB
             if(object->isHit(m_pLogic))
             {
               //punkt loeschen
-              if (me->button () ==  Qt::RightButton)
+				if (me->button () ==  Qt::RightButton && object->getClassName() == "BB_Point")
                 {
                     remove(objects, object);
                     ((BB_Point *)object)->deleteLines(objects);

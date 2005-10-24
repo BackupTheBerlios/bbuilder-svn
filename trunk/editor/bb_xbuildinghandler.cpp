@@ -123,6 +123,8 @@ bool BB_XBuildingHandler::startElement(const QString& namespaceURI, const QStrin
 		{
 			BB_DrawObject* wall = (BB_DrawObject*) new BB_Wall(point1,point2);
 			m_DrawObjects->append(wall);
+			((BB_Wall*)wall)->setPos2(point2);
+			
 		}
 		else
 		{
