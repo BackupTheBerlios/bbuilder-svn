@@ -64,6 +64,10 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	
 	addWidgetLeft(gB_Buildings,1);
 	
+	QAction *toolSelect = new QAction(QIcon("../img/toolMove.png"), "Select",this);
+	toolSelect->setStatusTip("Selektierungs Werkzeug");
+	createToolButton(toolSelect,SLOT(slotToolSelect(QAction*)));		
+	
 	QIcon zoom("../img/toolZoom.png");
 	QAction *toolZoom = new QAction(zoom,"Zoom",this);
 	toolZoom->setStatusTip("Zoom Werkzeug");
@@ -82,6 +86,8 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	QAction *toolMove = new QAction(QIcon("../img/toolMove.png"), "Move",this);
 	toolMove->setStatusTip("Move Werkzeug");
 	createToolButton(toolMove,SLOT(slotToolMove(QAction*)));
+
+	
 	
 	cout << "initialisiere Tools" << endl;
 	
@@ -89,6 +95,7 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	m_ToolPointNew = new BB_ToolPointNew();
 	m_ToolMove = new BB_ToolMove();
 	m_ToolLineNew = new BB_ToolLineNew(m_Center);
+	m_ToolSelect = new BB_ToolSelect();
 	
 	updateBuildingList();
 	
@@ -282,4 +289,16 @@ void BB_TabBuilding::mousePressEvent ( QMouseEvent * e )
 {
 
 	cout << "BB_Tab::mousePressEvent(e);" << endl;
+}
+
+
+/*!
+    \fn BB_TabBuilding::slotToolSelect(QAction* action)
+ */
+void BB_TabBuilding::slotToolSelect(QAction* action)
+{
+	unsetToolButton(action);
+	action->setChecked(true);
+	m_Center->setTool(m_ToolSelect);
+	cout << "m_ToolSelect" << m_ToolSelect << endl;
 }

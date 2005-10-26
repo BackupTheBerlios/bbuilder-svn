@@ -21,7 +21,7 @@ using namespace std;
 BB_DrawObject::BB_DrawObject(QString name) 
 	: BB_Object(name)
 {
-
+	m_Pen.setStyle(Qt::SolidLine);
 }
 
 
@@ -96,4 +96,16 @@ bool BB_DrawObject::isSelected() const
 void BB_DrawObject::setSelected(bool theValue)
 {
     m_Selected = theValue;
+}
+
+
+void BB_DrawObject::setBrush(const QBrush& theValue)
+{
+    m_Brush = theValue;
+}
+
+
+void BB_DrawObject::setPen(const QPen& theValue)
+{
+    m_Pen = theValue;
 }

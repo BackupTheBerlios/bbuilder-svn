@@ -61,6 +61,14 @@ void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
                 m_DrawObjects->at(i)->show(m_Transformer,painter);
 
             }
+			
+			for(int i = 0; i < m_ToolObjects.count(); i++)
+			{
+				
+				m_ToolObjects.at(i)->show(m_Transformer,painter);
+			}
+			
+			
         }
         else
         {
@@ -105,6 +113,7 @@ void BB_WorkFrame::setTool(BB_AbstractTool* tool)
         m_Tool = tool;
 		m_Tool->setTransformer(&m_Transformer);
 		m_Tool->setObjects(m_DrawObjects);
+		m_Tool->setSelectionVector(&m_ToolObjects);
 		
 		/* Selektion aufheben */
 		m_Selection->clear();
@@ -128,9 +137,6 @@ void BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
     }
     else
         cout << "Kein Tool ausgewählt" << endl;
-	
-	cout << "Workframe" << endl;
-	QLabel::mousePressEvent(me);
 }
 
 /**

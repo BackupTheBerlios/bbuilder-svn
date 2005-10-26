@@ -23,6 +23,7 @@
 #include "bb_toolpointnew.h"
 #include "bb_toollinenew.h"
 #include "bb_toolmove.h"
+#include "bb_toolselect.h"
 
 /**
 @author Alex Letkemann
@@ -50,13 +51,17 @@ protected:
     BB_AbstractTool* m_ToolPointNew;
     BB_AbstractTool* m_ToolMove;
     BB_AbstractTool* m_ToolLineNew;
-			
+	BB_AbstractTool* m_ToolSelect;	
+		
     QVector<BB_Building*>* m_Buildings;
     QListWidget* m_BuildingsListWidget;
     QPushButton* m_ButtonBuildingDelete;
     QPushButton* m_ButtonBuildingNew;
     QPushButton* m_ButtonBuildingProperties;
+    
 	
+public slots:
+    void slotToolSelect(QAction* action);
 };
 
 #endif

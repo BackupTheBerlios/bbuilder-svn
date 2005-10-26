@@ -49,6 +49,12 @@ public:
         
 
         bool isSelected() const;
+
+	void setBrush(const QBrush& theValue);
+
+	void setPen(const QPen& theValue);
+	
+	
         
     
 protected:
@@ -56,6 +62,8 @@ protected:
     QColor m_Color;
     int m_hitRange;
     bool m_Selected;
+    QPen m_Pen;
+    QBrush m_Brush;
 };
 
 #endif

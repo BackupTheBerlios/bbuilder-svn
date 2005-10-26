@@ -57,6 +57,9 @@ protected:
 	
     BB_Transformer m_Transformer;
     BB_Tab *m_TabCreator;
+	
+	/** Hilfsobjekte, die von den Tools erzeugt werden und gezeichnet werden müssen. */
+    QVector<BB_DrawObject*> m_ToolObjects;
 
 };
 
