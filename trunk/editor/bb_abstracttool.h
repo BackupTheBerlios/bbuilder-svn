@@ -31,10 +31,28 @@ public:
 	BB_AbstractTool();
 
     virtual ~BB_AbstractTool();
-    virtual void move(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
-    virtual void release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
-    virtual void click(QMouseEvent* me, QVector<BB_DrawObject*>* objects,BB_Tab * tabCreator, BB_Transformer* transformer) = 0;
-    virtual bool remove(QVector<BB_DrawObject*>* objects, BB_DrawObject * delObject);
+
+/* Edit: Alex
+ * Minimierung  der Aufrufparameter!	
+ *     virtual void move(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
+ *     virtual void release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
+ *     virtual void click(QMouseEvent* me, QVector<BB_DrawObject*>* objects,BB_Tab * tabCreator, BB_Transformer* transformer) = 0;
+ */
+	virtual void move(QMouseEvent* me) = 0;
+	virtual void release(QMouseEvent* me) = 0;
+	virtual void click(QMouseEvent* me) = 0;
+	
+    virtual bool remove(BB_DrawObject * delObject);
+
+	void setObjects(QVector< BB_DrawObject * >* vector);
+	QVector< BB_DrawObject * >* getObjects() const;
+
+	void setTransformer(BB_Transformer* transformer);
+	BB_Transformer* getTransformer() const;
+	
+	void setSelectionVector(QVector<BB_DrawObject*>* selectionVector);
+	QVector<BB_DrawObject*>* getSelectionVector() const;
+	
 
 
 protected:
@@ -42,6 +60,14 @@ protected:
 	C2dVector m_pLogic;
 	QPoint m_pScreen;
 	QWidget * parentWidget;
+	
+	/** Vektor mit Objekten, die bearbeitet werden sollen. */
+    QVector<BB_DrawObject*>* m_Objects;
+	
+	QVector<BB_DrawObject*>* m_Selection;
+	
+	/** Transformer, der bei der Bearbeitung verwendet wird. */
+    BB_Transformer* m_Transformer;
 };
 
 #endif

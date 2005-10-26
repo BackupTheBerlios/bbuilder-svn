@@ -28,18 +28,18 @@
 class BB_WorkFrame : public QLabel
 {
 public:
-  BB_WorkFrame(BB_Tab *tabCreator, QWidget * parent = 0, Qt::WFlags f = 0);
-
+	BB_WorkFrame(QVector<BB_DrawObject*>* selectVector, BB_Tab *tabCreator, QWidget * parent = 0, Qt::WFlags f = 0);	
+  
     ~BB_WorkFrame();
     void setZoomFaktor(double faktor);
 
     BB_AbstractTool* getTool();
     void setTool(BB_AbstractTool* tool);
 
-	void BB_WorkFrame::setDrawObjects(QVector< BB_DrawObject *>* theValue);
+	void setDrawObjects(QVector< BB_DrawObject *>* theValue);
 	
 
-	QVector< BB_DrawObject *>* BB_WorkFrame::getDrawObjects() const;
+	QVector< BB_DrawObject *>* getDrawObjects() const;
 	
 	
 protected:
@@ -51,7 +51,10 @@ protected:
 protected:
     double m_ZoomFaktor;
     BB_AbstractTool* m_Tool;
+	
     QVector<BB_DrawObject*>* m_DrawObjects;
+	QVector<BB_DrawObject*>* m_Selection;
+	
     BB_Transformer m_Transformer;
     BB_Tab *m_TabCreator;
 

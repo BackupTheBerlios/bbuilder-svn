@@ -37,17 +37,17 @@ BB_ToolLineNew::~BB_ToolLineNew()
 {}
 
 
-void BB_ToolLineNew::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Tab * tabCreator, BB_Transformer* transformer)
+void BB_ToolLineNew::click(QMouseEvent* me)
 {
-        if(objects != NULL && me != NULL && transformer != NULL) {
+        if(m_Objects != NULL && me != NULL && m_Transformer != NULL) {
                 BB_DrawObject *object;
                 m_pScreen = me->pos();
-                transformer->screenToLogical(m_pLogic,m_pScreen);
-                for(int i = 0; i < objects->count(); i++) {
-                        object = objects->at(i);
+                m_Transformer->screenToLogical(m_pLogic,m_pScreen);
+                for(int i = 0; i < m_Objects->count(); i++) {
+                        object = m_Objects->at(i);
                         //--------zur presentation
                         if (object->getClassName() == "BB_Point")
-                          ((BB_Point *)object)->setScale(transformer->getScale());
+                          ((BB_Point *)object)->setScale(m_Transformer->getScale());
                          //---------ende-----------
                         if(object->isHit(m_pLogic) && (object->getClassName() == "BB_Point")) {
                                 C2dVector fromhitobject = ((BB_Point*)object)->getPos();
@@ -56,7 +56,7 @@ void BB_ToolLineNew::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects,
                                 m_movedPoint = tmpPoint;
                                 BB_Wall *wall = new BB_Wall((BB_Point*)object, tmpPoint);
                                 tmpWall = wall;
-                                objects->append(wall);
+                                m_Objects->append(wall);
                                 m_LastLogicMouseClick = m_pLogic;
                                 return;
                         }
@@ -64,11 +64,11 @@ void BB_ToolLineNew::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects,
         }
 }
 
-void BB_ToolLineNew::move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
+void BB_ToolLineNew::move(QMouseEvent* me)
 {
-        if(objects != NULL && me != NULL && transformer != NULL && m_movedPoint != NULL) {
+        if(m_Objects != NULL && me != NULL && m_Transformer != NULL && m_movedPoint != NULL) {
                 C2dVector moveTmp;
-                transformer->screenToLogical(m_pLogic,me->pos());
+                m_Transformer->screenToLogical(m_pLogic,me->pos());
                 moveTmp.setX(m_pLogic.x() - m_LastLogicMouseClick.x());
                 moveTmp.setY(m_pLogic.y() - m_LastLogicMouseClick.y());
 
@@ -86,19 +86,19 @@ void BB_ToolLineNew::move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, 
         }
 }
 
-void BB_ToolLineNew::release(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
+void BB_ToolLineNew::release(QMouseEvent* me)
 {
-        if(objects != NULL && me != NULL && transformer != NULL && m_movedPoint != NULL) {
+        if(m_Objects != NULL && me != NULL && m_Transformer != NULL && m_movedPoint != NULL) {
                 BB_DrawObject *object;
                 m_pScreen = me->pos();
-                transformer->screenToLogical(m_pLogic,m_pScreen);
-                for(int i = 0; i < objects->count(); i++) {
-                        object = objects->at(i);
+                m_Transformer->screenToLogical(m_pLogic,m_pScreen);
+                for(int i = 0; i < m_Objects->count(); i++) {
+                        object = m_Objects->at(i);
                         if(object->isHit(m_pLogic) && (object->getClassName() == "BB_Point")) {
                                 C2dVector fromhitobject = ((BB_Point*)object)->getPos();
                                 cout << "Old Line : Point :" << fromhitobject.x()<<endl;
                                 if (!tmpWall->setPos2((BB_Point*)object)){
-                                        remove(objects, tmpWall);
+                                        remove(tmpWall);
                                         delete tmpWall;
                                 }
                                 tmpWall = NULL;
@@ -107,7 +107,7 @@ void BB_ToolLineNew::release(QMouseEvent* me, QVector< BB_DrawObject * >* object
                                 return;
                         }
                 }
-                remove(objects, tmpWall);
+                remove(tmpWall);
                 tmpWall = NULL;
                 m_movedPoint = NULL;
         }

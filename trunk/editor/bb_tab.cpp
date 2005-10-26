@@ -25,6 +25,8 @@ BB_Tab::BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): QWidget(parent, f)
 	initTab();
     initLayout(true, true);
 	
+	m_DrawObjects = NULL;
+	
 	
 }
 
@@ -120,7 +122,7 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
     else
         m_LeftFrame = NULL;
 
-    m_Center = new BB_WorkArea(this);
+    m_Center = new BB_WorkArea(&m_Selection, this);
     m_Center->setFrameShape(QFrame::Box);
     m_Center->setFrameShadow(QFrame::Sunken);
 
@@ -314,7 +316,11 @@ void BB_Tab::setDoc(BB_Doc* doc)
 		cout << "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" << endl;
 	}
 }
-void BB_Tab::createProperties(QStandardItemModel * model){
+
+
+
+void BB_Tab::createProperties(QStandardItemModel * model)
+{
           //-------------------
 //   initLayout(false, true);
 

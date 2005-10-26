@@ -13,9 +13,10 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_toolmove.h"
-#include <iostream.h>
+#include <iostream>
 #include <math.h>
 
+using namespace std;
 
 BB_ToolMove::BB_ToolMove()
         : BB_AbstractTool()
@@ -28,33 +29,33 @@ BB_ToolMove::~BB_ToolMove()
 {}
 
 
-void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Tab * tabCreator, BB_Transformer* transformer)
+void BB_ToolMove::click(QMouseEvent* me)
 {
-    if(objects != NULL && me != NULL && transformer != NULL)
+    if(m_Objects != NULL && me != NULL && m_Transformer != NULL)
     {
         m_Selection.clear();
         BB_DrawObject *object;
 
 
         m_pScreen = me->pos();
-        transformer->screenToLogical(m_pLogic,m_pScreen);
+        m_Transformer->screenToLogical(m_pLogic,m_pScreen);
         m_LastLogicMouseClick = m_pLogic;
 
 
-        for(int i = 0; i < objects->count(); i++)
+        for(int i = 0; i < m_Objects->count(); i++)
         {
-            object = objects->at(i);
+            object = m_Objects->at(i);
             //--------zur presentation
             if (object->getClassName() == "BB_Point")
-              ((BB_Point *)object)->setScale(transformer->getScale());
+              ((BB_Point *)object)->setScale(m_Transformer->getScale());
             //---------ende-----------
             if(object->isHit(m_pLogic))
             {
               //punkt loeschen
 				if (me->button () ==  Qt::RightButton && object->getClassName() == "BB_Point")
                 {
-                    remove(objects, object);
-                    ((BB_Point *)object)->deleteLines(objects);
+					BB_AbstractTool::remove(object);
+                    ((BB_Point *)object)->deleteLines(m_Objects);
                     delete object;
                     return;
                 }
@@ -71,32 +72,30 @@ void BB_ToolMove::click(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB
     }
 }
 
-void BB_ToolMove::move(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
+void BB_ToolMove::move(QMouseEvent* me)
 {
 
-    if(objects != NULL && me != NULL && transformer != NULL)
+    if(m_Objects != NULL && me != NULL && m_Transformer != NULL)
     {
 
         for(int i = 0; i < m_Selection.count(); i++)
         {
             C2dVector moveTmp;
-            transformer->screenToLogical(m_pLogic,me->pos());
+            m_Transformer->screenToLogical(m_pLogic,me->pos());
             moveTmp.setX(m_pLogic.x() - m_LastLogicMouseClick.x());
             moveTmp.setY(m_pLogic.y() - m_LastLogicMouseClick.y());
 
             m_Selection.at(i)->moveBy(moveTmp);
         }
 
-        transformer->screenToLogical(m_LastLogicMouseClick,me->pos());
+        m_Transformer->screenToLogical(m_LastLogicMouseClick,me->pos());
     }
 }
 
-void BB_ToolMove::release(QMouseEvent* me, QVector< BB_DrawObject * >* objects, BB_Transformer* transformer)
+void BB_ToolMove::release(QMouseEvent* me)
 {
     /* Übergebene Variablen, die nicht verwendet werden */
-    me = NULL;
-    objects = NULL;
-    transformer = NULL;
+	me->ignore();
 //     if (comparePoint != NULL){
 //       comparePoint->setSelected(false);
 //       comparePoint = NULL;

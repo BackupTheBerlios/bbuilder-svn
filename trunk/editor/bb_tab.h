@@ -52,6 +52,10 @@ protected:
 	bool addWidgetRight(QWidget *widget, int stretchFaktor = 0);
 	
 	BB_Doc * m_Doc;
+	QVector<BB_DrawObject*>* m_DrawObjects;
+	QVector<BB_DrawObject*>  m_Selection;
+	
+	
 	BB_WorkArea *m_Center;
 	QFrame *m_LeftFrame;
     QFrame *m_RightFrame;

@@ -29,24 +29,26 @@ BB_ToolPointNew::~BB_ToolPointNew()
 }
 
 
-void BB_ToolPointNew::click(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Tab * tabCreator, BB_Transformer* transformer)
+void BB_ToolPointNew::click(QMouseEvent* me)
 {
 	
-	if(objects != NULL)
+	if(m_Objects != NULL && me != NULL)
 	{	
 		m_pScreen = me->pos();
-		transformer->screenToLogical(m_pLogic,m_pScreen);
+		m_Transformer->screenToLogical(m_pLogic,m_pScreen);
 // 		cout << "New Point (" << pLogic.x() << "|" << pLogic.y() << ")" << endl;
 		BB_Point *point = new BB_Point(m_pLogic);
-		objects->append(point);
+		m_Objects->append(point);
 	}
 }
 
-void BB_ToolPointNew::move(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer)
+void BB_ToolPointNew::move(QMouseEvent* me)
 {
+	me->ignore();
 }
 
-void BB_ToolPointNew::release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer)
+void BB_ToolPointNew::release(QMouseEvent* me)
 {
+	me->ignore();
 }
 

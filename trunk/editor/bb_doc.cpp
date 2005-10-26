@@ -48,12 +48,20 @@ QVector< BB_Building*>* BB_Doc::getBuildings()
 }
 
 
+/**
+ * Liefert einen Vector mit allen Levels
+ * @return Vector mit allen Levels
+ */
 QVector<BB_Level*>* BB_Doc::getLevels()
 {
     return &m_Levels;
 }
 
 
+/**
+ * Liefert einen Pointer auf das Terrain
+ * @return Pointer auf das Terrain
+ */
 BB_Terrain* BB_Doc::getTerrain()
 {
     return m_Terrain;

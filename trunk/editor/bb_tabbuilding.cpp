@@ -276,9 +276,10 @@ void BB_TabBuilding::slotToolLineNew(QAction* action)
 
 
 /*!
-    \fn BB_TabBuilding::focusInEvent ( QFocusEvent * event ) 
+    \fn BB_TabBuilding::mousePressEvent ( QMouseEvent * e )
  */
-void BB_TabBuilding::changeEvent ( QEvent * event ) 
+void BB_TabBuilding::mousePressEvent ( QMouseEvent * e )
 {
-	updateBuildingList();
+
+	cout << "BB_Tab::mousePressEvent(e);" << endl;
 }

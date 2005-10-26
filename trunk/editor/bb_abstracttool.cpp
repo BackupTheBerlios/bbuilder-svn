@@ -20,31 +20,103 @@ using namespace std;
 
 BB_AbstractTool::BB_AbstractTool()
 {
+	m_Transformer = NULL;
+	m_Objects = NULL;
+	
 }
 
 BB_AbstractTool::~BB_AbstractTool()
 {
 }
 
-bool BB_AbstractTool::remove(QVector<BB_DrawObject*>* objects, BB_DrawObject * delObject)
+bool BB_AbstractTool::remove(BB_DrawObject * delObject)
 {
+	if(m_Objects != NULL && delObject != NULL)
+	{
 	BB_DrawObject * tmpObject;
 	int objectPosition;
 	objectPosition = -1;
-	for (int i=0; i<objects->count(); i++)
+	for (int i=0; i<m_Objects->count(); i++)
 	{
-		tmpObject = objects->at(i);
+		tmpObject = m_Objects->at(i);
 		if (tmpObject == delObject)
 		{
 			objectPosition = i;
+			
+			// TODO Objekt wird nicht aus dem Speicher gelöscht!
 		}
 	}
 	cout << objectPosition <<endl;
-	objects->remove(objectPosition);
+	m_Objects->remove(objectPosition);
 	
 	if(objectPosition == -1) 
 		return false;
 	else
 		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
+
+
+/**
+ * Gibt den Vector zurück, der z.Z. bearbeitet wird.
+ * @return Vector, der bearbeitet wird.
+ */
+QVector< BB_DrawObject * >* BB_AbstractTool::getObjects() const
+{
+    return m_Objects;
+}
+
+
+/**
+ * Setzt den Pointer auf den Vector, welcher bearbeitet werden soll.
+ * @param vector Vector, der bearbeitet werden soll.
+ */
+void BB_AbstractTool::setObjects(QVector< BB_DrawObject * >* vector)
+{
+	m_Objects = vector;
+}
+
+
+/**
+ * Gibt den Transformer zurück, der bei der Bearbeitung verwendet wird.
+ * @return Transformer, der bei der Bearbeitung verwendet wird.
+ */
+BB_Transformer* BB_AbstractTool::getTransformer() const
+{
+    return m_Transformer;
+}
+
+
+/**
+ * Setzt den Transformer, der bei der Bearbeitung verwendet werden soll.
+ * @param transformer Transformer, der bei der bearbeitung verwendet werden soll.
+ */
+void BB_AbstractTool::setTransformer(BB_Transformer* transformer)
+{
+	m_Transformer = transformer;
+}
+
+
+QVector<BB_DrawObject*>* BB_AbstractTool::getSelectionVector() const
+{
+	return m_Selection;
+}
+
+
+
+void BB_AbstractTool::setSelectionVector(QVector<BB_DrawObject*>* selectionVector)
+{
+	if(selectionVector != NULL)
+	{
+		m_Selection = selectionVector;
+	}
+	else
+	{
+		cout << "BB_AbstractTool::setSelectionVector(): Übergebener Pointer ist NULL\n Auswahl-Vektor wurde nicht gesetzt." <<  endl;
+	}
+}

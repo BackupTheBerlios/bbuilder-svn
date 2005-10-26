@@ -38,7 +38,7 @@ BB_ToolZoom::~BB_ToolZoom()
 }
 
 
-void BB_ToolZoom::click(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Tab * tabCreator, BB_Transformer* transformer)
+void BB_ToolZoom::click(QMouseEvent* me)
 {
 	if(me->button() == Qt::LeftButton)
 	{
@@ -54,11 +54,13 @@ void BB_ToolZoom::click(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Ta
 	}
 }
 
-void BB_ToolZoom::move(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer)
+void BB_ToolZoom::move(QMouseEvent* me)
 {
+	me->ignore();
 }
 
-void BB_ToolZoom::release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer)
+void BB_ToolZoom::release(QMouseEvent* me)
 {
+	me->ignore();
 }
 

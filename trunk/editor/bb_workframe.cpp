@@ -20,9 +20,16 @@
 
 using namespace std;
 
-BB_WorkFrame::BB_WorkFrame(BB_Tab *tabCreator, QWidget * parent, Qt::WFlags f)
+BB_WorkFrame::BB_WorkFrame(QVector<BB_DrawObject*>* selectVector, BB_Tab *tabCreator, QWidget * parent, Qt::WFlags f)
         :QLabel(parent,f)
 {
+	
+	if(selectVector != NULL)
+	{
+		m_Selection = selectVector;
+	}
+// 	exit(0);
+	
     m_ZoomFaktor = 1.0;
     m_Tool = NULL;
     m_DrawObjects = NULL;
@@ -77,8 +84,9 @@ void BB_WorkFrame::setZoomFaktor(double faktor)
 
 
 
-/*!
-    \fn BB_WorkFrame::getTool()
+/**
+ * Gibt das Tool, welches verwendet wird.
+ * @return Tool, welches gerade verwendet wird.
  */
 BB_AbstractTool* BB_WorkFrame::getTool()
 {
@@ -86,14 +94,21 @@ BB_AbstractTool* BB_WorkFrame::getTool()
 }
 
 
-/*!
-    \fn BB_WorkFrame::setTool(BB_AbstractTool* tool)
+/**
+ * Setzt das Tool, welches verwendet werden soll.
+ * @param tool Tool, welches verwendet werden soll.
  */
 void BB_WorkFrame::setTool(BB_AbstractTool* tool)
 {
     if(tool != NULL)
     {
         m_Tool = tool;
+		m_Tool->setTransformer(&m_Transformer);
+		m_Tool->setObjects(m_DrawObjects);
+		
+		/* Selektion aufheben */
+		m_Selection->clear();
+		
     }
     else
     {
@@ -108,21 +123,24 @@ void BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
 {
     if(m_Tool != NULL)
     {
-        m_Tool->click(me,m_DrawObjects,m_TabCreator, &m_Transformer);
+        m_Tool->click(me);
         // 		update();
     }
     else
         cout << "Kein Tool ausgewählt" << endl;
+	
+	cout << "Workframe" << endl;
+	QLabel::mousePressEvent(me);
 }
 
 /**
- * Wird aufgeruffen, wenn eine Maustaste los gelassen wird.
+ * Wird aufgeruffen, wenn eine Maustaste losgelassen wird.
  */
 void BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
 {
     if(m_Tool != NULL)
     {
-        m_Tool->release(me,m_DrawObjects,&m_Transformer);
+        m_Tool->release(me);
         update();
     }
     else
@@ -137,7 +155,7 @@ void BB_WorkFrame::mouseMoveEvent(QMouseEvent* me)
 {
     if(m_Tool != NULL)
     {
-        m_Tool->move(me,m_DrawObjects,&m_Transformer);
+        m_Tool->move(me);
         update();
     }
     else
@@ -145,15 +163,31 @@ void BB_WorkFrame::mouseMoveEvent(QMouseEvent* me)
 }
 
 
+/**
+ * Gibt einen Pointer des Objektvectors oder NULL, falls dieser nicht gesetzt ist.
+ * @return Pointer des Objektvectors.
+ */
 QVector< BB_DrawObject *>* BB_WorkFrame::getDrawObjects() const
 {
     return m_DrawObjects;
 }
 
 
-void BB_WorkFrame::setDrawObjects(QVector< BB_DrawObject *>* theValue)
+/**
+ * Setzt den Pointer des Workframe auf den Vector mit den Objekten.
+ * Es findet keine Überprüfung statt, ob der Pointer NULL ist oder nicht.
+ * @param objects Pointer auf den Objektvector.
+ */
+void BB_WorkFrame::setDrawObjects(QVector< BB_DrawObject *>* objects)
 {
-    m_DrawObjects = theValue;
+	/* Keine überprüfung auf null, da NULL die darstellung der Objekte deaktiviert*/
+	m_DrawObjects = objects;
+	
+	if(m_Tool != NULL)
+	{
+		m_Tool->setObjects(m_DrawObjects);
+		m_Tool->setTransformer(&m_Transformer);
+	}
 }
 
 
