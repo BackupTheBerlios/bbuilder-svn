@@ -231,3 +231,23 @@ QStandardItemModel * BB_Point::getItemModel()
       index = model->index(0, 1, QModelIndex());
       model->setData(index, QVariant("Red"));
 }
+
+
+/*!
+    \fn BB_Point::isHit(QRect rect)
+ */
+bool BB_Point::isHit(QRect rect)
+{
+  QRect normRect = rect;
+  if (rect.x() > (rect.x() + rect.width()))
+    normRect.setX(rect.x() + rect.width());
+  if (rect.y() < (rect.y() + rect.height()))
+    normRect.setY(rect.y() + rect.height());
+
+  if ((getX() > normRect.x()) && (getX() < (rect.x() + rect.width()))) {
+    if ((getY() < normRect.y()) && (getY() > (normRect.y() -normRect.height()))){
+      return true;
+    }
+  }
+  return false;
+}

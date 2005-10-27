@@ -78,6 +78,7 @@ public:
         {
                 m_scale = theValue;
         }
+    bool isHit(QRect rect);
         
 
 

@@ -48,13 +48,15 @@ public:
         void setSelected(bool theValue);
         
 
-        bool isSelected() const;
+
+    virtual bool isSelected() const;
+    virtual bool isHit(QRect rect);
+
 
 	void setBrush(const QBrush& theValue);
 
 	void setPen(const QPen& theValue);
-	
-	
+
         
     
 protected:

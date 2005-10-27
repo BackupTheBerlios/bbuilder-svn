@@ -99,6 +99,17 @@ void BB_DrawObject::setSelected(bool theValue)
 }
 
 
+
+/*!
+    \fn BB_DrawObject::isHit(QRect rect)
+ */
+bool BB_DrawObject::isHit(QRect rect)
+{
+  return false;
+}
+
+
+
 void BB_DrawObject::setBrush(const QBrush& theValue)
 {
     m_Brush = theValue;
@@ -109,3 +120,4 @@ void BB_DrawObject::setPen(const QPen& theValue)
 {
     m_Pen = theValue;
 }
+

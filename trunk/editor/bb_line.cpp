@@ -138,3 +138,19 @@ const QString BB_Line::getClassName()
 {
 	return QString("BB_Line");
 }
+
+bool BB_Line::isHit(QRect rect)
+{
+  QRect normRect = rect;
+  if (rect.x() > (rect.x() + rect.width()))
+    normRect.setX(rect.x() + rect.width());
+  if (rect.y() < (rect.y() + rect.height()))
+    normRect.setY(rect.y() + rect.height());
+
+  if (m_Pos1->getX() > normRect.x() && m_Pos1->getX() < (normRect.x() + normRect.width()))
+    if (m_Pos2->getX() > normRect.x() && m_Pos2->getX() < (normRect.x() + normRect.width()))
+      if (m_Pos1->getY() < normRect.y() && m_Pos1->getY() > (normRect.y() - normRect.height()))
+        if (m_Pos2->getY() < normRect.y() && m_Pos2->getY() > (normRect.y() - normRect.height()))
+          return true;
+  return false;
+}

@@ -67,6 +67,7 @@ public:
 
     void remove(BB_Point * point);
     virtual const QString getClassName();
+    bool isHit(QRect rect);
 
 
 
