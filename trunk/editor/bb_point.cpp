@@ -238,14 +238,9 @@ QStandardItemModel * BB_Point::getItemModel()
  */
 bool BB_Point::isHit(QRect rect)
 {
-  QRect normRect = rect;
-  if (rect.x() > (rect.x() + rect.width()))
-    normRect.setX(rect.x() + rect.width());
-  if (rect.y() < (rect.y() + rect.height()))
-    normRect.setY(rect.y() + rect.height());
-
-  if ((getX() > normRect.x()) && (getX() < (rect.x() + rect.width()))) {
-    if ((getY() < normRect.y()) && (getY() > (normRect.y() -normRect.height()))){
+  QRect normRect = rect.normalized();
+  if ((getX() > normRect.x()) && (getX() < normRect.right())) {
+    if ((getY() > normRect.top()) && (getY() < normRect.bottom())){
       return true;
     }
   }
