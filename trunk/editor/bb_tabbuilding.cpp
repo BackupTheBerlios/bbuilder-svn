@@ -64,6 +64,11 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	
 	addWidgetLeft(gB_Buildings,1);
 	
+	m_PropertyWidget = new BB_PropertyWidget();
+	
+	addWidgetRight(m_PropertyWidget,0);
+	
+	
 	QAction *toolSelect = new QAction(QIcon("../img/toolMove.png"), "Select",this);
 	toolSelect->setStatusTip("Selektierungs Werkzeug");
 	createToolButton(toolSelect,SLOT(slotToolSelect(QAction*)));		

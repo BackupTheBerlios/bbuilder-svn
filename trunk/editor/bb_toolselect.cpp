@@ -10,6 +10,7 @@
 //
 //
 #include "bb_toolselect.h"
+#include "c2dvector.h"
 #include <iostream>
 
 using namespace std;
@@ -45,13 +46,26 @@ BB_ToolSelect::~BB_ToolSelect()
  */
 void BB_ToolSelect::click(QMouseEvent* me)
 {
-	m_Point1.setX(me->x());
-	m_Point1.setY(me->y());
-	
-	m_Point2.setX(me->x());
-	m_Point2.setY(me->y());
-	
-	m_Selection->append(&m_Rect);
+	if(me->button() == Qt::LeftButton)
+	{
+		clearSelection();
+		
+		m_pScreen = me->pos();
+		m_Transformer->screenToLogical(m_pLogic,m_pScreen);
+		m_ClickPos = m_pLogic;
+		
+		m_Point1.setX(me->x());
+		m_Point1.setY(me->y());
+		
+		m_Point2.setX(me->x());
+		m_Point2.setY(me->y());
+		
+		m_ToolObjects->append(&m_Rect);
+	}
+	else if(me->button() == Qt::RightButton)
+	{
+		clearSelection();
+	}
 }
 
 
@@ -61,9 +75,54 @@ void BB_ToolSelect::click(QMouseEvent* me)
 void BB_ToolSelect::release(QMouseEvent* me)
 {
 	
-	// TODO isHit(QRect);
-	
-	m_Selection->clear();
+	if(me->button() == Qt::LeftButton)
+	{
+		BB_DrawObject* object;
+		
+		m_pScreen = me->pos();
+		m_Transformer->screenToLogical(m_pLogic,m_pScreen);
+		
+		if(m_ClickPos == m_pLogic)
+		{		
+			for(int i = 0; i < m_Objects->count(); i++)
+			{
+				object = m_Objects->at(i);
+				if(object->isHit(m_pLogic))
+				{
+					object->setSelected(true);
+					m_Selection->append(object);
+					cout << "(" << object << ")hinzugefügt" << endl;
+					break;
+				}
+			}
+		}
+		else
+		{
+			
+			
+			QRect rect(	(int) m_ClickPos.x(),
+						(int) m_ClickPos.y(),
+						(int) (m_pLogic.x() - m_ClickPos.x()),
+						(int) (m_ClickPos.y() - m_pLogic.y()));
+						//(int) (m_pLogic.y() - m_ClickPos.y()));
+						
+			cout << "rect: x=" << rect.x() << " y=" << rect.y() << " w=" << rect.width() << " h=" << rect.height() << endl;
+			
+			for(int i = 0; i < m_Objects->count(); i++)
+			{
+				object = m_Objects->at(i);
+				if(object->isHit(rect))
+				{
+					object->setSelected(true);
+					m_Selection->append(object);
+					cout << "(" << object << ")hinzugefügt" << endl;
+				}
+			}
+		}
+		
+		m_ToolObjects->clear();
+		cout << "Objects selected: " << m_Selection->count() << endl;
+	}
 }
 
 
@@ -72,6 +131,11 @@ void BB_ToolSelect::release(QMouseEvent* me)
  */
 void BB_ToolSelect::move(QMouseEvent* me)
 {
-	m_Point2.setX(me->x());
-	m_Point2.setY(me->y());	
+// 	cout << "move: " << me->buttons() << " - " << Qt::LeftButton << endl;
+	if(me->buttons() == Qt::LeftButton)
+	{
+		m_Point2.setX(me->x());
+		m_Point2.setY(me->y());	
+		
+	}
 }

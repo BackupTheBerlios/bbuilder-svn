@@ -25,6 +25,9 @@
 #include "bb_toolmove.h"
 #include "bb_toolselect.h"
 
+
+#include "bb_propertywidget.h"
+
 /**
 @author Alex Letkemann
 */
@@ -58,6 +61,7 @@ protected:
     QPushButton* m_ButtonBuildingDelete;
     QPushButton* m_ButtonBuildingNew;
     QPushButton* m_ButtonBuildingProperties;
+    BB_PropertyWidget* m_PropertyWidget;
     
 	
 public slots:

@@ -120,3 +120,30 @@ void BB_AbstractTool::setSelectionVector(QVector<BB_DrawObject*>* selectionVecto
 		cout << "BB_AbstractTool::setSelectionVector(): Übergebener Pointer ist NULL\n Auswahl-Vektor wurde nicht gesetzt." <<  endl;
 	}
 }
+
+
+QVector< BB_DrawObject * >* BB_AbstractTool::getToolObjects() const
+{
+    return m_ToolObjects;
+}
+
+
+void BB_AbstractTool::setToolObjects(QVector< BB_DrawObject * >* theValue)
+{
+    m_ToolObjects = theValue;
+}
+
+
+/**
+ * Hebt die Selektion alle Objekte, die im SelectionVector liegen, auf.
+ */
+void BB_AbstractTool::clearSelection()
+{
+
+	for(int i = 0; i < m_Selection->count(); i++)
+	{
+		m_Selection->at(i)->setSelected(false);
+	}
+	
+	m_Selection->clear();
+}

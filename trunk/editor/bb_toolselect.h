@@ -15,6 +15,7 @@
 #include <bb_abstracttool.h>
 #include <bb_point.h>
 #include <bb_rect.h>
+#include <c2dvector.h>
 
 /**
 Tool, mit dem es möglich ist mehrere Objekte auszuwählen.
@@ -36,6 +37,7 @@ protected:
     BB_Point m_Point2;
     BB_Point m_Point1;
 	BB_Rect m_Rect;
+    C2dVector m_ClickPos;
 };
 
 #endif

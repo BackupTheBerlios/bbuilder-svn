@@ -66,6 +66,7 @@ public:
  // QDomElement createDomElement(QDomDocument & doc)const;
   const char * getClassName()const;
     void print();
+    bool operator == (const C2dVector & v2) const;
 protected: // Protected attributes
   /** X coordinate.
   */

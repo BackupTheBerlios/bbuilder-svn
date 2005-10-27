@@ -113,10 +113,11 @@ void BB_WorkFrame::setTool(BB_AbstractTool* tool)
         m_Tool = tool;
 		m_Tool->setTransformer(&m_Transformer);
 		m_Tool->setObjects(m_DrawObjects);
-		m_Tool->setSelectionVector(&m_ToolObjects);
+		m_Tool->setSelectionVector(m_Selection);
+		m_Tool->setToolObjects(&m_ToolObjects);
 		
-		/* Selektion aufheben */
-		m_Selection->clear();
+		/* ToolObjekte des letzten Tools entfernen */
+		m_ToolObjects.clear();
 		
     }
     else

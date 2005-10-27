@@ -107,3 +107,12 @@ void C2dVector::print()
 {
 	cout << "x: " << m_X << "--y: "<< m_Y<<endl;
 }
+
+
+/*!
+    \fn C2dVector::operator == (const C2dVector & v2) const
+ */
+bool C2dVector::operator == (const C2dVector & v2) const
+{
+	return (m_X == v2.x() && m_Y == v2.y());
+}

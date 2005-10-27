@@ -52,6 +52,13 @@ public:
 	
 	void setSelectionVector(QVector<BB_DrawObject*>* selectionVector);
 	QVector<BB_DrawObject*>* getSelectionVector() const;
+
+	void setToolObjects(QVector< BB_DrawObject * >* theValue);
+	
+
+	QVector< BB_DrawObject * >* getToolObjects() const;
+    void clearSelection();
+	
 	
 
 
@@ -68,6 +75,7 @@ protected:
 	
 	/** Transformer, der bei der Bearbeitung verwendet wird. */
     BB_Transformer* m_Transformer;
+    QVector<BB_DrawObject*>* m_ToolObjects;
 };
 
 #endif

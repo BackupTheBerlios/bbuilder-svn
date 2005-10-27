@@ -139,57 +139,59 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
         m_RightFrame->setFrameShadow(QFrame::Sunken);
         m_RightFrame->setMinimumSize(160, 400);
         m_RightFrame->setMaximumSize(400,10000);
-        //-------------nur zum testen und praesentation
-        QVBoxLayout *rightLayout = new QVBoxLayout();
-        rightLayout->setMargin(0);
-        rightLayout->setSpacing(5);
-        QTableView *tableView = new QTableView;
-
-
-        QStandardItemModel *model = new QStandardItemModel(7,2);
-        model->setHeaderData(0, Qt::Horizontal, tr("Attribut"));
-        model->setHeaderData(1, Qt::Horizontal, tr("Wert"));
-
-        QModelIndex index = model->index(0, 0, QModelIndex());
-        model->setData(index, QVariant("Name"));
-        index = model->index(0, 1, QModelIndex());
-        model->setData(index, QVariant("Object_x"));
-
-        index = model->index(1, 0, QModelIndex());
-      //model->setData(index, QVariant((row+1) * (column+1)));
-        model->setData(index, QVariant("X-Position"));
-        index = model->index(1, 1, QModelIndex());
-        model->setData(index, QVariant(25));
-
-        index = model->index(2, 0, QModelIndex());
-        model->setData(index, QVariant("Y-Position"));
-        index = model->index(2, 1, QModelIndex());
-        model->setData(index, QVariant(-55));
-
-        index = model->index(3, 0, QModelIndex());
-        model->setData(index, QVariant("Color"));
-        index = model->index(3, 1, QModelIndex());
-        model->setData(index, QVariant(QColor("Red")));
-
-        index = model->index(4, 0, QModelIndex());
-        model->setData(index, QVariant("Texture"));
-        index = model->index(4, 1, QModelIndex());
-        model->setData(index, QVariant("NULL"));
-
-        index = model->index(5, 0, QModelIndex());
-        model->setData(index, QVariant("Breite"));
-        index = model->index(5, 1, QModelIndex());
-        model->setData(index, QVariant(7));
-
-        index = model->index(6, 0, QModelIndex());
-        model->setData(index, QVariant(QString::fromUtf8("Höhe")));
-        index = model->index(6, 1, QModelIndex());
-        model->setData(index, QVariant(7));
-
         
 
-        tableView->setModel(model);
-        rightLayout->addWidget(tableView);
+		QVBoxLayout *rightLayout = new QVBoxLayout();
+        rightLayout->setMargin(0);
+        rightLayout->setSpacing(5);
+// 		//-------------nur zum testen und praesentation		
+//         QTableView *tableView = new QTableView;
+// 
+// 
+//         QStandardItemModel *model = new QStandardItemModel(7,2);
+//         model->setHeaderData(0, Qt::Horizontal, tr("Attribut"));
+//         model->setHeaderData(1, Qt::Horizontal, tr("Wert"));
+// 
+//         QModelIndex index = model->index(0, 0, QModelIndex());
+//         model->setData(index, QVariant("Name"));
+//         index = model->index(0, 1, QModelIndex());
+//         model->setData(index, QVariant("Object_x"));
+// 
+//         index = model->index(1, 0, QModelIndex());
+//       //model->setData(index, QVariant((row+1) * (column+1)));
+//         model->setData(index, QVariant("X-Position"));
+//         index = model->index(1, 1, QModelIndex());
+//         model->setData(index, QVariant(25));
+// 
+//         index = model->index(2, 0, QModelIndex());
+//         model->setData(index, QVariant("Y-Position"));
+//         index = model->index(2, 1, QModelIndex());
+//         model->setData(index, QVariant(-55));
+// 
+//         index = model->index(3, 0, QModelIndex());
+//         model->setData(index, QVariant("Color"));
+//         index = model->index(3, 1, QModelIndex());
+//         model->setData(index, QVariant(QColor("Red")));
+// 
+//         index = model->index(4, 0, QModelIndex());
+//         model->setData(index, QVariant("Texture"));
+//         index = model->index(4, 1, QModelIndex());
+//         model->setData(index, QVariant("NULL"));
+// 
+//         index = model->index(5, 0, QModelIndex());
+//         model->setData(index, QVariant("Breite"));
+//         index = model->index(5, 1, QModelIndex());
+//         model->setData(index, QVariant(7));
+// 
+//         index = model->index(6, 0, QModelIndex());
+//         model->setData(index, QVariant(QString::fromUtf8("Höhe")));
+//         index = model->index(6, 1, QModelIndex());
+//         model->setData(index, QVariant(7));
+// 
+//         
+// 
+// //         tableView->setModel(model);
+// //         rightLayout->addWidget(tableView);
         m_RightFrame->setLayout(rightLayout);
         //---------------------------------------------
 
@@ -277,6 +279,7 @@ bool BB_Tab::addWidgetRight(QWidget *widget, int stretchFaktor)
 {
     if(widget != NULL && m_RightFrame != NULL)
     {
+// 		widget->setFixedWidth(156);
         m_RightFrame->layout()->addWidget(widget);
         ((QVBoxLayout*)m_RightFrame->layout())->setStretchFactor(widget,stretchFaktor);
         return true;
@@ -314,6 +317,7 @@ void BB_Tab::setDoc(BB_Doc* doc)
 	else
 	{
 		cout << "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" << endl;
+		exit(0);
 	}
 }
 
