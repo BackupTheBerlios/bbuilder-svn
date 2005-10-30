@@ -33,7 +33,7 @@ void BB_ToolMove::click(QMouseEvent* me)
 {
     if(m_Objects != NULL && me != NULL && m_Transformer != NULL)
     {
-        m_Selection.clear();
+//         m_Selection.clear();
         BB_DrawObject *object;
 
 
@@ -41,51 +41,63 @@ void BB_ToolMove::click(QMouseEvent* me)
         m_Transformer->screenToLogical(m_pLogic,m_pScreen);
         m_LastLogicMouseClick = m_pLogic;
 
-
-        for(int i = 0; i < m_Objects->count(); i++)
-        {
-            object = m_Objects->at(i);
-            //--------zur presentation
-            if (object->getClassName() == "BB_Point")
-              ((BB_Point *)object)->setScale(m_Transformer->getScale());
-            //---------ende-----------
-            if(object->isHit(m_pLogic))
-            {
-              //punkt loeschen
-				if (me->button () ==  Qt::RightButton && object->getClassName() == "BB_Point")
-                {
-					BB_AbstractTool::remove(object);
-                    ((BB_Point *)object)->deleteLines(m_Objects);
-                    delete object;
-                    return;
-                }
-                //Punkten ausrichten
-                if (me->button() == Qt::MidButton && object->getClassName() == "BB_Point")
-                {
-                  bringToLine((BB_Point *)object);
-                  //if(tabCreator != NULL)
-                   // tabCreator->createProperties(((BB_Point *)object)->getItemModel());
-                }
-                m_Selection.append(object);
-            }
-        }
+		if(m_Selection->count() == 0)
+		{
+			for(int i = 0; i < m_Objects->count(); i++)
+			{
+				object = m_Objects->at(i);
+				//--------zur presentation
+				if (object->getClassName() == "BB_Point")
+				((BB_Point *)object)->setScale(m_Transformer->getScale());
+				//---------ende-----------
+				if(object->isHit(m_pLogic))
+				{
+				//punkt loeschen
+					if (me->button () ==  Qt::RightButton && object->getClassName() == "BB_Point")
+					{
+						BB_AbstractTool::remove(object);
+						((BB_Point *)object)->deleteLines(m_Objects);
+						delete object;
+						return;
+					}
+					//Punkten ausrichten
+					if (me->button() == Qt::MidButton && object->getClassName() == "BB_Point")
+					{
+					bringToLine((BB_Point *)object);
+					//if(tabCreator != NULL)
+					// tabCreator->createProperties(((BB_Point *)object)->getItemModel());
+					}
+					m_Selection->append(object);
+				}
+			}
+		}
     }
 }
 
-void BB_ToolMove::move(QMouseEvent* me)
+void BB_ToolMove::move(QMouseEvent* me, bool overX, bool overY)
 {
 
     if(m_Objects != NULL && me != NULL && m_Transformer != NULL)
     {
 
-        for(int i = 0; i < m_Selection.count(); i++)
+        for(int i = 0; i < m_Selection->count(); i++)
         {
             C2dVector moveTmp;
             m_Transformer->screenToLogical(m_pLogic,me->pos());
             moveTmp.setX(m_pLogic.x() - m_LastLogicMouseClick.x());
             moveTmp.setY(m_pLogic.y() - m_LastLogicMouseClick.y());
 
-            m_Selection.at(i)->moveBy(moveTmp);
+			if(overX)
+			{
+				moveTmp.setX(0);
+			}
+			
+			if(overY)
+			{
+				moveTmp.setY(0);
+			}
+			
+            m_Selection->at(i)->moveBy(moveTmp);
         }
 
         m_Transformer->screenToLogical(m_LastLogicMouseClick,me->pos());

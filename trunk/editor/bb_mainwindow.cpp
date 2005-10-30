@@ -253,6 +253,11 @@ void BB_MainWindow::slotProjectOpen()
 		}
 	}
 	
+	
+	m_TabTerrain->updateWidget();
+	m_TabBuilding->updateWidget();
+	m_TabLevel->updateWidget();
+	
     /// @todo implement me
 }
 
@@ -266,11 +271,19 @@ void BB_MainWindow::slotProjectOpen()
 void BB_MainWindow::slotProjectClose()
 {	
 	m_Doc->close();
+
+	m_TabTerrain->unsetDrawObjects();
+	m_TabTerrain->updateWidget();
+	
+	m_TabBuilding->unsetDrawObjects();
+	m_TabBuilding->updateWidget();
+	
+	m_TabLevel->unsetDrawObjects();	
+	m_TabLevel->updateWidget();
+	
 	m_TabWidget->setEnabled(false);
 	
-	m_TabTerrain->unsetDrawObjects();
-	m_TabBuilding->unsetDrawObjects();
-	m_TabLevel->unsetDrawObjects();
+
 }
 
 void BB_MainWindow::slotViewOptions(){

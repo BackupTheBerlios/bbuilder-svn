@@ -30,8 +30,8 @@ public:
 
     ~BB_ToolSelect();
     virtual void click(QMouseEvent* me);
-    virtual void release(QMouseEvent* me);
-    virtual void move(QMouseEvent* me);
+	virtual void release(QMouseEvent* me);
+    virtual void move(QMouseEvent* me, bool overX, bool overY);
 
 protected:
     BB_Point m_Point2;

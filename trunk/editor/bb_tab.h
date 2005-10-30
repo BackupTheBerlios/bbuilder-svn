@@ -38,9 +38,9 @@ public:
     ~BB_Tab();
     void initTab();
     void unsetToolButton(QAction *action);
-    void createProperties(QStandardItemModel * model);
 	void unsetDrawObjects();
 	
+	virtual void updateWidget();	
 	
 private:	
 	void initLayout(bool leftFrame, bool rightFrame);
@@ -64,8 +64,8 @@ protected:
     QList<QAction*> *m_ToolButtonActions;
 	
 	virtual bool createToolButton(QAction *action, const char* method);
-
 	
+
 };
 
 #endif

@@ -30,11 +30,11 @@ public:
     ~BB_ToolMove();
 
     virtual void click(QMouseEvent* me);
-    virtual void move(QMouseEvent* me);
+	virtual void move(QMouseEvent* me, bool overX, bool overY);
     virtual void release(QMouseEvent* me);
 
 protected:
-    QVector<BB_DrawObject*> m_Selection;
+//     QVector<BB_DrawObject*> m_Selection;
     /**
     Punkt mit dem ausgeglichen wird
     */

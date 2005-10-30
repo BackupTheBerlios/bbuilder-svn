@@ -34,7 +34,7 @@ public:
     ~BB_ToolLineNew();
 
     virtual void click(QMouseEvent* me);
-    virtual void move(QMouseEvent* me);
+	virtual void move(QMouseEvent* me, bool overX, bool overY);
     virtual void release(QMouseEvent* me);
 protected:
 	BB_DrawObject * m_movedPoint;

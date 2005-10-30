@@ -21,42 +21,52 @@ using namespace std;
 BB_PropertyWidget::BB_PropertyWidget(QWidget * parent, Qt::WFlags f)
  : QWidget(parent,f)
 {
-	QHBoxLayout layout;
-	
+	QVBoxLayout *layout = new QVBoxLayout(this);
+	layout->setMargin(0);
+	layout->setMargin(0);
+	layout->setSpacing(2);
 
-	QTableView *view = new QTableView();
-		
+	QTableWidget *view = new QTableWidget();
+	
+	view->setColumnCount(2);
 
 	
 	view->verticalHeader()->setVisible(false);
+	
+	view->setSelectionBehavior(QAbstractItemView::SelectRows);
+	view->setSelectionMode(QAbstractItemView::SingleSelection);
 			
 	
-	QStandardItemModel *model = new QStandardItemModel(7,2);
-// 	model->
-    model->setHeaderData(0, Qt::Horizontal, tr("Attribut"));
-    model->setHeaderData(1, Qt::Horizontal, tr("Wert"));
+// 	QStandardItemModel *model = new QStandardItemModel(7,2);
+// // 	model->
+//     model->setHeaderData(0, Qt::Horizontal, tr("Attribut"));
+//     model->setHeaderData(1, Qt::Horizontal, tr("Wert"));
+// 	
+//     QModelIndex index = model->index(0, 0);
+// 	model->setData(index, QVariant("Name"), Qt::DisplayRole);
+//     index = model->index(0, 1);
+// 	model->setData(index, QVariant("Object_x"), Qt::EditRole);
 	
-    QModelIndex index = model->index(0, 0);
-    model->setData(index, QVariant("Name"));
-    index = model->index(0, 1);
-    model->setData(index, QVariant("Object_x"));
-	
-// 	view->horizontalHeader()->setResizeMode(0, QHeaderView::Interactive);
-// 	view->horizontalHeader()->setResizeMode(1, QHeaderView::Stretch);
+	view->horizontalHeader()->setResizeMode(0, QHeaderView::Interactive);
+	view->horizontalHeader()->setResizeMode(1, QHeaderView::Stretch);
 	
 	view->horizontalHeader()->setClickable(false);
 	view->horizontalHeader()->setSortIndicatorShown(false);
 	view->horizontalHeader()->setHighlightSections (false);	
 	
-	view->setModel(model);
+// 	view->setModel(model);
 	
-	layout.addWidget(view);
-	setLayout(&layout);
+	
+	QGroupBox * gBox = new QGroupBox();
+	gBox->setTitle(QString::fromUtf8("Eigenschaften"));
+	gBox->setFlat(true);
+	
+	layout->addWidget(gBox);
+	layout->addWidget(view);
+ 	setLayout(layout);
 }
 
 
 BB_PropertyWidget::~BB_PropertyWidget()
 {
 }
-
-

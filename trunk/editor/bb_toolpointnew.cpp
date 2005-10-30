@@ -42,7 +42,7 @@ void BB_ToolPointNew::click(QMouseEvent* me)
 	}
 }
 
-void BB_ToolPointNew::move(QMouseEvent* me)
+void BB_ToolPointNew::move(QMouseEvent* me, bool overX, bool overY)
 {
 	me->ignore();
 }

@@ -40,7 +40,8 @@ HEADERS += bb_abstracttool.h \
            bb_xbuildinghandler.h \
            bb_rect.h \
            bb_toolselect.h \
-           bb_propertywidget.h 
+           bb_propertywidget.h \
+           bb_globals.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -75,7 +76,8 @@ SOURCES += bb_abstracttool.cpp \
            bb_xbuildinghandler.cpp \
            bb_rect.cpp \
            bb_toolselect.cpp \
-           bb_propertywidget.cpp 
+           bb_propertywidget.cpp \
+           bb_globals.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

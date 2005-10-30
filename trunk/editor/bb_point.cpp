@@ -22,7 +22,7 @@ using namespace std;
 
 
 BB_Point::BB_Point()
-                : BB_DrawObject()
+	: BB_DrawObject()
 {
         m_Radius = 7;
         m_hitRange = 2;

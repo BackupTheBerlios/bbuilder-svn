@@ -15,10 +15,17 @@
 
 
 #include <QApplication>
+#include <QString>
+
+#include "bb_globals.h"
 #include "bb_mainwindow.h"
+
+
 
 int main(int argc, char *argv[])
 {
+	setDirs(argv[0]);
+	
     QApplication app(argc,argv);
     app.setQuitOnLastWindowClosed(true);
 

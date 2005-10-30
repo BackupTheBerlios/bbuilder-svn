@@ -26,8 +26,6 @@ BB_Tab::BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): QWidget(parent, f)
     initLayout(true, true);
 	
 	m_DrawObjects = NULL;
-	
-	
 }
 
 BB_Tab::BB_Tab(BB_Doc* doc, bool leftFrame, bool rightFrame,QWidget* parent, Qt::WFlags f): QWidget(parent, f)
@@ -321,21 +319,18 @@ void BB_Tab::setDoc(BB_Doc* doc)
 	}
 }
 
-
-
-void BB_Tab::createProperties(QStandardItemModel * model)
-{
-          //-------------------
-//   initLayout(false, true);
-
-        //---------------------
-}
-
-
 /**
  * Setzt den DrawObjects-Vektor auf null;
  */
 void BB_Tab::unsetDrawObjects()
 {
 	m_Center->setDrawObjects(NULL);
+}
+
+
+/*!
+    \fn BB_Tab::updateWidget()
+ */
+void BB_Tab::updateWidget()
+{
 }

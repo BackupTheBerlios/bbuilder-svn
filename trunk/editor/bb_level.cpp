@@ -42,6 +42,7 @@ void BB_Level::generateXElement(QTextStream &out, int depth)
 bool BB_Level::write(QTextStream &out)
 {
     /// @todo implement me
+	return false;
 }
 
 

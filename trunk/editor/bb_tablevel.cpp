@@ -13,6 +13,7 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_tablevel.h"
+#include "bb_globals.h"
 
 BB_TabLevel::BB_TabLevel(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
  : BB_Tab(doc, parent, f)
@@ -80,7 +81,7 @@ BB_TabLevel::BB_TabLevel(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	
 	addWidgetLeft(gB_Levels,1);
 	
-        QIcon zoom("../img/toolZoom.png");
+	QIcon zoom(IMG_DIR() + SEPARATOR() + "toolZoom.png");
 	QAction *toolZoom = new QAction(zoom,"Zoom",this);
 	toolZoom->setStatusTip("Zoom Werkzeug");
 	createToolButton(toolZoom,SLOT(slotZoomTool(QAction*)));

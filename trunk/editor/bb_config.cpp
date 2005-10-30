@@ -13,6 +13,7 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_config.h"
+#include "bb_globals.h"
 
 #include <iostream>
 
@@ -57,7 +58,8 @@ void BB_Config::setCurrentProjectPath(const QString& path)
  */
 bool BB_Config::save()
 {
-	QFile file("../conf/bb.conf");
+	QFile file(CONF_DIR() + SEPARATOR() + "bb.conf");
+	
 	if(!file.open(QFile::WriteOnly | QFile::Text))
 	{
 		return false;
@@ -90,7 +92,7 @@ bool BB_Config::save()
 bool BB_Config::open()
 {
 	
-	QFile file("../conf/bb.conf");
+	QFile file(CONF_DIR() + SEPARATOR() + "bb.conf");
 	if(!file.exists())
 	{
 		cout << "Konfigurationsdatei nicht gefunden,\n\

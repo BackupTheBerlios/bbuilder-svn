@@ -13,6 +13,7 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_workarea.h"
+#include "bb_globals.h"
 
 #include <iostream>
 
@@ -27,8 +28,12 @@ BB_WorkArea::BB_WorkArea(QVector<BB_DrawObject*>* selectVector,  BB_Tab *tabCrea
 	m_WorkFrame->setFrameShape(QFrame::Box);
 	m_WorkFrame->setFrameShadow(QFrame::Plain);
 	
+	/**** Image zum Testen *****/
 	QImage  *bg = new QImage();
-	bg->load("../img/RettungsPlan.png");
+	
+	bg->load(IMG_DIR() + SEPARATOR() + "RettungsPlan.png");
+	
+	/***************/
  	m_WorkFrame->setPixmap(QPixmap(QPixmap::fromImage(*bg)));
 	m_WorkFrame->setBackgroundRole(QPalette::Base);
 	m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);

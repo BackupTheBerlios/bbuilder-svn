@@ -389,4 +389,5 @@ BB_Level* BB_Doc::newLevel(QDir& path, QString& fileName)
 BB_Terrain* BB_Doc::newTerrain(QDir& path, QString& fileName)
 {
 	m_Terrain = new BB_Terrain(path,fileName,"Terrain");
+	return m_Terrain;
 }

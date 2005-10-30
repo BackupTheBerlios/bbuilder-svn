@@ -66,6 +66,8 @@ protected:
 	
 public slots:
     void slotToolSelect(QAction* action);
+protected:
+    virtual void updateWidget();
 };
 
 #endif

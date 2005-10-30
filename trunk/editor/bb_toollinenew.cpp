@@ -64,7 +64,7 @@ void BB_ToolLineNew::click(QMouseEvent* me)
         }
 }
 
-void BB_ToolLineNew::move(QMouseEvent* me)
+void BB_ToolLineNew::move(QMouseEvent* me, bool overX, bool overY)
 {
         if(m_Objects != NULL && me != NULL && m_Transformer != NULL && m_movedPoint != NULL) {
                 C2dVector moveTmp;

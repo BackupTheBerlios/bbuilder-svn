@@ -106,7 +106,7 @@ void BB_ToolSelect::release(QMouseEvent* me)
 						//(int) (m_ClickPos.y() - m_pLogic.y()));
 						(int) (m_pLogic.y() - m_ClickPos.y()));
 						
-			cout << "rect: x=" << rect.x() << " y=" << rect.y() << " w=" << rect.width() << " h=" << rect.height() << endl;
+// 			cout << "rect: x=" << rect.x() << " y=" << rect.y() << " w=" << rect.width() << " h=" << rect.height() << endl;
 			
 			for(int i = 0; i < m_Objects->count(); i++)
 			{
@@ -129,7 +129,7 @@ void BB_ToolSelect::release(QMouseEvent* me)
 /*!
     \fn BB_ToolSelect::move(QMouseEvent* me)
  */
-void BB_ToolSelect::move(QMouseEvent* me)
+void BB_ToolSelect::move(QMouseEvent* me, bool overX, bool overY)
 {
 // 	cout << "move: " << me->buttons() << " - " << Qt::LeftButton << endl;
 	if(me->buttons() == Qt::LeftButton)

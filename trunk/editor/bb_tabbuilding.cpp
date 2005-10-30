@@ -12,6 +12,8 @@
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
+#include "bb_globals.h"
+
 #include "bb_tabbuilding.h"
 
 #include <iostream>
@@ -63,36 +65,50 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	gB_Buildings->setLayout(gBL_Buildings);
 	
 	addWidgetLeft(gB_Buildings,1);
-	
-	m_PropertyWidget = new BB_PropertyWidget();
-	
-	addWidgetRight(m_PropertyWidget,0);
-	
-	
-	QAction *toolSelect = new QAction(QIcon("../img/toolMove.png"), "Select",this);
-	toolSelect->setStatusTip("Selektierungs Werkzeug");
+		
+	QAction *toolSelect = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolSelect.png"), "Auswahl",this);
+	toolSelect->setStatusTip("Auswahl Werkzeug");
 	createToolButton(toolSelect,SLOT(slotToolSelect(QAction*)));		
 	
-	QIcon zoom("../img/toolZoom.png");
+	QIcon zoom(IMG_DIR() + SEPARATOR() + "toolZoom.png");
 	QAction *toolZoom = new QAction(zoom,"Zoom",this);
 	toolZoom->setStatusTip("Zoom Werkzeug");
 	createToolButton(toolZoom,SLOT(slotZoomTool(QAction*)));
 	
-	QIcon knote("../img/toolPoint.png");
+	QIcon knote(IMG_DIR() + SEPARATOR() + "toolPoint.png");
 // 	QAction *toolPointNew = new QAction("Point",this);
 	QAction *toolPointNew = new QAction(knote,"Point",this);
 	toolPointNew->setStatusTip("Point Werkzeug");
 	createToolButton(toolPointNew,SLOT(slotToolPointNew(QAction*)));
 
-	QAction *toolLineNew = new QAction(QIcon("../img/toolWall.png"),"Wand",this);
+	QAction *toolLineNew = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolWall.png"),"Wand",this);
 	toolPointNew->setStatusTip("Line Werkzeug");
 	createToolButton(toolLineNew,SLOT(slotToolLineNew(QAction*)));
 	
-	QAction *toolMove = new QAction(QIcon("../img/toolMove.png"), "Move",this);
+	QAction *toolMove = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolMove.png"), "Move",this);
 	toolMove->setStatusTip("Move Werkzeug");
 	createToolButton(toolMove,SLOT(slotToolMove(QAction*)));
 
+	int x = 2,y = 2,z = 2;
 	
+	
+	double ***array = new double** [x];
+	for(int i = 0; i < x; i++)
+ 	{
+	
+		array[i] = new double* [y];
+		for(int j = 0; j < y; j++)
+		{
+			array[i][j] = new double [z];
+		}
+ 	}
+	
+	
+	array[0][0][0] = 1;
+	array[x-1][y-1][z-1] = 1;
+	
+	cout << "ARRAY:" <<  array[0][0][0] << endl;
+	cout << "ARRAY:" <<  array[x-1][y-1][z-1] << endl;
 	
 	cout << "initialisiere Tools" << endl;
 	
@@ -103,6 +119,45 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	m_ToolSelect = new BB_ToolSelect();
 	
 	updateBuildingList();
+	
+	
+	/*****************/
+	
+// 	QTableView *view = new QTableView();
+/*		
+
+	
+	view->verticalHeader()->setVisible(false);
+			
+	
+	QStandardItemModel *model = new QStandardItemModel(7,2);
+// 	model->
+	model->setHeaderData(0, Qt::Horizontal, tr("Attribut"));
+	model->setHeaderData(1, Qt::Horizontal, tr("Wert"));
+	
+	QModelIndex index = model->index(0, 0);
+	model->setData(index, QVariant("Name"));
+	index = model->index(0, 1);
+	model->setData(index, QVariant("Object_x"));
+	
+//	view->horizontalHeader()->setResizeMode(0, QHeaderView::Interactive);
+//	view->horizontalHeader()->setResizeMode(1, QHeaderView::Stretch);
+
+	
+	view->horizontalHeader()->setClickable(false);
+	view->horizontalHeader()->setSortIndicatorShown(false);
+	view->horizontalHeader()->setHighlightSections (false);	
+	
+	view->setModel(NULL);
+*/	
+	
+	m_PropertyWidget = new BB_PropertyWidget();
+	
+	addWidgetRight(m_PropertyWidget);
+	
+	/*****************/
+	
+	slotToolSelect(toolSelect);
 	
 }
 
@@ -130,14 +185,19 @@ void BB_TabBuilding::slotZoomTool(QAction* action)
  */
 void BB_TabBuilding::slotBuildingDelete()
 {
-// 	cout << m_BuildingsListWidget->currentRow() << endl;
-	if(QMessageBox::question(this,QString::fromUtf8("Bestätigung"),QString::fromUtf8("Möchten Sie dieses Gebäude wirklich löschen?"),QMessageBox::Yes,QMessageBox::No) == QMessageBox::Yes)
-	{
 
 		BB_Building *building;
 		int row = m_BuildingsListWidget->currentRow();
+		building = m_Buildings->at(row);
 			
-		if(row != -1)
+		if(row != -1 && 
+				 QMessageBox::question(this,
+									   QString::fromUtf8("Bestätigung"),
+									   QString::fromUtf8("Möchten Sie das Gebäude ")
+											   + building->getName() 
+											   + QString::fromUtf8(" wirklich löschen?"),
+									   QMessageBox::Yes,
+									   QMessageBox::No) == QMessageBox::Yes)
 		{
 			m_BuildingsListWidget->takeItem(row);	
 			
@@ -145,11 +205,17 @@ void BB_TabBuilding::slotBuildingDelete()
 			m_Buildings->remove(row);
 			delete building;
 			building = NULL;
+					
+			m_Doc->save();
+			
+			updateBuildingList();
+			unsetDrawObjects();
+			m_Center->setEnabled(false);	
+					
+			m_BuildingsListWidget->setCurrentRow(row - 1);
+			slotBuildingChanged(row - 1);
+
 		}
-		
-		updateBuildingList();
-		m_Center->setEnabled(false);
-	}
 }
 
 
@@ -292,6 +358,8 @@ void BB_TabBuilding::slotToolLineNew(QAction* action)
  */
 void BB_TabBuilding::mousePressEvent ( QMouseEvent * e )
 {
+	// TODO 
+	e->ignore();
 
 	cout << "BB_Tab::mousePressEvent(e);" << endl;
 }
@@ -306,4 +374,13 @@ void BB_TabBuilding::slotToolSelect(QAction* action)
 	action->setChecked(true);
 	m_Center->setTool(m_ToolSelect);
 	cout << "m_ToolSelect" << m_ToolSelect << endl;
+}
+
+
+/*!
+    \fn BB_TabBuilding::updateWidget()
+ */
+void BB_TabBuilding::updateWidget()
+{
+	updateBuildingList();
 }

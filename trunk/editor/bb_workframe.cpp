@@ -160,9 +160,14 @@ void BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
  */
 void BB_WorkFrame::mouseMoveEvent(QMouseEvent* me)
 {
+
     if(m_Tool != NULL)
     {
-        m_Tool->move(me);
+		bool overX, overY;
+		overX = (me->pos().x() < 0 || me->pos().x() > width() );
+		overY = (me->pos().y() < 0 || me->pos().y() > height() );
+		
+        m_Tool->move(me, overX, overY);
         update();
     }
     else
