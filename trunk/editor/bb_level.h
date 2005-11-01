@@ -17,11 +17,12 @@
 #define BB_LEVEL_H
 
 #include "bb_fileobject.h"
+#include "bb_map.h"
 
 /**
 @author Alex Letkemann
 */
-class BB_Level : public BB_FileObject {
+class BB_Level : public BB_FileObject, public BB_Map {
 public:
 	BB_Level(const QDir& path, const QString &fileName, const QString &name = QString(""));
 

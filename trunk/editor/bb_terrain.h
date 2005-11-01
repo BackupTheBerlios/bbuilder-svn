@@ -17,13 +17,15 @@
 #define BB_TERRAIN_H
 
 #include "bb_fileobject.h"
+#include "bb_map.h"
 
 #include <QTextStream>
 
 /**
 @author Alex Letkemann
 */
-class BB_Terrain : public BB_FileObject{
+class BB_Terrain : public BB_FileObject, public BB_Map
+{
 public:
 	BB_Terrain(const QDir& path, const QString &fileName, const QString &name = QString(""));
 

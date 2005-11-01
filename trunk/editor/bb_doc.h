@@ -40,7 +40,7 @@ public:
 	virtual BB_Terrain* BB_Doc::getTerrain();
 	virtual QVector<BB_Building*>* getBuildings();
 	virtual QVector<BB_Level*>* getLevels();
-	virtual bool open(QString &fileName);
+	virtual bool open(QString fileName);
     virtual bool close();
 	virtual bool createNew(const QString &name, const QString &desc, const QDir &path);
 	virtual bool write(QTextStream &out);

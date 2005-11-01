@@ -29,8 +29,8 @@ public:
 	BB_FileObject(const QDir &path, const QString &filename, const QString &name = QString(""));
 
     virtual	~BB_FileObject();
-    bool save();
-    bool open();
+    virtual bool save();
+    virtual bool open();
 	
 	QString getFileName() const;
 
@@ -43,6 +43,7 @@ public:
 	virtual QListWidgetItem* getListWidgetItem();
     virtual void setName(const QString& name);
 	virtual bool read(QXmlDefaultHandler &handler, QIODevice * dev);
+    virtual QString getErrorString() const;
 	
 	
 
@@ -58,6 +59,7 @@ protected:
 	
 	QListWidgetItem* m_ListWidgetItem;
     QXmlDefaultHandler* m_Handler;
+    QString m_ErrorString;
 protected:
 	virtual bool write(QTextStream &out)  = 0;
 

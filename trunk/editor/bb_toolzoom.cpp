@@ -42,11 +42,11 @@ void BB_ToolZoom::click(QMouseEvent* me)
 {
 	if(me->button() == Qt::LeftButton)
 	{
-		m_WorkArea->zoom(0.25);
+		m_WorkArea->zoom(1.25);
 	}
 	else if(me->button() == Qt::RightButton)
 	{
-		m_WorkArea->zoom(-0.25);
+		m_WorkArea->zoom(0.75);
 	}
 	else if(me->button() == Qt::MidButton)
 	{

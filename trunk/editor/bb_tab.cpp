@@ -120,7 +120,7 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
     else
         m_LeftFrame = NULL;
 
-    m_Center = new BB_WorkArea(&m_Selection, this);
+    m_Center = new BB_WorkArea(&m_Selection);
     m_Center->setFrameShape(QFrame::Box);
     m_Center->setFrameShadow(QFrame::Sunken);
 

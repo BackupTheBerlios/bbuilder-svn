@@ -41,7 +41,9 @@ HEADERS += bb_abstracttool.h \
            bb_rect.h \
            bb_toolselect.h \
            bb_propertywidget.h \
-           bb_globals.h 
+           bb_globals.h \
+           bb_map.h \
+           bb_dlgbuildingedit.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -77,7 +79,9 @@ SOURCES += bb_abstracttool.cpp \
            bb_rect.cpp \
            bb_toolselect.cpp \
            bb_propertywidget.cpp \
-           bb_globals.cpp 
+           bb_globals.cpp \
+           bb_map.cpp \
+           bb_dlgbuildingedit.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

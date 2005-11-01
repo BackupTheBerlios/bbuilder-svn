@@ -13,7 +13,7 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_building.h"
-#include "ui_buildingEdit.h"
+#include "bb_dlgbuildingedit.h"
 
 #include "bb_xbuildinghandler.h"
 
@@ -26,7 +26,7 @@
 using namespace std;
 
 BB_Building::BB_Building(const QDir& path, const QString &fileName, const QString &name)
-	: BB_FileObject(path,fileName,name)
+	: BB_FileObject(path,fileName,name), BB_Map()
 {
 	m_DrawObject = new QVector<BB_DrawObject*>();
 	m_Handler = new BB_XBuildingHandler(this);
@@ -55,21 +55,50 @@ BB_Building::~BB_Building()
  */
 int BB_Building::keyBoardEdit(QWidget* parent)
 {
+	QImage image;
+	
 	int result;
-	QDialog dialog(parent);
-	Ui_BuildingEditDialog dlg;
+	bool exit = false;
+
+	BB_DlgBuildingEdit dlg(parent);
 	
-	dlg.setupUi(&dialog);
+	dlg.setName(getName());
+	dlg.setDescription(getDescription());
 	
-	dlg.lineEditName->setText(getName());
-	dlg.lineEditDesc->setText(getDescription());
+	do
+	{
 	
+		result = dlg.exec();
+		/* Falls Abbrechen gedrückt wurde: raus. */
+		if(result == QDialog::Rejected)
+		{
+			return false;
+		}
+		
+		if(dlg.getName().isEmpty())
+		{
+			QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Sie müssen einen Namen für das Gebäudes angeben."));
+		}
+		else if(!image.load(dlg.getPlanFile()))
+		{
+			QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Sie müssen eine gültige Bilddatei als Plan angeben."));
+		}
+		else
+		{
+			/* Falls alles gut ist */
+			exit = 1;
+		}
+			
+	} while(result != QDialog::Rejected && !exit);
 	
+	setName(dlg.getName());
+	setDescription(dlg.getDescription());
 	
-	result = dialog.exec();
+	m_MapFileName.sprintf("%08d.png",getObjectNr());
 	
-	setName(dlg.lineEditName->text());
-	setDescription(dlg.lineEditDesc->text());
+	image.save(m_FilePath.path() + QDir::separator() + m_MapFileName,"PNG");
+	
+	setMap(QPixmap::fromImage(image));
 	
 	return result;
 }
@@ -121,6 +150,7 @@ bool BB_Building::write(QTextStream &out)
 			<< "<!DOCTYPE bb_building>\n"
 			<< "<bb_building version=\"1.0\">\n";
 	BB_Object::generateXElement(out, depth);
+	out << BB::indent(depth) << "<mapfile>" << m_MapFileName << "</mapfile>\n";
 	
 	if(points.count())
 	{
@@ -178,3 +208,43 @@ const QString BB_Building::getClassName()
 
 
 
+
+
+/**
+ * Überläd die open() Funktion von BB_FileObject.
+ * Läd zusätztlich die Map Datei des Gebäudes.
+ */
+bool BB_Building::open()
+{
+	bool exit;
+	
+	if(BB_FileObject::open())
+	{
+		exit = loadMap(m_FilePath);
+	}
+	else
+	{
+		exit = false;
+	}
+	
+	return exit;
+}
+
+
+/*!
+    \fn BB_Building::remove()
+ */
+void BB_Building::remove()
+{
+	QString xmlFile,pngFile, name;
+	name.sprintf("%08d.png",getObjectNr());
+			
+	xmlFile = m_FilePath.path() + QDir::separator() + m_FileName;
+	pngFile = m_FilePath.path() + QDir::separator() + name;
+	
+	cout << xmlFile.toStdString() << endl;
+	cout << pngFile.toStdString() << endl;
+			
+	QFile::remove(xmlFile);
+	QFile::remove(pngFile);
+}

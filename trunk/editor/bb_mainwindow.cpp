@@ -34,16 +34,21 @@ BB_MainWindow::BB_MainWindow(QWidget* parent, Qt::WFlags flags): QMainWindow(par
 	initStatusBar();
 	
 	initDoc();
-	
+
 	initMainWindow();
+	
+	loadDoc();
+	
+	
+	
 	
 	
 	
 	/* Status aller Tasten auf false setzen */
-	for(int i = 0; i < 256; i++)
-	{
-		m_Keys[i] = false;
-	}
+// 	for(int i = 0; i < 256; i++)
+// 	{
+// 		m_Keys[i] = false;
+// 	}
 	
 }
 
@@ -72,7 +77,7 @@ void BB_MainWindow::initMenus()
 	
 	m_MenuFile->addAction(m_aFileSave);
 	m_MenuFile->addSeparator();
-	m_MenuFile->addAction(QString("Beenden"));
+	m_MenuFile->addAction(m_aFileExit);
 	
     m_MenuView->addAction(m_aViewOptions);
 
@@ -166,6 +171,8 @@ void BB_MainWindow::keyReleaseEvent ( QKeyEvent * e )
 void BB_MainWindow::initDoc()
 {
 	m_Doc = new BB_Doc();
+	
+
 }
 
 
@@ -190,12 +197,23 @@ void BB_MainWindow::slotProjectNew()
 		if(result == QDialog::Accepted)
 		{
 			m_Doc->close();
+			
+			m_TabTerrain->unsetDrawObjects();
+			m_TabBuilding->unsetDrawObjects();
+			m_TabLevel->unsetDrawObjects();
+			
 			m_TabWidget->setEnabled(false);
 			
 			if(path.mkdir(dir) && path.cd(dir) && m_Doc->createNew(name, desc, path))
 			{
 				m_TabWidget->setEnabled(true);
-				break;
+				m_Config.setCurrentProjectPath(path.path() + QDir::separator() + dir + ".glbb");
+				
+				m_TabTerrain->updateWidget();
+				m_TabBuilding->updateWidget();
+				m_TabLevel->updateWidget();
+				
+				return;
 			}
 			else
 			{
@@ -207,6 +225,10 @@ void BB_MainWindow::slotProjectNew()
 		}
 	}
 	while(result != QDialog::Rejected);
+	
+	
+	
+
 	
 }
 
@@ -306,6 +328,9 @@ void BB_MainWindow::initActions()
 	m_aFileSave = new QAction(QString::fromUtf8("Datei speichern"),this);
 	connect(m_aFileSave,SIGNAL(triggered()),this,SLOT(slotFileSave()));
 	
+	m_aFileExit = new QAction(QString::fromUtf8("Beenden"),this);
+	connect(m_aFileExit,SIGNAL(triggered()),this,SLOT(slotFileExit()));
+	
 	m_aProjectNew = new QAction(QString::fromUtf8("Neues Projekt"),this);
 	connect(m_aProjectNew,SIGNAL(triggered()),this,SLOT(slotProjectNew()));
 	
@@ -320,10 +345,62 @@ void BB_MainWindow::initActions()
 }
 
 
-/*!
-    \fn BB_MainWindow::slotFileSave()
+/**
+ * 
  */
-void BB_MainWindow::slotFileSave()
+void BB_MainWindow::slotFileSave() 
 {
 	cout << "Datei speichern" << endl;
+}
+
+
+/*!
+    \fn BB_MainWindow::slotFileExit()
+ */
+void BB_MainWindow::slotFileExit()
+{
+	close();
+}
+
+
+/*!
+    \fn BB_MainWindow::closeEvent ( QCloseEvent * e )
+ */
+void BB_MainWindow::closeEvent ( QCloseEvent * e )
+{
+    
+	cout << "Fenster wird geschlossen" << endl;
+}
+
+
+/**
+ * Versucht das zuletzt geöffnete Projekt zu laden.
+ * @return <i>true</i>, falls das Projekt geladen werden konnte, sonst <i>false</i>.
+ * @author Alex Letkemann
+ * @date 30.10.2005
+ */
+bool BB_MainWindow::loadDoc()
+{
+	if(!m_Config.getCurrentProjectPath().isEmpty() && m_Doc->open(m_Config.getCurrentProjectPath()))
+	{
+		m_TabWidget->setEnabled(true);
+		
+		cout << "Projekt geladen: " << m_Config.getCurrentProjectPath().toStdString() << endl;
+		
+		m_TabTerrain->updateWidget();
+		m_TabBuilding->updateWidget();
+		m_TabLevel->updateWidget();
+		
+		return true;
+	}
+	else
+	{
+		m_Doc->close();
+		m_TabWidget->setEnabled(false);
+		
+		cout << "Projekt konnte nicht geladen werden: " << m_Config.getCurrentProjectPath().toStdString() << endl;
+		
+		m_Config.setCurrentProjectPath("");
+		return false;
+	}
 }

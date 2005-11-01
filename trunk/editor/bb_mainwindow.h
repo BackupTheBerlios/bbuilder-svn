@@ -51,6 +51,7 @@ private:
 	void initStatusBar();
 	void initMainWindow();
     void initDoc();
+    virtual void closeEvent ( QCloseEvent * e );
     
 	
 protected:
@@ -82,6 +83,7 @@ protected:
     BB_Tab* m_TabBuilding;
     BB_Tab* m_TabTerrain;
     BB_Tab* m_TabLevel;
+    QAction* m_aFileExit;
     
 	
 protected:
@@ -93,6 +95,9 @@ private slots:
     void slotProjectClose();
 	void slotViewOptions();
     void slotFileSave();
+    void slotFileExit();
+private:
+    bool loadDoc();
 };
 
 #endif

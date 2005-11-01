@@ -33,7 +33,15 @@ void BB_ToolMove::click(QMouseEvent* me)
 {
     if(m_Objects != NULL && me != NULL && m_Transformer != NULL)
     {
-//         m_Selection.clear();
+		if(m_Selection->count() == 1)
+		{
+			m_Selection->clear();
+			for(int i = 0; i < m_Selection->count(); i++)
+			{
+				m_Selection->at(i)->setSelected(false);
+			}
+		}
+		
         BB_DrawObject *object;
 
 

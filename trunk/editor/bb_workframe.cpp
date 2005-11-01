@@ -20,7 +20,7 @@
 
 using namespace std;
 
-BB_WorkFrame::BB_WorkFrame(QVector<BB_DrawObject*>* selectVector, BB_Tab *tabCreator, QWidget * parent, Qt::WFlags f)
+BB_WorkFrame::BB_WorkFrame(QVector<BB_DrawObject*>* selectVector, QWidget * parent, Qt::WFlags f)
         :QLabel(parent,f)
 {
 	
@@ -30,11 +30,9 @@ BB_WorkFrame::BB_WorkFrame(QVector<BB_DrawObject*>* selectVector, BB_Tab *tabCre
 	}
 // 	exit(0);
 	
-    m_ZoomFaktor = 1.0;
     m_Tool = NULL;
     m_DrawObjects = NULL;
     m_Transformer.setOffset(QPoint(100, 100));
-    m_TabCreator = tabCreator;
 }
 
 
@@ -84,9 +82,7 @@ void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
  */
 void BB_WorkFrame::setZoomFaktor(double faktor)
 {
-    m_ZoomFaktor = faktor;
-    cout << "Zoom: " << m_ZoomFaktor << endl;
-    m_Transformer.setScale(m_ZoomFaktor);
+	m_Transformer.setScale(faktor);
 }
 
 

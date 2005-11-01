@@ -159,6 +159,10 @@ bool BB_XBuildingHandler::endElement(const QString& namespaceURI, const QString&
 			m_Building->setDescription(m_CurrentText);
 			
 		}
+		else if(qName == "mapfile")
+		{
+			m_Building->setMapFileName(m_CurrentText);
+		}
 	}
 	else
 	{

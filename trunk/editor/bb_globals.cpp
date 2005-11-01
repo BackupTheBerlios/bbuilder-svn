@@ -13,11 +13,11 @@
 
 /**
  * Datei enthält alle globalen Variablen und Funktionen.
- * BIN_DIR: Pfad zum Verzeichnis wo die  ausführbare Datei liegt.
- * MAIN_DIR: Pfad zu Hauptverzeichnis des Programms.
- * IMG_DIR: Pfad, in welchem alle Grafiken des Programms untergebracht sind.
- * CONF_DIR: Pfad zum Konfiguraionsordner des Programms.
- * SEPARATOR: Separator des Dateisystems des Aktuellen Betriebssystems.
+ * BIN_DIR(): Pfad zum Verzeichnis wo die  ausführbare Datei liegt.
+ * MAIN_DIR(): Pfad zu Hauptverzeichnis des Programms.
+ * IMG_DIR(): Pfad, in welchem alle Grafiken des Programms untergebracht sind.
+ * CONF_DIR(): Pfad zum Konfiguraionsordner des Programms.
+ * SEPARATOR(): Separator des Dateisystems des Aktuellen Betriebssystems.
  * Die Pfade werden mit der Funktion setDirs(..) gesetzt und sind danach global erreichbar.
  * @author Alex Letkemann
  * @date 27.10.2005

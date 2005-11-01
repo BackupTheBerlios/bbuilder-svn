@@ -24,11 +24,12 @@
 #include "bb_point.h"
 
 #include "bb_drawobject.h"
+#include "bb_map.h"
 
 /**
 @author Alex Letkemann
 */
-class BB_Building : public BB_FileObject{
+class BB_Building : public BB_FileObject,  public BB_Map {
 public:
 	BB_Building(const QDir& path, const QString &fileName, const QString &name = QString(""));
 
@@ -38,6 +39,8 @@ public:
 	virtual bool write(QTextStream &out);
     virtual void generateXElement(QTextStream &out, int depth);
     virtual const QString getClassName();
+    virtual bool open();
+    void remove();
     
 
 protected:

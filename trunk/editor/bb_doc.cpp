@@ -113,6 +113,9 @@ bool BB_Doc::clear()
 	}
 	m_Levels.clear();
 	
+	
+	BB_Object::m_Counter = 0;
+	
 	return true;
 }
 
@@ -120,12 +123,12 @@ bool BB_Doc::clear()
 /*!
     \fn BB_Doc::open(QDir &dir)
  */
-bool BB_Doc::open(QString &fileName)
+bool BB_Doc::open(QString fileName)
 {
 	/* Dokument leeren */
 	clear();
 	
-	if(fileName != NULL )
+	if(&fileName != NULL )
 	{
 		
 		QDir dir(fileName);
@@ -140,7 +143,10 @@ bool BB_Doc::open(QString &fileName)
 		m_FilePath = m_ProjectPath;
 		
 		
-		BB_FileObject::open();
+		if(!BB_FileObject::open())
+		{
+			return false;
+		}
 		
 // 		m_Terrain->open();
 		

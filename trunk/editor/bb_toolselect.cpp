@@ -126,8 +126,13 @@ void BB_ToolSelect::release(QMouseEvent* me)
 }
 
 
-/*!
-    \fn BB_ToolSelect::move(QMouseEvent* me)
+
+/**
+ * Setzt die neue Position des zweite Punktes des Auswahlrechtecks,
+ * wenn die Maus mit gedrückter Taste bewegt wird.
+ * @param me Mausevent
+ * @param overX Unbenutzt
+ * @param overY Unbenutzt
  */
 void BB_ToolSelect::move(QMouseEvent* me, bool overX, bool overY)
 {
