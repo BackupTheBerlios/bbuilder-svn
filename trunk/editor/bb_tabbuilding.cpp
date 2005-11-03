@@ -22,6 +22,14 @@
 
 using namespace std;
 
+
+/**
+ * Konstrucktor.
+ * Erstellt ein neues Gebäude.
+ * @param doc Doc, welches die Daten enthält.
+ * @param parent Das Parent-Fenster
+ * @param f QtWindowFlags
+ */
 BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
         : BB_Tab(doc, true, true, parent, f)
 {
@@ -33,132 +41,36 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
         cout << "BB_TabBuilding::BB_TabBuilding(): Ungültiger Vector (NULL)" << endl;
     }
 
-    QGroupBox *gB_Buildings = new QGroupBox();
-    gB_Buildings->setTitle(QString::fromUtf8("Gebäude"));
-    gB_Buildings->setFlat(true);
+	initWidgetLeft();
+	initWidgetRight();
+    
+	initTools();
 
-    m_BuildingsListWidget = new QListWidget();
-    connect(m_BuildingsListWidget,SIGNAL(currentRowChanged (int)),this,SLOT(slotBuildingChanged(int)));
-
-    QVBoxLayout *gBL_Buildings = new QVBoxLayout();
-    gBL_Buildings->setMargin(0);
-    gBL_Buildings->setSpacing(2);
-    gBL_Buildings->addWidget(m_BuildingsListWidget,Qt::AlignTop);
-
-    m_ButtonBuildingNew = new QPushButton(QString::fromUtf8("Hinzufügen"));
-
-    m_ButtonBuildingDelete = new QPushButton(QString::fromUtf8("Löschen"));
-    // 	m_ButtonLevelDelete->setEnabled(false);
-
-    m_ButtonBuildingProperties = new QPushButton(QString::fromUtf8("Speichern"));
-    // 	m_ButtonLevelProperties->setEnabled(false);
-
-    connect(m_ButtonBuildingNew,SIGNAL(clicked(bool)),this,SLOT(slotBuildingNew()));
-    connect(m_ButtonBuildingDelete,SIGNAL(clicked(bool)),this,SLOT(slotBuildingDelete()));
-    connect(m_ButtonBuildingProperties,SIGNAL(clicked(bool)),this,SLOT(slotBuildingProperties()));
-
-    gBL_Buildings->addWidget(m_ButtonBuildingNew,Qt::AlignTop);
-    gBL_Buildings->addWidget(m_ButtonBuildingDelete,Qt::AlignTop);
-    gBL_Buildings->addWidget(m_ButtonBuildingProperties,Qt::AlignTop);
-
-
-    gB_Buildings->setLayout(gBL_Buildings);
-
-    addWidgetLeft(gB_Buildings,1);
-
-    QAction *toolSelect = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolSelect.png"), "Auswahl",this);
-    toolSelect->setStatusTip("Auswahl Werkzeug");
-    createToolButton(toolSelect,SLOT(slotToolSelect(QAction*)));
-
-    QIcon zoom(IMG_DIR() + SEPARATOR() + "toolZoom.png");
-    QAction *toolZoom = new QAction(zoom,"Zoom",this);
-    toolZoom->setStatusTip("Zoom Werkzeug");
-    createToolButton(toolZoom,SLOT(slotZoomTool(QAction*)));
-
-    QIcon knote(IMG_DIR() + SEPARATOR() + "toolPoint.png");
-    // 	QAction *toolPointNew = new QAction("Point",this);
-    QAction *toolPointNew = new QAction(knote,"Point",this);
-    toolPointNew->setStatusTip("Point Werkzeug");
-    createToolButton(toolPointNew,SLOT(slotToolPointNew(QAction*)));
-
-    QAction *toolLineNew = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolWall.png"),"Wand",this);
-    toolPointNew->setStatusTip("Line Werkzeug");
-    createToolButton(toolLineNew,SLOT(slotToolLineNew(QAction*)));
-
-    QAction *toolMove = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolMove.png"), "Move",this);
-    toolMove->setStatusTip("Move Werkzeug");
-    createToolButton(toolMove,SLOT(slotToolMove(QAction*)));
-
-
-    m_ToolZoom = new BB_ToolZoom(m_Center);
-    m_ToolPointNew = new BB_ToolPointNew();
-    m_ToolMove = new BB_ToolMove();
-    m_ToolLineNew = new BB_ToolLineNew(m_Center);
-    m_ToolSelect = new BB_ToolSelect();
-
-    updateBuildingList();
-
-
-    /*****************/
-
-    // 	QTableView *view = new QTableView();
-    /*
-     
-    	
-    	view->verticalHeader()->setVisible(false);
-    			
-    	
-    	QStandardItemModel *model = new QStandardItemModel(7,2);
-    // 	model->
-    	model->setHeaderData(0, Qt::Horizontal, tr("Attribut"));
-    	model->setHeaderData(1, Qt::Horizontal, tr("Wert"));
-    	
-    	QModelIndex index = model->index(0, 0);
-    	model->setData(index, QVariant("Name"));
-    	index = model->index(0, 1);
-    	model->setData(index, QVariant("Object_x"));
-    	
-    //	view->horizontalHeader()->setResizeMode(0, QHeaderView::Interactive);
-    //	view->horizontalHeader()->setResizeMode(1, QHeaderView::Stretch);
-     
-    	
-    	view->horizontalHeader()->setClickable(false);
-    	view->horizontalHeader()->setSortIndicatorShown(false);
-    	view->horizontalHeader()->setHighlightSections (false);	
-    	
-    	view->setModel(NULL);
-    */
-
-    m_PropertyWidget = new BB_PropertyWidget();
-
-    addWidgetRight(m_PropertyWidget);
-
-    /*****************/
-
-    slotToolSelect(toolSelect);
-
+	updateBuildingList();
 }
 
 
+/** Destrucktor */
 BB_TabBuilding::~BB_TabBuilding()
 {}
 
 
 
-/*!
-    \fn BB_TabBuilding::slotZoomTool(QAction* action)
+/**
+ * Selektiert das Zoomtool
  */
-void BB_TabBuilding::slotZoomTool(QAction* action)
-{
-    unsetToolButton(action);
-    action->setChecked(true);
-    m_Center->setTool(m_ToolZoom);
-    cout << "m_ToolZoom:" << m_ToolZoom << endl;
-}
+// void BB_TabBuilding::slotToolZoom(QAction* action)
+// {
+//     unsetToolButton(action);
+//     action->setChecked(true);
+//     m_Center->setTool(m_ToolZoom);
+//     cout << "m_ToolZoom:" << m_ToolZoom << endl;
+// }
 
 
-/*!
-    \fn BB_TabBuilding::slotBuildingDelete()
+/**
+ * Wird aufgeruffen, wenn der Button 'Löschen' auf der linken Seite gedrückt wird.
+ * Löscht das aüsgewählte Gebäude.
  */
 void BB_TabBuilding::slotBuildingDelete()
 {
@@ -201,41 +113,16 @@ void BB_TabBuilding::slotBuildingDelete()
 
 
 /**
- *
+ * Wird aufgeruffen, wenn der Button 'Neu' auf der linken Seite gedrückt wird.
+ * Lässt ein neues Gebäude erstellen.
  */
 void BB_TabBuilding::slotBuildingNew()
 {
-
-    // 	BB_Building* building = new BB_Building();
-    // 	if(building->keyBoardEdit(this) == QDialog::Accepted)
-    // 	{
-    // 		m_BuildingsListWidget->addItem(building->getName());
-    //
-    // 		cout << "Gebäude hinzugefügt (" << building << ")" << endl;
-    //
-    // 		m_Buildings->append(building);
-    // 	}
-    // 	else
-    // 	{
-    // 		delete building;
-    // 		building = NULL;
-    // 		cout << "Gelöscht" << endl;
-    // 	}
-    //
-    // 	m_BuildingsListWidget->setCurrentRow (m_Buildings->count()-1);
-    //
-    //
-    // 	updateBuildingList();
-
-
     if(m_Doc->newBuilding(this) != NULL)
     {
         m_BuildingsListWidget->setCurrentRow (m_BuildingsListWidget->count()-1);
         updateBuildingList();
     }
-
-
-    cout << "BuildingNew" << endl;
 }
 
 
@@ -257,7 +144,9 @@ void BB_TabBuilding::slotBuildingProperties()
 
 
 /**
- * Aktualisiert die Gebäudeliste und die Buttons
+ * Aktualisiert die Gebäudeliste und die Buttons.
+ * Deaktiviert die Arbeitsfläche, falls keine Gebäude ausgewählt ist und aktiviert
+ * diese, wenn ein Gebäude ausgewählt wird.
  */
 void BB_TabBuilding::updateBuildingList()
 {
@@ -283,12 +172,13 @@ void BB_TabBuilding::updateBuildingList()
 }
 
 
-/*!
-    \fn BB_TabBuilding::slotBuildingChanged(int index)
+/**
+ * Wird aufgeruffen, wenn ein neues Gebäude in der Liste selektiert wird.
+ * Übergibt die Daten des ausgewählten Gebäudes an die Arbeitsfläche.
  */
 void BB_TabBuilding::slotBuildingChanged(int index)
 {
-    cout << "slotBuildingChanged(" << index << ")" << endl;
+//     cout << "slotBuildingChanged(" << index << ")" << endl;
 
     if(index >= 0)
     {
@@ -296,42 +186,6 @@ void BB_TabBuilding::slotBuildingChanged(int index)
         m_Center->setEnabled(true);
         m_Center->setMap(m_Buildings->at(index));
     }
-}
-
-
-/*!
-    \fn BB_TabBuilding::slotToolPointNew(QAction* action)
- */
-void BB_TabBuilding::slotToolPointNew(QAction* action)
-{
-    unsetToolButton(action);
-    action->setChecked(true);
-    m_Center->setTool(m_ToolPointNew);
-    cout << "m_ToolPointNew:" << m_ToolPointNew << endl;
-}
-
-
-/*!
-    \fn BB_TabBuilding::slotToolMove(QAction* action)
- */
-void BB_TabBuilding::slotToolMove(QAction* action)
-{
-    unsetToolButton(action);
-    action->setChecked(true);
-    m_Center->setTool(m_ToolMove);
-    cout << "m_ToolMove:" << m_ToolMove << endl;
-}
-
-
-/*!
-    \fn BB_TabBuilding::void slotToolLineNew(QAction* action)
- */
-void BB_TabBuilding::slotToolLineNew(QAction* action)
-{
-    unsetToolButton(action);
-    action->setChecked(true);
-    m_Center->setTool(m_ToolLineNew);
-    cout << "m_ToolLineNew:" << m_ToolLineNew << endl;
 }
 
 
@@ -347,22 +201,158 @@ void BB_TabBuilding::mousePressEvent ( QMouseEvent * e )
 }
 
 
-/*!
-    \fn BB_TabBuilding::slotToolSelect(QAction* action)
- */
-void BB_TabBuilding::slotToolSelect(QAction* action)
-{
-    unsetToolButton(action);
-    action->setChecked(true);
-    m_Center->setTool(m_ToolSelect);
-    cout << "m_ToolSelect" << m_ToolSelect << endl;
-}
 
-
-/*!
-    \fn BB_TabBuilding::updateWidget()
+/**
+ * Updated das Fenster.
  */
 void BB_TabBuilding::updateWidget()
 {
     updateBuildingList();
+}
+
+
+/**
+ * Initialisiert alle Tools
+ */
+void BB_TabBuilding::initTools()
+{
+	
+	/* Tool zum Selektieren */
+	m_ToolSelect = new BB_ToolSelect();
+	QAction *toolSelect = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolSelect.png"), "Auswahl",this);
+	toolSelect->setStatusTip("Auswahl Werkzeug");
+	createToolButton(toolSelect,m_ToolSelect);
+	
+
+	/* Zoomtool */
+	m_ToolZoom = new BB_ToolZoom(m_Center);
+	QIcon zoom(IMG_DIR() + SEPARATOR() + "toolZoom.png");
+	QAction *toolZoom = new QAction(zoom,"Zoom",this);
+	toolZoom->setStatusTip("Zoom Werkzeug");
+	createToolButton(toolZoom,m_ToolZoom);
+	
+
+	/* Tool zum Erstellen neuer Knoten */
+	m_ToolPointNew = new BB_ToolPointNew();
+	QIcon knote(IMG_DIR() + SEPARATOR() + "toolPoint.png");
+    // 	QAction *toolPointNew = new QAction("Point",this);
+	QAction *toolPointNew = new QAction(knote,"Point",this);
+	toolPointNew->setStatusTip("Point Werkzeug");
+	createToolButton(toolPointNew,m_ToolPointNew);
+	
+
+	/* Tool zum Erstellen neuer Linien */
+	m_ToolLineNew = new BB_ToolLineNew(m_Center);
+	QAction *toolLineNew = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolWall.png"),"Wand",this);
+	toolPointNew->setStatusTip("Line Werkzeug");
+	createToolButton(toolLineNew,m_ToolLineNew);
+	
+
+	/* Tool zum Bewegen der Objekte */
+	m_ToolMove = new BB_ToolMove();
+	QAction *toolMove = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolMove.png"), "Move",this);
+	toolMove->setStatusTip("Move Werkzeug");
+	createToolButton(toolMove,m_ToolMove);
+	
+
+	
+	/* Das Selektionstool alst Standard wählen */
+	toolChanged(toolSelect);
+	
+	
+}
+
+
+/**
+ * Initialisiert das linke Tool-Fenster
+ */
+void BB_TabBuilding::initWidgetLeft()
+{
+	QGroupBox *gB_Buildings = new QGroupBox();
+	gB_Buildings->setTitle(QString::fromUtf8("Gebäude"));
+	gB_Buildings->setFlat(true);
+
+	m_BuildingsListWidget = new QListWidget();
+	connect(m_BuildingsListWidget,SIGNAL(currentRowChanged (int)),this,SLOT(slotBuildingChanged(int)));
+
+	QVBoxLayout *gBL_Buildings = new QVBoxLayout();
+	gBL_Buildings->setMargin(0);
+	gBL_Buildings->setSpacing(2);
+	gBL_Buildings->addWidget(m_BuildingsListWidget,Qt::AlignTop);
+
+	m_ButtonBuildingNew = new QPushButton(QString::fromUtf8("Hinzufügen"));
+
+	m_ButtonBuildingDelete = new QPushButton(QString::fromUtf8("Löschen"));
+    // 	m_ButtonLevelDelete->setEnabled(false);
+
+	m_ButtonBuildingProperties = new QPushButton(QString::fromUtf8("Speichern"));
+    // 	m_ButtonLevelProperties->setEnabled(false);
+
+	connect(m_ButtonBuildingNew,SIGNAL(clicked(bool)),this,SLOT(slotBuildingNew()));
+	connect(m_ButtonBuildingDelete,SIGNAL(clicked(bool)),this,SLOT(slotBuildingDelete()));
+	connect(m_ButtonBuildingProperties,SIGNAL(clicked(bool)),this,SLOT(slotBuildingProperties()));
+
+	gBL_Buildings->addWidget(m_ButtonBuildingNew,Qt::AlignTop);
+	gBL_Buildings->addWidget(m_ButtonBuildingDelete,Qt::AlignTop);
+	gBL_Buildings->addWidget(m_ButtonBuildingProperties,Qt::AlignTop);
+
+
+	gB_Buildings->setLayout(gBL_Buildings);
+
+	addWidgetLeft(gB_Buildings,1);
+}
+
+
+/**
+ * Initialisiert das rechte Fenster
+ */
+void BB_TabBuilding::initWidgetRight()
+{
+	m_PropertyWidget = new BB_PropertyWidget();
+
+	addWidgetRight(m_PropertyWidget);
+}
+
+
+/**
+ * Verarbeitet die Tools von BB_TabBuilding und übergibt diese weiter an die Arbeitfläche.
+ * @param action Aktion des Tools, welches Betätigt wurde.
+ */
+void BB_TabBuilding::toolChanged(QAction* action)
+{
+	
+	if(m_ToolSelect->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolSelect);
+	}
+	else if(m_ToolMove->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolMove);
+	}
+	else if(m_ToolZoom->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolZoom);
+	}
+	else if(m_ToolPointNew->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolPointNew);
+	}
+	else if(m_ToolLineNew->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolLineNew);
+	}
+	else
+	{
+		cout << "Unbekanntes Tool" << endl;
+	}
 }

@@ -14,8 +14,16 @@
  ***************************************************************************/
 #include "bb_tabterrain.h"
 
+#include "bb_globals.h"
+#include "bb_toolselect.h"
+#include "bb_toolzoom.h"
+#include "bb_toolmove.h"
+#include "bb_toolpointnew.h"
+#include "bb_toollinenew.h"
+
 BB_TabTerrain::BB_TabTerrain(BB_Doc* doc, QWidget* parent, Qt::WFlags f): BB_Tab(doc, true, false, parent, f)
 {
+	initTools();
 }
 
 
@@ -23,3 +31,95 @@ BB_TabTerrain::~BB_TabTerrain()
 {
 }
 
+
+
+/**
+ * Initialisiert alle Tools
+ */
+void BB_TabTerrain::initTools()
+{
+	/* Tool zum Selektieren */
+	m_ToolSelect = new BB_ToolSelect();
+	QAction *toolSelect = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolSelect.png"), "Auswahl",this);
+	toolSelect->setStatusTip("Auswahl Werkzeug");
+	createToolButton(toolSelect,m_ToolSelect);
+	
+
+	/* Zoomtool */
+	m_ToolZoom = new BB_ToolZoom(m_Center);
+	QIcon zoom(IMG_DIR() + SEPARATOR() + "toolZoom.png");
+	QAction *toolZoom = new QAction(zoom,"Zoom",this);
+	toolZoom->setStatusTip("Zoom Werkzeug");
+	createToolButton(toolZoom,m_ToolZoom);
+	
+
+	/* Tool zum Erstellen neuer Knoten */
+	m_ToolPointNew = new BB_ToolPointNew();
+	QIcon knote(IMG_DIR() + SEPARATOR() + "toolPoint.png");
+    // 	QAction *toolPointNew = new QAction("Point",this);
+	QAction *toolPointNew = new QAction(knote,"Point",this);
+	toolPointNew->setStatusTip("Point Werkzeug");
+	createToolButton(toolPointNew,m_ToolPointNew);
+	
+
+	/* Tool zum Erstellen neuer Linien */
+	m_ToolLineNew = new BB_ToolLineNew(m_Center);
+	QAction *toolLineNew = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolWall.png"),"Wand",this);
+	toolPointNew->setStatusTip("Line Werkzeug");
+	createToolButton(toolLineNew,m_ToolLineNew);
+	
+
+	/* Tool zum Bewegen der Objekte */
+	m_ToolMove = new BB_ToolMove();
+	QAction *toolMove = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolMove.png"), "Move",this);
+	toolMove->setStatusTip("Move Werkzeug");
+	createToolButton(toolMove,m_ToolMove);
+	
+
+	
+	/* Das Selektionstool alst Standard wählen */
+	toolChanged(toolSelect);
+}
+
+/**
+ * Verarbeitet die Tools von BB_TabTerrain und übergibt diese weiter an die Arbeitfläche.
+ * @param action Aktion des Tools, welches Betätigt wurde.
+ */
+void BB_TabTerrain::toolChanged(QAction* action)
+{
+	
+	if(m_ToolSelect->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolSelect);
+	}
+	else if(m_ToolMove->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolMove);
+	}
+	else if(m_ToolZoom->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolZoom);
+	}
+	else if(m_ToolPointNew->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolPointNew);
+	}
+	else if(m_ToolLineNew->getAction() == action)
+	{
+		unsetToolButton(action);
+		action->setChecked(true);
+		m_Center->setTool(m_ToolLineNew);
+	}
+	else
+	{
+		cout << "Unbekanntes Tool" << endl;
+	}
+}

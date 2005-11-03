@@ -19,6 +19,8 @@
 #include "bb_tab.h"
 #include "bb_terrain.h"
 
+#include "bb_abstracttool.h"
+
 /**
 @author Alex Letkemann
 */
@@ -30,6 +32,19 @@ public:
 
     ~BB_TabTerrain();
 
+	
+protected:
+	BB_AbstractTool* m_ToolZoom;
+	BB_AbstractTool* m_ToolPointNew;
+	BB_AbstractTool* m_ToolMove;
+	BB_AbstractTool* m_ToolLineNew;
+	BB_AbstractTool* m_ToolSelect;	
+
+private:
+    void initTools();
+
+protected:
+	virtual void toolChanged(QAction* action);
 };
 
 #endif

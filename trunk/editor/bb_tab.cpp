@@ -216,19 +216,18 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
 
 /**
  * Erzeugt einen QToolButton und plaziert diesen im linken Frame.
- * Der QToolButton übernimmt die Eigenschaften wie Text, Icon usw. von action und wird 'connected' zu method.
+ * Der QToolButton übernimmt die Eigenschaften von action wie Text, Icon usw. von action und wird 'connected' zu method.
  * @param action Die QAction, aus der der QToolButton erzeugt werden soll.
- * @param method Slot, an der die QAction 'connected' werden soll.<br />
- * <b>Achtung: Slot muss mit dem Qt-Makro SLOT() erzeugt werden.</b>
  * @return Gibt false im Fehlerfall zurück, sonst true
  * @author Alex Letkemann
  * @date 21.08.2005
  */
-bool BB_Tab::createToolButton(QAction *action, const char* method)
+bool BB_Tab::createToolButton(QAction *action, BB_AbstractTool* tool)
 {
-    if(action != NULL)
+    if(action != NULL && tool != NULL)
     {
 		action->setCheckable(true);
+		tool->setAction(action);
 		m_ToolButtonActions->append(action);
 		
         QToolButton *button = new QToolButton();
@@ -238,7 +237,7 @@ bool BB_Tab::createToolButton(QAction *action, const char* method)
 
         m_ToolsGridLayout->addWidget(button,m_ToolButtonCount / 5,m_ToolButtonCount % 5);
         m_ToolButtonCount++;
-        return connect(button,SIGNAL(triggered(QAction*)),this,method);
+		return connect(button,SIGNAL(triggered(QAction*)),this,SLOT(slotToolChanged(QAction*)));
     }
     else
         return false;
@@ -333,4 +332,26 @@ void BB_Tab::unsetDrawObjects()
  */
 void BB_Tab::updateWidget()
 {
+}
+
+
+/*!
+    \fn BB_Tab::slotToolChanged(QAction* action)
+ */
+void BB_Tab::slotToolChanged(QAction* action)
+{
+	toolChanged(action);
+}
+
+
+/**
+ * Wird ausgeführt, wenn ein Toolbuttons betätigt wird. Diese Funktion sollte in jeder 
+ * abgeleiteten Klasse, die Tools enthält, überladen werden. Falls dies nicht geschechen ist
+ * und ToolButton wird betätigt kommt die die Meldung <i>toolChanged(QAction* action) nicht implementiert</i> aus stdout.
+ * Hier werden die Tools weiter an die Arbeitsfläche übergeben.
+ * @param action QAction Pointer des Tools
+ */
+void BB_Tab::toolChanged(QAction* action)
+{
+	cout << "toolChanged(QAction* action) nicht implementiert (action:" << action << ")" << endl;
 }

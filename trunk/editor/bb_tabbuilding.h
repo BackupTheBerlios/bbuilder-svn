@@ -41,14 +41,10 @@ public:
     void updateBuildingList();
     virtual void mousePressEvent ( QMouseEvent * e );
 private slots:
-    void slotZoomTool(QAction* action);
     void slotBuildingProperties();
     void slotBuildingDelete();
     void slotBuildingNew();
     void slotBuildingChanged(int index);
-    void slotToolPointNew(QAction* action);
-    void slotToolMove(QAction* action);
-    void slotToolLineNew(QAction* action);
 protected:
     BB_AbstractTool* m_ToolZoom;
     BB_AbstractTool* m_ToolPointNew;
@@ -63,11 +59,13 @@ protected:
     QPushButton* m_ButtonBuildingProperties;
     BB_PropertyWidget* m_PropertyWidget;
     
-	
-public slots:
-    void slotToolSelect(QAction* action);
 protected:
     virtual void updateWidget();
+    virtual void toolChanged(QAction* action);
+private:
+    void initTools();
+    void initWidgetLeft();
+    void initWidgetRight();
 };
 
 #endif

@@ -84,13 +84,13 @@ BB_TabLevel::BB_TabLevel(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 	QIcon zoom(IMG_DIR() + SEPARATOR() + "toolZoom.png");
 	QAction *toolZoom = new QAction(zoom,"Zoom",this);
 	toolZoom->setStatusTip("Zoom Werkzeug");
-	createToolButton(toolZoom,SLOT(slotZoomTool(QAction*)));
-	
-	createToolButton(new QAction("3",this),SLOT(test(QAction*)));
-	createToolButton(new QAction("4",this),SLOT(test(QAction*)));
-	createToolButton(new QAction("5",this),SLOT(test(QAction*)));
-	createToolButton(new QAction("6",this),SLOT(test(QAction*)));
-	createToolButton(new QAction("7",this),SLOT(test(QAction*)));
+// 	createToolButton(toolZoom,SLOT(slotZoomTool(QAction*)));
+// 	
+// 	createToolButton(new QAction("3",this),SLOT(test(QAction*)));
+// 	createToolButton(new QAction("4",this),SLOT(test(QAction*)));
+// 	createToolButton(new QAction("5",this),SLOT(test(QAction*)));
+// 	createToolButton(new QAction("6",this),SLOT(test(QAction*)));
+// 	createToolButton(new QAction("7",this),SLOT(test(QAction*)));
 	
 	
 	m_ToolZoom = new BB_ToolZoom(m_Center);

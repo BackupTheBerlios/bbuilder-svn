@@ -13,6 +13,7 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_abstracttool.h"
+#include "bb_tab.h"
 
 #include <iostream>
 
@@ -22,6 +23,7 @@ BB_AbstractTool::BB_AbstractTool()
 {
 	m_Transformer = NULL;
 	m_Objects = NULL;
+	m_Action = NULL;
 	
 }
 
@@ -146,4 +148,23 @@ void BB_AbstractTool::clearSelection()
 	}
 	
 	m_Selection->clear();
+}
+
+
+QAction* BB_AbstractTool::getAction()
+{
+	return m_Action;
+}
+
+
+void BB_AbstractTool::setAction(QAction* action)
+{
+	if(action != NULL)
+	{
+		m_Action = action;
+	}
+	else
+	{
+		cout << "BB_AbstractTool::setAction(): NULL-Pointer erhalten" << endl;
+	}
 }

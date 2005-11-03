@@ -20,6 +20,7 @@
 #include <iostream>
 
 #include "bb_doc.h"
+#include "bb_abstracttool.h"
 
 class BB_WorkArea;
 
@@ -63,9 +64,12 @@ protected:
     int m_ToolButtonCount;
     QList<QAction*> *m_ToolButtonActions;
 	
-	virtual bool createToolButton(QAction *action, const char* method);
+	virtual bool createToolButton(QAction *action, BB_AbstractTool* tool);
+    virtual void toolChanged(QAction* action);
 	
 
+private slots:
+    void slotToolChanged(QAction* action);
 };
 
 #endif

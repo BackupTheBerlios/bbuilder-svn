@@ -17,11 +17,14 @@
 #define BB_ABSTRACTTOOL_H
 
 #include <QtGui>
+#include <QAction>
 
 #include "bb_drawobject.h"
 #include "bb_transformer.h"
 #include "c2dvector.h"
-#include "bb_tab.h"
+
+class BB_Tab;
+
 
 /**
 @author Alex Letkemann
@@ -58,15 +61,18 @@ public:
 
 	QVector< BB_DrawObject * >* getToolObjects() const;
     void clearSelection();
-	
-	
 
-
+	void setAction(QAction* theValue);
+	QAction* getAction();
+	
 protected:
+	
+
 	C2dVector m_LastLogicMouseClick;
 	C2dVector m_pLogic;
 	QPoint m_pScreen;
 	QWidget * parentWidget;
+	QAction* m_Action;
 	
 	/** Vektor mit Objekten, die bearbeitet werden sollen. */
     QVector<BB_DrawObject*>* m_Objects;
@@ -76,6 +82,7 @@ protected:
 	/** Transformer, der bei der Bearbeitung verwendet wird. */
     BB_Transformer* m_Transformer;
     QVector<BB_DrawObject*>* m_ToolObjects;
+
 };
 
 #endif
