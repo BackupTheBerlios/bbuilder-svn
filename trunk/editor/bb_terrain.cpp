@@ -13,6 +13,14 @@
  *   GNU General Public License for more details.                          *
  ***************************************************************************/
 #include "bb_terrain.h"
+#include "bb_dlgterrainedit.h"
+
+
+#include "bb_point.h"
+
+#include <iostream>
+
+using namespace std;
 
 const QString BB_Terrain::s_ClassName = "BB_Terrain";
 
@@ -44,6 +52,105 @@ void BB_Terrain::generateXElement(QTextStream &out, int depth)
  */
 bool BB_Terrain::write(QTextStream &out)
 {
-    /// @todo implement me
+	int depth = 1;
+	
+	QVector<BB_Point*> points;
+// 	QVector<BB_Wall*> walls; 
+	
+	BB_Object* object;
+	
+	for(int i = 0; i < m_DrawObject->count(); i++)
+	{
+		object = m_DrawObject->at(i);
+		
+		if(typeid(*object) == typeid(BB_Point))
+		{
+			points.append((BB_Point*)object);
+		} 
+// 		else if (typeid(*object) == typeid(BB_Wall))
+// 		{
+// 			walls.append((BB_Wall*)object);
+// 		}
+		else
+		{
+			cout << "Unbekanntes Objekt gefunden" << endl;
+		}
+	}
+	
+	
+	
+	out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+			<< "<!DOCTYPE bb_terrain>\n"
+			<< "<bb_terrain version=\"1.0\">\n";
+	BB_Object::generateXElement(out, depth);
+	out << BB::indent(depth) << "<mapfile>" << m_MapFileName << "</mapfile>\n";
+	
+	if(points.count())
+	{
+		out << BB::indent(depth) << "<points>\n";
+		
+		for(int i = 0; i < points.count(); i++)
+		{
+			points.at(i)->generateXElement(out,depth + 1);
+		}
+		
+		out << BB::indent(depth) << "</points>\n";
+	}
+	else
+	{
+		out << "<points />";
+	}
+	
+// 	if(walls.count())
+// 	{
+// 		out << BB::indent(depth) << "<walls>\n";
+// 		
+// 		for(int i = 0; i < walls.count(); i++)
+// 		{
+// 			walls.at(i)->generateXElement(out,depth + 1);
+// 		}
+// 		
+// 		out << BB::indent(depth) << "</walls>\n";
+// 	}
+// 	else
+// 	{
+// 		out << BB::indent(depth) << "<walls />\n";
+// 	}
+	
+	out << "</bb_terrain>\n";
 	return true;
+}
+
+
+/*!
+    \fn BB_Terrain::keyBoardEdit(QWidget* parent)
+ */
+int BB_Terrain::keyBoardEdit(QWidget* parent)
+{
+    /// @todo implement me
+    
+	BB_DlgTerrainEdit dlg;
+	
+	dlg.exec();
+}
+
+
+/**
+ * Führt die open() Funktion von BB_FileObject aus und
+ * läd zusätztlich die Map Datei des Geländes.
+ */
+bool BB_Terrain::open()
+{
+	bool exit;
+
+	if(BB_FileObject::open())
+	{
+		exit = loadMap(m_FilePath);
+	}
+	else
+	{
+		exit = false;
+	}
+
+	return exit;
 }

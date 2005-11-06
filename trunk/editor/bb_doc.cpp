@@ -143,12 +143,13 @@ bool BB_Doc::open(QString fileName)
 		m_FilePath = m_ProjectPath;
 		
 		
+		/* Projektdatei auslesen */
 		if(!BB_FileObject::open())
 		{
 			return false;
 		}
 		
-// 		m_Terrain->open();
+		m_Terrain->open();
 		
 		for(int i = 0; i < m_Buildings.count(); i++)
 		{
@@ -208,18 +209,6 @@ bool BB_Doc::createNew(const QString &name, const QString &desc, const QDir &pat
 	m_FilePath = m_ProjectPath;
 	m_FileName = m_ProjectFile;
 	
-// 	QString fileName = path.path() + QDir::separator() + path.dirName() + ".glbb";
-// 	QFile file(fileName);
-// 	
-// 	if(!file.open(QFile::WriteOnly | QFile::Text))
-// 	{
-// 		file.close();
-// 		return false;
-// 	}
-	
-
-	
-	
 	
 	m_ProjectPath.mkdir("terrain");
 	m_ProjectPath.mkdir("buildings");
@@ -231,23 +220,13 @@ bool BB_Doc::createNew(const QString &name, const QString &desc, const QDir &pat
 	
 	QString s = "terrain.xml";
 	
+	/* neues Gelände erzeugen */
 	newTerrain(tmpPath, s);
 	m_Terrain->setName("Terrain");
 	
 	
 	
 	save();
-	
-	
-// 	BB_XDocGenerator docGenerator(this);
-// 	
-// 	if(!docGenerator.write(&file))
-// 	{
-// 		file.close();
-// 		return false;
-// 	}
-// 	
-// 	file.close();
 	return true;
 }
 
@@ -362,6 +341,7 @@ BB_Level* BB_Doc::newLevel(QWidget * parent)
 // 	}
 // 	
 // 	return level;
+	return NULL;
 }
 
 
@@ -396,4 +376,27 @@ BB_Terrain* BB_Doc::newTerrain(QDir& path, QString& fileName)
 {
 	m_Terrain = new BB_Terrain(path,fileName,"Terrain");
 	return m_Terrain;
+}
+
+
+/*!
+    \fn BB_Doc::getBuilding(QListWidgetItem* item)
+ */
+BB_Building* BB_Doc::getBuilding(QListWidgetItem* item)
+{
+	if(&m_Buildings != NULL)
+	{
+		BB_Building* building;
+		
+		for(int i = 0; i < m_Buildings.count(); i++)
+		{
+			building = m_Buildings.at(i);
+			if(building != NULL && building->getListWidgetItem() == item)
+			{
+				return building;
+			}
+		}
+	}
+	
+	return NULL;
 }

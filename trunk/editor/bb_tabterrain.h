@@ -39,12 +39,15 @@ protected:
 	BB_AbstractTool* m_ToolMove;
 	BB_AbstractTool* m_ToolLineNew;
 	BB_AbstractTool* m_ToolSelect;	
+    BB_Terrain* m_Terrain;
 
 private:
     void initTools();
 
 protected:
 	virtual void toolChanged(QAction* action);
+private slots:
+    void slotTerrainEdit();
 };
 
 #endif

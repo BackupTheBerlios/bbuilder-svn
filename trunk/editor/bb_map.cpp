@@ -11,6 +11,10 @@
 //
 #include "bb_map.h"
 
+#include <iostream>
+
+using namespace std;
+
 BB_Map::BB_Map()
 {
 	m_Zoom = 1;
@@ -37,11 +41,11 @@ QPixmap& BB_Map::getMap()
 
 /**
  * 
- * @param theValue 
+ * @param map 
  */
-void BB_Map::setMap(const QPixmap& theValue)
+void BB_Map::setMap(const QPixmap& map)
 {
-    m_Map = theValue;
+    m_Map = map;
 }
 
 
@@ -65,7 +69,14 @@ QString BB_Map::getMapFileName() const
 
 void BB_Map::setMapFileName(const QString& name)
 {
-    m_MapFileName = name;
+	if(&name != NULL && !name.isEmpty())
+	{
+    	m_MapFileName = name;
+	}
+	else
+	{
+		cout << "BB_Map::setMapFileName(..): Ungültigen Dateinamen erhalten" << endl;
+	}
 }
 
 

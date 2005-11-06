@@ -42,6 +42,7 @@ public:
 	void unsetDrawObjects();
 	
 	virtual void updateWidget();	
+	virtual void clear();
 	
 private:	
 	void initLayout(bool leftFrame, bool rightFrame);
@@ -66,6 +67,7 @@ protected:
 	
 	virtual bool createToolButton(QAction *action, BB_AbstractTool* tool);
     virtual void toolChanged(QAction* action);
+    
 	
 
 private slots:

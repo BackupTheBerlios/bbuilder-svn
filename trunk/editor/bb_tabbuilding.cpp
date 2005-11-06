@@ -40,13 +40,15 @@ BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
     {
         cout << "BB_TabBuilding::BB_TabBuilding(): Ungültiger Vector (NULL)" << endl;
     }
+	
+	m_BuildingsListCreated = false;
 
 	initWidgetLeft();
 	initWidgetRight();
     
 	initTools();
 
-	updateBuildingList();
+// 	updateBuildingList();
 }
 
 
@@ -55,17 +57,47 @@ BB_TabBuilding::~BB_TabBuilding()
 {}
 
 
-
 /**
- * Selektiert das Zoomtool
+ * Initialisiert das linke Tool-Fenster
  */
-// void BB_TabBuilding::slotToolZoom(QAction* action)
-// {
-//     unsetToolButton(action);
-//     action->setChecked(true);
-//     m_Center->setTool(m_ToolZoom);
-//     cout << "m_ToolZoom:" << m_ToolZoom << endl;
-// }
+void BB_TabBuilding::initWidgetLeft()
+{
+	QGroupBox *gB_Buildings = new QGroupBox();
+	gB_Buildings->setTitle(QString::fromUtf8("Gebäude"));
+	gB_Buildings->setFlat(true);
+
+	m_BuildingsListWidget = new QListWidget();
+	connect(m_BuildingsListWidget,
+			SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
+			this,
+			SLOT(slotBuildingChanged(QListWidgetItem *, QListWidgetItem *)));
+
+	QVBoxLayout *gBL_Buildings = new QVBoxLayout();
+	gBL_Buildings->setMargin(0);
+	gBL_Buildings->setSpacing(2);
+	gBL_Buildings->addWidget(m_BuildingsListWidget,Qt::AlignTop);
+
+	m_ButtonBuildingNew = new QPushButton(QString::fromUtf8("Hinzufügen"));
+
+	m_ButtonBuildingDelete = new QPushButton(QString::fromUtf8("Löschen"));
+    // 	m_ButtonLevelDelete->setEnabled(false);
+
+	m_ButtonBuildingProperties = new QPushButton(QString::fromUtf8("Eigenschaften"));
+    // 	m_ButtonLevelProperties->setEnabled(false);
+
+	connect(m_ButtonBuildingNew,SIGNAL(clicked(bool)),this,SLOT(slotBuildingNew()));
+	connect(m_ButtonBuildingDelete,SIGNAL(clicked(bool)),this,SLOT(slotBuildingDelete()));
+	connect(m_ButtonBuildingProperties,SIGNAL(clicked(bool)),this,SLOT(slotBuildingProperties()));
+
+	gBL_Buildings->addWidget(m_ButtonBuildingNew,Qt::AlignTop);
+	gBL_Buildings->addWidget(m_ButtonBuildingDelete,Qt::AlignTop);
+	gBL_Buildings->addWidget(m_ButtonBuildingProperties,Qt::AlignTop);
+
+
+	gB_Buildings->setLayout(gBL_Buildings);
+
+	addWidgetLeft(gB_Buildings,1);
+}
 
 
 /**
@@ -100,12 +132,12 @@ void BB_TabBuilding::slotBuildingDelete()
 
             m_Doc->save();
 
-            updateBuildingList();
+
             unsetDrawObjects();
             m_Center->setEnabled(false);
 
             m_BuildingsListWidget->setCurrentRow(row - 1);
-            slotBuildingChanged(row - 1);
+
 
         }
     }
@@ -118,10 +150,11 @@ void BB_TabBuilding::slotBuildingDelete()
  */
 void BB_TabBuilding::slotBuildingNew()
 {
-    if(m_Doc->newBuilding(this) != NULL)
+	BB_Building* building = m_Doc->newBuilding(this);
+    if(building != NULL)
     {
-        m_BuildingsListWidget->setCurrentRow (m_BuildingsListWidget->count()-1);
-        updateBuildingList();
+		m_BuildingsListWidget->addItem(building->getListWidgetItem());
+		m_BuildingsListWidget->setCurrentItem(building->getListWidgetItem());
     }
 }
 
@@ -131,61 +164,16 @@ void BB_TabBuilding::slotBuildingNew()
  */
 void BB_TabBuilding::slotBuildingProperties()
 {
-    int row = m_BuildingsListWidget->currentRow();
-    if(row >= 0)
+    
+	BB_Building* building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem() );
+
+    if(building != NULL)
     {
-        // 		m_Buildings->at(row)->keyBoardEdit(this);
-        m_Buildings->at(row)->save();
+     	building->keyBoardEdit(this);
+		building->save();
 
     }
 
-    updateBuildingList();
-}
-
-
-/**
- * Aktualisiert die Gebäudeliste und die Buttons.
- * Deaktiviert die Arbeitsfläche, falls keine Gebäude ausgewählt ist und aktiviert
- * diese, wenn ein Gebäude ausgewählt wird.
- */
-void BB_TabBuilding::updateBuildingList()
-{
-    m_BuildingsListWidget->clear();
-
-    for(int i = 0; i < m_Buildings->count(); i++)
-    {
-        m_BuildingsListWidget->addItem(m_Buildings->at(i)->getName());
-    }
-
-    if(m_Buildings->count() == 0)
-    {
-        m_ButtonBuildingDelete->setEnabled(false);
-        m_ButtonBuildingProperties->setEnabled(false);
-        m_Center->setEnabled(false);
-    }
-    else if(m_Buildings->count() >= 0)
-    {
-        m_ButtonBuildingDelete->setEnabled(true);
-        m_ButtonBuildingProperties->setEnabled(true);
-        m_Center->setEnabled(true);
-    }
-}
-
-
-/**
- * Wird aufgeruffen, wenn ein neues Gebäude in der Liste selektiert wird.
- * Übergibt die Daten des ausgewählten Gebäudes an die Arbeitsfläche.
- */
-void BB_TabBuilding::slotBuildingChanged(int index)
-{
-//     cout << "slotBuildingChanged(" << index << ")" << endl;
-
-    if(index >= 0)
-    {
-        m_Center->setDrawObjects(m_Buildings->at(index)->getDrawObjects());
-        m_Center->setEnabled(true);
-        m_Center->setMap(m_Buildings->at(index));
-    }
 }
 
 
@@ -207,7 +195,7 @@ void BB_TabBuilding::mousePressEvent ( QMouseEvent * e )
  */
 void BB_TabBuilding::updateWidget()
 {
-    updateBuildingList();
+//     updateBuildingList();
 }
 
 
@@ -264,46 +252,6 @@ void BB_TabBuilding::initTools()
 
 
 /**
- * Initialisiert das linke Tool-Fenster
- */
-void BB_TabBuilding::initWidgetLeft()
-{
-	QGroupBox *gB_Buildings = new QGroupBox();
-	gB_Buildings->setTitle(QString::fromUtf8("Gebäude"));
-	gB_Buildings->setFlat(true);
-
-	m_BuildingsListWidget = new QListWidget();
-	connect(m_BuildingsListWidget,SIGNAL(currentRowChanged (int)),this,SLOT(slotBuildingChanged(int)));
-
-	QVBoxLayout *gBL_Buildings = new QVBoxLayout();
-	gBL_Buildings->setMargin(0);
-	gBL_Buildings->setSpacing(2);
-	gBL_Buildings->addWidget(m_BuildingsListWidget,Qt::AlignTop);
-
-	m_ButtonBuildingNew = new QPushButton(QString::fromUtf8("Hinzufügen"));
-
-	m_ButtonBuildingDelete = new QPushButton(QString::fromUtf8("Löschen"));
-    // 	m_ButtonLevelDelete->setEnabled(false);
-
-	m_ButtonBuildingProperties = new QPushButton(QString::fromUtf8("Speichern"));
-    // 	m_ButtonLevelProperties->setEnabled(false);
-
-	connect(m_ButtonBuildingNew,SIGNAL(clicked(bool)),this,SLOT(slotBuildingNew()));
-	connect(m_ButtonBuildingDelete,SIGNAL(clicked(bool)),this,SLOT(slotBuildingDelete()));
-	connect(m_ButtonBuildingProperties,SIGNAL(clicked(bool)),this,SLOT(slotBuildingProperties()));
-
-	gBL_Buildings->addWidget(m_ButtonBuildingNew,Qt::AlignTop);
-	gBL_Buildings->addWidget(m_ButtonBuildingDelete,Qt::AlignTop);
-	gBL_Buildings->addWidget(m_ButtonBuildingProperties,Qt::AlignTop);
-
-
-	gB_Buildings->setLayout(gBL_Buildings);
-
-	addWidgetLeft(gB_Buildings,1);
-}
-
-
-/**
  * Initialisiert das rechte Fenster
  */
 void BB_TabBuilding::initWidgetRight()
@@ -354,5 +302,52 @@ void BB_TabBuilding::toolChanged(QAction* action)
 	else
 	{
 		cout << "Unbekanntes Tool" << endl;
+	}
+}
+
+
+/**
+ * 
+ */
+void BB_TabBuilding::createBuildingList()
+{
+	if(!m_BuildingsListCreated)
+	{
+		cout << m_Buildings->count() << endl;
+		for(int i = 0; i < m_Buildings->count(); i++)
+		{
+			m_BuildingsListWidget->addItem( m_Buildings->at(i)->getListWidgetItem() );
+		}
+		m_BuildingsListCreated = true;
+	}
+	else
+	{
+		cout << "Kann die Liste nicht nochmal erstellen." << endl;
+	}
+}
+
+
+/*!
+    \fn BB_TabBuilding::clear()
+ */
+void BB_TabBuilding::clear()
+{
+	m_BuildingsListWidget->clear();
+	m_BuildingsListCreated = false;
+}
+
+
+/*!
+    \fn BB_TabBuilding::slotBuildingChanged(QListWidgetItem * current, QListWidgetItem * previous)
+ */
+void BB_TabBuilding::slotBuildingChanged(QListWidgetItem * current, QListWidgetItem * previous)
+{
+	BB_Building* building;
+	building = m_Doc->getBuilding(current);
+	if(building != NULL)
+	{
+        m_Center->setDrawObjects(building->getDrawObjects());
+        m_Center->setEnabled(true);
+        m_Center->setMap(building);
 	}
 }

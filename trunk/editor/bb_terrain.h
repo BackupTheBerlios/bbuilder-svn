@@ -16,6 +16,7 @@
 #ifndef BB_TERRAIN_H
 #define BB_TERRAIN_H
 
+#include "bb_drawobject.h"
 #include "bb_fileobject.h"
 #include "bb_map.h"
 
@@ -32,9 +33,14 @@ public:
     virtual ~BB_Terrain();
 	virtual void generateXElement(QTextStream &out, int depth);
 	virtual bool write(QTextStream &out);
-
+	virtual int keyBoardEdit(QWidget* parent);
+    virtual bool open();
+	
 private:
 	static const QString s_ClassName;
+
+protected:
+    QVector<BB_DrawObject*>* m_DrawObject;
 };
 
 #endif

@@ -37,7 +37,10 @@ BB_MainWindow::BB_MainWindow(QWidget* parent, Qt::WFlags flags): QMainWindow(par
 
 	initMainWindow();
 	
-	loadDoc();
+	if(loadDoc())
+	{
+		m_TabBuilding->createBuildingList();
+	}
 	
 	
 	
@@ -209,8 +212,12 @@ void BB_MainWindow::slotProjectNew()
 				m_TabWidget->setEnabled(true);
 				m_Config.setCurrentProjectPath(path.path() + QDir::separator() + dir + ".glbb");
 				
+				
 				m_TabTerrain->updateWidget();
+				
 				m_TabBuilding->updateWidget();
+				m_TabBuilding->clear();
+				
 				m_TabLevel->updateWidget();
 				
 				return;
@@ -260,8 +267,11 @@ void BB_MainWindow::slotProjectOpen()
 	
 	if(!filename.isEmpty())
 	{
+		m_TabBuilding->clear();
 		if(m_Doc->open(filename))
 		{
+			m_TabBuilding->createBuildingList();
+			
 // 			cout << "test1" << endl;
 			m_TabWidget->setEnabled(true);
 // 			cout << "test2" << endl;
@@ -294,14 +304,11 @@ void BB_MainWindow::slotProjectClose()
 {	
 	m_Doc->close();
 
-	m_TabTerrain->unsetDrawObjects();
-	m_TabTerrain->updateWidget();
+	m_TabTerrain->clear();
 	
-	m_TabBuilding->unsetDrawObjects();
-	m_TabBuilding->updateWidget();
+	m_TabBuilding->clear();
 	
-	m_TabLevel->unsetDrawObjects();	
-	m_TabLevel->updateWidget();
+	m_TabLevel->clear();	
 	
 	m_TabWidget->setEnabled(false);
 	
@@ -368,7 +375,8 @@ void BB_MainWindow::slotFileExit()
  */
 void BB_MainWindow::closeEvent ( QCloseEvent * e )
 {
-    
+
+
 	cout << "Fenster wird geschlossen" << endl;
 }
 

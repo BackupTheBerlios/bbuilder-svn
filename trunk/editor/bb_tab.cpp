@@ -355,3 +355,16 @@ void BB_Tab::toolChanged(QAction* action)
 {
 	cout << "toolChanged(QAction* action) nicht implementiert (action:" << action << ")" << endl;
 }
+
+
+/**
+ * Setzt alle DrawObject-Vektoren auf NULL
+ * Und leert alles Listen. BB_Doc muss bereits geleert sein, 
+ * wenn diese Funktion aufgeruffen wird.
+ */
+void BB_Tab::clear()
+{
+	cout << "BB_Tab::clear(): Funktion wurde nicht überladen" << endl;
+	unsetDrawObjects();
+
+}

@@ -21,9 +21,38 @@
 #include "bb_toolpointnew.h"
 #include "bb_toollinenew.h"
 
-BB_TabTerrain::BB_TabTerrain(BB_Doc* doc, QWidget* parent, Qt::WFlags f): BB_Tab(doc, true, false, parent, f)
+#include <QtGui>
+
+
+BB_TabTerrain::BB_TabTerrain(BB_Doc* doc, QWidget* parent, Qt::WFlags f)
+	: BB_Tab(doc, true, false, parent, f)
 {
+	
+	if(m_Doc!= NULL && m_Doc->getTerrain() != NULL)
+	{
+		m_Terrain = m_Doc->getTerrain();
+	}
+	
 	initTools();
+	
+	/***** <Debug> *****/
+	
+	QGroupBox* box = new QGroupBox();
+	box->setFlat(true);
+	box->setTitle("Optionen");
+
+	QPushButton * button = new QPushButton("Eigenschaften");
+	
+	QVBoxLayout * layout = new QVBoxLayout();
+	layout->addWidget(button);
+	box->setLayout(layout);
+	
+	addWidgetLeft(box,1);
+	
+	connect(button,SIGNAL(clicked(bool)),this,SLOT(slotTerrainEdit()));
+	
+	/***** </Debug> *****/
+	
 }
 
 
@@ -122,4 +151,14 @@ void BB_TabTerrain::toolChanged(QAction* action)
 	{
 		cout << "Unbekanntes Tool" << endl;
 	}
+}
+
+
+/*!
+    \fn BB_TabTerrain::slotTerrainEdit()
+ */
+void BB_TabTerrain::slotTerrainEdit()
+{
+	cout << "Eigenschaften" << endl;
+	m_Doc->getTerrain()->keyBoardEdit(this);
 }

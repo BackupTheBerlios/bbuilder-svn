@@ -33,7 +33,7 @@
    </size>
   </property>
   <property name="windowTitle" >
-   <string>Gebäude hinzufügen</string>
+   <string>Gebäude bearbeiten</string>
   </property>
   <layout class="QGridLayout" >
    <property name="margin" >

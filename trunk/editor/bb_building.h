@@ -18,6 +18,7 @@
 
 #include <QVector>
 #include <QtGui>
+#include <QListWidgetItem>
 
 #include "bb_fileobject.h"
 #include "bb_level.h"
@@ -41,11 +42,13 @@ public:
     virtual const QString getClassName();
     virtual bool open();
     void remove();
+    virtual QListWidgetItem* getListWidgetItem();
     
 
 protected:
     QVector<BB_Level>* m_Levels;
     QVector<BB_DrawObject*>* m_DrawObject;
+    QListWidgetItem* m_ListWidgetItem;
     
 };
 

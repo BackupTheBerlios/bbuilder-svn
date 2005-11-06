@@ -30,6 +30,7 @@ BB_Building::BB_Building(const QDir& path, const QString &fileName, const QStrin
 {
 	m_DrawObject = new QVector<BB_DrawObject*>();
 	m_Handler = new BB_XBuildingHandler(this);
+	m_ListWidgetItem = NULL;
 }
 
 
@@ -64,6 +65,9 @@ int BB_Building::keyBoardEdit(QWidget* parent)
 	
 	dlg.setName(getName());
 	dlg.setDescription(getDescription());
+	
+	QString planFile(m_FilePath.path() + QDir::separator() + m_MapFileName);
+	dlg.setPlanFile( planFile );
 	
 	do
 	{
@@ -100,6 +104,8 @@ int BB_Building::keyBoardEdit(QWidget* parent)
 	
 	setMap(QPixmap::fromImage(image));
 	
+	parent->update();
+	getListWidgetItem()->setText(getName());
 	return result;
 }
 
@@ -211,8 +217,8 @@ const QString BB_Building::getClassName()
 
 
 /**
- * Überläd die open() Funktion von BB_FileObject.
- * Läd zusätztlich die Map Datei des Gebäudes.
+ * Führt die open() Funktion von BB_FileObject aus und
+ * läd zusätztlich die Map Datei des Gebäudes.
  */
 bool BB_Building::open()
 {
@@ -248,3 +254,19 @@ void BB_Building::remove()
 	QFile::remove(xmlFile);
 	QFile::remove(pngFile);
 }
+
+
+/*!
+    \fn BB_Building::getListWidgetItem()
+ */
+QListWidgetItem* BB_Building::getListWidgetItem()
+{
+	if(m_ListWidgetItem == NULL)
+	{
+		m_ListWidgetItem = new QListWidgetItem(getName());
+	}
+	
+	return m_ListWidgetItem;
+}
+
+

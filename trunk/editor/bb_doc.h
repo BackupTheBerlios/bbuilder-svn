@@ -49,6 +49,7 @@ public:
     virtual BB_Building* newBuilding(QDir& path, QString& fileName);
     virtual BB_Level* newLevel(QDir& path, QString& fileName);
     virtual BB_Terrain* newTerrain(QDir& path, QString& fileName);
+    BB_Building* getBuilding(QListWidgetItem* item);
 
 protected:
 	

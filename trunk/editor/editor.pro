@@ -5,8 +5,9 @@
 
 FORMS += buildingEdit.ui \
          projectNew.ui \
-         fileOptions.ui 
-IDLS += fileOptions.ui 
+         fileOptions.ui \
+         terrainEdit.ui 
+IDLS += terrainEdit.ui 
 HEADERS += bb_abstracttool.h \
            bb_building.h \
            bb_doc.h \
@@ -43,7 +44,8 @@ HEADERS += bb_abstracttool.h \
            bb_propertywidget.h \
            bb_globals.h \
            bb_map.h \
-           bb_dlgbuildingedit.h 
+           bb_dlgbuildingedit.h \
+           bb_dlgterrainedit.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -81,7 +83,8 @@ SOURCES += bb_abstracttool.cpp \
            bb_propertywidget.cpp \
            bb_globals.cpp \
            bb_map.cpp \
-           bb_dlgbuildingedit.cpp 
+           bb_dlgbuildingedit.cpp \
+           bb_dlgterrainedit.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

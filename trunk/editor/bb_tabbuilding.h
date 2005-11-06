@@ -38,13 +38,18 @@ public:
     BB_TabBuilding(BB_Doc * doc, QWidget* parent = 0, Qt::WFlags f = 0);
 
     ~BB_TabBuilding();
-    void updateBuildingList();
+//     void updateBuildingList();
     virtual void mousePressEvent ( QMouseEvent * e );
+	virtual void updateWidget();
+	void createBuildingList();
+    virtual void clear();
+	
 private slots:
     void slotBuildingProperties();
     void slotBuildingDelete();
     void slotBuildingNew();
-    void slotBuildingChanged(int index);
+//     void slotBuildingChanged(int index);    
+	void slotBuildingChanged(QListWidgetItem * current, QListWidgetItem * previous);
 protected:
     BB_AbstractTool* m_ToolZoom;
     BB_AbstractTool* m_ToolPointNew;
@@ -58,14 +63,18 @@ protected:
     QPushButton* m_ButtonBuildingNew;
     QPushButton* m_ButtonBuildingProperties;
     BB_PropertyWidget* m_PropertyWidget;
+    bool m_BuildingsListCreated;
     
 protected:
-    virtual void updateWidget();
+    
     virtual void toolChanged(QAction* action);
 private:
     void initTools();
     void initWidgetLeft();
     void initWidgetRight();
+    
+private slots:
+
 };
 
 #endif

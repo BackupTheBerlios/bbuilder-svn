@@ -80,9 +80,9 @@ protected:
     QAction* m_aViewOptions;
 	QAction* m_aFileSave;
 			
-    BB_Tab* m_TabBuilding;
-    BB_Tab* m_TabTerrain;
-    BB_Tab* m_TabLevel;
+	BB_TabBuilding* m_TabBuilding;
+    BB_TabTerrain* m_TabTerrain;
+    BB_TabLevel* m_TabLevel;
     QAction* m_aFileExit;
     
 	
