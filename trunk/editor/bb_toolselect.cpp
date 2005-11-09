@@ -91,7 +91,6 @@ void BB_ToolSelect::release(QMouseEvent* me)
 				{
 					object->setSelected(true);
 					m_Selection->append(object);
-					cout << "(" << object << ")hinzugefügt" << endl;
 					break;
 				}
 			}
@@ -115,13 +114,11 @@ void BB_ToolSelect::release(QMouseEvent* me)
 				{
 					object->setSelected(true);
 					m_Selection->append(object);
-					cout << "(" << object << ")hinzugefügt" << endl;
 				}
 			}
 		}
 		
 		m_ToolObjects->clear();
-		cout << "Objects selected: " << m_Selection->count() << endl;
 	}
 }
 

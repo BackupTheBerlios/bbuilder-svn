@@ -180,12 +180,14 @@ void BB_TabBuilding::slotBuildingProperties()
 /*!
     \fn BB_TabBuilding::mousePressEvent ( QMouseEvent * e )
  */
-void BB_TabBuilding::mousePressEvent ( QMouseEvent * e )
+void BB_TabBuilding::mouseReleaseEvent ( QMouseEvent * e )
 {
     // TODO
     e->ignore();
 
-    cout << "BB_Tab::mousePressEvent(e);" << endl;
+	cout << "BB_TabBuilding -> " << m_Selection.count() << " Objekte slektiert" << endl;
+	
+	
 }
 
 
@@ -349,5 +351,32 @@ void BB_TabBuilding::slotBuildingChanged(QListWidgetItem * current, QListWidgetI
         m_Center->setDrawObjects(building->getDrawObjects());
         m_Center->setEnabled(true);
         m_Center->setMap(building);
+	}
+	if(previous != NULL)
+	{
+		building = m_Doc->getBuilding(previous);
+		if(building != NULL)
+		{
+			building->save();
+		}
+	}
+}
+
+
+/**
+ * Speichert das aktuelle Gebäude
+ */
+void BB_TabBuilding::saveCurrent()
+{
+	BB_Building *building;
+	
+	building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem () );
+	if(building != NULL)
+	{
+		building->save();
+	}
+	else
+	{
+		cout << "Kein Gebäude ausgewählt" << endl;
 	}
 }

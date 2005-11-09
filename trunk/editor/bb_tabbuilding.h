@@ -39,7 +39,7 @@ public:
 
     ~BB_TabBuilding();
 //     void updateBuildingList();
-    virtual void mousePressEvent ( QMouseEvent * e );
+    virtual void mouseReleaseEvent ( QMouseEvent * e );
 	virtual void updateWidget();
 	void createBuildingList();
     virtual void clear();
@@ -72,6 +72,7 @@ private:
     void initTools();
     void initWidgetLeft();
     void initWidgetRight();
+    virtual void saveCurrent();
     
 private slots:
 

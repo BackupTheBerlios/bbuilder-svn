@@ -333,6 +333,7 @@ void BB_MainWindow::slotViewOptions(){
 void BB_MainWindow::initActions()
 {
 	m_aFileSave = new QAction(QString::fromUtf8("Datei speichern"),this);
+	m_aFileSave->setShortcut(QKeySequence(tr("Ctrl+S", "File|Save")));
 	connect(m_aFileSave,SIGNAL(triggered()),this,SLOT(slotFileSave()));
 	
 	m_aFileExit = new QAction(QString::fromUtf8("Beenden"),this);
@@ -358,6 +359,7 @@ void BB_MainWindow::initActions()
 void BB_MainWindow::slotFileSave() 
 {
 	cout << "Datei speichern" << endl;
+	((BB_Tab*)m_TabWidget->currentWidget())->saveCurrent();
 }
 
 

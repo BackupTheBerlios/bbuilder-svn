@@ -17,7 +17,7 @@ HEADERS += bb_abstracttool.h \
            bb_object.h \
            bb_point.h \
            bb_tabbuilding.h \
-           bb_tab.h \
+           bb_tab.h \ 
            bb_tablevel.h \
            bb_tabterrain.h \
            bb_terrain.h \

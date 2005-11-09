@@ -15,6 +15,7 @@
 #include "bb_terrain.h"
 #include "bb_dlgterrainedit.h"
 
+#include <QObject>
 
 #include "bb_point.h"
 
@@ -127,11 +128,57 @@ bool BB_Terrain::write(QTextStream &out)
  */
 int BB_Terrain::keyBoardEdit(QWidget* parent)
 {
-    /// @todo implement me
-    
-	BB_DlgTerrainEdit dlg;
+	QImage image;
 	
-	dlg.exec();
+	int result;
+	bool exit = false;
+
+	BB_DlgTerrainEdit dlg(parent);
+	
+	dlg.setName(getName());
+	dlg.setDescription(getDescription());
+	
+	QString planFile(m_FilePath.path() + QDir::separator() + m_MapFileName);
+	dlg.setPlanFile( planFile );
+	
+	do
+	{
+	
+		result = dlg.exec();
+		/* Falls Abbrechen gedrückt wurde: raus. */
+		if(result == QDialog::Rejected)
+		{
+			return false;
+		}
+		
+		if(dlg.getName().isEmpty())
+		{
+			QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Sie müssen einen Namen für das Gelände angeben."));
+		}
+		else if(!image.load(dlg.getPlanFile()))
+		{
+			QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Sie müssen eine gültige Bilddatei als Plan angeben."));
+		}
+		else
+		{
+			/* Falls alles gut ist */
+			exit = 1;
+		}
+			
+	} while(result != QDialog::Rejected && !exit);
+	
+	setName(dlg.getName());
+	setDescription(dlg.getDescription());
+	
+	m_MapFileName.sprintf("%08d.png",getObjectNr());
+	
+	image.save(m_FilePath.path() + QDir::separator() + m_MapFileName,"PNG");
+	
+	setMap(QPixmap::fromImage(image));
+	
+	parent->update();
+	getListWidgetItem()->setText(getName());
+	return result;
 }
 
 

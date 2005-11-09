@@ -364,7 +364,16 @@ void BB_Tab::toolChanged(QAction* action)
  */
 void BB_Tab::clear()
 {
-	cout << "BB_Tab::clear(): Funktion wurde nicht überladen" << endl;
+	cout << "BB_Tab::clear(): Funktion wurde nicht überladen" << endl; 
 	unsetDrawObjects();
 
+}
+
+
+/**
+ *
+ */
+void BB_Tab::saveCurrent()
+{
+	cout << "BB_Tab::saveCurrent(): Funktion wurde nicht überladen" << endl; 
 }

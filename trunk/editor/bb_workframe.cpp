@@ -148,6 +148,8 @@ void BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
     }
     else
         cout << "Kein Tool ausgewählt" << endl;
+	
+	QLabel::mouseReleaseEvent(me);
 }
 
 
