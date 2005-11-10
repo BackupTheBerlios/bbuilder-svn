@@ -43,7 +43,7 @@ public:
 	
 	virtual void updateWidget();	
 	virtual void clear();
-    virtual void saveCurrent();
+    virtual bool saveCurrent();
 	
 private:	
 	void initLayout(bool leftFrame, bool rightFrame);

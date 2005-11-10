@@ -26,9 +26,8 @@
 using namespace std;
 
 BB_Building::BB_Building(const QDir& path, const QString &fileName, const QString &name)
-	: BB_FileObject(path,fileName,name), BB_Map()
+	: BB_DocComponent(path,fileName,name)
 {
-	m_DrawObject = new QVector<BB_DrawObject*>();
 	m_Handler = new BB_XBuildingHandler(this);
 	m_ListWidgetItem = NULL;
 }
@@ -39,13 +38,6 @@ BB_Building::BB_Building(const QDir& path, const QString &fileName, const QStrin
  */
 BB_Building::~BB_Building()
 {
-	for(int i = 0; i < m_DrawObject->count(); i++)
-	{
-		delete m_DrawObject->at(i);
-	}
-	
-	delete m_DrawObject;
-	
 }
 
 
@@ -110,16 +102,6 @@ int BB_Building::keyBoardEdit(QWidget* parent)
 }
 
 
-/**
- * Gibt einen Pointer auf einen Vektor mit den DrawObjects des Gebäudes zurück
- * @return Pointer auf einen Vektor mit den DrawObjects des Gebäudes
- */
-QVector<BB_DrawObject*>* BB_Building::getDrawObjects()
-{
-	return m_DrawObject;
-}
-
-
 /*!
     \fn BB_Building::write(QIODevice *device)
  */
@@ -132,9 +114,9 @@ bool BB_Building::write(QTextStream &out)
 	
 	BB_Object* object;
 	
-	for(int i = 0; i < m_DrawObject->count(); i++)
+	for(int i = 0; i < m_DrawObjects.count(); i++)
 	{
-		object = m_DrawObject->at(i);
+		object = m_DrawObjects.at(i);
 		
 		if(typeid(*object) == typeid(BB_Point))
 		{

@@ -46,7 +46,7 @@ private:
 
 protected:
 	virtual void toolChanged(QAction* action);
-    virtual void saveCurrent();
+    virtual bool saveCurrent();
 private slots:
     void slotTerrainEdit();
 };

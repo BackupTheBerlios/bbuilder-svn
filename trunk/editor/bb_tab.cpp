@@ -323,7 +323,7 @@ void BB_Tab::setDoc(BB_Doc* doc)
  */
 void BB_Tab::unsetDrawObjects()
 {
-	m_Center->setDrawObjects(NULL);
+	m_Center->setDrawDevice(NULL);
 }
 
 
@@ -373,7 +373,8 @@ void BB_Tab::clear()
 /**
  *
  */
-void BB_Tab::saveCurrent()
+bool BB_Tab::saveCurrent()
 {
 	cout << "BB_Tab::saveCurrent(): Funktion wurde nicht überladen" << endl; 
+	return false;
 }

@@ -27,7 +27,13 @@ int main(int argc, char *argv[])
 	setDirs(argv[0]);
 	
     QApplication app(argc,argv);
+	
     app.setQuitOnLastWindowClosed(true);
+	
+	QFont f;
+	f.setStyleHint(QFont::System, QFont::PreferDefault);
+			
+	app.setFont(f);
 
 	BB_MainWindow MainWindow;
 	MainWindow.show();

@@ -309,7 +309,7 @@ void BB_TabBuilding::toolChanged(QAction* action)
 
 
 /**
- * 
+ * Erzeugt die Gebäude-Liste. 
  */
 void BB_TabBuilding::createBuildingList()
 {
@@ -339,8 +339,8 @@ void BB_TabBuilding::clear()
 }
 
 
-/*!
-    \fn BB_TabBuilding::slotBuildingChanged(QListWidgetItem * current, QListWidgetItem * previous)
+/**
+ * @todo
  */
 void BB_TabBuilding::slotBuildingChanged(QListWidgetItem * current, QListWidgetItem * previous)
 {
@@ -348,7 +348,8 @@ void BB_TabBuilding::slotBuildingChanged(QListWidgetItem * current, QListWidgetI
 	building = m_Doc->getBuilding(current);
 	if(building != NULL)
 	{
-        m_Center->setDrawObjects(building->getDrawObjects());
+		
+		m_Center->setDrawDevice(building);
         m_Center->setEnabled(true);
         m_Center->setMap(building);
 	}
@@ -366,17 +367,19 @@ void BB_TabBuilding::slotBuildingChanged(QListWidgetItem * current, QListWidgetI
 /**
  * Speichert das aktuelle Gebäude
  */
-void BB_TabBuilding::saveCurrent()
+bool BB_TabBuilding::saveCurrent()
 {
 	BB_Building *building;
 	
 	building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem () );
 	if(building != NULL)
 	{
-		building->save();
+		return building->save();
 	}
 	else
 	{
 		cout << "Kein Gebäude ausgewählt" << endl;
 	}
+	
+	return false;
 }

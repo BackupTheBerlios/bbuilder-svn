@@ -108,7 +108,7 @@ void BB_WorkArea::setTool(BB_AbstractTool* tool)
 
 
 /**
- * Setzt den Zoomfaktor auf <i>zoom</i>
+ * Setzt den Zoomfaktor
  * @param zoom Zoomfaktor
  */
 void BB_WorkArea::setZoomFaktor(double z)
@@ -121,35 +121,9 @@ void BB_WorkArea::setZoomFaktor(double z)
 }
 
 
-/*!
-    \fn BB_WorkArea::getDrawObjects() const
- */
-QVector<BB_DrawObject*>* BB_WorkArea::getDrawObjects() const
-{
-	return m_WorkFrame->getDrawObjects();
-}
-
-
-/*!
-    \fn BB_WorkArea::setDrawObjects(QVector<BB_DrawObject>* objectsVector)
- */
-void BB_WorkArea::setDrawObjects(QVector<BB_DrawObject*>* objectsVector)
-{
-	if(objectsVector == NULL)
-	{
-		m_WorkFrame->setEnabled(false);
-	}	
-	else
-	{
-		m_WorkFrame->setEnabled(true);
-	}
-	m_WorkFrame->setDrawObjects(objectsVector);
-	m_WorkFrame->update();
-}
-
-
-/*!
-    \fn BB_WorkArea::setMap(BB_Map& map)
+/**
+ * Setzt den Hintergrund des Arbeitsbereiches
+ * @return map Map welche als Hintergrund hinterlegt wird.
  */
 bool BB_WorkArea::setMap(BB_Map* map)
 {
@@ -175,4 +149,25 @@ bool BB_WorkArea::setMap(BB_Map* map)
 		return false;
 	}
 	
+}
+
+
+/**
+ * Setzt das Objekt, auf welchem gezeichnet wird.
+ * @param device Objekt, auf welchem gezeichnet wird
+ */
+void BB_WorkArea::setDrawDevice(BB_DrawDevice * device)
+{
+	if(device == NULL)
+	{
+		m_WorkFrame->setEnabled(false);
+		m_WorkFrame->setDrawObjects(NULL);
+	}	
+	else
+	{
+		m_WorkFrame->setDrawObjects( device->getDrawObjects() );
+		m_WorkFrame->setEnabled(true);
+		
+	}
+	m_WorkFrame->update();	
 }

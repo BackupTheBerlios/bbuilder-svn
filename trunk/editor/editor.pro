@@ -17,7 +17,7 @@ HEADERS += bb_abstracttool.h \
            bb_object.h \
            bb_point.h \
            bb_tabbuilding.h \
-           bb_tab.h \ 
+           bb_tab.h \
            bb_tablevel.h \
            bb_tabterrain.h \
            bb_terrain.h \
@@ -45,7 +45,9 @@ HEADERS += bb_abstracttool.h \
            bb_globals.h \
            bb_map.h \
            bb_dlgbuildingedit.h \
-           bb_dlgterrainedit.h 
+           bb_dlgterrainedit.h \
+           bb_drawdevice.h \
+           bb_doccomponent.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -84,7 +86,9 @@ SOURCES += bb_abstracttool.cpp \
            bb_globals.cpp \
            bb_map.cpp \
            bb_dlgbuildingedit.cpp \
-           bb_dlgterrainedit.cpp 
+           bb_dlgterrainedit.cpp \
+           bb_drawdevice.cpp \
+           bb_doccomponent.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

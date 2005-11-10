@@ -31,6 +31,7 @@ BB_TabTerrain::BB_TabTerrain(BB_Doc* doc, QWidget* parent, Qt::WFlags f)
 	if(m_Doc!= NULL && m_Doc->getTerrain() != NULL)
 	{
 		m_Terrain = m_Doc->getTerrain();
+		m_Center->setDrawDevice(m_Terrain);
 		m_Center->setMap(m_Terrain);
 	}
 	
@@ -166,6 +167,7 @@ void BB_TabTerrain::slotTerrainEdit()
 	{
 		m_Terrain->keyBoardEdit(this);
 		m_Center->setMap(m_Terrain);
+		m_Center->setDrawDevice(m_Terrain);
 	}
 }
 
@@ -173,10 +175,14 @@ void BB_TabTerrain::slotTerrainEdit()
 /**
  * Speichert das Gelände
  */
-void BB_TabTerrain::saveCurrent()
+bool BB_TabTerrain::saveCurrent()
 {
+	m_Terrain = m_Doc->getTerrain();
+	
 	if(m_Terrain != NULL)
 	{
-		m_Terrain->save();
+		return m_Terrain->save();
 	}
+	
+	return false;
 }

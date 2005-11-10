@@ -72,7 +72,7 @@ private:
     void initTools();
     void initWidgetLeft();
     void initWidgetRight();
-    virtual void saveCurrent();
+    virtual bool saveCurrent();
     
 private slots:
 

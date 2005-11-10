@@ -24,19 +24,17 @@
 #include "bb_level.h"
 #include "bb_point.h"
 
-#include "bb_drawobject.h"
-#include "bb_map.h"
+#include "bb_doccomponent.h"
 
 /**
 @author Alex Letkemann
 */
-class BB_Building : public BB_FileObject,  public BB_Map {
+class BB_Building : public BB_DocComponent {
 public:
 	BB_Building(const QDir& path, const QString &fileName, const QString &name = QString(""));
 
     virtual ~BB_Building();
     int keyBoardEdit(QWidget* parent);
-    QVector<BB_DrawObject*>* getDrawObjects();
 	virtual bool write(QTextStream &out);
     virtual void generateXElement(QTextStream &out, int depth);
     virtual const QString getClassName();
@@ -47,7 +45,6 @@ public:
 
 protected:
     QVector<BB_Level>* m_Levels;
-    QVector<BB_DrawObject*>* m_DrawObject;
     QListWidgetItem* m_ListWidgetItem;
     
 };

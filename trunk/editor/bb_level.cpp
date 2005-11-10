@@ -15,7 +15,7 @@
 #include "bb_level.h"
 
 BB_Level::BB_Level(const QDir& path, const QString &fileName, const QString &name)
-	: BB_FileObject(path,fileName,name)
+	: BB_DocComponent(path,fileName,name)
 {
 }
 

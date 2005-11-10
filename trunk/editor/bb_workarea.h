@@ -20,6 +20,7 @@
 #include "bb_workframe.h"
 #include "bb_tab.h"
 
+#include "bb_drawdevice.h"
 
 /**
 @author Alex Letkemann
@@ -35,9 +36,9 @@ public:
     BB_AbstractTool* getTool();
     void setTool(BB_AbstractTool* tool);
     void setZoomFaktor(double zoom);
-    QVector<BB_DrawObject*>* getDrawObjects() const;
-    void setDrawObjects(QVector<BB_DrawObject*>* objectsVector);
+	
     bool setMap(BB_Map* map);
+    void setDrawDevice(BB_DrawDevice * device);
 
 
 protected:

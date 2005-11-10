@@ -119,7 +119,6 @@ void BB_MainWindow::initStatusBar()
  */
 void BB_MainWindow::initMainWindow()
 {
-	
 	setMinimumHeight(400);
 	setMinimumWidth(600);
 	
@@ -131,7 +130,7 @@ void BB_MainWindow::initMainWindow()
 	m_TabBuilding = new BB_TabBuilding(m_Doc);
 	m_TabLevel = new BB_TabLevel(m_Doc);
 	
-	m_TabWidget = new QTabWidget();
+	m_TabWidget = new QTabWidget();	
 	m_TabWidget->addTab(m_TabTerrain,QString::fromUtf8("Gelände"));	//TODO
 	m_TabWidget->addTab(m_TabBuilding,QString::fromUtf8("Gebäude"));	//TODO
 	m_TabWidget->addTab(m_TabLevel,QString::fromUtf8("Etagen"));
@@ -297,7 +296,7 @@ void BB_MainWindow::slotProjectOpen()
 /**
  * Schliesst das aktuelle Projekt.
  * Das Tabwidget des Hauptfensters wird deaktiviert.
- * @author Alex Letkemann
+ * @author Alex Letkemann 
  * @date 20.10.2005
  */
 void BB_MainWindow::slotProjectClose()
@@ -358,8 +357,14 @@ void BB_MainWindow::initActions()
  */
 void BB_MainWindow::slotFileSave() 
 {
-	cout << "Datei speichern" << endl;
-	((BB_Tab*)m_TabWidget->currentWidget())->saveCurrent();
+	if(((BB_Tab*)m_TabWidget->currentWidget())->saveCurrent())
+	{
+		statusBar()->showMessage(trUtf8("Detei erfolgreich gespeichert."),2000);
+	}
+	else
+	{
+		statusBar()->showMessage(trUtf8("Detei konnte nicht gespeichert werden."),2000);
+	}
 }
 
 

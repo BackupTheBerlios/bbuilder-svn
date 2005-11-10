@@ -26,7 +26,7 @@ using namespace std;
 const QString BB_Terrain::s_ClassName = "BB_Terrain";
 
 BB_Terrain::BB_Terrain(const QDir& path, const QString &fileName, const QString &name)
-	: BB_FileObject(path, fileName, name)
+	: BB_DocComponent(path, fileName, name)
 {
 
 }
@@ -60,9 +60,9 @@ bool BB_Terrain::write(QTextStream &out)
 	
 	BB_Object* object;
 	
-	for(int i = 0; i < m_DrawObject->count(); i++)
+	for(int i = 0; i < m_DrawObjects.count(); i++)
 	{
-		object = m_DrawObject->at(i);
+		object = m_DrawObjects.at(i);
 		
 		if(typeid(*object) == typeid(BB_Point))
 		{

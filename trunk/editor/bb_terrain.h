@@ -16,16 +16,14 @@
 #ifndef BB_TERRAIN_H
 #define BB_TERRAIN_H
 
-#include "bb_drawobject.h"
-#include "bb_fileobject.h"
-#include "bb_map.h"
+#include "bb_doccomponent.h"
 
 #include <QTextStream>
 
 /**
 @author Alex Letkemann
 */
-class BB_Terrain : public BB_FileObject, public BB_Map
+class BB_Terrain : public BB_DocComponent
 {
 public:
 	BB_Terrain(const QDir& path, const QString &fileName, const QString &name = QString(""));
@@ -39,8 +37,6 @@ public:
 private:
 	static const QString s_ClassName;
 
-protected:
-    QVector<BB_DrawObject*>* m_DrawObject;
 };
 
 #endif

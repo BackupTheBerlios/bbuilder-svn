@@ -84,18 +84,19 @@ bool BB_Doc::clear()
 		m_Terrain = NULL;
 	}
 	
-	BB_Object* object;
+	BB_DocComponent* object;
 	
 	/* Alle Gebäude löschen */
 	for(int i = 0; i < m_Buildings.count(); i++)
 	{
 		object = m_Buildings.at(i);
-		m_Buildings.remove(i);
 		if(object != NULL)
 		{
 			delete object;
 			object = NULL;
+			
 		}
+		m_Buildings.remove(i);
 	}
 	m_Buildings.clear();
 	
