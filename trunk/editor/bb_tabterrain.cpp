@@ -186,3 +186,24 @@ bool BB_TabTerrain::saveCurrent()
 	
 	return false;
 }
+
+
+/**
+ *
+ */
+void BB_TabTerrain::updateWidget()
+{
+	m_Terrain = m_Doc->getTerrain();
+	
+	if(m_Terrain != NULL)
+	{
+		m_Center->setMap(m_Terrain);
+		m_Center->setDrawDevice(m_Terrain);
+	}
+	else
+	{
+		m_Center->setMap(NULL);
+		m_Center->setDrawDevice(NULL);
+	}
+		
+}

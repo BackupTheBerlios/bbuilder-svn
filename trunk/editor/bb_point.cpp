@@ -230,6 +230,8 @@ QStandardItemModel * BB_Point::getItemModel()
       model->setData(index, QVariant("m_Color"));
       index = model->index(0, 1, QModelIndex());
       model->setData(index, QVariant("Red"));
+	  
+	  return model;
 }
 
 

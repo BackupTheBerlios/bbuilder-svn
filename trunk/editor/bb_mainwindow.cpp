@@ -383,7 +383,7 @@ void BB_MainWindow::slotFileExit()
 void BB_MainWindow::closeEvent ( QCloseEvent * e )
 {
 
-
+	e->accept();
 	cout << "Fenster wird geschlossen" << endl;
 }
 

@@ -60,6 +60,7 @@ private:
     void createName();
 	
 	friend class BB_XBuildingHandler;
+	friend class BB_XTerrainHandler;
 	friend class BB_Doc;
 
 };

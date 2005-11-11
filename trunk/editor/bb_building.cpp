@@ -198,25 +198,6 @@ const QString BB_Building::getClassName()
 
 
 
-/**
- * Führt die open() Funktion von BB_FileObject aus und
- * läd zusätztlich die Map Datei des Gebäudes.
- */
-bool BB_Building::open()
-{
-	bool exit;
-	
-	if(BB_FileObject::open())
-	{
-		exit = loadMap(m_FilePath);
-	}
-	else
-	{
-		exit = false;
-	}
-	
-	return exit;
-}
 
 
 /*!

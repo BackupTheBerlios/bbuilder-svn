@@ -20,6 +20,7 @@
 #include "bb_point.h"
 
 #include <iostream>
+#include "bb_xterrainhandler.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ const QString BB_Terrain::s_ClassName = "BB_Terrain";
 BB_Terrain::BB_Terrain(const QDir& path, const QString &fileName, const QString &name)
 	: BB_DocComponent(path, fileName, name)
 {
-
+	m_Handler = new BB_XTerrainHandler(this);
 }
 
 

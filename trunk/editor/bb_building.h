@@ -38,7 +38,6 @@ public:
 	virtual bool write(QTextStream &out);
     virtual void generateXElement(QTextStream &out, int depth);
     virtual const QString getClassName();
-    virtual bool open();
     void remove();
     virtual QListWidgetItem* getListWidgetItem();
     

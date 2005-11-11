@@ -31,7 +31,7 @@ public:
     BB_TabTerrain(BB_Doc* doc, QWidget* parent = 0, Qt::WFlags f = 0);
 
     ~BB_TabTerrain();
-
+	virtual void updateWidget();
 	
 protected:
 	BB_AbstractTool* m_ToolZoom;
@@ -47,6 +47,7 @@ private:
 protected:
 	virtual void toolChanged(QAction* action);
     virtual bool saveCurrent();
+    
 private slots:
     void slotTerrainEdit();
 };

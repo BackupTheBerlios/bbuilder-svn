@@ -22,15 +22,13 @@ BB_ToolSelect::BB_ToolSelect()
 	m_Rect.setPos2(&m_Point2);
 	
 	QPen pen;
-	QBrush brush;
-	
-	pen.setStyle(Qt::DotLine);
-	brush.setStyle(Qt::Dense4Pattern);
-	brush.setColor(Qt::yellow);
+	QColor p(255, 221, 118, 210);
+	pen.setBrush(p);
 	
 	m_Rect.setPen(pen);
-	m_Rect.setBrush(brush);
 	
+	QColor b(255, 221, 118, 150);
+	m_Rect.setBrush(b);
 }
 
 

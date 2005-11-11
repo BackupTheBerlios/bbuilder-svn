@@ -47,7 +47,8 @@ HEADERS += bb_abstracttool.h \
            bb_dlgbuildingedit.h \
            bb_dlgterrainedit.h \
            bb_drawdevice.h \
-           bb_doccomponent.h 
+           bb_doccomponent.h \
+           bb_xterrainhandler.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -88,7 +89,8 @@ SOURCES += bb_abstracttool.cpp \
            bb_dlgbuildingedit.cpp \
            bb_dlgterrainedit.cpp \
            bb_drawdevice.cpp \
-           bb_doccomponent.cpp 
+           bb_doccomponent.cpp \
+           bb_xterrainhandler.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

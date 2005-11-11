@@ -15,8 +15,9 @@
 #include <QXmlDefaultHandler>
 
 /**
-@author Alex Letkemann
-*/
+ * Abstrackte Klasse BB_XHandler. Wird benötigt um die XML-Dateien auszulesen.
+ * @author Alex Letkemann
+ */
 class BB_XHandler : public QXmlDefaultHandler
 {
 public:

@@ -25,6 +25,8 @@ public:
 	BB_DocComponent(const QDir& path, const QString &fileName, const QString &name);
 
     ~BB_DocComponent();
+	
+	virtual bool open();
 
 };
 

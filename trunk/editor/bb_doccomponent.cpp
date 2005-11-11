@@ -22,3 +22,12 @@ BB_DocComponent::~BB_DocComponent()
 }
 
 
+/**
+ * Führt die open() Funktion von BB_FileObject aus und
+ * läd zusätztlich die Map Datei des Gebäudes.
+ */
+bool BB_DocComponent::open()
+{
+	return (BB_FileObject::open() && loadMap(m_FilePath));
+}
+
