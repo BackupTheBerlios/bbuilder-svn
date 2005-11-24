@@ -30,7 +30,7 @@ Die Klasse beeinhaelt grundlegende Funktionen.
 
 @author Vaceslav Ustinov
 */
-class BB_DrawObject : public BB_Object 
+class BB_DrawObject : public BB_Object
 {
 public:
     BB_DrawObject(QString name = "");
@@ -45,20 +45,11 @@ public:
     virtual bool isHit(C2dVector hit) = 0;
     virtual const QString getClassName();
 
-        void setSelected(bool theValue);
-        
-
-
+    void setSelected(bool theValue);
     virtual bool isSelected() const;
     virtual bool isHit(QRect rect);
-
-
-	void setBrush(const QBrush& theValue);
-
-	void setPen(const QPen& theValue);
-
-        
-    
+    void setBrush(const QBrush& theValue);
+    void setPen(const QPen& theValue);
 protected:
     //QPoint m_P0;
     QColor m_Color;

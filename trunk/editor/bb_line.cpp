@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Vaceslav Ustinov   						*
- *   v.ustinov@web.de										     *
+ *   Copyright (C) 2005 by Vaceslav Ustinov                                             *
+ *   v.ustinov@web.de                                                                                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -111,8 +111,8 @@ bool BB_Line::setPos2(BB_Point* Value)
     if (m_Pos1 != Value && Value != NULL)
     {
         m_Pos2 = Value;
-        m_Pos1->addLine(this);
-        m_Pos2->addLine(this);
+        m_Pos1->addObject(this);
+        m_Pos2->addObject(this);
         return true;
     }
     return false;
@@ -125,9 +125,9 @@ bool BB_Line::setPos2(BB_Point* Value)
 void BB_Line::remove(BB_Point * point)
 {
   if (m_Pos1 == point)
-    m_Pos2->removeLine(this);
+    m_Pos2->deleteLinkedObject(this);
   else
-    m_Pos1->removeLine(this);
+    m_Pos1->deleteLinkedObject(this);
 }
 
 
@@ -136,7 +136,7 @@ void BB_Line::remove(BB_Point * point)
  */
 const QString BB_Line::getClassName()
 {
-	return QString("BB_Line");
+        return QString("BB_Line");
 }
 
 bool BB_Line::isHit(QRect rect)
