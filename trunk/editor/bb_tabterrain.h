@@ -37,7 +37,7 @@ protected:
 	BB_AbstractTool* m_ToolZoom;
 	BB_AbstractTool* m_ToolPointNew;
 	BB_AbstractTool* m_ToolMove;
-	BB_AbstractTool* m_ToolLineNew;
+	BB_AbstractTool* m_ToolTriangleNew;
 	BB_AbstractTool* m_ToolSelect;	
     BB_Terrain* m_Terrain;
 

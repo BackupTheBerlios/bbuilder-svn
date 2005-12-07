@@ -132,10 +132,13 @@ void BB_ToolSelect::release(QMouseEvent* me)
 void BB_ToolSelect::move(QMouseEvent* me, bool overX, bool overY)
 {
 // 	cout << "move: " << me->buttons() << " - " << Qt::LeftButton << endl;
-	if(me->buttons() == Qt::LeftButton)
+	if(!overX || !overY)
 	{
-		m_Point2.setX(me->x());
-		m_Point2.setY(me->y());	
-		
+		if(me->buttons() == Qt::LeftButton)
+		{
+			m_Point2.setX(me->x());
+			m_Point2.setY(me->y());	
+			
+		}
 	}
 }

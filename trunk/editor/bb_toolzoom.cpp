@@ -56,7 +56,10 @@ void BB_ToolZoom::click(QMouseEvent* me)
 
 void BB_ToolZoom::move(QMouseEvent* me, bool overX, bool overY)
 {
-	me->ignore();
+	if(overX || overY)
+	{
+		me->ignore();
+	}
 }
 
 void BB_ToolZoom::release(QMouseEvent* me)

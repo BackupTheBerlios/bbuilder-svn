@@ -23,11 +23,12 @@ using namespace std;
 
 BB_Point::BB_Point()
         : BB_DrawObject()
-{
+{	
     m_Radius = 7;
     m_hitRange = 2;
     m_Color.setNamedColor("Red");
     m_scale = 1.0;
+	m_Links.clear();
 }
 
 BB_Point::BB_Point(C2dVector p)
@@ -42,7 +43,8 @@ BB_Point::BB_Point(C2dVector p)
 
 
 BB_Point::~BB_Point()
-{}
+{
+}
 
 
 // void BB_Point::moveBy(QPoint pMove)
@@ -293,6 +295,7 @@ BB_DrawObject* BB_Point::removeLinkedObject(BB_DrawObject * object)
         cout << "Null Pointer an Funktion 'BB_Point::removeLinkedObject(BB_DrawObject * object)' ubergeben" << endl;
         return NULL;
     }
+	cout << object->getClassName().toStdString() << endl; 
     BB_DrawObject * tmp;
     for( int i=0;i< m_Links.count() ;i++ )
     {

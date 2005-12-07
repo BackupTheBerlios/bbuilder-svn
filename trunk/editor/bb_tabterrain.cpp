@@ -19,7 +19,7 @@
 #include "bb_toolzoom.h"
 #include "bb_toolmove.h"
 #include "bb_toolpointnew.h"
-#include "bb_toollinenew.h"
+#include "bb_tooltrianglenew.h"
 
 #include <QtGui>
 
@@ -93,12 +93,17 @@ void BB_TabTerrain::initTools()
 	createToolButton(toolPointNew,m_ToolPointNew);
 	
 
-/* Tool zum Erstellen neuer Linien */
-	m_ToolLineNew = new BB_ToolLineNew(m_Center);
-	QAction *toolLineNew = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolWall.png"),"Wand",this);
-	toolPointNew->setStatusTip("Line Werkzeug");
-	createToolButton(toolLineNew,m_ToolLineNew);
+// /* Tool zum Erstellen neuer Linien */
+// 	m_ToolLineNew = new BB_ToolLineNew(m_Center);
+// 	QAction *toolLineNew = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolWall.png"),"Wand",this);
+// 	toolPointNew->setStatusTip("Line Werkzeug");
+// 	createToolButton(toolLineNew,m_ToolLineNew);
 	
+	/* Tool zum Erstellen neuer Linien */
+	m_ToolTriangleNew = new BB_ToolTriangleNew();
+	QAction *toolTriangleNew = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolTerrain.png"),QString::fromUtf8("Fläche"),this);
+	toolTriangleNew->setStatusTip("Terrain Werkzeug");
+	createToolButton(toolTriangleNew,m_ToolTriangleNew);
 
 /* Tool zum Bewegen der Objekte */
 	m_ToolMove = new BB_ToolMove();
@@ -143,11 +148,11 @@ void BB_TabTerrain::toolChanged(QAction* action)
 		action->setChecked(true);
 		m_Center->setTool(m_ToolPointNew);
 	}
-	else if(m_ToolLineNew->getAction() == action)
+	else if(m_ToolTriangleNew->getAction() == action)
 	{
 		unsetToolButton(action);
 		action->setChecked(true);
-		m_Center->setTool(m_ToolLineNew);
+		m_Center->setTool(m_ToolTriangleNew);
 	}
 	else
 	{

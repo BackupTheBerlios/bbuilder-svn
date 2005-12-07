@@ -101,7 +101,7 @@ void BB_TabBuilding::initWidgetLeft()
 
 
 /**
- * Wird aufgeruffen, wenn der Button 'Löschen' auf der linken Seite gedrückt wird.
+ * Wird aufgerufen, wenn der Button 'Löschen' auf der linken Seite gedrückt wird.
  * Löscht das aüsgewählte Gebäude.
  */
 void BB_TabBuilding::slotBuildingDelete()
@@ -145,7 +145,7 @@ void BB_TabBuilding::slotBuildingDelete()
 
 
 /**
- * Wird aufgeruffen, wenn der Button 'Neu' auf der linken Seite gedrückt wird.
+ * Wird aufgerufen, wenn der Button 'Neu' auf der linken Seite gedrückt wird.
  * Lässt ein neues Gebäude erstellen.
  */
 void BB_TabBuilding::slotBuildingNew()

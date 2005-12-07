@@ -19,7 +19,9 @@ using namespace std;
 BB_Rect::BB_Rect()
 	: BB_Line(NULL,NULL)
 {
-	
+	cout << "test" <<  endl;
+	m_Pos1 = NULL;
+	m_Pos2 = NULL;
 }
 
 /**

@@ -64,6 +64,8 @@ public:
 
 	void setAction(QAction* theValue);
 	QAction* getAction();
+    virtual void reset();
+    virtual BB_DrawObject* getClickedObject(const C2dVector & posLogic ,const std::type_info &type);
 	
 protected:
 	

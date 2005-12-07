@@ -17,6 +17,7 @@
 #include <iostream>
 #include <QScrollArea>
 
+#include <bb_triangle.h>
 
 using namespace std;
 
@@ -45,6 +46,8 @@ BB_WorkFrame::~BB_WorkFrame()
  */
 void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
 {
+// 	cout << "Paint-Event - Start" << endl;
+	
     if(isEnabled())
     {
         QLabel::paintEvent(pe);
@@ -54,18 +57,27 @@ void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
 
         if(m_DrawObjects != NULL)
         {
+			
+// 			cout << "Paint-Event-Objects - Start" << endl;
+			BB_DrawObject* object;
             for(int i = 0; i < m_DrawObjects->count(); i++)
             {
-                m_DrawObjects->at(i)->show(m_Transformer,painter);
+				object = m_DrawObjects->at(i);
+				
+// 				cout << object << " | " << typeid(*object).name() << endl;;
+				
+                object->show(m_Transformer,painter);
 
             }
+// 			cout << "Paint-Event-Objects - End" << endl;
 			
+// 			cout << "Paint-Event-Tool-Objects - Start" << endl;
 			for(int i = 0; i < m_ToolObjects.count(); i++)
 			{
 				
 				m_ToolObjects.at(i)->show(m_Transformer,painter);
 			}
-			
+// 			cout << "Paint-Event-Tool-Objects - End" << endl;
 			
         }
         else
@@ -73,6 +85,8 @@ void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
             cout << "m_DrawObjects nicht initialisiert!" << endl;
         }
     }
+	
+// 	cout << "Paint-Event - End" << endl;
 }
 
 
@@ -99,13 +113,20 @@ BB_AbstractTool* BB_WorkFrame::getTool()
 
 
 /**
- * Setzt das Tool, welches verwendet werden soll.
+ * Setzt das Tool, welches verwendet werden soll. 
+ * Vorher wird das Letze Tool zurückgesetzt.
  * @param tool Tool, welches verwendet werden soll.
  */
 void BB_WorkFrame::setTool(BB_AbstractTool* tool)
 {
     if(tool != NULL)
     {
+		if(m_Tool != NULL)
+		{
+			m_Tool->reset();
+		}
+		
+		
         m_Tool = tool;
 		m_Tool->setTransformer(&m_Transformer);
 		m_Tool->setObjects(m_DrawObjects);
@@ -123,7 +144,7 @@ void BB_WorkFrame::setTool(BB_AbstractTool* tool)
 }
 
 /**
- * Wird aufgeruffen, wenn eine Maustaste gedrückt wird.
+ * Wird aufgerufen, wenn eine Maustaste gedrückt wird.
  */
 void BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
 {
@@ -137,7 +158,7 @@ void BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
 }
 
 /**
- * Wird aufgeruffen, wenn eine Maustaste losgelassen wird.
+ * Wird aufgerufen, wenn eine Maustaste losgelassen wird.
  */
 void BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
 {
@@ -154,7 +175,7 @@ void BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
 
 
 /**
- * Wird aufgeruffen, wenn die Maus mit einer gedrückten Maustaste bewegt wird.
+ * Wird aufgerufen, wenn die Maus mit einer gedrückten Maustaste bewegt wird.
  */
 void BB_WorkFrame::mouseMoveEvent(QMouseEvent* me)
 {

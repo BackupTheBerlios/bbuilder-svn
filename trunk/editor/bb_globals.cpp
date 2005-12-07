@@ -96,9 +96,11 @@ void setDirs(char * argv0)
 	
 	conf_dir = dir.path();
 	
-	cout << "BIN_DIR: " <<  bin_dir.toStdString()<< endl;
+	
 	cout << "MAIN_DIR: " <<  main_dir.toStdString()<< endl;
-	cout << "IMG_DIR: " <<  img_dir.toStdString()<< endl;
+	cout << "BIN_DIR: " <<  bin_dir.toStdString()<< endl;
 	cout << "CONF_DIR: " <<  conf_dir.toStdString()<< endl;
+	cout << "IMG_DIR: " <<  img_dir.toStdString()<< endl;
+	
 
 }

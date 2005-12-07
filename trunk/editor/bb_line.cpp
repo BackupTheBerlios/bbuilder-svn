@@ -22,8 +22,18 @@ using namespace std;
 
 BB_Line::BB_Line(BB_Point *p1, BB_Point *p2)
 {
-    m_Pos1 = p1;
-    m_Pos2 = p2;
+// Edit: Alex Letkemann
+// Positionen werden durch funktionen gesetzt
+//     m_Pos1 = p1;
+//     m_Pos2 = p2;
+	
+	
+	// Mit NULL initialisieren
+	m_Pos1 = NULL;
+	m_Pos2 = NULL;
+	
+	setPos1(p1);
+	setPos2(p2);
     m_Color.setNamedColor("Red");
     m_hitRange = 3;
 }
@@ -93,7 +103,13 @@ bool BB_Line::setPos1(BB_Point* Value)
 {
     if (Value != NULL)
     {
+		// EDIT: Alex Letkemann
+		// DATE: 07.12.2005
+		// Links werden bei jedem Setzten des Punktes aktualisiert.
+		if(m_Pos1 != NULL)
+			m_Pos1->removeLinkedObject( this );
         m_Pos1 = Value;
+		m_Pos1->addObject( this );
         return true;
     }
     return false;
@@ -108,11 +124,16 @@ BB_Point* BB_Line::getPos2() const
 
 bool BB_Line::setPos2(BB_Point* Value)
 {
-    if (m_Pos1 != Value && Value != NULL)
+	if (Value != NULL)
     {
+		
+		// EDIT: Alex Letkemann
+		// DATE: 07.12.2005
+		// Links werden bei jedem Setzten des Punktes aktualisiert.
+		if(m_Pos2 != NULL)
+			m_Pos2->removeLinkedObject( this );
         m_Pos2 = Value;
-        m_Pos1->addObject(this);
-        m_Pos2->addObject(this);
+		m_Pos2->addObject( this );
         return true;
     }
     return false;

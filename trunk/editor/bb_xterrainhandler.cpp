@@ -46,7 +46,7 @@ bool BB_XTerrainHandler::startElement(const QString& namespaceURI, const QString
 	
 // 	cout << "event: " << namespaceURI.toStdString() << " | " << localName.toStdString() << " | " << qName.toStdString() << endl;
 	
-	cout << "<" << qName.toStdString() << ">" << endl;
+// 	cout << "<" << qName.toStdString() << ">" << endl;
 	
 	if (!m_XTerrainTag && qName != "bb_terrain") {
 		m_ErrorStr = QObject::tr("Dies ist keine gültige bb_terrain Datei");
@@ -99,7 +99,7 @@ bool BB_XTerrainHandler::startElement(const QString& namespaceURI, const QString
  */
 bool BB_XTerrainHandler::endElement(const QString& namespaceURI, const QString& localName, const QString& qName)
 {
-	cout << "</" << qName.toStdString() << ">" << endl;
+// 	cout << "</" << qName.toStdString() << ">" << endl;
 	if(m_Object == NULL)
 	{
 		if (qName == "name") {

@@ -55,7 +55,7 @@ BB_Tab::~BB_Tab()
 
 /**
  * Initialisiert alle wichtigen Einstellungen des Tabs.
- * Muss als Erstes in jedem Konstrucktor aufgeruffen werden.
+ * Muss als Erstes in jedem Konstrucktor aufgerufen werden.
  */
 void BB_Tab::initTab()
 {
@@ -360,7 +360,7 @@ void BB_Tab::toolChanged(QAction* action)
 /**
  * Setzt alle DrawObject-Vektoren auf NULL
  * Und leert alles Listen. BB_Doc muss bereits geleert sein, 
- * wenn diese Funktion aufgeruffen wird.
+ * wenn diese Funktion aufgerufen wird.
  */
 void BB_Tab::clear()
 {

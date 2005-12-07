@@ -168,3 +168,43 @@ void BB_AbstractTool::setAction(QAction* action)
 		cout << "BB_AbstractTool::setAction(): NULL-Pointer erhalten" << endl;
 	}
 }
+
+
+/**
+ * Setzt das Tool zurück
+ */
+void BB_AbstractTool::reset()
+{
+// 	m_ToolObjects->clear();
+}
+
+
+/**
+ * Gibt ein Objekt des angegebenen Typs zurück, 
+ * welches sich an der angegebenen Logischen position befindet.
+ * Falls es kein Objekt an der angegebenen Position zu finden ist, wird NULL zurück gegeben.
+ * @param posLogic Position, an welcher gesucht wird.
+ * @param type Typ des Objektes, welcher gesucht wird.
+ * @return Pointer auf das Objekt, falls es solch ein Objekt gibt, sonst NULL.
+ */
+BB_DrawObject* BB_AbstractTool::getClickedObject(const C2dVector &posLogic ,const std::type_info &type)
+{
+	BB_DrawObject* object;
+	bool exit = false;
+	for(int i = 0; i < m_Objects->count() && exit == false; i++)
+	{
+		object = m_Objects->at(i);
+		if(object != NULL && typeid(*object) == type && object->isHit(posLogic))
+		{
+			exit = true;
+			object =  object;
+		}
+		else
+		{
+			object = NULL;
+		}
+						
+	}
+	
+	return object;
+}

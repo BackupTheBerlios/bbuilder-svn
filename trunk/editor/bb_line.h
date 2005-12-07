@@ -30,7 +30,7 @@ class BB_Line : public BB_DrawObject
 {
 public:
     BB_Line(BB_Point *p1, BB_Point *p2);
-    BB_Line();
+//     BB_Line();
 
     ~BB_Line();
 
