@@ -17,6 +17,8 @@
 #include <iostream>
 #include "bb_point.h"
 
+#include "bb_workarea.h"
+
 using namespace std;
 
 BB_ToolLineNew::BB_ToolLineNew()
@@ -46,6 +48,7 @@ void BB_ToolLineNew::click(QMouseEvent* me)
                 for(int i = 0; i < m_Objects->count(); i++) {
                         object = m_Objects->at(i);
                         //--------zur presentation
+                        /// @todo bitte bessere implementierung von Scale Funktion
                         if (object->getClassName() == "BB_Point")
                           ((BB_Point *)object)->setScale(m_Transformer->getScale());
                          //---------ende-----------
@@ -59,6 +62,13 @@ void BB_ToolLineNew::click(QMouseEvent* me)
                                 m_Objects->append(wall);
                                 m_LastLogicMouseClick = m_pLogic;
                                 return;
+                        }
+                        /// @todo zum testen, nach implementation bitte loeschen.
+                        if(object->isHit(m_pLogic) && (object->getClassName() == "BB_Wall")) {
+//                           QPixmap * tmpPixmap = (BB_WorkArea *) parentWidget)->getMap()->getMap;
+                          ((BB_Wall *) object)->editDlg(&((QPixmap)((BB_WorkArea *) parentWidget)->getMap()->getMap()));
+                          cout << "edit dlg exec"<<endl;
+                          return;
                         }
                 }
         }

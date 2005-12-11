@@ -18,6 +18,7 @@
 
 #include "bb_abstracttool.h"
 #include "bb_point.h"
+#include "bb_rect.h"
 
 /**
 @author Alex Letkemann
@@ -30,27 +31,33 @@ public:
     ~BB_ToolMove();
 
     virtual void click(QMouseEvent* me);
-	virtual void move(QMouseEvent* me, bool overX, bool overY);
+    virtual void move(QMouseEvent* me, bool overX, bool overY);
     virtual void release(QMouseEvent* me);
 
 protected:
-//     QVector<BB_DrawObject*> m_Selection;
-    /**
-    Punkt mit dem ausgeglichen wird
-    */
-    BB_Point* comparePoint;
+    //     QVector<BB_DrawObject*> m_Selection;
+    /**Punkt mit dem ausgeglichen wird*/
+    BB_Point * comparePoint;
+    BB_Point   m_Point2;
+    BB_Point   m_Point1;
+    BB_Rect    m_Rect;
+    C2dVector  m_ClickPos;
+	/** Wenn select = true, dann heisst es, dieser toll wird als ein Auswahl-Viereck arbeiten<br>
+	*Wenn select = false, dann heisst es, dieser toll wird die Punkten verschieben
+	*/
+	bool m_select;
 private:
-  /**
-  Funktion zum Ausgleichen von zwei Punkten<br>
-  Bei erstem klick(MausRAd) auf ein Punkt. wird deieser
-  in comparepoint gespeichert.<br>
-  Bei zweitem Klick werden die punkte verglichen und
-  enweder senkrecht oder waagerecht ausgeglichen.
-  @author Vaceslav Ustinov
-  @param point zeiger auf einen BB_Point
-  @date 22.10.2005
-  */
-  void bringToLine(BB_Point *point);
+    /**
+    Funktion zum Ausgleichen von zwei Punkten<br>
+    Bei erstem klick(MausRAd) auf ein Punkt. wird deieser
+    in comparepoint gespeichert.<br>
+    Bei zweitem Klick werden die punkte verglichen und
+    enweder senkrecht oder waagerecht ausgeglichen.
+    @author Vaceslav Ustinov
+    @param point zeiger auf einen BB_Point
+    @date 22.10.2005
+    */
+    void bringToLine(BB_Point *point);
 };
 
 #endif

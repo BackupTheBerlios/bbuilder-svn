@@ -1,7 +1,7 @@
 //
 // C++ Interface: bb_toolselect
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -30,13 +30,13 @@ public:
 
     ~BB_ToolSelect();
     virtual void click(QMouseEvent* me);
-	virtual void release(QMouseEvent* me);
+    virtual void release(QMouseEvent* me);
     virtual void move(QMouseEvent* me, bool overX, bool overY);
 
 protected:
     BB_Point m_Point2;
     BB_Point m_Point1;
-	BB_Rect m_Rect;
+    BB_Rect m_Rect;
     C2dVector m_ClickPos;
 };
 

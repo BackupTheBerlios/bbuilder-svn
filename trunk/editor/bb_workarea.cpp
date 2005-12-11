@@ -22,23 +22,23 @@ using namespace std;
 BB_WorkArea::BB_WorkArea(QVector<BB_DrawObject*>* selectVector, QWidget *parent)
  : QScrollArea(parent)
 {
-	
-	m_WorkFrame = new BB_WorkFrame(selectVector);
-	m_WorkFrame->setFrameShape(QFrame::NoFrame);
-	m_WorkFrame->setFrameShadow(QFrame::Plain);
-	
-// 	/**** Image zum Testen *****/
-// 	QImage  *bg = new QImage();
-// 	
-// 	bg->load(IMG_DIR() + SEPARATOR() + "RettungsPlan.png");
-// 	
-// 	/***************/
-//  	m_WorkFrame->setPixmap(QPixmap(QPixmap::fromImage(*bg)));
-	m_WorkFrame->setBackgroundRole(QPalette::Background);
-	m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-	m_WorkFrame->setScaledContents(true);
 
-	setWidget(m_WorkFrame);
+        m_WorkFrame = new BB_WorkFrame(selectVector);
+        m_WorkFrame->setFrameShape(QFrame::NoFrame);
+        m_WorkFrame->setFrameShadow(QFrame::Plain);
+
+//      /**** Image zum Testen *****/
+//      QImage  *bg = new QImage();
+//
+//      bg->load(IMG_DIR() + SEPARATOR() + "RettungsPlan.png");
+//
+//      /***************/
+//      m_WorkFrame->setPixmap(QPixmap(QPixmap::fromImage(*bg)));
+        m_WorkFrame->setBackgroundRole(QPalette::Background);
+        m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        m_WorkFrame->setScaledContents(true);
+
+        setWidget(m_WorkFrame);
 }
 
 
@@ -52,34 +52,34 @@ BB_WorkArea::~BB_WorkArea()
  */
 void BB_WorkArea::zoom(double faktor)
 {
-	
-	if(m_Map != NULL)
-	{
-		double zoom = m_Map->getZoom();
-		
-		Q_ASSERT(m_WorkFrame->pixmap());
-		
-		zoom *= faktor;
-		
-		if(zoom > 5.0)
-		{
-			zoom = 5.0;
-		}
-		else if(zoom < 0.5)
-		{
-			zoom = 0.5;
-		}
-			
-		
-		m_WorkFrame->resize(zoom * m_WorkFrame->pixmap()->size());
-		m_WorkFrame->setZoomFaktor(zoom);
-		
-		horizontalScrollBar()->setValue(int(faktor * horizontalScrollBar()->value()	+ ((faktor - 1) * horizontalScrollBar()->pageStep()/2)));
-	
-		verticalScrollBar()->setValue(int(faktor * verticalScrollBar()->value()	+ ((faktor - 1) * verticalScrollBar()->pageStep()/2)));
-		
-		m_Map->setZoom(zoom);
-	}
+
+        if(m_Map != NULL)
+        {
+                double zoom = m_Map->getZoom();
+
+                Q_ASSERT(m_WorkFrame->pixmap());
+
+                zoom *= faktor;
+
+                if(zoom > 5.0)
+                {
+                        zoom = 5.0;
+                }
+                else if(zoom < 0.5)
+                {
+                        zoom = 0.5;
+                }
+
+
+                m_WorkFrame->resize(zoom * m_WorkFrame->pixmap()->size());
+                m_WorkFrame->setZoomFaktor(zoom);
+
+                horizontalScrollBar()->setValue(int(faktor * horizontalScrollBar()->value()     + ((faktor - 1) * horizontalScrollBar()->pageStep()/2)));
+
+                verticalScrollBar()->setValue(int(faktor * verticalScrollBar()->value() + ((faktor - 1) * verticalScrollBar()->pageStep()/2)));
+
+                m_Map->setZoom(zoom);
+        }
 
 }
 
@@ -90,7 +90,7 @@ void BB_WorkArea::zoom(double faktor)
  */
 BB_AbstractTool* BB_WorkArea::getTool()
 {
-	return m_WorkFrame->getTool();
+        return m_WorkFrame->getTool();
 }
 
 
@@ -100,10 +100,10 @@ BB_AbstractTool* BB_WorkArea::getTool()
  */
 void BB_WorkArea::setTool(BB_AbstractTool* tool)
 {
-	if(tool != NULL)
-		m_WorkFrame->setTool(tool);
-	else
-		cout << "BB_WorkArea::setTool(): NULL-Pointer erhalten" << endl; 
+        if(tool != NULL)
+                m_WorkFrame->setTool(tool);
+        else
+                cout << "BB_WorkArea::setTool(): NULL-Pointer erhalten" << endl;
 }
 
 
@@ -113,11 +113,11 @@ void BB_WorkArea::setTool(BB_AbstractTool* tool)
  */
 void BB_WorkArea::setZoomFaktor(double z)
 {
-	if(m_Map != NULL)
-	{
-		m_Map->setZoom(1.0);
-		zoom(z);
-	}
+        if(m_Map != NULL)
+        {
+                m_Map->setZoom(1.0);
+                zoom(z);
+        }
 }
 
 
@@ -127,28 +127,28 @@ void BB_WorkArea::setZoomFaktor(double z)
  */
 bool BB_WorkArea::setMap(BB_Map* map)
 {
-	if(map != NULL)
-	{
-		m_Map = map;
-		
-		m_WorkFrame->setPixmap(m_Map->getMap());
-		
-		m_WorkFrame->setFrameShape(QFrame::Box);
-		m_WorkFrame->setBackgroundRole(QPalette::Background);
-		m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-		m_WorkFrame->setScaledContents(true);
-		m_WorkFrame->setEnabled(true);
-		
-		setZoomFaktor(m_Map->getZoom());
-		return true;
-	}
-	else
-	{
-		m_WorkFrame->setEnabled(false);
-		m_WorkFrame->setFrameShape(QFrame::NoFrame);
-		return false;
-	}
-	
+        if(map != NULL)
+        {
+                m_Map = map;
+
+                m_WorkFrame->setPixmap(m_Map->getMap());
+
+                m_WorkFrame->setFrameShape(QFrame::Box);
+                m_WorkFrame->setBackgroundRole(QPalette::Background);
+                m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+                m_WorkFrame->setScaledContents(true);
+                m_WorkFrame->setEnabled(true);
+
+                setZoomFaktor(m_Map->getZoom());
+                return true;
+        }
+        else
+        {
+                m_WorkFrame->setEnabled(false);
+                m_WorkFrame->setFrameShape(QFrame::NoFrame);
+                return false;
+        }
+
 }
 
 
@@ -158,16 +158,22 @@ bool BB_WorkArea::setMap(BB_Map* map)
  */
 void BB_WorkArea::setDrawDevice(BB_DrawDevice * device)
 {
-	if(device == NULL)
-	{
-		m_WorkFrame->setEnabled(false);
-		m_WorkFrame->setDrawObjects(NULL);
-	}	
-	else
-	{
-		m_WorkFrame->setDrawObjects( device->getDrawObjects() );
-		m_WorkFrame->setEnabled(true);
-		
-	}
-	m_WorkFrame->update();	
+        if(device == NULL)
+        {
+                m_WorkFrame->setEnabled(false);
+                m_WorkFrame->setDrawObjects(NULL);
+        }
+        else
+        {
+                m_WorkFrame->setDrawObjects( device->getDrawObjects() );
+                m_WorkFrame->setEnabled(true);
+
+        }
+        m_WorkFrame->update();
+}
+
+
+BB_Map* BB_WorkArea::getMap() const
+{
+    return m_Map;
 }

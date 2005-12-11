@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Vaceslav Ustinov   						*
- *   v.ustinov@web.de   											*
+ *   Copyright (C) 2005 by Vaceslav Ustinov                                             *
+ *   v.ustinov@web.de                                                                                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -16,7 +16,9 @@
 #ifndef BB_WALL_H
 #define BB_WALL_H
 
-#include <bb_line.h>
+#include "bb_line.h"
+
+#include <QPixmap>
 
 /**
 Diese Klasse representiert eine Wand,
@@ -34,7 +36,8 @@ public:
     virtual const QString getClassName();
     virtual void generateXElement(QTextStream &out, int depth);
     virtual void show(BB_Transformer& transformer, QPainter& painter) const;
-    
+    void editDlg(QPixmap * pixmap);
+
 
 };
 

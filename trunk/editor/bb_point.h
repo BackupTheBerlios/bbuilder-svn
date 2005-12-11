@@ -113,7 +113,7 @@ protected:
     QVector mit allen Linien, die zu diesem Punkt gehoeren.
     @date 20.10.2005
     */
-    QVector<BB_Line*> m_Lines;
+//     QVector<BB_Line*> m_Lines;
     /**
     QVector mit allen Objekten, die zu diesem Punkt gehoeren.<br>
     z.B. BB_Line oder BB_Tiangle

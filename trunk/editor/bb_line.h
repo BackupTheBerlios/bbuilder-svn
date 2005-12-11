@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Vaceslav Ustinov   						*
+ *   Copyright (C) 2005 by Vaceslav Ustinov                                *
  *   v.ustinov@web.de                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -23,7 +23,7 @@ class BB_Point;
 
 /**
 Klasse zum Darstellen von Wänden und Fenstern
- 
+
 @author Vaceslav Ustinov
 */
 class BB_Line : public BB_DrawObject
@@ -40,7 +40,7 @@ public:
     /**
     Setzt Pointer auf Position 1
     @author Vacelav Ustinov
-    @param BB_Point 
+    @param BB_Point
     */
     bool setPos1(BB_Point* Value);
 
@@ -54,7 +54,7 @@ public:
     /**
     Setzt Pointer auf Position 2
     @author Vacelav Ustinov
-    @param BB_Point 
+    @param BB_Point
     */
     bool setPos2(BB_Point* Value);
 

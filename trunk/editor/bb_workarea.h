@@ -29,16 +29,17 @@ class BB_WorkArea : public QScrollArea
 {
 Q_OBJECT
 public:
-	BB_WorkArea(QVector<BB_DrawObject*>* selectVector, QWidget *parent = 0);
+        BB_WorkArea(QVector<BB_DrawObject*>* selectVector, QWidget *parent = 0);
 
     ~BB_WorkArea();
     void zoom(double faktor);
     BB_AbstractTool* getTool();
     void setTool(BB_AbstractTool* tool);
     void setZoomFaktor(double zoom);
-	
+
     bool setMap(BB_Map* map);
     void setDrawDevice(BB_DrawDevice * device);
+    BB_Map* getMap() const;
 
 
 protected:

@@ -29,37 +29,38 @@ class BB_Tab;
 /**
 @author Alex Letkemann
 */
-class BB_AbstractTool{
+class BB_AbstractTool
+{
 public:
-	BB_AbstractTool();
+    BB_AbstractTool();
 
     virtual ~BB_AbstractTool();
 
-/* Edit: Alex
- * Minimierung  der Aufrufparameter!	
- *     virtual void move(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
- *     virtual void release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
- *     virtual void click(QMouseEvent* me, QVector<BB_DrawObject*>* objects,BB_Tab * tabCreator, BB_Transformer* transformer) = 0;
- */
-	virtual void move(QMouseEvent* me, bool overX, bool overY) = 0;
-	virtual void release(QMouseEvent* me) = 0;
-	virtual void click(QMouseEvent* me) = 0;
-	
+    /* Edit: Alex
+     * Minimierung  der Aufrufparameter!
+     *     virtual void move(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
+     *     virtual void release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
+     *     virtual void click(QMouseEvent* me, QVector<BB_DrawObject*>* objects,BB_Tab * tabCreator, BB_Transformer* transformer) = 0;
+     */
+    virtual void move(QMouseEvent* me, bool overX, bool overY) = 0;
+    virtual void release(QMouseEvent* me) = 0;
+    virtual void click(QMouseEvent* me) = 0;
+
     virtual bool remove(BB_DrawObject * delObject);
 
-	void setObjects(QVector< BB_DrawObject * >* vector);
-	QVector< BB_DrawObject * >* getObjects() const;
+    void setObjects(QVector< BB_DrawObject * >* vector);
+    QVector< BB_DrawObject * >* getObjects() const;
 
-	void setTransformer(BB_Transformer* transformer);
-	BB_Transformer* getTransformer() const;
-	
-	void setSelectionVector(QVector<BB_DrawObject*>* selectionVector);
-	QVector<BB_DrawObject*>* getSelectionVector() const;
+    void setTransformer(BB_Transformer* transformer);
+    BB_Transformer* getTransformer() const;
 
-	void setToolObjects(QVector< BB_DrawObject * >* theValue);
-	
+    void setSelectionVector(QVector<BB_DrawObject*>* selectionVector);
+    QVector<BB_DrawObject*>* getSelectionVector() const;
 
-	QVector< BB_DrawObject * >* getToolObjects() const;
+    void setToolObjects(QVector< BB_DrawObject * >* theValue);
+
+
+    QVector< BB_DrawObject * >* getToolObjects() const;
     void clearSelection();
 
 	void setAction(QAction* theValue);
@@ -68,21 +69,22 @@ public:
     virtual BB_DrawObject* getClickedObject(const C2dVector & posLogic ,const std::type_info &type);
 	
 protected:
-	
 
-	C2dVector m_LastLogicMouseClick;
-	C2dVector m_pLogic;
-	QPoint m_pScreen;
-	QWidget * parentWidget;
-	QAction* m_Action;
-	
-	/** Vektor mit Objekten, die bearbeitet werden sollen. */
+
+    C2dVector m_LastLogicMouseClick;
+    C2dVector m_pLogic;
+    QPoint    m_pScreen;
+    QWidget * parentWidget;
+    QAction * m_Action;
+
+    /** Vektor mit Objekten, die bearbeitet werden sollen. */
     QVector<BB_DrawObject*>* m_Objects;
-	
-	QVector<BB_DrawObject*>* m_Selection;
-	
-	/** Transformer, der bei der Bearbeitung verwendet wird. */
+
+    QVector<BB_DrawObject*>* m_Selection;
+
+    /** Transformer, der bei der Bearbeitung verwendet wird. */
     BB_Transformer* m_Transformer;
+    /** Zu zeichende Objecte, die zum Ausgewaeltem tool gehoeren*/
     QVector<BB_DrawObject*>* m_ToolObjects;
 
 };
