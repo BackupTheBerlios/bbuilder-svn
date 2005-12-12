@@ -74,6 +74,7 @@ void BB_Wall::show(BB_Transformer& transformer, QPainter& painter) const
  */
 void BB_Wall::editDlg(QPixmap * pixmap)
 {
-  BB_DlgWallEdit EditDlg;
+	BB_DlgWallEdit EditDlg;
+  EditDlg.setImage(pixmap);
   EditDlg.exec();
 }
