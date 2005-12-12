@@ -11,6 +11,9 @@
 //
 #include "bb_xterrainhandler.h"
 #include "bb_terrain.h"
+// #include "bb_drawobject.h"
+#include "bb_triangle.h"
+
 
 #include "bb_point.h"
 
@@ -88,6 +91,63 @@ bool BB_XTerrainHandler::startElement(const QString& namespaceURI, const QString
 		m_Terrain->getDrawObjects()->append(m_Object);
 
 	}
+	else if(qName == "bb_triangle")
+	{
+		bool ok;
+		QString tmp;
+		BB_Point *point1 = NULL;
+		BB_Point *point2 = NULL;
+		BB_Point *point3 = NULL;
+		int p1,p2,p3,id;
+		
+		tmp = atts.value("id");
+		id = tmp.toInt(&ok);
+		
+		tmp = atts.value("p1");
+		p1 = tmp.toInt(&ok);
+		
+		tmp = atts.value("p2");
+		p2 = tmp.toInt(&ok);
+		
+		tmp = atts.value("p3");
+		p3 = tmp.toInt(&ok);
+		
+		
+		BB_Object *object;
+		
+		for(int i = 0; i < m_Terrain->getDrawObjects()->count(); i++)
+		{
+			object = m_Terrain->getDrawObjects()->at(i);
+			if(typeid(*object) == typeid(BB_Point))
+			{
+				if(object->getObjectNr() == p1)
+				{
+					point1=(BB_Point*)object;
+				}
+				else if(object->getObjectNr() == p2)
+				{
+					point2=(BB_Point*)object;
+				}
+				else if(object->getObjectNr() == p3)
+				{
+					point3=(BB_Point*)object;
+				}
+			}
+		}
+		
+		if(point1 != NULL && point2 != NULL && point3 != NULL)
+		{
+			BB_DrawObject* triangle = (BB_DrawObject*) new BB_Triangle(point1,point2,point3);
+			m_Terrain->getDrawObjects()->append(triangle);
+			
+		}
+		else
+		{
+			cout  << "Fehler: BB_Triangle konnte nicht erstellt werden!" << endl;
+			return false;
+		}
+	}
+	
 	m_CurrentText.clear();
 
 	return true;
@@ -131,6 +191,10 @@ bool BB_XTerrainHandler::endElement(const QString& namespaceURI, const QString& 
 	
 	
 	if(qName == "bb_point")
+	{
+		m_Object = NULL;
+	}
+	else if(qName == "bb_triangle")
 	{
 		m_Object = NULL;
 	}

@@ -128,7 +128,7 @@ bool BB_Building::write(QTextStream &out)
 		}
 		else
 		{
-			cout << "Unbekanntes Objekt gefunden" << endl;
+			cout << "Unbekanntes Objekt gefunden: " << typeid(*object).name() << endl;
 		}
 	}
 	

@@ -10,6 +10,11 @@
 //
 //
 #include "bb_drawdevice.h"
+#include "bb_point.h"
+
+#include <iostream>
+
+using namespace std;
 
 BB_DrawDevice::BB_DrawDevice()
 {
@@ -18,23 +23,38 @@ BB_DrawDevice::BB_DrawDevice()
 
 /**
  * Destrucktor
- * Löscht alle Objekte
+ * Löscht alle Objekte, die noch im DrawDevice sind.
  */
 BB_DrawDevice::~BB_DrawDevice()
 {
-	BB_DrawObject* object;
 	
-	for(int i = 0; i < m_DrawObjects.count(); i++)
+	BB_DrawObject * object;
+	
+	/* Alle Punkte löschen.
+	* Vorher werden alle Objekte gelöscht, 
+	* die vom jeweiligen Punkt abhängig sind.
+	*/
+	for(int i = m_DrawObjects.count() - 1; i >=0 ; i-- )
 	{
-		object = m_DrawObjects.at(i);
-		if(object != NULL)
+		if( typeid( *( m_DrawObjects.at( i ) ) ) == typeid( BB_Point ) )
 		{
+			object = m_DrawObjects.at( i );
+			m_DrawObjects.remove( i );
+			
+			((BB_Point*)object) -> deleteLinkedObjects( &m_DrawObjects );
 			delete object;
 		}
 	}
 	
-	m_DrawObjects.clear();
 	
+	if(m_DrawObjects.count() > 0)
+	{
+		
+		// TODO Auf qDebug umstellen
+		cout << "BB_Terrain::~BB_Terrain(): Nicht alle Objekte konnten gelöscht werden" << endl; 
+	}
+	
+	m_DrawObjects.clear();
 }
 
 

@@ -18,6 +18,7 @@
 #include <QObject>
 
 #include "bb_point.h"
+#include "bb_triangle.h"
 
 #include <iostream>
 #include "bb_xterrainhandler.h"
@@ -33,8 +34,12 @@ BB_Terrain::BB_Terrain(const QDir& path, const QString &fileName, const QString 
 }
 
 
+/**
+ * Destrucktor
+ */
 BB_Terrain::~BB_Terrain()
 {
+
 }
 
 
@@ -57,7 +62,7 @@ bool BB_Terrain::write(QTextStream &out)
 	int depth = 1;
 	
 	QVector<BB_Point*> points;
-// 	QVector<BB_Wall*> walls; 
+ 	QVector<BB_Triangle*> triangles; 
 	
 	BB_Object* object;
 	
@@ -69,13 +74,13 @@ bool BB_Terrain::write(QTextStream &out)
 		{
 			points.append((BB_Point*)object);
 		} 
-// 		else if (typeid(*object) == typeid(BB_Wall))
-// 		{
-// 			walls.append((BB_Wall*)object);
-// 		}
+		else if (typeid(*object) == typeid(BB_Triangle))
+		{
+			triangles.append((BB_Triangle*)object);
+		}
 		else
 		{
-			cout << "Unbekanntes Objekt gefunden" << endl;
+			qDebug() << "Unbekanntes Objekt gefunden: " << typeid(*object).name() << endl;
 		}
 	}
 	
@@ -103,21 +108,21 @@ bool BB_Terrain::write(QTextStream &out)
 		out << "<points />";
 	}
 	
-// 	if(walls.count())
-// 	{
-// 		out << BB::indent(depth) << "<walls>\n";
-// 		
-// 		for(int i = 0; i < walls.count(); i++)
-// 		{
-// 			walls.at(i)->generateXElement(out,depth + 1);
-// 		}
-// 		
-// 		out << BB::indent(depth) << "</walls>\n";
-// 	}
-// 	else
-// 	{
-// 		out << BB::indent(depth) << "<walls />\n";
-// 	}
+		if(triangles.count())
+		{
+			out << BB::indent(depth) << "<triangles>\n";
+			
+			for(int i = 0; i < triangles.count(); i++)
+			{
+				triangles.at(i)->generateXElement(out,depth + 1);
+			}
+			
+			out << BB::indent(depth) << "</triangles>\n";
+		}
+		else
+		{
+			out << BB::indent(depth) << "<triangles />\n";
+		}
 	
 	out << "</bb_terrain>\n";
 	return true;

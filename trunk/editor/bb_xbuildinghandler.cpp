@@ -128,7 +128,8 @@ bool BB_XBuildingHandler::startElement(const QString& namespaceURI, const QStrin
 		}
 		else
 		{
-			cout << "Fehler: BB_Wall konnte nicht erstellt werden!" << endl;
+			qDebug() << "Fehler: BB_Wall konnte nicht erstellt werden!" << endl;
+			return false;
 		}
 		
 		

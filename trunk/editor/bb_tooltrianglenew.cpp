@@ -23,7 +23,9 @@ BB_ToolTriangleNew::BB_ToolTriangleNew()
 
 
 BB_ToolTriangleNew::~BB_ToolTriangleNew()
-{}
+{
+	reset();
+}
 
 void BB_ToolTriangleNew::click(QMouseEvent* me)
 {
@@ -45,6 +47,7 @@ void BB_ToolTriangleNew::click(QMouseEvent* me)
 				if(object != NULL)
 				{
 					m_Triangle = new BB_Triangle((BB_Point*) object, (BB_Point*) object, (BB_Point*) object);
+					object->setSelected( true );						// Den angeclickten Punkt markieren
 					m_ToolObjects->append(m_Triangle);
 				}
             }
@@ -65,6 +68,7 @@ void BB_ToolTriangleNew::click(QMouseEvent* me)
 					{
 						if(object != m_Triangle->getPos1())
 						{
+							object->setSelected( true );				// Den angeclickten Punkt markieren
 							m_Triangle->setPos2((BB_Point*) object);
 						}
 						object = NULL;
@@ -81,7 +85,7 @@ void BB_ToolTriangleNew::click(QMouseEvent* me)
 						if(object != m_Triangle->getPos1() && object != m_Triangle->getPos2())
 						{
 							m_Triangle->setPos3((BB_Point*) object);
-						
+							object->setSelected( true );				// Den angeclickten Punkt markieren
 							object = NULL;
 							
 							
@@ -95,6 +99,12 @@ void BB_ToolTriangleNew::click(QMouseEvent* me)
 // 									<< m_Triangle << endl;
 							
 							// Wichtig:  m_Triangle wird auf NULL gesetzt, da sie sonst vom reset() gelösch wird
+							
+							// Die Selektion aufheben
+							m_Triangle->getPos1()->setSelected( false );
+							m_Triangle->getPos2()->setSelected( false );
+							m_Triangle->getPos3()->setSelected( false );
+							
 							m_Triangle = NULL;
 							reset();
 						}
@@ -138,6 +148,12 @@ void BB_ToolTriangleNew::reset()
 		m_Triangle->getPos1()->removeLinkedObject( m_Triangle );
 		m_Triangle->getPos2()->removeLinkedObject( m_Triangle );
 		m_Triangle->getPos3()->removeLinkedObject( m_Triangle );
+		
+		// Die Selektion aller Punkte aufheben
+		m_Triangle->getPos1()->setSelected( false );
+		m_Triangle->getPos2()->setSelected( false );
+		m_Triangle->getPos3()->setSelected( false );
+		
 		
 		// Triangle lösche
 		delete m_Triangle;

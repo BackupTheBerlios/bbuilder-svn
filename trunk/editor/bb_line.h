@@ -65,9 +65,9 @@ public:
     */
     BB_Point* getPos2() const;
 
-    void remove(BB_Point * point);
+    virtual void remove(BB_Point * point);
     virtual const QString getClassName();
-    bool isHit(QRect rect);
+    virtual bool isHit(QRect rect);
 
 
 

@@ -42,6 +42,9 @@ BB_Triangle::BB_Triangle(BB_Point* p1, BB_Point* p2, BB_Point* p3): BB_Line(p1, 
 
 BB_Triangle::~BB_Triangle()
 {
+	m_Pos1->removeLinkedObject( this );
+	m_Pos2->removeLinkedObject( this );
+	m_Pos3->removeLinkedObject( this );
 }
 
 
@@ -92,14 +95,39 @@ void BB_Triangle::show(BB_Transformer& transformer, QPainter& painter) const
 	}
 }
 
+/* 
 void BB_Triangle::remove(BB_Point* point)
 {
-    BB_Line::remove(point);
+	cout << "void BB_Triangle::remove(" << point << ")" << endl;
 	
-	/// @todo
+	if (m_Pos1 == point)
+	{
+		cout << "m_Pos2( " << m_Pos2 << " )->deleteLinkedObject( " << this << " );" << endl;
+		m_Pos2->deleteLinkedObject( this );
+		
+		cout << "m_Pos3( " << m_Pos3 << " )->deleteLinkedObject( " << this << " );" << endl;
+		m_Pos3->deleteLinkedObject( this );
+	}
+	else if(m_Pos2 == point)
+	{
+		cout << "m_Pos1( " << m_Pos1 << " )->deleteLinkedObject( " << this << " );" << endl;
+		m_Pos1->deleteLinkedObject( this );
+		
+		cout << "m_Pos3( " << m_Pos3 << " )->deleteLinkedObject( " << this << " );" << endl;
+		m_Pos3->deleteLinkedObject( this );
+	}
+	else if(m_Pos3 == point)
+	{
+		cout << "m_Pos1( " << m_Pos1 << " )->deleteLinkedObject( " << this << " );" << endl;
+		m_Pos1->deleteLinkedObject( this );
+		
+		cout << "m_Pos2( " << m_Pos2 << " )->deleteLinkedObject( " << this << " );" << endl;
+		m_Pos2->deleteLinkedObject( this );
+	}
+
 }
 
-
+*/
 
 /**
  * Gibt die Position der dritten Ecke des Dreiecks zurück
@@ -127,4 +155,23 @@ bool BB_Triangle::setPos3(BB_Point* point)
 	}
 // 	cout << "BB_Triangle::setPos3(..): NULL-Pointer erhalten" << endl;
 	return false;
+}
+
+
+/**
+ * Erstellt ein BB_Triangle XML-Element und schreibt dieses in den out-Stream
+ * @param out Stream, in welchen das Element geschrieben wird.
+ * @param depth Tiefe der Einrückung
+ * @author Alex Letkemann
+ * @date 11.12.2005
+ */
+void BB_Triangle::generateXElement(QTextStream &out, int depth)
+{
+	out << BB::indent(depth) << "<bb_triangle id=\"" << getObjectNr() 
+			<< "\" p1=\"" << getPos1()->getObjectNr()
+			<< "\" p2=\"" << getPos2()->getObjectNr() 
+			<< "\" p3=\"" << getPos3()->getObjectNr() << "\">\n";
+	
+	BB_Object::generateXElement(out,depth+1);
+	out << BB::indent(depth) << "</bb_triangle>\n";
 }

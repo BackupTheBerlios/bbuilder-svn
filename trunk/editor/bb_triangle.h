@@ -25,18 +25,30 @@ public:
 
     ~BB_Triangle();
 
-    bool isHit(QRect rect);
+    virtual bool isHit(QRect rect);
     virtual bool isHit(C2dVector hit);
     virtual const QString getClassName();
     virtual void show(BB_Transformer& transformer, QPainter& painter) const;
-    void remove(BB_Point* point);
+    
+	
+	//virtual void remove(BB_Point* point);
 
-	bool setPos3(BB_Point* theValue);
+	/**
+	 * Setzt die dritte Position (Ecke) der Trinagle.
+	 * @param point Pointer auf einen Punkt. Wird auf NULL geprüft.
+	 * @return False im Fehlerfall, sonst true
+	 */
+	bool setPos3(BB_Point* point);
 	
 
+	/**
+	 * Gibt einen Pointer auf den Punkt der dritten Position zurück.
+	 * @return Pointer auf den Punkt der dritten Position.
+	 */
 	BB_Point* getPos3() const;
+    virtual void generateXElement(QTextStream &out, int depth);
 	
-	
+	/** Pointer auf die dritte Position */
 	BB_Point* m_Pos3;
 };
 

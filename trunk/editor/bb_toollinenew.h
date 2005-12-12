@@ -38,6 +38,9 @@ public:
     virtual void release(QMouseEvent* me);
 protected:
 	BB_DrawObject * m_movedPoint;
+	
+	// EDIT: Alex Letkemann
+	// Name angepasst ...
 	BB_Wall * tmpWall;
 
 };

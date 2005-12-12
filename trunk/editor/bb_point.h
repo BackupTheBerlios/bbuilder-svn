@@ -91,7 +91,7 @@ public:
     @return BB_DrawObject wenn Ein Objekt aus dem Vektor entwernt wurde, wird ein Link auf diesen Objekt
     zurückgegeben. Wenn es nicht gelöscht wurde, wird ein Null - Pointer zurückgegeben.
     */
-    BB_DrawObject* removeLinkedObject(BB_DrawObject * object);
+    void removeLinkedObject(BB_DrawObject * object);
     /**
     ///TO-DO
     @author Vaceslav Ustinov

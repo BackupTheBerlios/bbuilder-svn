@@ -40,7 +40,10 @@ BB_Line::BB_Line(BB_Point *p1, BB_Point *p2)
 
 
 BB_Line::~BB_Line()
-{}
+{
+	m_Pos1->removeLinkedObject( this );
+	m_Pos2->removeLinkedObject( this );
+}
 
 bool BB_Line::isHit(C2dVector hit)
 {
@@ -145,6 +148,8 @@ bool BB_Line::setPos2(BB_Point* Value)
  */
 void BB_Line::remove(BB_Point * point)
 {
+		
+	cout << "void BB_Line::remove( " << point << " )" << endl;
   if (m_Pos1 == point)
     m_Pos2->deleteLinkedObject(this);
   else

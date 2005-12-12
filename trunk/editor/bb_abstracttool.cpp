@@ -30,36 +30,37 @@ BB_AbstractTool::BB_AbstractTool()
 BB_AbstractTool::~BB_AbstractTool()
 {}
 
-bool BB_AbstractTool::remove
-    ( BB_DrawObject * delObject )
+bool BB_AbstractTool::remove(BB_DrawObject * delObject)
 {
-    if ( m_Objects != NULL && delObject != NULL )
-    {
-        BB_DrawObject * tmpObject;
-        int objectPosition;
-        objectPosition = -1;
-        for ( int i = 0; i < m_Objects->count(); i++ )
-        {
-            tmpObject = m_Objects->at( i );
-            if ( tmpObject == delObject )
-            {
-                objectPosition = i;
+	if(m_Objects != NULL && delObject != NULL)
+	{
+		BB_DrawObject * tmpObject;
+// 		int objectPosition;
+// 		objectPosition = -1;
+		for (int i = m_Objects->count() - 1; i >= 0 ; i--)
+		{
+			tmpObject = m_Objects->at(i);
+			if (tmpObject == delObject)
+			{
+				
+				m_Objects->remove(i);
+				delete delObject;
+				return true;
+// 				objectPosition = i;
+				
+				// TODO Objekt wird nicht aus dem Speicher gelöscht!
+			}
+		}
+// 		cout << objectPosition <<endl;
+		
+		
+// 		if(objectPosition != -1) 
+// 		return true;
+	}
 
-                // TODO Objekt wird nicht aus dem Speicher gelöscht!
-            }
-        }
-        cout << objectPosition << endl;
-        m_Objects->remove( objectPosition );
+	return false;
+	
 
-        if ( objectPosition == -1 )
-            return false;
-        else
-            return true;
-    }
-    else
-    {
-        return false;
-    }
 }
 
 
