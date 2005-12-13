@@ -19,6 +19,8 @@
 #include <QtGui>
 #include <QAction>
 
+#include "bb_doccomponent.h"
+
 #include "bb_drawobject.h"
 #include "bb_transformer.h"
 #include "c2dvector.h"
@@ -48,12 +50,14 @@ public:
 
     virtual bool remove(BB_DrawObject * delObject);
 
-    void setObjects(QVector< BB_DrawObject * >* vector);
-    QVector< BB_DrawObject * >* getObjects() const;
-
+	/* Edit: Alex
+	 * Emstellung auf BB_DocComponent
+     *    void setObjects(QVector< BB_DrawObject * >* vector);
+     *    QVector< BB_DrawObject * >* getObjects() const;
+	 */
     void setTransformer(BB_Transformer* transformer);
     BB_Transformer* getTransformer() const;
-
+	 
     void setSelectionVector(QVector<BB_DrawObject*>* selectionVector);
     QVector<BB_DrawObject*>* getSelectionVector() const;
 
@@ -67,6 +71,10 @@ public:
 	QAction* getAction();
     virtual void reset();
     virtual BB_DrawObject* getClickedObject(const C2dVector & posLogic ,const std::type_info &type);
+
+	void setDocComponent( BB_DocComponent* theValue );
+	BB_DocComponent* getDocComponent() const;
+	
 	
 protected:
 
@@ -83,10 +91,13 @@ protected:
     QVector<BB_DrawObject*>* m_Selection;
 
     /** Transformer, der bei der Bearbeitung verwendet wird. */
-    BB_Transformer* m_Transformer;
+    
+	BB_Transformer* m_Transformer;
     /** Zu zeichende Objecte, die zum Ausgewaeltem tool gehoeren*/
     QVector<BB_DrawObject*>* m_ToolObjects;
-
+	
+	/** Pointer auf das DocComponent, mit welchem gearbeitet wird */
+	BB_DocComponent * m_Component;
 };
 
 #endif

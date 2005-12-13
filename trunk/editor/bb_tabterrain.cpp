@@ -31,8 +31,10 @@ BB_TabTerrain::BB_TabTerrain(BB_Doc* doc, QWidget* parent, Qt::WFlags f)
 	if(m_Doc!= NULL && m_Doc->getTerrain() != NULL)
 	{
 		m_Terrain = m_Doc->getTerrain();
-		m_Center->setDrawDevice(m_Terrain);
-		m_Center->setMap(m_Terrain);
+		
+		m_Center->setDocComponent(m_Terrain);
+// 		m_Center->setDrawDevice(m_Terrain);
+// 		m_Center->setMap(m_Terrain);
 	}
 	
 	initTools();
@@ -171,8 +173,10 @@ void BB_TabTerrain::slotTerrainEdit()
 	if(m_Terrain != NULL)
 	{
 		m_Terrain->keyBoardEdit(this);
-		m_Center->setMap(m_Terrain);
-		m_Center->setDrawDevice(m_Terrain);
+		
+		m_Center->setDocComponent( m_Terrain );
+// 		m_Center->setMap(m_Terrain);
+// 		m_Center->setDrawDevice(m_Terrain);
 	}
 }
 
@@ -202,13 +206,15 @@ void BB_TabTerrain::updateWidget()
 	
 	if(m_Terrain != NULL)
 	{
-		m_Center->setMap(m_Terrain);
-		m_Center->setDrawDevice(m_Terrain);
+		m_Center->setDocComponent( m_Terrain );
+// 		m_Center->setMap(m_Terrain);
+// 		m_Center->setDrawDevice(m_Terrain);
 	}
 	else
 	{
-		m_Center->setMap(NULL);
-		m_Center->setDrawDevice(NULL);
+		m_Center->setDocComponent( m_Terrain );
+// 		m_Center->setMap(NULL);
+// 		m_Center->setDrawDevice(NULL);
 	}
 		
 }

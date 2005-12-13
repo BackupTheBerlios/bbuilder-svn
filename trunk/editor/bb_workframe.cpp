@@ -21,6 +21,8 @@
 
 using namespace std;
 
+///@todo alle m_DrawObjects gegen m_DocComponent->getDrawObjects() tauschen
+
 BB_WorkFrame::BB_WorkFrame(QVector<BB_DrawObject*>* selectVector, QWidget * parent, Qt::WFlags f)
         :QLabel(parent,f)
 {
@@ -31,6 +33,7 @@ BB_WorkFrame::BB_WorkFrame(QVector<BB_DrawObject*>* selectVector, QWidget * pare
 	}
 // 	exit(0);
 	
+	m_Component = NULL;
     m_Tool = NULL;
     m_DrawObjects = NULL;
     m_Transformer.setOffset(QPoint(100, 100));
@@ -42,12 +45,18 @@ BB_WorkFrame::~BB_WorkFrame()
 
 
 /**
- * Zeichnet den Hintergrund und alle Objekte
+ * Zeichnet den Hintergrund und alle Objekte (Wenn die Arbeitsfläche aktiviert ist).
+ * Zeichen Reihenfolge:
+ * 1. Alle Objekte aus dem DrawObjects-Vektor, die KEINE Punkte sind
+ * 2. Alle Punkte
+ * 3. Die ToolObjekte
+ * Jedes Objekt, das Gezeichnet wird, liegt oberhalb der bereits gezeichneten Objekte.
+ * @author Alex Letkemann
+ * @date 12.12.2005
  */
 void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
 {
-// 	cout << "Paint-Event - Start" << endl;
-	
+	/* Nur Zeichnen, wenn die Arbeitsfläche aktiviert ist. */
     if(isEnabled())
     {
         QLabel::paintEvent(pe);
@@ -57,36 +66,42 @@ void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
 
         if(m_DrawObjects != NULL)
         {
-			
-// 			cout << "Paint-Event-Objects - Start" << endl;
-			BB_DrawObject* object;
+			BB_DrawObject* object;		
+				
+			/* Alle Objekte außer der Punkte zeichnen */
             for(int i = 0; i < m_DrawObjects->count(); i++)
             {
-				object = m_DrawObjects->at(i);
-				
-// 				cout << object << " | " << typeid(*object).name() << endl;;
-				
-                object->show(m_Transformer,painter);
-
+				if( typeid(*(m_DrawObjects->at(i))) != typeid(BB_Point) )
+				{
+					object = m_DrawObjects->at(i);
+					object->show(m_Transformer,painter);
+				}
             }
-// 			cout << "Paint-Event-Objects - End" << endl;
 			
-// 			cout << "Paint-Event-Tool-Objects - Start" << endl;
+			
+			/* Alle Punkte zeichnen */
+			for(int i = 0; i < m_DrawObjects->count(); i++)
+			{
+				if( typeid(*(m_DrawObjects->at(i))) == typeid(BB_Point) )
+				{
+					object = m_DrawObjects->at(i);
+					object->show(m_Transformer,painter);
+				}
+			}
+			
+			
+			/* ToolObjekte Zeichnen */
 			for(int i = 0; i < m_ToolObjects.count(); i++)
 			{
-				
 				m_ToolObjects.at(i)->show(m_Transformer,painter);
 			}
-// 			cout << "Paint-Event-Tool-Objects - End" << endl;
 			
         }
         else
         {
-            cout << "m_DrawObjects nicht initialisiert!" << endl;
+			qDebug() << "m_DrawObjects nicht initialisiert!" << endl;
         }
     }
-	
-// 	cout << "Paint-Event - End" << endl;
 }
 
 
@@ -129,7 +144,8 @@ void BB_WorkFrame::setTool(BB_AbstractTool* tool)
 		
         m_Tool = tool;
 		m_Tool->setTransformer(&m_Transformer);
-		m_Tool->setObjects(m_DrawObjects);
+// 		m_Tool->setObjects(m_DrawObjects);
+		m_Tool->setDocComponent( m_Component );
 		m_Tool->setSelectionVector(m_Selection);
 		m_Tool->setToolObjects(&m_ToolObjects);
 		
@@ -154,7 +170,9 @@ void BB_WorkFrame::mousePressEvent ( QMouseEvent * me)
         // 		update();
     }
     else
+	{
         cout << "Kein Tool ausgewählt" << endl;
+	}
 }
 
 /**
@@ -168,8 +186,11 @@ void BB_WorkFrame::mouseReleaseEvent(QMouseEvent* me)
         update();
     }
     else
+	{
         cout << "Kein Tool ausgewählt" << endl;
+	}
 	
+	/* Mouseevent weiterleiten, damit das BB_TabXXXXX es mitkriegt */
 	QLabel::mouseReleaseEvent(me);
 }
 
@@ -190,36 +211,39 @@ void BB_WorkFrame::mouseMoveEvent(QMouseEvent* me)
         update();
     }
     else
-        cout << "Kein Tool ausgewählt" << endl;
+	{
+		qDebug() << "Kein Tool ausgewählt" << endl;
+	}
 }
 
 
-/**
+/* *
  * Gibt einen Pointer des Objektvectors oder NULL, falls dieser nicht gesetzt ist.
  * @return Pointer des Objektvectors.
  */
-QVector< BB_DrawObject *>* BB_WorkFrame::getDrawObjects() const
-{
-    return m_DrawObjects;
-}
+// QVector< BB_DrawObject *>* BB_WorkFrame::getDrawObjects() const
+// {
+//     return m_DrawObjects;
+// }
 
 
-/**
+/* *
  * Setzt den Pointer des Workframe auf den Vector mit den Objekten.
  * Es findet keine Überprüfung statt, ob der Pointer NULL ist oder nicht.
  * @param objects Pointer auf den Objektvector.
  */
-void BB_WorkFrame::setDrawObjects(QVector< BB_DrawObject *>* objects)
-{
-	/* Keine überprüfung auf null, da NULL die darstellung der Objekte deaktiviert*/
-	m_DrawObjects = objects;
-	
-	if(m_Tool != NULL)
-	{
-		m_Tool->setObjects(m_DrawObjects);
-		m_Tool->setTransformer(&m_Transformer);
-	}
-}
+// void BB_WorkFrame::setDrawObjects(QVector< BB_DrawObject *>* objects)
+// {
+// 	/* Keine überprüfung auf null, da NULL die darstellung der Objekte deaktiviert*/
+// 	m_DrawObjects = objects;
+// 	
+// 	if(m_Tool != NULL)
+// 	{
+// 		m_Tool->setDocComponent( m_Component );
+// // 		m_Tool->setObjects(m_DrawObjects);
+// // 		m_Tool->setTransformer(&m_Transformer);
+// 	}
+// }
 
 
 /**
@@ -240,4 +264,29 @@ void BB_WorkFrame::drawCenter(QPainter &painter)
     painter.drawLine(dest.x() - 10,dest.y(),dest.x() + 10,dest.y());
     painter.drawLine(dest.x(),dest.y() -10,dest.x(), dest.y() + 10);
     painter.restore();
+}
+
+
+BB_DocComponent* BB_WorkFrame::getDocComponent() const
+{
+    return m_Component;
+}
+
+
+void BB_WorkFrame::setDocComponent( BB_DocComponent* component )
+{
+	m_Component = component;
+	if(m_Component == NULL)
+	{
+		m_DrawObjects = NULL;
+	}
+	else
+	{
+		m_DrawObjects = m_Component->getDrawObjects();
+		if(m_Tool != NULL)
+		{
+			m_Tool->setDocComponent( m_Component );
+			m_Tool->setTransformer( &m_Transformer );
+		}
+	}
 }

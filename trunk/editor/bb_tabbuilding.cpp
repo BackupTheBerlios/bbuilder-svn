@@ -106,7 +106,7 @@ void BB_TabBuilding::initWidgetLeft()
  */
 void BB_TabBuilding::slotBuildingDelete()
 {
-
+	///@todo Auf QListWidgetItem umstellen
     BB_Building * building;
     int row = m_BuildingsListWidget->currentRow();
     if ( row != -1 )
@@ -324,7 +324,7 @@ void BB_TabBuilding::createBuildingList()
     }
     else
     {
-        cout << "Kann die Liste nicht nochmal erstellen." << endl;
+		qDebug() << "Kann die Liste nicht nochmal erstellen." << endl;
     }
 }
 
@@ -349,9 +349,11 @@ void BB_TabBuilding::slotBuildingChanged( QListWidgetItem * current, QListWidget
     if ( building != NULL )
     {
 
-        m_Center->setDrawDevice( building );
-        m_Center->setEnabled( true );
-        m_Center->setMap( building );
+		m_Center->setDocComponent(building);
+		m_Center->setEnabled( true );
+//         m_Center->setDrawDevice( building );
+//        
+//         m_Center->setMap( building );
     }
     if ( previous != NULL )
     {

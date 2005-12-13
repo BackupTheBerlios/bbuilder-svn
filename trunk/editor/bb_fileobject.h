@@ -61,6 +61,7 @@ protected:
     QXmlDefaultHandler* m_Handler;
     QString m_ErrorString;
 protected:
+	/** Schreibt die Datei in den Stream out */ 
 	virtual bool write(QTextStream &out)  = 0;
 
 

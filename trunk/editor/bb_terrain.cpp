@@ -39,14 +39,13 @@ BB_Terrain::BB_Terrain(const QDir& path, const QString &fileName, const QString 
  */
 BB_Terrain::~BB_Terrain()
 {
-
 }
 
 
 
 
 /*!
-    \fn BB_Terrain::generateXElement(QIODevice *device, int depth)
+    \fn virtual void BB_Terrain::generateXElement(QIODevice *device, int depth)
  */
 void BB_Terrain::generateXElement(QTextStream &out, int depth)
 {
@@ -55,7 +54,7 @@ void BB_Terrain::generateXElement(QTextStream &out, int depth)
 
 
 /*!
-    \fn BB_Terrain::write(QIODevice *device)
+   \fn BB_FileObject::write(QTextStream &out);
  */
 bool BB_Terrain::write(QTextStream &out)
 {

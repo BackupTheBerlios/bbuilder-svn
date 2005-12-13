@@ -36,10 +36,14 @@ public:
     BB_AbstractTool* getTool();
     void setTool(BB_AbstractTool* tool);
 
-	void setDrawObjects(QVector< BB_DrawObject *>* theValue);
+	void setDocComponent( BB_DocComponent* theValue );
 	
 
-	QVector< BB_DrawObject *>* getDrawObjects() const;
+	BB_DocComponent* getDocComponent() const;
+	
+
+// 	void setDrawObjects(QVector< BB_DrawObject *>* theValue);
+// 	QVector< BB_DrawObject *>* getDrawObjects() const;
 	
 	
 protected:
@@ -51,14 +55,19 @@ protected:
 protected:
     BB_AbstractTool* m_Tool;
 	
-    QVector<BB_DrawObject*>* m_DrawObjects;
+    
 	QVector<BB_DrawObject*>* m_Selection;
 	
     BB_Transformer m_Transformer;
 	
 	/** Hilfsobjekte, die von den Tools erzeugt werden und gezeichnet werden müssen. */
     QVector<BB_DrawObject*> m_ToolObjects;
-
+	
+	/** Kompenent, mit welchem gearbeitet wird */
+	BB_DocComponent* m_Component;
+	
+	
+	QVector<BB_DrawObject*>* m_DrawObjects;
 };
 
 #endif

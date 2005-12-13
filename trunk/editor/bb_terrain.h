@@ -30,6 +30,8 @@ public:
 
     virtual ~BB_Terrain();
 	virtual void generateXElement(QTextStream &out, int depth);
+	
+	/** @see virtual bool BB_FileObject::write(QTextStream &out) */
 	virtual bool write(QTextStream &out);
 	virtual int keyBoardEdit(QWidget* parent);
     virtual bool open();

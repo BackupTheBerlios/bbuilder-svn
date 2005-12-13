@@ -200,7 +200,7 @@ void BB_ToolMove::move( QMouseEvent* me, bool overX, bool overY )
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
     if ( m_Objects == NULL && me == NULL && m_Transformer == NULL )
     {
-        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %d \tme: %d\tm_Transformer: %d", m_Objects, me, m_Transformer );
+        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %d\tm_Transformer: %d", m_Objects, me, m_Transformer );
         return ;
     }
     //Behandlung von Linke-maustaste

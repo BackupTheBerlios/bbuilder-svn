@@ -11,6 +11,8 @@
 //
 #include "bb_triangle.h"
 
+
+#include <QBrush>
 #include <iostream>
 
 using namespace std;
@@ -29,7 +31,11 @@ BB_Triangle::BB_Triangle(BB_Point* p1, BB_Point* p2, BB_Point* p3): BB_Line(p1, 
 	if(p3 != NULL)
 	{
 		setPos3(p3);
-		m_Color = QColor(255, 221, 118,150);
+		
+		
+		m_Color = QColor(255, 221, 118);
+		m_Brush.setColor(m_Color);
+		m_Brush.setStyle(Qt::Dense4Pattern);
 	}
 	else
 	{
@@ -61,18 +67,18 @@ bool BB_Triangle::isHit(QRect rect)
 bool BB_Triangle::isHit(C2dVector hit)
 {
 	
-	///@todo
+	///@todo isHit für Triangle
     return BB_Line::isHit(hit);
 }
 
 /**
  * Gibt den Klassennamen zurück
- * 
  */
 const QString BB_Triangle::getClassName()
 {
 	return "BB_Triangle";
 }
+
 
 void BB_Triangle::show(BB_Transformer& transformer, QPainter& painter) const
 {
@@ -85,9 +91,10 @@ void BB_Triangle::show(BB_Transformer& transformer, QPainter& painter) const
 		transformer.logicalToScreen(point[0], m_Pos1->getPos());
 		transformer.logicalToScreen(point[1], m_Pos2->getPos());
 		transformer.logicalToScreen(point[2], m_Pos3->getPos());
-	
+		
 		painter.setPen(m_Color);
-		painter.setBrush(m_Color);
+		painter.setBrush(m_Brush);
+
 	// 	painter.drawLine(dest_Pos1.x(), dest_Pos1.y(), dest_Pos2.x(), dest_Pos2.y());
 		painter.drawPolygon(point,3);
 		

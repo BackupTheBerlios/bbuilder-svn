@@ -21,6 +21,7 @@ using namespace std;
 
 BB_AbstractTool::BB_AbstractTool()
 {
+	m_Component = NULL;
     m_Transformer = NULL;
     m_Objects = NULL;
     m_Action = NULL;
@@ -65,24 +66,24 @@ bool BB_AbstractTool::remove(BB_DrawObject * delObject)
 
 
 
-/**
+/* *
  * Gibt den Vector zurück, der z.Z. bearbeitet wird.
  * @return Vector, der bearbeitet wird.
  */
-QVector< BB_DrawObject * >* BB_AbstractTool::getObjects() const
-{
-    return m_Objects;
-}
+// QVector< BB_DrawObject * >* BB_AbstractTool::getObjects() const
+// {
+//     return m_Objects;
+// }
 
 
-/**
+/* *
  * Setzt den Pointer auf den Vector, welcher bearbeitet werden soll.
  * @param vector Vector, der bearbeitet werden soll.
  */
-void BB_AbstractTool::setObjects( QVector< BB_DrawObject * >* vector )
-{
-    m_Objects = vector;
-}
+// void BB_AbstractTool::setObjects( QVector< BB_DrawObject * >* vector )
+// {
+//     m_Objects = vector;
+// }
 
 
 /**
@@ -190,6 +191,8 @@ void BB_AbstractTool::reset()
  */
 BB_DrawObject* BB_AbstractTool::getClickedObject( const C2dVector &posLogic , const std::type_info &type )
 {
+	
+	/// todo Fehler abfangen
     BB_DrawObject * object;
     bool exit = false;
     for ( int i = 0; i < m_Objects->count() && exit == false; i++ )
@@ -208,4 +211,35 @@ BB_DrawObject* BB_AbstractTool::getClickedObject( const C2dVector &posLogic , co
     }
 
     return object;
+}
+
+
+/**
+ * Gibt das DocComponent, mit welchem gearbeitet wird, zurück.
+ * Wenn kein DocComponent gesetzt ist wird NULL-Zurückgegeben.
+ * @return DocComponent, mit welchem gearbeitet wird.
+ */
+BB_DocComponent* BB_AbstractTool::getDocComponent() const
+{
+    return m_Component;
+}
+
+
+/**
+ * Setzt das DocComponent, mit welchem gearbeitet wird.
+ * NULL-Pointer sind Erlaubt
+ * @param component DocComponent, mit welchem gearbeitet wird.
+ */
+void BB_AbstractTool::setDocComponent( BB_DocComponent* component )
+{
+    m_Component = component;
+	if(m_Component == NULL)
+	{
+		m_Objects = NULL;
+		m_Transformer = NULL;
+	}
+	else
+	{
+		m_Objects = m_Component->getDrawObjects();
+	}
 }

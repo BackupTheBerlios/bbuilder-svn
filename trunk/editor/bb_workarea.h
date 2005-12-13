@@ -36,10 +36,14 @@ public:
     BB_AbstractTool* getTool();
     void setTool(BB_AbstractTool* tool);
     void setZoomFaktor(double zoom);
-
-    bool setMap(BB_Map* map);
-    void setDrawDevice(BB_DrawDevice * device);
-    BB_Map* getMap() const;
+	
+	/*	Edit: Alex umstellung auf BB_DocComponent
+     *	bool setMap(BB_Map* map);
+     *	void setDrawDevice(BB_DrawDevice * device);
+     *	BB_Map* getMap() const;
+	 */
+    BB_DocComponent* getDocComponent();
+    void setDocComponent(BB_DocComponent* component);
 
 
 protected:

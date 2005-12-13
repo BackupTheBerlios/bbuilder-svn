@@ -323,7 +323,8 @@ void BB_Tab::setDoc(BB_Doc* doc)
  */
 void BB_Tab::unsetDrawObjects()
 {
-	m_Center->setDrawDevice(NULL);
+// 	m_Center->setDrawDevice(NULL);
+	m_Center->setDocComponent(NULL);
 }
 
 

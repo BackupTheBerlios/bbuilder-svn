@@ -26,7 +26,7 @@
 
 /**
 Template-Klasse fuer weitere Objekte in diesem Projekt (z.B point, Wand, Fenster, etc)
-Die Klasse beeinhaelt grundlegende Funktionen.
+Die Klasse beinhaltet grundlegende Funktionen.
 
 @author Vaceslav Ustinov
 */

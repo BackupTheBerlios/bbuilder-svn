@@ -121,59 +121,96 @@ void BB_WorkArea::setZoomFaktor(double z)
 }
 
 
-/**
+/* *
  * Setzt den Hintergrund des Arbeitsbereiches
  * @return map Map welche als Hintergrund hinterlegt wird.
  */
-bool BB_WorkArea::setMap(BB_Map* map)
-{
-        if(map != NULL)
-        {
-                m_Map = map;
+// bool BB_WorkArea::setMap(BB_Map* map)
+// {
+//         if(map != NULL)
+//         {
+//                 m_Map = map;
+// 
+//                 m_WorkFrame->setPixmap(m_Map->getMap());
+// 
+//                 m_WorkFrame->setFrameShape(QFrame::Box);
+//                 m_WorkFrame->setBackgroundRole(QPalette::Background);
+//                 m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+//                 m_WorkFrame->setScaledContents(true);
+//                 m_WorkFrame->setEnabled(true);
+// 
+//                 setZoomFaktor(m_Map->getZoom());
+//                 return true;
+//         }
+//         else
+//         {
+//                 m_WorkFrame->setEnabled(false);
+//                 m_WorkFrame->setFrameShape(QFrame::NoFrame);
+//                 return false;
+//         }
+// 
+// }
 
-                m_WorkFrame->setPixmap(m_Map->getMap());
 
-                m_WorkFrame->setFrameShape(QFrame::Box);
-                m_WorkFrame->setBackgroundRole(QPalette::Background);
-                m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-                m_WorkFrame->setScaledContents(true);
-                m_WorkFrame->setEnabled(true);
-
-                setZoomFaktor(m_Map->getZoom());
-                return true;
-        }
-        else
-        {
-                m_WorkFrame->setEnabled(false);
-                m_WorkFrame->setFrameShape(QFrame::NoFrame);
-                return false;
-        }
-
-}
-
-
-/**
+/* *
  * Setzt das Objekt, auf welchem gezeichnet wird.
  * @param device Objekt, auf welchem gezeichnet wird
  */
-void BB_WorkArea::setDrawDevice(BB_DrawDevice * device)
-{
-        if(device == NULL)
-        {
-                m_WorkFrame->setEnabled(false);
-                m_WorkFrame->setDrawObjects(NULL);
-        }
-        else
-        {
-                m_WorkFrame->setDrawObjects( device->getDrawObjects() );
-                m_WorkFrame->setEnabled(true);
+// void BB_WorkArea::setDrawDevice(BB_DrawDevice * device)
+// {
+//         if(device == NULL)
+//         {
+//                 m_WorkFrame->setEnabled(false);
+//                 m_WorkFrame->setDrawObjects(NULL);
+//         }
+//         else
+//         {
+//                 m_WorkFrame->setDrawObjects( device->getDrawObjects() );
+//                 m_WorkFrame->setEnabled(true);
+// 
+//         }
+//         m_WorkFrame->update();
+// }
 
-        }
-        m_WorkFrame->update();
+
+// BB_Map* BB_WorkArea::getMap() const
+// {
+//     return m_Map;
+// }
+
+
+/*!
+    \fn BB_WorkArea::getDocComponent()
+ */
+BB_DocComponent* BB_WorkArea::getDocComponent()
+{
+	return m_WorkFrame->getDocComponent();
 }
 
 
-BB_Map* BB_WorkArea::getMap() const
+/*!
+    \fn BB_WorkArea::setDocComponent(BB_DocComponent* component)
+ */
+void BB_WorkArea::setDocComponent(BB_DocComponent* component)
 {
-    return m_Map;
+	if(component == NULL)
+	{
+		m_Map = NULL;
+		m_WorkFrame->setDocComponent( NULL );
+	}
+	else
+	{
+		m_Map = component;
+
+		m_WorkFrame->setPixmap(m_Map->getMap());
+		
+		m_WorkFrame->setFrameShape(QFrame::Box);
+		m_WorkFrame->setBackgroundRole(QPalette::Background);
+		m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+		m_WorkFrame->setScaledContents(true);
+		m_WorkFrame->setEnabled(true);
+		
+		setZoomFaktor(m_Map->getZoom());
+		m_WorkFrame->setDocComponent( component );
+	}
 }

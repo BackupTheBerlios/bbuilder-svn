@@ -19,6 +19,9 @@
 
 #include "bb_workarea.h"
 
+
+///@todo tmpWall auf m_TmpWall umstellen
+
 using namespace std;
 
 BB_ToolLineNew::BB_ToolLineNew()
@@ -71,7 +74,7 @@ void BB_ToolLineNew::click( QMouseEvent* me )
             {
                 // QPixmap * tmpPixmap = (BB_WorkArea *) parentWidget)->getMap()->getMap;
                 // ((BB_Wall *) object)->editDlg((((BB_WorkArea *) parentWidget)->getMap()->getMap()));
-                ( ( BB_Wall * ) object ) ->editDlg( ( ( ( BB_WorkArea * ) parentWidget ) ->getMap() ) );
+// >>>>>>>>>>>> ( ( BB_Wall * ) object ) ->editDlg( ( ( ( BB_WorkArea * ) parentWidget ) ->getMap() ) ); <<<<<<<<<<< === HIER MACHEN !!!
                 cout << "edit dlg exec" << endl;
                 return ;
             }
