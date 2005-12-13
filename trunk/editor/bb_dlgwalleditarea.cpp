@@ -18,10 +18,12 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "bb_dlgwalleditarea.h"
+#include <QPainter>
 
-BB_DlgWallEditArea::BB_DlgWallEditArea()
- : QLabel()
+BB_DlgWallEditArea::BB_DlgWallEditArea(BB_Map * map, QWidget * parent, Qt::WFlags f)
+ : QLabel(parent, f)
 {
+	m_currentMap = map;
 }
 
 
@@ -30,3 +32,9 @@ BB_DlgWallEditArea::~BB_DlgWallEditArea()
 }
 
 
+void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
+{
+	QLabel::paintEvent(pe);
+	QPainter painter(this);
+	painter.drawText(30, 30, "test");
+}

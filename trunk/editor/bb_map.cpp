@@ -1,7 +1,7 @@
 //
 // C++ Implementation: bb_map
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -17,14 +17,13 @@ using namespace std;
 
 BB_Map::BB_Map()
 {
-	m_Zoom = 1;
-	m_MapFileName = "";
+    m_Zoom = 1;
+    m_MapFileName = "";
 }
 
 
 BB_Map::~BB_Map()
-{
-}
+{}
 
 
 
@@ -43,7 +42,7 @@ QPixmap& BB_Map::getMap()
  * 
  * @param map 
  */
-void BB_Map::setMap(const QPixmap& map)
+void BB_Map::setMap( const QPixmap& map )
 {
     m_Map = map;
 }
@@ -55,7 +54,7 @@ double BB_Map::getZoom() const
 }
 
 
-void BB_Map::setZoom(double theValue)
+void BB_Map::setZoom( double theValue )
 {
     m_Zoom = theValue;
 }
@@ -67,39 +66,39 @@ QString BB_Map::getMapFileName() const
 }
 
 
-void BB_Map::setMapFileName(const QString& name)
+void BB_Map::setMapFileName( const QString& name )
 {
-	if(&name != NULL && !name.isEmpty())
-	{
-    	m_MapFileName = name;
-	}
-	else
-	{
-		cout << "BB_Map::setMapFileName(..): Ungültigen Dateinamen erhalten" << endl;
-	}
+    if ( &name != NULL && !name.isEmpty() )
+    {
+        m_MapFileName = name;
+    }
+    else
+    {
+        cout << "BB_Map::setMapFileName(..): Ungültigen Dateinamen erhalten" << endl;
+    }
 }
 
 
 /*!
     \fn BB_Map::load()
  */
-bool BB_Map::loadMap(QDir& path)
+bool BB_Map::loadMap( QDir& path )
 {
-	bool exit;
-	
-	if(!m_MapFileName.isEmpty())
-	{
-		QImage img;
-		exit = img.load(path.path() + QDir::separator() + m_MapFileName,"PNG");
-		if(exit)
-		{
-			m_Map = QPixmap::fromImage(img);
-		}
-	}
-	else
-	{
-		exit = false;
-	}
-	
-	return exit;
+    bool exit;
+
+    if ( !m_MapFileName.isEmpty() )
+    {
+        QImage img;
+        exit = img.load( path.path() + QDir::separator() + m_MapFileName, "PNG" );
+        if ( exit )
+        {
+            m_Map = QPixmap::fromImage( img );
+        }
+    }
+    else
+    {
+        exit = false;
+    }
+
+    return exit;
 }

@@ -1,7 +1,7 @@
 //
 // C++ Interface: bb_doccomponent
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -21,13 +21,10 @@
 */
 class BB_DocComponent : public BB_FileObject, public BB_Map, public BB_DrawDevice
 {
-public:
-	BB_DocComponent(const QDir& path, const QString &fileName, const QString &name);
-
-    ~BB_DocComponent();
-	
-	virtual bool open();
-
+    public:
+        BB_DocComponent( const QDir& path, const QString &fileName, const QString &name );
+        ~BB_DocComponent();
+        virtual bool open();
 };
 
 #endif

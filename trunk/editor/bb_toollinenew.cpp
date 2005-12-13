@@ -41,38 +41,43 @@ BB_ToolLineNew::~BB_ToolLineNew()
 
 void BB_ToolLineNew::click( QMouseEvent* me )
 {
-        if(m_Objects != NULL && me != NULL && m_Transformer != NULL) {
-                BB_DrawObject *object;
-                m_pScreen = me->pos();
-                m_Transformer->screenToLogical(m_pLogic,m_pScreen);
-                for(int i = 0; i < m_Objects->count(); i++) {
-                        object = m_Objects->at(i);
-                        //--------zur presentation
-                        /// @todo bitte bessere implementierung von Scale Funktion
-                        if (object->getClassName() == "BB_Point")
-                          ((BB_Point *)object)->setScale(m_Transformer->getScale());
-                         //---------ende-----------
-                        if(object->isHit(m_pLogic) && (object->getClassName() == "BB_Point")) {
-                                C2dVector fromhitobject = ((BB_Point*)object)->getPos();
-                                cout << "New Line : Point :" << fromhitobject.x()<<endl;
-                                BB_Point *tmpPoint = new BB_Point(m_pLogic);
-                                m_movedPoint = tmpPoint;
-                                BB_Wall *wall = new BB_Wall((BB_Point*)object, tmpPoint);
-                                tmpWall = wall;
-                                m_Objects->append(wall);
-                                m_LastLogicMouseClick = m_pLogic;
-                                return;
-                        }
-                        /// @todo zum testen, nach implementation bitte loeschen.
-                        if(object->isHit(m_pLogic) && (object->getClassName() == "BB_Wall")) {
-//                           QPixmap * tmpPixmap = (BB_WorkArea *) parentWidget)->getMap()->getMap;
-                          ((BB_Wall *) object)->editDlg((&(QPixmap)((BB_WorkArea *) parentWidget)->getMap()->getMap()));
-                          cout << "edit dlg exec"<<endl;
-                          return;
-                        }
-                }
+    if ( m_Objects != NULL && me != NULL && m_Transformer != NULL )
+    {
+        BB_DrawObject * object;
+        m_pScreen = me->pos();
+        m_Transformer->screenToLogical( m_pLogic, m_pScreen );
+        for ( int i = 0; i < m_Objects->count(); i++ )
+        {
+            object = m_Objects->at( i );
+            //--------zur presentation
+            /// @todo bitte bessere implementierung von Scale Funktion
+            if ( object->getClassName() == "BB_Point" )
+                ( ( BB_Point * ) object ) ->setScale( m_Transformer->getScale() );
+            //---------ende-----------
+            if ( object->isHit( m_pLogic ) && ( object->getClassName() == "BB_Point" ) )
+            {
+                C2dVector fromhitobject = ( ( BB_Point* ) object ) ->getPos();
+                cout << "New Line : Point :" << fromhitobject.x() << endl;
+                BB_Point *tmpPoint = new BB_Point( m_pLogic );
+                m_movedPoint = tmpPoint;
+                BB_Wall *wall = new BB_Wall( ( BB_Point* ) object, tmpPoint );
+                tmpWall = wall;
+                m_Objects->append( wall );
+                m_LastLogicMouseClick = m_pLogic;
+                return ;
+            }
+            /// @todo zum testen, nach implementation bitte loeschen.
+            if ( object->isHit( m_pLogic ) && ( object->getClassName() == "BB_Wall" ) )
+            {
+                // QPixmap * tmpPixmap = (BB_WorkArea *) parentWidget)->getMap()->getMap;
+                // ((BB_Wall *) object)->editDlg((((BB_WorkArea *) parentWidget)->getMap()->getMap()));
+                ( ( BB_Wall * ) object ) ->editDlg( ( ( ( BB_WorkArea * ) parentWidget ) ->getMap() ) );
+                cout << "edit dlg exec" << endl;
+                return ;
+            }
         }
     }
+}
 
 void BB_ToolLineNew::move( QMouseEvent* me, bool overX, bool overY )
 {
@@ -120,11 +125,11 @@ void BB_ToolLineNew::release( QMouseEvent* me )
 
                 C2dVector fromhitobject = ( ( BB_Point* ) object ) ->getPos();
                 cout << "Old Line : Point :" << fromhitobject.x() << endl;
-				
-				if ( !tmpWall->setPos2( ( BB_Point* ) object ) )
+
+                if ( !tmpWall->setPos2( ( BB_Point* ) object ) )
                 {
-// 					remove( tmpWall );
-//              	delete tmpWall;	
+                    // 					remove( tmpWall );
+                    //              	delete tmpWall;
                 }
                 tmpWall = NULL;
                 //delete m_movedPoint;
@@ -132,7 +137,7 @@ void BB_ToolLineNew::release( QMouseEvent* me )
                 return ;
             }
         }
-		
+
         remove( tmpWall );
         tmpWall = NULL;
         m_movedPoint = NULL;

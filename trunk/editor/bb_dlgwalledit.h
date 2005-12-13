@@ -22,6 +22,7 @@
 
 #include <QDialog>
 
+#include "bb_map.h"
 #include "bb_dlgwalleditarea.h"
 
 /**
@@ -34,15 +35,12 @@ In diesem Dialog koennen grafisch neu Fenster, Türen und etc eingefügt.
 class BB_DlgWallEdit : public QDialog
 {
     public:
-        BB_DlgWallEdit( QWidget * parent = 0, Qt::WFlags f = 0 );
+		BB_DlgWallEdit( BB_Map * map, QWidget * parent = 0, Qt::WFlags f = 0 );
         ~BB_DlgWallEdit();
-        void setImage( QPixmap * Value );
-        QPixmap * getImage() const;
     private:
         void initilize();
     protected:
         BB_DlgWallEditArea * m_CentralWidget;
-		QPixmap * myImage;
 };
 
 #endif

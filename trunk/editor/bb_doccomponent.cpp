@@ -30,4 +30,3 @@ bool BB_DocComponent::open()
 {
 	return (BB_FileObject::open() && loadMap(m_FilePath));
 }
-

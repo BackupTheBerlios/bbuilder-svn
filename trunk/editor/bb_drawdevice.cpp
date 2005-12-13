@@ -1,7 +1,7 @@
 //
 // C++ Implementation: bb_drawdevice
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -17,8 +17,7 @@
 using namespace std;
 
 BB_DrawDevice::BB_DrawDevice()
-{
-}
+{}
 
 
 /**
@@ -27,34 +26,34 @@ BB_DrawDevice::BB_DrawDevice()
  */
 BB_DrawDevice::~BB_DrawDevice()
 {
-	
-	BB_DrawObject * object;
-	
-	/* Alle Punkte löschen.
-	* Vorher werden alle Objekte gelöscht, 
-	* die vom jeweiligen Punkt abhängig sind.
-	*/
-	for(int i = m_DrawObjects.count() - 1; i >=0 ; i-- )
-	{
-		if( typeid( *( m_DrawObjects.at( i ) ) ) == typeid( BB_Point ) )
-		{
-			object = m_DrawObjects.at( i );
-			m_DrawObjects.remove( i );
-			
-			((BB_Point*)object) -> deleteLinkedObjects( &m_DrawObjects );
-			delete object;
-		}
-	}
-	
-	
-	if(m_DrawObjects.count() > 0)
-	{
-		
-		// TODO Auf qDebug umstellen
-		cout << "BB_Terrain::~BB_Terrain(): Nicht alle Objekte konnten gelöscht werden" << endl; 
-	}
-	
-	m_DrawObjects.clear();
+
+    BB_DrawObject * object;
+
+    /* Alle Punkte löschen.
+    * Vorher werden alle Objekte gelöscht, 
+    * die vom jeweiligen Punkt abhängig sind.
+    */
+    for ( int i = m_DrawObjects.count() - 1; i >= 0 ; i-- )
+    {
+        if ( typeid( *( m_DrawObjects.at( i ) ) ) == typeid( BB_Point ) )
+        {
+            object = m_DrawObjects.at( i );
+            m_DrawObjects.remove( i );
+
+            ( ( BB_Point* ) object ) -> deleteLinkedObjects( &m_DrawObjects );
+            delete object;
+        }
+    }
+
+
+    if ( m_DrawObjects.count() > 0 )
+    {
+
+        ///@todo Auf qDebug umstellen
+        cout << "BB_Terrain::~BB_Terrain(): Nicht alle Objekte konnten gelöscht werden" << endl;
+    }
+
+    m_DrawObjects.clear();
 }
 
 
@@ -68,5 +67,5 @@ BB_DrawDevice::~BB_DrawDevice()
  */
 QVector<BB_DrawObject*>* BB_DrawDevice::getDrawObjects()
 {
-	return &m_DrawObjects;
+    return & m_DrawObjects;
 }

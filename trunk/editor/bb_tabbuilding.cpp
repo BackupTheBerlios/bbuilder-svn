@@ -1,17 +1,17 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Alex Letkemann   *
- *   alex@letkemann.de   *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- ***************************************************************************/
+*   Copyright (C) 2005 by Alex Letkemann   *
+*   alex@letkemann.de   *
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+*   This program is distributed in the hope that it will be useful,       *
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+*   GNU General Public License for more details.                          *
+***************************************************************************/
 #include "bb_globals.h"
 
 #include "bb_tabbuilding.h"
@@ -30,25 +30,25 @@ using namespace std;
  * @param parent Das Parent-Fenster
  * @param f QtWindowFlags
  */
-BB_TabBuilding::BB_TabBuilding(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
-        : BB_Tab(doc, true, true, parent, f)
+BB_TabBuilding::BB_TabBuilding( BB_Doc * doc, QWidget* parent, Qt::WFlags f )
+        : BB_Tab( doc, true, true, parent, f )
 {
 
-    if(m_Doc->getBuildings() != NULL)
+    if ( m_Doc->getBuildings() != NULL )
         m_Buildings = m_Doc->getBuildings();
     else
     {
         cout << "BB_TabBuilding::BB_TabBuilding(): Ungültiger Vector (NULL)" << endl;
     }
-	
-	m_BuildingsListCreated = false;
 
-	initWidgetLeft();
-	initWidgetRight();
-    
-	initTools();
+    m_BuildingsListCreated = false;
 
-// 	updateBuildingList();
+    initWidgetLeft();
+    initWidgetRight();
+
+    initTools();
+
+    // 	updateBuildingList();
 }
 
 
@@ -62,41 +62,41 @@ BB_TabBuilding::~BB_TabBuilding()
  */
 void BB_TabBuilding::initWidgetLeft()
 {
-	QGroupBox *gB_Buildings = new QGroupBox();
-	gB_Buildings->setTitle(QString::fromUtf8("Gebäude"));
-	gB_Buildings->setFlat(true);
+    QGroupBox * gB_Buildings = new QGroupBox();
+    gB_Buildings->setTitle( QString::fromUtf8( "Gebäude" ) );
+    gB_Buildings->setFlat( true );
 
-	m_BuildingsListWidget = new QListWidget();
-	connect(m_BuildingsListWidget,
-			SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
-			this,
-			SLOT(slotBuildingChanged(QListWidgetItem *, QListWidgetItem *)));
+    m_BuildingsListWidget = new QListWidget();
+    connect( m_BuildingsListWidget,
+             SIGNAL( currentItemChanged( QListWidgetItem *, QListWidgetItem * ) ),
+             this,
+             SLOT( slotBuildingChanged( QListWidgetItem *, QListWidgetItem * ) ) );
 
-	QVBoxLayout *gBL_Buildings = new QVBoxLayout();
-	gBL_Buildings->setMargin(0);
-	gBL_Buildings->setSpacing(2);
-	gBL_Buildings->addWidget(m_BuildingsListWidget,Qt::AlignTop);
+    QVBoxLayout *gBL_Buildings = new QVBoxLayout();
+    gBL_Buildings->setMargin( 0 );
+    gBL_Buildings->setSpacing( 2 );
+    gBL_Buildings->addWidget( m_BuildingsListWidget, Qt::AlignTop );
 
-	m_ButtonBuildingNew = new QPushButton(QString::fromUtf8("Hinzufügen"));
+    m_ButtonBuildingNew = new QPushButton( QString::fromUtf8( "Hinzufügen" ) );
 
-	m_ButtonBuildingDelete = new QPushButton(QString::fromUtf8("Löschen"));
+    m_ButtonBuildingDelete = new QPushButton( QString::fromUtf8( "Löschen" ) );
     // 	m_ButtonLevelDelete->setEnabled(false);
 
-	m_ButtonBuildingProperties = new QPushButton(QString::fromUtf8("Eigenschaften"));
+    m_ButtonBuildingProperties = new QPushButton( QString::fromUtf8( "Eigenschaften" ) );
     // 	m_ButtonLevelProperties->setEnabled(false);
 
-	connect(m_ButtonBuildingNew,SIGNAL(clicked(bool)),this,SLOT(slotBuildingNew()));
-	connect(m_ButtonBuildingDelete,SIGNAL(clicked(bool)),this,SLOT(slotBuildingDelete()));
-	connect(m_ButtonBuildingProperties,SIGNAL(clicked(bool)),this,SLOT(slotBuildingProperties()));
+    connect( m_ButtonBuildingNew, SIGNAL( clicked( bool ) ), this, SLOT( slotBuildingNew() ) );
+    connect( m_ButtonBuildingDelete, SIGNAL( clicked( bool ) ), this, SLOT( slotBuildingDelete() ) );
+    connect( m_ButtonBuildingProperties, SIGNAL( clicked( bool ) ), this, SLOT( slotBuildingProperties() ) );
 
-	gBL_Buildings->addWidget(m_ButtonBuildingNew,Qt::AlignTop);
-	gBL_Buildings->addWidget(m_ButtonBuildingDelete,Qt::AlignTop);
-	gBL_Buildings->addWidget(m_ButtonBuildingProperties,Qt::AlignTop);
+    gBL_Buildings->addWidget( m_ButtonBuildingNew, Qt::AlignTop );
+    gBL_Buildings->addWidget( m_ButtonBuildingDelete, Qt::AlignTop );
+    gBL_Buildings->addWidget( m_ButtonBuildingProperties, Qt::AlignTop );
 
 
-	gB_Buildings->setLayout(gBL_Buildings);
+    gB_Buildings->setLayout( gBL_Buildings );
 
-	addWidgetLeft(gB_Buildings,1);
+    addWidgetLeft( gB_Buildings, 1 );
 }
 
 
@@ -107,24 +107,24 @@ void BB_TabBuilding::initWidgetLeft()
 void BB_TabBuilding::slotBuildingDelete()
 {
 
-    BB_Building *building;
+    BB_Building * building;
     int row = m_BuildingsListWidget->currentRow();
-    if(row != -1)
+    if ( row != -1 )
     {
-        building = m_Buildings->at(row);
-        if( QMessageBox::question(this,
-                                  QString::fromUtf8("Bestätigung"),
-                                  QString::fromUtf8("Möchten Sie das Gebäude ")
-                                  + building->getName()
-                                  + QString::fromUtf8(" wirklich löschen?"),
-                                  QMessageBox::Yes,
-                                  QMessageBox::No) == QMessageBox::Yes)
+        building = m_Buildings->at( row );
+        if ( QMessageBox::question( this,
+                                    QString::fromUtf8( "Bestätigung" ),
+                                    QString::fromUtf8( "Möchten Sie das Gebäude " )
+                                    + building->getName()
+                                    + QString::fromUtf8( " wirklich löschen?" ),
+                                    QMessageBox::Yes,
+                                    QMessageBox::No ) == QMessageBox::Yes )
         {
-            m_BuildingsListWidget->takeItem(row);
+            m_BuildingsListWidget->takeItem( row );
 
-            building = m_Buildings->at(row);
+            building = m_Buildings->at( row );
             m_Buildings->remove
-            (row);
+            ( row );
             building->remove
             ();
             delete building;
@@ -134,9 +134,9 @@ void BB_TabBuilding::slotBuildingDelete()
 
 
             unsetDrawObjects();
-            m_Center->setEnabled(false);
+            m_Center->setEnabled( false );
 
-            m_BuildingsListWidget->setCurrentRow(row - 1);
+            m_BuildingsListWidget->setCurrentRow( row - 1 );
 
 
         }
@@ -150,11 +150,11 @@ void BB_TabBuilding::slotBuildingDelete()
  */
 void BB_TabBuilding::slotBuildingNew()
 {
-	BB_Building* building = m_Doc->newBuilding(this);
-    if(building != NULL)
+    BB_Building * building = m_Doc->newBuilding( this );
+    if ( building != NULL )
     {
-		m_BuildingsListWidget->addItem(building->getListWidgetItem());
-		m_BuildingsListWidget->setCurrentItem(building->getListWidgetItem());
+        m_BuildingsListWidget->addItem( building->getListWidgetItem() );
+        m_BuildingsListWidget->setCurrentItem( building->getListWidgetItem() );
     }
 }
 
@@ -164,13 +164,13 @@ void BB_TabBuilding::slotBuildingNew()
  */
 void BB_TabBuilding::slotBuildingProperties()
 {
-    
-	BB_Building* building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem() );
 
-    if(building != NULL)
+    BB_Building * building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem() );
+
+    if ( building != NULL )
     {
-     	building->keyBoardEdit(this);
-		building->save();
+        building->keyBoardEdit( this );
+        building->save();
 
     }
 
@@ -185,9 +185,9 @@ void BB_TabBuilding::mouseReleaseEvent ( QMouseEvent * e )
     // TODO
     e->ignore();
 
-	cout << "BB_TabBuilding -> " << m_Selection.count() << " Objekte slektiert" << endl;
-	
-	
+    cout << "BB_TabBuilding -> " << m_Selection.count() << " Objekte slektiert" << endl;
+
+
 }
 
 
@@ -197,7 +197,7 @@ void BB_TabBuilding::mouseReleaseEvent ( QMouseEvent * e )
  */
 void BB_TabBuilding::updateWidget()
 {
-//     updateBuildingList();
+    //     updateBuildingList();
 }
 
 
@@ -206,50 +206,50 @@ void BB_TabBuilding::updateWidget()
  */
 void BB_TabBuilding::initTools()
 {
-	
-	/* Tool zum Selektieren */
-	m_ToolSelect = new BB_ToolSelect();
-	QAction *toolSelect = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolSelect.png"), "Auswahl",this);
-	toolSelect->setStatusTip("Auswahl Werkzeug");
-	createToolButton(toolSelect,m_ToolSelect);
-	
 
-	/* Zoomtool */
-	m_ToolZoom = new BB_ToolZoom(m_Center);
-	QIcon zoom(IMG_DIR() + SEPARATOR() + "toolZoom.png");
-	QAction *toolZoom = new QAction(zoom,"Zoom",this);
-	toolZoom->setStatusTip("Zoom Werkzeug");
-	createToolButton(toolZoom,m_ToolZoom);
-	
+    /* Tool zum Selektieren */
+    m_ToolSelect = new BB_ToolSelect();
+    QAction *toolSelect = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolSelect.png" ), "Auswahl", this );
+    toolSelect->setStatusTip( "Auswahl Werkzeug" );
+    createToolButton( toolSelect, m_ToolSelect );
 
-	/* Tool zum Erstellen neuer Knoten */
-	m_ToolPointNew = new BB_ToolPointNew();
-	QIcon knote(IMG_DIR() + SEPARATOR() + "toolPoint.png");
+
+    /* Zoomtool */
+    m_ToolZoom = new BB_ToolZoom( m_Center );
+    QIcon zoom( IMG_DIR() + SEPARATOR() + "toolZoom.png" );
+    QAction *toolZoom = new QAction( zoom, "Zoom", this );
+    toolZoom->setStatusTip( "Zoom Werkzeug" );
+    createToolButton( toolZoom, m_ToolZoom );
+
+
+    /* Tool zum Erstellen neuer Knoten */
+    m_ToolPointNew = new BB_ToolPointNew();
+    QIcon knote( IMG_DIR() + SEPARATOR() + "toolPoint.png" );
     // 	QAction *toolPointNew = new QAction("Point",this);
-	QAction *toolPointNew = new QAction(knote,"Point",this);
-	toolPointNew->setStatusTip("Point Werkzeug");
-	createToolButton(toolPointNew,m_ToolPointNew);
-	
+    QAction *toolPointNew = new QAction( knote, "Point", this );
+    toolPointNew->setStatusTip( "Point Werkzeug" );
+    createToolButton( toolPointNew, m_ToolPointNew );
 
-	/* Tool zum Erstellen neuer Linien */
-	m_ToolLineNew = new BB_ToolLineNew(m_Center);
-	QAction *toolLineNew = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolWall.png"),"Wand",this);
-	toolPointNew->setStatusTip("Line Werkzeug");
-	createToolButton(toolLineNew,m_ToolLineNew);
-	
 
-	/* Tool zum Bewegen der Objekte */
-	m_ToolMove = new BB_ToolMove();
-	QAction *toolMove = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolMove.png"), "Move",this);
-	toolMove->setStatusTip("Move Werkzeug");
-	createToolButton(toolMove,m_ToolMove);
-	
+    /* Tool zum Erstellen neuer Linien */
+    m_ToolLineNew = new BB_ToolLineNew( m_Center );
+    QAction *toolLineNew = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" ), "Wand", this );
+    toolPointNew->setStatusTip( "Line Werkzeug" );
+    createToolButton( toolLineNew, m_ToolLineNew );
 
-	
-	/* Das Selektionstool alst Standard wählen */
-	toolChanged(toolSelect);
-	
-	
+
+    /* Tool zum Bewegen der Objekte */
+    m_ToolMove = new BB_ToolMove();
+    QAction *toolMove = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolMove.png" ), "Move", this );
+    toolMove->setStatusTip( "Move Werkzeug" );
+    createToolButton( toolMove, m_ToolMove );
+
+
+
+    /* Das Selektionstool alst Standard wählen */
+    toolChanged( toolSelect );
+
+
 }
 
 
@@ -258,9 +258,9 @@ void BB_TabBuilding::initTools()
  */
 void BB_TabBuilding::initWidgetRight()
 {
-	m_PropertyWidget = new BB_PropertyWidget();
+    m_PropertyWidget = new BB_PropertyWidget();
 
-	addWidgetRight(m_PropertyWidget);
+    addWidgetRight( m_PropertyWidget );
 }
 
 
@@ -268,43 +268,43 @@ void BB_TabBuilding::initWidgetRight()
  * Verarbeitet die Tools von BB_TabBuilding und übergibt diese weiter an die Arbeitfläche.
  * @param action Aktion des Tools, welches Betätigt wurde.
  */
-void BB_TabBuilding::toolChanged(QAction* action)
+void BB_TabBuilding::toolChanged( QAction* action )
 {
-	
-	if(m_ToolSelect->getAction() == action)
-	{
-		unsetToolButton(action);
-		action->setChecked(true);
-		m_Center->setTool(m_ToolSelect);
-	}
-	else if(m_ToolMove->getAction() == action)
-	{
-		unsetToolButton(action);
-		action->setChecked(true);
-		m_Center->setTool(m_ToolMove);
-	}
-	else if(m_ToolZoom->getAction() == action)
-	{
-		unsetToolButton(action);
-		action->setChecked(true);
-		m_Center->setTool(m_ToolZoom);
-	}
-	else if(m_ToolPointNew->getAction() == action)
-	{
-		unsetToolButton(action);
-		action->setChecked(true);
-		m_Center->setTool(m_ToolPointNew);
-	}
-	else if(m_ToolLineNew->getAction() == action)
-	{
-		unsetToolButton(action);
-		action->setChecked(true);
-		m_Center->setTool(m_ToolLineNew);
-	}
-	else
-	{
-		cout << "Unbekanntes Tool" << endl;
-	}
+
+    if ( m_ToolSelect->getAction() == action )
+    {
+        unsetToolButton( action );
+        action->setChecked( true );
+        m_Center->setTool( m_ToolSelect );
+    }
+    else if ( m_ToolMove->getAction() == action )
+    {
+        unsetToolButton( action );
+        action->setChecked( true );
+        m_Center->setTool( m_ToolMove );
+    }
+    else if ( m_ToolZoom->getAction() == action )
+    {
+        unsetToolButton( action );
+        action->setChecked( true );
+        m_Center->setTool( m_ToolZoom );
+    }
+    else if ( m_ToolPointNew->getAction() == action )
+    {
+        unsetToolButton( action );
+        action->setChecked( true );
+        m_Center->setTool( m_ToolPointNew );
+    }
+    else if ( m_ToolLineNew->getAction() == action )
+    {
+        unsetToolButton( action );
+        action->setChecked( true );
+        m_Center->setTool( m_ToolLineNew );
+    }
+    else
+    {
+        cout << "Unbekanntes Tool" << endl;
+    }
 }
 
 
@@ -313,19 +313,19 @@ void BB_TabBuilding::toolChanged(QAction* action)
  */
 void BB_TabBuilding::createBuildingList()
 {
-	if(!m_BuildingsListCreated)
-	{
-		cout << m_Buildings->count() << endl;
-		for(int i = 0; i < m_Buildings->count(); i++)
-		{
-			m_BuildingsListWidget->addItem( m_Buildings->at(i)->getListWidgetItem() );
-		}
-		m_BuildingsListCreated = true;
-	}
-	else
-	{
-		cout << "Kann die Liste nicht nochmal erstellen." << endl;
-	}
+    if ( !m_BuildingsListCreated )
+    {
+        cout << m_Buildings->count() << endl;
+        for ( int i = 0; i < m_Buildings->count(); i++ )
+        {
+            m_BuildingsListWidget->addItem( m_Buildings->at( i ) ->getListWidgetItem() );
+        }
+        m_BuildingsListCreated = true;
+    }
+    else
+    {
+        cout << "Kann die Liste nicht nochmal erstellen." << endl;
+    }
 }
 
 
@@ -334,33 +334,33 @@ void BB_TabBuilding::createBuildingList()
  */
 void BB_TabBuilding::clear()
 {
-	m_BuildingsListWidget->clear();
-	m_BuildingsListCreated = false;
+    m_BuildingsListWidget->clear();
+    m_BuildingsListCreated = false;
 }
 
 
 /**
- * @todo
+ ///@todo ???
  */
-void BB_TabBuilding::slotBuildingChanged(QListWidgetItem * current, QListWidgetItem * previous)
+void BB_TabBuilding::slotBuildingChanged( QListWidgetItem * current, QListWidgetItem * previous )
 {
-	BB_Building* building;
-	building = m_Doc->getBuilding(current);
-	if(building != NULL)
-	{
-		
-		m_Center->setDrawDevice(building);
-        m_Center->setEnabled(true);
-        m_Center->setMap(building);
-	}
-	if(previous != NULL)
-	{
-		building = m_Doc->getBuilding(previous);
-		if(building != NULL)
-		{
-			building->save();
-		}
-	}
+    BB_Building * building;
+    building = m_Doc->getBuilding( current );
+    if ( building != NULL )
+    {
+
+        m_Center->setDrawDevice( building );
+        m_Center->setEnabled( true );
+        m_Center->setMap( building );
+    }
+    if ( previous != NULL )
+    {
+        building = m_Doc->getBuilding( previous );
+        if ( building != NULL )
+        {
+            building->save();
+        }
+    }
 }
 
 
@@ -369,17 +369,17 @@ void BB_TabBuilding::slotBuildingChanged(QListWidgetItem * current, QListWidgetI
  */
 bool BB_TabBuilding::saveCurrent()
 {
-	BB_Building *building;
-	
-	building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem () );
-	if(building != NULL)
-	{
-		return building->save();
-	}
-	else
-	{
-		cout << "Kein Gebäude ausgewählt" << endl;
-	}
-	
-	return false;
+    BB_Building * building;
+
+    building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem () );
+    if ( building != NULL )
+    {
+        return building->save();
+    }
+    else
+    {
+        cout << "Kein Gebäude ausgewählt" << endl;
+    }
+
+    return false;
 }

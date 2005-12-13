@@ -115,11 +115,31 @@ void BB_ToolMove::click( QMouseEvent* me )
         m_Transformer->screenToLogical( m_pLogic, m_pScreen );
         m_LastLogicMouseClick = m_pLogic;
 
+        //beimersten click markieren und verschiebne
+        for ( int i = 0;i < m_Objects->count() ;i++ )
+        {
+            object = m_Objects->at( i );
+            //--------zur presentation
+            ///@todo das muss irgentwie anders geloest werden
+            if ( object->getClassName() == "BB_Point" )
+                ( ( BB_Point * ) object ) ->setScale( m_Transformer->getScale() );
+            //---------ende-----------
+            if ( object->isHit( m_pLogic ) && !object->isSelected() )
+            {
+                clearSelection();
+                m_select = false;
+                object->setSelected( true );
+                m_Selection->append( object );
+                qDebug( "Keine Objeckte sind selectiert, ein neues wurde selektiert" );
+                return ;
+            }
+        }
+
         for ( int i = 0; i < m_Selection->count(); i++ )
         {
             object = m_Selection->at( i );
             //--------zur presentation
-			///@todo das muss irgentwie anders geloest werden
+            ///@todo das muss irgentwie anders geloest werden
             if ( object->getClassName() == "BB_Point" )
                 ( ( BB_Point * ) object ) ->setScale( m_Transformer->getScale() );
             //---------ende-----------
@@ -183,16 +203,16 @@ void BB_ToolMove::move( QMouseEvent* me, bool overX, bool overY )
         qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %d \tme: %d\tm_Transformer: %d", m_Objects, me, m_Transformer );
         return ;
     }
-	//Behandlung von Linke-maustaste
+    //Behandlung von Linke-maustaste
     if ( me->buttons() == Qt::LeftButton )
     {
-		//wenn Slected-mode ausgewaehlt, dann einfach viereck weiter schieben
+        //wenn Slected-mode ausgewaehlt, dann einfach viereck weiter schieben
         if ( m_select )
         {
             m_Point2.setX( me->x() );
             m_Point2.setY( me->y() );
         }
-		//sonst alle punkte verschieben
+        //sonst alle punkte verschieben
         else
         {
             for ( int i = 0; i < m_Selection->count(); i++ )
@@ -201,8 +221,8 @@ void BB_ToolMove::move( QMouseEvent* me, bool overX, bool overY )
                 m_Transformer->screenToLogical( m_pLogic, me->pos() );
                 moveTmp.setX( m_pLogic.x() - m_LastLogicMouseClick.x() );
                 moveTmp.setY( m_pLogic.y() - m_LastLogicMouseClick.y() );
-				//Uberpruefung, damit die punkte nicht auserrand geschoben werden
-				///@todo Funktioniert falsch!!!
+                //Uberpruefung, damit die punkte nicht auserrand geschoben werden
+                ///@todo Funktioniert falsch!!!
                 if ( overX )
                 {
                     moveTmp.setX( 0 );
@@ -213,7 +233,7 @@ void BB_ToolMove::move( QMouseEvent* me, bool overX, bool overY )
                 }
                 m_Selection->at( i ) ->moveBy( moveTmp );
             }
-			//letzte mausposition merken
+            //letzte mausposition merken
             m_Transformer->screenToLogical( m_LastLogicMouseClick, me->pos() );
         }
     }
@@ -292,7 +312,7 @@ void BB_ToolMove::release( QMouseEvent* me )
         }
         m_ToolObjects->clear();
     }
-	//wieder in Auswahl-Modus wechseln
+    //wieder in Auswahl-Modus wechseln
     m_select = true;
 }
 
