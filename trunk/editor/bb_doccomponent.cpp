@@ -15,11 +15,11 @@
 BB_DocComponent::BB_DocComponent(const QDir& path, const QString &fileName, const QString &name)
  : BB_FileObject(path,fileName,name), BB_Map(), BB_DrawDevice()
 {
-// 	m_ScalePoint_1.setX( 0.0 );
-// 	m_ScalePoint_1.setY( 0.0 );
-// 	
-// 	m_ScalePoint_2.setX( m_Map.width() );
-// 	m_ScalePoint_2.setY( m_Map.height() );
+	m_ScalePoint_1.setX( 0.0 );
+	m_ScalePoint_1.setY( 0.0 );
+	
+	m_ScalePoint_2.setX( 50.0 );
+	m_ScalePoint_2.setY( -50.0 );
 	
 	m_ScaleValue = 1.0;
 }
@@ -40,12 +40,6 @@ BB_DocComponent::~BB_DocComponent()
 bool BB_DocComponent::open()
 {
 	bool exit = ( BB_FileObject::open() && loadMap( m_FilePath ) );
-	
-	m_ScalePoint_1.setX( 0.0 );
-	m_ScalePoint_1.setY( 0.0 );
-	
-	m_ScalePoint_2.setX( m_Map.width() );
-	m_ScalePoint_2.setY( -m_Map.height() );
 	
 	return exit;
 }
@@ -79,3 +73,4 @@ void BB_DocComponent::setScaleReal( double value )
 {
     m_ScaleValue = value;
 }
+

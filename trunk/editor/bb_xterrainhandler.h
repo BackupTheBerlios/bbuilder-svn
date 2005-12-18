@@ -36,7 +36,9 @@ public:
 protected:
     BB_DrawObject* m_Object;
     BB_Terrain* m_Terrain;
-    bool m_XTerrainTag;
+    
+	bool m_XTerrainTag;
+	bool m_XScale;
 };
 
 #endif

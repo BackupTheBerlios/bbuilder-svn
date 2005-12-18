@@ -37,8 +37,10 @@ public:
 protected:
     BB_Building* m_Building;
 	bool m_XBuildingTag;
+	bool m_XScale;
 	
 	BB_DrawObject *m_Object;
+	int m_ScalePointIndex;
 	
     QVector<BB_DrawObject*>* m_DrawObjects;
 };

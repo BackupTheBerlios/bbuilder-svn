@@ -26,6 +26,8 @@ BB_XTerrainHandler::BB_XTerrainHandler( BB_Terrain * terrain )
 	if(terrain != NULL)
 	{
 		m_Terrain = terrain;
+		m_XTerrainTag = false;
+		m_XScale = false;
 	}
 	
 	m_Object = NULL;
@@ -65,6 +67,19 @@ bool BB_XTerrainHandler::startElement(const QString& namespaceURI, const QString
 		}
 		m_XTerrainTag = true;		
 	} 
+	else if ( qName == "scale" )
+	{
+		bool ok;
+		QString tmp;
+		double value;
+		
+		tmp = atts.value( "value" );
+		value = tmp.toDouble( &ok );
+		
+		m_Terrain->setScaleReal( value );
+		
+		m_XScale = true;
+	}
 	else if(qName == "bb_point")
 	{
 		bool ok;
@@ -88,7 +103,28 @@ bool BB_XTerrainHandler::startElement(const QString& namespaceURI, const QString
 		
 		m_Object->m_ObjectNr = id;
 		m_Object->setSelected(false);
-		m_Terrain->getDrawObjects()->append(m_Object);
+		
+		if ( m_XScale )
+		{
+			static int scalePoint = 0;
+			if ( scalePoint == 0 )
+			{
+				m_Terrain->getScalePoint_1() ->setX( x );
+				m_Terrain->getScalePoint_1() ->setY( y );
+			}
+			else if ( scalePoint == 1 )
+			{
+				m_Terrain->getScalePoint_2() ->setX( x );
+				m_Terrain->getScalePoint_2() ->setY( y );
+			}
+
+			scalePoint++;
+		}
+		else
+		{
+			m_Terrain->getDrawObjects()->append(m_Object);
+		}
+		
 
 	}
 	else if(qName == "bb_triangle")
@@ -190,7 +226,11 @@ bool BB_XTerrainHandler::endElement(const QString& namespaceURI, const QString& 
 	}
 	
 	
-	if(qName == "bb_point")
+	if ( qName == "scale" )
+	{
+		m_XScale = false;
+	}
+	else if(qName == "bb_point")
 	{
 		m_Object = NULL;
 	}

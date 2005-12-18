@@ -31,10 +31,6 @@ BB_ToolScale::~BB_ToolScale()
 
 void BB_ToolScale::click( QMouseEvent* me )
 {
-
-	cout << m_Component->getScalePoint_1()->getX()  << " | " << m_Component->getScalePoint_1()->getY()
-			<< m_Component->getScalePoint_2()->getX()  << " | " << m_Component->getScalePoint_2()->getY() 
-			<< endl;
 	
 	if ( me != NULL && me->buttons() == Qt::LeftButton )
     {
@@ -57,7 +53,6 @@ void BB_ToolScale::click( QMouseEvent* me )
 			v2 = m_Component->getScalePoint_1()->getPos();
 			double logicScale = (v2 - v1).getLength();
 			
-			///@todo DLG
 			BB_DlgToolScaleEdit dlg( m_Parent );
 			
 			dlg.setScaleLogic( logicScale );

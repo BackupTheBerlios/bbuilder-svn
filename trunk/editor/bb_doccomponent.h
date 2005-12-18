@@ -59,6 +59,7 @@ public:
 	void setScaleReal( double value );
 	double getScaleReal() const;
 	
+	
 protected:
     BB_Point m_ScalePoint_1;
     BB_Point m_ScalePoint_2;
