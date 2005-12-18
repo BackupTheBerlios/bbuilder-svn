@@ -20,10 +20,7 @@ BB_DrawDevice::BB_DrawDevice()
 {}
 
 
-/**
- * Destrucktor
- * Löscht alle Objekte, die noch im DrawDevice sind.
- */
+
 BB_DrawDevice::~BB_DrawDevice()
 {
 
@@ -57,14 +54,6 @@ BB_DrawDevice::~BB_DrawDevice()
 }
 
 
-
-
-/**
- * Gibt einen Pointer auf den Vektor mit allen Objekten zurück
- * @return Vektor mit allen Objekten
- * @author Alex Letkemann
- * @date 10.11.2005
- */
 QVector<BB_DrawObject*>* BB_DrawDevice::getDrawObjects()
 {
     return & m_DrawObjects;

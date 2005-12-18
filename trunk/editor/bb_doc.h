@@ -60,6 +60,7 @@ protected:
 	QString m_ProjectFile;
 	
 	virtual bool clear();
+    bool deleteBuilding(QListWidgetItem* item);
 	
 	
 	friend class BB_XDocHandler;

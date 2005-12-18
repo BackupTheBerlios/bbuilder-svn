@@ -303,7 +303,7 @@ void BB_TabBuilding::toolChanged( QAction* action )
     }
     else
     {
-        cout << "Unbekanntes Tool" << endl;
+		qDebug() << "Unbekanntes Tool" << endl;
     }
 }
 

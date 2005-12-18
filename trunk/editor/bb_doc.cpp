@@ -87,7 +87,7 @@ bool BB_Doc::clear()
 	BB_DocComponent* object;
 	
 	/* Alle Gebäude löschen */
-	for(int i = 0; i < m_Buildings.count(); i++)
+	for(int i = m_Buildings.count() - 1 ; i >= 0 ; i--)
 	{
 		object = m_Buildings.at(i);
 		if(object != NULL)
@@ -102,7 +102,7 @@ bool BB_Doc::clear()
 	
 	
 	/* Alle Etagen löschen */
-	for(int i = 0; i < m_Levels.count(); i++)
+	for(int i = m_Levels.count() - 1 ; i >= 0 ; i--)
 	{
 		object = m_Levels.at(i);
 		m_Levels.remove(i);
@@ -400,4 +400,31 @@ BB_Building* BB_Doc::getBuilding(QListWidgetItem* item)
 	}
 	
 	return NULL;
+}
+
+
+/**
+ * Löscht das Gebäude, welches das QListWidgetItem item hat.
+ * @param item QListWidgetItem des Gebäudes
+ * @return True, falls das Gebäude erfolgreich gelöscht wurde, sonst false.
+ */
+bool BB_Doc::deleteBuilding(QListWidgetItem* item)
+{
+	if( item != NULL )
+	{
+		BB_Building* building;
+		
+		for( int i = m_Buildings.count() - 1 ; i >= 0 ; i-- )
+		{
+			building = m_Buildings.at( i );
+			if( item == building->getListWidgetItem() )
+			{
+				m_Buildings.remove( i );
+				delete building;
+				return true;
+			}
+		}
+	}
+	
+	return false;
 }

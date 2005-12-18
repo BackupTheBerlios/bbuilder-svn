@@ -15,8 +15,28 @@
 
 
 #include <QApplication>
+#include <QString>
+
+#include "br_globals.h"
+#include "br_mainwindow.h"
+
+
 
 int main(int argc, char *argv[])
 {
-	return 0;
+ 	setDirs(argv[0]);
+	
+	QApplication app(argc,argv);
+	
+	app.setQuitOnLastWindowClosed(true);
+	
+	QFont f;
+	f.setStyleHint(QFont::System, QFont::PreferDefault);
+			
+	app.setFont(f);
+
+	BR_MainWindow MainWindow;
+	MainWindow.show();
+	
+	return app.exec();
 }

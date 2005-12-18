@@ -94,7 +94,7 @@ void BB_MainWindow::initMenus()
 	m_MainMenuBar->addMenu(m_MenuView);
 	m_MainMenuBar->addMenu(m_MenuProject);
 	
-	setMenuBar(m_MainMenuBar);
+
 }
 
 
@@ -124,7 +124,7 @@ void BB_MainWindow::initMainWindow()
 	
 // 	setWindowState(Qt::WindowMaximized);
 	setWindowTitle(QString::fromUtf8("glBuildingBuilder - Editor"));
-	setStatusBar(m_StatusBar);
+	
 	
 	m_TabTerrain = new BB_TabTerrain(m_Doc);
 	m_TabBuilding = new BB_TabBuilding(m_Doc);
@@ -137,6 +137,8 @@ void BB_MainWindow::initMainWindow()
 	
 	m_TabWidget->setEnabled(false);
 	
+	setStatusBar(m_StatusBar);
+	setMenuBar(m_MainMenuBar);
 	setCentralWidget(m_TabWidget);
 }
 

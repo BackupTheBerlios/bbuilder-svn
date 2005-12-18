@@ -21,18 +21,71 @@
 class BB_Map
 {
     public:
-        BB_Map();
+        
+		/**
+		 * Konstruktor
+		 */
+		BB_Map();
+		
+		
+        /**
+         * Destruktor
+         * @return 
+         */
         ~BB_Map();
-        void setMap( const QPixmap& theValue );
+        
+		/**
+         * Setzt des Bild der Map
+         * @param map Das neue Bild der Map
+         */
+        void setMap( const QPixmap& map );
+        
+		/**
+         * Gibt das Bild der Map zurück
+         * @return Bild der Map
+         */
         QPixmap& getMap();
-        void setZoom( double theValue );
+		
+        /**
+         * Setzt den Zoomfaktor der Map
+		 * @param z Zoomfaktor der Map
+         */
+        void setZoom( double z );
+		
+        /**
+         * Gibt den Zoomfaktor der Map zurück
+		 * @return Zoomfaktor der Map
+         */
         double getZoom() const;
-        void setMapFileName( const QString& theValue );
+		
+		
+        /**
+         * Setzt den Dateinamen der Map
+         * @param filename Dateiname der Map
+         */
+        void setMapFileName( const QString& filename );
+		
+        /**
+         * Gibt den Dateinamen der Map zurück
+         * @return Dateiname der Map
+         */
         QString getMapFileName() const;
+		
+		/**
+		 * Lädt die Bilddatei aus dem Verzeichnis 'path'.
+		 * @param path Verzeichnis, aus dem die Bilddatei (m_MapFileName) geladen wird.
+		 * @return True, wenn die Bilddatei erfolgreich geladen werden konnte, sonst False
+		 */
         bool loadMap( QDir& path );
     protected:
+		
+		/** Das Bilde der Map */
         QPixmap m_Map;
+		
+		/** Zoomfaktor der Map */
         double m_Zoom;
+		
+		/** Dateiname der Map */ 
         QString m_MapFileName;
 };
 

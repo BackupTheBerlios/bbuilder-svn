@@ -3,9 +3,27 @@
 # Subdir relative project main directory: ./renderer
 # Target is an application:  renderer.e
 
-TARGET = renderer.e 
-DESTDIR = ../bin 
-CONFIG += release \
-          warn_on 
-TEMPLATE = app 
-SOURCES += main.cpp 
+HEADERS += br_mainwindow.h \
+           br_globals.h \
+           br_view.h \
+           br_camera.h \
+           c3dvector.h \
+           ccolorrgba.h \
+           cglmatrix.h \
+           br_keyhandler.h 
+SOURCES += main.cpp \
+           br_mainwindow.cpp \
+           br_globals.cpp \
+           br_view.cpp \
+           br_camera.cpp \
+           c3dvector.cpp \
+           ccolorrgba.cpp \
+           cglmatrix.cpp \
+           br_keyhandler.cpp 
+QT += xml opengl
+TARGET = renderer.e
+DESTDIR = ../bin
+CONFIG += debug \
+warn_on \
+opengl
+TEMPLATE = app

@@ -19,12 +19,28 @@
  */
 class BB_DrawDevice{
 public:
+    /**
+     * Konstruktor
+     */
     BB_DrawDevice();
 
-    virtual ~BB_DrawDevice();
+    /**
+	 * Destrucktor
+	 * Löscht alle Objekte, die noch im DrawDevice sind.
+	 * @author Alex Letkemann
+	 * @date 23.11.2005
+	 */
+	virtual ~BB_DrawDevice();
+	
+	
+    /**
+     * Gibt den Pointer auf einen Vektor mit allen Objekten zurück 
+	 * @return Pointer auf einen Vektor mit allen Objekten
+     */
     virtual QVector<BB_DrawObject*>* getDrawObjects();
 
 protected:
+	/** Vektor, der alle Objekte enthält */
     QVector<BB_DrawObject*> m_DrawObjects;
 };
 

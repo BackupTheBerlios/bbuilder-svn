@@ -15,6 +15,9 @@
 
 using namespace std;
 
+/**
+ * Konstruktor
+ */
 BB_Map::BB_Map()
 {
     m_Zoom = 1;
@@ -22,36 +25,32 @@ BB_Map::BB_Map()
 }
 
 
+/**
+ * Destruktor
+ */
 BB_Map::~BB_Map()
 {}
 
 
 
 
-/**
- * 
- * @return 
- */
 QPixmap& BB_Map::getMap()
 {
     return m_Map;
 }
 
-
-/**
- * 
- * @param map 
- */
 void BB_Map::setMap( const QPixmap& map )
 {
-    m_Map = map;
+   m_Map = map;
 }
+
 
 
 double BB_Map::getZoom() const
 {
     return m_Zoom;
 }
+
 
 
 void BB_Map::setZoom( double theValue )
@@ -79,9 +78,6 @@ void BB_Map::setMapFileName( const QString& name )
 }
 
 
-/*!
-    \fn BB_Map::load()
- */
 bool BB_Map::loadMap( QDir& path )
 {
     bool exit;
