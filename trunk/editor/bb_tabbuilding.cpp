@@ -185,7 +185,7 @@ void BB_TabBuilding::mouseReleaseEvent ( QMouseEvent * e )
     // TODO
     e->ignore();
 
-    cout << "BB_TabBuilding -> " << m_Selection.count() << " Objekte slektiert" << endl;
+//     cout << "BB_TabBuilding -> " << m_Selection.count() << " Objekte slektiert" << endl;
 
 
 }
@@ -244,6 +244,12 @@ void BB_TabBuilding::initTools()
     toolMove->setStatusTip( "Move Werkzeug" );
     createToolButton( toolMove, m_ToolMove );
 
+	
+	/* Tool zum Setzen der Maßstab-Punkte */
+	m_ToolScale = new BB_ToolScale( this );
+	QAction *toolScale = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolScale.png" ), "Maßstab", this );
+	toolScale->setStatusTip( QString::fromUtf8("Maßstab Werkzeug") );
+	createToolButton( toolScale, m_ToolScale );
 
 
     /* Das Selektionstool alst Standard wählen */
@@ -301,10 +307,18 @@ void BB_TabBuilding::toolChanged( QAction* action )
         action->setChecked( true );
         m_Center->setTool( m_ToolLineNew );
     }
+	else if( m_ToolScale->getAction() == action)
+	{
+		unsetToolButton( action );
+		action->setChecked( true );
+		m_Center->setTool( m_ToolScale );
+	}
     else
     {
 		qDebug() << "Unbekanntes Tool" << endl;
     }
+	
+	m_Center->update();
 }
 
 

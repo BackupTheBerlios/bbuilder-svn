@@ -16,12 +16,18 @@
 #include <bb_map.h>
 #include <bb_drawdevice.h>
 
+#include <bb_point.h>
+
 /**
  * Die Klasse vereinit mehrere Klassen und stellt die Basisklasse für die Komponenten des Projektes (Gelände, Gebäude, Etage).<br />
  * Klasse besteht aus drei Klassen:<br />
  * BB_FileObject:	Für das Speichern/Laden<br />
  * BB_Map: 			Hintergrundbild laden/speichern<br />
  * BB_DrawDevice:	Enthält die Geometriedaten<br />
+ * <br />
+ * Als weiteres behandelt die Klasse den Maßstab der Map.
+ * Der Maßstab kann mittels der beiden Punkte m_ScalePoint_1 und m_ScalePoint_2 eingestellt werden.
+ * Die Entfernung der Beiden Punkte wird mit der reelen Entfernung, die der User angebenkann, ins Verhältnis gesetzt.
  * @author Alex Letkemann
  */
 class BB_DocComponent : public BB_FileObject, public BB_Map, public BB_DrawDevice
@@ -47,6 +53,16 @@ public:
 	 * @date 13.12.2005
 	 */
 	virtual bool open();
+    BB_Point* getScalePoint_1();
+    BB_Point* getScalePoint_2();
+
+	void setScaleReal( double value );
+	double getScaleReal() const;
+	
+protected:
+    BB_Point m_ScalePoint_1;
+    BB_Point m_ScalePoint_2;
+    double m_ScaleValue;
 };
 
 #endif

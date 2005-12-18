@@ -24,6 +24,7 @@
 #include "bb_toollinenew.h"
 #include "bb_toolmove.h"
 #include "bb_toolselect.h"
+#include "bb_toolscale.h"
 
 
 #include "bb_propertywidget.h"
@@ -64,6 +65,7 @@ protected:
     QPushButton* m_ButtonBuildingProperties;
     BB_PropertyWidget* m_PropertyWidget;
     bool m_BuildingsListCreated;
+    BB_AbstractTool* m_ToolScale;
     
 protected:
     

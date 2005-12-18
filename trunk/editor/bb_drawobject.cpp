@@ -22,6 +22,7 @@ BB_DrawObject::BB_DrawObject(QString name)
 	: BB_Object(name)
 {
 	m_Pen.setStyle(Qt::SolidLine);
+	m_Selected = false;
 }
 
 

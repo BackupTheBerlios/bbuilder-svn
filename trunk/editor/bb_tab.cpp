@@ -342,6 +342,7 @@ void BB_Tab::updateWidget()
 void BB_Tab::slotToolChanged(QAction* action)
 {
 	toolChanged(action);
+	updateWidget();
 }
 
 

@@ -36,7 +36,7 @@ BB_WorkFrame::BB_WorkFrame(QVector<BB_DrawObject*>* selectVector, QWidget * pare
 	m_Component = NULL;
     m_Tool = NULL;
     m_DrawObjects = NULL;
-    m_Transformer.setOffset(QPoint(100, 100));
+//     m_Transformer.setOffset(QPoint(100, 100));
 }
 
 
@@ -141,22 +141,25 @@ void BB_WorkFrame::setTool(BB_AbstractTool* tool)
 			m_Tool->reset();
 		}
 		
+		/* ToolObjekte des letzten Tools entfernen */
+		m_ToolObjects.clear();		
 		
         m_Tool = tool;
 		m_Tool->setTransformer(&m_Transformer);
 // 		m_Tool->setObjects(m_DrawObjects);
-		m_Tool->setDocComponent( m_Component );
-		m_Tool->setSelectionVector(m_Selection);
 		m_Tool->setToolObjects(&m_ToolObjects);
+		m_Tool->setSelectionVector(m_Selection);
+		m_Tool->setDocComponent( m_Component );
 		
-		/* ToolObjekte des letzten Tools entfernen */
-		m_ToolObjects.clear();
+
 		
     }
     else
     {
         QMessageBox::critical (this, "Fehler (BB_WorkFrame)", "Fehler beim setzten des Tools.\nNULL-Pointer erhalten", QMessageBox::Ok,QMessageBox::NoButton);
     }
+	
+	update();
 }
 
 /**

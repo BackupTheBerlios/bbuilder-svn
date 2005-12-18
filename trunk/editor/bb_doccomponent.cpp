@@ -15,6 +15,13 @@
 BB_DocComponent::BB_DocComponent(const QDir& path, const QString &fileName, const QString &name)
  : BB_FileObject(path,fileName,name), BB_Map(), BB_DrawDevice()
 {
+// 	m_ScalePoint_1.setX( 0.0 );
+// 	m_ScalePoint_1.setY( 0.0 );
+// 	
+// 	m_ScalePoint_2.setX( m_Map.width() );
+// 	m_ScalePoint_2.setY( m_Map.height() );
+	
+	m_ScaleValue = 1.0;
 }
 
 
@@ -32,5 +39,43 @@ BB_DocComponent::~BB_DocComponent()
  */
 bool BB_DocComponent::open()
 {
-	return ( BB_FileObject::open() && loadMap( m_FilePath ) );
+	bool exit = ( BB_FileObject::open() && loadMap( m_FilePath ) );
+	
+	m_ScalePoint_1.setX( 0.0 );
+	m_ScalePoint_1.setY( 0.0 );
+	
+	m_ScalePoint_2.setX( m_Map.width() );
+	m_ScalePoint_2.setY( -m_Map.height() );
+	
+	return exit;
+}
+
+
+/**
+ * Gibt den Pointer auf den ersten Maßstab-Punkt zurück
+ */
+BB_Point* BB_DocComponent::getScalePoint_1()
+{
+	return &m_ScalePoint_1;
+}
+
+
+/**
+ * Gibt den Pointer auf den zweiten Maßstab-Punkt zurück
+ */
+BB_Point* BB_DocComponent::getScalePoint_2()
+{
+	return &m_ScalePoint_2;
+}
+
+
+double BB_DocComponent::getScaleReal() const
+{
+    return m_ScaleValue;
+}
+
+
+void BB_DocComponent::setScaleReal( double value )
+{
+    m_ScaleValue = value;
 }

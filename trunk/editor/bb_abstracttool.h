@@ -72,7 +72,7 @@ public:
     virtual void reset();
     virtual BB_DrawObject* getClickedObject(const C2dVector & posLogic ,const std::type_info &type);
 
-	void setDocComponent( BB_DocComponent* theValue );
+	virtual void setDocComponent( BB_DocComponent* theValue );
 	BB_DocComponent* getDocComponent() const;
 	
 	
