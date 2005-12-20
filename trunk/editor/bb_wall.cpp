@@ -68,8 +68,8 @@ void BB_Wall::show( BB_Transformer& transformer, QPainter& painter ) const
 
 
 
-void BB_Wall::editDlg( BB_Map * map )
+void BB_Wall::editDlg( BB_DocComponent * docComponent )
 {
-	BB_DlgWallEdit EditDlg( map );
+	BB_DlgWallEdit EditDlg( this, docComponent);
 	EditDlg.exec();
 }

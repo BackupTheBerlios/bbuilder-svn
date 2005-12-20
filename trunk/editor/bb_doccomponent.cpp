@@ -74,3 +74,31 @@ void BB_DocComponent::setScaleReal( double value )
     m_ScaleValue = value;
 }
 
+
+
+/*!
+    \fn BB_DocComponent::getMeterPerPixel(int pixel)
+ */
+double BB_DocComponent::getMeterPerPixel(double pixel)
+{
+	C2dVector tmp((m_ScalePoint_2.getX() - m_ScalePoint_1.getX()), (m_ScalePoint_2.getY() - m_ScalePoint_1.getY()));
+	double lenght_pixel = tmp.getLength();
+
+	double meter = pixel  * ( m_ScaleValue / lenght_pixel);
+
+	return meter;;
+}
+
+
+/*!
+    \fn BB_DocComponent::getPixelPerMeter(double meter)
+ */
+double BB_DocComponent::getPixelPerMeter(double meter)
+{
+	C2dVector tmp((m_ScalePoint_2.getX() - m_ScalePoint_1.getX()), (m_ScalePoint_2.getY() - m_ScalePoint_1.getY()));
+	double lenght_pixel = tmp.getLength();
+
+	double pixel = (meter * lenght_pixel) / m_ScaleValue;
+
+	return pixel;
+}

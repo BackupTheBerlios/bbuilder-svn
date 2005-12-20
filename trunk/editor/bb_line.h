@@ -68,6 +68,13 @@ public:
     virtual void remove(BB_Point * point);
     virtual const QString getClassName();
     virtual bool isHit(QRect rect);
+	double getLength();
+	/**
+	* Winkel zu x-Achse
+	* @author Vaceslav Ustinov
+	* @return double Winkel
+	*/
+	double getWinkel();
 
 
 
@@ -75,6 +82,9 @@ public:
 protected:
     BB_Point * m_Pos1;
     BB_Point * m_Pos2;
+	/**
+	*Ein Richtungs-Vector (also Pos2-Pos1)
+	*/
     C2dVector m_Richtung;
 };
 

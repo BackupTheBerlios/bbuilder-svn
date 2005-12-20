@@ -22,8 +22,10 @@
 
 #include <QDialog>
 
-#include "bb_map.h"
+#include "bb_doccomponent.h"
 #include "bb_dlgwalleditarea.h"
+#include "bb_dlgwalleditpreview.h"
+#include "bb_wall.h"
 
 /**
 Ein Diaolog zum editieren von Wand-Eigenschaften.
@@ -35,12 +37,23 @@ In diesem Dialog koennen grafisch neu Fenster, Türen und etc eingefügt.
 class BB_DlgWallEdit : public QDialog
 {
     public:
-		BB_DlgWallEdit( BB_Map * map, QWidget * parent = 0, Qt::WFlags f = 0 );
+        BB_DlgWallEdit( BB_Wall * wall, BB_DocComponent * docComponent , QWidget * parent = 0, Qt::WFlags f = 0 );
         ~BB_DlgWallEdit();
-    private:
+
+        void setLevel( BB_DocComponent* Value );
+        BB_DocComponent* getLevel() const;
+        void setWall( BB_Wall* Value );
+        BB_Wall* getWall() const;
+    protected:
+        void paintEvent ( QPaintEvent * pe );
+        void resizeEvent ( QResizeEvent * re );
         void initilize();
     protected:
+        BB_DocComponent * m_level;
+        BB_Wall * m_wall;
         BB_DlgWallEditArea * m_CentralWidget;
+        BB_DlgWallEditPreview * m_PreviewWidget;
+        QRect m_rect;
 };
 
 #endif

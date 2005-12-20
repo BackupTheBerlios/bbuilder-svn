@@ -23,6 +23,8 @@
 #include <QLabel> 
 //Local Includes
 #include "bb_map.h"
+#include "bb_wall.h"
+#include "bb_doccomponent.h"
 
 /**
 Cetral Widget in BB_DlgWallEdit,
@@ -34,12 +36,19 @@ Dieses Widget dient zum Edittieren einer Wand
 class BB_DlgWallEditArea : public QLabel
 {
     public:
-        BB_DlgWallEditArea( BB_Map * map, QWidget * parent = 0, Qt::WFlags f = 0 );
+        BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent = 0, Qt::WFlags f = 0 );
         ~BB_DlgWallEditArea();
     protected:
         BB_Map * m_currentMap;
+        /**
+        * hohe und  breite in meter
+        */
+        double m_height;
+        double m_lenght;
+        double m_verhaeltniss;
     private:
         void paintEvent ( QPaintEvent * );
+        void resizeEvent ( QResizeEvent * );
 };
 
 #endif

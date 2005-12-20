@@ -33,6 +33,9 @@ class BB_Level : public BB_DocComponent
 		void setHeight( double Value );
 		double getHeight() const;
     protected:
+		/**
+		Hohe von Etage in meter
+		*/
 		double m_height;
 };
 

@@ -24,6 +24,5 @@ QT += xml opengl
 TARGET = renderer.e
 DESTDIR = ../bin
 CONFIG += debug \
-warn_on \
-opengl
+warn_on
 TEMPLATE = app

@@ -18,7 +18,7 @@ BB_Level::BB_Level( const QDir& path, const QString &fileName, const QString &na
         : BB_DocComponent( path, fileName, name )
 {
     //Standart Hoehe
-    setHeight( 20.0 );
+	m_height = 3;
 }
 
 

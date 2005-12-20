@@ -58,6 +58,8 @@ public:
 
 	void setScaleReal( double value );
 	double getScaleReal() const;
+	double getMeterPerPixel(double pixel);
+	double getPixelPerMeter(double meter);
 	
 	
 protected:

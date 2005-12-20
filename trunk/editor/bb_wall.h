@@ -17,7 +17,7 @@
 #define BB_WALL_H
 
 #include "bb_line.h"
-#include "bb_map.h"
+#include "bb_doccomponent.h"
 
 #include <QPixmap>
 
@@ -37,9 +37,7 @@ public:
     virtual const QString getClassName();
     virtual void generateXElement(QTextStream &out, int depth);
     virtual void show(BB_Transformer& transformer, QPainter& painter) const;
-	void editDlg(BB_Map *);
-
-
+	void editDlg(BB_DocComponent * docComponent );
 };
 
 #endif

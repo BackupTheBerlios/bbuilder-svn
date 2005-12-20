@@ -55,6 +55,9 @@ public:
   /**Returns Abstand von Zwei Punkten
   */
   virtual double getAbstand(C2dVector v2);
+  /**Return: Winkel von diesem Vektror zum X-Achse
+  */
+  virtual double getWinkel();
   /** Returns vector sum this + v2.
  */
   virtual C2dVector operator + (const C2dVector & v2) const;

@@ -72,10 +72,7 @@ void BB_ToolLineNew::click( QMouseEvent* me )
             /// @todo zum testen, nach implementation bitte loeschen.
             if ( object->isHit( m_pLogic ) && ( object->getClassName() == "BB_Wall" ) )
             {
-                // QPixmap * tmpPixmap = (BB_WorkArea *) parentWidget)->getMap()->getMap;
-                // ((BB_Wall *) object)->editDlg((((BB_WorkArea *) parentWidget)->getMap()->getMap()));
-// >>>>>>>>>>>> ( ( BB_Wall * ) object ) ->editDlg( ( ( ( BB_WorkArea * ) parentWidget ) ->getMap() ) ); <<<<<<<<<<< === HIER MACHEN !!!
-                cout << "edit dlg exec" << endl;
+                ( ( BB_Wall * ) object ) ->editDlg( getDocComponent() );
                 return ;
             }
         }

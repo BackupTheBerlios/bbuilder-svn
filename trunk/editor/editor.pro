@@ -55,7 +55,8 @@ HEADERS += bb_abstracttool.h \
            bb_triangle.h \
            bb_tooltrianglenew.h \
            bb_toolscale.h \
-           bb_dlgtoolscaleedit.h 
+           bb_dlgtoolscaleedit.h \
+           bb_dlgwalleditpreview.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -103,7 +104,8 @@ SOURCES += bb_abstracttool.cpp \
            bb_triangle.cpp \
            bb_tooltrianglenew.cpp \
            bb_toolscale.cpp \
-           bb_dlgtoolscaleedit.cpp 
+           bb_dlgtoolscaleedit.cpp \
+           bb_dlgwalleditpreview.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

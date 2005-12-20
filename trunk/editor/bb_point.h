@@ -93,13 +93,20 @@ public:
     */
     void removeLinkedObject(BB_DrawObject * object);
     /**
-    ///TO-DO
+    ///@todo
     @author Vaceslav Ustinov
     @date 14.11.2005
     @return void
     */
     void deleteLinkedObjects(QVector< BB_DrawObject * >* objects);
     void BB_Point::addObject(BB_DrawObject * newObject);
+	/**
+	* erzeugt von BB_Point ein QT-QPoint
+	* @return QPoint
+	* @date 20.12.2005
+	* @author Vaceslav Ustinov
+	*/
+	QPoint getQPoint();
 
 
 

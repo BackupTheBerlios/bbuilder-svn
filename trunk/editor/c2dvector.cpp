@@ -116,3 +116,8 @@ bool C2dVector::operator == (const C2dVector & v2) const
 {
 	return (m_X == v2.x() && m_Y == v2.y());
 }
+
+double C2dVector::getWinkel(){
+	//Umwandlung von radiant in degrees
+	return atan(m_Y / m_X) * 180 / M_PI;
+}

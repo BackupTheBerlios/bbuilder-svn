@@ -242,7 +242,7 @@ void BR_View::drawFPS()
 	
 	glDisable(GL_LIGHTING);
 	qglColor(QColor(255,0,0));
-	renderText(10 ,10 ,"FPS: ");
+	renderText(10 ,20 ,"FPS: " + QString::number(m_CurrentFPS));
 	glEnable(GL_LIGHTING);
 	
 }

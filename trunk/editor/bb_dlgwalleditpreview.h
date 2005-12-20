@@ -17,70 +17,43 @@
 *   Free Software Foundation, Inc.,                                       *
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
-#include "bb_dlgwalledit.h"
-#include "bb_level.h"
-#include <iostream>
-#include <QtGui>
+#ifndef BB_DLGWALLEDITPREVIEW_H
+#define BB_DLGWALLEDITPREVIEW_H
 
-using namespace std;
+#include <QLabel>
+#include "bb_wall.h"
 
-BB_DlgWallEdit::BB_DlgWallEdit( BB_Wall * wall, BB_DocComponent * docComponent , QWidget * parent, Qt::WFlags f )
-        : QDialog( parent, f )
+/**
+	Dies ist ein kleines Fenster(Preview-window) in Dialog beim bearbeiten von einer Wand
+ 
+	@author Vaceslav Ustinov <v.ustinov@web.de>
+	@date 2005-12-19
+*/
+class BB_DlgWallEditPreview : public QLabel
 {
-    setWindowTitle ( tr( "Eigenschaften von einer Wand" ) );
-    m_level = docComponent;
-    m_wall = wall;
-	m_CentralWidget = new BB_DlgWallEditArea( wall, docComponent );
-	m_PreviewWidget = new BB_DlgWallEditPreview( wall, docComponent );
+    public:
+        /**
+        * Standart Konstruktor
+        * @param BB_Wall * Zeiger auf ein Wand zu dem dieser Dialog geh&ouml;rt
+        * @param BB_DocComponent * Zeiger auf DocComponent (bzw  @link BB_DocComponent @endlink )
+        */
+        BB_DlgWallEditPreview( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent = 0, Qt::WFlags f = 0 );
+        ~BB_DlgWallEditPreview();
+    protected:
+        /**
+        * Rutine zum initiliasieren aller wichtigen einstellungen
+        * es ist eine private Funktion und es wird nur im Konstruktor aufgerufen
+        * @author Vaceslav Ustinov
+        * @date 2005-12-20
+        */
+        void initilize( BB_Wall * wall, BB_DocComponent * docComponent );
+        /**
+        *&Uuml;berladene Funktion. @see QLabel::paintEvent();
+         */
+        void paintEvent ( QPaintEvent * pe );
+    private:
+        QRect m_rect;
 
-    initilize();
-}
+};
 
-
-BB_DlgWallEdit::~BB_DlgWallEdit()
-{}
-
-void BB_DlgWallEdit::initilize()
-{
-    QScrollArea * scroll = new QScrollArea();
-    scroll->setWidget( m_CentralWidget );
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget( scroll );
-    layout->addWidget( m_PreviewWidget );
-    setLayout( layout );
-    // 	setFixedHeight(500);
-}
-
-void BB_DlgWallEdit::paintEvent ( QPaintEvent * pe )
-{
-    m_CentralWidget->repaint();
-}
-void BB_DlgWallEdit::resizeEvent ( QResizeEvent * re )
-{
-    m_CentralWidget->update();
-}
-
-
-
-BB_DocComponent* BB_DlgWallEdit::getLevel() const
-{
-    return m_level;
-}
-
-
-void BB_DlgWallEdit::setLevel( BB_DocComponent* Value )
-{
-    m_level = Value;
-}
-
-
-BB_Wall* BB_DlgWallEdit::getWall() const
-{
-    return m_wall;
-}
-
-
-void BB_DlgWallEdit::setWall( BB_Wall* Value )
-{
-    m_wall = Value;
-}
+#endif

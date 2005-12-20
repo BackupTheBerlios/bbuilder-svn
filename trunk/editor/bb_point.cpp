@@ -44,10 +44,10 @@ BB_Point::BB_Point( C2dVector p )
 
 BB_Point::~BB_Point()
 {
-	if(m_Links.count() > 0)
-	{
-		qDebug( "Warnung: Der zu löschende Punkt enthält noch Links" );
-	}
+    if ( m_Links.count() > 0 )
+    {
+        qDebug( "Warnung: Der zu löschende Punkt enthält noch Links" );
+    }
 }
 
 
@@ -280,11 +280,11 @@ void BB_Point::deleteLinkedObject( BB_DrawObject * object )
         cout << "Null Pointer an Funktion 'BB_Point::deleteLinkedObject(BB_DrawObject * object)' ubergeben" << endl;
         return ;
     }
-//     if ( removeLinkedObject( object ) != NULL )
-//     {
-        cout << "delete " << object << ";" << endl;
-        delete object;
-//     }
+    //     if ( removeLinkedObject( object ) != NULL )
+    //     {
+    cout << "delete " << object << ";" << endl;
+    delete object;
+    //     }
 }
 
 
@@ -297,13 +297,13 @@ Entfernt ein Objekt aus dem Vektor.<br>Instantz wird nicht gelöscht
 */
 void BB_Point::removeLinkedObject( BB_DrawObject * object )
 {
-//     cout << "BB_Point::removeLinkedObject( " << object << " )" << endl;
+    //     cout << "BB_Point::removeLinkedObject( " << object << " )" << endl;
     if ( object == NULL )
     {
         cout << "Null Pointer an Funktion 'BB_Point::removeLinkedObject(BB_DrawObject * object)' ubergeben" << endl;
-        return;
+        return ;
     }
-	
+
     BB_DrawObject * tmp;
     for ( int i = 0;i < m_Links.count() ;i++ )
     {
@@ -311,11 +311,11 @@ void BB_Point::removeLinkedObject( BB_DrawObject * object )
         if ( tmp == object )
         {
             m_Links.remove( i );
-            return;
+            return ;
         }
     }
     tmp = NULL;
-    return;
+    return ;
 }
 
 
@@ -324,20 +324,20 @@ void BB_Point::deleteLinkedObjects( QVector< BB_DrawObject * >* objects )
 
     BB_DrawObject * tmp;
     BB_DrawObject * tmp_object;
-	
-	for ( int i = m_Links.count() - 1; i >= 0; i-- )
+
+    for ( int i = m_Links.count() - 1; i >= 0; i-- )
     {
         tmp = m_Links.at( i );
-		
-		for ( int j = objects->count() - 1; j >= 0; j-- )
+
+        for ( int j = objects->count() - 1; j >= 0; j-- )
         {
             tmp_object = objects->at( j );
             if ( tmp_object == tmp )
-			{
-// 				cout << "delete " << tmp << endl;
+            {
+                // 				cout << "delete " << tmp << endl;
                 objects->remove( j );
-				delete tmp;
-			}
+                delete tmp;
+            }
         }
     }
 
@@ -347,4 +347,9 @@ void BB_Point::deleteLinkedObjects( QVector< BB_DrawObject * >* objects )
 void BB_Point::addObject( BB_DrawObject * newObject )
 {
     m_Links.insert( m_Links.count(), newObject );
+}
+
+QPoint BB_Point::getQPoint()
+{
+    return QPoint( m_Pos.x(), m_Pos.y() );
 }
