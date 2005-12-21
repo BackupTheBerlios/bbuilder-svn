@@ -27,28 +27,55 @@ using namespace std;
 BB_DlgWallEdit::BB_DlgWallEdit( BB_Wall * wall, BB_DocComponent * docComponent , QWidget * parent, Qt::WFlags f )
         : QDialog( parent, f )
 {
-    setWindowTitle ( tr( "Eigenschaften von einer Wand" ) );
-    m_level = docComponent;
-    m_wall = wall;
-	m_CentralWidget = new BB_DlgWallEditArea( wall, docComponent );
-	m_PreviewWidget = new BB_DlgWallEditPreview( wall, docComponent );
-
-    initilize();
+    initilize( wall, docComponent );
 }
 
 
 BB_DlgWallEdit::~BB_DlgWallEdit()
 {}
 
-void BB_DlgWallEdit::initilize()
+void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
 {
+    //eigenschaften von Widget bearbeiten
+    setWindowTitle ( tr( "Eigenschaften von einer Wand" ) );
+
+    //member-variablen zuweisen
+    m_level = docComponent;
+    m_wall = wall;
+    m_CentralWidget = new BB_DlgWallEditArea( wall, docComponent );
+    m_PreviewWidget = new BB_DlgWallEditPreview( wall, docComponent );
+    m_ToolDoorNew = new BB_ToolDoorNew;
+    m_ToolWindowNew = new BB_ToolWindowNew;
+
+    //Scroll-Fenster mit haupt-Widget
     QScrollArea * scroll = new QScrollArea();
     scroll->setWidget( m_CentralWidget );
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget( scroll );
-    layout->addWidget( m_PreviewWidget );
-    setLayout( layout );
+    //Layout fuer Area und Preview - Widget
+    QVBoxLayout *layout_area_preview = new QVBoxLayout;
+    layout_area_preview->addWidget( scroll );
+    layout_area_preview->addWidget( m_PreviewWidget );
+
+    //Layout fuer Buttons
+    QVBoxLayout * layout_buttons = new QVBoxLayout;
+    m_ButtonWindow = new QPushButton( "Fenster" );
+    m_ButtonDoor = new QPushButton( "Tuer" );
+    m_ButtonMove = new QPushButton( "Move-resize" );
+
+    //buttons hinzufuegen
+    layout_buttons->addWidget( m_ButtonWindow );
+    layout_buttons->addWidget( m_ButtonDoor );
+    layout_buttons->addWidget( m_ButtonMove );
+
+    //layout mit allen anderen Layouts
+    QHBoxLayout * layout_alles_zusammen = new QHBoxLayout;
+    layout_alles_zusammen->addLayout( layout_buttons );
+    layout_alles_zusammen->addLayout( layout_area_preview );
+
+    //Haupt_layout zum Widget hinzufuegen
+    setLayout( layout_alles_zusammen );
     // 	setFixedHeight(500);
+
+    initSingals();
 }
 
 void BB_DlgWallEdit::paintEvent ( QPaintEvent * pe )
@@ -83,4 +110,22 @@ BB_Wall* BB_DlgWallEdit::getWall() const
 void BB_DlgWallEdit::setWall( BB_Wall* Value )
 {
     m_wall = Value;
+}
+
+
+void BB_DlgWallEdit::slotToolDoor()
+{
+    m_CentralWidget->setTool( m_ToolDoorNew );
+}
+
+void BB_DlgWallEdit::slotToolWindow()
+{
+    m_CentralWidget->setTool( m_ToolWindowNew );
+}
+
+
+void BB_DlgWallEdit::initSingals()
+{
+    connect( m_ButtonDoor, SIGNAL( clicked( bool ) ), this, SLOT( slotToolDoor() ) );
+    connect( m_ButtonWindow, SIGNAL( clicked( bool ) ), this, SLOT( slotToolWindow() ) );
 }

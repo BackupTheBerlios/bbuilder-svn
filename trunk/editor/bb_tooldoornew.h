@@ -17,43 +17,27 @@
 *   Free Software Foundation, Inc.,                                       *
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
-#ifndef BB_DLGWALLEDITAREA_H
-#define BB_DLGWALLEDITAREA_H 
-//QT includes
-#include <QLabel> 
-//Local Includes
-#include "bb_map.h"
-#include "bb_wall.h"
-#include "bb_doccomponent.h"
-#include "bb_abstracttool.h"
-#include "bb_tooldoornew.h"
+#ifndef BB_TOOLDOORNEW_H
+#define BB_TOOLDOORNEW_H
+
+#include <bb_abstracttool.h>
 
 /**
-Cetral Widget in BB_DlgWallEdit,
-wird von QLabel abgeleitet.
-Dieses Widget dient zum Edittieren einer Wand
- 
-@author Vaceslav Ustinov
+* tool zum erstellen von neuen T&uuml;ren
+* @author Vaceslav Ustinov <v.ustinov@web.de>
+* @date 21-12-2005
 */
-class BB_DlgWallEditArea : public QLabel
+class BB_ToolDoorNew : public BB_AbstractTool
 {
     public:
-        BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent = 0, Qt::WFlags f = 0 );
-        ~BB_DlgWallEditArea();
-		void setTool(BB_AbstractTool * tool);
-    protected:
-        BB_Map * m_currentMap;
-        /**  hohe und  breite in meter */
-        double m_height;
-        double m_lenght;
-        double m_verhaeltniss;
-        BB_AbstractTool * m_Tool;
-    protected:
-        virtual void paintEvent ( QPaintEvent * );
-        virtual void resizeEvent ( QResizeEvent * );
-        virtual void mousePressEvent ( QMouseEvent * me );
-        virtual void mouseReleaseEvent ( QMouseEvent* me );
-        virtual void mouseMoveEvent ( QMouseEvent* me );
+        BB_ToolDoorNew();
+
+        ~BB_ToolDoorNew();
+	protected:
+		void click( QMouseEvent* me );
+		 void move( QMouseEvent* me, bool overX, bool overY );
+		 void release( QMouseEvent* me ) ;
+
 };
 
 #endif

@@ -596,6 +596,20 @@
   <compound kind="class">
     <name>BB_DlgWallEdit</name>
     <filename>classBB__DlgWallEdit.html</filename>
+    <member kind="slot">
+      <type>void</type>
+      <name>slotToolDoor</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>i0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="slot">
+      <type>void</type>
+      <name>slotToolWindow</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>i1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>BB_DlgWallEdit</name>
@@ -645,6 +659,20 @@
       <anchor>b1</anchor>
       <arglist>(QResizeEvent *re)</arglist>
     </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>initilize</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>b2</anchor>
+      <arglist>(BB_Wall *wall, BB_DocComponent *docComponent)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>initSingals</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>b3</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="variable" protection="protected">
       <type>BB_DocComponent *</type>
       <name>m_level</name>
@@ -680,6 +708,41 @@
       <anchor>p4</anchor>
       <arglist></arglist>
     </member>
+    <member kind="variable" protection="protected">
+      <type>QPushButton *</type>
+      <name>m_ButtonWindow</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>p5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QPushButton *</type>
+      <name>m_ButtonDoor</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>p6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QPushButton *</type>
+      <name>m_ButtonMove</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>p7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_ToolDoorNew *</type>
+      <name>m_ToolDoorNew</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>p8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_ToolWindowNew *</type>
+      <name>m_ToolWindowNew</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>p9</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>BB_DlgWallEditArea</name>
@@ -690,6 +753,48 @@
       <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_Wall *wall, BB_DocComponent *docComponent, QWidget *parent=0, Qt::WFlags f=0)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setTool</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(BB_AbstractTool *tool)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>paintEvent</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>b0</anchor>
+      <arglist>(QPaintEvent *)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>resizeEvent</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>b1</anchor>
+      <arglist>(QResizeEvent *)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>mousePressEvent</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>b2</anchor>
+      <arglist>(QMouseEvent *me)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>mouseReleaseEvent</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>b3</anchor>
+      <arglist>(QMouseEvent *me)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>mouseMoveEvent</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>b4</anchor>
+      <arglist>(QMouseEvent *me)</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_Map *</type>
@@ -717,6 +822,13 @@
       <name>m_verhaeltniss</name>
       <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
       <anchor>p3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_AbstractTool *</type>
+      <name>m_Tool</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>p4</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -2496,6 +2608,32 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>BB_ToolDoorNew</name>
+    <filename>classBB__ToolDoorNew.html</filename>
+    <base>BB_AbstractTool</base>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>click</name>
+      <anchorfile>classBB__ToolDoorNew.html</anchorfile>
+      <anchor>b0</anchor>
+      <arglist>(QMouseEvent *me)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>move</name>
+      <anchorfile>classBB__ToolDoorNew.html</anchorfile>
+      <anchor>b1</anchor>
+      <arglist>(QMouseEvent *me, bool overX, bool overY)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>release</name>
+      <anchorfile>classBB__ToolDoorNew.html</anchorfile>
+      <anchor>b2</anchor>
+      <arglist>(QMouseEvent *me)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>BB_ToolLineNew</name>
     <filename>classBB__ToolLineNew.html</filename>
     <base>BB_AbstractTool</base>
@@ -2803,6 +2941,32 @@
       <anchorfile>classBB__ToolTriangleNew.html</anchorfile>
       <anchor>p0</anchor>
       <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BB_ToolWindowNew</name>
+    <filename>classBB__ToolWindowNew.html</filename>
+    <base>BB_AbstractTool</base>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>click</name>
+      <anchorfile>classBB__ToolWindowNew.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(QMouseEvent *me)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>move</name>
+      <anchorfile>classBB__ToolWindowNew.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>(QMouseEvent *me, bool overX, bool overY)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>release</name>
+      <anchorfile>classBB__ToolWindowNew.html</anchorfile>
+      <anchor>a4</anchor>
+      <arglist>(QMouseEvent *me)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -4894,6 +5058,8 @@
     <file>bb_tabterrain.h</file>
     <file>bb_terrain.cpp</file>
     <file>bb_terrain.h</file>
+    <file>bb_tooldoornew.cpp</file>
+    <file>bb_tooldoornew.h</file>
     <file>bb_toollinenew.cpp</file>
     <file>bb_toollinenew.h</file>
     <file>bb_toolmove.cpp</file>
@@ -4906,6 +5072,8 @@
     <file>bb_toolselect.h</file>
     <file>bb_tooltrianglenew.cpp</file>
     <file>bb_tooltrianglenew.h</file>
+    <file>bb_toolwindownew.cpp</file>
+    <file>bb_toolwindownew.h</file>
     <file>bb_toolzoom.cpp</file>
     <file>bb_toolzoom.h</file>
     <file>bb_transformer.cpp</file>
@@ -4937,6 +5105,7 @@
     <file>moc_bb_dlgprojectnew.cpp</file>
     <file>moc_bb_dlgterrainedit.cpp</file>
     <file>moc_bb_dlgtoolscaleedit.cpp</file>
+    <file>moc_bb_dlgwalledit.cpp</file>
     <file>moc_bb_mainwindow.cpp</file>
     <file>moc_bb_tab.cpp</file>
     <file>moc_bb_tabbuilding.cpp</file>
