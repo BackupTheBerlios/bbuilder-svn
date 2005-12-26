@@ -262,7 +262,7 @@ void BB_AbstractTool::setWorkFrame( BB_WorkFrame* value )
 
 
 /**
- * Aktualisiert das Workframe
+ * Aktualisiert das Workframe.
  */
 void BB_AbstractTool::documentChanged()
 {
