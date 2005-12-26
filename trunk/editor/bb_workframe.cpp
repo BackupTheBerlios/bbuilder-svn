@@ -67,28 +67,31 @@ void BB_WorkFrame::paintEvent ( QPaintEvent * pe)
         if(m_DrawObjects != NULL)
         {
 			BB_DrawObject* object;		
-				
-			/* Alle Objekte außer der Punkte zeichnen */
-            for(int i = 0; i < m_DrawObjects->count(); i++)
-            {
-				if( typeid(*(m_DrawObjects->at(i))) != typeid(BB_Point) )
-				{
-					object = m_DrawObjects->at(i);
-					object->show(m_Transformer,painter);
-				}
-            }
 			
-			
-			/* Alle Punkte zeichnen */
-			for(int i = 0; i < m_DrawObjects->count(); i++)
+			/* Prüfen, ob die Objekte gezeichnet werden sollen, oder ob sie vom Tool ausgeblendet werden */
+			if( m_Tool == NULL || ( m_Tool != NULL && m_Tool->getShowDrawObjects() == true ) )
 			{
-				if( typeid(*(m_DrawObjects->at(i))) == typeid(BB_Point) )
+				/* Alle Objekte außer der Punkte zeichnen */
+				for(int i = 0; i < m_DrawObjects->count(); i++)
 				{
-					object = m_DrawObjects->at(i);
-					object->show(m_Transformer,painter);
+					if( typeid(*(m_DrawObjects->at(i))) != typeid(BB_Point) )
+					{
+						object = m_DrawObjects->at(i);
+						object->show(m_Transformer,painter);
+					}
+				}
+				
+				
+				/* Alle Punkte zeichnen */
+				for(int i = 0; i < m_DrawObjects->count(); i++)
+				{
+					if( typeid(*(m_DrawObjects->at(i))) == typeid(BB_Point) )
+					{
+						object = m_DrawObjects->at(i);
+						object->show(m_Transformer,painter);
+					}
 				}
 			}
-			
 			
 			/* ToolObjekte Zeichnen */
 			for(int i = 0; i < m_ToolObjects.count(); i++)
@@ -145,8 +148,8 @@ void BB_WorkFrame::setTool(BB_AbstractTool* tool)
 		m_ToolObjects.clear();		
 		
         m_Tool = tool;
+		m_Tool->setWorkFrame( this );
 		m_Tool->setTransformer(&m_Transformer);
-// 		m_Tool->setObjects(m_DrawObjects);
 		m_Tool->setToolObjects(&m_ToolObjects);
 		m_Tool->setSelectionVector(m_Selection);
 		m_Tool->setDocComponent( m_Component );

@@ -302,12 +302,16 @@ void BB_MainWindow::slotProjectOpen()
  */
 void BB_MainWindow::slotProjectClose()
 {
+	/* Alle Tools zurüksetzten damit die DocComponents 'freiggeben' werden */
+	m_TabTerrain->resetTool();
+	m_TabBuilding->resetTool();
+	m_TabLevel->resetTool();
+	
+	/* Dokument schliessen */
     m_Doc->close();
 
     m_TabTerrain->clear();
-
     m_TabBuilding->clear();
-
     m_TabLevel->clear();
 
     m_TabWidget->setEnabled( false );

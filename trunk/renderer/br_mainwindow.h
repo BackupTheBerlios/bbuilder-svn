@@ -16,6 +16,8 @@
 #include <QtGui>
 
 #include <br_view.h>
+#include <br_infowidget.h>
+#include <br_doc.h>
 
 
 /**
@@ -61,6 +63,8 @@ protected:
 	QAction* m_aViewFullScreen;
     QTimer* m_TimerAnimate;
     QTimer* m_TimerFPS;
+    BR_Doc m_Doc;
+    BR_InfoWidget* m_InfoWidget;
 	
 	
 private slots:

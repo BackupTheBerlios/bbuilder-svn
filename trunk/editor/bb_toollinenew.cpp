@@ -33,7 +33,7 @@ BB_ToolLineNew::BB_ToolLineNew()
 BB_ToolLineNew::BB_ToolLineNew( QWidget *parent )
         : BB_AbstractTool()
 {
-    parentWidget = parent;
+    m_ParentWidget = parent;
     m_movedPoint = NULL;
 }
 
@@ -138,7 +138,7 @@ void BB_ToolLineNew::release( QMouseEvent* me )
             }
         }
 
-        remove( tmpWall );
+        deleteObject( tmpWall );
         tmpWall = NULL;
         m_movedPoint = NULL;
     }

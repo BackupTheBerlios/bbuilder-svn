@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <QtGui>
+#include <bb.h>
 using namespace std;
 
 BB_DlgProjectNew::BB_DlgProjectNew(QWidget * parent, Qt::WFlags f)
@@ -24,7 +25,7 @@ BB_DlgProjectNew::BB_DlgProjectNew(QWidget * parent, Qt::WFlags f)
 	
 	m_Dlg.setupUi(this);
 	
-	m_Dlg.lineEditProjectName->setValidator(new QRegExpValidator(QRegExp("[A-Za-z][A-Za-z0-9\\s._]+"), this ));
+	m_Dlg.lineEditProjectName->setValidator( BB::validAlphanumeric );
 	
 	m_ProjectPath = QDir::homePath();
 	m_Dlg.lineEditProjectPath->setText(m_ProjectPath);

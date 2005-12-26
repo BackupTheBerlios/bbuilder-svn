@@ -12,78 +12,59 @@
 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
 *   GNU General Public License for more details.                          *
 ***************************************************************************/
-#include "bb_abstracttool.h"
-#include "bb_tab.h"
-
+#include <bb_abstracttool.h>
+#include <bb_tab.h>
+#include <bb_workframe.h>
 #include <iostream>
 
 using namespace std;
 
 BB_AbstractTool::BB_AbstractTool()
 {
-	m_Component = NULL;
+    m_Component = NULL;
     m_Transformer = NULL;
     m_Objects = NULL;
     m_Action = NULL;
+	m_ToolWidget = NULL;
+	m_WorkFrame = NULL;
+    m_ShowDrawObjects = true;
 
 }
 
 BB_AbstractTool::~BB_AbstractTool()
 {}
 
-bool BB_AbstractTool::remove(BB_DrawObject * delObject)
+bool BB_AbstractTool::deleteObject( BB_DrawObject * delObject )
 {
-	if(m_Objects != NULL && delObject != NULL)
-	{
-		BB_DrawObject * tmpObject;
-// 		int objectPosition;
-// 		objectPosition = -1;
-		for (int i = m_Objects->count() - 1; i >= 0 ; i--)
-		{
-			tmpObject = m_Objects->at(i);
-			if (tmpObject == delObject)
-			{
+    if ( m_Objects != NULL && delObject != NULL )
+    {
+        BB_DrawObject * tmpObject;
+        // 		int objectPosition;
+        // 		objectPosition = -1;
+        for ( int i = m_Objects->count() - 1; i >= 0 ; i-- )
+        {
+            tmpObject = m_Objects->at( i );
+            if ( tmpObject == delObject )
+            {
+				// Falls das Objekt ein BB_Point ist, werden zuerst alle abhängigen Objekte gelöscht
+				if( typeid( *(m_Objects->at(i)) ) == typeid( BB_Point ) )
+				{
+					((BB_Point*)(m_Objects->at(i)))->deleteLinkedObjects( m_Component->getDrawObjects() );
+				}
 				
-				m_Objects->remove(i);
-				delete delObject;
-				return true;
-// 				objectPosition = i;
-				
-				// TODO Objekt wird nicht aus dem Speicher gelöscht!
-			}
-		}
-// 		cout << objectPosition <<endl;
-		
-		
-// 		if(objectPosition != -1) 
-// 		return true;
-	}
+                m_Objects->remove( i );
+                delete delObject;
+                return true;
+                // 				objectPosition = i;
+            }
+        }
+    }
 
-	return false;
-	
+    return false;
+
 
 }
 
-
-
-/* *
- * Gibt den Vector zurück, der z.Z. bearbeitet wird.
- * @return Vector, der bearbeitet wird.
- */
-// QVector< BB_DrawObject * >* BB_AbstractTool::getObjects() const
-// {
-//     return m_Objects;
-// }
-
-
-/* *
- * Setzt den Pointer auf den Vector, welcher bearbeitet werden soll.
- * @param vector Vector, der bearbeitet werden soll.
- */
-// void BB_AbstractTool::setObjects( QVector< BB_DrawObject * >* vector )
-// {
-//     m_Objects = vector;
-// }
 
 
 /**
@@ -173,11 +154,15 @@ void BB_AbstractTool::setAction( QAction* action )
 
 
 /**
- * Setzt das Tool zurück
+ * Setzt das Tool zurück.
+ * 
  */
 void BB_AbstractTool::reset()
 {
-    //  m_ToolObjects->clear();
+	if( m_ToolWidget != NULL)
+	{
+		m_ToolWidget->updateWidget();
+	}
 }
 
 
@@ -191,8 +176,8 @@ void BB_AbstractTool::reset()
  */
 BB_DrawObject* BB_AbstractTool::getClickedObject( const C2dVector &posLogic , const std::type_info &type )
 {
-	
-	/// todo Fehler abfangen
+
+    /// todo Fehler abfangen
     BB_DrawObject * object;
     bool exit = false;
     for ( int i = 0; i < m_Objects->count() && exit == false; i++ )
@@ -233,13 +218,56 @@ BB_DocComponent* BB_AbstractTool::getDocComponent() const
 void BB_AbstractTool::setDocComponent( BB_DocComponent* component )
 {
     m_Component = component;
-	if(m_Component == NULL)
+    if ( m_Component == NULL )
+    {
+        m_Objects = NULL;
+        m_Transformer = NULL;
+    }
+    else
+    {
+        m_Objects = m_Component->getDrawObjects();
+    }
+}
+
+
+/**
+ * Gibt den Status zurück, ob die DrawObject gezeichnet werden sollen oder nicht.
+ * @return Status
+ */
+bool BB_AbstractTool::getShowDrawObjects()
+{
+    return m_ShowDrawObjects;
+}
+
+
+
+
+/**
+ * Gibt das Tool-Fenster zurück
+ */
+BB_AbstractToolWidget* BB_AbstractTool::getToolWidget()
+{
+	return m_ToolWidget;
+}
+
+
+/**
+ * Setzt das aktuelle Workframe
+ * @param value das aktuelle Workframe
+ */
+void BB_AbstractTool::setWorkFrame( BB_WorkFrame* value )
+{
+	m_WorkFrame = value;
+}
+
+
+/**
+ * Aktualisiert das Workframe
+ */
+void BB_AbstractTool::documentChanged()
+{
+	if( m_WorkFrame != NULL )
 	{
-		m_Objects = NULL;
-		m_Transformer = NULL;
-	}
-	else
-	{
-		m_Objects = m_Component->getDrawObjects();
+		m_WorkFrame->update();
 	}
 }

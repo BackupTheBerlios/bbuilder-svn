@@ -15,12 +15,17 @@
 #include "bb_toolmove.h"
 #include <iostream>
 #include <math.h>
+#include <bb_widgettoolselect.h>
 
 using namespace std;
 
 BB_ToolMove::BB_ToolMove()
         : BB_AbstractTool()
 {
+
+    m_ToolWidget = new BB_WidgetToolSelect( this );
+
+
     comparePoint = NULL;
     m_Rect.setPos1( &m_Point1 );
     m_Rect.setPos2( &m_Point2 );
@@ -34,7 +39,7 @@ BB_ToolMove::BB_ToolMove()
     QColor b( 255, 221, 118, 150 );
     m_Rect.setBrush( b );
 
-    m_select = true;;
+    m_select = true;
 }
 
 
@@ -103,7 +108,7 @@ void BB_ToolMove::click( QMouseEvent* me )
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
     if ( m_Objects == NULL && me == NULL && m_Transformer == NULL )
     {
-        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %d \tme: %d\tm_Transformer: %d", m_Objects, me, m_Transformer );
+        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
         return ;
     }
     //Behandlung von linke Maustaste
@@ -200,7 +205,7 @@ void BB_ToolMove::move( QMouseEvent* me, bool overX, bool overY )
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
     if ( m_Objects == NULL && me == NULL && m_Transformer == NULL )
     {
-        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %d\tm_Transformer: %d", m_Objects, me, m_Transformer );
+        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
         return ;
     }
     //Behandlung von Linke-maustaste
@@ -258,12 +263,14 @@ void BB_ToolMove::release( QMouseEvent* me )
     if ( !m_select )
     {
         m_select = true;
+		m_ToolWidget->updateWidget();
         return ;
     }
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
     if ( m_Objects == NULL && me == NULL && m_Transformer == NULL )
     {
-        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %d \tme: %d\tm_Transformer: %d", m_Objects, me, m_Transformer );
+        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
+		m_ToolWidget->updateWidget();
         return ;
     }
     //Behandlung nur von Linke-Maustaste
@@ -314,6 +321,7 @@ void BB_ToolMove::release( QMouseEvent* me )
     }
     //wieder in Auswahl-Modus wechseln
     m_select = true;
+	m_ToolWidget->updateWidget();
 }
 
 
@@ -350,4 +358,35 @@ void BB_ToolMove::bringToLine( BB_Point *point )
         point->setSelected( true );
         cout << "setzen von bringToLinePoint" << endl;
     }
+}
+
+
+/**
+ * Überladung der Funktion 'BB_AbstractTool::setSelectionVector();'.
+ * Übergibt den Vektor auch an das Tool-Fenster
+ */
+void BB_ToolMove::setSelectionVector( QVector<BB_DrawObject*>* selectionVector )
+{
+    BB_AbstractTool::setSelectionVector( selectionVector );
+    ( ( BB_WidgetToolSelect* ) ( m_ToolWidget ) ) ->setSelection( selectionVector );
+}
+
+
+/**
+ * Löscht alle selektierten Objekte
+ * @author Alex Letkemann
+ * @date 26.12.2005
+ */
+void BB_ToolMove::deleteSelection()
+{
+	if( m_Selection != NULL )
+	{
+		for(int i = m_Selection->count() -1 ; i >= 0; i--)
+		{
+			deleteObject( m_Selection->at(i) );
+			m_Selection->remove(i);
+		}
+	}
+	
+	documentChanged();
 }

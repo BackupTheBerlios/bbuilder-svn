@@ -27,8 +27,6 @@
 #include "bb_toolscale.h"
 
 
-#include "bb_propertywidget.h"
-
 /**
 @author Alex Letkemann
 */
@@ -40,7 +38,6 @@ public:
 
     ~BB_TabBuilding();
 //     void updateBuildingList();
-    virtual void mouseReleaseEvent ( QMouseEvent * e );
 	virtual void updateWidget();
 	void createBuildingList();
     virtual void clear();
@@ -63,7 +60,7 @@ protected:
     QPushButton* m_ButtonBuildingDelete;
     QPushButton* m_ButtonBuildingNew;
     QPushButton* m_ButtonBuildingProperties;
-    BB_PropertyWidget* m_PropertyWidget;
+
     bool m_BuildingsListCreated;
     BB_AbstractTool* m_ToolScale;
     

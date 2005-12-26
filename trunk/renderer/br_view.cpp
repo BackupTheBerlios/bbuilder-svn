@@ -17,9 +17,17 @@
 
 using namespace std;
 
-BR_View::BR_View( QWidget * parent )
+BR_View::BR_View( BR_Doc * doc, BR_InfoWidget * info, QWidget * parent )
         : QGLWidget( parent )
 {
+	if( doc == NULL || info == NULL)
+	{
+		cout << "Kritischer Programmfehler" << endl;
+		exit(1);
+	}
+	
+	m_Info = info;
+	
     /* Fokus setzen, damit das Fenster die KeyPress events abfangen kann */
     setFocusPolicy( Qt::StrongFocus );
 	m_FPS = 0;
@@ -81,7 +89,6 @@ void BR_View::paintGL()
     m_Camera.apply();
 	
     drawGrid();
-	drawFPS();
 	m_FPS++;
 }
 
@@ -182,11 +189,11 @@ void BR_View::mouseMoveEvent ( QMouseEvent * me )
         //cout << "move " << e->x() << "|" << e->y() << endl;
         double x, y;
 
-        cout << me->x() << " | " << me->y() << endl;
+//         cout << me->x() << " | " << me->y() << endl;
 
 
-        x = m_MousePosX - me->globalX();
-        y = m_MousePosY - me->globalY();
+		x = m_MousePosX - (me->globalX());
+		y = m_MousePosY - (me->globalY());
 
         m_Camera.rotateX( -y * 0.3 );
         m_Camera.rotateY( x * 0.3 );
@@ -235,14 +242,7 @@ void BR_View::showCurrentFPS()
 {
 	m_CurrentFPS = m_FPS;
 	m_FPS = 0;
-}
 
-void BR_View::drawFPS()
-{
-	
-	glDisable(GL_LIGHTING);
-	qglColor(QColor(255,0,0));
-	renderText(10 ,20 ,"FPS: " + QString::number(m_CurrentFPS));
-	glEnable(GL_LIGHTING);
+	m_Info->printFPS( m_CurrentFPS );
 	
 }

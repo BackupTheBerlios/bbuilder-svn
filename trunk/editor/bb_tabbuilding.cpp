@@ -177,20 +177,6 @@ void BB_TabBuilding::slotBuildingProperties()
 }
 
 
-/*!
-    \fn BB_TabBuilding::mousePressEvent ( QMouseEvent * e )
- */
-void BB_TabBuilding::mouseReleaseEvent ( QMouseEvent * e )
-{
-    // TODO
-    e->ignore();
-
-//     cout << "BB_TabBuilding -> " << m_Selection.count() << " Objekte slektiert" << endl;
-
-
-}
-
-
 
 /**
  * Updated das Fenster.
@@ -242,6 +228,7 @@ void BB_TabBuilding::initTools()
     m_ToolMove = new BB_ToolMove();
     QAction *toolMove = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolMove.png" ), "Move", this );
     toolMove->setStatusTip( "Move Werkzeug" );
+	addWidgetRight( m_ToolMove->getToolWidget() );
     createToolButton( toolMove, m_ToolMove );
 
 	
@@ -249,6 +236,7 @@ void BB_TabBuilding::initTools()
 	m_ToolScale = new BB_ToolScale( this );
 	QAction *toolScale = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolScale.png" ), "Maßstab", this );
 	toolScale->setStatusTip( QString::fromUtf8("Maßstab Werkzeug") );
+	addWidgetRight( m_ToolScale->getToolWidget() );
 	createToolButton( toolScale, m_ToolScale );
 
 
@@ -264,9 +252,9 @@ void BB_TabBuilding::initTools()
  */
 void BB_TabBuilding::initWidgetRight()
 {
-    m_PropertyWidget = new BB_PropertyWidget();
+//     m_PropertyWidget = new BB_PropertyWidget();
 
-    addWidgetRight( m_PropertyWidget );
+//     addWidgetRight( m_PropertyWidget );
 }
 
 
@@ -288,6 +276,7 @@ void BB_TabBuilding::toolChanged( QAction* action )
         unsetToolButton( action );
         action->setChecked( true );
         m_Center->setTool( m_ToolMove );
+		m_RightFrame->setCurrentWidget( m_ToolMove->getToolWidget() );
     }
     else if ( m_ToolZoom->getAction() == action )
     {
@@ -312,6 +301,7 @@ void BB_TabBuilding::toolChanged( QAction* action )
 		unsetToolButton( action );
 		action->setChecked( true );
 		m_Center->setTool( m_ToolScale );
+		m_RightFrame->setCurrentWidget( m_ToolScale->getToolWidget() );
 	}
     else
     {

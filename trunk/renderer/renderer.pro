@@ -3,6 +3,12 @@
 # Subdir relative project main directory: ./renderer
 # Target is an application:  renderer.e
 
+QT += xml opengl
+TARGET = renderer.e 
+DESTDIR = ../bin 
+CONFIG += debug \
+          warn_on
+TEMPLATE = app 
 HEADERS += br_mainwindow.h \
            br_globals.h \
            br_view.h \
@@ -10,7 +16,15 @@ HEADERS += br_mainwindow.h \
            c3dvector.h \
            ccolorrgba.h \
            cglmatrix.h \
-           br_keyhandler.h 
+           br_keyhandler.h \
+           br_infowidget.h \
+           br_doc.h \
+           c3dbody.h \
+           c3dcylinder.h \
+           c3dline.h \
+           c3dpoint.h \
+           c3dquad.h \
+           c3dtriangle.h 
 SOURCES += main.cpp \
            br_mainwindow.cpp \
            br_globals.cpp \
@@ -19,10 +33,12 @@ SOURCES += main.cpp \
            c3dvector.cpp \
            ccolorrgba.cpp \
            cglmatrix.cpp \
-           br_keyhandler.cpp 
-QT += xml opengl
-TARGET = renderer.e
-DESTDIR = ../bin
-CONFIG += debug \
-warn_on
-TEMPLATE = app
+           br_keyhandler.cpp \
+           br_infowidget.cpp \
+           br_doc.cpp \
+           c3dbody.cpp \
+           c3dcylinder.cpp \
+           c3dline.cpp \
+           c3dpoint.cpp \
+           c3dquad.cpp \
+           c3dtriangle.cpp

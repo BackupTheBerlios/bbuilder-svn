@@ -26,7 +26,7 @@ BB_DrawDevice::~BB_DrawDevice()
 
     BB_DrawObject * object;
 
-    /* Alle Punkte löschen.
+   /* Alle Punkte löschen.
     * Vorher werden alle Objekte gelöscht, 
     * die vom jeweiligen Punkt abhängig sind.
     */

@@ -10,6 +10,13 @@
 //
 //
 #include "bb_xhandler.h"
+#include "QMessageBox"
+
+#include <iostream>
+
+
+using namespace std;
+
 
 BB_XHandler::BB_XHandler()
  : QXmlDefaultHandler()
@@ -28,22 +35,17 @@ bool BB_XHandler::characters(const QString& ch)
 	return true;
 }
 
-// bool BB_XHandler::endElement(const QString& namespaceURI, const QString& localName, const QString& qName)
-// {
-//  
-// }
-// 
-// bool BB_XHandler::startElement(const QString& namespaceURI, const QString& localName, const QString& qName, const QXmlAttributes& atts)
-// {
-// 
-// }
-
-
-
-/*!
-    \fn BB_XHandler::fatalError(const QXmlParseException& exception)
+/**
+ * Wird aufgeruffen, wenn während des Parsens ein Fehler auftritt.
+ * Dier Fehler wird im std::cout ausgegeben
  */
 bool BB_XHandler::fatalError(const QXmlParseException& exception)
 {
-    /// @todo implement me
+	
+	QString errorString = QObject::tr("Parse error at line %1, column %2:\n%3")
+									.arg(exception.lineNumber())
+									.arg(exception.columnNumber())
+									.arg(exception.message());
+	cout << "XML-Fehler: " << errorString.toStdString() << endl;
+	return false;
 }

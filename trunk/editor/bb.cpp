@@ -12,6 +12,14 @@
 #include "bb.h"
 
 
+QRegExp BB::regExpAlphanumeric = QRegExp("[A-Za-z][A-Za-z0-9\\s._]+");
+QRegExp BB::regExpNumeric = QRegExp("[0-9.]+");
+
+
+QRegExpValidator* BB::validAlphanumeric = new QRegExpValidator( regExpAlphanumeric, NULL );
+QRegExpValidator* BB::validNumeric = new QRegExpValidator( regExpNumeric, NULL );
+
+
 /** Konstrucktor */
 BB::BB()
 {
@@ -81,5 +89,4 @@ QString BB::escapedText(const QString &str)
 	result.replace(QString::fromUtf8("ß"), "&szlig;");
 	return result;
 }
-
 

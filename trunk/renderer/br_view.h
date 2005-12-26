@@ -16,6 +16,8 @@
 
 #include <br_camera.h>
 #include <br_keyhandler.h>
+#include <br_doc.h>
+#include <br_infowidget.h>
 
 /**
  * Fenster, in dem die OpenGL darstellung aubläuft.
@@ -25,7 +27,7 @@
 class BR_View : public QGLWidget
 {
 public:
-	BR_View( QWidget * parent = 0 );
+	BR_View( BR_Doc * doc, BR_InfoWidget * info, QWidget * parent = 0 );
 
 	~BR_View();
 
@@ -37,7 +39,6 @@ protected:
 	virtual void paintGL();
 
 	void drawGrid();
-	void drawFPS();
 
 	virtual void keyPressEvent ( QKeyEvent * ke );
 	virtual void keyReleaseEvent ( QKeyEvent * ke );
@@ -56,6 +57,7 @@ protected:
 	
 	unsigned int m_FPS;
 	unsigned int m_CurrentFPS;
+    BR_InfoWidget* m_Info;
 private:
     void proceedActions();
 };

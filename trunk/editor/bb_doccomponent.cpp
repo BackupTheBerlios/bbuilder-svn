@@ -28,6 +28,7 @@ BB_DocComponent::BB_DocComponent(const QDir& path, const QString &fileName, cons
 
 BB_DocComponent::~BB_DocComponent()
 {
+		
 }
 
 
@@ -66,6 +67,11 @@ BB_Point* BB_DocComponent::getScalePoint_2()
 double BB_DocComponent::getScaleReal() const
 {
     return m_ScaleValue;
+}
+
+double* BB_DocComponent::getScaleRealPointer()
+{
+	return &m_ScaleValue;
 }
 
 

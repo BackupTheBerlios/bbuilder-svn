@@ -98,6 +98,7 @@ bool BB_Doc::clear()
 		}
 		m_Buildings.remove(i);
 	}
+	cout << "m_Buildings.clear(); count: " << m_Buildings.count() << endl;
 	m_Buildings.clear();
 	
 	

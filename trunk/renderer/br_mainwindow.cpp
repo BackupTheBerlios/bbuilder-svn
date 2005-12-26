@@ -13,6 +13,9 @@
 
 #include <iostream>
 
+#include <QtGui>
+
+
 using namespace std;
 
 /**
@@ -21,13 +24,29 @@ using namespace std;
 BR_MainWindow::BR_MainWindow( QWidget* parent, Qt::WFlags flags )
         : QMainWindow( parent, flags )
 {
+
+    m_InfoWidget = NULL;
+    m_ViewWidget = NULL;
+
+    m_MainMenuBar = NULL;
+    m_StatusBar = NULL;
+
+    m_MenuFile = NULL;
+    m_MenuNavi = NULL;
+    m_MenuView = NULL;
+
+    m_TimerAnimate = NULL;
+    m_TimerFPS = NULL;
+
     initActions();
     initMenus();
     initStatusBar();
     initMainWindow();
-	
-	
-	initTimer();
+
+    m_aFileExit = NULL;
+    m_aViewFullScreen = NULL;
+
+    initTimer();
 }
 
 
@@ -77,12 +96,29 @@ void BR_MainWindow::initMainWindow()
 
     /* Das View-Fenster erzeugen und deaktivieren.
      * Wird erst aktiviert, wenn ein Projekt geladen wird. */
-    m_ViewWidget = new BR_View( this );
 
+    QSplitter *splitter = new QSplitter( this );
+
+    m_InfoWidget = new BR_InfoWidget( &m_Doc, this );
+	
+	m_InfoWidget->setFixedWidth(200);
+	
+    m_ViewWidget = new BR_View( &m_Doc, m_InfoWidget, this );
+	
+	
     ///@todo Wieder Deaktivieren
     // 	m_ViewWidget->setEnabled( false );
 
-    setCentralWidget( m_ViewWidget );
+    splitter->addWidget( m_ViewWidget );
+    splitter->setCollapsible( 0, false );
+    splitter->setStretchFactor( 0, 0 );
+
+    splitter->addWidget( m_InfoWidget );
+    splitter->setCollapsible( 1, true );
+    splitter->setStretchFactor( 1, 0 );
+
+
+    setCentralWidget( splitter );
 }
 
 
@@ -160,14 +196,14 @@ void BR_MainWindow::slotViewFullScreen ( bool value )
 void BR_MainWindow::initTimer()
 {
     m_TimerAnimate = new QTimer( this );
-	m_TimerAnimate->setSingleShot ( false );
-	connect( m_TimerAnimate, SIGNAL( timeout() ), this, SLOT( slotTimerAnimation() ) );
+    m_TimerAnimate->setSingleShot ( false );
+    connect( m_TimerAnimate, SIGNAL( timeout() ), this, SLOT( slotTimerAnimation() ) );
     m_TimerAnimate->start( 10 );
-	
-	m_TimerFPS = new QTimer( this );
-	m_TimerFPS->setSingleShot ( false );
-	connect( m_TimerFPS, SIGNAL( timeout() ), this, SLOT( slotTimerFPS() ) );
-	m_TimerFPS->start( 1000 );
+
+    m_TimerFPS = new QTimer( this );
+    m_TimerFPS->setSingleShot ( false );
+    connect( m_TimerFPS, SIGNAL( timeout() ), this, SLOT( slotTimerFPS() ) );
+    m_TimerFPS->start( 1000 );
 }
 
 
@@ -185,7 +221,7 @@ void BR_MainWindow::slotTimerAnimation()
  */
 void BR_MainWindow::slotTimerFPS()
 {
-	m_ViewWidget->showCurrentFPS();
+    m_ViewWidget->showCurrentFPS();
 }
 
 

@@ -29,12 +29,18 @@ public:
     virtual void move(QMouseEvent* me, bool overX, bool overY);
     virtual void release(QMouseEvent* me);
     virtual void setDocComponent( BB_DocComponent* component );
+    virtual void reset();
+    virtual void updateWidget();
 
 protected:
     BB_Point* m_MovePoint;
     BB_Line* m_ScaleLine;
 	
 	QWidget* m_Parent;
+    C2dVector m_Tmp_v1;
+    C2dVector m_Tmp_v2;
+private:
+    double getLogicalScale();
 };
 
 #endif

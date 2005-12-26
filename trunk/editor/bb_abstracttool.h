@@ -24,9 +24,10 @@
 #include "bb_drawobject.h"
 #include "bb_transformer.h"
 #include "c2dvector.h"
+#include <bb_abstracttoolwidget.h>
 
 class BB_Tab;
-
+class BB_WorkFrame;
 
 /**
 @author Alex Letkemann
@@ -38,52 +39,52 @@ class BB_AbstractTool
 
         virtual ~BB_AbstractTool();
 
-        /* Edit: Alex
-         * Minimierung  der Aufrufparameter!
-         *     virtual void move(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
-         *     virtual void release(QMouseEvent* me, QVector<BB_DrawObject*>* objects, BB_Transformer* transformer) = 0;
-         *     virtual void click(QMouseEvent* me, QVector<BB_DrawObject*>* objects,BB_Tab * tabCreator, BB_Transformer* transformer) = 0;
-         */
         virtual void move( QMouseEvent* me, bool overX, bool overY ) = 0;
         virtual void release( QMouseEvent* me ) = 0;
         virtual void click( QMouseEvent* me ) = 0;
 
-        virtual bool remove( BB_DrawObject * delObject );
-
-        /* Edit: Alex
-         * Emstellung auf BB_DocComponent
-            *    void setObjects(QVector< BB_DrawObject * >* vector);
-            *    QVector< BB_DrawObject * >* getObjects() const;
-         */
-        void setTransformer( BB_Transformer* transformer );
-        BB_Transformer* getTransformer() const;
-
-        void setSelectionVector( QVector<BB_DrawObject*>* selectionVector );
-        QVector<BB_DrawObject*>* getSelectionVector() const;
-
-        void setToolObjects( QVector< BB_DrawObject * >* theValue );
-
-
-        QVector< BB_DrawObject * >* getToolObjects() const;
-        void clearSelection();
-
-        void setAction( QAction* theValue );
-        QAction* getAction();
+        virtual bool deleteObject( BB_DrawObject * delObject );
         virtual void reset();
         virtual BB_DrawObject* getClickedObject( const C2dVector & posLogic , const std::type_info &type );
 
+        virtual void setTransformer( BB_Transformer* transformer );
+        virtual BB_Transformer* getTransformer() const;
+
+        virtual void setSelectionVector( QVector<BB_DrawObject*>* selectionVector );
+        virtual QVector<BB_DrawObject*>* getSelectionVector() const;
+
+        virtual void setToolObjects( QVector< BB_DrawObject * >* theValue );
+
+
+        virtual QVector< BB_DrawObject * >* getToolObjects() const;
+        virtual void clearSelection();
+
+        virtual void setAction( QAction* theValue );
+        virtual QAction* getAction();
+
+
         virtual void setDocComponent( BB_DocComponent* theValue );
-        BB_DocComponent* getDocComponent() const;
+        virtual BB_DocComponent* getDocComponent() const;
+        virtual bool getShowDrawObjects();
+
+        virtual BB_AbstractToolWidget* getToolWidget();
+
+	void setWorkFrame( BB_WorkFrame* value );
+	
+
 
 
     protected:
 
-
         C2dVector m_LastLogicMouseClick;
         C2dVector m_pLogic;
         QPoint m_pScreen;
-        QWidget * parentWidget;
+        QWidget * m_ParentWidget;
         QAction * m_Action;
+		
+		BB_WorkFrame* m_WorkFrame;
+
+
 
         /** Vektor mit Objekten, die bearbeitet werden sollen. */
         QVector<BB_DrawObject*>* m_Objects;
@@ -98,6 +99,11 @@ class BB_AbstractTool
 
         /** Pointer auf das DocComponent, mit welchem gearbeitet wird */
         BB_DocComponent * m_Component;
+        bool m_ShowDrawObjects;
+        BB_AbstractToolWidget* m_ToolWidget;
+		
+protected:
+    virtual void documentChanged();
 };
 
 #endif

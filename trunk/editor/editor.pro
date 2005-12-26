@@ -7,8 +7,8 @@ FORMS += buildingEdit.ui \
          projectNew.ui \
          fileOptions.ui \
          terrainEdit.ui \
-         scaleEdit.ui 
-IDLS += terrainEdit.ui 
+         toolWidgetScale.ui \
+         toolWidgetSelect.ui 
 HEADERS += bb_abstracttool.h \
            bb_building.h \
            bb_doc.h \
@@ -42,7 +42,6 @@ HEADERS += bb_abstracttool.h \
            bb_xbuildinghandler.h \
            bb_rect.h \
            bb_toolselect.h \
-           bb_propertywidget.h \
            bb_globals.h \
            bb_map.h \
            bb_dlgbuildingedit.h \
@@ -55,10 +54,12 @@ HEADERS += bb_abstracttool.h \
            bb_triangle.h \
            bb_tooltrianglenew.h \
            bb_toolscale.h \
-           bb_dlgtoolscaleedit.h \
            bb_dlgwalleditpreview.h \
            bb_tooldoornew.h \
-           bb_toolwindownew.h 
+           bb_toolwindownew.h \
+           bb_abstracttoolwidget.h \
+           bb_widgettoolscale.h \
+           bb_widgettoolselect.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -93,7 +94,6 @@ SOURCES += bb_abstracttool.cpp \
            bb_xbuildinghandler.cpp \
            bb_rect.cpp \
            bb_toolselect.cpp \
-           bb_propertywidget.cpp \
            bb_globals.cpp \
            bb_map.cpp \
            bb_dlgbuildingedit.cpp \
@@ -106,10 +106,12 @@ SOURCES += bb_abstracttool.cpp \
            bb_triangle.cpp \
            bb_tooltrianglenew.cpp \
            bb_toolscale.cpp \
-           bb_dlgtoolscaleedit.cpp \
            bb_dlgwalleditpreview.cpp \
            bb_tooldoornew.cpp \
-           bb_toolwindownew.cpp 
+           bb_toolwindownew.cpp \
+           bb_abstracttoolwidget.cpp \
+           bb_widgettoolscale.cpp \
+           bb_widgettoolselect.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

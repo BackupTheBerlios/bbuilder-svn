@@ -1,56 +1,56 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Alex Letkemann   *
- *   alex@letkemann.de   *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- ***************************************************************************/
+*   Copyright (C) 2005 by Alex Letkemann   *
+*   alex@letkemann.de   *
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+*   This program is distributed in the hope that it will be useful,       *
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+*   GNU General Public License for more details.                          *
+***************************************************************************/
 #include "bb_tab.h"
 
 #include <QHBoxLayout>
 #include "bb_workarea.h"
 
 
-BB_Tab::BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): QWidget(parent, f)
+BB_Tab::BB_Tab( BB_Doc* doc, QWidget* parent, Qt::WFlags f ) : QWidget( parent, f )
 {
-	setDoc(doc);
-	
-	initTab();
-    initLayout(true, true);
-	
-	m_DrawObjects = NULL;
+    setDoc( doc );
+
+    initTab();
+    initLayout( true, true );
+
+    m_DrawObjects = NULL;
 }
 
-BB_Tab::BB_Tab(BB_Doc* doc, bool leftFrame, bool rightFrame,QWidget* parent, Qt::WFlags f): QWidget(parent, f)
+BB_Tab::BB_Tab( BB_Doc* doc, bool leftFrame, bool rightFrame, QWidget* parent, Qt::WFlags f ) : QWidget( parent, f )
 {
-	setDoc(doc);
-	
-	initTab();
-    initLayout(leftFrame, rightFrame);
+    setDoc( doc );
+
+    initTab();
+    initLayout( leftFrame, rightFrame );
 }
 
 
 BB_Tab::~BB_Tab()
 {
-	m_Doc = NULL;
-	
-	delete m_ToolButtonActions;
-	delete m_Center;
-	if(m_LeftFrame != NULL)
-		delete m_LeftFrame;
-	if(m_RightFrame != NULL)
-		delete m_RightFrame;
-	
-// TODO m_ToolsGridLayout lässt sich nicht löschen
-// 	if(m_ToolsGridLayout != NULL)
-// 		delete m_ToolsGridLayout;
+    m_Doc = NULL;
+
+    delete m_ToolButtonActions;
+    delete m_Center;
+    if ( m_LeftFrame != NULL )
+        delete m_LeftFrame;
+    if ( m_RightFrame != NULL )
+        delete m_RightFrame;
+
+    // TODO m_ToolsGridLayout lässt sich nicht löschen
+    // 	if(m_ToolsGridLayout != NULL)
+    // 		delete m_ToolsGridLayout;
 }
 
 /**
@@ -59,12 +59,12 @@ BB_Tab::~BB_Tab()
  */
 void BB_Tab::initTab()
 {
-	m_ToolButtonCount = 0;
-	m_ToolButtonActions = new QList<QAction*>();
-	
-	m_ToolsGridLayout = NULL;
-	m_LeftFrame = NULL;
-	m_RightFrame = NULL;
+    m_ToolButtonCount = 0;
+    m_ToolButtonActions = new QList<QAction*>();
+
+    m_ToolsGridLayout = NULL;
+    m_LeftFrame = NULL;
+    m_RightFrame = NULL;
 }
 
 
@@ -72,144 +72,98 @@ void BB_Tab::initTab()
 /**
  * Erzeugt das Layout für das Tab-Fenster
  */
-void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
+void BB_Tab::initLayout( bool leftFrame, bool rightFrame )
 {
     int iFrames = 0;
 
-    QSplitter *splitter = new QSplitter(this);
-    if(leftFrame)
+    QSplitter *splitter = new QSplitter( this );
+    if ( leftFrame )
     {
         m_LeftFrame = new QFrame();
-        m_LeftFrame->setFrameShape(QFrame::Box);
-        m_LeftFrame->setFrameShadow(QFrame::Sunken);
-		
-		m_LeftFrame->setFixedWidth(160);
+        m_LeftFrame->setFrameShape( QFrame::Box );
+        m_LeftFrame->setFrameShadow( QFrame::Sunken );
+
+        m_LeftFrame->setFixedWidth( 160 );
 
         QVBoxLayout *leftLayout = new QVBoxLayout();
-        leftLayout->setMargin(0);
-        leftLayout->setSpacing(5);
+        leftLayout->setMargin( 0 );
+        leftLayout->setSpacing( 5 );
 
         /* GroupBox für die ToolButtons */
-        QGroupBox *groupBox = new QGroupBox(NULL);
-        groupBox->setObjectName(QString::fromUtf8("leftFrameTools"));
-        groupBox->setFlat(true);
-        groupBox->setTitle(QString::fromUtf8("Tools"));
+        QGroupBox *groupBox = new QGroupBox( NULL );
+        groupBox->setObjectName( QString::fromUtf8( "leftFrameTools" ) );
+        groupBox->setFlat( true );
+        groupBox->setTitle( QString::fromUtf8( "Tools" ) );
 
         m_ToolsGridLayout = new QGridLayout();
-        m_ToolsGridLayout->setMargin(2);
+        m_ToolsGridLayout->setMargin( 2 );
 
-        groupBox->setLayout(m_ToolsGridLayout);
+        groupBox->setLayout( m_ToolsGridLayout );
 
 
-        leftLayout->addWidget(groupBox);
-        leftLayout->setStretchFactor(groupBox,0);
+        leftLayout->addWidget( groupBox );
+        leftLayout->setStretchFactor( groupBox, 0 );
 
-        m_LeftFrame->setLayout(leftLayout);
+        m_LeftFrame->setLayout( leftLayout );
 
-        splitter->addWidget(m_LeftFrame);
-        splitter->setCollapsible(iFrames,true);
-        splitter->setStretchFactor(iFrames, 0);
+        splitter->addWidget( m_LeftFrame );
+        splitter->setCollapsible( iFrames, true );
+        splitter->setStretchFactor( iFrames, 0 );
         iFrames++;
 
         m_LeftFrame->setGeometry(
             m_LeftFrame->x(),
             m_LeftFrame->y(),
             160,
-            m_LeftFrame->height());
+            m_LeftFrame->height() );
     }
     else
         m_LeftFrame = NULL;
 
-    m_Center = new BB_WorkArea(&m_Selection);
-    m_Center->setFrameShape(QFrame::Box);
-    m_Center->setFrameShadow(QFrame::Sunken);
+    m_Center = new BB_WorkArea( &m_Selection );
+    m_Center->setFrameShape( QFrame::Box );
+    m_Center->setFrameShadow( QFrame::Sunken );
 
-    splitter->addWidget(m_Center);
-    splitter->setCollapsible(iFrames,false);
-    splitter->setStretchFactor(iFrames, 1);
+    splitter->addWidget( m_Center );
+    splitter->setCollapsible( iFrames, false );
+    splitter->setStretchFactor( iFrames, 1 );
 
     iFrames++;
 
-    if(rightFrame)
+    if ( rightFrame )
     {
-        m_RightFrame = new QFrame();
-        m_RightFrame->setFrameShape(QFrame::Box);
-        m_RightFrame->setFrameShadow(QFrame::Sunken);
-        m_RightFrame->setMinimumSize(160, 400);
-        m_RightFrame->setMaximumSize(400,10000);
-        
+        m_RightFrame = new QStackedWidget();
+        m_RightFrame->setFrameShape( QFrame::Box );
+        m_RightFrame->setFrameShadow( QFrame::Sunken );
+        m_RightFrame->setMinimumSize( 160, 400 );
+        m_RightFrame->setMaximumSize( 400, 10000 );
 
-		QVBoxLayout *rightLayout = new QVBoxLayout();
-        rightLayout->setMargin(0);
-        rightLayout->setSpacing(5);
-// 		//-------------nur zum testen und praesentation		
-//         QTableView *tableView = new QTableView;
-// 
-// 
-//         QStandardItemModel *model = new QStandardItemModel(7,2);
-//         model->setHeaderData(0, Qt::Horizontal, tr("Attribut"));
-//         model->setHeaderData(1, Qt::Horizontal, tr("Wert"));
-// 
-//         QModelIndex index = model->index(0, 0, QModelIndex());
-//         model->setData(index, QVariant("Name"));
-//         index = model->index(0, 1, QModelIndex());
-//         model->setData(index, QVariant("Object_x"));
-// 
-//         index = model->index(1, 0, QModelIndex());
-//       //model->setData(index, QVariant((row+1) * (column+1)));
-//         model->setData(index, QVariant("X-Position"));
-//         index = model->index(1, 1, QModelIndex());
-//         model->setData(index, QVariant(25));
-// 
-//         index = model->index(2, 0, QModelIndex());
-//         model->setData(index, QVariant("Y-Position"));
-//         index = model->index(2, 1, QModelIndex());
-//         model->setData(index, QVariant(-55));
-// 
-//         index = model->index(3, 0, QModelIndex());
-//         model->setData(index, QVariant("Color"));
-//         index = model->index(3, 1, QModelIndex());
-//         model->setData(index, QVariant(QColor("Red")));
-// 
-//         index = model->index(4, 0, QModelIndex());
-//         model->setData(index, QVariant("Texture"));
-//         index = model->index(4, 1, QModelIndex());
-//         model->setData(index, QVariant("NULL"));
-// 
-//         index = model->index(5, 0, QModelIndex());
-//         model->setData(index, QVariant("Breite"));
-//         index = model->index(5, 1, QModelIndex());
-//         model->setData(index, QVariant(7));
-// 
-//         index = model->index(6, 0, QModelIndex());
-//         model->setData(index, QVariant(QString::fromUtf8("Höhe")));
-//         index = model->index(6, 1, QModelIndex());
-//         model->setData(index, QVariant(7));
-// 
-//         
-// 
-// //         tableView->setModel(model);
-// //         rightLayout->addWidget(tableView);
-        m_RightFrame->setLayout(rightLayout);
-        //---------------------------------------------
 
-        splitter->addWidget(m_RightFrame);
-        splitter->setCollapsible(iFrames,true);
-        splitter->setStretchFactor(iFrames, 0);
+        //         QVBoxLayout *rightLayout = new QVBoxLayout();
+        //         rightLayout->setMargin( 0 );
+        //         rightLayout->setSpacing( 5 );
+        //         m_RightFrame->setLayout( rightLayout );
+
+
+        splitter->addWidget( m_RightFrame );
+        splitter->setCollapsible( iFrames, true );
+        splitter->setStretchFactor( iFrames, 0 );
         iFrames++;
 
         m_RightFrame->setGeometry(
             m_RightFrame->x(),
             m_RightFrame->y(),
             200,
-            m_RightFrame->height());
+            m_RightFrame->height() );
     }
     else
+    {
         m_RightFrame = NULL;
+    }
 
     QHBoxLayout *layout = new QHBoxLayout();
-    layout->addWidget(splitter);
-    setLayout(layout);
+    layout->addWidget( splitter );
+    setLayout( layout );
 }
 
 
@@ -222,25 +176,27 @@ void BB_Tab::initLayout(bool leftFrame, bool rightFrame)
  * @author Alex Letkemann
  * @date 21.08.2005
  */
-bool BB_Tab::createToolButton(QAction *action, BB_AbstractTool* tool)
+bool BB_Tab::createToolButton( QAction *action, BB_AbstractTool* tool )
 {
-    if(action != NULL && tool != NULL)
+    if ( action != NULL && tool != NULL )
     {
-		action->setCheckable(true);
-		tool->setAction(action);
-		m_ToolButtonActions->append(action);
-		
-        QToolButton *button = new QToolButton();
-		button->setToolButtonStyle(Qt::ToolButtonIconOnly);
-		button->setFixedSize(24,24);
-        button->setDefaultAction(action);
+        action->setCheckable( true );
+        tool->setAction( action );
+        m_ToolButtonActions->append( action );
 
-        m_ToolsGridLayout->addWidget(button,m_ToolButtonCount / 5,m_ToolButtonCount % 5);
+        QToolButton *button = new QToolButton();
+        button->setToolButtonStyle( Qt::ToolButtonIconOnly );
+        button->setFixedSize( 24, 24 );
+        button->setDefaultAction( action );
+
+        m_ToolsGridLayout->addWidget( button, m_ToolButtonCount / 5, m_ToolButtonCount % 5 );
         m_ToolButtonCount++;
-		return connect(button,SIGNAL(triggered(QAction*)),this,SLOT(slotToolChanged(QAction*)));
+        return connect( button, SIGNAL( triggered( QAction* ) ), this, SLOT( slotToolChanged( QAction* ) ) );
     }
     else
+    {
         return false;
+    }
 }
 
 
@@ -252,35 +208,33 @@ bool BB_Tab::createToolButton(QAction *action, BB_AbstractTool* tool)
  * @author Alex Letkemann
  * @date 18.08.2005
  */
-bool BB_Tab::addWidgetLeft(QWidget *widget, int stretchFaktor)
+bool BB_Tab::addWidgetLeft( QWidget *widget, int stretchFaktor )
 {
-    if(widget != NULL && m_LeftFrame != NULL)
+    if ( widget != NULL && m_LeftFrame != NULL )
     {
-		widget->setFixedWidth(156);
-        m_LeftFrame->layout()->addWidget(widget);
-        ((QVBoxLayout*)m_LeftFrame->layout())->setStretchFactor(widget,stretchFaktor);
+        widget->setFixedWidth( 156 );
+        m_LeftFrame->layout() ->addWidget( widget );
+        ( ( QVBoxLayout* ) m_LeftFrame->layout() ) ->setStretchFactor( widget, stretchFaktor );
         return true;
     }
     return false;
 }
 
 /**
- * Hängt ein QWidget im rechten Frame an
- * @param widget Das QWidget, das im rechten Frame angehängt werden soll
- * @param stretchFaktor Gibt an, ob und wie stark sich das Widget streckt wenn die Größe des Fensters verändert wird. Default ist 0
+ * Fügt ein Fenster zum StackWidget hinzu
+ * @param widget Das QWidget, das im rechten StackWidget hinzugefügt werden soll
  * @return Gibt false im Fehlerfall zurück, sonst true
  * @author Alex Letkemann
  * @date 18.08.2005
  */
-bool BB_Tab::addWidgetRight(QWidget *widget, int stretchFaktor)
+bool BB_Tab::addWidgetRight( QWidget *widget )
 {
-    if(widget != NULL && m_RightFrame != NULL)
+    if ( m_RightFrame != NULL && widget != NULL )
     {
-// 		widget->setFixedWidth(156);
-        m_RightFrame->layout()->addWidget(widget);
-        ((QVBoxLayout*)m_RightFrame->layout())->setStretchFactor(widget,stretchFaktor);
-        return true;
+		m_RightFrame->addWidget( widget );
+		return true;		
     }
+
     return false;
 }
 
@@ -289,13 +243,13 @@ bool BB_Tab::addWidgetRight(QWidget *widget, int stretchFaktor)
  * Setzt alle Actions der Toolbuttons außer 'action' auf unchecked.
  * @param action Aktion, welche nicht auf unchecked gesetzt werden soll. 
  */
-void BB_Tab::unsetToolButton(QAction *action)
+void BB_Tab::unsetToolButton( QAction *action )
 {
-	for(int i = 0; i < m_ToolButtonActions->count(); i++)
-	{
-		if(m_ToolButtonActions->at(i) != action)
-			((QAction*)m_ToolButtonActions->at(i))->setChecked(false);
-	}
+    for ( int i = 0; i < m_ToolButtonActions->count(); i++ )
+    {
+        if ( m_ToolButtonActions->at( i ) != action )
+            ( ( QAction* ) m_ToolButtonActions->at( i ) ) ->setChecked( false );
+    }
 }
 
 
@@ -305,57 +259,64 @@ void BB_Tab::unsetToolButton(QAction *action)
  * @author Alex Letkemann
  * @date 22.10.2005
  */
-void BB_Tab::setDoc(BB_Doc* doc)
+void BB_Tab::setDoc( BB_Doc* doc )
 {
-	if(doc != NULL)
-	{
-		m_Doc = doc;
-	}
-	else
-	{
-		cout << "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" << endl;
-		exit(0);
-	}
+    if ( doc != NULL )
+    {
+        m_Doc = doc;
+    }
+    else
+    {
+        cout << "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" << endl;
+        exit( 0 );
+    }
 }
 
 /**
- * Setzt den DrawObjects-Vektor auf null;
+ * Setzt den DocComponent auf null;
  */
 void BB_Tab::unsetDrawObjects()
 {
-// 	m_Center->setDrawDevice(NULL);
-	m_Center->setDocComponent(NULL);
+    m_Center->setDocComponent( NULL );
 }
 
 
-/*!
-    \fn BB_Tab::updateWidget()
+/**
+ * Zeichnet das Fenster neu
  */
 void BB_Tab::updateWidget()
 {
+    update();
 }
 
 
-/*!
-    \fn BB_Tab::slotToolChanged(QAction* action)
+/**
+ * Setzt das Tool zurück, und ruft die Funktion toolChanged(..) auf, die das Tool weiterbearbeitet
+ * Wird aufgeruffen, wenn ein neues Tool ausgewählt wird.
+ * @param action Aktion des neuen Tools
  */
-void BB_Tab::slotToolChanged(QAction* action)
+void BB_Tab::slotToolChanged( QAction* action )
 {
-	toolChanged(action);
-	updateWidget();
+	if( m_Center->getTool() != NULL )
+	{
+		m_Center->getTool()->reset();
+	}
+	
+    toolChanged( action );
+    updateWidget();
 }
 
 
 /**
  * Wird ausgeführt, wenn ein Toolbuttons betätigt wird. Diese Funktion sollte in jeder 
  * abgeleiteten Klasse, die Tools enthält, überladen werden. Falls dies nicht geschechen ist
- * und ToolButton wird betätigt kommt die die Meldung <i>toolChanged(QAction* action) nicht implementiert</i> aus stdout.
+ * und ToolButton wird betätigt kommt die die Meldung <i>toolChanged(QAction* action) nicht implementiert</i> in stdout.
  * Hier werden die Tools weiter an die Arbeitsfläche übergeben.
  * @param action QAction Pointer des Tools
  */
-void BB_Tab::toolChanged(QAction* action)
+void BB_Tab::toolChanged( QAction* action )
 {
-	cout << "toolChanged(QAction* action) nicht implementiert (action:" << action << ")" << endl;
+    cout << "toolChanged(QAction* action) nicht implementiert (action:" << action << ")" << endl;
 }
 
 
@@ -366,17 +327,30 @@ void BB_Tab::toolChanged(QAction* action)
  */
 void BB_Tab::clear()
 {
-	cout << "BB_Tab::clear(): Funktion wurde nicht überladen" << endl; 
-	unsetDrawObjects();
-
+    unsetDrawObjects();
 }
 
 
 /**
- *
+ * Die Funktion soll das aktuelle DocComponent des abgeleiteten Tabs speichern.
+ * Diese funktion muss in jedem abgeleiteten Tab überladen werden, sonst erschein immer die Meldung: <br />
+ * "BB_Tab::saveCurrent(): Funktion wurde nicht überladen" und es wird immer false zurückgegeben.
+ * @return Erfolg des Speicherns; true = erfolgreich, false = erfolglos
  */
 bool BB_Tab::saveCurrent()
 {
-	cout << "BB_Tab::saveCurrent(): Funktion wurde nicht überladen" << endl; 
-	return false;
+    cout << "BB_Tab::saveCurrent(): Funktion wurde nicht überladen" << endl;
+    return false;
+}
+
+
+/**
+ * Setzt das aktuelle Tool des Tabs zurück
+ */
+void BB_Tab::resetTool()
+{
+    if ( m_Center != NULL && m_Center->getTool() != NULL )
+    {
+        m_Center->getTool() ->reset();
+    }
 }

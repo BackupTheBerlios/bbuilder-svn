@@ -25,7 +25,7 @@
 
 
 BB_TabTerrain::BB_TabTerrain( BB_Doc* doc, QWidget* parent, Qt::WFlags f )
-        : BB_Tab( doc, true, false, parent, f )
+        : BB_Tab( doc, true, true, parent, f )
 {
 
     if ( m_Doc != NULL && m_Doc->getTerrain() != NULL )
