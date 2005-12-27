@@ -158,9 +158,9 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
 
         if ( point1 != NULL && point2 != NULL )
         {
-            BB_DrawObject * wall = ( BB_DrawObject* ) new BB_Wall( point1, point2 );
-            m_DrawObjects->append( wall );
-            ( ( BB_Wall* ) wall ) ->setPos2( point2 );
+            m_Object = ( BB_DrawObject* ) new BB_Wall( point1, point2 );
+			m_DrawObjects->append( m_Object );
+			( ( BB_Wall* ) m_Object ) ->setPos2( point2 );
 
         }
         else

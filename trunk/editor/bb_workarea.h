@@ -43,6 +43,7 @@ class BB_WorkArea : public QScrollArea
          */
         BB_DocComponent* getDocComponent();
         void setDocComponent( BB_DocComponent* component );
+    double getZoom();
     protected:
         BB_WorkFrame *m_WorkFrame;
         BB_Map* m_Map;

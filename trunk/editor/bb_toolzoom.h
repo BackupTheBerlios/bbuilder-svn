@@ -18,6 +18,7 @@
 
 #include <bb_abstracttool.h>
 #include <bb_workarea.h>
+#include <bb_widgettoolzoom.h>
 
 /**
 @author Alex Letkemann
@@ -32,6 +33,7 @@ public:
     virtual void click(QMouseEvent* me);
 	virtual void move(QMouseEvent* me, bool overX, bool overY);
 	virtual void release(QMouseEvent* me);
+    virtual void setDocComponent( BB_DocComponent* component );
 
 protected:
     BB_WorkArea* m_WorkArea;

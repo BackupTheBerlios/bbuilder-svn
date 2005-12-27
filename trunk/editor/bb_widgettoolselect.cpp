@@ -40,6 +40,7 @@ BB_WidgetToolSelect::BB_WidgetToolSelect( BB_ToolMove* parentTool )
     connect( m_Ui.lineEdit_ObjectName, SIGNAL( editingFinished() ), this, SLOT( slotNameFinished() ) );
 	connect( m_Ui.textEdit_ObjectDesc, SIGNAL( textChanged() ), this, SLOT( slotDescFinished() ) );
 	connect( m_Ui.button_Delete, SIGNAL( released() ), this, SLOT( slotDeleteSelection() ) );
+	connect( m_Ui.button_SelectAll, SIGNAL( released() ), this, SLOT( slotSelectAll() ) );
 }
 
 
@@ -149,5 +150,15 @@ void BB_WidgetToolSelect::commitDesc()
 void BB_WidgetToolSelect::slotDeleteSelection()
 {
 	m_ParentTool->deleteSelection();
+	updateWidget();
+}
+
+
+/**
+ * Selektiert alle Objekte
+ */
+void BB_WidgetToolSelect::slotSelectAll()
+{
+	m_ParentTool->selectAll();
 	updateWidget();
 }

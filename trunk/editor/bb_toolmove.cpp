@@ -136,6 +136,7 @@ void BB_ToolMove::click( QMouseEvent* me )
                 object->setSelected( true );
                 m_Selection->append( object );
                 qDebug( "Keine Objeckte sind selectiert, ein neues wurde selektiert" );
+				m_ToolWidget->updateWidget();
                 return ;
             }
         }
@@ -263,7 +264,7 @@ void BB_ToolMove::release( QMouseEvent* me )
     if ( !m_select )
     {
         m_select = true;
-		m_ToolWidget->updateWidget();
+		documentChanged();
         return ;
     }
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
@@ -386,6 +387,30 @@ void BB_ToolMove::deleteSelection()
 			deleteObject( m_Selection->at(i) );
 			m_Selection->remove(i);
 		}
+	}
+	
+	documentChanged();
+}
+
+
+/**
+ * Selektiert alle Objekte
+ */
+void BB_ToolMove::selectAll()
+{
+	if( m_Selection != NULL && m_Component != NULL)
+	{
+		m_Selection->clear();
+		
+		BB_DrawObject* object;
+		
+		for(int i = 0; i < m_Component->getDrawObjects()->count() ; i++)
+		{
+			object = m_Component->getDrawObjects()->at(i);
+			object->setSelected( true );
+			m_Selection->append( object );
+		}
+		
 	}
 	
 	documentChanged();

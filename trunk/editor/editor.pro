@@ -8,7 +8,8 @@ FORMS += buildingEdit.ui \
          fileOptions.ui \
          terrainEdit.ui \
          toolWidgetScale.ui \
-         toolWidgetSelect.ui 
+         toolWidgetSelect.ui \
+         toolWidgetZoom.ui 
 HEADERS += bb_abstracttool.h \
            bb_building.h \
            bb_doc.h \
@@ -59,7 +60,8 @@ HEADERS += bb_abstracttool.h \
            bb_toolwindownew.h \
            bb_abstracttoolwidget.h \
            bb_widgettoolscale.h \
-           bb_widgettoolselect.h 
+           bb_widgettoolselect.h \
+           bb_widgettoolzoom.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -111,7 +113,8 @@ SOURCES += bb_abstracttool.cpp \
            bb_toolwindownew.cpp \
            bb_abstracttoolwidget.cpp \
            bb_widgettoolscale.cpp \
-           bb_widgettoolselect.cpp 
+           bb_widgettoolselect.cpp \
+           bb_widgettoolzoom.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

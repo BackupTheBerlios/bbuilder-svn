@@ -44,6 +44,7 @@ public:
     virtual void setName(const QString& name);
 	virtual bool read(QXmlDefaultHandler &handler, QIODevice * dev);
     virtual QString getErrorString() const;
+    virtual void setModified( bool value );
 	
 	
 

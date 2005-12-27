@@ -49,6 +49,7 @@ public:
     virtual BB_Building* newBuilding(QDir& path, QString& fileName);
     virtual BB_Level* newLevel(QDir& path, QString& fileName);
     virtual BB_Terrain* newTerrain(QDir& path, QString& fileName);
+	bool deleteBuilding(QListWidgetItem* item);
     BB_Building* getBuilding(QListWidgetItem* item);
 
 protected:
@@ -59,9 +60,7 @@ protected:
 	QDir m_ProjectPath;
 	QString m_ProjectFile;
 	
-	virtual bool clear();
-    bool deleteBuilding(QListWidgetItem* item);
-	
+	virtual bool clear();	
 	
 	friend class BB_XDocHandler;
 	

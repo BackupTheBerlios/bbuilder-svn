@@ -39,12 +39,10 @@ public:
     virtual void generateXElement(QTextStream &out, int depth);
     virtual const QString getClassName();
     void remove();
-    virtual QListWidgetItem* getListWidgetItem();
     
 
 protected:
     QVector<BB_Level>* m_Levels;
-    QListWidgetItem* m_ListWidgetItem;
     
 };
 

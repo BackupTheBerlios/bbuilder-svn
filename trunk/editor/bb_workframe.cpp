@@ -296,3 +296,16 @@ void BB_WorkFrame::setDocComponent( BB_DocComponent* component )
 		}
 	}
 }
+
+
+/*!
+    \fn BB_WorkFrame::documentChanged()
+ */
+void BB_WorkFrame::documentChanged()
+{
+	update();
+	if( m_Component != NULL)
+	{
+		m_Component->setModified( true );
+	}
+}

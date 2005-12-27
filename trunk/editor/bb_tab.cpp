@@ -135,15 +135,7 @@ void BB_Tab::initLayout( bool leftFrame, bool rightFrame )
         m_RightFrame = new QStackedWidget();
         m_RightFrame->setFrameShape( QFrame::Box );
         m_RightFrame->setFrameShadow( QFrame::Sunken );
-        m_RightFrame->setMinimumSize( 160, 400 );
-        m_RightFrame->setMaximumSize( 400, 10000 );
-
-
-        //         QVBoxLayout *rightLayout = new QVBoxLayout();
-        //         rightLayout->setMargin( 0 );
-        //         rightLayout->setSpacing( 5 );
-        //         m_RightFrame->setLayout( rightLayout );
-
+        m_RightFrame->setFixedWidth( 160 );
 
         splitter->addWidget( m_RightFrame );
         splitter->setCollapsible( iFrames, true );
@@ -153,8 +145,10 @@ void BB_Tab::initLayout( bool leftFrame, bool rightFrame )
         m_RightFrame->setGeometry(
             m_RightFrame->x(),
             m_RightFrame->y(),
-            200,
+            160,
             m_RightFrame->height() );
+
+        splitter->refresh();
     }
     else
     {
@@ -231,8 +225,12 @@ bool BB_Tab::addWidgetRight( QWidget *widget )
 {
     if ( m_RightFrame != NULL && widget != NULL )
     {
-		m_RightFrame->addWidget( widget );
-		return true;		
+        widget->setFixedWidth( 156 );
+        m_RightFrame->addWidget( widget );
+
+
+
+        return true;
     }
 
     return false;
@@ -267,7 +265,7 @@ void BB_Tab::setDoc( BB_Doc* doc )
     }
     else
     {
-        cout << "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" << endl;
+		qDebug( "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" );
         exit( 0 );
     }
 }
@@ -297,11 +295,11 @@ void BB_Tab::updateWidget()
  */
 void BB_Tab::slotToolChanged( QAction* action )
 {
-	if( m_Center->getTool() != NULL )
-	{
-		m_Center->getTool()->reset();
-	}
-	
+    if ( m_Center->getTool() != NULL )
+    {
+        m_Center->getTool() ->reset();
+    }
+
     toolChanged( action );
     updateWidget();
 }
@@ -316,7 +314,7 @@ void BB_Tab::slotToolChanged( QAction* action )
  */
 void BB_Tab::toolChanged( QAction* action )
 {
-    cout << "toolChanged(QAction* action) nicht implementiert (action:" << action << ")" << endl;
+	qDebug("toolChanged(QAction* action) nicht implementiert (action: %p)\n", action);
 }
 
 
@@ -339,7 +337,7 @@ void BB_Tab::clear()
  */
 bool BB_Tab::saveCurrent()
 {
-    cout << "BB_Tab::saveCurrent(): Funktion wurde nicht überladen" << endl;
+    qDebug( "BB_Tab::saveCurrent(): Funktion wurde nicht überladen\n" );
     return false;
 }
 

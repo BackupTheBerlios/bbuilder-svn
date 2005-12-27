@@ -35,7 +35,7 @@ public:
     virtual void release(QMouseEvent* me);
     virtual void setSelectionVector( QVector<BB_DrawObject*>* selectionVector );
     virtual void deleteSelection();
-
+	virtual void selectAll();
 protected:
     //     QVector<BB_DrawObject*> m_Selection;
     /**Punkt mit dem ausgeglichen wird*/

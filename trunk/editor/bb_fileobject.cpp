@@ -1,7 +1,7 @@
 //
 // C++ Implementation: bb_fileobject
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -29,28 +29,35 @@ using namespace std;
  * @author Alex Letkemann
  * @date 30.10.2005
  */
-BB_FileObject::BB_FileObject(const QDir &path, const QString &filename, const QString &name): BB_Object(name)
+BB_FileObject::BB_FileObject( const QDir &path, const QString &filename, const QString &name ) : BB_Object( name )
 {
-	if(&path != NULL || &filename != NULL || filename.isEmpty())
-	{
-		m_FilePath = path;
-		m_FileName = filename;
-	}
-	else
-	{
-		m_FilePath = QDir::temp();
-		m_FileName = getName() + ".tmp";
-	}
-	
-	m_Modified = false;
-	m_ListWidgetItem = NULL;
-	m_Handler = NULL;
+    if ( &path != NULL || &filename != NULL || filename.isEmpty() )
+    {
+        m_FilePath = path;
+        m_FileName = filename;
+    }
+    else
+    {
+        m_FilePath = QDir::temp();
+        m_FileName = getName() + ".tmp";
+    }
+
+
+    m_ListWidgetItem = NULL;
+    m_Handler = NULL;
+
+    setModified( true );
 }
 
 
 /** Destrucktor */
 BB_FileObject::~BB_FileObject()
 {
+	if( m_ListWidgetItem != NULL )
+	{
+		delete m_ListWidgetItem;
+		m_ListWidgetItem = NULL;
+	}
 }
 
 
@@ -64,29 +71,29 @@ BB_FileObject::~BB_FileObject()
  */
 bool BB_FileObject::save()
 {
-	QFile file(m_FilePath.path() + QDir::separator() + m_FileName);
+    QFile file( m_FilePath.path() + QDir::separator() + m_FileName );
 
-	if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
-	{
-		QMessageBox::critical(NULL,"Fehler", QString::fromUtf8("Datei konnte nicht geöffnet werden: \n") + file.fileName());
-		file.close();
-		return false;
-	}
-	
-	QTextStream Stream;
-	Stream.setDevice(&file);
-	Stream.setCodec("UTF-8");
-	
-	if(!write(Stream))
-	{
-		QMessageBox::critical(NULL,"Fehler", QString::fromUtf8("Fehler beim Schreiben in Datei: \n") + file.fileName());
-		file.close();
-		return false;
-	}
-	
-	m_Modified = false;
-	file.close();
-	return true;
+    if ( !file.open( QIODevice::WriteOnly | QIODevice::Text ) )
+    {
+        QMessageBox::critical( NULL, "Fehler", QString::fromUtf8( "Datei konnte nicht geöffnet werden: \n" ) + file.fileName() );
+        file.close();
+        return false;
+    }
+
+    QTextStream Stream;
+    Stream.setDevice( &file );
+    Stream.setCodec( "UTF-8" );
+
+    if ( !write( Stream ) )
+    {
+        QMessageBox::critical( NULL, "Fehler", QString::fromUtf8( "Fehler beim Schreiben in Datei: \n" ) + file.fileName() );
+        file.close();
+        return false;
+    }
+
+    setModified( false );
+    file.close();
+    return true;
 }
 
 
@@ -102,13 +109,13 @@ QDir BB_FileObject::getFilePath() const
 }
 
 
-void BB_FileObject::setFileName(const QString& theValue)
+void BB_FileObject::setFileName( const QString& theValue )
 {
     m_FileName = theValue;
 }
 
 
-void BB_FileObject::setFilePath(const QDir& theValue)
+void BB_FileObject::setFilePath( const QDir& theValue )
 {
     m_FilePath = theValue;
 }
@@ -120,7 +127,7 @@ void BB_FileObject::setFilePath(const QDir& theValue)
  */
 const QString BB_FileObject::getClassName()
 {
-	return QString("BB_FileObject");
+    return QString( "BB_FileObject" );
 }
 
 
@@ -133,12 +140,12 @@ const QString BB_FileObject::getClassName()
  */
 QListWidgetItem* BB_FileObject::getListWidgetItem()
 {
-	if(m_ListWidgetItem == NULL)
-	{
-		m_ListWidgetItem = new QListWidgetItem(getName());
-	}
-	
-	return m_ListWidgetItem;
+    if ( m_ListWidgetItem == NULL )
+    {
+        m_ListWidgetItem = new QListWidgetItem( getName() );
+    }
+
+    return m_ListWidgetItem;
 }
 
 
@@ -151,13 +158,13 @@ QListWidgetItem* BB_FileObject::getListWidgetItem()
  * @author Alex Letkemann
  * @date 23.10.2005
  */
-void BB_FileObject::setName(const QString& name)
+void BB_FileObject::setName( const QString& name )
 {
-	BB_Object::setName(name);
-	if(m_ListWidgetItem != NULL)
-	{
-		m_ListWidgetItem->setText(getName());
-	}
+    BB_Object::setName( name );
+    if ( m_ListWidgetItem != NULL )
+    {
+        m_ListWidgetItem->setText( getName() );
+    }
 }
 
 
@@ -169,34 +176,34 @@ void BB_FileObject::setName(const QString& name)
  */
 bool BB_FileObject::open()
 {
-	if(m_Handler != NULL)
-	{
-		QFile file(m_FilePath.path() + QDir::separator() + m_FileName);
-	
-		if(!file.exists() || !file.open(QIODevice::ReadOnly | QIODevice::Text))
-		{
-			m_ErrorString = "Datei konnte nicht geöffnet werden: " + file.fileName();
-			return false;
-		}
-		
-		
-		if(!read(*m_Handler, &file))
-		{
-			m_ErrorString = "Fehler beim Parsen der Datei: " + file.fileName();
-			file.close();
-			return false;
-		}
-						
-		m_Modified = false;
-		file.close();
-		return true;
-	}
-	else
-	{
-		m_ErrorString = "Für '" + getClassName() + "' ist kein Handler definiert!";
-	}
-	
-	return false;
+    if ( m_Handler != NULL )
+    {
+        QFile file( m_FilePath.path() + QDir::separator() + m_FileName );
+
+        if ( !file.exists() || !file.open( QIODevice::ReadOnly | QIODevice::Text ) )
+        {
+            m_ErrorString = "Datei konnte nicht geöffnet werden: " + file.fileName();
+            return false;
+        }
+
+
+        if ( !read( *m_Handler, &file ) )
+        {
+            m_ErrorString = "Fehler beim Parsen der Datei: " + file.fileName();
+            file.close();
+            return false;
+        }
+
+        setModified( false );
+        file.close();
+        return true;
+    }
+    else
+    {
+        m_ErrorString = "Für '" + getClassName() + "' ist kein Handler definiert!";
+    }
+
+    return false;
 }
 
 
@@ -207,15 +214,15 @@ bool BB_FileObject::open()
  * @return false im Fehlerfall sonst true;
  * @author Alex Letkemann
  */
-bool BB_FileObject::read(QXmlDefaultHandler &handler, QIODevice * dev)
+bool BB_FileObject::read( QXmlDefaultHandler &handler, QIODevice * dev )
 {
-	QXmlSimpleReader reader;
-	reader.setContentHandler(&handler);
-	reader.setErrorHandler(&handler);
+    QXmlSimpleReader reader;
+    reader.setContentHandler( &handler );
+    reader.setErrorHandler( &handler );
 
-	QXmlInputSource xmlInputSource(dev);
-	
-	return reader.parse(xmlInputSource);
+    QXmlInputSource xmlInputSource( dev );
+
+    return reader.parse( xmlInputSource );
 }
 
 
@@ -225,5 +232,25 @@ bool BB_FileObject::read(QXmlDefaultHandler &handler, QIODevice * dev)
  */
 QString BB_FileObject::getErrorString() const
 {
-	return m_ErrorString;
+    return m_ErrorString;
+}
+
+
+/*!
+    \fn BB_FileObject::setModified( bool value )
+ */
+void BB_FileObject::setModified( bool value )
+{
+    m_Modified = value;
+
+    if ( m_Modified )
+    {
+        // 		getListWidgetItem() ->setTextColor( Qt::white );
+        getListWidgetItem() ->setText( getName() + "*" );
+    }
+    else
+    {
+        // 		getListWidgetItem() ->setTextColor( Qt::black );
+        getListWidgetItem() ->setText( getName() );
+    }
 }

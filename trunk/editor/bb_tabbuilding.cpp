@@ -106,12 +106,11 @@ void BB_TabBuilding::initWidgetLeft()
  */
 void BB_TabBuilding::slotBuildingDelete()
 {
-	///@todo Auf QListWidgetItem umstellen
-    BB_Building * building;
-    int row = m_BuildingsListWidget->currentRow();
-    if ( row != -1 )
+
+    BB_Building * building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem() );
+
+    if ( building != NULL )
     {
-        building = m_Buildings->at( row );
         if ( QMessageBox::question( this,
                                     QString::fromUtf8( "Bestätigung" ),
                                     QString::fromUtf8( "Möchten Sie das Gebäude " )
@@ -120,25 +119,26 @@ void BB_TabBuilding::slotBuildingDelete()
                                     QMessageBox::Yes,
                                     QMessageBox::No ) == QMessageBox::Yes )
         {
-            m_BuildingsListWidget->takeItem( row );
-
-            building = m_Buildings->at( row );
-            m_Buildings->remove
-            ( row );
-            building->remove
-            ();
-            delete building;
+			
+			
+			unsetDrawObjects();
+			
+			// Gebäude aus der Liste entfernen
+            m_BuildingsListWidget->takeItem( m_BuildingsListWidget->row( building->getListWidgetItem() ) );
+			
+			// Gebäude löschen
+			m_Doc->deleteBuilding( building->getListWidgetItem() );
             building = NULL;
 
+			// Änderung speichern
             m_Doc->save();
 
-
-            unsetDrawObjects();
-            m_Center->setEnabled( false );
-
-            m_BuildingsListWidget->setCurrentRow( row - 1 );
-
-
+			
+//             m_Center->setEnabled( false );
+			if( m_BuildingsListWidget->count() > 0 )
+			{
+// 				m_BuildingsListWidget->setCurrentRow( - 1 );	
+			}
         }
     }
 }
@@ -164,16 +164,12 @@ void BB_TabBuilding::slotBuildingNew()
  */
 void BB_TabBuilding::slotBuildingProperties()
 {
-
     BB_Building * building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem() );
 
     if ( building != NULL )
     {
         building->keyBoardEdit( this );
-        building->save();
-
     }
-
 }
 
 
@@ -193,18 +189,19 @@ void BB_TabBuilding::updateWidget()
 void BB_TabBuilding::initTools()
 {
 
-    /* Tool zum Selektieren */
-    m_ToolSelect = new BB_ToolSelect();
-    QAction *toolSelect = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolSelect.png" ), "Auswahl", this );
-    toolSelect->setStatusTip( "Auswahl Werkzeug" );
-    createToolButton( toolSelect, m_ToolSelect );
-
+    /* Tool zum Bewegen der Objekte */
+    m_ToolMove = new BB_ToolMove();
+    QAction *toolMove = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolMove.png" ), "Move", this );
+    toolMove->setStatusTip( "Move Werkzeug" );
+    addWidgetRight( m_ToolMove->getToolWidget() );
+    createToolButton( toolMove, m_ToolMove );
 
     /* Zoomtool */
     m_ToolZoom = new BB_ToolZoom( m_Center );
     QIcon zoom( IMG_DIR() + SEPARATOR() + "toolZoom.png" );
     QAction *toolZoom = new QAction( zoom, "Zoom", this );
     toolZoom->setStatusTip( "Zoom Werkzeug" );
+    addWidgetRight( m_ToolZoom->getToolWidget() );
     createToolButton( toolZoom, m_ToolZoom );
 
 
@@ -223,25 +220,16 @@ void BB_TabBuilding::initTools()
     toolPointNew->setStatusTip( "Line Werkzeug" );
     createToolButton( toolLineNew, m_ToolLineNew );
 
-
-    /* Tool zum Bewegen der Objekte */
-    m_ToolMove = new BB_ToolMove();
-    QAction *toolMove = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolMove.png" ), "Move", this );
-    toolMove->setStatusTip( "Move Werkzeug" );
-	addWidgetRight( m_ToolMove->getToolWidget() );
-    createToolButton( toolMove, m_ToolMove );
-
-	
-	/* Tool zum Setzen der Maßstab-Punkte */
-	m_ToolScale = new BB_ToolScale( this );
-	QAction *toolScale = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolScale.png" ), "Maßstab", this );
-	toolScale->setStatusTip( QString::fromUtf8("Maßstab Werkzeug") );
-	addWidgetRight( m_ToolScale->getToolWidget() );
-	createToolButton( toolScale, m_ToolScale );
+    /* Tool zum Setzen der Maßstab-Punkte */
+    m_ToolScale = new BB_ToolScale( this );
+    QAction *toolScale = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolScale.png" ), "Maßstab", this );
+    toolScale->setStatusTip( QString::fromUtf8( "Maßstab Werkzeug" ) );
+    addWidgetRight( m_ToolScale->getToolWidget() );
+    createToolButton( toolScale, m_ToolScale );
 
 
     /* Das Selektionstool alst Standard wählen */
-    toolChanged( toolSelect );
+    toolChanged( toolMove );
 
 
 }
@@ -252,9 +240,9 @@ void BB_TabBuilding::initTools()
  */
 void BB_TabBuilding::initWidgetRight()
 {
-//     m_PropertyWidget = new BB_PropertyWidget();
+    //     m_PropertyWidget = new BB_PropertyWidget();
 
-//     addWidgetRight( m_PropertyWidget );
+    //     addWidgetRight( m_PropertyWidget );
 }
 
 
@@ -265,24 +253,19 @@ void BB_TabBuilding::initWidgetRight()
 void BB_TabBuilding::toolChanged( QAction* action )
 {
 
-    if ( m_ToolSelect->getAction() == action )
-    {
-        unsetToolButton( action );
-        action->setChecked( true );
-        m_Center->setTool( m_ToolSelect );
-    }
-    else if ( m_ToolMove->getAction() == action )
+    if ( m_ToolMove->getAction() == action )
     {
         unsetToolButton( action );
         action->setChecked( true );
         m_Center->setTool( m_ToolMove );
-		m_RightFrame->setCurrentWidget( m_ToolMove->getToolWidget() );
+        m_RightFrame->setCurrentWidget( m_ToolMove->getToolWidget() );
     }
     else if ( m_ToolZoom->getAction() == action )
     {
         unsetToolButton( action );
         action->setChecked( true );
         m_Center->setTool( m_ToolZoom );
+        m_RightFrame->setCurrentWidget( m_ToolZoom->getToolWidget() );
     }
     else if ( m_ToolPointNew->getAction() == action )
     {
@@ -296,19 +279,19 @@ void BB_TabBuilding::toolChanged( QAction* action )
         action->setChecked( true );
         m_Center->setTool( m_ToolLineNew );
     }
-	else if( m_ToolScale->getAction() == action)
-	{
-		unsetToolButton( action );
-		action->setChecked( true );
-		m_Center->setTool( m_ToolScale );
-		m_RightFrame->setCurrentWidget( m_ToolScale->getToolWidget() );
-	}
+    else if ( m_ToolScale->getAction() == action )
+    {
+        unsetToolButton( action );
+        action->setChecked( true );
+        m_Center->setTool( m_ToolScale );
+        m_RightFrame->setCurrentWidget( m_ToolScale->getToolWidget() );
+    }
     else
     {
-		qDebug() << "Unbekanntes Tool" << endl;
+		qDebug( "Unbekanntes Tool\n" );
     }
-	
-	m_Center->update();
+
+    m_Center->update();
 }
 
 
@@ -328,13 +311,14 @@ void BB_TabBuilding::createBuildingList()
     }
     else
     {
-		qDebug() << "Kann die Liste nicht nochmal erstellen." << endl;
+		qDebug( "Kann die Liste nicht nochmal erstellen.\n" );
     }
 }
 
 
-/*!
-    \fn BB_TabBuilding::clear()
+/**
+ * Leert die aktuelle Liste und löscht das 'Luste-Erstellt'-Flag,
+ * damit eine neue Liste erstellt werden kann.
  */
 void BB_TabBuilding::clear()
 {
@@ -348,24 +332,18 @@ void BB_TabBuilding::clear()
  */
 void BB_TabBuilding::slotBuildingChanged( QListWidgetItem * current, QListWidgetItem * previous )
 {
-    BB_Building * building;
-    building = m_Doc->getBuilding( current );
+    BB_Building * building = m_Doc->getBuilding( current );
+
+    // Das Tool zurücksetzen
+    if ( m_Center->getTool() != NULL )
+    {
+        m_Center->getTool() ->reset();
+    }
+
     if ( building != NULL )
     {
-
-		m_Center->setDocComponent(building);
-		m_Center->setEnabled( true );
-//         m_Center->setDrawDevice( building );
-//        
-//         m_Center->setMap( building );
-    }
-    if ( previous != NULL )
-    {
-        building = m_Doc->getBuilding( previous );
-        if ( building != NULL )
-        {
-            building->save();
-        }
+        m_Center->setDocComponent( building );
+        m_Center->setEnabled( true );
     }
 }
 
@@ -384,7 +362,7 @@ bool BB_TabBuilding::saveCurrent()
     }
     else
     {
-        cout << "Kein Gebäude ausgewählt" << endl;
+        qDebug( "Kein Gebäude ausgewählt\n" );
     }
 
     return false;

@@ -41,7 +41,7 @@ class BB_WorkFrame : public QLabel
 
         BB_DocComponent* getDocComponent() const;
 
-
+		virtual void documentChanged();
         // 	void setDrawObjects(QVector< BB_DrawObject *>* theValue);
         // 	QVector< BB_DrawObject *>* getDrawObjects() const;
 
@@ -52,6 +52,7 @@ class BB_WorkFrame : public QLabel
         virtual void paintEvent ( QPaintEvent * pe );
         virtual void mouseMoveEvent ( QMouseEvent* me );
         void drawCenter( QPainter &painter );
+        
     protected:
         BB_AbstractTool* m_Tool;
         QVector<BB_DrawObject*>* m_Selection;

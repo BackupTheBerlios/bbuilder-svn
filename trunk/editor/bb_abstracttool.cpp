@@ -268,6 +268,11 @@ void BB_AbstractTool::documentChanged()
 {
 	if( m_WorkFrame != NULL )
 	{
-		m_WorkFrame->update();
+		m_WorkFrame->documentChanged();
+	}
+	
+	if( m_ToolWidget )
+	{
+		m_ToolWidget->updateWidget();
 	}
 }

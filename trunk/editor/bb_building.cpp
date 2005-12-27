@@ -37,7 +37,8 @@ BB_Building::BB_Building( const QDir& path, const QString &fileName, const QStri
  * Destrucktor 
  */
 BB_Building::~BB_Building()
-{}
+{
+}
 
 
 
@@ -97,7 +98,9 @@ int BB_Building::keyBoardEdit( QWidget* parent )
     setMap( QPixmap::fromImage( image ) );
 
     parent->update();
-    getListWidgetItem() ->setText( getName() );
+    
+	setModified( true );
+	
     return result;
 }
 
@@ -221,19 +224,4 @@ void BB_Building::remove()
     QFile::remove( xmlFile );
     QFile::remove( pngFile );
 }
-
-
-/*!
-    \fn BB_Building::getListWidgetItem()
- */
-QListWidgetItem* BB_Building::getListWidgetItem()
-{
-    if ( m_ListWidgetItem == NULL )
-    {
-        m_ListWidgetItem = new QListWidgetItem( getName() );
-    }
-
-    return m_ListWidgetItem;
-}
-
 

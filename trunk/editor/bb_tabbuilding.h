@@ -23,7 +23,6 @@
 #include "bb_toolpointnew.h"
 #include "bb_toollinenew.h"
 #include "bb_toolmove.h"
-#include "bb_toolselect.h"
 #include "bb_toolscale.h"
 
 
@@ -53,7 +52,6 @@ protected:
     BB_AbstractTool* m_ToolPointNew;
     BB_AbstractTool* m_ToolMove;
     BB_AbstractTool* m_ToolLineNew;
-	BB_AbstractTool* m_ToolSelect;	
 		
     QVector<BB_Building*>* m_Buildings;
     QListWidget* m_BuildingsListWidget;

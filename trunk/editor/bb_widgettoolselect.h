@@ -48,6 +48,8 @@ class BB_WidgetToolSelect : public BB_AbstractToolWidget
 	private:
 		BB_ToolMove *m_ParentTool;
 
+private slots:
+    void slotSelectAll();
 };
 
 #endif
