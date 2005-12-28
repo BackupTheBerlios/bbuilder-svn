@@ -20,6 +20,7 @@
 #include "bb_dlgwalleditarea.h"
 #include "bb_dlgwalledit.h"
 #include "bb_level.h"
+#include "bb_window.h"
 #include <iostream>
 #include <QPainter>
 
@@ -35,7 +36,12 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
     m_height = hohe_meter;
     m_lenght = laenge_meter;
     double m_verhaeltniss = m_lenght / m_height;
+	m_Wall = wall;
     setFixedSize ( 400 * m_verhaeltniss, 400 );
+    m_Tool = NULL;
+	m_DrawObjects = NULL;
+    m_DrawObjects = wall->getObjects();
+    m_DrawObjects->append( new BB_Window() );
     // 	setMinimumSize ( 400 * m_verhaeltniss, 400);
 }
 
@@ -49,6 +55,19 @@ void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
     QLabel::paintEvent( pe );
     QPainter painter( this );
     painter.drawRect( 0, 0, width() - 1, height() - 1 );
+    if ( m_DrawObjects != NULL )
+    {
+        BB_DrawObject * tmpElement;
+        for ( int i = 0; i < m_DrawObjects->count(); i++ )
+        {
+            tmpElement = m_DrawObjects->at( i );
+            tmpElement->show( m_transformer, painter );
+        }
+    }
+    else
+    {
+        qDebug( "m_DrawObjects ist nichtinitialisiert: in BB_DlgWallEditArea" );
+    }
 }
 
 void BB_DlgWallEditArea::resizeEvent ( QResizeEvent * re )
@@ -122,14 +141,18 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
         }
 
         /* ToolObjekte des letzten Tools entfernen */
-//         m_ToolObjects.clear();
+        //         m_ToolObjects.clear();
 
         m_Tool = tool;
-//         m_Tool->setTransformer( &m_Transformer );
+		m_Tool->setTransformer(&m_transformer);
+		if ( typeid(* tool ) == typeid( BB_ToolMove ) ){
+			m_Tool->setObjects( m_Wall->getPoints());
+		}
+        //         m_Tool->setTransformer( &m_Transformer );
         // 		m_Tool->setObjects(m_DrawObjects);
-//         m_Tool->setToolObjects( &m_ToolObjects );
-//         m_Tool->setSelectionVector( m_Selection );
-//         m_Tool->setDocComponent( m_Component );
+        //         m_Tool->setToolObjects( &m_ToolObjects );
+        //         m_Tool->setSelectionVector( m_Selection );
+        //         m_Tool->setDocComponent( m_Component );
     }
     else
     {

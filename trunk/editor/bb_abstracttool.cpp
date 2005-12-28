@@ -229,6 +229,14 @@ void BB_AbstractTool::setDocComponent( BB_DocComponent* component )
     }
 }
 
+void BB_AbstractTool::setObjects(QVector<BB_DrawObject*>* objects){
+	if (objects != NULL){
+		m_Objects = objects;
+	}else{
+		qDebug("Null-Pointer in BB_AbstractTool::setObjects(QVector<BB_DrawObject*>* objects)");
+	}
+}
+
 
 /**
  * Gibt den Status zurück, ob die DrawObject gezeichnet werden sollen oder nicht.

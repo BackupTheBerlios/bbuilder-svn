@@ -17,25 +17,19 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef BB_TOOLWINDOWNEW_H
-#define BB_TOOLWINDOWNEW_H
+#include "bb_abstracttoolwalledit.h"
 
-#include <bb_abstracttoolwalledit.h>
-
-/**
-	@author Vaceslav Ustinov <v.ustinov@web.de>
-*/
-class BB_ToolWindowNew : public BB_AbstractTool
+BB_AbstractToolWallEdit::BB_AbstractToolWallEdit()
+ : BB_AbstractTool()
 {
-public:
-    BB_ToolWindowNew();
+}
 
-    ~BB_ToolWindowNew();
 
-    virtual void click(QMouseEvent* me);
-    virtual void move(QMouseEvent* me, bool overX, bool overY);
-    virtual void release(QMouseEvent* me);
+BB_AbstractToolWallEdit::~BB_AbstractToolWallEdit()
+{
+}
 
-};
+void BB_AbstractToolWallEdit::setObjects(QVector <BB_DrawObject *> * objects){
+	m_Objects = objects;
+}
 
-#endif

@@ -16,9 +16,13 @@
 
 #include "bb_point.h"
 #include "bb_dlgwalledit.h"
+#include "bb_window.h"
 
 BB_Wall::BB_Wall( BB_Point* p1, BB_Point* p2 ) : BB_Line( p1, p2 )
-{}
+{
+    m_Objects = new QVector <BB_DrawObject *>;
+    // 	m_Objects->resize(100);
+}
 
 
 BB_Wall::~BB_Wall()
@@ -70,6 +74,34 @@ void BB_Wall::show( BB_Transformer& transformer, QPainter& painter ) const
 
 void BB_Wall::editDlg( BB_DocComponent * docComponent )
 {
-	BB_DlgWallEdit EditDlg( this, docComponent);
-	EditDlg.exec();
+    BB_DlgWallEdit EditDlg( this, docComponent );
+    EditDlg.exec();
+}
+
+
+QVector< BB_DrawObject * >* BB_Wall::getObjects() const
+{
+    return m_Objects;
+}
+
+QVector< BB_DrawObject * >* BB_Wall::getPoints() const
+{
+    BB_Rect * tmpObject;
+	QVector<BB_DrawObject * > * vectorMitpoints = new QVector<BB_DrawObject *>;
+    for ( int i = 0; i < m_Objects->count(); i++ )
+    {
+        if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Window ) )
+        {
+            vectorMitpoints->append( tmpObject->getPos1() );
+            vectorMitpoints->append( tmpObject->getPos2() );
+        }
+    }
+	int test = vectorMitpoints->count();
+	return vectorMitpoints;
+}
+
+
+void BB_Wall::setObjects( QVector< BB_DrawObject * >* Value )
+{
+    m_Objects = Value;
 }

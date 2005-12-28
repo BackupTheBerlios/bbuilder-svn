@@ -60,8 +60,11 @@ HEADERS += bb_abstracttool.h \
            bb_toolwindownew.h \
            bb_abstracttoolwidget.h \
            bb_widgettoolscale.h \
+           bb_abstracttoolwalledit.h \
            bb_widgettoolselect.h \
-           bb_widgettoolzoom.h 
+           bb_widgettoolzoom.h \
+           bb_constructionelement.h \
+           bb_window.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -113,8 +116,11 @@ SOURCES += bb_abstracttool.cpp \
            bb_toolwindownew.cpp \
            bb_abstracttoolwidget.cpp \
            bb_widgettoolscale.cpp \
+           bb_abstracttoolwalledit.cpp \
            bb_widgettoolselect.cpp \
-           bb_widgettoolzoom.cpp 
+           bb_widgettoolzoom.cpp \
+           bb_constructionelement.cpp \
+           bb_window.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

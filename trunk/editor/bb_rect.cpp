@@ -1,7 +1,7 @@
 //
 // C++ Implementation: bb_rect
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -17,10 +17,10 @@
 using namespace std;
 
 BB_Rect::BB_Rect()
-	: BB_Line(NULL,NULL)
+        : BB_Line( NULL, NULL )
 {
-	m_Pos1 = NULL;
-	m_Pos2 = NULL;
+    m_Pos1 = NULL;
+    m_Pos2 = NULL;
 }
 
 /**
@@ -30,17 +30,15 @@ BB_Rect::BB_Rect()
  * @param p1 Position des ersten Punktes.
  * @param p2 Position des zweiten, <b>quer gegenüber liegenden</b> Punktes.
  */
-BB_Rect::BB_Rect(BB_Point* p1, BB_Point* p2)
-	: BB_Line(p1,p2)
+BB_Rect::BB_Rect( BB_Point* p1, BB_Point* p2 )
+        : BB_Line( p1, p2 )
 {
-	
 }
 
 
 /** Destruktor */
 BB_Rect::~BB_Rect()
-{
-}
+{}
 
 
 
@@ -50,22 +48,22 @@ BB_Rect::~BB_Rect()
  */
 const QString BB_Rect::getClassName()
 {
-	return QString("BB_Rect");
+    return QString( "BB_Rect" );
 }
 
 
-void BB_Rect::show(BB_Transformer& transformer, QPainter& painter) const
+void BB_Rect::show( BB_Transformer& transformer, QPainter& painter ) const
 {
-	if(&transformer != NULL && &painter != NULL && m_Pos1 != NULL && m_Pos2 != NULL)
-	{		
-		painter.setPen(m_Pen);
-		painter.setBrush(m_Brush);
-		
-		QRect rect(	(int) m_Pos1->getX(),
-				   	(int) m_Pos1->getY(),
-					(int) (m_Pos2->getX() - m_Pos1->getX()),
-					(int) (m_Pos2->getY() - m_Pos1->getY()));
-		
-		painter.drawRect(rect);
-	}
+    if ( &transformer != NULL && &painter != NULL && m_Pos1 != NULL && m_Pos2 != NULL )
+    {
+        painter.setPen( m_Pen );
+        painter.setBrush( m_Brush );
+
+        QRect rect( ( int ) m_Pos1->getX(),
+                    ( int ) m_Pos1->getY(),
+                    ( int ) ( m_Pos2->getX() - m_Pos1->getX() ),
+                    ( int ) ( m_Pos2->getY() - m_Pos1->getY() ) );
+
+        painter.drawRect( rect );
+    }
 }

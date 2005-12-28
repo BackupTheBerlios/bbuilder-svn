@@ -27,6 +27,7 @@
 #include "bb_dlgwalleditpreview.h"
 #include "bb_wall.h"
 #include "bb_toolwindownew.h"
+#include "bb_toolmove.h"
 
 /**
 Ein Diaolog zum editieren von Wand-Eigenschaften.
@@ -64,6 +65,7 @@ class BB_DlgWallEdit : public QDialog
         //tools
         BB_ToolDoorNew * m_ToolDoorNew;
         BB_ToolWindowNew * m_ToolWindowNew;
+		BB_ToolMove * m_ToolMove;
 
 
     public slots:
@@ -75,6 +77,10 @@ class BB_DlgWallEdit : public QDialog
 		setzt das Tool in BB_DlgWallEditArea auf BB_ToolWindowNew
 		 */
         void slotToolWindow();
+		/**
+		setzt das Tool in BB_DlgWallEditArea auf BB_ToolMove
+		 */
+		void slotToolMove();
 };
 
 #endif

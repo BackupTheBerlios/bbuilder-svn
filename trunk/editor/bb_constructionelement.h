@@ -17,24 +17,23 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef BB_TOOLWINDOWNEW_H
-#define BB_TOOLWINDOWNEW_H
+#ifndef BB_CONSTRUCTIONELEMENT_H
+#define BB_CONSTRUCTIONELEMENT_H
 
-#include <bb_abstracttoolwalledit.h>
+#include <bb_rect.h>
 
 /**
+Eine Basis-Klasse fuer allle Konstruktion-Elemente z.B: Fenster oder T&uuml;r
+In Zukunft auch m&ouml;glicherweise Bilder und Poster
+
 	@author Vaceslav Ustinov <v.ustinov@web.de>
 */
-class BB_ToolWindowNew : public BB_AbstractTool
+class BB_ConstructionElement : public BB_Rect
 {
 public:
-    BB_ToolWindowNew();
+	BB_ConstructionElement();
 
-    ~BB_ToolWindowNew();
-
-    virtual void click(QMouseEvent* me);
-    virtual void move(QMouseEvent* me, bool overX, bool overY);
-    virtual void release(QMouseEvent* me);
+    ~BB_ConstructionElement();
 
 };
 

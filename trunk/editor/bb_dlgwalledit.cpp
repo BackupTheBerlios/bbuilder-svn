@@ -44,8 +44,14 @@ void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
     m_wall = wall;
     m_CentralWidget = new BB_DlgWallEditArea( wall, docComponent );
     m_PreviewWidget = new BB_DlgWallEditPreview( wall, docComponent );
+    //tols initialisieren
     m_ToolDoorNew = new BB_ToolDoorNew;
+    m_ToolDoorNew->setObjects( wall->getObjects() );
+
     m_ToolWindowNew = new BB_ToolWindowNew;
+    m_ToolWindowNew->setObjects( wall->getObjects() );
+
+	m_ToolMove = new BB_ToolMove;
 
     //Scroll-Fenster mit haupt-Widget
     QScrollArea * scroll = new QScrollArea();
@@ -57,7 +63,7 @@ void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
 
     //Layout fuer Buttons
     QVBoxLayout * layout_buttons = new QVBoxLayout;
-    m_ButtonWindow = new QPushButton( "Fenster" );
+    m_ButtonWindow = new QPushButton( tr( "Fenster" ) );
     m_ButtonDoor = new QPushButton( "Tuer" );
     m_ButtonMove = new QPushButton( "Move-resize" );
 
@@ -123,9 +129,15 @@ void BB_DlgWallEdit::slotToolWindow()
     m_CentralWidget->setTool( m_ToolWindowNew );
 }
 
+void BB_DlgWallEdit::slotToolMove()
+{
+	m_CentralWidget->setTool( m_ToolMove);
+}
+
 
 void BB_DlgWallEdit::initSingals()
 {
     connect( m_ButtonDoor, SIGNAL( clicked( bool ) ), this, SLOT( slotToolDoor() ) );
     connect( m_ButtonWindow, SIGNAL( clicked( bool ) ), this, SLOT( slotToolWindow() ) );
+	connect(m_ButtonMove, SIGNAL(clicked(bool)), this, SLOT(slotToolMove()));
 }

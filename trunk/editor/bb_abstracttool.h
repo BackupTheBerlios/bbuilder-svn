@@ -65,6 +65,7 @@ class BB_AbstractTool
 
         virtual void setDocComponent( BB_DocComponent* theValue );
         virtual BB_DocComponent* getDocComponent() const;
+		virtual void setObjects(QVector<BB_DrawObject*>* objects);
         virtual bool getShowDrawObjects();
 
         virtual BB_AbstractToolWidget* getToolWidget();

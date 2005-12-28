@@ -41,6 +41,17 @@ BB_Point::BB_Point( C2dVector p )
     m_scale = 1.0;
 }
 
+BB_Point::BB_Point( QPoint p )
+{
+    m_Pos.setX( p.x() );
+    m_Pos.setY( p.y() );
+    m_Radius = 7;
+    m_Color.setNamedColor( "Red" );
+    m_hitRange = 2;
+    m_Selected = false;
+    m_scale = 1.0;
+}
+
 
 BB_Point::~BB_Point()
 {

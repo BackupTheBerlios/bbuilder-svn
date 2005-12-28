@@ -1,6 +1,6 @@
 /***************************************************************************
-*   Copyright (C) 2005 by Vaceslav Ustinov                                             *
-*   v.ustinov@web.de                                                                                           *
+*   Copyright (C) 2005 by Vaceslav Ustinov                                *
+*   v.ustinov@web.de                                                      *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
 *   it under the terms of the GNU General Public License as published by  *
@@ -12,36 +12,30 @@
 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
 *   GNU General Public License for more details.                          *
 *                                                                         *
+*   You should have received a copy of the GNU General Public License     *
+*   along with this program; if not, write to the                         *
+*   Free Software Foundation, Inc.,                                       *
+*   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
-#ifndef BB_WALL_H
-#define BB_WALL_H
+#ifndef BB_ABSTRACTTOOLWALLEDIT_H
+#define BB_ABSTRACTTOOLWALLEDIT_H
 
-#include "bb_line.h"
-#include "bb_doccomponent.h"
-
-#include <QPixmap>
+#include <bb_abstracttool.h>
 
 /**
-Diese Klasse representiert eine Wand,
-sie hat zwei pointer auf BB_WallPoint.
-Eigene Pinkten hat sie nicht
+Eine Abstrakte Klasse fuer alle Tools in Dialog BB_DlgWallEdit
  
-@author Vaceslav Ustinov
+	@author Vaceslav Ustinov <v.ustinov@web.de>
 */
-class BB_Wall : public BB_Line
+class BB_AbstractToolWallEdit : public BB_AbstractTool
 {
     public:
-        BB_Wall( BB_Point* p1, BB_Point* p2 );
-        ~BB_Wall();
-        virtual const QString getClassName();
-        virtual void generateXElement( QTextStream &out, int depth );
-        virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
-        void editDlg( BB_DocComponent * docComponent );
-        void setObjects( QVector< BB_DrawObject * >* Value );
-        QVector< BB_DrawObject * >* getObjects() const;
-		QVector< BB_DrawObject * >* getPoints() const;
-    protected:
-        QVector <BB_DrawObject *> * m_Objects;
+        BB_AbstractToolWallEdit();
+
+        ~BB_AbstractToolWallEdit();
+
+        void setObjects( QVector <BB_DrawObject *> * objects );
+
 };
 
 #endif

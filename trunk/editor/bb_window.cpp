@@ -17,31 +17,34 @@
 *   Free Software Foundation, Inc.,                                       *
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
-#include <iostream>
+#include "bb_window.h"
+#include "bb_point.h"
 
-#include "bb_tooldoornew.h"
+BB_Window::BB_Window()
+        : BB_ConstructionElement()
+{
+    setPos1( new BB_Point( QPoint( 0, 0 ) ) );
+    setPos2( new BB_Point( QPoint( 50, -50 ) ) );
+}
 
-using namespace std;
 
-BB_ToolDoorNew::BB_ToolDoorNew()
-        : BB_AbstractTool()
+BB_Window::~BB_Window()
 {}
 
-
-BB_ToolDoorNew::~BB_ToolDoorNew()
-{}
-
-void BB_ToolDoorNew::click( QMouseEvent* me )
+void BB_Window::show( BB_Transformer& transformer, QPainter& painter ) const
 {
-    cout << "BB_ToolDoorNew::click( QMouseEvent* me )" << endl;
+    if ( &transformer != NULL && &painter != NULL && m_Pos1 != NULL && m_Pos2 != NULL )
+    {
+        painter.setPen( m_Pen );
+        painter.setBrush( m_Brush );
+
+        QRect rect( ( int ) m_Pos1->getX(),
+                    ( int ) m_Pos1->getY(),
+                    ( int ) ( m_Pos2->getX() - m_Pos1->getX() ),
+                    abs( ( int ) ( m_Pos2->getY() - m_Pos1->getY() ) ) );
+        painter.drawRect( rect );
+        m_Pos1->show( transformer, painter );
+        m_Pos2->show( transformer, painter );
+    }
 }
 
-void BB_ToolDoorNew::move( QMouseEvent* me, bool overX, bool overY )
-{
-    cout << "::move( QMouseEvent* me, bool overX, bool overY )" << endl;
-}
-
-void BB_ToolDoorNew::release( QMouseEvent* me )
-{
-    cout << "BB_ToolDoorNew::release( QMouseEvent* me ) " << endl;
-}

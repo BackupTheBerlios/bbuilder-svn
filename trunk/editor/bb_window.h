@@ -17,25 +17,22 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef BB_TOOLWINDOWNEW_H
-#define BB_TOOLWINDOWNEW_H
+#ifndef BB_WINDOW_H
+#define BB_WINDOW_H
 
-#include <bb_abstracttoolwalledit.h>
+#include <bb_constructionelement.h>
 
 /**
+Implementierung von Fenster
+
 	@author Vaceslav Ustinov <v.ustinov@web.de>
 */
-class BB_ToolWindowNew : public BB_AbstractTool
+class BB_Window : public BB_ConstructionElement
 {
 public:
-    BB_ToolWindowNew();
-
-    ~BB_ToolWindowNew();
-
-    virtual void click(QMouseEvent* me);
-    virtual void move(QMouseEvent* me, bool overX, bool overY);
-    virtual void release(QMouseEvent* me);
-
+    BB_Window();
+    ~BB_Window();
+	virtual void show(BB_Transformer& transformer, QPainter& painter) const;
 };
 
 #endif

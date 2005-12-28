@@ -20,7 +20,7 @@
 #ifndef BB_TOOLDOORNEW_H
 #define BB_TOOLDOORNEW_H
 
-#include <bb_abstracttool.h>
+#include <bb_abstracttoolwalledit.h>
 
 /**
 * tool zum erstellen von neuen T&uuml;ren

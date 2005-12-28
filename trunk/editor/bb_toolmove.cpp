@@ -106,7 +106,7 @@ BB_ToolMove::~BB_ToolMove()
 void BB_ToolMove::click( QMouseEvent* me )
 {
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
-    if ( m_Objects == NULL && me == NULL && m_Transformer == NULL )
+    if ( m_Objects == NULL | me == NULL | m_Transformer == NULL )
     {
         qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
         return ;
@@ -136,7 +136,7 @@ void BB_ToolMove::click( QMouseEvent* me )
                 object->setSelected( true );
                 m_Selection->append( object );
                 qDebug( "Keine Objeckte sind selectiert, ein neues wurde selektiert" );
-				m_ToolWidget->updateWidget();
+                m_ToolWidget->updateWidget();
                 return ;
             }
         }
@@ -204,7 +204,7 @@ void BB_ToolMove::click( QMouseEvent* me )
 void BB_ToolMove::move( QMouseEvent* me, bool overX, bool overY )
 {
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
-    if ( m_Objects == NULL && me == NULL && m_Transformer == NULL )
+    if ( m_Objects == NULL | me == NULL | m_Transformer == NULL )
     {
         qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
         return ;
@@ -264,14 +264,14 @@ void BB_ToolMove::release( QMouseEvent* me )
     if ( !m_select )
     {
         m_select = true;
-		documentChanged();
+        documentChanged();
         return ;
     }
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
-    if ( m_Objects == NULL && me == NULL && m_Transformer == NULL )
+    if ( m_Objects == NULL | me == NULL | m_Transformer == NULL )
     {
         qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
-		m_ToolWidget->updateWidget();
+        m_ToolWidget->updateWidget();
         return ;
     }
     //Behandlung nur von Linke-Maustaste
@@ -322,7 +322,7 @@ void BB_ToolMove::release( QMouseEvent* me )
     }
     //wieder in Auswahl-Modus wechseln
     m_select = true;
-	m_ToolWidget->updateWidget();
+    m_ToolWidget->updateWidget();
 }
 
 
@@ -380,16 +380,16 @@ void BB_ToolMove::setSelectionVector( QVector<BB_DrawObject*>* selectionVector )
  */
 void BB_ToolMove::deleteSelection()
 {
-	if( m_Selection != NULL )
-	{
-		for(int i = m_Selection->count() -1 ; i >= 0; i--)
-		{
-			deleteObject( m_Selection->at(i) );
-			m_Selection->remove(i);
-		}
-	}
-	
-	documentChanged();
+    if ( m_Selection != NULL )
+    {
+        for ( int i = m_Selection->count() - 1 ; i >= 0; i-- )
+        {
+            deleteObject( m_Selection->at( i ) );
+            m_Selection->remove( i );
+        }
+    }
+
+    documentChanged();
 }
 
 
@@ -398,20 +398,20 @@ void BB_ToolMove::deleteSelection()
  */
 void BB_ToolMove::selectAll()
 {
-	if( m_Selection != NULL && m_Component != NULL)
-	{
-		m_Selection->clear();
-		
-		BB_DrawObject* object;
-		
-		for(int i = 0; i < m_Component->getDrawObjects()->count() ; i++)
-		{
-			object = m_Component->getDrawObjects()->at(i);
-			object->setSelected( true );
-			m_Selection->append( object );
-		}
-		
-	}
-	
-	documentChanged();
+    if ( m_Selection != NULL && m_Component != NULL )
+    {
+        m_Selection->clear();
+
+        BB_DrawObject* object;
+
+        for ( int i = 0; i < m_Component->getDrawObjects() ->count() ; i++ )
+        {
+            object = m_Component->getDrawObjects() ->at( i );
+            object->setSelected( true );
+            m_Selection->append( object );
+        }
+
+    }
+
+    documentChanged();
 }

@@ -25,7 +25,7 @@
 #include "bb_map.h"
 #include "bb_wall.h"
 #include "bb_doccomponent.h"
-#include "bb_abstracttool.h"
+#include "bb_abstracttoolwalledit.h"
 #include "bb_tooldoornew.h"
 
 /**
@@ -40,14 +40,17 @@ class BB_DlgWallEditArea : public QLabel
     public:
         BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent = 0, Qt::WFlags f = 0 );
         ~BB_DlgWallEditArea();
-		void setTool(BB_AbstractTool * tool);
+        void setTool( BB_AbstractTool * tool );
     protected:
         BB_Map * m_currentMap;
+		BB_Wall * m_Wall;
         /**  hohe und  breite in meter */
         double m_height;
         double m_lenght;
         double m_verhaeltniss;
         BB_AbstractTool * m_Tool;
+		QVector<BB_DrawObject * > * m_DrawObjects;
+		BB_Transformer m_transformer;
     protected:
         virtual void paintEvent ( QPaintEvent * );
         virtual void resizeEvent ( QResizeEvent * );

@@ -20,7 +20,7 @@
 #include "bb_toolwindownew.h"
 
 BB_ToolWindowNew::BB_ToolWindowNew()
- : BB_AbstractTool()
+	: BB_AbstractTool()
 {
 }
 
