@@ -19,11 +19,11 @@
 #include <QtGui>
 #include <QAction>
 
-#include "bb_doccomponent.h"
+#include <bb_doccomponent.h>
 
-#include "bb_drawobject.h"
-#include "bb_transformer.h"
-#include "c2dvector.h"
+#include <bb_drawobject.h>
+#include <bb_transformer.h>
+#include <c2dvector.h>
 #include <bb_abstracttoolwidget.h>
 
 class BB_Tab;
@@ -39,11 +39,12 @@ class BB_AbstractTool
 
         virtual ~BB_AbstractTool();
 
-        virtual void move( QMouseEvent* me, bool overX, bool overY ) = 0;
-        virtual void release( QMouseEvent* me ) = 0;
+        virtual void move( QMouseEvent* me, bool overX, bool overY );
+        virtual void release( QMouseEvent* me );
         virtual void click( QMouseEvent* me ) = 0;
 
         virtual bool deleteObject( BB_DrawObject * delObject );
+		virtual void deleteSelection();
         virtual void reset();
         virtual BB_DrawObject* getClickedObject( const C2dVector & posLogic , const std::type_info &type );
 
@@ -70,8 +71,9 @@ class BB_AbstractTool
 
         virtual BB_AbstractToolWidget* getToolWidget();
 
-	void setWorkFrame( BB_WorkFrame* value );
-	
+	virtual void setWorkFrame( BB_WorkFrame* value );
+    virtual void updateWidget();
+	virtual void documentChanged();
 
 
 
@@ -102,9 +104,12 @@ class BB_AbstractTool
         BB_DocComponent * m_Component;
         bool m_ShowDrawObjects;
         BB_AbstractToolWidget* m_ToolWidget;
+
 		
 protected:
-    virtual void documentChanged();
+    
+	virtual BB_DrawObject* createNewObject();
+	
 };
 
 #endif

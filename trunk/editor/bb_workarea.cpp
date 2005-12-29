@@ -179,7 +179,9 @@ void BB_WorkArea::setZoomFaktor( double z )
 
 
 /**
- * Gibt das DocComponent zurück, welches gerade bearbeitet wird.
+ * Gibt das Komponent zurück, welches gerade bearbeitet wird.
+ * Falls kein Komponent eingestellt ist wird NULL zurückgegeben
+ * @return Das aktuelle DocComponent
  */
 BB_DocComponent* BB_WorkArea::getDocComponent()
 {

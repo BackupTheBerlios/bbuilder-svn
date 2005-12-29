@@ -211,6 +211,7 @@ void BB_TabBuilding::initTools()
     // 	QAction *toolPointNew = new QAction("Point",this);
     QAction *toolPointNew = new QAction( knote, "Point", this );
     toolPointNew->setStatusTip( "Point Werkzeug" );
+	addWidgetRight( m_ToolPointNew->getToolWidget() );
     createToolButton( toolPointNew, m_ToolPointNew );
 
 
@@ -271,6 +272,7 @@ void BB_TabBuilding::toolChanged( QAction* action )
     {
         unsetToolButton( action );
         action->setChecked( true );
+		m_RightFrame->setCurrentWidget( m_ToolPointNew->getToolWidget() );
         m_Center->setTool( m_ToolPointNew );
     }
     else if ( m_ToolLineNew->getAction() == action )

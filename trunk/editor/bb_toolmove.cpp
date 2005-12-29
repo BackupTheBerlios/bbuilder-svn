@@ -374,26 +374,6 @@ void BB_ToolMove::setSelectionVector( QVector<BB_DrawObject*>* selectionVector )
 
 
 /**
- * Löscht alle selektierten Objekte
- * @author Alex Letkemann
- * @date 26.12.2005
- */
-void BB_ToolMove::deleteSelection()
-{
-    if ( m_Selection != NULL )
-    {
-        for ( int i = m_Selection->count() - 1 ; i >= 0; i-- )
-        {
-            deleteObject( m_Selection->at( i ) );
-            m_Selection->remove( i );
-        }
-    }
-
-    documentChanged();
-}
-
-
-/**
  * Selektiert alle Objekte
  */
 void BB_ToolMove::selectAll()

@@ -38,6 +38,34 @@
       <anchor>e2</anchor>
       <arglist>(const QString &amp;str)</arglist>
     </member>
+    <member kind="variable" static="yes">
+      <type>static QRegExp</type>
+      <name>regExpAlphanumeric</name>
+      <anchorfile>classBB.html</anchorfile>
+      <anchor>s0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static QRegExp</type>
+      <name>regExpNumeric</name>
+      <anchorfile>classBB.html</anchorfile>
+      <anchor>s1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static QRegExpValidator *</type>
+      <name>validAlphanumeric</name>
+      <anchorfile>classBB.html</anchorfile>
+      <anchor>s2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static QRegExpValidator *</type>
+      <name>validNumeric</name>
+      <anchorfile>classBB.html</anchorfile>
+      <anchor>s3</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>BB_AbstractTool</name>
@@ -65,87 +93,87 @@
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
-      <name>remove</name>
+      <name>deleteObject</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>a5</anchor>
       <arglist>(BB_DrawObject *delObject)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setTransformer</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a6</anchor>
-      <arglist>(BB_Transformer *transformer)</arglist>
-    </member>
-    <member kind="function">
-      <type>BB_Transformer *</type>
-      <name>getTransformer</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a7</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setSelectionVector</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a8</anchor>
-      <arglist>(QVector&lt; BB_DrawObject * &gt; *selectionVector)</arglist>
-    </member>
-    <member kind="function">
-      <type>QVector&lt; BB_DrawObject * &gt; *</type>
-      <name>getSelectionVector</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a9</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setToolObjects</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a10</anchor>
-      <arglist>(QVector&lt; BB_DrawObject * &gt; *theValue)</arglist>
-    </member>
-    <member kind="function">
-      <type>QVector&lt; BB_DrawObject * &gt; *</type>
-      <name>getToolObjects</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a11</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>clearSelection</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a12</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setAction</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a13</anchor>
-      <arglist>(QAction *theValue)</arglist>
-    </member>
-    <member kind="function">
-      <type>QAction *</type>
-      <name>getAction</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a14</anchor>
-      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>reset</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a15</anchor>
+      <anchor>a6</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_DrawObject *</type>
       <name>getClickedObject</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a16</anchor>
+      <anchor>a7</anchor>
       <arglist>(const C2dVector &amp;posLogic, const std::type_info &amp;type)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setTransformer</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a8</anchor>
+      <arglist>(BB_Transformer *transformer)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual BB_Transformer *</type>
+      <name>getTransformer</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a9</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setSelectionVector</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a10</anchor>
+      <arglist>(QVector&lt; BB_DrawObject * &gt; *selectionVector)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>getSelectionVector</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a11</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setToolObjects</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a12</anchor>
+      <arglist>(QVector&lt; BB_DrawObject * &gt; *theValue)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>getToolObjects</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a13</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>clearSelection</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a14</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setAction</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a15</anchor>
+      <arglist>(QAction *theValue)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual QAction *</type>
+      <name>getAction</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a16</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -154,12 +182,40 @@
       <anchor>a17</anchor>
       <arglist>(BB_DocComponent *theValue)</arglist>
     </member>
-    <member kind="function">
-      <type>BB_DocComponent *</type>
+    <member kind="function" virtualness="virtual">
+      <type>virtual BB_DocComponent *</type>
       <name>getDocComponent</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>a18</anchor>
       <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>getShowDrawObjects</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a19</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual BB_AbstractToolWidget *</type>
+      <name>getToolWidget</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a20</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setWorkFrame</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a21</anchor>
+      <arglist>(BB_WorkFrame *value)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>documentChanged</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>b0</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>C2dVector</type>
@@ -184,7 +240,7 @@
     </member>
     <member kind="variable" protection="protected">
       <type>QWidget *</type>
-      <name>parentWidget</name>
+      <name>m_ParentWidget</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>p3</anchor>
       <arglist></arglist>
@@ -197,39 +253,78 @@
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>QVector&lt; BB_DrawObject * &gt; *</type>
-      <name>m_Objects</name>
+      <type>BB_WorkFrame *</type>
+      <name>m_WorkFrame</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>p5</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QVector&lt; BB_DrawObject * &gt; *</type>
-      <name>m_Selection</name>
+      <name>m_Objects</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>p6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>m_Selection</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>p7</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_Transformer *</type>
       <name>m_Transformer</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>p7</anchor>
+      <anchor>p8</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QVector&lt; BB_DrawObject * &gt; *</type>
       <name>m_ToolObjects</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>p8</anchor>
+      <anchor>p9</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_DocComponent *</type>
       <name>m_Component</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>p9</anchor>
+      <anchor>p10</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>bool</type>
+      <name>m_ShowDrawObjects</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>p11</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_AbstractToolWidget *</type>
+      <name>m_ToolWidget</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>p12</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BB_AbstractToolWidget</name>
+    <filename>classBB__AbstractToolWidget.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>BB_AbstractToolWidget</name>
+      <anchorfile>classBB__AbstractToolWidget.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(QWidget *parent=0)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>updateWidget</name>
+      <anchorfile>classBB__AbstractToolWidget.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>()</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -285,25 +380,11 @@
       <anchor>a6</anchor>
       <arglist>()</arglist>
     </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual QListWidgetItem *</type>
-      <name>getListWidgetItem</name>
-      <anchorfile>classBB__Building.html</anchorfile>
-      <anchor>a7</anchor>
-      <arglist>()</arglist>
-    </member>
     <member kind="variable" protection="protected">
       <type>QVector&lt; BB_Level &gt; *</type>
       <name>m_Levels</name>
       <anchorfile>classBB__Building.html</anchorfile>
       <anchor>p0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>QListWidgetItem *</type>
-      <name>m_ListWidgetItem</name>
-      <anchorfile>classBB__Building.html</anchorfile>
-      <anchor>p1</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -544,52 +625,6 @@
       <name>m_Dlg</name>
       <anchorfile>classBB__DlgTerrainEdit.html</anchorfile>
       <anchor>p0</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>BB_DlgToolScaleEdit</name>
-    <filename>classBB__DlgToolScaleEdit.html</filename>
-    <member kind="function">
-      <type></type>
-      <name>BB_DlgToolScaleEdit</name>
-      <anchorfile>classBB__DlgToolScaleEdit.html</anchorfile>
-      <anchor>a0</anchor>
-      <arglist>(QWidget *parent)</arglist>
-    </member>
-    <member kind="function">
-      <type>double</type>
-      <name>getScaleReal</name>
-      <anchorfile>classBB__DlgToolScaleEdit.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function">
-      <type>double</type>
-      <name>getScaleLogic</name>
-      <anchorfile>classBB__DlgToolScaleEdit.html</anchorfile>
-      <anchor>a3</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setScaleLogic</name>
-      <anchorfile>classBB__DlgToolScaleEdit.html</anchorfile>
-      <anchor>a4</anchor>
-      <arglist>(double scale)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setScaleReal</name>
-      <anchorfile>classBB__DlgToolScaleEdit.html</anchorfile>
-      <anchor>a5</anchor>
-      <arglist>(double scale)</arglist>
-    </member>
-    <member kind="variable">
-      <type>Ui_ScaleEditDialog</type>
-      <name>m_Dlg</name>
-      <anchorfile>classBB__DlgToolScaleEdit.html</anchorfile>
-      <anchor>o0</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -946,10 +981,17 @@
       <arglist>(QDir &amp;path, QString &amp;fileName)</arglist>
     </member>
     <member kind="function">
+      <type>bool</type>
+      <name>deleteBuilding</name>
+      <anchorfile>classBB__Doc.html</anchorfile>
+      <anchor>a14</anchor>
+      <arglist>(QListWidgetItem *item)</arglist>
+    </member>
+    <member kind="function">
       <type>BB_Building *</type>
       <name>getBuilding</name>
       <anchorfile>classBB__Doc.html</anchorfile>
-      <anchor>a14</anchor>
+      <anchor>a15</anchor>
       <arglist>(QListWidgetItem *item)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
@@ -958,13 +1000,6 @@
       <anchorfile>classBB__Doc.html</anchorfile>
       <anchor>b0</anchor>
       <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>bool</type>
-      <name>deleteBuilding</name>
-      <anchorfile>classBB__Doc.html</anchorfile>
-      <anchor>b1</anchor>
-      <arglist>(QListWidgetItem *item)</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_Terrain *</type>
@@ -1065,17 +1100,24 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function">
+      <type>double *</type>
+      <name>getScaleRealPointer</name>
+      <anchorfile>classBB__DocComponent.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
       <type>double</type>
       <name>getMeterPerPixel</name>
       <anchorfile>classBB__DocComponent.html</anchorfile>
-      <anchor>a7</anchor>
+      <anchor>a8</anchor>
       <arglist>(double pixel)</arglist>
     </member>
     <member kind="function">
       <type>double</type>
       <name>getPixelPerMeter</name>
       <anchorfile>classBB__DocComponent.html</anchorfile>
-      <anchor>a8</anchor>
+      <anchor>a9</anchor>
       <arglist>(double meter)</arglist>
     </member>
     <member kind="variable" protection="protected">
@@ -1219,6 +1261,13 @@
       <anchorfile>classBB__DrawObject.html</anchorfile>
       <anchor>a12</anchor>
       <arglist>(const QPen &amp;theValue)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>moveEvent</name>
+      <anchorfile>classBB__DrawObject.html</anchorfile>
+      <anchor>a13</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QColor</type>
@@ -1376,6 +1425,13 @@
       <anchorfile>classBB__FileObject.html</anchorfile>
       <anchor>a12</anchor>
       <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setModified</name>
+      <anchorfile>classBB__FileObject.html</anchorfile>
+      <anchor>a13</anchor>
+      <arglist>(bool value)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="pure">
       <type>virtual bool</type>
@@ -1535,38 +1591,45 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>remove</name>
-      <anchorfile>classBB__Line.html</anchorfile>
-      <anchor>a8</anchor>
-      <arglist>(BB_Point *point)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
       <type>virtual const QString</type>
       <name>getClassName</name>
       <anchorfile>classBB__Line.html</anchorfile>
-      <anchor>a9</anchor>
+      <anchor>a8</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
       <name>isHit</name>
       <anchorfile>classBB__Line.html</anchorfile>
-      <anchor>a10</anchor>
+      <anchor>a9</anchor>
       <arglist>(QRect rect)</arglist>
     </member>
     <member kind="function">
       <type>double</type>
       <name>getLength</name>
       <anchorfile>classBB__Line.html</anchorfile>
-      <anchor>a11</anchor>
+      <anchor>a10</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>double</type>
       <name>getWinkel</name>
       <anchorfile>classBB__Line.html</anchorfile>
+      <anchor>a11</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>moveEvent</name>
+      <anchorfile>classBB__Line.html</anchorfile>
       <anchor>a12</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>const C2dVector &amp;</type>
+      <name>getMiddle</name>
+      <anchorfile>classBB__Line.html</anchorfile>
+      <anchor>a13</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected">
@@ -1588,6 +1651,13 @@
       <name>m_Richtung</name>
       <anchorfile>classBB__Line.html</anchorfile>
       <anchor>p2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C2dVector</type>
+      <name>m_Middle</name>
+      <anchorfile>classBB__Line.html</anchorfile>
+      <anchor>p3</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -1869,7 +1939,7 @@
       <arglist>(const QString &amp;theValue)</arglist>
     </member>
     <member kind="function">
-      <type>QString</type>
+      <type>const QString &amp;</type>
       <name>getName</name>
       <anchorfile>classBB__Object.html</anchorfile>
       <anchor>a4</anchor>
@@ -1883,7 +1953,7 @@
       <arglist>(const QString &amp;theValue)</arglist>
     </member>
     <member kind="function">
-      <type>QString</type>
+      <type>const QString &amp;</type>
       <name>getDescription</name>
       <anchorfile>classBB__Object.html</anchorfile>
       <anchor>a6</anchor>
@@ -1979,11 +2049,11 @@
       <arglist>(const C2dVector &amp;theValue)</arglist>
     </member>
     <member kind="function">
-      <type>C2dVector</type>
+      <type>C2dVector &amp;</type>
       <name>getPos</name>
       <anchorfile>classBB__Point.html</anchorfile>
       <anchor>a9</anchor>
-      <arglist>() const </arglist>
+      <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>QVector&lt; BB_Line * &gt; *</type>
@@ -2208,6 +2278,13 @@
       <anchor>a8</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>resetTool</name>
+      <anchorfile>classBB__Tab.html</anchorfile>
+      <anchor>a9</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" protection="protected">
       <type>bool</type>
       <name>addWidgetLeft</name>
@@ -2220,7 +2297,7 @@
       <name>addWidgetRight</name>
       <anchorfile>classBB__Tab.html</anchorfile>
       <anchor>b1</anchor>
-      <arglist>(QWidget *widget, int stretchFaktor=0)</arglist>
+      <arglist>(QWidget *widget)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual bool</type>
@@ -2272,7 +2349,7 @@
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>QFrame *</type>
+      <type>QStackedWidget *</type>
       <name>m_RightFrame</name>
       <anchorfile>classBB__Tab.html</anchorfile>
       <anchor>p5</anchor>
@@ -2320,30 +2397,23 @@
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
-      <name>mouseReleaseEvent</name>
-      <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>(QMouseEvent *e)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
       <name>updateWidget</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>a3</anchor>
+      <anchor>a2</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>createBuildingList</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>a4</anchor>
+      <anchor>a3</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>clear</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>a5</anchor>
+      <anchor>a4</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
@@ -2382,66 +2452,52 @@
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>BB_AbstractTool *</type>
-      <name>m_ToolSelect</name>
-      <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>p4</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
       <type>QVector&lt; BB_Building * &gt; *</type>
       <name>m_Buildings</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>p5</anchor>
+      <anchor>p4</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QListWidget *</type>
       <name>m_BuildingsListWidget</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>p6</anchor>
+      <anchor>p5</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QPushButton *</type>
       <name>m_ButtonBuildingDelete</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>p7</anchor>
+      <anchor>p6</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QPushButton *</type>
       <name>m_ButtonBuildingNew</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>p8</anchor>
+      <anchor>p7</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QPushButton *</type>
       <name>m_ButtonBuildingProperties</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>p9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>BB_PropertyWidget *</type>
-      <name>m_PropertyWidget</name>
-      <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>p10</anchor>
+      <anchor>p8</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>bool</type>
       <name>m_BuildingsListCreated</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>p11</anchor>
+      <anchor>p9</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_AbstractTool *</type>
       <name>m_ToolScale</name>
       <anchorfile>classBB__TabBuilding.html</anchorfile>
-      <anchor>p12</anchor>
+      <anchor>p10</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -2705,6 +2761,27 @@
       <anchor>a4</anchor>
       <arglist>(QMouseEvent *me)</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setSelectionVector</name>
+      <anchorfile>classBB__ToolMove.html</anchorfile>
+      <anchor>a5</anchor>
+      <arglist>(QVector&lt; BB_DrawObject * &gt; *selectionVector)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>deleteSelection</name>
+      <anchorfile>classBB__ToolMove.html</anchorfile>
+      <anchor>a6</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>selectAll</name>
+      <anchorfile>classBB__ToolMove.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="variable" protection="protected">
       <type>BB_Point *</type>
       <name>comparePoint</name>
@@ -2813,6 +2890,20 @@
       <anchor>a5</anchor>
       <arglist>(BB_DocComponent *component)</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>reset</name>
+      <anchorfile>classBB__ToolScale.html</anchorfile>
+      <anchor>a6</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>updateWidget</name>
+      <anchorfile>classBB__ToolScale.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="variable" protection="protected">
       <type>BB_Point *</type>
       <name>m_MovePoint</name>
@@ -2832,6 +2923,20 @@
       <name>m_Parent</name>
       <anchorfile>classBB__ToolScale.html</anchorfile>
       <anchor>p2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C2dVector</type>
+      <name>m_Tmp_v1</name>
+      <anchorfile>classBB__ToolScale.html</anchorfile>
+      <anchor>p3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C2dVector</type>
+      <name>m_Tmp_v2</name>
+      <anchorfile>classBB__ToolScale.html</anchorfile>
+      <anchor>p4</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -3000,6 +3105,13 @@
       <anchorfile>classBB__ToolZoom.html</anchorfile>
       <anchor>a4</anchor>
       <arglist>(QMouseEvent *me)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setDocComponent</name>
+      <anchorfile>classBB__ToolZoom.html</anchorfile>
+      <anchor>a5</anchor>
+      <arglist>(BB_DocComponent *component)</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_WorkArea *</type>
@@ -3176,6 +3288,133 @@
       <anchor>a5</anchor>
       <arglist>(BB_DocComponent *docComponent)</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>moveEvent</name>
+      <anchorfile>classBB__Wall.html</anchorfile>
+      <anchor>a6</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C2dVector</type>
+      <name>m_Direction</name>
+      <anchorfile>classBB__Wall.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>bool</type>
+      <name>m_ShowDirection</name>
+      <anchorfile>classBB__Wall.html</anchorfile>
+      <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QPen</type>
+      <name>m_PenDirection</name>
+      <anchorfile>classBB__Wall.html</anchorfile>
+      <anchor>p2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BB_WidgetToolScale</name>
+    <filename>classBB__WidgetToolScale.html</filename>
+    <base>BB_AbstractToolWidget</base>
+    <member kind="function">
+      <type>void</type>
+      <name>setLogicalScale</name>
+      <anchorfile>classBB__WidgetToolScale.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(double value)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setRealScale</name>
+      <anchorfile>classBB__WidgetToolScale.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>(double *real)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>Ui::WidgetToolScale</type>
+      <name>m_Ui</name>
+      <anchorfile>classBB__WidgetToolScale.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>double *</type>
+      <name>m_RealScale</name>
+      <anchorfile>classBB__WidgetToolScale.html</anchorfile>
+      <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BB_WidgetToolSelect</name>
+    <filename>classBB__WidgetToolSelect.html</filename>
+    <base>BB_AbstractToolWidget</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_WidgetToolSelect</name>
+      <anchorfile>classBB__WidgetToolSelect.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(BB_ToolMove *parentTool)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolSelect</name>
+      <anchorfile>classBB__WidgetToolSelect.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>updateWidget</name>
+      <anchorfile>classBB__WidgetToolSelect.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setSelection</name>
+      <anchorfile>classBB__WidgetToolSelect.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>(QVector&lt; BB_DrawObject * &gt; *vector)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>Ui::WidgetToolSelect</type>
+      <name>m_Ui</name>
+      <anchorfile>classBB__WidgetToolSelect.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>m_Selection</name>
+      <anchorfile>classBB__WidgetToolSelect.html</anchorfile>
+      <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BB_WidgetToolZoom</name>
+    <filename>classBB__WidgetToolZoom.html</filename>
+    <base>BB_AbstractToolWidget</base>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setZoomFaktor</name>
+      <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(double value)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>Ui::WidgetToolZoom</type>
+      <name>m_Ui</name>
+      <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>BB_WorkArea</name>
@@ -3228,6 +3467,13 @@
       <anchorfile>classBB__WorkArea.html</anchorfile>
       <anchor>a7</anchor>
       <arglist>(BB_DocComponent *component)</arglist>
+    </member>
+    <member kind="function">
+      <type>double</type>
+      <name>getZoom</name>
+      <anchorfile>classBB__WorkArea.html</anchorfile>
+      <anchor>a8</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_WorkFrame *</type>
@@ -3288,6 +3534,13 @@
       <anchorfile>classBB__WorkFrame.html</anchorfile>
       <anchor>a6</anchor>
       <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>documentChanged</name>
+      <anchorfile>classBB__WorkFrame.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
@@ -3550,6 +3803,20 @@
   <compound kind="class">
     <name>BB_XHandler</name>
     <filename>classBB__XHandler.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>BB_XHandler</name>
+      <anchorfile>classBB__XHandler.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_XHandler</name>
+      <anchorfile>classBB__XHandler.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
       <name>characters</name>
@@ -3771,6 +4038,42 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>BR_Doc</name>
+    <filename>classBR__Doc.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>BR_InfoWidget</name>
+    <filename>classBR__InfoWidget.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>BR_InfoWidget</name>
+      <anchorfile>classBR__InfoWidget.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(BR_Doc *doc, QWidget *parent=0, Qt::WFlags f=0)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>printFPS</name>
+      <anchorfile>classBR__InfoWidget.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(int fps)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QTextEdit *</type>
+      <name>m_Text</name>
+      <anchorfile>classBR__InfoWidget.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QLabel *</type>
+      <name>m_FpsLabel</name>
+      <anchorfile>classBR__InfoWidget.html</anchorfile>
+      <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>BR_KeyHandler</name>
     <filename>classBR__KeyHandler.html</filename>
     <member kind="function">
@@ -3896,6 +4199,20 @@
       <anchor>p9</anchor>
       <arglist></arglist>
     </member>
+    <member kind="variable" protection="protected">
+      <type>BR_Doc</type>
+      <name>m_Doc</name>
+      <anchorfile>classBR__MainWindow.html</anchorfile>
+      <anchor>p10</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BR_InfoWidget *</type>
+      <name>m_InfoWidget</name>
+      <anchorfile>classBR__MainWindow.html</anchorfile>
+      <anchor>p11</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>BR_View</name>
@@ -3905,7 +4222,7 @@
       <name>BR_View</name>
       <anchorfile>classBR__View.html</anchorfile>
       <anchor>a0</anchor>
-      <arglist>(QWidget *parent=0)</arglist>
+      <arglist>(BR_Doc *doc, BR_InfoWidget *info, QWidget *parent=0)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -3942,39 +4259,32 @@
       <anchor>b3</anchor>
       <arglist>()</arglist>
     </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>drawFPS</name>
-      <anchorfile>classBR__View.html</anchorfile>
-      <anchor>b4</anchor>
-      <arglist>()</arglist>
-    </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
       <name>keyPressEvent</name>
       <anchorfile>classBR__View.html</anchorfile>
-      <anchor>b5</anchor>
+      <anchor>b4</anchor>
       <arglist>(QKeyEvent *ke)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
       <name>keyReleaseEvent</name>
       <anchorfile>classBR__View.html</anchorfile>
-      <anchor>b6</anchor>
+      <anchor>b5</anchor>
       <arglist>(QKeyEvent *ke)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
       <name>mousePressEvent</name>
       <anchorfile>classBR__View.html</anchorfile>
-      <anchor>b7</anchor>
+      <anchor>b6</anchor>
       <arglist>(QMouseEvent *me)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
       <name>mouseMoveEvent</name>
       <anchorfile>classBR__View.html</anchorfile>
-      <anchor>b8</anchor>
+      <anchor>b7</anchor>
       <arglist>(QMouseEvent *me)</arglist>
     </member>
     <member kind="variable" protection="protected">
@@ -4017,6 +4327,13 @@
       <name>m_CurrentFPS</name>
       <anchorfile>classBR__View.html</anchorfile>
       <anchor>p5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BR_InfoWidget *</type>
+      <name>m_Info</name>
+      <anchorfile>classBR__View.html</anchorfile>
+      <anchor>p6</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -4128,6 +4445,27 @@
       <anchor>a14</anchor>
       <arglist>(const C2dVector &amp;v2) const </arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual C2dVector</type>
+      <name>operator *</name>
+      <anchorfile>classC2dVector.html</anchorfile>
+      <anchor>a15</anchor>
+      <arglist>(const double value) const </arglist>
+    </member>
+    <member kind="function">
+      <type>C2dVector</type>
+      <name>rotate</name>
+      <anchorfile>classC2dVector.html</anchorfile>
+      <anchor>a16</anchor>
+      <arglist>(double angle) const </arglist>
+    </member>
+    <member kind="function">
+      <type>C2dVector</type>
+      <name>unitVector</name>
+      <anchorfile>classC2dVector.html</anchorfile>
+      <anchor>a17</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="variable" protection="protected">
       <type>double</type>
       <name>m_X</name>
@@ -4140,6 +4478,639 @@
       <name>m_Y</name>
       <anchorfile>classC2dVector.html</anchorfile>
       <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>C3dBody</name>
+    <filename>classC3dBody.html</filename>
+    <base>C3dQuad</base>
+    <member kind="function">
+      <type></type>
+      <name>C3dBody</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~C3dBody</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getV4</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>moveBy</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>(const C3dVector &amp;vMove)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>rotate</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a4</anchor>
+      <arglist>(const C3dVector &amp;vAxis, double Angle)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setV4</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a5</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a6</anchor>
+      <arglist>(const C3dBody &amp;toCopy)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>makeSurface</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>surfaceExists</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a8</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>draw</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a9</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>show</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a10</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>GLuint</type>
+      <name>getTexture</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a11</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>QString &amp;</type>
+      <name>getTextureFileName</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a12</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setTextureFileName</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a13</anchor>
+      <arglist>(QString &amp;name)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>makeTransformations</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>a14</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>createTexture</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>b0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_V4</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>bool</type>
+      <name>m_SurfaceExists</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; C3dTriangle * &gt;</type>
+      <name>m_Triangles</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>p2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; C3dQuad * &gt;</type>
+      <name>m_Quads</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>p3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>GLuint</type>
+      <name>m_Texture</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>p4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QString</type>
+      <name>m_TextureFileName</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>p5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; CGLMatrix * &gt;</type>
+      <name>m_Transformations</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>p6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>bool</type>
+      <name>m_TexGenError</name>
+      <anchorfile>classC3dBody.html</anchorfile>
+      <anchor>p7</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>C3dCylinder</name>
+    <filename>classC3dCylinder.html</filename>
+    <base>C3dBody</base>
+    <member kind="function">
+      <type></type>
+      <name>C3dCylinder</name>
+      <anchorfile>classC3dCylinder.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(double radius, double height, unsigned int sides)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>makeSurface</name>
+      <anchorfile>classC3dCylinder.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>C3dLine</name>
+    <filename>classC3dLine.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>C3dLine</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~C3dLine</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getV1</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getVN1</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getVTex1</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a4</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setV1</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a5</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setVN1</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a6</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setVTex1</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>draw</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a8</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>drawNormals</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a9</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>moveBy</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a10</anchor>
+      <arglist>(const C3dVector &amp;vMove)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>rotate</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a11</anchor>
+      <arglist>(const C3dVector &amp;vAxis, double Angle)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>stretch</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a12</anchor>
+      <arglist>(double sx, double sy, double sz)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a13</anchor>
+      <arglist>(const C3dLine &amp;toCopy)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>C3dLine</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a14</anchor>
+      <arglist>(const C3dVector &amp;v0, const C3dVector &amp;v1, const C3dVector &amp;n0, const C3dVector &amp;n1, const C3dVector &amp;t0=v_Zero, const C3dVector &amp;t1=v_Zero, const CColorRGBA &amp;color=cl_Red)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>C3dLine</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a15</anchor>
+      <arglist>(C3dPoint &amp;p1, C3dPoint &amp;p2, CColorRGBA &amp;color)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual GLenum</type>
+      <name>getClassEnum</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>a16</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_V1</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_VN1</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_VTex1</name>
+      <anchorfile>classC3dLine.html</anchorfile>
+      <anchor>p2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>C3dQuad</name>
+    <filename>classC3dQuad.html</filename>
+    <base>C3dTriangle</base>
+    <member kind="function">
+      <type></type>
+      <name>C3dQuad</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>(const C3dVector &amp;v0, const C3dVector &amp;v1, const C3dVector &amp;v2, const C3dVector &amp;v3, const C3dVector &amp;t0, const C3dVector &amp;t1, const C3dVector &amp;t2, const C3dVector &amp;t3, const CColorRGBA &amp;color)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>C3dQuad</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(const C3dVector &amp;v0, const C3dVector &amp;v1, const C3dVector &amp;v2, const C3dVector &amp;v3, const C3dVector &amp;n0, const C3dVector &amp;n1, const C3dVector &amp;n2, const C3dVector &amp;n3, const C3dVector &amp;t0, const C3dVector &amp;t1, const C3dVector &amp;t2, const C3dVector &amp;t3, const CColorRGBA &amp;color)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>C3dQuad</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>(C3dPoint &amp;p1, C3dPoint &amp;p2, C3dPoint &amp;p3, C3dPoint &amp;p4, CColorRGBA &amp;color)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~C3dQuad</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a4</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getV3</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a5</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getVN3</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a6</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getVTex3</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual GLenum</type>
+      <name>getClassEnum</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a8</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>draw</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a9</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>drawNormals</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a10</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>moveBy</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a11</anchor>
+      <arglist>(const C3dVector &amp;vMove)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>rotate</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a12</anchor>
+      <arglist>(const C3dVector &amp;vAxis, double Angle)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setV3</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a13</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setVN3</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a14</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setVTex3</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a15</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>stretch</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a16</anchor>
+      <arglist>(double sx, double sy, double sz)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a17</anchor>
+      <arglist>(const C3dQuad &amp;toCopy)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>checkPlanarity</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>a18</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_V3</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_VN3</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_VTex3</name>
+      <anchorfile>classC3dQuad.html</anchorfile>
+      <anchor>p2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>C3dTriangle</name>
+    <filename>classC3dTriangle.html</filename>
+    <base>C3dLine</base>
+    <member kind="function">
+      <type></type>
+      <name>C3dTriangle</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>C3dTriangle</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>(const C3dVector &amp;v0, const C3dVector &amp;v1, const C3dVector &amp;v2, const C3dVector &amp;t0, const C3dVector &amp;t1, const C3dVector &amp;t2, const CColorRGBA &amp;color)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>C3dTriangle</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(const C3dVector &amp;v0, const C3dVector &amp;v1, const C3dVector &amp;v2, const C3dVector &amp;n0, const C3dVector &amp;n1, const C3dVector &amp;n2, const C3dVector &amp;t0, const C3dVector &amp;t1, const C3dVector &amp;t2, const CColorRGBA &amp;color)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>C3dTriangle</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>(C3dPoint &amp;p1, C3dPoint &amp;p2, C3dPoint &amp;p3, CColorRGBA &amp;color)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual GLenum</type>
+      <name>getClassEnum</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a5</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>draw</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a6</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>drawNormals</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>moveBy</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a8</anchor>
+      <arglist>(const C3dVector &amp;vMove)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>rotate</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a9</anchor>
+      <arglist>(const C3dVector &amp;vAxis, double Angle)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>stretch</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a10</anchor>
+      <arglist>(double sx, double sy, double sz)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a11</anchor>
+      <arglist>(const C3dTriangle &amp;toCopy)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getV2</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a12</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getVN2</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a13</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const C3dVector &amp;</type>
+      <name>getVTex2</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a14</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setVN2</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a15</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setVTex2</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a16</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setV2</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>a17</anchor>
+      <arglist>(const C3dVector &amp;_newVal)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_V2</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_VN2</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C3dVector</type>
+      <name>m_VTex2</name>
+      <anchorfile>classC3dTriangle.html</anchorfile>
+      <anchor>p2</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -4994,12 +5965,16 @@
   </compound>
   <compound kind="dir">
     <name>editor/</name>
-    <path>/home/high/programming/bbuilder/editor/</path>
+    <path>/home/alex/Studium/SE.Projekt/glbb/editor/</path>
     <filename>dir_000000.html</filename>
+    <file>_bb_propertywidget.cpp</file>
+    <file>_bb_propertywidget.h</file>
     <file>bb.cpp</file>
     <file>bb.h</file>
     <file>bb_abstracttool.cpp</file>
     <file>bb_abstracttool.h</file>
+    <file>bb_abstracttoolwidget.cpp</file>
+    <file>bb_abstracttoolwidget.h</file>
     <file>bb_building.cpp</file>
     <file>bb_building.h</file>
     <file>bb_config.cpp</file>
@@ -5010,8 +5985,6 @@
     <file>bb_dlgprojectnew.h</file>
     <file>bb_dlgterrainedit.cpp</file>
     <file>bb_dlgterrainedit.h</file>
-    <file>bb_dlgtoolscaleedit.cpp</file>
-    <file>bb_dlgtoolscaleedit.h</file>
     <file>bb_dlgwalledit.cpp</file>
     <file>bb_dlgwalledit.h</file>
     <file>bb_dlgwalleditarea.cpp</file>
@@ -5044,8 +6017,6 @@
     <file>bb_object.h</file>
     <file>bb_point.cpp</file>
     <file>bb_point.h</file>
-    <file>bb_propertywidget.cpp</file>
-    <file>bb_propertywidget.h</file>
     <file>bb_rect.cpp</file>
     <file>bb_rect.h</file>
     <file>bb_tab.cpp</file>
@@ -5082,6 +6053,12 @@
     <file>bb_triangle.h</file>
     <file>bb_wall.cpp</file>
     <file>bb_wall.h</file>
+    <file>bb_widgettoolscale.cpp</file>
+    <file>bb_widgettoolscale.h</file>
+    <file>bb_widgettoolselect.cpp</file>
+    <file>bb_widgettoolselect.h</file>
+    <file>bb_widgettoolzoom.cpp</file>
+    <file>bb_widgettoolzoom.h</file>
     <file>bb_workarea.cpp</file>
     <file>bb_workarea.h</file>
     <file>bb_workframe.cpp</file>
@@ -5101,38 +6078,61 @@
     <file>c2dvector.cpp</file>
     <file>c2dvector.h</file>
     <file>main.cpp</file>
+    <file>moc_bb_abstracttool.cpp</file>
+    <file>moc_bb_abstracttoolwidget.cpp</file>
     <file>moc_bb_dlgbuildingedit.cpp</file>
     <file>moc_bb_dlgprojectnew.cpp</file>
     <file>moc_bb_dlgterrainedit.cpp</file>
     <file>moc_bb_dlgtoolscaleedit.cpp</file>
     <file>moc_bb_dlgwalledit.cpp</file>
+    <file>moc_bb_doc.cpp</file>
     <file>moc_bb_mainwindow.cpp</file>
     <file>moc_bb_tab.cpp</file>
     <file>moc_bb_tabbuilding.cpp</file>
     <file>moc_bb_tablevel.cpp</file>
     <file>moc_bb_tabterrain.cpp</file>
+    <file>moc_bb_widgettoolscale.cpp</file>
+    <file>moc_bb_widgettoolselect.cpp</file>
+    <file>moc_bb_widgettoolzoom.cpp</file>
     <file>moc_bb_workarea.cpp</file>
     <file>ui_buildingEdit.h</file>
-    <file>ui_editWall.h</file>
     <file>ui_fileOptions.h</file>
     <file>ui_projectNew.h</file>
-    <file>ui_scaleEdit.h</file>
     <file>ui_terrainEdit.h</file>
+    <file>ui_toolWidgetScale.h</file>
+    <file>ui_toolWidgetSelect.h</file>
+    <file>ui_toolWidgetZoom.h</file>
   </compound>
   <compound kind="dir">
     <name>renderer/</name>
-    <path>/home/high/programming/bbuilder/renderer/</path>
+    <path>/home/alex/Studium/SE.Projekt/glbb/renderer/</path>
     <filename>dir_000001.html</filename>
     <file>br_camera.cpp</file>
     <file>br_camera.h</file>
+    <file>br_doc.cpp</file>
+    <file>br_doc.h</file>
     <file>br_globals.cpp</file>
     <file>br_globals.h</file>
+    <file>br_infowidget.cpp</file>
+    <file>br_infowidget.h</file>
     <file>br_keyhandler.cpp</file>
     <file>br_keyhandler.h</file>
     <file>br_mainwindow.cpp</file>
     <file>br_mainwindow.h</file>
     <file>br_view.cpp</file>
     <file>br_view.h</file>
+    <file>c3dbody.cpp</file>
+    <file>c3dbody.h</file>
+    <file>c3dcylinder.cpp</file>
+    <file>c3dcylinder.h</file>
+    <file>c3dline.cpp</file>
+    <file>c3dline.h</file>
+    <file>c3dpoint.cpp</file>
+    <file>c3dpoint.h</file>
+    <file>c3dquad.cpp</file>
+    <file>c3dquad.h</file>
+    <file>c3dtriangle.cpp</file>
+    <file>c3dtriangle.h</file>
     <file>c3dvector.cpp</file>
     <file>c3dvector.h</file>
     <file>ccolorrgba.cpp</file>

@@ -28,7 +28,7 @@ BB_ToolZoom::BB_ToolZoom( BB_WorkArea* area )
     }
 
     m_WorkArea = area;
-    m_ToolWidget = new BB_WidgetToolZoom();
+    m_ToolWidget = new BB_WidgetToolZoom( this );
 }
 
 
@@ -53,20 +53,6 @@ void BB_ToolZoom::click( QMouseEvent* me )
 
 	( ( BB_WidgetToolZoom* ) ( m_ToolWidget ) ) -> setZoomFaktor( m_Component->getZoom() );
 }
-
-void BB_ToolZoom::move( QMouseEvent* me, bool overX, bool overY )
-{
-    if ( overX || overY )
-    {
-        me->ignore();
-    }
-}
-
-void BB_ToolZoom::release( QMouseEvent* me )
-{
-    me->ignore();
-}
-
 
 
 /*!

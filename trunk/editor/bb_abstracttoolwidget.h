@@ -15,6 +15,8 @@
 #include <QWidget>
 #include <bb_drawobject.h>
 
+class BB_AbstractTool;
+
 /**
 Basisklasse für alle Tool-Fenster
  
@@ -24,11 +26,17 @@ class BB_AbstractToolWidget : public QWidget
 {
         Q_OBJECT
     public:
-        BB_AbstractToolWidget( QWidget *parent = 0 );
+		BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget *parent = 0 );
 
         ~BB_AbstractToolWidget();
     virtual void updateWidget();
-
+    virtual void setSelection( QVector< BB_DrawObject* >* vector );
+    virtual void clearWidget();
+    virtual void setWidgetEnabled( bool value );
+	
+	QVector< BB_DrawObject* >* m_Selection;
+	protected:
+		BB_AbstractTool *m_ParentTool;
 };
 
 #endif

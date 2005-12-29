@@ -26,7 +26,7 @@ BB_ToolScale::BB_ToolScale( QWidget * parent )
     m_MovePoint = NULL;
     m_ScaleLine = NULL;
 
-    m_ToolWidget = new BB_WidgetToolScale();
+    m_ToolWidget = new BB_WidgetToolScale( this );
 
     /* Alle Objekte ausblenden */
     m_ShowDrawObjects = false;

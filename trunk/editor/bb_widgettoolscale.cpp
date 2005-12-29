@@ -13,8 +13,8 @@
 #include <bb.h>
 #include <QMessageBox>
 
-BB_WidgetToolScale::BB_WidgetToolScale()
-        : BB_AbstractToolWidget()
+BB_WidgetToolScale::BB_WidgetToolScale( BB_AbstractTool* parentTool )
+        : BB_AbstractToolWidget(parentTool)
 {
     m_Ui.setupUi( this );
     m_Ui.real->setValidator( BB::validNumeric );
@@ -94,4 +94,13 @@ void BB_WidgetToolScale::setRealScale( double *real )
 void BB_WidgetToolScale::slotRealFinished()
 {
 	commitReal();
+}
+
+
+/*!
+    \fn BB_WidgetToolScale::setupUi()
+ */
+void BB_WidgetToolScale::setupUi()
+{
+    /// @todo implement me
 }

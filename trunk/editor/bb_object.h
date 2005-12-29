@@ -34,10 +34,10 @@ public:
 	int BB_Object::getObjectNr() const;
 
 	void BB_Object::setName(const QString& theValue);
-	QString& BB_Object::getName();
+	const QString& BB_Object::getName() const;
 	
 	void BB_Object::setDescription(const QString& theValue);
-	QString& BB_Object::getDescription();
+	const QString& BB_Object::getDescription() const;
 	
 	virtual void generateXElement(QTextStream &out, int depth);	
     virtual const QString getClassName();

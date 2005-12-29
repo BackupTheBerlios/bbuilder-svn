@@ -30,7 +30,6 @@ class BB_WidgetToolSelect : public BB_AbstractToolWidget
 		BB_WidgetToolSelect( BB_ToolMove* parentTool );
         ~BB_WidgetToolSelect();
         virtual void updateWidget();
-        void setSelection( QVector< BB_DrawObject* >* vector );
 
 
     private slots:
@@ -40,13 +39,10 @@ class BB_WidgetToolSelect : public BB_AbstractToolWidget
 
     protected:
         Ui::WidgetToolSelect m_Ui;
-        QVector <BB_DrawObject* >* m_Selection;
     private:
         void commitName();
         void commitDesc();
-		
-	private:
-		BB_ToolMove *m_ParentTool;
+
 
 private slots:
     void slotSelectAll();

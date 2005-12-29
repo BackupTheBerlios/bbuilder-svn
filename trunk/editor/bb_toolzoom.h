@@ -31,8 +31,6 @@ public:
     ~BB_ToolZoom();
 
     virtual void click(QMouseEvent* me);
-	virtual void move(QMouseEvent* me, bool overX, bool overY);
-	virtual void release(QMouseEvent* me);
     virtual void setDocComponent( BB_DocComponent* component );
 
 protected:

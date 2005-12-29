@@ -16,17 +16,9 @@
  * Konstruktor
  */
 BB_WidgetToolSelect::BB_WidgetToolSelect( BB_ToolMove* parentTool )
-        : BB_AbstractToolWidget()
+        : BB_AbstractToolWidget(parentTool)
 {
-	
-	if( parentTool == NULL )
-	{
-		qDebug( "ERROR: BB_WidgetToolSelect::BB_WidgetToolSelect( NULL )" );
-		exit(1);
-	}
 
-	m_ParentTool = parentTool;
-	
     m_Selection = NULL;
 
     m_Ui.setupUi( this );
@@ -109,23 +101,6 @@ void BB_WidgetToolSelect::updateWidget()
 
 
 /**
- * Setzt den Selektions-Vektor
- */
-void BB_WidgetToolSelect::setSelection( QVector< BB_DrawObject* >* vector )
-{
-	if( vector != NULL )
-	{
-		m_Selection = vector;
-		updateWidget();
-	}
-	else
-	{
-		qDebug( "Selektions-Vektor wurde nicht gesetzt: NULL-Pointer erhalten" );
-	}
-}
-
-
-/**
  * Speichert die Änderungen des Name des selectierten Objektes
  */
 void BB_WidgetToolSelect::commitName()
@@ -159,6 +134,6 @@ void BB_WidgetToolSelect::slotDeleteSelection()
  */
 void BB_WidgetToolSelect::slotSelectAll()
 {
-	m_ParentTool->selectAll();
+	((BB_ToolMove*)(m_ParentTool))->selectAll();
 	updateWidget();
 }

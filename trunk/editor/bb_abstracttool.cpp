@@ -25,14 +25,28 @@ BB_AbstractTool::BB_AbstractTool()
     m_Transformer = NULL;
     m_Objects = NULL;
     m_Action = NULL;
-	m_ToolWidget = NULL;
 	m_WorkFrame = NULL;
     m_ShowDrawObjects = true;
-
+	m_ToolWidget = NULL;
+	m_Selection = NULL;
 }
 
 BB_AbstractTool::~BB_AbstractTool()
 {}
+
+void BB_AbstractTool::move( QMouseEvent* me, bool overX, bool overY )
+{
+	overX = false;
+	overY = false;
+	me->ignore();
+}
+
+void BB_AbstractTool::release( QMouseEvent* me )
+{
+	me->ignore();
+}
+
+
 
 bool BB_AbstractTool::deleteObject( BB_DrawObject * delObject )
 {
@@ -99,7 +113,12 @@ void BB_AbstractTool::setSelectionVector( QVector<BB_DrawObject*>* selectionVect
     if ( selectionVector != NULL )
     {
         m_Selection = selectionVector;
+		if( m_ToolWidget != NULL )
+		{
+			m_ToolWidget->setSelection( m_Selection );
+		}
     }
+	
     else
     {
         cout << "BB_AbstractTool::setSelectionVector(): Übergebener Pointer ist NULL\n Auswahl-Vektor wurde nicht gesetzt." << endl;
@@ -283,4 +302,46 @@ void BB_AbstractTool::documentChanged()
 	{
 		m_ToolWidget->updateWidget();
 	}
+}
+
+
+/*!
+    \fn BB_AbstractTool::createNewObject()
+ */
+BB_DrawObject* BB_AbstractTool::createNewObject()
+{
+	return NULL;
+}
+
+
+/**
+ * Aktualisiert das Tool-Fenster
+ */
+void BB_AbstractTool::updateWidget()
+{
+	if( m_ToolWidget != NULL )
+	{
+		m_ToolWidget->updateWidget();
+	}
+}
+
+
+
+/**
+ * Löscht alle selektierten Objekte
+ * @author Alex Letkemann
+ * @date 26.12.2005
+ */
+void BB_AbstractTool::deleteSelection()
+{
+	if( m_Selection != NULL )
+	{
+		for(int i = m_Selection->count() -1 ; i >= 0; i--)
+		{
+			deleteObject( m_Selection->at(i) );
+			m_Selection->remove(i);
+		}
+	}
+	
+	documentChanged();
 }

@@ -18,8 +18,24 @@
 #include "bb_dlgwalledit.h"
 #include "bb_window.h"
 
+#include <iostream>
+
+using namespace std;
+
 BB_Wall::BB_Wall( BB_Point* p1, BB_Point* p2 ) : BB_Line( p1, p2 )
 {
+	m_ShowDirection = true;
+	
+	m_Pen.setColor( m_Color );
+	m_Pen.setWidth( 3 );
+	
+	m_Brush.setColor( m_Color );
+	
+	m_PenDirection.setWidth( 1 );
+	m_PenDirection.setColor( m_Color );
+	
+	moveEvent();
+
     m_Objects = new QVector <BB_DrawObject *>;
     // 	m_Objects->resize(100);
 }
@@ -55,19 +71,39 @@ void BB_Wall::generateXElement( QTextStream &out, int depth )
 void BB_Wall::show( BB_Transformer& transformer, QPainter& painter ) const
 {
     //     BB_DrawObject::show(transformer, painter);
-
-    QPoint dest_Pos1, dest_Pos2;
+	if( m_Selected )
+	{
+		painter.setPen( m_PenSelected );
+	}
+	else
+	{
+		painter.setPen( m_Pen );
+	}
+	painter.setBrush( m_Brush );
+	
+	QPoint dest_Pos1, dest_Pos2, dest_Middle;
 
     transformer.logicalToScreen( dest_Pos1, m_Pos1->getPos() );
     transformer.logicalToScreen( dest_Pos2, m_Pos2->getPos() );
+	transformer.logicalToScreen( dest_Middle, m_Middle );
+	
 
-    painter.setPen( m_Color );
-    painter.setBrush( m_Color );
-    QPen pen;
-    pen.setColor( m_Color );
-    pen.setWidth( 3 );
-    painter.setPen( pen );
+	
     painter.drawLine( dest_Pos1.x(), dest_Pos1.y(), dest_Pos2.x(), dest_Pos2.y() );
+	
+// 	cout 	<< "P1: " << m_Pos1->getPos().x() << "|" << m_Pos1->getPos().y() << " - "
+// 			<< "P2: " << m_Pos2->getPos().x() << "|" << m_Pos2->getPos().y() << " - "
+// 			<< "M:" << m_Middle.x() << "|" << m_Middle.y() << endl;
+	
+	///@todo Test löschen
+	// NUR TEST 
+	painter.drawText( dest_Middle.x() , dest_Middle.y() , getName());
+	
+	
+	if( m_ShowDirection )
+	{
+		showDirection( transformer, painter, dest_Middle);
+	}
 }
 
 
@@ -104,4 +140,48 @@ QVector< BB_DrawObject * >* BB_Wall::getPoints() const
 void BB_Wall::setObjects( QVector< BB_DrawObject * >* Value )
 {
     m_Objects = Value;
+}
+
+/**
+ * Markiert die 'Richtung' der Wand. 
+ * Die Seite der Wand, die Später angezeigt werden soll wird markiert.
+ * @param transformer Transformer, mit dessen Einstellungen gezeichnet wird.
+ * @param painter Painter, mit welchem gezeichnet wird.
+ * @param middle Ein bereits mit dem Transformer konvertierter Mittelpunkt der Linie
+ * @author Alex Letkemann
+ */
+void BB_Wall::showDirection( BB_Transformer& transformer, QPainter& painter, QPoint& middle ) const
+{
+	QPoint dest_Direction;
+	
+
+	transformer.logicalToScreen( dest_Direction, m_Direction );
+	painter.setPen( m_PenDirection );	
+	painter.drawLine( middle, dest_Direction );
+	
+}
+
+
+/**
+ * Berechnet die 'Richtung' der Wand
+ */
+void BB_Wall::calculateDirection()
+{
+
+	m_Direction = ( m_Pos2->getPos() - m_Pos1->getPos() ); 
+	// Länge der Markierunglinie auf 10 setzen.
+	m_Direction = m_Direction.unitVector() * 10.0;
+	m_Direction = m_Direction.rotate( 90.0 );
+	m_Direction = m_Direction + m_Middle;
+}
+
+
+/*!
+    \fn BB_Line::moveEvent()
+ */
+void BB_Wall::moveEvent()
+{
+	BB_Line::moveEvent();
+	calculateDirection();
+	
 }

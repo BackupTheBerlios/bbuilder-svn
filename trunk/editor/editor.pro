@@ -9,7 +9,8 @@ FORMS += buildingEdit.ui \
          terrainEdit.ui \
          toolWidgetScale.ui \
          toolWidgetSelect.ui \
-         toolWidgetZoom.ui 
+         toolWidgetZoom.ui \
+         toolWidgetPointNew.ui 
 HEADERS += bb_abstracttool.h \
            bb_building.h \
            bb_doc.h \
@@ -62,6 +63,7 @@ HEADERS += bb_abstracttool.h \
            bb_widgettoolscale.h \
            bb_abstracttoolwalledit.h \
            bb_widgettoolselect.h \
+           bb_widgettoolpointnew.h \
            bb_widgettoolzoom.h \
            bb_constructionelement.h \
            bb_window.h 
@@ -118,6 +120,7 @@ SOURCES += bb_abstracttool.cpp \
            bb_widgettoolscale.cpp \
            bb_abstracttoolwalledit.cpp \
            bb_widgettoolselect.cpp \
+           bb_widgettoolpointnew.cpp \
            bb_widgettoolzoom.cpp \
            bb_constructionelement.cpp \
            bb_window.cpp 

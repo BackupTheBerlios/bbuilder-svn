@@ -1,57 +1,129 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Alex Letkemann   *
- *   alex@letkemann.de   *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- ***************************************************************************/
+*   Copyright (C) 2005 by Alex Letkemann   *
+*   alex@letkemann.de   *
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+*   This program is distributed in the hope that it will be useful,       *
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+*   GNU General Public License for more details.                          *
+***************************************************************************/
 #include "bb_toolpointnew.h"
+#include <bb_widgettoolpointnew.h>
 
 #include <iostream>
 
 using namespace std;
 
 BB_ToolPointNew::BB_ToolPointNew()
- : BB_AbstractTool()
+        : BB_AbstractTool()
 {
+	m_ToolWidget = new BB_WidgetToolPointNew( this );
 }
 
 
 BB_ToolPointNew::~BB_ToolPointNew()
+{}
+
+
+/**
+ * Pr&uuml;ft, ob ein Punkt angeclickt wurde und selektiert diesen.
+ * Wenn kein Punkt angeclickt wurde, wird ein neuer erzeigt und dieser selectiert.
+ * @param me MouseClickEvent
+ * @author Alex Letkemann, Vaceslav Ustinov
+ * @date 27.12.2005
+ */
+void BB_ToolPointNew::click( QMouseEvent* me )
 {
+
+    if ( m_Objects != NULL && me != NULL )
+    {
+        m_Transformer->screenToLogical( m_LastLogicMouseClick, me->pos() );
+        clearSelection();
+
+        m_pScreen = me->pos();
+        m_Transformer->screenToLogical( m_pLogic, m_pScreen );
+
+        // Prüfen, ob ein bereits vorhandener Punkt angeclickt wurde
+        m_Point = ( BB_Point * ) getClickedObject( m_pLogic, typeid( BB_Point ) );
+
+        // falls kein Punkt abgeclickt wurde, wird ein neuer Punkt erzeugt
+        if ( m_Point == NULL )
+        {
+            m_Point = ( BB_Point * ) createNewObject();
+            m_Objects->append( m_Point );
+        }
+
+        m_Point->setSelected( true );
+        m_Selection->append( m_Point );
+        updateWidget();
+    }
 }
 
 
-void BB_ToolPointNew::click(QMouseEvent* me)
+
+
+/**
+ * Bewegt den selektierten Punkt.
+ * @param me MouseMoveEvent
+ * @param overX Gibt an wenn der Maus-Zeiger horizontal außerhalb des Workframes ist.
+ * @param overY Gibt an wenn der Maus-Zeiger vertikal außerhalb des Workframes ist.
+ */
+void BB_ToolPointNew::move( QMouseEvent* me, bool overX, bool overY )
 {
-	
-	if(m_Objects != NULL && me != NULL)
-	{	
-		m_pScreen = me->pos();
-		m_Transformer->screenToLogical(m_pLogic,m_pScreen);
-// 		cout << "New Point (" << pLogic.x() << "|" << pLogic.y() << ")" << endl;
-		BB_Point *point = new BB_Point(m_pLogic);
-		m_Objects->append(point);
-	}
+    //wenn die noetigen objekte nicht da sind, sofort abbrechen
+    if ( m_Objects == NULL && me == NULL && m_Transformer == NULL )
+    {
+        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
+        return ;
+    }
+
+    C2dVector moveTmp;
+    for ( int i = 0; i < m_Selection->count(); i++ )
+    {
+
+        m_Transformer->screenToLogical( m_pLogic, me->pos() );
+        moveTmp.setX( m_pLogic.x() - m_LastLogicMouseClick.x() );
+        moveTmp.setY( m_pLogic.y() - m_LastLogicMouseClick.y() );
+        //Uberpruefung, damit die punkte nicht auserrand geschoben werden
+        ///@todo Funktioniert falsch!!!
+        if ( overX )
+        {
+            moveTmp.setX( 0 );
+        }
+        if ( overY )
+        {
+            moveTmp.setY( 0 );
+        }
+        m_Selection->at( i ) ->moveBy( moveTmp );
+    }
+    //letzte mausposition merken
+    m_Transformer->screenToLogical( m_LastLogicMouseClick, me->pos() );
+	updateWidget();
 }
 
-void BB_ToolPointNew::move(QMouseEvent* me, bool overX, bool overY)
+
+/**
+ * Wird aufgerufen, wenn die Maustaste losgelassen wird.
+ * @param me MausReleaseEvent
+ */
+void BB_ToolPointNew::release( QMouseEvent* me )
 {
-	if(overX || overY)
-	{
-		me->ignore();
-	}
+    me->ignore();
+    m_Point = NULL;
 }
 
-void BB_ToolPointNew::release(QMouseEvent* me)
+
+/**
+ * Erzeigt einen neunen Punkt an der Position 'm_pLogic' und gibt diesen zur&uuml;ck.
+ * @return Der neue Punkt
+ */
+BB_DrawObject* BB_ToolPointNew::createNewObject()
 {
-	me->ignore();
+    return new BB_Point( m_pLogic );
 }
 

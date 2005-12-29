@@ -48,7 +48,7 @@ bool BB_Level::write( QTextStream &out )
 
 
 /*!
-    \fn BB_Level::getClassName()
+    \fn BB_Object::getClassName()
  */
 const QString BB_Level::getClassName()
 {

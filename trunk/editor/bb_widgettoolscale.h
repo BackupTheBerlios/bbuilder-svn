@@ -24,7 +24,7 @@ class BB_WidgetToolScale : public BB_AbstractToolWidget
 {
 	Q_OBJECT
 public:
-    BB_WidgetToolScale();
+	BB_WidgetToolScale( BB_AbstractTool* parentTool );
 
     ~BB_WidgetToolScale();
     void setLogicalScale( double value );
@@ -38,6 +38,8 @@ private:
     void commitReal();
 private slots:
 	void slotRealFinished();
+protected:
+    virtual void setupUi();
 };
 
 #endif

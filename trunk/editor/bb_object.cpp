@@ -74,7 +74,7 @@ int BB_Object::getObjectNr() const
  * Gibt den Namen des Objektes zurück
  * @return Name des Onjektes
  */
-QString& BB_Object::getName()
+const QString& BB_Object::getName() const
 {
     return m_Name;
 }
@@ -106,7 +106,7 @@ void BB_Object::setName( const QString& name )
  * Gibt die Beschreibung des Objektes zurück
  * @return Beschreibung des Objektes
  */
-QString& BB_Object::getDescription()
+const QString& BB_Object::getDescription() const
 {
     return m_Description;
 }

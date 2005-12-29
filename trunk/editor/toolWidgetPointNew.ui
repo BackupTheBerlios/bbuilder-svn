@@ -1,0 +1,162 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>WidgetToolPointNew</class>
+ <widget class="QWidget" name="WidgetToolPointNew" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>449</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" >
+   <property name="margin" >
+    <number>0</number>
+   </property>
+   <property name="spacing" >
+    <number>5</number>
+   </property>
+   <item row="0" column="0" >
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>Knoten</string>
+     </property>
+     <property name="flat" >
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" >
+      <property name="margin" >
+       <number>2</number>
+      </property>
+      <property name="spacing" >
+       <number>5</number>
+      </property>
+      <item row="3" column="0" >
+       <widget class="QGroupBox" name="groupBox_5" >
+        <property name="title" >
+         <string>Optionen</string>
+        </property>
+        <property name="flat" >
+         <bool>true</bool>
+        </property>
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>2</number>
+         </property>
+         <property name="spacing" >
+          <number>5</number>
+         </property>
+         <item row="0" column="0" >
+          <widget class="QPushButton" name="pushButton_Delete" >
+           <property name="toolTip" >
+            <string>Löscht den Knoten</string>
+           </property>
+           <property name="statusTip" >
+            <string>Löscht den Knoten</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Löscht den Knoten</string>
+           </property>
+           <property name="text" >
+            <string>Löschen</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QGroupBox" name="groupBox_4" >
+        <property name="title" >
+         <string>Position</string>
+        </property>
+        <property name="flat" >
+         <bool>true</bool>
+        </property>
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>2</number>
+         </property>
+         <property name="spacing" >
+          <number>5</number>
+         </property>
+         <item row="1" column="1" >
+          <widget class="QLineEdit" name="lineEdit_Y" />
+         </item>
+         <item row="0" column="1" >
+          <widget class="QLineEdit" name="lineEdit_X" />
+         </item>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="label_2" >
+           <property name="text" >
+            <string>Y:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" >
+          <widget class="QLabel" name="label" >
+           <property name="text" >
+            <string>X:</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QGroupBox" name="groupBox_3" >
+        <property name="title" >
+         <string>Knoten-Beschreibung</string>
+        </property>
+        <property name="flat" >
+         <bool>true</bool>
+        </property>
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>2</number>
+         </property>
+         <property name="spacing" >
+          <number>5</number>
+         </property>
+         <item row="0" column="0" >
+          <widget class="QTextEdit" name="textEdit_PointDesc" />
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="0" >
+       <widget class="QGroupBox" name="groupBox_2" >
+        <property name="title" >
+         <string>Knoten-Name</string>
+        </property>
+        <property name="flat" >
+         <bool>true</bool>
+        </property>
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>2</number>
+         </property>
+         <property name="spacing" >
+          <number>5</number>
+         </property>
+         <item row="0" column="0" >
+          <widget class="QLineEdit" name="lineEdit_PointName" />
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</ui>

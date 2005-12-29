@@ -61,7 +61,7 @@ void BB_ToolLineNew::click( QMouseEvent* me )
             {
                 C2dVector fromhitobject = ( ( BB_Point* ) object ) ->getPos();
                 cout << "New Line : Point :" << fromhitobject.x() << endl;
-                BB_Point *tmpPoint = new BB_Point( m_pLogic );
+				BB_Point *tmpPoint = new BB_Point( m_pLogic );	///@todo tmpPoint wird nicht aus dem Speicher entfernt
                 m_movedPoint = tmpPoint;
                 BB_Wall *wall = new BB_Wall( ( BB_Point* ) object, tmpPoint );
                 tmpWall = wall;

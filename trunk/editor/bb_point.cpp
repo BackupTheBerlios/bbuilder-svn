@@ -29,6 +29,7 @@ BB_Point::BB_Point()
     m_Color.setNamedColor( "Red" );
     m_scale = 1.0;
     m_Links.clear();
+	
 }
 
 BB_Point::BB_Point( C2dVector p )
@@ -71,6 +72,12 @@ BB_Point::~BB_Point()
 void BB_Point::moveBy( C2dVector vMove )
 {
     m_Pos = m_Pos + vMove;
+	
+	for(int i = 0; i < m_Links.count(); i++)
+	{
+		m_Links.at(i)->moveEvent();
+	}
+	
 }
 
 void BB_Point::show( BB_Transformer& transformer, QPainter& painter ) const
@@ -80,35 +87,42 @@ void BB_Point::show( BB_Transformer& transformer, QPainter& painter ) const
 
     transformer.logicalToScreen( dest, m_Pos );
 
-    painter.setPen( m_Color );
-    painter.setBrush( m_Color );
+	if( m_Selected )
+	{
+    	painter.setPen( m_PenSelected );
+	}
+	else
+	{
+		painter.setPen( m_Pen );
+	}
+	
+	painter.setBrush( m_Brush );
+
     //painter.drawEllipse(dest.x() - m_Radius, dest.y() - m_Radius, m_Radius*2, m_Radius*2);
-    painter.drawRect( dest.x() - m_Radius, dest.y() - m_Radius,
-                      m_Radius * 2, breite );
-    painter.drawRect( dest.x() - m_Radius, dest.y() + m_Radius - breite,
-                      m_Radius * 2, breite );
-    painter.drawRect( dest.x() - m_Radius, dest.y() - m_Radius + breite,
-                      breite, m_Radius * 2 - breite * 2 );
-    painter.drawRect( dest.x() + m_Radius - breite, dest.y() - m_Radius + breite,
-                      breite, m_Radius * 2 - breite * 2 );
+    painter.drawRect( dest.x() - m_Radius, dest.y() - m_Radius, m_Radius * 2, breite );
+    painter.drawRect( dest.x() - m_Radius, dest.y() + m_Radius - breite, m_Radius * 2, breite );
+    painter.drawRect( dest.x() - m_Radius, dest.y() - m_Radius + breite, breite, m_Radius * 2 - breite * 2 );
+    painter.drawRect( dest.x() + m_Radius - breite, dest.y() - m_Radius + breite, breite, m_Radius * 2 - breite * 2 );
     painter.setBrush( QColor( 0, 200, 0 ) );
     painter.setPen( QColor( 0, 200, 0 ) );
     painter.drawRect( dest.x() - breite, dest.y() - breite,
                       breite * 2, breite * 2 );
-    if ( m_Selected )
-    {
-        painter.setBrush( QColor( 0, 0, 200 ) );
-        painter.setPen( QColor( 0, 0, 200 ) );
-        painter.drawText( dest.x() - m_Radius - breite, dest.y() - m_Radius - breite, "->" );
-        painter.drawRect( dest.x() - m_Radius - breite, dest.y() - m_Radius - breite,
-                          breite, breite );
-        painter.drawRect( dest.x() - m_Radius - breite, dest.y() + m_Radius,
-                          breite, breite );
-        painter.drawRect( dest.x() + m_Radius, dest.y() - m_Radius - breite,
-                          breite, breite );
-        painter.drawRect( dest.x() + m_Radius, dest.y() + m_Radius,
-                          breite, breite );
-    }
+	
+//  EDIT: Alex Letkemann: Andere Selektionsmarkierung implementiert
+//     if ( m_Selected )
+//     {
+//         painter.setBrush( QColor( 0, 0, 200 ) );
+//         painter.setPen( QColor( 0, 0, 200 ) );
+//         painter.drawText( dest.x() - m_Radius - breite, dest.y() - m_Radius - breite, "->" );
+//         painter.drawRect( dest.x() - m_Radius - breite, dest.y() - m_Radius - breite,
+//                           breite, breite );
+//         painter.drawRect( dest.x() - m_Radius - breite, dest.y() + m_Radius,
+//                           breite, breite );
+//         painter.drawRect( dest.x() + m_Radius, dest.y() - m_Radius - breite,
+//                           breite, breite );
+//         painter.drawRect( dest.x() + m_Radius, dest.y() + m_Radius,
+//                           breite, breite );
+//     }
 }
 
 
@@ -153,7 +167,7 @@ bool BB_Point::isHit( C2dVector hit )
 
 
 
-C2dVector BB_Point::getPos() const
+const C2dVector& BB_Point::getPos() const
 {
     return m_Pos;
 }

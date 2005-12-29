@@ -50,12 +50,14 @@ public:
     virtual bool isHit(QRect rect);
     void setBrush(const QBrush& theValue);
     void setPen(const QPen& theValue);
+    virtual void moveEvent();
 protected:
     //QPoint m_P0;
     QColor m_Color;
     int m_hitRange;
     bool m_Selected;
     QPen m_Pen;
+	QPen m_PenSelected;
     QBrush m_Brush;
 };
 

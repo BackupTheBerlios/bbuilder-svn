@@ -51,7 +51,7 @@ class BB_Point : public BB_DrawObject
         void setRadius( int r );
         virtual bool isHit( C2dVector hit );
         void setPos( const C2dVector& theValue );
-        C2dVector getPos() const;
+        const C2dVector& getPos() const;
         QVector<BB_Line*>* getLines();
         /**
         @author Vaceslav ustinov
@@ -123,8 +123,6 @@ class BB_Point : public BB_DrawObject
         * @author Vaceslav Ustinov
         */
         QPoint getQPoint();
-
-
 
     private:
         int m_Radius;

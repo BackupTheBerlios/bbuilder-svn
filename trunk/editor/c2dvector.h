@@ -22,7 +22,7 @@
 
 /**A vector with 2 double coordinates. Used for vector maths.
   *Get functions are called x() and y().
-  *@author Walter Roth
+  *@author Walter Roth, Alex Letkemann (Änderungen), Vaceslav Ustinov (Änderungen)
   */
 #include <math.h> 
   
@@ -70,6 +70,9 @@ public:
   const char * getClassName()const;
     void print();
     bool operator == (const C2dVector & v2) const;
+    virtual C2dVector operator * (const double value) const;;
+    C2dVector rotate( double angle ) const;
+    C2dVector unitVector();
 protected: // Protected attributes
   /** X coordinate.
   */

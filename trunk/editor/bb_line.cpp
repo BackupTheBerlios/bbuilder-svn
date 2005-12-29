@@ -32,10 +32,14 @@ BB_Line::BB_Line( BB_Point *p1, BB_Point *p2 )
     m_Pos1 = NULL;
     m_Pos2 = NULL;
 
+	// Positionen setzen
     setPos1( p1 );
     setPos2( p2 );
+	
+	// Sonstige Einstellungen
     m_Color.setNamedColor( "Red" );
     m_hitRange = 3;
+
 }
 
 
@@ -83,6 +87,15 @@ void BB_Line::show( BB_Transformer& transformer, QPainter& painter ) const
 {
     //     BB_DrawObject::show(transformer, painter);
 
+	if( m_Selected )
+	{
+		painter.setPen( m_PenSelected );
+	}
+	else
+	{
+		painter.setPen( m_Pen );
+	}
+	
     QPoint dest_Pos1, dest_Pos2;
 
     transformer.logicalToScreen( dest_Pos1, m_Pos1->getPos() );
@@ -113,7 +126,11 @@ bool BB_Line::setPos1( BB_Point* Value )
             m_Pos1->removeLinkedObject( this );
         m_Pos1 = Value;
         m_Pos1->addObject( this );
-        return true;
+        
+		// Mitte neu berechnen
+		moveEvent();
+		
+		return true;
     }
     return false;
 }
@@ -137,6 +154,10 @@ bool BB_Line::setPos2( BB_Point* Value )
             m_Pos2->removeLinkedObject( this );
         m_Pos2 = Value;
         m_Pos2->addObject( this );
+		
+		// Mitte neu berechnen
+		moveEvent();
+		
         return true;
     }
     return false;
@@ -146,15 +167,15 @@ bool BB_Line::setPos2( BB_Point* Value )
 /*!
     \fn BB_Line::delete(BB_Point * point)
  */
-void BB_Line::remove( BB_Point * point )
-{
-
-    cout << "void BB_Line::remove( " << point << " )" << endl;
-    if ( m_Pos1 == point )
-        m_Pos2->deleteLinkedObject( this );
-    else
-        m_Pos1->deleteLinkedObject( this );
-}
+// void BB_Line::remove( BB_Point * point )
+// {
+// 
+//     cout << "void BB_Line::remove( " << point << " )" << endl;
+//     if ( m_Pos1 == point )
+//         m_Pos2->deleteLinkedObject( this );
+//     else
+//         m_Pos1->deleteLinkedObject( this );
+// }
 
 
 /*!
@@ -187,6 +208,43 @@ double BB_Line::getLength()
     return tmp.getLength();
 }
 
-double BB_Line::getWinkel(){
-	return m_Richtung.getWinkel();
+double BB_Line::getWinkel() const{
+	return (m_Pos2->getPos() - m_Pos1->getPos()).getWinkel();
+}
+
+
+/**
+ *  \fn BB_DrawObject::moveEvent()
+ */
+void BB_Line::moveEvent()
+{
+	calculateMiddle();
+}
+
+
+/**
+ * Gibt die Mitte der Linie zurück
+ * @author Alex Letkemann
+ */
+const C2dVector& BB_Line::getMiddle()
+{
+	return m_Middle;
+}
+
+
+/**
+ * Berechnet die Mitte der Linie.
+ * @author Alex Letkemann
+ */
+void BB_Line::calculateMiddle()
+{
+	if( m_Pos1 != NULL && m_Pos2 != NULL )
+	{
+		C2dVector v1,v2;
+		
+		v1 = m_Pos1->getPos();
+		v2 = m_Pos2->getPos();
+		
+		m_Middle = v1 + ( v2 - v1 ) * 0.5;
+	}
 }
