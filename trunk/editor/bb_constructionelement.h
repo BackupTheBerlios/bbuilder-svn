@@ -35,6 +35,15 @@ public:
 
     ~BB_ConstructionElement();
 
+	void setTextureFileName( const QString& Value );
+	
+
+	QString getTextureFileName() const;
+	
+	protected:
+		QString m_TextureFileName;
+		QImage m_Image;
+
 };
 
 #endif

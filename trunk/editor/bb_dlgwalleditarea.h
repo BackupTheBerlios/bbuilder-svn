@@ -50,6 +50,8 @@ class BB_DlgWallEditArea : public QLabel
         double m_verhaeltniss;
         BB_AbstractTool * m_Tool;
 		QVector<BB_DrawObject * > * m_DrawObjects;
+		QVector<BB_DrawObject * > * m_Selection;
+		QVector<BB_DrawObject * > * m_ToolObjects;;
 		BB_Transformer m_transformer;
     protected:
         virtual void paintEvent ( QPaintEvent * );

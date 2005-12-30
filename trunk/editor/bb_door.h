@@ -17,32 +17,31 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "bb_constructionelement.h"
+#ifndef BB_DOOR_H
+#define BB_DOOR_H
 
-BB_ConstructionElement::BB_ConstructionElement()
- : BB_Rect()
+#include <bb_constructionelement.h>
+
+/**
+Eine Klasse zum Darstellen von einer T&uuml;r
+
+	@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
+class BB_Door : public BB_ConstructionElement
 {
-}
+public:
+    BB_Door();
+	BB_Door(C2dVector v);
 
+    ~BB_Door();
 
-BB_ConstructionElement::~BB_ConstructionElement()
-{
-}
+	/**
+	Abgeleitete Funktion zum Zeichnen von einer T&uuml;r
+	@param BB_Transformer
+	@param QPainter von QT
+	 */
+	virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
 
+};
 
-
-
-
-QString BB_ConstructionElement::getTextureFileName() const
-{
-    return m_TextureFileName;
-}
-
-
-void BB_ConstructionElement::setTextureFileName( const QString& Value )
-{
-    m_TextureFileName = Value;
-	if (!m_TextureFileName.isNull()){
-		m_Image.load(m_TextureFileName);
-	}
-}
+#endif

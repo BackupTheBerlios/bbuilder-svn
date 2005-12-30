@@ -25,7 +25,9 @@ BB_AbstractTool::BB_AbstractTool()
     m_Transformer = NULL;
     m_Objects = NULL;
     m_Action = NULL;
-	m_WorkFrame = NULL;
+    m_ToolWidget = NULL;
+    m_WorkFrame = NULL;
+	m_ToolObjects = NULL;
     m_ShowDrawObjects = true;
 	m_ToolWidget = NULL;
 	m_Selection = NULL;
@@ -60,12 +62,12 @@ bool BB_AbstractTool::deleteObject( BB_DrawObject * delObject )
             tmpObject = m_Objects->at( i );
             if ( tmpObject == delObject )
             {
-				// Falls das Objekt ein BB_Point ist, werden zuerst alle abhängigen Objekte gelöscht
-				if( typeid( *(m_Objects->at(i)) ) == typeid( BB_Point ) )
-				{
-					((BB_Point*)(m_Objects->at(i)))->deleteLinkedObjects( m_Component->getDrawObjects() );
-				}
-				
+                // Falls das Objekt ein BB_Point ist, werden zuerst alle abhängigen Objekte gelöscht
+                if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Point ) )
+                {
+                    ( ( BB_Point* ) ( m_Objects->at( i ) ) ) ->deleteLinkedObjects( m_Component->getDrawObjects() );
+                }
+
                 m_Objects->remove( i );
                 delete delObject;
                 return true;
@@ -178,10 +180,10 @@ void BB_AbstractTool::setAction( QAction* action )
  */
 void BB_AbstractTool::reset()
 {
-	if( m_ToolWidget != NULL)
-	{
-		m_ToolWidget->updateWidget();
-	}
+    if ( m_ToolWidget != NULL )
+    {
+        m_ToolWidget->updateWidget();
+    }
 }
 
 
@@ -248,12 +250,17 @@ void BB_AbstractTool::setDocComponent( BB_DocComponent* component )
     }
 }
 
-void BB_AbstractTool::setObjects(QVector<BB_DrawObject*>* objects){
-	if (objects != NULL){
-		m_Objects = objects;
-	}else{
-		qDebug("Null-Pointer in BB_AbstractTool::setObjects(QVector<BB_DrawObject*>* objects)");
-	}
+void BB_AbstractTool::setObjects( QVector<BB_DrawObject*>* objects )
+{
+    if ( objects != NULL )
+    {
+		qDebug("Vector mit Points ist gesetzt!");
+        m_Objects = objects;
+    }
+    else
+    {
+        qDebug( "Null-Pointer in BB_AbstractTool::setObjects(QVector<BB_DrawObject*>* objects)" );
+    }
 }
 
 
@@ -274,7 +281,7 @@ bool BB_AbstractTool::getShowDrawObjects()
  */
 BB_AbstractToolWidget* BB_AbstractTool::getToolWidget()
 {
-	return m_ToolWidget;
+    return m_ToolWidget;
 }
 
 
@@ -284,7 +291,7 @@ BB_AbstractToolWidget* BB_AbstractTool::getToolWidget()
  */
 void BB_AbstractTool::setWorkFrame( BB_WorkFrame* value )
 {
-	m_WorkFrame = value;
+    m_WorkFrame = value;
 }
 
 
@@ -293,15 +300,15 @@ void BB_AbstractTool::setWorkFrame( BB_WorkFrame* value )
  */
 void BB_AbstractTool::documentChanged()
 {
-	if( m_WorkFrame != NULL )
-	{
-		m_WorkFrame->documentChanged();
-	}
-	
-	if( m_ToolWidget )
-	{
-		m_ToolWidget->updateWidget();
-	}
+    if ( m_WorkFrame != NULL )
+    {
+        m_WorkFrame->documentChanged();
+    }
+
+    if ( m_ToolWidget )
+    {
+        m_ToolWidget->updateWidget();
+    }
 }
 
 

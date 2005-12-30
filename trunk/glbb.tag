@@ -70,19 +70,19 @@
   <compound kind="class">
     <name>BB_AbstractTool</name>
     <filename>classBB__AbstractTool.html</filename>
-    <member kind="function" virtualness="pure">
+    <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>move</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>a2</anchor>
-      <arglist>(QMouseEvent *me, bool overX, bool overY)=0</arglist>
+      <arglist>(QMouseEvent *me, bool overX, bool overY)</arglist>
     </member>
-    <member kind="function" virtualness="pure">
+    <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>release</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>a3</anchor>
-      <arglist>(QMouseEvent *me)=0</arglist>
+      <arglist>(QMouseEvent *me)</arglist>
     </member>
     <member kind="function" virtualness="pure">
       <type>virtual void</type>
@@ -100,119 +100,147 @@
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
-      <name>reset</name>
+      <name>deleteSelection</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>a6</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>reset</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a7</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_DrawObject *</type>
       <name>getClickedObject</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a7</anchor>
+      <anchor>a8</anchor>
       <arglist>(const C2dVector &amp;posLogic, const std::type_info &amp;type)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>setTransformer</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a8</anchor>
+      <anchor>a9</anchor>
       <arglist>(BB_Transformer *transformer)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_Transformer *</type>
       <name>getTransformer</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a9</anchor>
+      <anchor>a10</anchor>
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>setSelectionVector</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a10</anchor>
+      <anchor>a11</anchor>
       <arglist>(QVector&lt; BB_DrawObject * &gt; *selectionVector)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual QVector&lt; BB_DrawObject * &gt; *</type>
       <name>getSelectionVector</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a11</anchor>
+      <anchor>a12</anchor>
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>setToolObjects</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a12</anchor>
+      <anchor>a13</anchor>
       <arglist>(QVector&lt; BB_DrawObject * &gt; *theValue)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual QVector&lt; BB_DrawObject * &gt; *</type>
       <name>getToolObjects</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a13</anchor>
+      <anchor>a14</anchor>
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>clearSelection</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a14</anchor>
+      <anchor>a15</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>setAction</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a15</anchor>
+      <anchor>a16</anchor>
       <arglist>(QAction *theValue)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual QAction *</type>
       <name>getAction</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a16</anchor>
+      <anchor>a17</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>setDocComponent</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a17</anchor>
+      <anchor>a18</anchor>
       <arglist>(BB_DocComponent *theValue)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_DocComponent *</type>
       <name>getDocComponent</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a18</anchor>
+      <anchor>a19</anchor>
       <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setObjects</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a20</anchor>
+      <arglist>(QVector&lt; BB_DrawObject * &gt; *objects)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
       <name>getShowDrawObjects</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a19</anchor>
+      <anchor>a21</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_AbstractToolWidget *</type>
       <name>getToolWidget</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a20</anchor>
+      <anchor>a22</anchor>
       <arglist>()</arglist>
     </member>
-    <member kind="function">
-      <type>void</type>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
       <name>setWorkFrame</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a21</anchor>
+      <anchor>a23</anchor>
       <arglist>(BB_WorkFrame *value)</arglist>
     </member>
-    <member kind="function" protection="protected" virtualness="virtual">
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>updateWidget</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a24</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>documentChanged</name>
+      <anchorfile>classBB__AbstractTool.html</anchorfile>
+      <anchor>a25</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual BB_DrawObject *</type>
+      <name>createNewObject</name>
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>b0</anchor>
       <arglist>()</arglist>
@@ -310,6 +338,18 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>BB_AbstractToolWallEdit</name>
+    <filename>classBB__AbstractToolWallEdit.html</filename>
+    <base>BB_AbstractTool</base>
+    <member kind="function">
+      <type>void</type>
+      <name>setObjects</name>
+      <anchorfile>classBB__AbstractToolWallEdit.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(QVector&lt; BB_DrawObject * &gt; *objects)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>BB_AbstractToolWidget</name>
     <filename>classBB__AbstractToolWidget.html</filename>
     <member kind="function">
@@ -317,7 +357,7 @@
       <name>BB_AbstractToolWidget</name>
       <anchorfile>classBB__AbstractToolWidget.html</anchorfile>
       <anchor>a0</anchor>
-      <arglist>(QWidget *parent=0)</arglist>
+      <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -325,6 +365,41 @@
       <anchorfile>classBB__AbstractToolWidget.html</anchorfile>
       <anchor>a2</anchor>
       <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setSelection</name>
+      <anchorfile>classBB__AbstractToolWidget.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>(QVector&lt; BB_DrawObject * &gt; *vector)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>clearWidget</name>
+      <anchorfile>classBB__AbstractToolWidget.html</anchorfile>
+      <anchor>a4</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setWidgetEnabled</name>
+      <anchorfile>classBB__AbstractToolWidget.html</anchorfile>
+      <anchor>a5</anchor>
+      <arglist>(bool value)</arglist>
+    </member>
+    <member kind="variable">
+      <type>QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>m_Selection</name>
+      <anchorfile>classBB__AbstractToolWidget.html</anchorfile>
+      <anchor>o0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_AbstractTool *</type>
+      <name>m_ParentTool</name>
+      <anchorfile>classBB__AbstractToolWidget.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -424,6 +499,39 @@
       <name>m_CurrentProjectPath</name>
       <anchorfile>classBB__Config.html</anchorfile>
       <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BB_ConstructionElement</name>
+    <filename>classBB__ConstructionElement.html</filename>
+    <base>BB_Rect</base>
+    <member kind="function">
+      <type>void</type>
+      <name>setTextureFileName</name>
+      <anchorfile>classBB__ConstructionElement.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(const QString &amp;Value)</arglist>
+    </member>
+    <member kind="function">
+      <type>QString</type>
+      <name>getTextureFileName</name>
+      <anchorfile>classBB__ConstructionElement.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QString</type>
+      <name>m_TextureFileName</name>
+      <anchorfile>classBB__ConstructionElement.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QImage</type>
+      <name>m_Image</name>
+      <anchorfile>classBB__ConstructionElement.html</anchorfile>
+      <anchor>p1</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -645,6 +753,13 @@
       <anchor>i1</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="slot">
+      <type>void</type>
+      <name>slotToolMove</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>i2</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>BB_DlgWallEdit</name>
@@ -744,21 +859,21 @@
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>QPushButton *</type>
+      <type>QToolButton *</type>
       <name>m_ButtonWindow</name>
       <anchorfile>classBB__DlgWallEdit.html</anchorfile>
       <anchor>p5</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>QPushButton *</type>
+      <type>QToolButton *</type>
       <name>m_ButtonDoor</name>
       <anchorfile>classBB__DlgWallEdit.html</anchorfile>
       <anchor>p6</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>QPushButton *</type>
+      <type>QToolButton *</type>
       <name>m_ButtonMove</name>
       <anchorfile>classBB__DlgWallEdit.html</anchorfile>
       <anchor>p7</anchor>
@@ -776,6 +891,13 @@
       <name>m_ToolWindowNew</name>
       <anchorfile>classBB__DlgWallEdit.html</anchorfile>
       <anchor>p9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_ToolMove *</type>
+      <name>m_ToolMove</name>
+      <anchorfile>classBB__DlgWallEdit.html</anchorfile>
+      <anchor>p10</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -839,31 +961,66 @@
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>double</type>
-      <name>m_height</name>
+      <type>BB_Wall *</type>
+      <name>m_Wall</name>
       <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
       <anchor>p1</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>double</type>
-      <name>m_lenght</name>
+      <name>m_height</name>
       <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
       <anchor>p2</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>double</type>
-      <name>m_verhaeltniss</name>
+      <name>m_lenght</name>
       <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
       <anchor>p3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>double</type>
+      <name>m_verhaeltniss</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>p4</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_AbstractTool *</type>
       <name>m_Tool</name>
       <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
-      <anchor>p4</anchor>
+      <anchor>p5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>m_DrawObjects</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>p6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>m_Selection</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>p7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>m_ToolObjects</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>p8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_Transformer</type>
+      <name>m_transformer</name>
+      <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
+      <anchor>p9</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -1298,10 +1455,17 @@
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
+      <type>QPen</type>
+      <name>m_PenSelected</name>
+      <anchorfile>classBB__DrawObject.html</anchorfile>
+      <anchor>p4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
       <type>QBrush</type>
       <name>m_Brush</name>
       <anchorfile>classBB__DrawObject.html</anchorfile>
-      <anchor>p4</anchor>
+      <anchor>p5</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -2006,158 +2170,165 @@
       <anchor>a1</anchor>
       <arglist>(C2dVector p)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>BB_Point</name>
+      <anchorfile>classBB__Point.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(QPoint p)</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>moveBy</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a3</anchor>
+      <anchor>a4</anchor>
       <arglist>(C2dVector pMove)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>show</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a4</anchor>
+      <anchor>a5</anchor>
       <arglist>(BB_Transformer &amp;transformer, QPainter &amp;painter) const </arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>getRadius</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a5</anchor>
+      <anchor>a6</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setRadius</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a6</anchor>
+      <anchor>a7</anchor>
       <arglist>(int r)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
       <name>isHit</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a7</anchor>
+      <anchor>a8</anchor>
       <arglist>(C2dVector hit)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setPos</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a8</anchor>
+      <anchor>a9</anchor>
       <arglist>(const C2dVector &amp;theValue)</arglist>
     </member>
     <member kind="function">
-      <type>C2dVector &amp;</type>
+      <type>const C2dVector &amp;</type>
       <name>getPos</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a9</anchor>
-      <arglist>()</arglist>
+      <anchor>a10</anchor>
+      <arglist>() const </arglist>
     </member>
     <member kind="function">
       <type>QVector&lt; BB_Line * &gt; *</type>
       <name>getLines</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a10</anchor>
+      <anchor>a11</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual const QString</type>
       <name>getClassName</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a11</anchor>
+      <anchor>a12</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setX</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a12</anchor>
+      <anchor>a13</anchor>
       <arglist>(double value)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setY</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a13</anchor>
+      <anchor>a14</anchor>
       <arglist>(double value)</arglist>
     </member>
     <member kind="function">
       <type>double</type>
       <name>getX</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a14</anchor>
+      <anchor>a15</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>double</type>
       <name>getY</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a15</anchor>
+      <anchor>a16</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>generateXElement</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a16</anchor>
+      <anchor>a17</anchor>
       <arglist>(QTextStream &amp;out, int depth)</arglist>
     </member>
     <member kind="function">
       <type>QStandardItemModel *</type>
       <name>getItemModel</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a17</anchor>
+      <anchor>a18</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setScale</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a18</anchor>
+      <anchor>a19</anchor>
       <arglist>(double theValue)</arglist>
     </member>
     <member kind="function">
       <type>bool</type>
       <name>isHit</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a19</anchor>
+      <anchor>a20</anchor>
       <arglist>(QRect rect)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>deleteLinkedObject</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a20</anchor>
+      <anchor>a21</anchor>
       <arglist>(BB_DrawObject *object)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>removeLinkedObject</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a21</anchor>
+      <anchor>a22</anchor>
       <arglist>(BB_DrawObject *object)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>deleteLinkedObjects</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a22</anchor>
+      <anchor>a23</anchor>
       <arglist>(QVector&lt; BB_DrawObject * &gt; *objects)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>addObject</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a23</anchor>
+      <anchor>a24</anchor>
       <arglist>(BB_DrawObject *newObject)</arglist>
     </member>
     <member kind="function">
       <type>QPoint</type>
       <name>getQPoint</name>
       <anchorfile>classBB__Point.html</anchorfile>
-      <anchor>a24</anchor>
+      <anchor>a25</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected">
@@ -2173,17 +2344,6 @@
       <anchorfile>classBB__Point.html</anchorfile>
       <anchor>p1</anchor>
       <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>BB_PropertyWidget</name>
-    <filename>classBB__PropertyWidget.html</filename>
-    <member kind="function">
-      <type></type>
-      <name>BB_PropertyWidget</name>
-      <anchorfile>classBB__PropertyWidget.html</anchorfile>
-      <anchor>a0</anchor>
-      <arglist>(QWidget *parent=0, Qt::WFlags f=0)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -2770,16 +2930,9 @@
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
-      <name>deleteSelection</name>
-      <anchorfile>classBB__ToolMove.html</anchorfile>
-      <anchor>a6</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
       <name>selectAll</name>
       <anchorfile>classBB__ToolMove.html</anchorfile>
-      <anchor>a7</anchor>
+      <anchor>a6</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected">
@@ -2836,19 +2989,33 @@
       <anchor>a2</anchor>
       <arglist>(QMouseEvent *me)</arglist>
     </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>move</name>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual BB_DrawObject *</type>
+      <name>createNewObject</name>
       <anchorfile>classBB__ToolPointNew.html</anchorfile>
-      <anchor>a3</anchor>
-      <arglist>(QMouseEvent *me, bool overX, bool overY)</arglist>
+      <anchor>b0</anchor>
+      <arglist>()</arglist>
     </member>
-    <member kind="function" virtualness="virtual">
+    <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
       <name>release</name>
       <anchorfile>classBB__ToolPointNew.html</anchorfile>
-      <anchor>a4</anchor>
+      <anchor>b1</anchor>
       <arglist>(QMouseEvent *me)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>move</name>
+      <anchorfile>classBB__ToolPointNew.html</anchorfile>
+      <anchor>b2</anchor>
+      <arglist>(QMouseEvent *me, bool overX, bool overY)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_Point *</type>
+      <name>m_Point</name>
+      <anchorfile>classBB__ToolPointNew.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -3094,23 +3261,9 @@
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
-      <name>move</name>
-      <anchorfile>classBB__ToolZoom.html</anchorfile>
-      <anchor>a3</anchor>
-      <arglist>(QMouseEvent *me, bool overX, bool overY)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>release</name>
-      <anchorfile>classBB__ToolZoom.html</anchorfile>
-      <anchor>a4</anchor>
-      <arglist>(QMouseEvent *me)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
       <name>setDocComponent</name>
       <anchorfile>classBB__ToolZoom.html</anchorfile>
-      <anchor>a5</anchor>
+      <anchor>a3</anchor>
       <arglist>(BB_DocComponent *component)</arglist>
     </member>
     <member kind="variable" protection="protected">
@@ -3295,6 +3448,27 @@
       <anchor>a6</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setObjects</name>
+      <anchorfile>classBB__Wall.html</anchorfile>
+      <anchor>a7</anchor>
+      <arglist>(QVector&lt; BB_DrawObject * &gt; *Value)</arglist>
+    </member>
+    <member kind="function">
+      <type>QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>getObjects</name>
+      <anchorfile>classBB__Wall.html</anchorfile>
+      <anchor>a8</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function">
+      <type>QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>getPoints</name>
+      <anchorfile>classBB__Wall.html</anchorfile>
+      <anchor>a9</anchor>
+      <arglist>() const </arglist>
+    </member>
     <member kind="variable" protection="protected">
       <type>C2dVector</type>
       <name>m_Direction</name>
@@ -3316,11 +3490,72 @@
       <anchor>p2</anchor>
       <arglist></arglist>
     </member>
+    <member kind="variable" protection="protected">
+      <type>QVector&lt; BB_DrawObject * &gt; *</type>
+      <name>m_Objects</name>
+      <anchorfile>classBB__Wall.html</anchorfile>
+      <anchor>p3</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BB_WidgetToolPointNew</name>
+    <filename>classBB__WidgetToolPointNew.html</filename>
+    <base>BB_AbstractToolWidget</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_WidgetToolPointNew</name>
+      <anchorfile>classBB__WidgetToolPointNew.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>updateWidget</name>
+      <anchorfile>classBB__WidgetToolPointNew.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>clearWidget</name>
+      <anchorfile>classBB__WidgetToolPointNew.html</anchorfile>
+      <anchor>a3</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setWidgetEnabled</name>
+      <anchorfile>classBB__WidgetToolPointNew.html</anchorfile>
+      <anchor>a4</anchor>
+      <arglist>(bool value)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_Point *</type>
+      <name>m_Tmp_Point</name>
+      <anchorfile>classBB__WidgetToolPointNew.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>C2dVector</type>
+      <name>m_Tmp_Vector</name>
+      <anchorfile>classBB__WidgetToolPointNew.html</anchorfile>
+      <anchor>p1</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>BB_WidgetToolScale</name>
     <filename>classBB__WidgetToolScale.html</filename>
     <base>BB_AbstractToolWidget</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_WidgetToolScale</name>
+      <anchorfile>classBB__WidgetToolScale.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(BB_AbstractTool *parentTool)</arglist>
+    </member>
     <member kind="function">
       <type>void</type>
       <name>setLogicalScale</name>
@@ -3334,6 +3569,13 @@
       <anchorfile>classBB__WidgetToolScale.html</anchorfile>
       <anchor>a3</anchor>
       <arglist>(double *real)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setupUi</name>
+      <anchorfile>classBB__WidgetToolScale.html</anchorfile>
+      <anchor>b0</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>Ui::WidgetToolScale</type>
@@ -3375,13 +3617,6 @@
       <anchor>a2</anchor>
       <arglist>()</arglist>
     </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setSelection</name>
-      <anchorfile>classBB__WidgetToolSelect.html</anchorfile>
-      <anchor>a3</anchor>
-      <arglist>(QVector&lt; BB_DrawObject * &gt; *vector)</arglist>
-    </member>
     <member kind="variable" protection="protected">
       <type>Ui::WidgetToolSelect</type>
       <name>m_Ui</name>
@@ -3389,18 +3624,18 @@
       <anchor>p0</anchor>
       <arglist></arglist>
     </member>
-    <member kind="variable" protection="protected">
-      <type>QVector&lt; BB_DrawObject * &gt; *</type>
-      <name>m_Selection</name>
-      <anchorfile>classBB__WidgetToolSelect.html</anchorfile>
-      <anchor>p1</anchor>
-      <arglist></arglist>
-    </member>
   </compound>
   <compound kind="class">
     <name>BB_WidgetToolZoom</name>
     <filename>classBB__WidgetToolZoom.html</filename>
     <base>BB_AbstractToolWidget</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_WidgetToolZoom</name>
+      <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(BB_AbstractTool *parentTool)</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>setZoomFaktor</name>
@@ -3408,12 +3643,38 @@
       <anchor>a2</anchor>
       <arglist>(double value)</arglist>
     </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setupUi</name>
+      <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
+      <anchor>b0</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="variable" protection="protected">
       <type>Ui::WidgetToolZoom</type>
       <name>m_Ui</name>
       <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
       <anchor>p0</anchor>
       <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BB_Window</name>
+    <filename>classBB__Window.html</filename>
+    <base>BB_ConstructionElement</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_Window</name>
+      <anchorfile>classBB__Window.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>show</name>
+      <anchorfile>classBB__Window.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(BB_Transformer &amp;transformer, QPainter &amp;painter) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -5965,20 +6226,22 @@
   </compound>
   <compound kind="dir">
     <name>editor/</name>
-    <path>/home/alex/Studium/SE.Projekt/glbb/editor/</path>
+    <path>/home/high/programming/bbuilder/editor/</path>
     <filename>dir_000000.html</filename>
-    <file>_bb_propertywidget.cpp</file>
-    <file>_bb_propertywidget.h</file>
     <file>bb.cpp</file>
     <file>bb.h</file>
     <file>bb_abstracttool.cpp</file>
     <file>bb_abstracttool.h</file>
+    <file>bb_abstracttoolwalledit.cpp</file>
+    <file>bb_abstracttoolwalledit.h</file>
     <file>bb_abstracttoolwidget.cpp</file>
     <file>bb_abstracttoolwidget.h</file>
     <file>bb_building.cpp</file>
     <file>bb_building.h</file>
     <file>bb_config.cpp</file>
     <file>bb_config.h</file>
+    <file>bb_constructionelement.cpp</file>
+    <file>bb_constructionelement.h</file>
     <file>bb_dlgbuildingedit.cpp</file>
     <file>bb_dlgbuildingedit.h</file>
     <file>bb_dlgprojectnew.cpp</file>
@@ -6053,12 +6316,16 @@
     <file>bb_triangle.h</file>
     <file>bb_wall.cpp</file>
     <file>bb_wall.h</file>
+    <file>bb_widgettoolpointnew.cpp</file>
+    <file>bb_widgettoolpointnew.h</file>
     <file>bb_widgettoolscale.cpp</file>
     <file>bb_widgettoolscale.h</file>
     <file>bb_widgettoolselect.cpp</file>
     <file>bb_widgettoolselect.h</file>
     <file>bb_widgettoolzoom.cpp</file>
     <file>bb_widgettoolzoom.h</file>
+    <file>bb_window.cpp</file>
+    <file>bb_window.h</file>
     <file>bb_workarea.cpp</file>
     <file>bb_workarea.h</file>
     <file>bb_workframe.cpp</file>
@@ -6078,34 +6345,36 @@
     <file>c2dvector.cpp</file>
     <file>c2dvector.h</file>
     <file>main.cpp</file>
-    <file>moc_bb_abstracttool.cpp</file>
     <file>moc_bb_abstracttoolwidget.cpp</file>
     <file>moc_bb_dlgbuildingedit.cpp</file>
     <file>moc_bb_dlgprojectnew.cpp</file>
     <file>moc_bb_dlgterrainedit.cpp</file>
     <file>moc_bb_dlgtoolscaleedit.cpp</file>
     <file>moc_bb_dlgwalledit.cpp</file>
-    <file>moc_bb_doc.cpp</file>
     <file>moc_bb_mainwindow.cpp</file>
     <file>moc_bb_tab.cpp</file>
     <file>moc_bb_tabbuilding.cpp</file>
     <file>moc_bb_tablevel.cpp</file>
     <file>moc_bb_tabterrain.cpp</file>
+    <file>moc_bb_widgettoolpointnew.cpp</file>
     <file>moc_bb_widgettoolscale.cpp</file>
     <file>moc_bb_widgettoolselect.cpp</file>
     <file>moc_bb_widgettoolzoom.cpp</file>
     <file>moc_bb_workarea.cpp</file>
     <file>ui_buildingEdit.h</file>
+    <file>ui_editWall.h</file>
     <file>ui_fileOptions.h</file>
     <file>ui_projectNew.h</file>
+    <file>ui_scaleEdit.h</file>
     <file>ui_terrainEdit.h</file>
+    <file>ui_toolWidgetPointNew.h</file>
     <file>ui_toolWidgetScale.h</file>
     <file>ui_toolWidgetSelect.h</file>
     <file>ui_toolWidgetZoom.h</file>
   </compound>
   <compound kind="dir">
     <name>renderer/</name>
-    <path>/home/alex/Studium/SE.Projekt/glbb/renderer/</path>
+    <path>/home/high/programming/bbuilder/renderer/</path>
     <filename>dir_000001.html</filename>
     <file>br_camera.cpp</file>
     <file>br_camera.h</file>

@@ -66,7 +66,8 @@ HEADERS += bb_abstracttool.h \
            bb_widgettoolpointnew.h \
            bb_widgettoolzoom.h \
            bb_constructionelement.h \
-           bb_window.h 
+           bb_window.h \
+           bb_door.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -123,7 +124,8 @@ SOURCES += bb_abstracttool.cpp \
            bb_widgettoolpointnew.cpp \
            bb_widgettoolzoom.cpp \
            bb_constructionelement.cpp \
-           bb_window.cpp 
+           bb_window.cpp \
+           bb_door.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

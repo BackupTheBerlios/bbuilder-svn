@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "bb_toolwindownew.h"
+#include "bb_window.h"
 
 BB_ToolWindowNew::BB_ToolWindowNew()
 	: BB_AbstractTool()
@@ -32,6 +33,10 @@ BB_ToolWindowNew::~BB_ToolWindowNew()
 
 void BB_ToolWindowNew::click(QMouseEvent* me)
 {
+	m_pScreen = me->pos();
+	m_Transformer->screenToLogical( m_pLogic, m_pScreen );
+	m_LastLogicMouseClick = m_pLogic;
+	m_Objects->append(new BB_Window(m_pLogic));
 }
 
 void BB_ToolWindowNew::move(QMouseEvent* me, bool overX, bool overY)

@@ -32,7 +32,19 @@ BB_DlgWallEdit::BB_DlgWallEdit( BB_Wall * wall, BB_DocComponent * docComponent ,
 
 
 BB_DlgWallEdit::~BB_DlgWallEdit()
-{}
+{
+    delete m_CentralWidget;
+    delete m_PreviewWidget;
+    delete m_ToolDoorNew;
+    delete m_ToolWindowNew;
+    delete m_ToolMove;
+    // 	QScrollArea * scroll = new QScrollArea();
+    // 	QVBoxLayout *layout_area_preview = new QVBoxLayout;
+    // 	QVBoxLayout * layout_buttons = new QVBoxLayout;
+    delete m_ButtonWindow;
+    delete m_ButtonDoor;
+    delete m_ButtonMove;
+}
 
 void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
 {
@@ -44,6 +56,7 @@ void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
     m_wall = wall;
     m_CentralWidget = new BB_DlgWallEditArea( wall, docComponent );
     m_PreviewWidget = new BB_DlgWallEditPreview( wall, docComponent );
+
     //tols initialisieren
     m_ToolDoorNew = new BB_ToolDoorNew;
     m_ToolDoorNew->setObjects( wall->getObjects() );
@@ -51,7 +64,7 @@ void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
     m_ToolWindowNew = new BB_ToolWindowNew;
     m_ToolWindowNew->setObjects( wall->getObjects() );
 
-	m_ToolMove = new BB_ToolMove;
+    m_ToolMove = new BB_ToolMove;
 
     //Scroll-Fenster mit haupt-Widget
     QScrollArea * scroll = new QScrollArea();
@@ -63,9 +76,12 @@ void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
 
     //Layout fuer Buttons
     QVBoxLayout * layout_buttons = new QVBoxLayout;
-    m_ButtonWindow = new QPushButton( tr( "Fenster" ) );
-    m_ButtonDoor = new QPushButton( "Tuer" );
-    m_ButtonMove = new QPushButton( "Move-resize" );
+    m_ButtonWindow = new QToolButton();
+    m_ButtonWindow->setText( "Fenster" );
+    m_ButtonDoor = new QToolButton();
+    m_ButtonDoor->setText( QString::fromUtf8( "Tür" ) );
+    m_ButtonMove = new QToolButton();
+    m_ButtonMove->setText( "Move" );
 
     //buttons hinzufuegen
     layout_buttons->addWidget( m_ButtonWindow );
@@ -131,7 +147,7 @@ void BB_DlgWallEdit::slotToolWindow()
 
 void BB_DlgWallEdit::slotToolMove()
 {
-	m_CentralWidget->setTool( m_ToolMove);
+    m_CentralWidget->setTool( m_ToolMove );
 }
 
 
@@ -139,5 +155,5 @@ void BB_DlgWallEdit::initSingals()
 {
     connect( m_ButtonDoor, SIGNAL( clicked( bool ) ), this, SLOT( slotToolDoor() ) );
     connect( m_ButtonWindow, SIGNAL( clicked( bool ) ), this, SLOT( slotToolWindow() ) );
-	connect(m_ButtonMove, SIGNAL(clicked(bool)), this, SLOT(slotToolMove()));
+    connect( m_ButtonMove, SIGNAL( clicked( bool ) ), this, SLOT( slotToolMove() ) );
 }

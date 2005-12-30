@@ -19,12 +19,26 @@
 ***************************************************************************/
 #include "bb_window.h"
 #include "bb_point.h"
+#include "bb_globals.h"
+
+#include <iostream>
+
+using namespace std;
 
 BB_Window::BB_Window()
         : BB_ConstructionElement()
 {
     setPos1( new BB_Point( QPoint( 0, 0 ) ) );
     setPos2( new BB_Point( QPoint( 50, -50 ) ) );
+    setTextureFileName( IMG_DIR() + SEPARATOR() + "Fenster.jpg" );
+}
+
+BB_Window::BB_Window( C2dVector v )
+        : BB_ConstructionElement()
+{
+    setPos1( new BB_Point( v ) );
+    setPos2( new BB_Point( QPoint( 50, -50 ) ) );
+    setTextureFileName( IMG_DIR() + SEPARATOR() + "Fenster.jpg" );
 }
 
 
@@ -38,13 +52,35 @@ void BB_Window::show( BB_Transformer& transformer, QPainter& painter ) const
         painter.setPen( m_Pen );
         painter.setBrush( m_Brush );
 
-        QRect rect( ( int ) m_Pos1->getX(),
-                    ( int ) m_Pos1->getY(),
-                    ( int ) ( m_Pos2->getX() - m_Pos1->getX() ),
-                    abs( ( int ) ( m_Pos2->getY() - m_Pos1->getY() ) ) );
+        QPoint dest1;
+        QPoint dest2;
+
+        transformer.logicalToScreen( dest1, m_Pos1->getPos() );
+        transformer.logicalToScreen( dest2, m_Pos2->getPos() );
+
+        QRect rect( ( int ) dest1.x(),
+                    ( int ) dest1.y(),
+                    ( int ) ( dest2.x() - dest1.x() ),
+                    ( int ) ( dest2.y() - dest1.y() ) );
+        rect = rect.normalized();
         painter.drawRect( rect );
-        m_Pos1->show( transformer, painter );
-        m_Pos2->show( transformer, painter );
+
+        painter.drawImage( rect, m_Image );
+
+        if ( m_Selected )
+        {
+            m_Pos1->show( transformer, painter );
+            m_Pos2->show( transformer, painter );
+        }
     }
+}
+
+bool BB_Window::isHit( QRect rect )
+{
+    if ( rect.x() > m_Pos1->getX() && rect.y() > m_Pos2->getY() )
+    {
+        return true;
+    }
+    return false;
 }
 

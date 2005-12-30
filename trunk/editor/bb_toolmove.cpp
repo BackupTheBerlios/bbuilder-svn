@@ -124,6 +124,8 @@ void BB_ToolMove::click( QMouseEvent* me )
         for ( int i = 0;i < m_Objects->count() ;i++ )
         {
             object = m_Objects->at( i );
+            if ( object == NULL )
+                cout << "NULL pointer auf Object in bb_toolmove::click" << endl;
             //--------zur presentation
             ///@todo das muss irgentwie anders geloest werden
             if ( object->getClassName() == "BB_Point" )
@@ -166,7 +168,10 @@ void BB_ToolMove::click( QMouseEvent* me )
         m_Point2.setX( me->x() );
         m_Point2.setY( me->y() );
 
-        m_ToolObjects->append( &m_Rect );
+        if ( m_ToolObjects != NULL )
+        {
+            m_ToolObjects->append( &m_Rect );
+        }
     }
 }
 
@@ -318,7 +323,10 @@ void BB_ToolMove::release( QMouseEvent* me )
                 }
             }
         }
-        m_ToolObjects->clear();
+        if ( m_ToolObjects != NULL )
+        {
+            m_ToolObjects->clear();
+        }
     }
     //wieder in Auswahl-Modus wechseln
     m_select = true;

@@ -44,7 +44,8 @@ protected:
     BB_Point   m_Point1;
     BB_Rect    m_Rect;
     C2dVector  m_ClickPos;
-	/** Wenn select = true, dann heisst es, dieser toll wird als ein Auswahl-Viereck arbeiten<br>
+	/**
+	*Wenn select = true, dann heisst es, dieser toll wird als ein Auswahl-Viereck arbeiten<br>
 	*Wenn select = false, dann heisst es, dieser toll wird die Punkten verschieben
 	*/
 	bool m_select;

@@ -36,18 +36,23 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
     m_height = hohe_meter;
     m_lenght = laenge_meter;
     double m_verhaeltniss = m_lenght / m_height;
-	m_Wall = wall;
+    m_Wall = wall;
     setFixedSize ( 400 * m_verhaeltniss, 400 );
     m_Tool = NULL;
-	m_DrawObjects = NULL;
+    m_DrawObjects = NULL;
     m_DrawObjects = wall->getObjects();
-    m_DrawObjects->append( new BB_Window() );
+
+    m_Selection = new QVector<BB_DrawObject *>;
+    m_ToolObjects = new QVector<BB_DrawObject *>;
     // 	setMinimumSize ( 400 * m_verhaeltniss, 400);
 }
 
 
 BB_DlgWallEditArea::~BB_DlgWallEditArea()
-{}
+{
+	delete m_Selection;
+	delete m_ToolObjects;
+}
 
 
 void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
@@ -68,6 +73,12 @@ void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
     {
         qDebug( "m_DrawObjects ist nichtinitialisiert: in BB_DlgWallEditArea" );
     }
+
+    for ( int i = 0;i < m_ToolObjects->count() ;i++ )
+    {
+        m_ToolObjects->at( i ) ->show( m_transformer, painter );
+    }
+
 }
 
 void BB_DlgWallEditArea::resizeEvent ( QResizeEvent * re )
@@ -140,14 +151,23 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
             m_Tool->reset();
         }
 
-        /* ToolObjekte des letzten Tools entfernen */
-        //         m_ToolObjects.clear();
+        for ( int i = 0; i < m_DrawObjects->count(); i++ )
+        {
+            m_DrawObjects->at( i ) ->setSelected( false );
+        }
 
         m_Tool = tool;
-		m_Tool->setTransformer(&m_transformer);
-		if ( typeid(* tool ) == typeid( BB_ToolMove ) ){
-			m_Tool->setObjects( m_Wall->getPoints());
-		}
+        if ( typeid( * tool ) == typeid( BB_ToolMove ) )
+        {
+            m_Tool->setObjects( m_Wall->getPoints() );
+            for ( int i = 0; i < m_DrawObjects->count(); i++ )
+            {
+                m_DrawObjects->at( i ) ->setSelected( true );
+            }
+        }
+        m_Tool->setSelectionVector( m_Selection );
+        m_Tool->setToolObjects( m_ToolObjects );
+        m_Tool->setTransformer( &m_transformer );
         //         m_Tool->setTransformer( &m_Transformer );
         // 		m_Tool->setObjects(m_DrawObjects);
         //         m_Tool->setToolObjects( &m_ToolObjects );
