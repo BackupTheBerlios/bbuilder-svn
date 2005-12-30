@@ -28,11 +28,6 @@ class BB_WidgetToolLineNew : public BB_AbstractToolWidget
 
         virtual ~BB_WidgetToolLineNew();
 
-    private:
-
-        void commitName();
-        void commitDesc();
-
     public:
         virtual void updateWidget();
         virtual void setWidgetEnabled( bool value );
@@ -42,7 +37,6 @@ class BB_WidgetToolLineNew : public BB_AbstractToolWidget
         void slotNameFinished();
         void slotDescFinished();
         void slotDelete();
-		void slotSwap();
 
 	private:
 		Ui::WidgetToolLineNew m_Ui;

@@ -196,7 +196,7 @@ void BB_TabBuilding::initTools()
 	m_ToolScale = new BB_ToolScale( this );
 	m_ToolZoom = new BB_ToolZoom( m_Center );
 	m_ToolPointNew = new BB_ToolPointNew();
-	m_ToolWallNew = new BB_ToolLineNew( m_Center );	//TODO WALL !!!
+	m_ToolWallNew = new BB_ToolWallNew( m_Center );
 	
 	
 	/* Tools dem Tab hinzufügen */

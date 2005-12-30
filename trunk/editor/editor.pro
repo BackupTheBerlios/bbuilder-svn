@@ -13,7 +13,8 @@ FORMS += buildingEdit.ui \
          toolWidgetPointNew.ui \
          toolWidgetLineNew.ui \
          toolWidgetTerrainPointNew.ui \
-         toolWidgetNavigationPointNew.ui 
+         toolWidgetNavigationPointNew.ui \
+         toolWidgetWallNew.ui 
 HEADERS += bb_abstracttool.h \
            bb_building.h \
            bb_doc.h \
@@ -77,7 +78,9 @@ HEADERS += bb_abstracttool.h \
            bb_toolnavigationpointnew.h \
            bb_navigationpoint.h \
            bb_door.h \
-           bb_widgettoolnavigationpointnew.h 
+           bb_widgettoolnavigationpointnew.h \
+           bb_toolwallnew.h \
+           bb_widgettoolwallnew.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -142,7 +145,9 @@ SOURCES += bb_abstracttool.cpp \
            bb_toolnavigationpointnew.cpp \
            bb_navigationpoint.cpp \
            bb_door.cpp \
-           bb_widgettoolnavigationpointnew.cpp 
+           bb_widgettoolnavigationpointnew.cpp \
+           bb_toolwallnew.cpp \
+           bb_widgettoolwallnew.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

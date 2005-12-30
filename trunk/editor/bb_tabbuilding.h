@@ -21,7 +21,7 @@
 
 #include "bb_toolzoom.h"
 #include "bb_toolpointnew.h"
-#include "bb_toollinenew.h"
+#include "bb_toolwallnew.h"
 #include "bb_toolmove.h"
 #include "bb_toolscale.h"
 

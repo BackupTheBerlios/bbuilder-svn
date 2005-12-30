@@ -21,22 +21,22 @@
 #include <bb_widgettoollinenew.h>
 
 
-///@todo tmpWall auf m_TmpWall umstellen
+///@todo m_Tmp_Line auf m_TmpWall umstellen
 
 using namespace std;
 
 BB_ToolLineNew::BB_ToolLineNew()
         : BB_AbstractTool()
 {
-    m_movedPoint = NULL;
-	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
+//     m_movedPoint = NULL;
+    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
 }
 
 BB_ToolLineNew::BB_ToolLineNew( QWidget *parent )
         : BB_AbstractTool()
 {
     m_ParentWidget = parent;
-    m_movedPoint = NULL;
+//     m_movedPoint = NULL;
 }
 
 
@@ -48,35 +48,68 @@ void BB_ToolLineNew::click( QMouseEvent* me )
 {
     if ( m_Objects != NULL && me != NULL && m_Transformer != NULL )
     {
-        BB_DrawObject * object;
         m_pScreen = me->pos();
         m_Transformer->screenToLogical( m_pLogic, m_pScreen );
-        for ( int i = 0; i < m_Objects->count(); i++ )
+
+        m_LastLogicMouseClick = m_pLogic;
+        m_MovePoint.setPos( m_pLogic );
+
+		clearSelection();
+		
+        BB_Line* line = getClickedLine( m_pLogic );
+
+        if ( line != NULL )
         {
-            object = m_Objects->at( i );
-            //--------zur presentation
-            /// @todo bitte bessere implementierung von Scale Funktion
-            if ( object->getClassName() == "BB_Point" )
-                ( ( BB_Point * ) object ) ->setScale( m_Transformer->getScale() );
-            //---------ende-----------
-            if ( object->isHit( m_pLogic ) && ( object->getClassName() == "BB_Point" ) )
+            
+            line->setSelected( true );
+            m_Selection->append( line );
+			updateWidget();
+			
+            m_Tmp_Line = NULL;
+        }
+        else
+        {
+            BB_Point* point = getClickedPoint( m_pLogic );
+            if ( point != NULL )
             {
-                C2dVector fromhitobject = ( ( BB_Point* ) object ) ->getPos();
-                cout << "New Line : Point :" << fromhitobject.x() << endl;
-				BB_Point *tmpPoint = new BB_Point( m_pLogic );	///@todo tmpPoint wird nicht aus dem Speicher entfernt
-                m_movedPoint = tmpPoint;
-                BB_Wall *wall = new BB_Wall( ( BB_Point* ) object, tmpPoint );
-                tmpWall = wall;
-                m_Objects->append( wall );
-                m_LastLogicMouseClick = m_pLogic;
-                return ;
+                m_Tmp_Line = createNewLine( point, &m_MovePoint );
+                m_ToolObjects->append( m_Tmp_Line );
             }
-            /// @todo zum testen, nach implementation bitte loeschen.
-            if ( object->isHit( m_pLogic ) && ( object->getClassName() == "BB_Wall" ) )
+            else
             {
-                ( ( BB_Wall * ) object ) ->editDlg( getDocComponent() );
-                return ;
+                m_Tmp_Line = NULL;
             }
+            // EDIT: Alex Letkemann
+            // Andere Implementierung
+            //         BB_DrawObject * object;
+            //
+            //         for ( int i = 0; i < m_Objects->count(); i++ )
+            //         {
+            //             object = m_Objects->at( i );
+            //             //--------zur presentation
+            //             /// @todo bitte bessere implementierung von Scale Funktion
+            //             if ( object->getClassName() == "BB_Point" )
+            //                 ( ( BB_Point * ) object ) ->setScale( m_Transformer->getScale() );
+            //             //---------ende-----------
+            //             if ( object->isHit( m_pLogic ) && ( object->getClassName() == "BB_Point" ) )
+            //             {
+            //                 C2dVector fromhitobject = ( ( BB_Point* ) object ) ->getPos();
+            //                 cout << "New Line : Point :" << fromhitobject.x() << endl;
+            //                 BB_Point *tmpPoint = new BB_Point( m_pLogic );	///@todo tmpPoint wird nicht aus dem Speicher entfernt
+            //                 m_movedPoint = tmpPoint;
+            //                 BB_Wall *wall = new BB_Wall( ( BB_Point* ) object, tmpPoint );
+            //                 m_Tmp_Line = wall;
+            //                 m_Objects->append( wall );
+            //                 m_LastLogicMouseClick = m_pLogic;
+            //                 return ;
+            //             }
+            //             /// @todo zum testen, nach implementation bitte loeschen.
+            //             if ( object->isHit( m_pLogic ) && ( object->getClassName() == "BB_Wall" ) )
+            //             {
+            //                 ( ( BB_Wall * ) object ) ->editDlg( getDocComponent() );
+            //                 return ;
+            //             }
+            //         }
         }
     }
 }
@@ -85,8 +118,7 @@ void BB_ToolLineNew::move( QMouseEvent* me, bool overX, bool overY )
 {
     if ( m_Objects != NULL &&
             me != NULL &&
-            m_Transformer != NULL &&
-            m_movedPoint != NULL )
+            m_Transformer != NULL)
     {
 
         C2dVector moveTmp;
@@ -103,45 +135,79 @@ void BB_ToolLineNew::move( QMouseEvent* me, bool overX, bool overY )
         //                  cout << "moveTmp.x:" << moveTmp.x();
         //                  cout << "moveTmp.y:" << moveTmp.y()<<endl;
 
-        m_movedPoint->moveBy( moveTmp );
+        //         m_movedPoint->moveBy( moveTmp );
+
+        m_MovePoint.moveBy( moveTmp );
         m_LastLogicMouseClick = m_pLogic;
     }
 }
 
 void BB_ToolLineNew::release( QMouseEvent* me )
 {
-    if ( m_Objects != NULL && me != NULL && m_Transformer != NULL && m_movedPoint != NULL )
+    if ( m_Objects != NULL && me != NULL && m_Transformer != NULL )
     {
-        BB_DrawObject * object;
 
-        m_pScreen = me->pos();
-        m_Transformer->screenToLogical( m_pLogic, m_pScreen );
-
-        for ( int i = 0; i < m_Objects->count(); i++ )
+        if ( m_Tmp_Line != NULL )
         {
+            m_pScreen = me->pos();
+            m_Transformer->screenToLogical( m_pLogic, m_pScreen );
 
-            object = m_Objects->at( i );
+            BB_Point* point = getClickedPoint( m_pLogic );
 
-            if ( object->isHit( m_pLogic ) && ( object->getClassName() == "BB_Point" ) )
+            if ( point != NULL && m_Tmp_Line->setPos2( point ) )
             {
-
-                C2dVector fromhitobject = ( ( BB_Point* ) object ) ->getPos();
-                cout << "Old Line : Point :" << fromhitobject.x() << endl;
-
-                if ( !tmpWall->setPos2( ( BB_Point* ) object ) )
-                {
-//                     delete tmpWall;
-                }
-                tmpWall = NULL;
-                //delete m_movedPoint;
-                m_movedPoint = NULL;
-                return ;
+                m_Objects->append( m_Tmp_Line );
+				m_MovePoint.removeLinkedObject( m_Tmp_Line );
+				
+				m_Selection->clear();
+				m_Selection->append( m_Tmp_Line );
             }
+            else
+            {
+				m_MovePoint.removeLinkedObject( m_Tmp_Line );
+                delete m_Tmp_Line;
+            }
+			
+            m_Tmp_Line = NULL;
+            m_ToolObjects->clear();
+			updateWidget();
         }
 
-        deleteObject( tmpWall );
-        tmpWall = NULL;
-        m_movedPoint = NULL;
+        // 		EDIT: Alex Letkemann
+        // 		Andere Implementierung
+        //
+        //
+        //
+        //         BB_DrawObject * object;
+        //
+        //         m_pScreen = me->pos();
+        //         m_Transformer->screenToLogical( m_pLogic, m_pScreen );
+        //
+        //         for ( int i = 0; i < m_Objects->count(); i++ )
+        //         {
+        //
+        //             object = m_Objects->at( i );
+        //
+        //             if ( object->isHit( m_pLogic ) && ( object->getClassName() == "BB_Point" ) )
+        //             {
+        //
+        //                 C2dVector fromhitobject = ( ( BB_Point* ) object ) ->getPos();
+        //                 cout << "Old Line : Point :" << fromhitobject.x() << endl;
+        //
+        //                 if ( !m_Tmp_Line->setPos2( ( BB_Point* ) object ) )
+        //                 {
+        //                     //                     delete m_Tmp_Line;
+        //                 }
+        //                 m_Tmp_Line = NULL;
+        //                 //delete m_movedPoint;
+        //                 m_movedPoint = NULL;
+        //                 return ;
+        //             }
+        //         }
+        //
+        //         deleteObject( m_Tmp_Line );
+        //         m_Tmp_Line = NULL;
+        //         m_movedPoint = NULL;
     }
 }
 
@@ -152,10 +218,37 @@ void BB_ToolLineNew::release( QMouseEvent* me )
  */
 BB_AbstractToolWidget* BB_ToolLineNew::getToolWidget()
 {
-	if( m_ToolWidget == NULL )
-	{
-		m_ToolWidget = new BB_WidgetToolLineNew(this);
-	}
-	
-	return m_ToolWidget;
+    if ( m_ToolWidget == NULL )
+    {
+        m_ToolWidget = new BB_WidgetToolLineNew( this );
+    }
+
+    return m_ToolWidget;
+}
+
+
+/*!
+    \fn BB_ToolLineNew::getClickedPoint( C2dVector& pos )
+ */
+BB_Point* BB_ToolLineNew::getClickedPoint( C2dVector& pos )
+{
+    return ( BB_Point* ) getClickedObject( pos, typeid( BB_Point ) );
+}
+
+
+/*!
+    \fn BB_ToolLineNew::createNewLine( BB_Point* p1, BB_Point* p2 )
+ */
+BB_Line* BB_ToolLineNew::createNewLine( BB_Point* p1, BB_Point* p2 )
+{
+    return new BB_Line( p1, p2 );
+}
+
+
+/*!
+    \fn BB_ToolLineNew::getClickedLine()
+ */
+BB_Line* BB_ToolLineNew::getClickedLine( C2dVector& pos )
+{
+    return ( BB_Line* ) getClickedObject( pos, typeid( BB_Line ) );
 }

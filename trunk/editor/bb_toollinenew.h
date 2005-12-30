@@ -23,7 +23,7 @@
 /**
 dokumentation
  
-@author Vacesav Ustinov
+@author Vacesav Ustinov, Alex Letkemann (Änderungen)
 */
 class BB_ToolLineNew : public BB_AbstractTool
 {
@@ -36,14 +36,19 @@ class BB_ToolLineNew : public BB_AbstractTool
         virtual void click( QMouseEvent* me );
         virtual void move( QMouseEvent* me, bool overX, bool overY );
         virtual void release( QMouseEvent* me );
-    virtual BB_AbstractToolWidget* getToolWidget();
+        virtual BB_AbstractToolWidget* getToolWidget();
     protected:
-        BB_DrawObject * m_movedPoint;
+//         BB_DrawObject * m_movedPoint;
 
         // EDIT: Alex Letkemann
         // Name angepasst ...
-        BB_Wall * tmpWall;
+        BB_Line * m_Tmp_Line;
+        BB_Point m_MovePoint;
 
+    protected:
+        virtual BB_Point* getClickedPoint( C2dVector& pos );
+    virtual BB_Line* createNewLine( BB_Point* p1, BB_Point* p2 );
+	virtual BB_Line* getClickedLine( C2dVector& pos );
 };
 
 #endif

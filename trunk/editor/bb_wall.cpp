@@ -186,3 +186,18 @@ void BB_Wall::moveEvent()
     calculateDirection();
 
 }
+
+
+/*!
+    \fn BB_Wall::swap()
+ */
+void BB_Wall::swap()
+{
+	BB_Point* tmp;
+	
+	tmp = m_Pos1;
+	m_Pos1 = m_Pos2;
+	m_Pos2 = tmp;
+	
+	calculateDirection();
+}

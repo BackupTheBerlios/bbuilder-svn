@@ -2,13 +2,13 @@
  <author></author>
  <comment></comment>
  <exportmacro></exportmacro>
- <class>WidgetToolLineNew</class>
- <widget class="QWidget" name="WidgetToolLineNew" >
+ <class>WidgetToolWallNew</class>
+ <widget class="QWidget" name="WidgetToolWallNew" >
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>194</width>
+    <width>132</width>
     <height>634</height>
    </rect>
   </property>
@@ -25,7 +25,7 @@
    <item row="0" column="0" >
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
-      <string>Linie</string>
+      <string>Wand</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -96,7 +96,7 @@
          <property name="spacing" >
           <number>5</number>
          </property>
-         <item row="1" column="0" >
+         <item row="2" column="0" >
           <widget class="QPushButton" name="pushButton_Delete" >
            <property name="toolTip" >
             <string>Löscht den Knoten</string>
@@ -112,13 +112,27 @@
            </property>
           </widget>
          </item>
+         <item row="0" column="0" >
+          <widget class="QPushButton" name="pushButton_Swap" >
+           <property name="text" >
+            <string>Umdrehen</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="QPushButton" name="pushButton_Edit" >
+           <property name="text" >
+            <string>Fenster und Türen</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
       <item row="1" column="0" >
        <widget class="QGroupBox" name="groupBox_3" >
         <property name="title" >
-         <string>Linien-Beschreibung</string>
+         <string>Beschreibung</string>
         </property>
         <property name="flat" >
          <bool>true</bool>
@@ -131,7 +145,7 @@
           <number>5</number>
          </property>
          <item row="0" column="0" >
-          <widget class="QTextEdit" name="textEdit_LineDesc" />
+          <widget class="QTextEdit" name="textEdit_WallDesc" />
          </item>
         </layout>
        </widget>
@@ -139,7 +153,7 @@
       <item row="0" column="0" >
        <widget class="QGroupBox" name="groupBox_2" >
         <property name="title" >
-         <string>Linien-Name</string>
+         <string>Name</string>
         </property>
         <property name="flat" >
          <bool>true</bool>
@@ -152,7 +166,7 @@
           <number>5</number>
          </property>
          <item row="0" column="0" >
-          <widget class="QLineEdit" name="lineEdit_LineName" />
+          <widget class="QLineEdit" name="lineEdit_WallName" />
          </item>
         </layout>
        </widget>

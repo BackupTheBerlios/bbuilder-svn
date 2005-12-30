@@ -259,7 +259,7 @@ void BB_AbstractTool::setObjects( QVector<BB_DrawObject*>* objects )
 {
     if ( objects != NULL )
     {
-		qDebug("Vector mit Points ist gesetzt!");
+// 		qDebug("Vector mit Points ist gesetzt!");
         m_Objects = objects;
     }
     else

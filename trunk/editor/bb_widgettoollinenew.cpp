@@ -23,7 +23,6 @@ BB_WidgetToolLineNew::BB_WidgetToolLineNew( BB_AbstractTool* parentTool , QWidge
     connect( m_Ui.textEdit_LineDesc, SIGNAL( textChanged() ), this, SLOT( slotDescFinished() ) );
 
     connect( m_Ui.pushButton_Delete, SIGNAL( released() ), this, SLOT( slotDelete() ) );
-    connect( m_Ui.pushButton_Swap, SIGNAL( released() ), this, SLOT( slotSwap() ) );
 
     setWidgetEnabled( false );
 
@@ -36,12 +35,20 @@ BB_WidgetToolLineNew::~BB_WidgetToolLineNew()
 
 void BB_WidgetToolLineNew::slotNameFinished()
 {
-    commitName();
+	if ( m_Selection != NULL && m_Selection->count() == 1 )
+	{
+		m_Tmp_DrawObject = m_Selection->at( 0 );
+		m_Tmp_DrawObject->setName( m_Ui.lineEdit_LineName->text() );
+	}
 }
 
 void BB_WidgetToolLineNew::slotDescFinished()
 {
-    commitDesc();
+	if ( m_Selection != NULL && m_Selection->count() == 1 )
+	{
+		m_Tmp_DrawObject = m_Selection->at( 0 );
+		m_Tmp_DrawObject->setDescription( m_Ui.textEdit_LineDesc->toPlainText() );
+	}
 }
 
 void BB_WidgetToolLineNew::slotDelete()
@@ -49,26 +56,6 @@ void BB_WidgetToolLineNew::slotDelete()
     m_ParentTool->deleteSelection();
 }
 
-void BB_WidgetToolLineNew::slotSwap()
-{}
-
-void BB_WidgetToolLineNew::commitName()
-{
-    if ( m_Selection != NULL && m_Selection->count() == 1 )
-    {
-        m_Tmp_DrawObject = m_Selection->at( 0 );
-        m_Tmp_DrawObject->setName( m_Ui.lineEdit_LineName->text() );
-    }
-}
-
-void BB_WidgetToolLineNew::commitDesc()
-{
-    if ( m_Selection != NULL && m_Selection->count() == 1 )
-    {
-        m_Tmp_DrawObject = m_Selection->at( 0 );
-        m_Tmp_DrawObject->setDescription( m_Ui.textEdit_LineDesc->toPlainText() );
-    }
-}
 
 void BB_WidgetToolLineNew::updateWidget()
 {
@@ -111,7 +98,6 @@ void BB_WidgetToolLineNew::setWidgetEnabled( bool value )
     m_Ui.textEdit_LineDesc->setEnabled( value );
 
     m_Ui.pushButton_Delete->setEnabled( value );
-    m_Ui.pushButton_Swap->setEnabled( value );
 }
 
 void BB_WidgetToolLineNew::clearWidget()

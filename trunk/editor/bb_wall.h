@@ -30,27 +30,28 @@ Eigene Pinkten hat sie nicht
 */
 class BB_Wall : public BB_Line
 {
-public:
-    BB_Wall(BB_Point* p1, BB_Point* p2);
-    ~BB_Wall();
-    virtual const QString getClassName();
-    virtual void generateXElement(QTextStream &out, int depth);
-    virtual void show(BB_Transformer& transformer, QPainter& painter) const;
-	void editDlg(BB_DocComponent * docComponent );
-    virtual void moveEvent();        
-	void setObjects( QVector< BB_DrawObject * >* Value );
-	QVector< BB_DrawObject * >* getObjects() const;
-	QVector< BB_DrawObject * >* getPoints() const;
+    public:
+        BB_Wall( BB_Point* p1, BB_Point* p2 );
+        ~BB_Wall();
+        virtual const QString getClassName();
+        virtual void generateXElement( QTextStream &out, int depth );
+        virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
+        void editDlg( BB_DocComponent * docComponent );
+        virtual void moveEvent();
+        void setObjects( QVector< BB_DrawObject * >* Value );
+        QVector< BB_DrawObject * >* getObjects() const;
+        QVector< BB_DrawObject * >* getPoints() const;
+        virtual void swap();
+    private:
+        virtual void showDirection( BB_Transformer& transformer, QPainter& painter, QPoint& middle ) const;
+        void calculateDirection();
 
-	private:
-    virtual void showDirection( BB_Transformer& transformer, QPainter& painter, QPoint& middle ) const;
-    void calculateDirection();
-protected:
-    C2dVector m_Direction;
-    bool m_ShowDirection;
-    QPen m_PenDirection;
+    protected:
+        C2dVector m_Direction;
+        bool m_ShowDirection;
+        QPen m_PenDirection;
 
-    QVector <BB_DrawObject *> * m_Objects;
+        QVector <BB_DrawObject *> * m_Objects;
 };
 
 #endif
