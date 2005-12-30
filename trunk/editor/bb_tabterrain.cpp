@@ -16,9 +16,10 @@
 
 #include "bb_globals.h"
 #include "bb_toolselect.h"
+#include "bb_toolscale.h"
 #include "bb_toolzoom.h"
 #include "bb_toolmove.h"
-#include "bb_toolpointnew.h"
+#include "bb_toolterrainpointnew.h"
 #include "bb_tooltrianglenew.h"
 
 #include <QtGui>
@@ -70,52 +71,23 @@ BB_TabTerrain::~BB_TabTerrain()
  */
 void BB_TabTerrain::initTools()
 {
-    /* Tool zum Selektieren */
-    m_ToolSelect = new BB_ToolSelect();
-    QAction *toolSelect = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolSelect.png" ), "Auswahl", this );
-    toolSelect->setStatusTip( "Auswahl Werkzeug" );
-    createToolButton( toolSelect, m_ToolSelect );
-
-
-    /* Zoomtool */
-    m_ToolZoom = new BB_ToolZoom( m_Center );
-    QIcon zoom( IMG_DIR() + SEPARATOR() + "toolZoom.png" );
-    QAction *toolZoom = new QAction( zoom, "Zoom", this );
-    toolZoom->setStatusTip( "Zoom Werkzeug" );
-    createToolButton( toolZoom, m_ToolZoom );
-
-
-    /* Tool zum Erstellen neuer Knoten */
-    m_ToolPointNew = new BB_ToolPointNew();
-    QIcon knote( IMG_DIR() + SEPARATOR() + "toolPoint.png" );
-    // 	QAction *toolPointNew = new QAction("Point",this);
-    QAction *toolPointNew = new QAction( knote, "Point", this );
-    toolPointNew->setStatusTip( "Point Werkzeug" );
-    createToolButton( toolPointNew, m_ToolPointNew );
-
-
-    // /* Tool zum Erstellen neuer Linien */
-    // 	m_ToolLineNew = new BB_ToolLineNew(m_Center);
-    // 	QAction *toolLineNew = new QAction(QIcon(IMG_DIR() + SEPARATOR() + "toolWall.png"),"Wand",this);
-    // 	toolPointNew->setStatusTip("Line Werkzeug");
-    // 	createToolButton(toolLineNew,m_ToolLineNew);
-
-    /* Tool zum Erstellen neuer Linien */
-    m_ToolTriangleNew = new BB_ToolTriangleNew();
-    QAction *toolTriangleNew = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolTerrain.png" ), QString::fromUtf8( "Fläche" ), this );
-    toolTriangleNew->setStatusTip( "Terrain Werkzeug" );
-    createToolButton( toolTriangleNew, m_ToolTriangleNew );
-
-    /* Tool zum Bewegen der Objekte */
-    m_ToolMove = new BB_ToolMove();
-    QAction *toolMove = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolMove.png" ), "Move", this );
-    toolMove->setStatusTip( "Move Werkzeug" );
-    createToolButton( toolMove, m_ToolMove );
-
-
-
-    /* Das Selektionstool als Standard wählen */
-    toolChanged( toolSelect );
+	
+	QAction* initTool;
+	
+	/* Tools initialisieren */
+	m_ToolMove = new BB_ToolMove();
+	m_ToolScale = new BB_ToolScale( this );
+	m_ToolZoom = new BB_ToolZoom( m_Center );
+	m_ToolTerrainPointNew = new BB_ToolTerrainPointNew();
+	m_ToolTriangleNew = new BB_ToolTriangleNew();
+			
+	initTool = addTool( m_ToolMove, "Move", "Bewegungs Werkzeug" );
+	addTool( m_ToolScale, QString::fromUtf8("Maßstab"), QString::fromUtf8("Maßstab Werkzeug") );
+	addTool( m_ToolZoom, "Zoom", QString::fromUtf8("Zoom Werkzeug") );
+	addTool( m_ToolTerrainPointNew, QString::fromUtf8("Geländepunkt-Werkzeug"), QString::fromUtf8("Werkzeug zum Erstellen von Geländeknoten") );
+	addTool( m_ToolTriangleNew, QString::fromUtf8("Gelände-Flächen"), QString::fromUtf8("Werkzeug zum Erstellen von Geländeflächen") );
+	
+	toolChanged( initTool );
 }
 
 /**
@@ -125,13 +97,7 @@ void BB_TabTerrain::initTools()
 void BB_TabTerrain::toolChanged( QAction* action )
 {
 
-    if ( m_ToolSelect->getAction() == action )
-    {
-        unsetToolButton( action );
-        action->setChecked( true );
-        m_Center->setTool( m_ToolSelect );
-    }
-    else if ( m_ToolMove->getAction() == action )
+	if ( m_ToolMove->getAction() == action )
     {
         unsetToolButton( action );
         action->setChecked( true );
@@ -143,11 +109,12 @@ void BB_TabTerrain::toolChanged( QAction* action )
         action->setChecked( true );
         m_Center->setTool( m_ToolZoom );
     }
-    else if ( m_ToolPointNew->getAction() == action )
+    else if ( m_ToolTerrainPointNew->getAction() == action )
     {
         unsetToolButton( action );
         action->setChecked( true );
-        m_Center->setTool( m_ToolPointNew );
+		m_RightFrame->setCurrentWidget( m_ToolTerrainPointNew->getToolWidget() );
+        m_Center->setTool( m_ToolTerrainPointNew );
     }
     else if ( m_ToolTriangleNew->getAction() == action )
     {

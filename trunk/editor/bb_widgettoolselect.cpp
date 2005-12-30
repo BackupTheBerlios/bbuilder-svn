@@ -52,7 +52,7 @@ void BB_WidgetToolSelect::slotNameFinished()
 {
 	if( m_Selection != NULL && m_Selection->count() == 1  )
 	{
-		commitName();
+		m_Selection->at(0)->setName( m_Ui.lineEdit_ObjectName->text() );
 	}
 }
 
@@ -64,7 +64,7 @@ void BB_WidgetToolSelect::slotDescFinished()
 {
 	if( m_Selection != NULL && m_Selection->count() == 1 )
 	{
-		commitDesc();
+		m_Selection->at(0)->setDescription( m_Ui.textEdit_ObjectDesc->toPlainText() );
 	}
 }
 
@@ -98,25 +98,6 @@ void BB_WidgetToolSelect::updateWidget()
         }
     }
 }
-
-
-/**
- * Speichert die Änderungen des Name des selectierten Objektes
- */
-void BB_WidgetToolSelect::commitName()
-{
-	m_Selection->at(0)->setName( m_Ui.lineEdit_ObjectName->text() );
-}
-
-
-/**
- * Speichert die Änderungen der Beschreibung des selectierten Objektes
- */
-void BB_WidgetToolSelect::commitDesc()
-{
-	m_Selection->at(0)->setDescription( m_Ui.textEdit_ObjectDesc->toPlainText() );
-}
-
 
 /**
  * Wird aufgerufen, wenn die Taste 'Löschen' betätigt wurde.

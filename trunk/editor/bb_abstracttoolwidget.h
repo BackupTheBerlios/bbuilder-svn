@@ -37,6 +37,7 @@ class BB_AbstractToolWidget : public QWidget
 	QVector< BB_DrawObject* >* m_Selection;
 	protected:
 		BB_AbstractTool *m_ParentTool;
+    	BB_DrawObject* m_Tmp_DrawObject;
 };
 
 #endif

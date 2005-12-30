@@ -25,27 +25,26 @@ class BB_WidgetToolPointNew : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
-		BB_WidgetToolPointNew( BB_AbstractTool* parentTool,  QWidget *parent = 0 );
+        BB_WidgetToolPointNew( BB_AbstractTool* parentTool, QWidget *parent = 0 );
 
         ~BB_WidgetToolPointNew();
-    virtual void updateWidget();
-    virtual void clearWidget();
-    virtual void setWidgetEnabled( bool value );
-		
+        virtual void updateWidget();
+        virtual void clearWidget();
+        virtual void setWidgetEnabled( bool value );
+
+
+    private slots:
+        void slotPosFinished();
+        void slotDelete();
+        void slotDescFinished();
+        void slotNameFinished();
+    
+	protected:
+        BB_Point* m_Tmp_Point;
+        C2dVector m_Tmp_Vector;    
+	
 	private:
-		Ui::WidgetToolPointNew m_Ui;
-private slots:
-    void slotPosFinished();
-    void slotDelete();
-    void slotDescFinished();
-    void slotNameFinished();
-private:
-    void commitDesc();
-    void commitName();
-    void commitPos();
-protected:
-    BB_Point* m_Tmp_Point;
-    C2dVector m_Tmp_Vector;
+        Ui::WidgetToolPointNew m_Ui;
 };
 
 #endif

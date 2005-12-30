@@ -26,16 +26,57 @@
 class BB_ToolPointNew : public BB_AbstractTool
 {
     public:
+        /**
+         * Konstruktor.
+		 * Erstellt ein neues Werkzeug zur Erstellung von Punkten
+		 * @author Alex Letkemann
+         */
         BB_ToolPointNew();
 
+		/**
+		 * Destruktor
+		 */
         ~BB_ToolPointNew();
 
-        virtual void click( QMouseEvent* me );
+        
+        /**
+		 * \fn BB_AbstractTool::getToolWidget()
+         */
+        virtual BB_AbstractToolWidget* getToolWidget();
 
     protected:
-        virtual BB_DrawObject* createNewObject();
-    virtual void release(QMouseEvent* me);
-    virtual void move(QMouseEvent* me, bool overX, bool overY);
+		/**
+	 	 * \fn BB_AbstractTool::click( QMouseEvent* me )
+		 */
+		virtual void click( QMouseEvent* me );
+        
+		/**
+		 * \fn BB_AbstractTool::release( QMouseEvent* me )
+		 */
+		virtual void release( QMouseEvent* me );
+		
+		/**
+		 * \fn move( QMouseEvent* me, bool overX, bool overY )
+		 */
+		virtual void move( QMouseEvent* me, bool overX, bool overY );
+		
+        /**
+         * Die Funktion such nach einem Punkt an der Position 'pos'.
+		 * Wird ein Punkt an der angegebenen Position gefunden, wird der 
+		 * Zeiger des Punktes zur&uumlckgegeben. Falls nicht wird NULL zurückgegeben.
+         * @param pos Position an der nach dem Punkt gesucht wird
+         * @return Zeiger auf den gefundenen Punkt.
+         */
+        virtual BB_Point* getClickedPoint( C2dVector& pos );
+
+        /**
+         * Die Funktion erzeugt einen neuen Punkt an der Position 'pos' und gibt den Zeiger
+		 * auf den neuen Punkt zur&uuml;ck
+         * @param pos Position, an der der neue Punkt erzeugt wird.
+         * @return Zeiger auf den neuen Punkt
+         */
+        virtual BB_Point* createNewPoint( C2dVector& pos );
+
 
 
     protected:

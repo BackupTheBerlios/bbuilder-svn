@@ -59,12 +59,12 @@ BB_Triangle::~BB_Triangle()
  * @param rect Recheck
  * @return True falls sich der Dreieck komplett im Rechteck befindet, sonst false.
  */
-bool BB_Triangle::isHit(QRect rect)
+bool BB_Triangle::isHit( const QRect& rect)
 {
 	return BB_Line::isHit(rect) && m_Pos3->isHit(rect);
 }
 
-bool BB_Triangle::isHit(C2dVector hit)
+bool BB_Triangle::isHit( const C2dVector& hit)
 {
 	
 	///@todo isHit für Triangle

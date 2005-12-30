@@ -26,7 +26,7 @@ BB_ToolScale::BB_ToolScale( QWidget * parent )
     m_MovePoint = NULL;
     m_ScaleLine = NULL;
 
-    m_ToolWidget = new BB_WidgetToolScale( this );
+    
 
     /* Alle Objekte ausblenden */
     m_ShowDrawObjects = false;
@@ -148,4 +148,18 @@ void BB_ToolScale::updateWidget()
         ( ( BB_WidgetToolScale* ) m_ToolWidget ) ->setLogicalScale( getLogicalScale() );
         ( ( BB_WidgetToolScale* ) m_ToolWidget ) ->setRealScale( m_Component->getScaleRealPointer() );
     }
+}
+
+
+/*!
+    \fn BB_AbstractTool::getToolWidget()
+ */
+BB_AbstractToolWidget* BB_ToolScale::getToolWidget()
+{
+	if( m_ToolWidget == NULL )
+	{
+		m_ToolWidget = new BB_WidgetToolScale( this );
+	}
+	
+	return m_ToolWidget;
 }

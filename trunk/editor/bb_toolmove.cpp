@@ -23,7 +23,7 @@ BB_ToolMove::BB_ToolMove()
         : BB_AbstractTool()
 {
 
-    m_ToolWidget = new BB_WidgetToolSelect( this );
+    
 
 
     comparePoint = NULL;
@@ -40,6 +40,8 @@ BB_ToolMove::BB_ToolMove()
     m_Rect.setBrush( b );
 
     m_select = true;
+	
+	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolSelect.png" );
 }
 
 
@@ -370,16 +372,6 @@ void BB_ToolMove::bringToLine( BB_Point *point )
 }
 
 
-/**
- * Überladung der Funktion 'BB_AbstractTool::setSelectionVector();'.
- * Übergibt den Vektor auch an das Tool-Fenster
- */
-void BB_ToolMove::setSelectionVector( QVector<BB_DrawObject*>* selectionVector )
-{
-    BB_AbstractTool::setSelectionVector( selectionVector );
-    ( ( BB_WidgetToolSelect* ) ( m_ToolWidget ) ) ->setSelection( selectionVector );
-}
-
 
 /**
  * Selektiert alle Objekte
@@ -402,4 +394,18 @@ void BB_ToolMove::selectAll()
     }
 
     documentChanged();
+}
+
+
+/*!
+    \fn BB_AbstractTool::getToolWidget()
+ */
+BB_AbstractToolWidget* BB_ToolMove::getToolWidget()
+{
+	if( m_ToolWidget == NULL )
+	{
+		m_ToolWidget = new BB_WidgetToolSelect( this );
+	}
+	
+	return m_ToolWidget;
 }

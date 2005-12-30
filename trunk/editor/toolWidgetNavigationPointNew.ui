@@ -2,14 +2,14 @@
  <author></author>
  <comment></comment>
  <exportmacro></exportmacro>
- <class>WidgetToolSelect</class>
- <widget class="QWidget" name="WidgetToolSelect" >
+ <class>WidgetToolTerrainPointNew</class>
+ <widget class="QWidget" name="WidgetToolTerrainPointNew" >
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>198</width>
-    <height>620</height>
+    <width>241</width>
+    <height>630</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -25,7 +25,7 @@
    <item row="0" column="0" >
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
-      <string>Selektion</string>
+      <string>Navigationsknoten</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -37,8 +37,29 @@
       <property name="spacing" >
        <number>5</number>
       </property>
-      <item row="3" column="0" colspan="2" >
-       <widget class="QGroupBox" name="groupBox_4" >
+      <item row="0" column="0" >
+       <widget class="QGroupBox" name="groupBox_2" >
+        <property name="title" >
+         <string>Knoten-Name</string>
+        </property>
+        <property name="flat" >
+         <bool>true</bool>
+        </property>
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>2</number>
+         </property>
+         <property name="spacing" >
+          <number>5</number>
+         </property>
+         <item row="0" column="0" >
+          <widget class="QLineEdit" name="lineEdit_PointName" />
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="3" column="0" >
+       <widget class="QGroupBox" name="groupBox_5" >
         <property name="title" >
          <string>Optionen</string>
         </property>
@@ -52,65 +73,83 @@
          <property name="spacing" >
           <number>5</number>
          </property>
-         <item row="1" column="0" >
-          <widget class="QPushButton" name="button_Delete" >
+         <item row="0" column="0" >
+          <widget class="QCheckBox" name="checkBox_Index" >
            <property name="toolTip" >
-            <string>Löscht alle selektierten Objekte (Entfernen)</string>
+            <string>Soll dieser Knoten wird in den Index Übernommen werden und später als Navigationsziel angezeigt werden</string>
            </property>
            <property name="statusTip" >
-            <string>Löscht alle selektierten Objekte (Entfernen)</string>
+            <string>Soll dieser Knoten wird in den Index Übernommen werden und später als Navigationsziel angezeigt werden</string>
            </property>
            <property name="whatsThis" >
-            <string>Löscht alle selektierten Objekte</string>
+            <string>Soll dieser Knoten wird in den Index Übernommen werden und später als Navigationsziel angezeigt werden</string>
+           </property>
+           <property name="text" >
+            <string>Index</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="QPushButton" name="pushButton_Delete" >
+           <property name="toolTip" >
+            <string>Löscht den Knoten</string>
+           </property>
+           <property name="statusTip" >
+            <string>Löscht den Knoten</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Löscht den Knoten</string>
            </property>
            <property name="text" >
             <string>Löschen</string>
            </property>
-           <property name="shortcut" >
-            <string>Del</string>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QGroupBox" name="groupBox_4" >
+        <property name="title" >
+         <string>Position</string>
+        </property>
+        <property name="flat" >
+         <bool>true</bool>
+        </property>
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>2</number>
+         </property>
+         <property name="spacing" >
+          <number>5</number>
+         </property>
+         <item row="1" column="1" >
+          <widget class="QLineEdit" name="lineEdit_Y" />
+         </item>
+         <item row="0" column="1" >
+          <widget class="QLineEdit" name="lineEdit_X" />
+         </item>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="label_2" >
+           <property name="text" >
+            <string>Y:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="0" >
-          <widget class="QPushButton" name="button_SelectAll" >
-           <property name="toolTip" >
-            <string>Selektiert alle Objekte (STRG+A)</string>
-           </property>
-           <property name="statusTip" >
-            <string>Selektiert alle Objekte (STRG+A)</string>
-           </property>
-           <property name="whatsThis" >
-            <string>Selektiert alle Objekte (STRG+A)</string>
-           </property>
+          <widget class="QLabel" name="label" >
            <property name="text" >
-            <string>Alles Selektieren</string>
-           </property>
-           <property name="shortcut" >
-            <string>Ctrl+A</string>
+            <string>X:</string>
            </property>
           </widget>
          </item>
         </layout>
        </widget>
       </item>
-      <item row="0" column="0" >
-       <widget class="QLabel" name="label" >
-        <property name="text" >
-         <string>Selektiert Objekte:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" >
-       <widget class="QLabel" name="label_ObjectsCount" >
-        <property name="text" >
-         <string>0</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="2" >
+      <item row="1" column="0" >
        <widget class="QGroupBox" name="groupBox_3" >
         <property name="title" >
-         <string>Objekt-Beschreibung</string>
+         <string>Knoten-Beschreibung</string>
         </property>
         <property name="flat" >
          <bool>true</bool>
@@ -123,36 +162,7 @@
           <number>5</number>
          </property>
          <item row="0" column="0" >
-          <widget class="QTextEdit" name="textEdit_ObjectDesc" />
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="2" >
-       <widget class="QGroupBox" name="groupBox_2" >
-        <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>5</hsizetype>
-          <vsizetype>0</vsizetype>
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="title" >
-         <string>Objekt-Name</string>
-        </property>
-        <property name="flat" >
-         <bool>true</bool>
-        </property>
-        <layout class="QGridLayout" >
-         <property name="margin" >
-          <number>2</number>
-         </property>
-         <property name="spacing" >
-          <number>5</number>
-         </property>
-         <item row="0" column="0" >
-          <widget class="QLineEdit" name="lineEdit_ObjectName" />
+          <widget class="QTextEdit" name="textEdit_PointDesc" />
          </item>
         </layout>
        </widget>

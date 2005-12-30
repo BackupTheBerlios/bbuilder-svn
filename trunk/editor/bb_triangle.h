@@ -43,8 +43,8 @@ public:
     ~BB_Triangle();
 
 	
-    virtual bool isHit(QRect rect);
-    virtual bool isHit(C2dVector hit);
+    virtual bool isHit( const QRect& rect);
+    virtual bool isHit( const C2dVector& hit);
     virtual const QString getClassName();
 	
 	/**

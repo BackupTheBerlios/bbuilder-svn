@@ -39,6 +39,8 @@ BB_Line::BB_Line( BB_Point *p1, BB_Point *p2 )
 	// Sonstige Einstellungen
     m_Color.setNamedColor( "Red" );
     m_hitRange = 3;
+	
+
 
 }
 
@@ -49,7 +51,7 @@ BB_Line::~BB_Line()
     m_Pos2->removeLinkedObject( this );
 }
 
-bool BB_Line::isHit( C2dVector hit )
+bool BB_Line::isHit( const C2dVector& hit )
 {
     //Richtungsvektor von Pos1 zu Pos2
     m_Richtung = m_Pos2->getPos() - m_Pos1->getPos();
@@ -117,7 +119,7 @@ BB_Point* BB_Line::getPos1() const
 
 bool BB_Line::setPos1( BB_Point* Value )
 {
-    if ( Value != NULL )
+    if ( Value != NULL && Value != m_Pos2 )
     {
         // EDIT: Alex Letkemann
         // DATE: 07.12.2005
@@ -144,7 +146,7 @@ BB_Point* BB_Line::getPos2() const
 
 bool BB_Line::setPos2( BB_Point* Value )
 {
-    if ( Value != NULL )
+    if ( Value != NULL && Value != m_Pos1)
     {
 
         // EDIT: Alex Letkemann
@@ -186,20 +188,23 @@ const QString BB_Line::getClassName()
     return QString( "BB_Line" );
 }
 
-bool BB_Line::isHit( QRect rect )
+bool BB_Line::isHit( const QRect& rect )
 {
-    QRect normRect = rect;
-    if ( rect.x() > ( rect.x() + rect.width() ) )
-        normRect.setX( rect.x() + rect.width() );
-    if ( rect.y() < ( rect.y() + rect.height() ) )
-        normRect.setY( rect.y() + rect.height() );
-
-    if ( m_Pos1->getX() > normRect.x() && m_Pos1->getX() < ( normRect.x() + normRect.width() ) )
-        if ( m_Pos2->getX() > normRect.x() && m_Pos2->getX() < ( normRect.x() + normRect.width() ) )
-            if ( m_Pos1->getY() < normRect.y() && m_Pos1->getY() > ( normRect.y() - normRect.height() ) )
-                if ( m_Pos2->getY() < normRect.y() && m_Pos2->getY() > ( normRect.y() - normRect.height() ) )
-                    return true;
-    return false;
+//	EDIT: Alex Letkemann
+//	Die Linie wird selektiert, wenn die linie ganz im QRect ist
+//     QRect normRect = rect;
+//     if ( rect.x() > ( rect.x() + rect.width() ) )
+//         normRect.setX( rect.x() + rect.width() );
+//     if ( rect.y() < ( rect.y() + rect.height() ) )
+//         normRect.setY( rect.y() + rect.height() );
+// 
+//     if ( m_Pos1->getX() > normRect.x() && m_Pos1->getX() < ( normRect.x() + normRect.width() ) )
+//         if ( m_Pos2->getX() > normRect.x() && m_Pos2->getX() < ( normRect.x() + normRect.width() ) )
+//             if ( m_Pos1->getY() < normRect.y() && m_Pos1->getY() > ( normRect.y() - normRect.height() ) )
+//                 if ( m_Pos2->getY() < normRect.y() && m_Pos2->getY() > ( normRect.y() - normRect.height() ) )
+//                     return true;
+//     return false;
+	return m_Pos1->isHit( rect ) && m_Pos2->isHit( rect );
 }
 
 double BB_Line::getLength()

@@ -36,6 +36,7 @@ class BB_ToolLineNew : public BB_AbstractTool
         virtual void click( QMouseEvent* me );
         virtual void move( QMouseEvent* me, bool overX, bool overY );
         virtual void release( QMouseEvent* me );
+    virtual BB_AbstractToolWidget* getToolWidget();
     protected:
         BB_DrawObject * m_movedPoint;
 

@@ -35,10 +35,11 @@ public:
 	
 protected:
 	BB_AbstractTool* m_ToolZoom;
-	BB_AbstractTool* m_ToolPointNew;
+	BB_AbstractTool* m_ToolTerrainPointNew;
 	BB_AbstractTool* m_ToolMove;
 	BB_AbstractTool* m_ToolTriangleNew;
-	BB_AbstractTool* m_ToolSelect;	
+// 	BB_AbstractTool* m_ToolSelect;
+	BB_AbstractTool* m_ToolScale;
     BB_Terrain* m_Terrain;
 
 private:

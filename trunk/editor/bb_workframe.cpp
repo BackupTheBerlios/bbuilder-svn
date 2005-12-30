@@ -36,7 +36,6 @@ BB_WorkFrame::BB_WorkFrame( QVector<BB_DrawObject*>* selectVector, QWidget * par
     m_Component = NULL;
     m_Tool = NULL;
     m_DrawObjects = NULL;
-    //     m_Transformer.setOffset(QPoint(100, 100));
 }
 
 
@@ -288,6 +287,8 @@ void BB_WorkFrame::setDocComponent( BB_DocComponent* component )
     }
     else
     {
+		m_Transformer.setOffset( m_Component->getOffset() );
+		
         m_DrawObjects = m_Component->getDrawObjects();
         if ( m_Tool != NULL )
         {

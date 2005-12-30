@@ -19,6 +19,7 @@
 #include <QtGui>
 #include <QAction>
 
+#include <bb_globals.h>
 #include <bb_doccomponent.h>
 
 #include <bb_drawobject.h>
@@ -44,7 +45,7 @@ class BB_AbstractTool
         virtual void click( QMouseEvent* me ) = 0;
 
         virtual bool deleteObject( BB_DrawObject * delObject );
-		virtual void deleteSelection();
+        virtual void deleteSelection();
         virtual void reset();
         virtual BB_DrawObject* getClickedObject( const C2dVector & posLogic , const std::type_info &type );
 
@@ -66,14 +67,20 @@ class BB_AbstractTool
 
         virtual void setDocComponent( BB_DocComponent* theValue );
         virtual BB_DocComponent* getDocComponent() const;
-		virtual void setObjects(QVector<BB_DrawObject*>* objects);
+        virtual void setObjects( QVector<BB_DrawObject*>* objects );
         virtual bool getShowDrawObjects();
 
         virtual BB_AbstractToolWidget* getToolWidget();
 
-	virtual void setWorkFrame( BB_WorkFrame* value );
-    virtual void updateWidget();
-	virtual void documentChanged();
+        virtual void setWorkFrame( BB_WorkFrame* value );
+        virtual void updateWidget();
+        virtual void documentChanged();
+
+	void setIcon( const QIcon& value );
+	
+
+	QIcon getIcon() const;
+	
 
 
 
@@ -84,8 +91,8 @@ class BB_AbstractTool
         QPoint m_pScreen;
         QWidget * m_ParentWidget;
         QAction * m_Action;
-		
-		BB_WorkFrame* m_WorkFrame;
+
+        BB_WorkFrame* m_WorkFrame;
 
 
 
@@ -103,13 +110,11 @@ class BB_AbstractTool
         /** Pointer auf das DocComponent, mit welchem gearbeitet wird */
         BB_DocComponent * m_Component;
         bool m_ShowDrawObjects;
-        BB_AbstractToolWidget* m_ToolWidget;
-
 		
-protected:
-    
-	virtual BB_DrawObject* createNewObject();
-	
+        BB_AbstractToolWidget* m_ToolWidget;
+    QIcon m_Icon;
+
+
 };
 
 #endif

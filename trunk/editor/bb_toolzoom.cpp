@@ -28,7 +28,7 @@ BB_ToolZoom::BB_ToolZoom( BB_WorkArea* area )
     }
 
     m_WorkArea = area;
-    m_ToolWidget = new BB_WidgetToolZoom( this );
+	m_Icon = QIcon ( IMG_DIR() + SEPARATOR() + "toolZoom.png" );
 }
 
 
@@ -62,8 +62,21 @@ void BB_ToolZoom::setDocComponent( BB_DocComponent* component )
 {
 	BB_AbstractTool::setDocComponent( component );
 	
-	if( m_Component != NULL )
+	if( m_Component != NULL && m_ToolWidget != NULL )
 	{
 		( ( BB_WidgetToolZoom* ) ( m_ToolWidget ) ) -> setZoomFaktor( m_Component->getZoom() );
 	}
+}
+
+
+/*!
+    \fn BB_ToolZoom::getToolWidget()
+ */
+BB_AbstractToolWidget* BB_ToolZoom::getToolWidget()
+{
+	if( m_ToolWidget == NULL )
+	{
+		m_ToolWidget = new BB_WidgetToolZoom( this );
+	}
+	return m_ToolWidget;
 }

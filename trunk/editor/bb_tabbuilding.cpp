@@ -189,50 +189,26 @@ void BB_TabBuilding::updateWidget()
 void BB_TabBuilding::initTools()
 {
 
-    /* Tool zum Bewegen der Objekte */
+	QAction* initTool;
+    
+	/* Tools erzeugen */
     m_ToolMove = new BB_ToolMove();
-    QAction *toolMove = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolMove.png" ), "Move", this );
-    toolMove->setStatusTip( "Move Werkzeug" );
-    addWidgetRight( m_ToolMove->getToolWidget() );
-    createToolButton( toolMove, m_ToolMove );
+	m_ToolScale = new BB_ToolScale( this );
+	m_ToolZoom = new BB_ToolZoom( m_Center );
+	m_ToolPointNew = new BB_ToolPointNew();
+	m_ToolWallNew = new BB_ToolLineNew( m_Center );	//TODO WALL !!!
+	
+	
+	/* Tools dem Tab hinzufügen */
+	initTool = addTool( m_ToolMove, "Move", "Bewegungs Werkzeug" );
+	addTool( m_ToolScale, QString::fromUtf8("Maßstab"), QString::fromUtf8("Maßstab Werkzeug") );
+	addTool( m_ToolZoom, "Zoom", QString::fromUtf8("Zoom Werkzeug") );
+	addTool( m_ToolPointNew, "Knoten-Werkzeug", "Werkzeug zum Erstellen von Knoten");
+	addTool( m_ToolWallNew, "Wand-Werkzeug", QString::fromUtf8("Werkzeug zum Erstellen von Wänden") );
+	
 
-    /* Zoomtool */
-    m_ToolZoom = new BB_ToolZoom( m_Center );
-    QIcon zoom( IMG_DIR() + SEPARATOR() + "toolZoom.png" );
-    QAction *toolZoom = new QAction( zoom, "Zoom", this );
-    toolZoom->setStatusTip( "Zoom Werkzeug" );
-    addWidgetRight( m_ToolZoom->getToolWidget() );
-    createToolButton( toolZoom, m_ToolZoom );
-
-
-    /* Tool zum Erstellen neuer Knoten */
-    m_ToolPointNew = new BB_ToolPointNew();
-    QIcon knote( IMG_DIR() + SEPARATOR() + "toolPoint.png" );
-    // 	QAction *toolPointNew = new QAction("Point",this);
-    QAction *toolPointNew = new QAction( knote, "Point", this );
-    toolPointNew->setStatusTip( "Point Werkzeug" );
-	addWidgetRight( m_ToolPointNew->getToolWidget() );
-    createToolButton( toolPointNew, m_ToolPointNew );
-
-
-    /* Tool zum Erstellen neuer Linien */
-    m_ToolLineNew = new BB_ToolLineNew( m_Center );
-    QAction *toolLineNew = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" ), "Wand", this );
-    toolPointNew->setStatusTip( "Line Werkzeug" );
-    createToolButton( toolLineNew, m_ToolLineNew );
-
-    /* Tool zum Setzen der Maßstab-Punkte */
-    m_ToolScale = new BB_ToolScale( this );
-    QAction *toolScale = new QAction( QIcon( IMG_DIR() + SEPARATOR() + "toolScale.png" ), "Maßstab", this );
-    toolScale->setStatusTip( QString::fromUtf8( "Maßstab Werkzeug" ) );
-    addWidgetRight( m_ToolScale->getToolWidget() );
-    createToolButton( toolScale, m_ToolScale );
-
-
-    /* Das Selektionstool alst Standard wählen */
-    toolChanged( toolMove );
-
-
+	/* Ein Tool als Standard festlegen */
+    toolChanged( initTool );
 }
 
 
@@ -275,11 +251,12 @@ void BB_TabBuilding::toolChanged( QAction* action )
 		m_RightFrame->setCurrentWidget( m_ToolPointNew->getToolWidget() );
         m_Center->setTool( m_ToolPointNew );
     }
-    else if ( m_ToolLineNew->getAction() == action )
+    else if ( m_ToolWallNew->getAction() == action )
     {
         unsetToolButton( action );
         action->setChecked( true );
-        m_Center->setTool( m_ToolLineNew );
+        m_Center->setTool( m_ToolWallNew );
+		m_RightFrame->setCurrentWidget( m_ToolWallNew->getToolWidget() );
     }
     else if ( m_ToolScale->getAction() == action )
     {

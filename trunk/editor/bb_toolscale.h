@@ -31,7 +31,7 @@ public:
     virtual void setDocComponent( BB_DocComponent* component );
     virtual void reset();
     virtual void updateWidget();
-
+	virtual BB_AbstractToolWidget* getToolWidget();
 protected:
     BB_Point* m_MovePoint;
     BB_Line* m_ScaleLine;
@@ -41,6 +41,7 @@ protected:
     C2dVector m_Tmp_v2;
 private:
     double getLogicalScale();
+    
 };
 
 #endif

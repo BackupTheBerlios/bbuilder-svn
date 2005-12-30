@@ -22,7 +22,7 @@ using namespace std;
 BB_ToolPointNew::BB_ToolPointNew()
         : BB_AbstractTool()
 {
-	m_ToolWidget = new BB_WidgetToolPointNew( this );
+	m_Icon = QIcon ( IMG_DIR() + SEPARATOR() + "toolPoint.png" );
 }
 
 
@@ -49,12 +49,12 @@ void BB_ToolPointNew::click( QMouseEvent* me )
         m_Transformer->screenToLogical( m_pLogic, m_pScreen );
 
         // Prüfen, ob ein bereits vorhandener Punkt angeclickt wurde
-        m_Point = ( BB_Point * ) getClickedObject( m_pLogic, typeid( BB_Point ) );
+		m_Point = getClickedPoint( m_pLogic );
 
         // falls kein Punkt abgeclickt wurde, wird ein neuer Punkt erzeugt
         if ( m_Point == NULL )
         {
-            m_Point = ( BB_Point * ) createNewObject();
+			m_Point = createNewPoint( m_pLogic );
             m_Objects->append( m_Point );
         }
 
@@ -118,12 +118,34 @@ void BB_ToolPointNew::release( QMouseEvent* me )
 }
 
 
-/**
- * Erzeigt einen neunen Punkt an der Position 'm_pLogic' und gibt diesen zur&uuml;ck.
- * @return Der neue Punkt
+/*!
+    \fn BB_AbstractTool::getToolWidget()
  */
-BB_DrawObject* BB_ToolPointNew::createNewObject()
+BB_AbstractToolWidget* BB_ToolPointNew::getToolWidget()
 {
-    return new BB_Point( m_pLogic );
+	if( m_ToolWidget == NULL )
+	{
+		m_ToolWidget = new BB_WidgetToolPointNew( this );
+	}
+	
+	return m_ToolWidget;
 }
 
+
+/*!
+    \fn BB_ToolPointNew::getClickedPoint( C2dVector& pos )
+ */
+BB_Point* BB_ToolPointNew::getClickedPoint( C2dVector& pos )
+{
+	return ( BB_Point * ) getClickedObject( pos, typeid( BB_Point ) );
+}
+
+
+/*!
+    \fn BB_ToolPointNew::createNewPoint( C2dVector& pos )
+ */
+BB_Point* BB_ToolPointNew::createNewPoint( C2dVector& pos )
+{
+	// neunen Punkt erzeugen und zurückgeben
+	return new BB_Point( pos );
+}

@@ -33,8 +33,8 @@ public:
     virtual void click(QMouseEvent* me);
     virtual void move(QMouseEvent* me, bool overX, bool overY);
     virtual void release(QMouseEvent* me);
-    virtual void setSelectionVector( QVector<BB_DrawObject*>* selectionVector );
-   
+
+	virtual BB_AbstractToolWidget* getToolWidget();
 	virtual void selectAll();
 protected:
     //     QVector<BB_DrawObject*> m_Selection;
@@ -61,6 +61,7 @@ private:
     @date 22.10.2005
     */
     void bringToLine(BB_Point *point);
+    
 };
 
 #endif

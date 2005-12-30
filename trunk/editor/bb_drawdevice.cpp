@@ -58,3 +58,15 @@ QVector<BB_DrawObject*>* BB_DrawDevice::getDrawObjects()
 {
     return & m_DrawObjects;
 }
+
+
+const C2dVector& BB_DrawDevice::getOffset() const
+{
+    return m_Offset;
+}
+
+
+void BB_DrawDevice::setOffset( const C2dVector& value )
+{
+    m_Offset = value;
+}

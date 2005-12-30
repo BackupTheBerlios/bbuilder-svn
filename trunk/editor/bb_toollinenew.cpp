@@ -15,9 +15,10 @@
 #include "bb_toollinenew.h"
 
 #include <iostream>
-#include "bb_point.h"
+#include <bb_point.h>
 
-#include "bb_workarea.h"
+#include <bb_workarea.h>
+#include <bb_widgettoollinenew.h>
 
 
 ///@todo tmpWall auf m_TmpWall umstellen
@@ -28,6 +29,7 @@ BB_ToolLineNew::BB_ToolLineNew()
         : BB_AbstractTool()
 {
     m_movedPoint = NULL;
+	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
 }
 
 BB_ToolLineNew::BB_ToolLineNew( QWidget *parent )
@@ -128,8 +130,7 @@ void BB_ToolLineNew::release( QMouseEvent* me )
 
                 if ( !tmpWall->setPos2( ( BB_Point* ) object ) )
                 {
-                    // 					remove( tmpWall );
-                    //              	delete tmpWall;
+//                     delete tmpWall;
                 }
                 tmpWall = NULL;
                 //delete m_movedPoint;
@@ -144,3 +145,17 @@ void BB_ToolLineNew::release( QMouseEvent* me )
     }
 }
 
+
+
+/*!
+    \fn BB_AbstractTool::getToolWidget()
+ */
+BB_AbstractToolWidget* BB_ToolLineNew::getToolWidget()
+{
+	if( m_ToolWidget == NULL )
+	{
+		m_ToolWidget = new BB_WidgetToolLineNew(this);
+	}
+	
+	return m_ToolWidget;
+}

@@ -78,15 +78,13 @@ void BB_DrawObject::setColor( const QColor& value )
 }
 
 
-
 /*!
-    \fn BB_DrawObject::isHit(QPoint p)
- */ 
-// bool BB_DrawObject::isHit(C2dVector hit)
-// {
-//     /// @todo implement me
-// }
-
+    \fn BB_DrawObject::isHit(QRect rect)
+ */
+bool BB_DrawObject::isHit( const QRect& rect )
+{
+	return false;
+}
 
 /*!
     \fn BB_DrawObject::getClassName()
@@ -107,17 +105,6 @@ void BB_DrawObject::setSelected( bool theValue )
 {
     m_Selected = theValue;
 }
-
-
-
-/*!
-    \fn BB_DrawObject::isHit(QRect rect)
- */
-bool BB_DrawObject::isHit( QRect rect )
-{
-    return false;
-}
-
 
 
 void BB_DrawObject::setBrush( const QBrush& value )

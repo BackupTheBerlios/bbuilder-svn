@@ -79,16 +79,17 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
         bool ok;
         QString tmp;
 
-        int x, y, id;
+        double x, y;
+		int id;
 
         tmp = atts.value( "id" );
-        id = tmp.toInt( &ok );
+		id = tmp.toInt( &ok );
 
         tmp = atts.value( "x" );
-        x = tmp.toInt( &ok );
+		x = tmp.toDouble( &ok );
 
         tmp = atts.value( "y" );
-        y = tmp.toInt( &ok );
+		y = tmp.toDouble( &ok );
 
 
         m_Object = new BB_Point();
@@ -127,16 +128,17 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
         QString tmp;
         BB_Point *point1 = NULL;
         BB_Point *point2 = NULL;
-        int p1, p2, id;
+        double p1, p2;
+		int id;
 
         tmp = atts.value( "id" );
-        id = tmp.toInt( &ok );
+		id = tmp.toInt( &ok );
 
         tmp = atts.value( "p1" );
-        p1 = tmp.toInt( &ok );
+		p1 = tmp.toDouble( &ok );
 
         tmp = atts.value( "p2" );
-        p2 = tmp.toInt( &ok );
+		p2 = tmp.toDouble( &ok );
 
         BB_Object *object;
 

@@ -69,11 +69,13 @@ class BB_Tab : public QWidget
         int m_ToolButtonCount;
         QList<QAction*> *m_ToolButtonActions;
 
-        virtual bool createToolButton( QAction *action, BB_AbstractTool* tool );
+        virtual bool createToolButton( QAction* action, BB_AbstractTool* tool );
         virtual void toolChanged( QAction* action );
 
     private slots:
         void slotToolChanged( QAction* action );
+protected:
+	virtual QAction* addTool( BB_AbstractTool* tool, const QString& name, const QString& info );
 };
 
 #endif

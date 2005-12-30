@@ -49,7 +49,8 @@ class BB_Point : public BB_DrawObject
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
         int getRadius();
         void setRadius( int r );
-        virtual bool isHit( C2dVector hit );
+        virtual bool isHit( const C2dVector& hit );
+		virtual bool isHit( const QRect& rect );
         void setPos( const C2dVector& theValue );
         const C2dVector& getPos() const;
         QVector<BB_Line*>* getLines();
@@ -86,11 +87,12 @@ class BB_Point : public BB_DrawObject
         };
         virtual void generateXElement( QTextStream &out, int depth );
         QStandardItemModel * getItemModel();
-        void setScale( double theValue )
+        
+		void setScale( double theValue )
         {
             m_scale = theValue;
         }
-        bool isHit( QRect rect );
+        
         /**
         Löscht vollständig ein Objekt aus dem Vektor.
         @author Vaceslav Ustinov
@@ -129,12 +131,7 @@ class BB_Point : public BB_DrawObject
         double m_scale;
     protected:
         C2dVector m_Pos;
-        /**
-        @author Vaceslav Ustinov
-        QVector mit allen Linien, die zu diesem Punkt gehoeren.
-        @date 20.10.2005
-        */ 
-        //     QVector<BB_Line*> m_Lines;
+
         /**
         QVector mit allen Objekten, die zu diesem Punkt gehoeren.<br>
         z.B. BB_Line oder BB_Tiangle

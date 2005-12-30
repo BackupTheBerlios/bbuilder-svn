@@ -32,12 +32,12 @@ public:
 
     ~BB_Transformer();
 
-    void setOffset(const QPoint& theValue);
+    void setOffset(const C2dVector& value);
 
 
-    QPoint getOffset() const;
+    C2dVector getOffset() const;
 
-    void setScale(double theValue);
+    void setScale(double value);
 
 
     double getScale() const;
@@ -58,7 +58,7 @@ public:
 
 private:
     double m_Scale;
-    QPoint m_Offset;
+    C2dVector m_Offset;
 };
 
 #endif

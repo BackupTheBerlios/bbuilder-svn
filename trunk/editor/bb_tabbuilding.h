@@ -51,7 +51,7 @@ protected:
     BB_AbstractTool* m_ToolZoom;
     BB_AbstractTool* m_ToolPointNew;
     BB_AbstractTool* m_ToolMove;
-    BB_AbstractTool* m_ToolLineNew;
+    BB_AbstractTool* m_ToolWallNew;
 		
     QVector<BB_Building*>* m_Buildings;
     QListWidget* m_BuildingsListWidget;

@@ -1,7 +1,7 @@
 //
 // C++ Implementation: bb_doccomponent
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -12,23 +12,22 @@
 #include "bb_doccomponent.h"
 
 
-BB_DocComponent::BB_DocComponent(const QDir& path, const QString &fileName, const QString &name)
- : BB_FileObject(path,fileName,name), BB_Map(), BB_DrawDevice()
+BB_DocComponent::BB_DocComponent( const QDir& path, const QString &fileName, const QString &name )
+        : BB_FileObject( path, fileName, name ), BB_Map(), BB_DrawDevice()
 {
-	m_ScalePoint_1.setX( 0.0 );
-	m_ScalePoint_1.setY( 0.0 );
-	
-	m_ScalePoint_2.setX( 50.0 );
-	m_ScalePoint_2.setY( -50.0 );
-	
-	m_ScaleValue = 1.0;
+    m_ScalePoint_1.setX( 0.0 );
+    m_ScalePoint_1.setY( 0.0 );
+
+    m_ScalePoint_2.setX( 50.0 );
+    m_ScalePoint_2.setY( -50.0 );
+
+    m_ScaleValue = 1.0;
 }
 
 
 
 BB_DocComponent::~BB_DocComponent()
 {
-		
 }
 
 
@@ -40,9 +39,14 @@ BB_DocComponent::~BB_DocComponent()
  */
 bool BB_DocComponent::open()
 {
-	bool exit = ( BB_FileObject::open() && loadMap( m_FilePath ) );
-	
-	return exit;
+    bool exit = ( BB_FileObject::open() && loadMap( m_FilePath ) );
+
+    C2dVector offset;
+    offset.setX( m_Map.width() / 2.0 );
+    offset.setY( m_Map.height() / 2.0 );
+
+	setOffset( offset );
+    return exit;
 }
 
 
@@ -51,7 +55,7 @@ bool BB_DocComponent::open()
  */
 BB_Point* BB_DocComponent::getScalePoint_1()
 {
-	return &m_ScalePoint_1;
+    return & m_ScalePoint_1;
 }
 
 
@@ -60,7 +64,7 @@ BB_Point* BB_DocComponent::getScalePoint_1()
  */
 BB_Point* BB_DocComponent::getScalePoint_2()
 {
-	return &m_ScalePoint_2;
+    return & m_ScalePoint_2;
 }
 
 
@@ -71,7 +75,7 @@ double BB_DocComponent::getScaleReal() const
 
 double* BB_DocComponent::getScaleRealPointer()
 {
-	return &m_ScaleValue;
+    return & m_ScaleValue;
 }
 
 
@@ -85,26 +89,26 @@ void BB_DocComponent::setScaleReal( double value )
 /*!
     \fn BB_DocComponent::getMeterPerPixel(int pixel)
  */
-double BB_DocComponent::getMeterPerPixel(double pixel)
+double BB_DocComponent::getMeterPerPixel( double pixel )
 {
-	C2dVector tmp((m_ScalePoint_2.getX() - m_ScalePoint_1.getX()), (m_ScalePoint_2.getY() - m_ScalePoint_1.getY()));
-	double lenght_pixel = tmp.getLength();
+    C2dVector tmp( ( m_ScalePoint_2.getX() - m_ScalePoint_1.getX() ), ( m_ScalePoint_2.getY() - m_ScalePoint_1.getY() ) );
+    double lenght_pixel = tmp.getLength();
 
-	double meter = pixel  * ( m_ScaleValue / lenght_pixel);
+    double meter = pixel * ( m_ScaleValue / lenght_pixel );
 
-	return meter;;
+    return meter;;
 }
 
 
 /*!
     \fn BB_DocComponent::getPixelPerMeter(double meter)
  */
-double BB_DocComponent::getPixelPerMeter(double meter)
+double BB_DocComponent::getPixelPerMeter( double meter )
 {
-	C2dVector tmp((m_ScalePoint_2.getX() - m_ScalePoint_1.getX()), (m_ScalePoint_2.getY() - m_ScalePoint_1.getY()));
-	double lenght_pixel = tmp.getLength();
+    C2dVector tmp( ( m_ScalePoint_2.getX() - m_ScalePoint_1.getX() ), ( m_ScalePoint_2.getY() - m_ScalePoint_1.getY() ) );
+    double lenght_pixel = tmp.getLength();
 
-	double pixel = (meter * lenght_pixel) / m_ScaleValue;
+    double pixel = ( meter * lenght_pixel ) / m_ScaleValue;
 
-	return pixel;
+    return pixel;
 }

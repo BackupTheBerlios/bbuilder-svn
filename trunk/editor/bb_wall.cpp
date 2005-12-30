@@ -127,7 +127,7 @@ QVector< BB_DrawObject * >* BB_Wall::getPoints() const
     QVector<BB_DrawObject * > * vectorMitpoints = new QVector<BB_DrawObject *>;
     for ( int i = 0; i < m_Objects->count(); i++ )
     {
-		if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Window )  | typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Door ))
+		if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Window )  || typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Door ))
         {
             tmpObject = ( BB_Rect * ) m_Objects->at( i );
             vectorMitpoints->append( tmpObject->getPos1() );

@@ -39,9 +39,16 @@ public:
      */
     virtual QVector<BB_DrawObject*>* getDrawObjects();
 
+	void setOffset( const C2dVector& value );
+	
+
+	const C2dVector& getOffset() const;
+	
+
 protected:
 	/** Vektor, der alle Objekte enthält */
     QVector<BB_DrawObject*> m_DrawObjects;
+    C2dVector m_Offset;
 };
 
 #endif

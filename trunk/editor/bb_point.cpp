@@ -30,9 +30,13 @@ BB_Point::BB_Point()
     m_scale = 1.0;
     m_Links.clear();
 	
+	m_Pos.setX( 0.0 );
+	m_Pos.setY( 0.0 );
+	
 }
 
 BB_Point::BB_Point( C2dVector p )
+	: BB_DrawObject()
 {
     m_Pos = p;
     m_Radius = 7;
@@ -43,6 +47,7 @@ BB_Point::BB_Point( C2dVector p )
 }
 
 BB_Point::BB_Point( QPoint p )
+	: BB_DrawObject()
 {
     m_Pos.setX( p.x() );
     m_Pos.setY( p.y() );
@@ -144,7 +149,7 @@ void BB_Point::setRadius( int r )
     m_Radius = r;
 }
 
-bool BB_Point::isHit( C2dVector hit )
+bool BB_Point::isHit( const C2dVector& hit )
 {
     //isHit von Kreis
     //         double abstand = m_Pos.getAbstand(hit);
@@ -165,6 +170,22 @@ bool BB_Point::isHit( C2dVector hit )
 }
 
 
+
+/*!
+    \fn BB_Point::isHit(QRect rect)
+ */
+bool BB_Point::isHit( const QRect& rect )
+{
+	QRect normRect = rect.normalized();
+	if ( ( getX() > normRect.x() ) && ( getX() < normRect.right() ) )
+	{
+		if ( ( getY() > normRect.top() ) && ( getY() < normRect.bottom() ) )
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
 
 const C2dVector& BB_Point::getPos() const
@@ -273,22 +294,6 @@ QStandardItemModel * BB_Point::getItemModel()
     return model;
 }
 
-
-/*!
-    \fn BB_Point::isHit(QRect rect)
- */
-bool BB_Point::isHit( QRect rect )
-{
-    QRect normRect = rect.normalized();
-    if ( ( getX() > normRect.x() ) && ( getX() < normRect.right() ) )
-    {
-        if ( ( getY() > normRect.top() ) && ( getY() < normRect.bottom() ) )
-        {
-            return true;
-        }
-    }
-    return false;
-}
 
 
 /**

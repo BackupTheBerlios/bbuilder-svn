@@ -85,16 +85,17 @@ bool BB_XTerrainHandler::startElement(const QString& namespaceURI, const QString
 		bool ok;
 		QString tmp;
 		
-		int x,y,id;
+		double x,y;
+		int id;
 		
 		tmp = atts.value("id");
 		id = tmp.toInt(&ok);
 		
 		tmp = atts.value("x");
-		x = tmp.toInt(&ok);
+		x = tmp.toDouble(&ok);
 		
 		tmp = atts.value("y");
-		y = tmp.toInt(&ok);
+		y = tmp.toDouble(&ok);
 		
 		
 		m_Object = new BB_Point();
@@ -134,7 +135,8 @@ bool BB_XTerrainHandler::startElement(const QString& namespaceURI, const QString
 		BB_Point *point1 = NULL;
 		BB_Point *point2 = NULL;
 		BB_Point *point3 = NULL;
-		int p1,p2,p3,id;
+		int id;
+		int p1,p2,p3;
 		
 		tmp = atts.value("id");
 		id = tmp.toInt(&ok);

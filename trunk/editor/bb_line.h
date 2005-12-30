@@ -34,7 +34,8 @@ class BB_Line : public BB_DrawObject
 
         ~BB_Line();
 
-        virtual bool isHit( C2dVector hit );
+        virtual bool isHit( const C2dVector& hit );
+		virtual bool isHit( const QRect& rect );
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
 
         /**
@@ -67,7 +68,7 @@ class BB_Line : public BB_DrawObject
 
 //         virtual void remove( BB_Point * point );
         virtual const QString getClassName();
-        virtual bool isHit( QRect rect );
+        
         double getLength();
         /**
         * Winkel zu x-Achse

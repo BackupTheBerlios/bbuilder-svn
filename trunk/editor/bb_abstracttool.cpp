@@ -17,6 +17,9 @@
 #include <bb_workframe.h>
 #include <iostream>
 
+#include <bb_navigationpoint.h>
+#include <bb_terrainpoint.h>
+
 using namespace std;
 
 BB_AbstractTool::BB_AbstractTool()
@@ -30,7 +33,7 @@ BB_AbstractTool::BB_AbstractTool()
 	m_ToolObjects = NULL;
     m_ShowDrawObjects = true;
 	m_ToolWidget = NULL;
-	m_Selection = NULL;
+	m_Selection = NULL;	
 }
 
 BB_AbstractTool::~BB_AbstractTool()
@@ -62,8 +65,10 @@ bool BB_AbstractTool::deleteObject( BB_DrawObject * delObject )
             tmpObject = m_Objects->at( i );
             if ( tmpObject == delObject )
             {
-                // Falls das Objekt ein BB_Point ist, werden zuerst alle abhängigen Objekte gelöscht
-                if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Point ) )
+                // Falls das Objekt ein Knoten ist, werden zuerst alle abhängigen Objekte gelöscht
+                if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Point ) ||
+					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_TerrainPoint ) ||
+					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_NavigationPoint ))
                 {
                     ( ( BB_Point* ) ( m_Objects->at( i ) ) ) ->deleteLinkedObjects( m_Component->getDrawObjects() );
                 }
@@ -312,15 +317,6 @@ void BB_AbstractTool::documentChanged()
 }
 
 
-/*!
-    \fn BB_AbstractTool::createNewObject()
- */
-BB_DrawObject* BB_AbstractTool::createNewObject()
-{
-	return NULL;
-}
-
-
 /**
  * Aktualisiert das Tool-Fenster
  */
@@ -351,4 +347,26 @@ void BB_AbstractTool::deleteSelection()
 	}
 	
 	documentChanged();
+}
+
+
+/**
+ * Gibt das Icon des Tools zurück
+ * @return Das Icon des Tools
+ * @author Alex Letkemann
+ */
+QIcon BB_AbstractTool::getIcon() const
+{
+    return m_Icon;
+}
+
+
+/**
+ * Setzt das Icon des Tool
+ * @param value Das neue Icon
+ * @author Alex Letkemann
+ */
+void BB_AbstractTool::setIcon( const QIcon& value )
+{
+    m_Icon = value;
 }

@@ -32,6 +32,7 @@ public:
 
     virtual void click(QMouseEvent* me);
     virtual void setDocComponent( BB_DocComponent* component );
+    virtual BB_AbstractToolWidget* getToolWidget();
 
 protected:
     BB_WorkArea* m_WorkArea;

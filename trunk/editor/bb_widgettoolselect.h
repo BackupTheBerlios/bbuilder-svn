@@ -39,11 +39,7 @@ class BB_WidgetToolSelect : public BB_AbstractToolWidget
 
     protected:
         Ui::WidgetToolSelect m_Ui;
-    private:
-        void commitName();
-        void commitDesc();
-
-
+		
 private slots:
     void slotSelectAll();
 };

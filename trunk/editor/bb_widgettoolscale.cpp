@@ -30,39 +30,6 @@ BB_WidgetToolScale::~BB_WidgetToolScale()
 {}
 
 
-
-
-/**
- * Prüft die Eingabe und speichert diese, falls die Eingabe korrekt ist.
- * Falls die Eingabe Fehlerhaft ist, wird der alte Wert hergestellt und eine
- * Fehlermeldung wird angezeigt.
- */
-void BB_WidgetToolScale::commitReal()
-{
-    if ( m_RealScale != NULL )
-    {
-        bool ok;
-        double tmp;
-
-        tmp = QString( m_Ui.real->text() ).toDouble( &ok );
-
-        if ( ok )
-        {
-            *m_RealScale = tmp;
-        }
-		else
-		{
-			m_Ui.real->setText( QString::number( *m_RealScale ) );
-			QMessageBox::critical(this,
-								  "Fehler",
-								  QString::fromUtf8("Fehler bei der Eingabe.\nBitte überprüfen Sie ihre Eingabe"));
-			
-			
-		}
-    }
-}
-
-
 /**
  * Setzt den logischen Maß
  */
@@ -89,11 +56,30 @@ void BB_WidgetToolScale::setRealScale( double *real )
 /**
  * Wird aufgeruffen, wenn im 'real'-LineEdit die Taste 'Enter' gedrückt wird 
  * oder das LineEdit den Fokus verliert.
- * Ruft die Funktion 'commitReal()' auf.
  */
 void BB_WidgetToolScale::slotRealFinished()
 {
-	commitReal();
+	if ( m_RealScale != NULL )
+	{
+		bool ok;
+		double tmp;
+
+		tmp = QString( m_Ui.real->text() ).toDouble( &ok );
+
+		if ( ok )
+		{
+			*m_RealScale = tmp;
+		}
+		else
+		{
+			m_Ui.real->setText( QString::number( *m_RealScale ) );
+			QMessageBox::critical(this,
+								  "Fehler",
+								  QString::fromUtf8("Fehler bei der Eingabe.\nBitte überprüfen Sie ihre Eingabe"));
+			
+			
+		}
+	}
 }
 
 

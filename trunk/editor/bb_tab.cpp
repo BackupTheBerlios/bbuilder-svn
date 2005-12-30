@@ -170,11 +170,12 @@ void BB_Tab::initLayout( bool leftFrame, bool rightFrame )
  * @author Alex Letkemann
  * @date 21.08.2005
  */
-bool BB_Tab::createToolButton( QAction *action, BB_AbstractTool* tool )
+bool BB_Tab::createToolButton( QAction* action, BB_AbstractTool* tool )
 {
     if ( action != NULL && tool != NULL )
     {
         action->setCheckable( true );
+		action->setIcon( tool->getIcon() );
         tool->setAction( action );
         m_ToolButtonActions->append( action );
 
@@ -351,4 +352,25 @@ void BB_Tab::resetTool()
     {
         m_Center->getTool() ->reset();
     }
+}
+
+
+/*!
+    \fn BB_Tab::addTool( BB_AbstractTool& tool, QIcon& icon, QString& name, QString& info )
+ */
+QAction* BB_Tab::addTool( BB_AbstractTool* tool, const QString& name, const QString& info )
+{
+	if( &tool != NULL && &name != NULL && &info != NULL )
+	{
+		
+		QAction* toolAction = new QAction( name, this );
+		
+		toolAction->setStatusTip( info );
+		addWidgetRight( tool->getToolWidget() );
+		createToolButton( toolAction, tool );
+		
+		return toolAction;
+	}
+	
+	return NULL;
 }

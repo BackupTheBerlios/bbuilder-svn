@@ -23,9 +23,6 @@ BB_WidgetToolPointNew::BB_WidgetToolPointNew( BB_AbstractTool* parentTool , QWid
 {
     m_Ui.setupUi( this );
 
-    // 	m_Ui.lineEdit_X->setValidator( BB::validNumeric );
-    // 	m_Ui.lineEdit_Y->setValidator( BB::validNumeric );
-
     connect( m_Ui.lineEdit_X, SIGNAL( editingFinished() ), this, SLOT( slotPosFinished() ) );
     connect( m_Ui.lineEdit_Y, SIGNAL( editingFinished() ), this, SLOT( slotPosFinished() ) );
 
@@ -46,59 +43,29 @@ BB_WidgetToolPointNew::~BB_WidgetToolPointNew()
  */
 void BB_WidgetToolPointNew::slotPosFinished()
 {
-    commitPos();
+	m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
+	m_Tmp_Vector = m_Tmp_Point->getPos();
+	double x, y;
+	bool ok;
+
+	x = QString( m_Ui.lineEdit_X->text() ).toDouble( &ok );
+	if ( ok )
+	{
+		m_Tmp_Vector.setX( x );
+	}
+
+	y = QString( m_Ui.lineEdit_Y->text() ).toDouble( &ok );
+	if ( ok )
+	{
+		m_Tmp_Vector.setY( y );
+	}
+
+	m_Tmp_Point->setPos( m_Tmp_Vector );
+
+	m_ParentTool->documentChanged();
 }
 
 
-/**
- * Speichert die Beschreibung
- * @author Alex Letkemann
- */
-void BB_WidgetToolPointNew::commitDesc()
-{
-    m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
-    m_Tmp_Point->setDescription( m_Ui.textEdit_PointDesc->toPlainText() );
-}
-
-
-/**
- * Speichert den Namen
- * @author Alex Letkemann
- */
-void BB_WidgetToolPointNew::commitName()
-{
-    m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
-    m_Tmp_Point->setName( m_Ui.lineEdit_PointName->text() );
-}
-
-
-/**
- * Prüft und speihert die eingegebene Position
- * @author Alex Letkemann
- */
-void BB_WidgetToolPointNew::commitPos()
-{
-    m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
-    m_Tmp_Vector = m_Tmp_Point->getPos();
-    double x, y;
-    bool ok;
-
-    x = QString( m_Ui.lineEdit_X->text() ).toDouble( &ok );
-    if ( ok )
-    {
-        m_Tmp_Vector.setX( x );
-    }
-
-    y = QString( m_Ui.lineEdit_Y->text() ).toDouble( &ok );
-    if ( ok )
-    {
-        m_Tmp_Vector.setY( y );
-    }
-
-    m_Tmp_Point->setPos( m_Tmp_Vector );
-
-    m_ParentTool->documentChanged();
-}
 
 
 /*!
@@ -115,7 +82,8 @@ void BB_WidgetToolPointNew::slotDelete()
  */
 void BB_WidgetToolPointNew::slotDescFinished()
 {
-    commitDesc();
+	m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
+	m_Tmp_Point->setDescription( m_Ui.textEdit_PointDesc->toPlainText() );
 }
 
 
@@ -124,7 +92,8 @@ void BB_WidgetToolPointNew::slotDescFinished()
  */
 void BB_WidgetToolPointNew::slotNameFinished()
 {
-    commitName();
+	m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
+	m_Tmp_Point->setName( m_Ui.lineEdit_PointName->text() );
 }
 
 
@@ -133,7 +102,9 @@ void BB_WidgetToolPointNew::slotNameFinished()
  */
 void BB_WidgetToolPointNew::updateWidget()
 {
-    if ( m_Selection != NULL && m_Selection->count() == 1 )
+    if ( m_Selection != NULL &&
+            m_Selection->count() == 1 &&
+            typeid( *( m_Selection->at( 0 ) ) ) == typeid( BB_Point ) )
     {
         m_Tmp_Point = ( ( BB_Point * ) ( m_Selection->at( 0 ) ) );
         m_Tmp_Vector = m_Tmp_Point->getPos();
