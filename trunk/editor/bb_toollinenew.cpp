@@ -32,7 +32,6 @@ BB_ToolLineNew::BB_ToolLineNew( QWidget *parent )
 {
 
 	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
-//     m_movedPoint = NULL;
 }
 
 

@@ -18,8 +18,8 @@
 
 using namespace std;
 
-BB_ToolZoom::BB_ToolZoom( BB_WorkArea* area )
-        : BB_AbstractTool(area)
+BB_ToolZoom::BB_ToolZoom( BB_WorkArea* area, QWidget* parent )
+        : BB_AbstractTool( parent )
 {
     if ( area == NULL )
     {
@@ -28,7 +28,7 @@ BB_ToolZoom::BB_ToolZoom( BB_WorkArea* area )
     }
 
     m_WorkArea = area;
-	m_Icon = QIcon ( IMG_DIR() + SEPARATOR() + "toolZoom.png" );
+    m_Icon = QIcon ( IMG_DIR() + SEPARATOR() + "toolZoom.png" );
 }
 
 
@@ -51,7 +51,7 @@ void BB_ToolZoom::click( QMouseEvent* me )
         m_WorkArea->setZoomFaktor( 1.0 );
     }
 
-	( ( BB_WidgetToolZoom* ) ( m_ToolWidget ) ) -> setZoomFaktor( m_Component->getZoom() );
+    ( ( BB_WidgetToolZoom* ) ( m_ToolWidget ) ) -> setZoomFaktor( m_Component->getZoom() );
 }
 
 
@@ -60,12 +60,12 @@ void BB_ToolZoom::click( QMouseEvent* me )
  */
 void BB_ToolZoom::setDocComponent( BB_DocComponent* component )
 {
-	BB_AbstractTool::setDocComponent( component );
-	
-	if( m_Component != NULL && m_ToolWidget != NULL )
-	{
-		( ( BB_WidgetToolZoom* ) ( m_ToolWidget ) ) -> setZoomFaktor( m_Component->getZoom() );
-	}
+    BB_AbstractTool::setDocComponent( component );
+
+    if ( m_Component != NULL && m_ToolWidget != NULL )
+    {
+        ( ( BB_WidgetToolZoom* ) ( m_ToolWidget ) ) -> setZoomFaktor( m_Component->getZoom() );
+    }
 }
 
 
@@ -74,9 +74,9 @@ void BB_ToolZoom::setDocComponent( BB_DocComponent* component )
  */
 BB_AbstractToolWidget* BB_ToolZoom::getToolWidget()
 {
-	if( m_ToolWidget == NULL )
-	{
-		m_ToolWidget = new BB_WidgetToolZoom( this );
-	}
-	return m_ToolWidget;
+    if ( m_ToolWidget == NULL )
+    {
+        m_ToolWidget = new BB_WidgetToolZoom( this );
+    }
+    return m_ToolWidget;
 }

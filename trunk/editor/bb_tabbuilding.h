@@ -24,6 +24,8 @@
 #include "bb_toolwallnew.h"
 #include "bb_toolmove.h"
 #include "bb_toolscale.h"
+#include "bb_toolnavigationpointnew.h"
+#include "bb_toolnavigationlinenew.h"
 
 
 /**
@@ -61,6 +63,8 @@ protected:
 
     bool m_BuildingsListCreated;
     BB_AbstractTool* m_ToolScale;
+    BB_AbstractTool* m_ToolNavigationPointNew;
+    BB_AbstractTool* m_ToolNavigationLineNew;
     
 protected:
     

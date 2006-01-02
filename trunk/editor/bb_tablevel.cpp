@@ -93,7 +93,7 @@ BB_TabLevel::BB_TabLevel(BB_Doc * doc, QWidget* parent, Qt::WFlags f)
 // 	createToolButton(new QAction("7",this),SLOT(test(QAction*)));
 	
 	
-	m_ToolZoom = new BB_ToolZoom(m_Center);
+	m_ToolZoom = new BB_ToolZoom(m_Center, this);
 }
 
 

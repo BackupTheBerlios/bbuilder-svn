@@ -8,7 +8,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>507</width>
+    <width>231</width>
     <height>634</height>
    </rect>
   </property>
@@ -118,7 +118,7 @@
       <item row="1" column="0" >
        <widget class="QGroupBox" name="groupBox_3" >
         <property name="title" >
-         <string>Linien-Beschreibung</string>
+         <string>Beschreibung</string>
         </property>
         <property name="flat" >
          <bool>true</bool>
@@ -131,7 +131,7 @@
           <number>5</number>
          </property>
          <item row="0" column="0" >
-          <widget class="QTextEdit" name="textEdit_LineDesc" />
+          <widget class="QTextEdit" name="textEdit_Desc" />
          </item>
         </layout>
        </widget>
@@ -139,7 +139,7 @@
       <item row="0" column="0" >
        <widget class="QGroupBox" name="groupBox_2" >
         <property name="title" >
-         <string>Linien-Name</string>
+         <string>Name</string>
         </property>
         <property name="flat" >
          <bool>true</bool>
@@ -152,7 +152,7 @@
           <number>5</number>
          </property>
          <item row="0" column="0" >
-          <widget class="QLineEdit" name="lineEdit_LineName" />
+          <widget class="QLineEdit" name="lineEdit_Name" />
          </item>
         </layout>
        </widget>

@@ -89,6 +89,7 @@ void BB_ToolTriangleNew::click( QMouseEvent* me )
                         {
                             m_Objects->append( newTriangle );
                             selectObject( newTriangle );
+							updateWidget();
                         }
 
                         reset();
@@ -102,6 +103,7 @@ void BB_ToolTriangleNew::click( QMouseEvent* me )
     else if ( me->button() == Qt::RightButton )
     {
         reset();
+		updateWidget();
     }
 
 }
@@ -116,7 +118,6 @@ void BB_ToolTriangleNew::reset()
     m_P1 = NULL;
     m_P2 = NULL;
     m_P3 = NULL;
-    clearSelection();
 
 }
 
@@ -140,7 +141,7 @@ BB_AbstractToolWidget* BB_ToolTriangleNew::getToolWidget()
  */
 BB_Point* BB_ToolTriangleNew::getClickedPoint( C2dVector & pos )
 {
-	return (BB_Point*) getClickedObject( pos, typeid( BB_Point ) );
+	return (BB_Point*) getClickedObject( pos, typeid( BB_TerrainPoint ) );
 }
 
 
@@ -152,7 +153,7 @@ BB_Triangle* BB_ToolTriangleNew::createNewSurface()
 	
 	BB_Triangle* triangle = NULL;
 	
-    if ( m_P1 == NULL || m_P2 == NULL || m_P3 == NULL )
+    if ( m_P1 != NULL && m_P2 != NULL && m_P3 != NULL )
     {
 		triangle = new BB_Triangle( m_P1, m_P2, m_P3 );
     }

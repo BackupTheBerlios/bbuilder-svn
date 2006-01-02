@@ -119,26 +119,26 @@ void BB_TabBuilding::slotBuildingDelete()
                                     QMessageBox::Yes,
                                     QMessageBox::No ) == QMessageBox::Yes )
         {
-			
-			
-			unsetDocComponent();
-			
-			// Gebäude aus der Liste entfernen
+
+
+            unsetDocComponent();
+
+            // Gebäude aus der Liste entfernen
             m_BuildingsListWidget->takeItem( m_BuildingsListWidget->row( building->getListWidgetItem() ) );
-			
-			// Gebäude löschen
-			m_Doc->deleteBuilding( building->getListWidgetItem() );
+
+            // Gebäude löschen
+            m_Doc->deleteBuilding( building->getListWidgetItem() );
             building = NULL;
 
-			// Änderung speichern
+            // Änderung speichern
             m_Doc->save();
 
-			
-//             m_Center->setEnabled( false );
-			if( m_BuildingsListWidget->count() > 0 )
-			{
-// 				m_BuildingsListWidget->setCurrentRow( - 1 );	
-			}
+
+            //             m_Center->setEnabled( false );
+            if ( m_BuildingsListWidget->count() > 0 )
+            {
+                // 				m_BuildingsListWidget->setCurrentRow( - 1 );
+            }
         }
     }
 }
@@ -189,25 +189,28 @@ void BB_TabBuilding::updateWidget()
 void BB_TabBuilding::initTools()
 {
 
-	QAction* initTool;
-    
-	/* Tools erzeugen */
-    m_ToolMove = new BB_ToolMove(this);
-	m_ToolScale = new BB_ToolScale( this );
-	m_ToolZoom = new BB_ToolZoom( m_Center );
-	m_ToolPointNew = new BB_ToolPointNew(this);
-	m_ToolWallNew = new BB_ToolWallNew( m_Center );
-	
-	
-	/* Tools dem Tab hinzufügen */
-	initTool = addTool( m_ToolMove, "Move", "Bewegungs Werkzeug" );
-	addTool( m_ToolScale, QString::fromUtf8("Maßstab"), QString::fromUtf8("Maßstab Werkzeug") );
-	addTool( m_ToolZoom, "Zoom", QString::fromUtf8("Zoom Werkzeug") );
-	addTool( m_ToolPointNew, "Knoten-Werkzeug", "Werkzeug zum Erstellen von Knoten");
-	addTool( m_ToolWallNew, "Wand-Werkzeug", QString::fromUtf8("Werkzeug zum Erstellen von Wänden") );
-	
+    QAction * initTool;
 
-	/* Ein Tool als Standard festlegen */
+    /* Tools erzeugen */
+    m_ToolMove = new BB_ToolMove( this );
+    m_ToolScale = new BB_ToolScale( this );
+    m_ToolZoom = new BB_ToolZoom( m_Center, this );
+    m_ToolPointNew = new BB_ToolPointNew( this );
+    m_ToolWallNew = new BB_ToolWallNew( this );
+    m_ToolNavigationPointNew = new BB_ToolNavigationPointNew( this );
+    m_ToolNavigationLineNew = new BB_ToolNavigationLineNew( this );
+
+
+    /* Tools dem Tab hinzufügen */
+    initTool = addTool( m_ToolMove, "Move", "Bewegungs Werkzeug" );
+    addTool( m_ToolScale, QString::fromUtf8( "Maßstab" ), QString::fromUtf8( "Maßstab Werkzeug" ) );
+    addTool( m_ToolZoom, "Zoom", QString::fromUtf8( "Zoom Werkzeug" ) );
+    addTool( m_ToolPointNew, "Knoten-Werkzeug", "Werkzeug zum Erstellen von Knoten" );
+    addTool( m_ToolWallNew, "Wand-Werkzeug", QString::fromUtf8( "Werkzeug zum Erstellen von Wänden" ) );
+    addTool( m_ToolNavigationPointNew, "Navigationsknoten", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationsknoten" ) );
+    addTool( m_ToolNavigationLineNew, "Navigationslinien", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationslinien" ) );
+
+    /* Ein Tool als Standard festlegen */
     toolChanged( initTool );
 }
 
@@ -232,27 +235,35 @@ void BB_TabBuilding::toolChanged( QAction* action )
 
     if ( m_ToolMove->getAction() == action )
     {
-		setTool( m_ToolMove );
+        setTool( m_ToolMove );
     }
     else if ( m_ToolZoom->getAction() == action )
     {
-		setTool( m_ToolZoom );
+        setTool( m_ToolZoom );
     }
     else if ( m_ToolPointNew->getAction() == action )
     {
-		setTool( m_ToolPointNew );
+        setTool( m_ToolPointNew );
     }
     else if ( m_ToolWallNew->getAction() == action )
     {
-		setTool( m_ToolWallNew );
+        setTool( m_ToolWallNew );
     }
     else if ( m_ToolScale->getAction() == action )
     {
-		setTool( m_ToolScale );
+        setTool( m_ToolScale );
     }
-    else
+    else if ( m_ToolNavigationPointNew->getAction() == action )
     {
-		qDebug( "Unbekanntes Tool\n" );
+        setTool( m_ToolNavigationPointNew );
+    }
+	else if( m_ToolNavigationLineNew->getAction() == action )
+	{
+		setTool( m_ToolNavigationLineNew );
+	}
+	else
+    {
+        qDebug( "Unbekanntes Tool\n" );
     }
 
     m_Center->update();
@@ -275,7 +286,7 @@ void BB_TabBuilding::createBuildingList()
     }
     else
     {
-		qDebug( "Kann die Liste nicht nochmal erstellen.\n" );
+        qDebug( "Kann die Liste nicht nochmal erstellen.\n" );
     }
 }
 

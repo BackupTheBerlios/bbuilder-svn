@@ -26,7 +26,7 @@
 class BB_ToolZoom : public BB_AbstractTool
 {
 public:
-	BB_ToolZoom(BB_WorkArea* area);
+	BB_ToolZoom(BB_WorkArea* area, QWidget* paret);
 
     ~BB_ToolZoom();
 

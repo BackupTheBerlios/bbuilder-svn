@@ -108,8 +108,8 @@ void BB_Point::show( BB_Transformer& transformer, QPainter& painter ) const
     painter.drawRect( dest.x() - m_Radius, dest.y() + m_Radius - breite, m_Radius * 2, breite );
     painter.drawRect( dest.x() - m_Radius, dest.y() - m_Radius + breite, breite, m_Radius * 2 - breite * 2 );
     painter.drawRect( dest.x() + m_Radius - breite, dest.y() - m_Radius + breite, breite, m_Radius * 2 - breite * 2 );
-    painter.setBrush( QColor( 0, 200, 0 ) );
-    painter.setPen( QColor( 0, 200, 0 ) );
+//     painter.setBrush( QColor( 0, 200, 0 ) );
+//     painter.setPen( QColor( 0, 200, 0 ) );
     painter.drawRect( dest.x() - breite, dest.y() - breite,
                       breite * 2, breite * 2 );
 	
@@ -252,7 +252,7 @@ void BB_Point::setPos( const C2dVector& theValue )
 // }
 
 /*!
-    \fn BB_Point::getClassName()
+    \fn BB_Object::getClassName()
  */
 const QString BB_Point::getClassName()
 {

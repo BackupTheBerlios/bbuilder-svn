@@ -77,7 +77,7 @@ void BB_TabTerrain::initTools()
 	/* Tools initialisieren */
 	m_ToolMove = new BB_ToolMove(this);
 	m_ToolScale = new BB_ToolScale( this );
-	m_ToolZoom = new BB_ToolZoom( m_Center );
+	m_ToolZoom = new BB_ToolZoom( m_Center, this );
 	m_ToolTerrainPointNew = new BB_ToolTerrainPointNew(this);
 	m_ToolTriangleNew = new BB_ToolTriangleNew(this);
 			
@@ -136,8 +136,6 @@ void BB_TabTerrain::slotTerrainEdit()
         m_Terrain->keyBoardEdit( this );
 
         m_Center->setDocComponent( m_Terrain );
-        // 		m_Center->setMap(m_Terrain);
-        // 		m_Center->setDrawDevice(m_Terrain);
     }
 }
 

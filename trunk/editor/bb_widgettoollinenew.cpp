@@ -19,8 +19,8 @@ BB_WidgetToolLineNew::BB_WidgetToolLineNew( BB_AbstractTool* parentTool , QWidge
 {
     m_Ui.setupUi( this );
 
-    connect( m_Ui.lineEdit_LineName, SIGNAL( editingFinished() ), this, SLOT( slotNameFinished() ) );
-    connect( m_Ui.textEdit_LineDesc, SIGNAL( textChanged() ), this, SLOT( slotDescFinished() ) );
+    connect( m_Ui.lineEdit_Name, SIGNAL( editingFinished() ), this, SLOT( slotNameFinished() ) );
+    connect( m_Ui.textEdit_Desc, SIGNAL( textChanged() ), this, SLOT( slotDescFinished() ) );
 
     connect( m_Ui.pushButton_Delete, SIGNAL( released() ), this, SLOT( slotDelete() ) );
 
@@ -38,7 +38,7 @@ void BB_WidgetToolLineNew::slotNameFinished()
 	if ( m_Selection != NULL && m_Selection->count() == 1 )
 	{
 		m_Tmp_DrawObject = m_Selection->at( 0 );
-		m_Tmp_DrawObject->setName( m_Ui.lineEdit_LineName->text() );
+		m_Tmp_DrawObject->setName( m_Ui.lineEdit_Name->text() );
 	}
 }
 
@@ -47,7 +47,7 @@ void BB_WidgetToolLineNew::slotDescFinished()
 	if ( m_Selection != NULL && m_Selection->count() == 1 )
 	{
 		m_Tmp_DrawObject = m_Selection->at( 0 );
-		m_Tmp_DrawObject->setDescription( m_Ui.textEdit_LineDesc->toPlainText() );
+		m_Tmp_DrawObject->setDescription( m_Ui.textEdit_Desc->toPlainText() );
 	}
 }
 
@@ -67,8 +67,8 @@ void BB_WidgetToolLineNew::updateWidget()
     {
         tmpLine = ( BB_Line* ) m_Selection->at( 0 );
 
-        m_Ui.lineEdit_LineName->setText( tmpLine->getName() );
-        m_Ui.textEdit_LineDesc->setPlainText( tmpLine->getDescription() );
+        m_Ui.lineEdit_Name->setText( tmpLine->getName() );
+        m_Ui.textEdit_Desc->setPlainText( tmpLine->getDescription() );
 
         m_Tmp_DrawObject = tmpLine->getPos1();
         if ( m_Tmp_DrawObject != NULL )
@@ -94,16 +94,16 @@ void BB_WidgetToolLineNew::updateWidget()
 
 void BB_WidgetToolLineNew::setWidgetEnabled( bool value )
 {
-    m_Ui.lineEdit_LineName->setEnabled( value );
-    m_Ui.textEdit_LineDesc->setEnabled( value );
+    m_Ui.lineEdit_Name->setEnabled( value );
+    m_Ui.textEdit_Desc->setEnabled( value );
 
     m_Ui.pushButton_Delete->setEnabled( value );
 }
 
 void BB_WidgetToolLineNew::clearToolWidget()
 {
-    m_Ui.lineEdit_LineName->clear();
-    m_Ui.textEdit_LineDesc->clear();
+    m_Ui.lineEdit_Name->clear();
+    m_Ui.textEdit_Desc->clear();
     m_Ui.label_Pos1->clear();
     m_Ui.label_Pos2->clear();
 }

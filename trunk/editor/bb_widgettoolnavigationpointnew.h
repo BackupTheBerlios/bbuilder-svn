@@ -1,7 +1,7 @@
 //
 // C++ Interface: bb_widgettoolnavigationpointnew
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -13,20 +13,35 @@
 #define BB_WIDGETTOOLNAVIGATIONPOINTNEW_H
 
 #include <bb_abstracttoolwidget.h>
+#include <ui_toolWidgetNavigationPointNew.h>
+#include <bb_point.h>
 
 /**
 	@author Alex Letkemann <alex@letkemann.de>
 */
 class BB_WidgetToolNavigationPointNew : public BB_AbstractToolWidget
 {
-public:
-    BB_WidgetToolNavigationPointNew(BB_AbstractTool* parentTool, QWidget* parent = 0);
+        Q_OBJECT
+    public:
+        BB_WidgetToolNavigationPointNew( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
-    ~BB_WidgetToolNavigationPointNew();
+        ~BB_WidgetToolNavigationPointNew();
 
-    virtual void clearToolWidget();
-    virtual void setWidgetEnabled(bool value);
-    virtual void updateWidget();
+        virtual void clearToolWidget();
+        virtual void setWidgetEnabled( bool value );
+        virtual void updateWidget();
+
+    private slots:
+        void slotDescFinished();
+        void slotNameFinished();
+        void slotPosFinished();
+        void slotIndexChanged( int index );
+        void slotDelete();
+
+    protected:
+        Ui::WidgetToolNavigationPointNew m_Ui;
+		BB_Point* m_Tmp_Point;
+        C2dVector m_Tmp_Vector;
 
 };
 

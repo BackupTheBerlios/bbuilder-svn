@@ -14,6 +14,8 @@
 BB_NavigationPoint::BB_NavigationPoint(C2dVector p): BB_Point(p)
 {
 	m_Indexed = false;
+	
+	m_Pen.setColor( Qt::blue );
 }
 
 

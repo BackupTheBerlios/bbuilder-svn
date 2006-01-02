@@ -35,7 +35,7 @@ class BB_Line : public BB_DrawObject
         ~BB_Line();
 
         virtual bool isHit( const C2dVector& hit );
-		virtual bool isHit( const QRect& rect );
+        virtual bool isHit( const QRect& rect );
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
 
         /**
@@ -66,9 +66,9 @@ class BB_Line : public BB_DrawObject
         */
         BB_Point* getPos2() const;
 
-//         virtual void remove( BB_Point * point );
+        //         virtual void remove( BB_Point * point );
         virtual const QString getClassName();
-        
+
         double getLength();
         /**
         * Winkel zu x-Achse
@@ -80,6 +80,10 @@ class BB_Line : public BB_DrawObject
         const C2dVector& getMiddle();
 
     private:
+        /**
+         * Berechnet die Mitte der Linie und speichert diese im m_Middle Vektor.
+         * @author Alex Letkemann
+         */
         virtual void calculateMiddle();
 
 

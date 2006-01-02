@@ -103,8 +103,7 @@ void BB_Line::show( BB_Transformer& transformer, QPainter& painter ) const
     transformer.logicalToScreen( dest_Pos1, m_Pos1->getPos() );
     transformer.logicalToScreen( dest_Pos2, m_Pos2->getPos() );
 
-    painter.setPen( m_Color );
-    painter.setBrush( m_Color );
+    painter.setBrush( m_Brush );
     painter.drawLine( dest_Pos1.x(), dest_Pos1.y(), dest_Pos2.x(), dest_Pos2.y() );
 }
 
@@ -238,7 +237,7 @@ const C2dVector& BB_Line::getMiddle()
 
 
 /**
- * Berechnet die Mitte der Linie.
+ * Berechnet die Mitte der Linie und speichert diese im m_Middle Vektor.
  * @author Alex Letkemann
  */
 void BB_Line::calculateMiddle()
