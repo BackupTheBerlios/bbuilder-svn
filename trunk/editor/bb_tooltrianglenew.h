@@ -34,9 +34,6 @@ public:
      */
     ~BB_ToolTriangleNew();
 	
-	
-	virtual void move(QMouseEvent* me, bool overX, bool overY);
-	virtual void release(QMouseEvent* me);
 	virtual void click(QMouseEvent* me);
 	
 	/**
@@ -44,9 +41,16 @@ public:
 	 * Falls es ein temporäres Triangle-Objekt bereits erstellt wurde, wird dieses gelöscht.
 	 */
 	virtual void reset();
+	virtual BB_AbstractToolWidget* getToolWidget();
 
 protected:
-    BB_Triangle* m_Triangle;
+	
+	BB_Point* m_P1;
+	BB_Point* m_P2;
+	BB_Point* m_P3;
+protected:
+    virtual BB_Point* getClickedPoint( C2dVector &pos);
+	virtual BB_Triangle* createNewSurface();
 };
 
 #endif

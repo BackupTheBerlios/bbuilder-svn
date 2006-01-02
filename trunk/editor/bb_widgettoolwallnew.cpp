@@ -19,6 +19,9 @@ BB_WidgetToolWallNew::BB_WidgetToolWallNew( BB_AbstractTool* parentTool, QWidget
 
 
     connect( m_Ui.lineEdit_WallName, SIGNAL( editingFinished() ), this, SLOT( slotNameFinished() ) );
+	
+	// ACHTUNG: Für QTextEdit-Objekte müssen die Signale geblockt werden, wenn man ein clear() oder setXXXText() macht
+	// sonst entsteht eine Endlosschleife, da das Signal textChanged() dabei gesendet wird.
     connect( m_Ui.textEdit_WallDesc, SIGNAL( textChanged() ), this, SLOT( slotDescFinished() ) );
 
     connect( m_Ui.pushButton_Swap, SIGNAL( released() ), this, SLOT( slotSwap() ) );
@@ -35,19 +38,20 @@ BB_WidgetToolWallNew::~BB_WidgetToolWallNew()
 
 void BB_WidgetToolWallNew::clearToolWidget()
 {
-	qDebug("clearToolWidget() - Start");
     m_Ui.lineEdit_WallName->clear();
-//     m_Ui.textEdit_WallDesc->clear();
+	
+	m_Ui.textEdit_WallDesc->blockSignals(true);
+    m_Ui.textEdit_WallDesc->clear();
+	m_Ui.textEdit_WallDesc->blockSignals(false);
+	
     m_Ui.label_Pos1->clear();
     m_Ui.label_Pos2->clear();
-	
-	qDebug("clearToolWidget() - Ende");
 }
 
 void BB_WidgetToolWallNew::setWidgetEnabled( bool value )
 {
     m_Ui.lineEdit_WallName->setEnabled( value );
-//     m_Ui.textEdit_WallDesc->setEnabled( value );
+    m_Ui.textEdit_WallDesc->setEnabled( value );
 
     m_Ui.pushButton_Delete->setEnabled( value );
     m_Ui.pushButton_Edit->setEnabled( value );
@@ -56,6 +60,7 @@ void BB_WidgetToolWallNew::setWidgetEnabled( bool value )
 
 void BB_WidgetToolWallNew::updateWidget()
 {
+	
     BB_Wall * tmpWall;
 
     if ( m_Selection != NULL &&
@@ -65,8 +70,9 @@ void BB_WidgetToolWallNew::updateWidget()
         tmpWall = ( BB_Wall* ) m_Selection->at( 0 );
 
         m_Ui.lineEdit_WallName->setText( tmpWall->getName() );
-//         m_Ui.textEdit_WallDesc->setPlainText( tmpWall->getDescription() );
-
+		m_Ui.textEdit_WallDesc->blockSignals(true);
+        m_Ui.textEdit_WallDesc->setPlainText( tmpWall->getDescription() );
+		m_Ui.textEdit_WallDesc->blockSignals(false);
         m_Tmp_DrawObject = tmpWall->getPos1();
         if ( m_Tmp_DrawObject != NULL )
         {
@@ -86,6 +92,7 @@ void BB_WidgetToolWallNew::updateWidget()
         clearToolWidget();
         setWidgetEnabled( false );
     }
+
 }
 
 
@@ -107,7 +114,7 @@ void BB_WidgetToolWallNew::slotDescFinished()
     if ( m_Selection != NULL && m_Selection->count() == 1 )
     {
         m_Tmp_DrawObject = m_Selection->at( 0 );
-//         m_Tmp_DrawObject->setDescription( m_Ui.textEdit_WallDesc->toPlainText() );
+        m_Tmp_DrawObject->setDescription( m_Ui.textEdit_WallDesc->toPlainText() );
         m_ParentTool->documentChanged();
     }
 }

@@ -137,8 +137,7 @@ void BB_ToolMove::click( QMouseEvent* me )
             {
                 clearSelection();
                 m_select = false;
-                object->setSelected( true );
-                m_Selection->append( object );
+				selectObject( object );
                 qDebug( "Keine Objeckte sind selectiert, ein neues wurde selektiert" );
                 if ( m_ToolWidget != NULL )
                 {
@@ -303,8 +302,7 @@ void BB_ToolMove::release( QMouseEvent* me )
                 object = m_Objects->at( i );
                 if ( object->isHit( m_pLogic ) )
                 {
-                    object->setSelected( true );
-                    m_Selection->append( object );
+					selectObject( object );
                     //max 1 Object, also Abbrechen
                     break;
                 }
@@ -323,8 +321,7 @@ void BB_ToolMove::release( QMouseEvent* me )
                 object = m_Objects->at( i );
                 if ( object->isHit( rect ) )
                 {
-                    object->setSelected( true );
-                    m_Selection->append( object );
+					selectObject( object );
                 }
             }
         }
@@ -369,7 +366,8 @@ void BB_ToolMove::bringToLine( BB_Point *point )
     else
     {
         comparePoint = ( BB_Point * ) point;
-        point->setSelected( true );
+//         point->setSelected( true );
+		selectObject( point );
         cout << "setzen von bringToLinePoint" << endl;
     }
 }
@@ -390,8 +388,7 @@ void BB_ToolMove::selectAll()
         for ( int i = 0; i < m_Component->getDrawObjects() ->count() ; i++ )
         {
             object = m_Component->getDrawObjects() ->at( i );
-            object->setSelected( true );
-            m_Selection->append( object );
+			selectObject( object );
         }
 
     }

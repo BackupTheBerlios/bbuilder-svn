@@ -150,17 +150,24 @@ BB_Point* BB_Triangle::getPos3() const
  * Setzt die Position der dritten Ecke des Dreiecks
  * @param point Position der dritten Ecke
  */
-bool BB_Triangle::setPos3(BB_Point* point)
+bool BB_Triangle::setPos3(BB_Point* value)
 {
-	if(point != NULL)
+	if ( value != NULL && value != m_Pos1 && value != m_Pos2)
 	{
-		if(m_Pos3 != NULL)
-			m_Pos3->removeLinkedObject(this);		// Links zur alten Position entfernen
-		m_Pos3 = point;					// Neue Position
- 		m_Pos3->addObject(this);			// Link zur neuen Position erstellen
+
+        // EDIT: Alex Letkemann
+        // DATE: 07.12.2005
+        // Links werden bei jedem Setzten des Punktes aktualisiert.
+		if ( m_Pos3 != NULL )
+			m_Pos3->removeLinkedObject( this );
+		m_Pos3 = value;
+		m_Pos3->addObject( this );
+		
+		// Mitte neu berechnen
+		moveEvent();
+		
 		return true;
 	}
-// 	cout << "BB_Triangle::setPos3(..): NULL-Pointer erhalten" << endl;
 	return false;
 }
 

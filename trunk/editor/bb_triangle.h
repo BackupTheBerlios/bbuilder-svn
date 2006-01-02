@@ -57,7 +57,7 @@ public:
 	 * @param point Pointer auf einen Punkt. Wird auf NULL geprüft.
 	 * @return False im Fehlerfall, sonst true
 	 */
-	bool setPos3(BB_Point* point);
+	bool setPos3(BB_Point* value);
 	
 
 	/**

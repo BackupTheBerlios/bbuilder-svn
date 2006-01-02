@@ -58,8 +58,7 @@ void BB_ToolPointNew::click( QMouseEvent* me )
             m_Objects->append( m_Point );
         }
 
-        m_Point->setSelected( true );
-        m_Selection->append( m_Point );
+		selectObject( m_Point );
         updateWidget();
     }
 }

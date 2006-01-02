@@ -2,14 +2,14 @@
  <author></author>
  <comment></comment>
  <exportmacro></exportmacro>
- <class>WidgetToolWallNew</class>
- <widget class="QWidget" name="WidgetToolWallNew" >
+ <class>WidgetToolTriangleNew</class>
+ <widget class="QWidget" name="WidgetToolTriangleNew" >
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>214</width>
-    <height>557</height>
+    <width>507</width>
+    <height>634</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -25,7 +25,7 @@
    <item row="0" column="0" >
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
-      <string>Wand</string>
+      <string>Fläche</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -52,6 +52,19 @@
          <property name="spacing" >
           <number>5</number>
          </property>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="label_Pos2" >
+           <property name="frameShape" >
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow" >
+            <enum>QFrame::Sunken</enum>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0" >
           <widget class="QLabel" name="label_Pos1" >
            <property name="frameShape" >
@@ -65,8 +78,8 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="label_Pos2" >
+         <item row="2" column="0" >
+          <widget class="QLabel" name="label_Pos3" >
            <property name="frameShape" >
             <enum>QFrame::StyledPanel</enum>
            </property>
@@ -96,7 +109,7 @@
          <property name="spacing" >
           <number>5</number>
          </property>
-         <item row="2" column="0" >
+         <item row="1" column="0" >
           <widget class="QPushButton" name="pushButton_Delete" >
            <property name="toolTip" >
             <string>Löscht den Knoten</string>
@@ -109,20 +122,6 @@
            </property>
            <property name="text" >
             <string>Löschen</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0" >
-          <widget class="QPushButton" name="pushButton_Swap" >
-           <property name="text" >
-            <string>Umdrehen</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" >
-          <widget class="QPushButton" name="pushButton_Edit" >
-           <property name="text" >
-            <string>Fenster und Türen</string>
            </property>
           </widget>
          </item>
@@ -145,7 +144,7 @@
           <number>5</number>
          </property>
          <item row="0" column="0" >
-          <widget class="QTextEdit" name="textEdit_WallDesc" />
+          <widget class="QTextEdit" name="textEdit_Desc" />
          </item>
         </layout>
        </widget>
@@ -166,7 +165,7 @@
           <number>5</number>
          </property>
          <item row="0" column="0" >
-          <widget class="QLineEdit" name="lineEdit_WallName" />
+          <widget class="QLineEdit" name="lineEdit_Name" />
          </item>
         </layout>
        </widget>

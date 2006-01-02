@@ -30,7 +30,7 @@ using namespace std;
 BB_ToolLineNew::BB_ToolLineNew( QWidget *parent )
         : BB_AbstractTool(parent)
 {
-    m_ParentWidget = parent;
+
 	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
 //     m_movedPoint = NULL;
 }
@@ -50,17 +50,16 @@ void BB_ToolLineNew::click( QMouseEvent* me )
         m_LastLogicMouseClick = m_pLogic;
         m_MovePoint.setPos( m_pLogic );
 
-		clearSelection();
-		
+        clearSelection();
+
         BB_Line* line = getClickedLine( m_pLogic );
 
         if ( line != NULL )
         {
-            
-            line->setSelected( true );
-            m_Selection->append( line );
-			
-			
+
+			selectObject( line );
+
+
             m_Tmp_Line = NULL;
         }
         else
@@ -107,8 +106,8 @@ void BB_ToolLineNew::click( QMouseEvent* me )
             //             }
             //         }
         }
-		
-		updateWidget();
+
+        updateWidget();
     }
 }
 
@@ -116,7 +115,9 @@ void BB_ToolLineNew::move( QMouseEvent* me, bool overX, bool overY )
 {
     if ( m_Objects != NULL &&
             me != NULL &&
-            m_Transformer != NULL)
+            m_Transformer != NULL &&
+            !overX &&
+            !overY )
     {
 
         C2dVector moveTmp;
@@ -155,21 +156,21 @@ void BB_ToolLineNew::release( QMouseEvent* me )
             if ( point != NULL && m_Tmp_Line->setPos2( point ) )
             {
                 m_Objects->append( m_Tmp_Line );
-				m_MovePoint.removeLinkedObject( m_Tmp_Line );
-				
-				clearSelection();
-				m_Tmp_Line->setSelected( true );
-				m_Selection->append( m_Tmp_Line );
+                m_MovePoint.removeLinkedObject( m_Tmp_Line );
+
+                clearSelection();
+                m_Tmp_Line->setSelected( true );
+                m_Selection->append( m_Tmp_Line );
             }
             else
             {
-				m_MovePoint.removeLinkedObject( m_Tmp_Line );
+                m_MovePoint.removeLinkedObject( m_Tmp_Line );
                 delete m_Tmp_Line;
             }
-			
+
             m_Tmp_Line = NULL;
             m_ToolObjects->clear();
-			updateWidget();
+            updateWidget();
         }
 
         // 		EDIT: Alex Letkemann

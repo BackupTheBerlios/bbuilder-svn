@@ -80,6 +80,7 @@ class BB_AbstractTool
 	
 
 	QIcon getIcon() const;
+    virtual void selectObject( BB_DrawObject * object );
 	
 
 

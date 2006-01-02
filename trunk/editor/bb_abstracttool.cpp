@@ -35,6 +35,7 @@ BB_AbstractTool::BB_AbstractTool(QWidget * parent)
     m_ShowDrawObjects = true;
 	m_ToolWidget = NULL;
 	m_Selection = NULL;	
+	m_ParentWidget = NULL;
 }
 
 BB_AbstractTool::~BB_AbstractTool()
@@ -67,9 +68,10 @@ bool BB_AbstractTool::deleteObject( BB_DrawObject * delObject )
             if ( tmpObject == delObject )
             {
                 // Falls das Objekt ein Knoten ist, werden zuerst alle abhängigen Objekte gelöscht
-                if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Point ) ||
-					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_TerrainPoint ) ||
-					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_NavigationPoint ))
+//                 if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Point ) ||
+// 					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_TerrainPoint ) ||
+// 					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_NavigationPoint ))
+				if( dynamic_cast< BB_Point* >(m_Objects->at( i )) )
                 {
                     ( ( BB_Point* ) ( m_Objects->at( i ) ) ) ->deleteLinkedObjects( m_Component->getDrawObjects() );
                 }
@@ -370,4 +372,17 @@ QIcon BB_AbstractTool::getIcon() const
 void BB_AbstractTool::setIcon( const QIcon& value )
 {
     m_Icon = value;
+}
+
+
+/*!
+    \fn BB_AbstractTool::selectObject( BB_DrawObject * object )
+ */
+void BB_AbstractTool::selectObject( BB_DrawObject * object )
+{
+	if( m_Selection != NULL )
+	{
+		object->setSelected( true );
+		m_Selection->append( object );
+	}
 }

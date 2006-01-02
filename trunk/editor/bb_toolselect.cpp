@@ -87,8 +87,7 @@ void BB_ToolSelect::release(QMouseEvent* me)
 				object = m_Objects->at(i);
 				if(object->isHit(m_pLogic))
 				{
-					object->setSelected(true);
-					m_Selection->append(object);
+					selectObject( object );
 					break;
 				}
 			}
@@ -110,8 +109,7 @@ void BB_ToolSelect::release(QMouseEvent* me)
 				object = m_Objects->at(i);
 				if(object->isHit(rect))
 				{
-					object->setSelected(true);
-					m_Selection->append(object);
+					selectObject( object );
 				}
 			}
 		}

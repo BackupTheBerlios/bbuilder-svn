@@ -10,131 +10,101 @@
 //
 //
 #include "bb_tooltrianglenew.h"
-
+#include <bb_widgettooltrianglenew.h>
+#include <bb_abstracttoolwidget.h>
 #include <iostream>
+#include <bb_terrainpoint.h>
 
 using namespace std;
 
 BB_ToolTriangleNew::BB_ToolTriangleNew(QWidget *parent)
         : BB_AbstractTool(parent)
 {
-	m_Triangle = NULL;
+    m_P1 = NULL;
+    m_P2 = NULL;
+    m_P3 = NULL;
 }
 
 
 BB_ToolTriangleNew::~BB_ToolTriangleNew()
 {
-	reset();
+    reset();
 }
 
-void BB_ToolTriangleNew::click(QMouseEvent* me)
+void BB_ToolTriangleNew::click( QMouseEvent* me )
 {
-    if(me != NULL)
+    if ( me != NULL )
     {
-		m_pScreen = me->pos();	
-		m_Transformer->screenToLogical(m_pLogic, m_pScreen);
-		BB_DrawObject *object;
-		
-        if(me->button() == Qt::LeftButton)
+        m_pScreen = me->pos();
+        m_Transformer->screenToLogical( m_pLogic, m_pScreen );
+        BB_Point *point;
+
+        if ( me->button() == Qt::LeftButton )
         {
-            if(m_Triangle == NULL)
-            /* Erster Click */
+			
+			point = getClickedPoint( m_pLogic );
+            if ( m_P1 == NULL )
             {
+                if ( point != NULL )
+                {
+                    m_P1 = point;
+					selectObject( m_P1 );
 
-				object = getClickedObject(m_pLogic,typeid(BB_Point));
-				
-				/* Falls ein BB_Point ausgewählt wurde */
-				if(object != NULL)
-				{
-					m_Triangle = new BB_Triangle((BB_Point*) object, (BB_Point*) object, (BB_Point*) object);
-					object->setSelected( true );						// Den angeclickten Punkt markieren
-					m_ToolObjects->append(m_Triangle);
-				}
+                    point = NULL;
+                }
             }
-			else
-			/* Weitere clicks */
-			{
+            /* Prüfen, ob die zweite Ecke bereits gesetzt ist */
+            else if ( m_P2 == NULL )
+            {
+                point = getClickedPoint( m_pLogic );
 
-				cout 	<< " pos1:" << m_Triangle->getPos1() 
-						<< " pos2:" << m_Triangle->getPos2() 
-						<< " pos3:" << m_Triangle->getPos3() << endl;
-				
-				/* Prüfen, ob die zweite Ecke bereits gesetzt ist */
-				if(m_Triangle->getPos1() == m_Triangle->getPos2())
-				{
-					object = getClickedObject(m_pLogic,typeid(BB_Point));
-// 					cout << object << endl;
-					if(object != NULL)
-					{
-						if(object != m_Triangle->getPos1())
-						{
-							object->setSelected( true );				// Den angeclickten Punkt markieren
-							m_Triangle->setPos2((BB_Point*) object);
-						}
-						object = NULL;
-					}
-				}
-				
-				/* Prüfen, ob die dritte Ecke bereits gesetzt ist */ 
-				else if(m_Triangle->getPos1() == m_Triangle->getPos3())
-				{
-					object = getClickedObject(m_pLogic,typeid(BB_Point));
-// 					cout << object << endl;
-					if(object != NULL)
-					{
-						if(object != m_Triangle->getPos1() && object != m_Triangle->getPos2())
-						{
-							m_Triangle->setPos3((BB_Point*) object);
-							object->setSelected( true );				// Den angeclickten Punkt markieren
-							object = NULL;
-							
-							
-							/// @todo
-							
-							// Triangle an Vektor anhängen
-							m_Objects->append(m_Triangle);
-// 							cout << "Triangle: ["<< m_Triangle->getPos1() 
-// 									<<"]["<<m_Triangle->getPos2()
-// 									<<"]["<<m_Triangle->getPos3()<<"]" 
-// 									<< m_Triangle << endl;
-							
-							// Wichtig:  m_Triangle wird auf NULL gesetzt, da sie sonst vom reset() gelösch wird
-							
-							// Die Selektion aufheben
-							m_Triangle->getPos1()->setSelected( false );
-							m_Triangle->getPos2()->setSelected( false );
-							m_Triangle->getPos3()->setSelected( false );
-							
-							m_Triangle = NULL;
-							reset();
-						}
-						
-					}
-				}
-				
-			}
-        }
-        else if(me->button() == Qt::RightButton)
-        {
-			reset();
+                if ( point != NULL )
+                {
+                    if ( point != m_P1 )
+                    {
+						m_P2 = point;
+						selectObject( m_P2 );
+                    }
+                    point = NULL;
+                }
+            }
+
+            /* Prüfen, ob die dritte Ecke bereits gesetzt ist */
+            else if ( m_P3 == NULL )
+            {
+                point = getClickedPoint( m_pLogic );
+                // 					cout << object << endl;
+                if ( point != NULL )
+                {
+					if ( point != m_P1 && point != m_P2 )
+                    {
+						m_P3 = point;
+						selectObject( m_P3 );
+						point = NULL;
+
+                        BB_Triangle* newTriangle = createNewSurface();
+                        // Triangle an Vektor anhängen
+                        clearSelection();
+                        if ( newTriangle )
+                        {
+                            m_Objects->append( newTriangle );
+                            selectObject( newTriangle );
+                        }
+
+                        reset();
+                    }
+
+                }
+            }
+
         }
     }
-}
+    else if ( me->button() == Qt::RightButton )
+    {
+        reset();
+    }
 
-void BB_ToolTriangleNew::move(QMouseEvent* me, bool overX, bool overY)
-{
-	/* Eigendlich sinnlos aber die Warnungen sind weg. */
-	if(me != NULL && overX && overY)
-	{
-		me->ignore();
-	}
 }
-
-void BB_ToolTriangleNew::release(QMouseEvent* me)
-{
-	me->ignore();
-}
-
 
 
 /**
@@ -142,24 +112,49 @@ void BB_ToolTriangleNew::release(QMouseEvent* me)
  */
 void BB_ToolTriangleNew::reset()
 {
-	if(m_Triangle != NULL)
-	{
-		// Alle Links zum erstellten Triangle löschen
-		m_Triangle->getPos1()->removeLinkedObject( m_Triangle );
-		m_Triangle->getPos2()->removeLinkedObject( m_Triangle );
-		m_Triangle->getPos3()->removeLinkedObject( m_Triangle );
-		
-		// Die Selektion aller Punkte aufheben
-		m_Triangle->getPos1()->setSelected( false );
-		m_Triangle->getPos2()->setSelected( false );
-		m_Triangle->getPos3()->setSelected( false );
-		
-		
-		// Triangle lösche
-		delete m_Triangle;
-		m_Triangle = NULL;
-	}
+
+    m_P1 = NULL;
+    m_P2 = NULL;
+    m_P3 = NULL;
+    clearSelection();
+
+}
+
+
+/*!
+    \fn BB_AbstractTool::getToolWidget()
+ */
+BB_AbstractToolWidget* BB_ToolTriangleNew::getToolWidget()
+{
+    if ( m_ToolWidget == NULL )
+    {
+        m_ToolWidget = new BB_WidgetToolTriangleNew( this );
+    }
+
+    return m_ToolWidget;
+}
+
+
+/*!
+    \fn BB_ToolTriangleNew::getClickedPoint( C2dVector &pos)
+ */
+BB_Point* BB_ToolTriangleNew::getClickedPoint( C2dVector & pos )
+{
+	return (BB_Point*) getClickedObject( pos, typeid( BB_Point ) );
+}
+
+
+/*!
+    \fn BB_ToolTriangleNew::createNewSurface()
+ */
+BB_Triangle* BB_ToolTriangleNew::createNewSurface()
+{
 	
- 	m_ToolObjects->clear();
+	BB_Triangle* triangle = NULL;
 	
+    if ( m_P1 == NULL || m_P2 == NULL || m_P3 == NULL )
+    {
+		triangle = new BB_Triangle( m_P1, m_P2, m_P3 );
+    }
+	return triangle;
 }
