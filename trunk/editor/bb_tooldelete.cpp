@@ -17,22 +17,19 @@
 *   Free Software Foundation, Inc.,                                       *
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
-#include "bb_tooltexture.h"
+#include "bb_tooldelete.h"
 #include "bb_constructionelement.h"
-#include "bb_dlgwalledit.h"
-#include <iostream>
 
-using namespace std;
-
-BB_ToolTexture::BB_ToolTexture( QWidget *parent )
+BB_ToolDelete::BB_ToolDelete( QWidget * parent )
         : BB_AbstractTool( parent )
 {}
 
 
-BB_ToolTexture::~BB_ToolTexture()
+BB_ToolDelete::~BB_ToolDelete()
 {}
 
-void BB_ToolTexture::click( QMouseEvent* me )
+
+void BB_ToolDelete::click( QMouseEvent* me )
 {
     m_pScreen = me->pos();
     m_Transformer->screenToLogical( m_pLogic, m_pScreen );
@@ -44,14 +41,12 @@ void BB_ToolTexture::click( QMouseEvent* me )
         {
             if ( myElement->isHit( m_pLogic ) )
             {
-                myElement->openTextureDlg();
+                m_Objects->remove( i );
+                delete myElement;
                 m_ParentWidget->update();
                 return ;
             }
         }
     }
-    ( ( BB_DlgWallEdit * ) m_ParentWidget ) ->openTextureDlg();
-	m_ParentWidget->update();
 }
-
 

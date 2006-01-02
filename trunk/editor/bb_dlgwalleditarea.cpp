@@ -21,6 +21,7 @@
 #include "bb_dlgwalledit.h"
 #include "bb_level.h"
 #include "bb_window.h"
+
 #include <iostream>
 #include <QPainter>
 
@@ -37,7 +38,9 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
     m_lenght = laenge_meter;
     double m_verhaeltniss = m_lenght / m_height;
     m_Wall = wall;
-    setFixedSize ( 400 * m_verhaeltniss, 400 );
+    m_PixelHeight = 400.0;
+    m_PixelWidth = m_PixelHeight * m_verhaeltniss;
+    setFixedSize ( m_PixelWidth, m_PixelHeight );
     m_Tool = NULL;
     m_DrawObjects = NULL;
     m_DrawObjects = wall->getObjects();
@@ -45,13 +48,16 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
     m_Selection = new QVector<BB_DrawObject *>;
     m_ToolObjects = new QVector<BB_DrawObject *>;
     // 	setMinimumSize ( 400 * m_verhaeltniss, 400);
+
+	loadTexture();
 }
 
 
 BB_DlgWallEditArea::~BB_DlgWallEditArea()
 {
-	delete m_Selection;
-	delete m_ToolObjects;
+    delete m_Selection;
+    delete m_ToolObjects;
+    // 	delete m_WallTexture;
 }
 
 
@@ -60,6 +66,7 @@ void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
     QLabel::paintEvent( pe );
     QPainter painter( this );
     painter.drawRect( 0, 0, width() - 1, height() - 1 );
+    makeWallTexture( &painter );
     if ( m_DrawObjects != NULL )
     {
         BB_DrawObject * tmpElement;
@@ -78,7 +85,6 @@ void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
     {
         m_ToolObjects->at( i ) ->show( m_transformer, painter );
     }
-
 }
 
 void BB_DlgWallEditArea::resizeEvent ( QResizeEvent * re )
@@ -151,11 +157,6 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
             m_Tool->reset();
         }
 
-        for ( int i = 0; i < m_DrawObjects->count(); i++ )
-        {
-            m_DrawObjects->at( i ) ->setSelected( false );
-        }
-
         m_Tool = tool;
         if ( typeid( * tool ) == typeid( BB_ToolMove ) )
         {
@@ -163,6 +164,13 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
             for ( int i = 0; i < m_DrawObjects->count(); i++ )
             {
                 m_DrawObjects->at( i ) ->setSelected( true );
+            }
+        }
+        else
+        {
+            for ( int i = 0; i < m_DrawObjects->count(); i++ )
+            {
+                m_DrawObjects->at( i ) ->setSelected( false );
             }
         }
         m_Tool->setSelectionVector( m_Selection );
@@ -179,4 +187,23 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
         QMessageBox::critical ( this, "Fehler (BB_WorkFrame)", "Fehler beim setzten des Tools.\nNULL-Pointer erhalten", QMessageBox::Ok, QMessageBox::NoButton );
     }
     update();
+}
+
+void BB_DlgWallEditArea::makeWallTexture( QPainter * p )
+{
+//     p->drawPixmap( 0, 0, m_WallTexture );
+    int k = m_PixelHeight / m_WallTexture.height() ;
+	int n = m_PixelWidth / m_WallTexture.width() ;
+    for ( int i = 0;i <= k ;i++ )
+    {
+        p->drawPixmap( 0, m_WallTexture.height() * i , m_WallTexture );
+        for ( int j = 1;j <= n ;j++ )
+        {
+            p->drawPixmap( m_WallTexture.width() * j , m_WallTexture.height() * i , m_WallTexture );
+        }
+    }
+}
+
+void BB_DlgWallEditArea::loadTexture(){
+	m_WallTexture.load( m_Wall->getTextureFile() );
 }

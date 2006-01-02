@@ -41,24 +41,29 @@ class BB_DlgWallEditArea : public QLabel
         BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent = 0, Qt::WFlags f = 0 );
         ~BB_DlgWallEditArea();
         void setTool( BB_AbstractTool * tool );
+		void loadTexture();
     protected:
         BB_Map * m_currentMap;
-		BB_Wall * m_Wall;
+        BB_Wall * m_Wall;
         /**  hohe und  breite in meter */
         double m_height;
         double m_lenght;
+        double m_PixelHeight;
+        double m_PixelWidth;
         double m_verhaeltniss;
         BB_AbstractTool * m_Tool;
-		QVector<BB_DrawObject * > * m_DrawObjects;
-		QVector<BB_DrawObject * > * m_Selection;
-		QVector<BB_DrawObject * > * m_ToolObjects;;
-		BB_Transformer m_transformer;
+        QVector<BB_DrawObject * > * m_DrawObjects;
+        QVector<BB_DrawObject * > * m_Selection;
+        QVector<BB_DrawObject * > * m_ToolObjects;;
+        BB_Transformer m_transformer;
+        QPixmap m_WallTexture;
     protected:
         virtual void paintEvent ( QPaintEvent * );
         virtual void resizeEvent ( QResizeEvent * );
         virtual void mousePressEvent ( QMouseEvent * me );
         virtual void mouseReleaseEvent ( QMouseEvent* me );
         virtual void mouseMoveEvent ( QMouseEvent* me );
+        virtual void makeWallTexture( QPainter *p );
 };
 
 #endif

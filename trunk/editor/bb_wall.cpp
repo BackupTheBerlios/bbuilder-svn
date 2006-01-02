@@ -18,6 +18,8 @@
 #include "bb_dlgwalledit.h"
 #include "bb_window.h"
 #include "bb_door.h"
+#include "bb_dlgopentexture.h"
+#include "bb_globals.h"
 
 #include <iostream>
 
@@ -38,7 +40,8 @@ BB_Wall::BB_Wall( BB_Point* p1, BB_Point* p2 ) : BB_Line( p1, p2 )
     moveEvent();
 
     m_Objects = new QVector <BB_DrawObject *>;
-    // 	m_Objects->resize(100);
+
+// 	setTextureFile(IMG_DIR() + SEPARATOR() +"brick.jpg");
 }
 
 
@@ -127,7 +130,7 @@ QVector< BB_DrawObject * >* BB_Wall::getPoints() const
     QVector<BB_DrawObject * > * vectorMitpoints = new QVector<BB_DrawObject *>;
     for ( int i = 0; i < m_Objects->count(); i++ )
     {
-		if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Window )  || typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Door ))
+        if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Window ) || typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Door ) )
         {
             tmpObject = ( BB_Rect * ) m_Objects->at( i );
             vectorMitpoints->append( tmpObject->getPos1() );
@@ -193,11 +196,48 @@ void BB_Wall::moveEvent()
  */
 void BB_Wall::swap()
 {
-	BB_Point* tmp;
-	
-	tmp = m_Pos1;
-	m_Pos1 = m_Pos2;
-	m_Pos2 = tmp;
-	
-	calculateDirection();
+    BB_Point * tmp;
+
+    tmp = m_Pos1;
+    m_Pos1 = m_Pos2;
+    m_Pos2 = tmp;
+
+    calculateDirection();
+}
+
+QVector< BB_DrawObject * >* BB_Wall::getObjectsWithPoints() const
+{
+    QVector< BB_DrawObject * >* points = getPoints();;
+    ///@todo zeiger muss geloescht werden, wie!!!!
+    QVector< BB_DrawObject * >* objectsWithPoints = new QVector< BB_DrawObject * >;
+
+    for ( int i = 0; i < m_Objects->count() ;i++ )
+    {
+        objectsWithPoints->append( m_Objects->at( i ) );
+    }
+    for ( int i = 0; i < points->count() ;i++ )
+    {
+        objectsWithPoints->append( points->at( i ) );
+    }
+    return objectsWithPoints;
+}
+
+void BB_Wall::openTextureDlg()
+{
+	BB_DlgOpenTexture dlg;
+	dlg.setTextureFile( m_TextureFile);
+	dlg.exec();
+	m_TextureFile = dlg.getTextureFile();
+}
+
+
+QString BB_Wall::getTextureFile() const
+{
+    return m_TextureFile;
+}
+
+
+void BB_Wall::setTextureFile( const QString& Value )
+{
+    m_TextureFile = Value;
 }

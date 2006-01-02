@@ -37,7 +37,7 @@ BB_Window::BB_Window( C2dVector v )
         : BB_ConstructionElement()
 {
     setPos1( new BB_Point( v ) );
-    setPos2( new BB_Point( QPoint( 50, -50 ) ) );
+    setPos2( new BB_Point( QPoint( v.x() + 200, v.y() - 200 ) ) );
     setTextureFileName( IMG_DIR() + SEPARATOR() + "Fenster.jpg" );
 }
 

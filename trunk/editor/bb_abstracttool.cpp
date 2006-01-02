@@ -35,7 +35,6 @@ BB_AbstractTool::BB_AbstractTool(QWidget * parent)
     m_ShowDrawObjects = true;
 	m_ToolWidget = NULL;
 	m_Selection = NULL;	
-	m_ParentWidget = NULL;
 }
 
 BB_AbstractTool::~BB_AbstractTool()

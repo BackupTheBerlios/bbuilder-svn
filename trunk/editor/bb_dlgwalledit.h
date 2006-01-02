@@ -29,6 +29,7 @@
 #include "bb_toolwindownew.h"
 #include "bb_toolmove.h"
 #include "bb_tooltexture.h"
+#include "bb_tooldelete.h"
 
 /**
 Ein Diaolog zum editieren von Wand-Eigenschaften.
@@ -62,6 +63,7 @@ class BB_DlgWallEdit : public QDialog
         BB_DocComponent* getLevel() const;
         void setWall( BB_Wall* Value );
         BB_Wall* getWall() const;
+		void openTextureDlg();
     protected:
         void paintEvent ( QPaintEvent * pe );
         void resizeEvent ( QResizeEvent * re );
@@ -84,6 +86,7 @@ class BB_DlgWallEdit : public QDialog
         QToolButton * m_ButtonDoor;
         QToolButton * m_ButtonMove;
 		QToolButton * m_ButtonTexture;
+		QToolButton * m_ButtonDelete;
 		QVector<QToolButton *> * m_Buttons;
 
         //tools
@@ -91,6 +94,7 @@ class BB_DlgWallEdit : public QDialog
         BB_ToolWindowNew * m_ToolWindowNew;
         BB_ToolMove * m_ToolMove;
 		BB_ToolTexture * m_ToolTexture;
+		BB_ToolDelete * m_ToolDelete;
 
 
     public slots:
@@ -107,6 +111,7 @@ class BB_DlgWallEdit : public QDialog
          */
         void slotToolMove();
 		void slotToolTexture();
+		void slotToolDelete();
 };
 
 #endif

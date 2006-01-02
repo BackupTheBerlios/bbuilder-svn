@@ -25,7 +25,7 @@ BB_Door::BB_Door()
         : BB_ConstructionElement()
 {
 	setPos1( new BB_Point( QPoint( 0, 0 ) ) );
-	setPos2( new BB_Point( QPoint( 50, -50 ) ) );
+	setPos2( new BB_Point( QPoint( 150, - 250 ) ) );
 	setTextureFileName( IMG_DIR() + SEPARATOR() + "Tuer.png" );
 }
 
@@ -33,7 +33,7 @@ BB_Door::BB_Door(C2dVector v)
 	: BB_ConstructionElement()
 {
 	setPos1( new BB_Point( v ) );
-	setPos2( new BB_Point( QPoint( 50, -50 ) ) );
+	setPos2( new BB_Point( QPoint( v.x() + 150, v.y() - 250 ) ) );
 	setTextureFileName( IMG_DIR() + SEPARATOR() + "Tuer.png" );
 }
 

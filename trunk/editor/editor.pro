@@ -85,6 +85,7 @@ HEADERS += bb_abstracttool.h \
            bb_widgettooltrianglenew.h \
            bb_widgettoolwallnew.h \
            bb_dlgopentexture.h \
+           bb_tooldelete.h \
            bb_tooltexture.h \
            bb_navigationline.h \
            bb_toolnavigationlinenew.h 
@@ -157,6 +158,7 @@ SOURCES += bb_abstracttool.cpp \
            bb_widgettooltrianglenew.cpp \
            bb_widgettoolwallnew.cpp \
            bb_dlgopentexture.cpp \
+           bb_tooldelete.cpp \
            bb_tooltexture.cpp \
            bb_navigationline.cpp \
            bb_toolnavigationlinenew.cpp 

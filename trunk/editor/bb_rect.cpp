@@ -84,3 +84,11 @@ bool BB_Rect::isHit( const C2dVector &hit )
             return true;
     return false;
 }
+
+void BB_Rect::moveBy( C2dVector pMove )
+{
+	m_Pos1->setX( m_Pos1->getX() + pMove.x() );
+	m_Pos1->setY( m_Pos1->getY() + pMove.y() );
+	m_Pos2->setX( m_Pos2->getX() + pMove.x() );
+	m_Pos2->setY( m_Pos2->getY() + pMove.y() );
+}
