@@ -26,7 +26,7 @@ class BB_WidgetToolWallNew : public BB_AbstractToolWidget
 
         ~BB_WidgetToolWallNew();
 
-        virtual void clearWidget();
+        virtual void clearToolWidget();
         virtual void setWidgetEnabled( bool value );
         virtual void updateWidget();
 

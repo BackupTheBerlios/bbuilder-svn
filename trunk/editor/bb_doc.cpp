@@ -321,7 +321,7 @@ BB_Building* BB_Doc::newBuilding(QWidget * parent)
 /*!
     \fn BB_Doc::newLevel()
  */
-BB_Level* BB_Doc::newLevel(QWidget * parent)
+BB_Level* BB_Doc::newLevel( BB_Building* building, QWidget * parent)
 {
 // 	QString fileName;
 // 	QDir path = m_ProjectPath;
@@ -362,9 +362,9 @@ BB_Building* BB_Doc::newBuilding(QDir& path, QString& fileName)
 /*!
     \fn BB_Doc::newLevel(QDir& path, QString& fileName)
  */
-BB_Level* BB_Doc::newLevel(QDir& path, QString& fileName)
+BB_Level* BB_Doc::newLevel( BB_Building* building, QDir& path, QString& fileName)
 {
-	BB_Level* level = new BB_Level(path,fileName);
+	BB_Level* level = new BB_Level(building,path,fileName);
 	m_Levels.append(level);
 		
 	return level;

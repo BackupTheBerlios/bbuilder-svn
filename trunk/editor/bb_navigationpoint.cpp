@@ -34,3 +34,12 @@ void BB_NavigationPoint::setIndexed( bool value )
 {
     m_Indexed = value;
 }
+
+
+/*!
+    \fn BB_NavigationPoint::getClassName()
+ */
+const QString BB_NavigationPoint::getClassName()
+{
+	return QString( "BB_NavigationPoint" );
+}

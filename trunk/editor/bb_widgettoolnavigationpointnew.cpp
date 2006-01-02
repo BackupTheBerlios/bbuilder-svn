@@ -21,9 +21,9 @@ BB_WidgetToolNavigationPointNew::~BB_WidgetToolNavigationPointNew()
 }
 
 
-void BB_WidgetToolNavigationPointNew::clearWidget()
+void BB_WidgetToolNavigationPointNew::clearToolWidget()
 {
-    BB_AbstractToolWidget::clearWidget();
+    BB_AbstractToolWidget::clearToolWidget();
 }
 
 void BB_WidgetToolNavigationPointNew::setWidgetEnabled(bool value)

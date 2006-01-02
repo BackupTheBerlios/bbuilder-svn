@@ -60,9 +60,9 @@ void BB_AbstractToolWidget::setSelection( QVector< BB_DrawObject* >* vector )
 
 
 /*!
-    \fn BB_AbstractToolWidget::clearWidget()
+    \fn BB_AbstractToolWidget::clearToolWidget()
  */
-void BB_AbstractToolWidget::clearWidget()
+void BB_AbstractToolWidget::clearToolWidget()
 {
     /// @todo implement me
 }

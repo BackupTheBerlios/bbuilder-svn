@@ -9,7 +9,7 @@
     <x>0</x>
     <y>0</y>
     <width>132</width>
-    <height>634</height>
+    <height>557</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -145,7 +145,11 @@
           <number>5</number>
          </property>
          <item row="0" column="0" >
-          <widget class="QTextEdit" name="textEdit_WallDesc" />
+          <widget class="QTextEdit" name="textEdit_WallDesc" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

@@ -13,12 +13,14 @@
 *   GNU General Public License for more details.                          *
 ***************************************************************************/
 #include "bb_level.h"
+#include "bb_building.h"
 
-BB_Level::BB_Level( const QDir& path, const QString &fileName, const QString &name )
+
+BB_Level::BB_Level( BB_Building* building, const QDir& path, const QString &fileName, const QString &name )
         : BB_DocComponent( path, fileName, name )
 {
     //Standart Hoehe
-	m_height = 3;
+	m_height = 3.0;
 }
 
 

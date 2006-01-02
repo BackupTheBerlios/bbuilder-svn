@@ -113,7 +113,10 @@ double C2dVector::getAbstand( C2dVector v2 )
 /*!
     \fn C2dVector::print()
  */
-void C2dVector::print()
+/**
+* Returns this * skalar
+* @author Alex Letkmann
+*/void C2dVector::print()
 {
     cout << "x: " << m_X << "--y: " << m_Y << endl;
 }
@@ -134,10 +137,7 @@ double C2dVector::getWinkel()
 }
 
 
-/**
- * Returns this * skalar
- * @author Alex Letkmann
- */
+
 C2dVector C2dVector::operator * ( const double value ) const
 {
     return C2dVector( m_X * value , m_Y * value );

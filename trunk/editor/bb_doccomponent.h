@@ -27,7 +27,7 @@
  * <br />
  * Als weiteres behandelt die Klasse den Maßstab der Map.
  * Der Maßstab kann mittels der beiden Punkte m_ScalePoint_1 und m_ScalePoint_2 eingestellt werden.
- * Die Entfernung der Beiden Punkte wird mit der reelen Entfernung, die der User angebenkann, ins Verhältnis gesetzt.
+ * Die Entfernung der Beiden Punkte wird mit der reelen Entfernung, die der User angeben kann, ins Verhältnis gesetzt.
  * @author Alex Letkemann
  */
 class BB_DocComponent : public BB_FileObject, public BB_Map, public BB_DrawDevice
@@ -53,13 +53,50 @@ public:
 	 * @date 13.12.2005
 	 */
 	virtual bool open();
+	
+    /**
+     * Gibt der Pointer auf den ersten Maßstab-Punkt zurück
+	 * @return Pointer auf den ersten Maßstab-Punkt
+     */
     BB_Point* getScalePoint_1();
+	
+	
+    /**
+	 * Gibt der Pointer auf den zweiten Maßstab-Punkt zurück
+	 * @return Pointer auf den zweite Maßstab-Punkt
+     */
     BB_Point* getScalePoint_2();
 
+	
+	/**
+	 * Setzt den reelen Abstand zwischen den Maßstab-Punkten
+	 * @param value der reele Abstand zwischen den Maßstab-Punkten
+	 */
 	void setScaleReal( double value );
+	
+	/**
+	 * Gibt den reelen Abstand zwischen den Maßstab-Punkten
+	 * @return der reele Abstand zwischen den Maßstab-Punkten
+	 */
 	double getScaleReal() const;
+	
+	// TODO Ändern ---
 	double* getScaleRealPointer();
+	
+	
+	/**
+	 * Gibt die Länge der Pixel in Metern zurück
+	 * @param pixel Pixel
+	 * @return Meter
+	 */
 	double getMeterPerPixel(double pixel);
+	
+	
+	/**
+	 * Gibt die Länge der Meter in Pixeln zurück
+	 * @param meter Meter
+	 * @return Pixel
+	 */
 	double getPixelPerMeter(double meter);
 	
 	

@@ -40,7 +40,7 @@ public:
     BB_MainWindow(QWidget* parent = 0, Qt::WFlags flags = 0);
 
 	/**
-	 * Destrucktor
+	 * Destruktor
 	 */
     ~BB_MainWindow();
    

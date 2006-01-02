@@ -201,9 +201,9 @@ void BB_MainWindow::slotProjectNew()
         {
             m_Doc->close();
 
-            m_TabTerrain->unsetDrawObjects();
-            m_TabBuilding->unsetDrawObjects();
-            m_TabLevel->unsetDrawObjects();
+            m_TabTerrain->unsetDocComponent();
+            m_TabBuilding->unsetDocComponent();
+            m_TabLevel->unsetDocComponent();
 
             m_TabWidget->setEnabled( false );
 
@@ -249,9 +249,9 @@ void BB_MainWindow::slotProjectNew()
 void BB_MainWindow::slotProjectOpen()
 {
 
-    m_TabTerrain->unsetDrawObjects();
-    m_TabBuilding->unsetDrawObjects();
-    m_TabLevel->unsetDrawObjects();
+    m_TabTerrain->unsetDocComponent();
+    m_TabBuilding->unsetDocComponent();
+    m_TabLevel->unsetDocComponent();
 
     m_TabWidget->setEnabled( false );
     // 	cout << "Projekt öffnen" << endl;

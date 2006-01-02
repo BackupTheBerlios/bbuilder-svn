@@ -28,7 +28,7 @@ public:
 
     ~BB_WidgetToolTerrainPointNew();
 
-    virtual void clearWidget();
+    virtual void clearToolWidget();
     virtual void setWidgetEnabled(bool value);
     virtual void updateWidget();
 

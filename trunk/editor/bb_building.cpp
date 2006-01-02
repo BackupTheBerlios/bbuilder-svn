@@ -34,7 +34,7 @@ BB_Building::BB_Building( const QDir& path, const QString &fileName, const QStri
 
 
 /**
- * Destrucktor 
+ * Destruktor 
  */
 BB_Building::~BB_Building()
 {

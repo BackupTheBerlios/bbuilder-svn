@@ -18,13 +18,15 @@
 
 #include "bb_doccomponent.h"
 
+class BB_Building;
+
 /**
 @author Alex Letkemann
 */
 class BB_Level : public BB_DocComponent
 {
     public:
-        BB_Level( const QDir& path, const QString &fileName, const QString &name = QString( "" ) );
+        BB_Level( BB_Building* building, const QDir& path, const QString &fileName, const QString &name = QString( "" ) );
 
         virtual ~BB_Level();
         virtual void generateXElement( QTextStream &out, int depth );

@@ -24,14 +24,14 @@ using namespace std;
 
 
 /**
- * Konstrucktor.
+ * Konstruktor.
  * Erstellt ein neues Gebäude.
  * @param doc Doc, welches die Daten enthält.
  * @param parent Das Parent-Fenster
  * @param f QtWindowFlags
  */
 BB_TabBuilding::BB_TabBuilding( BB_Doc * doc, QWidget* parent, Qt::WFlags f )
-        : BB_Tab( doc, true, true, parent, f )
+        : BB_Tab( doc, parent, f )
 {
 
     if ( m_Doc->getBuildings() != NULL )
@@ -52,7 +52,7 @@ BB_TabBuilding::BB_TabBuilding( BB_Doc * doc, QWidget* parent, Qt::WFlags f )
 }
 
 
-/** Destrucktor */
+/** Destruktor */
 BB_TabBuilding::~BB_TabBuilding()
 {}
 
@@ -121,7 +121,7 @@ void BB_TabBuilding::slotBuildingDelete()
         {
 			
 			
-			unsetDrawObjects();
+			unsetDocComponent();
 			
 			// Gebäude aus der Liste entfernen
             m_BuildingsListWidget->takeItem( m_BuildingsListWidget->row( building->getListWidgetItem() ) );
@@ -232,38 +232,23 @@ void BB_TabBuilding::toolChanged( QAction* action )
 
     if ( m_ToolMove->getAction() == action )
     {
-        unsetToolButton( action );
-        action->setChecked( true );
-        m_Center->setTool( m_ToolMove );
-        m_RightFrame->setCurrentWidget( m_ToolMove->getToolWidget() );
+		setTool( m_ToolMove );
     }
     else if ( m_ToolZoom->getAction() == action )
     {
-        unsetToolButton( action );
-        action->setChecked( true );
-        m_Center->setTool( m_ToolZoom );
-        m_RightFrame->setCurrentWidget( m_ToolZoom->getToolWidget() );
+		setTool( m_ToolZoom );
     }
     else if ( m_ToolPointNew->getAction() == action )
     {
-        unsetToolButton( action );
-        action->setChecked( true );
-		m_RightFrame->setCurrentWidget( m_ToolPointNew->getToolWidget() );
-        m_Center->setTool( m_ToolPointNew );
+		setTool( m_ToolPointNew );
     }
     else if ( m_ToolWallNew->getAction() == action )
     {
-        unsetToolButton( action );
-        action->setChecked( true );
-        m_Center->setTool( m_ToolWallNew );
-		m_RightFrame->setCurrentWidget( m_ToolWallNew->getToolWidget() );
+		setTool( m_ToolWallNew );
     }
     else if ( m_ToolScale->getAction() == action )
     {
-        unsetToolButton( action );
-        action->setChecked( true );
-        m_Center->setTool( m_ToolScale );
-        m_RightFrame->setCurrentWidget( m_ToolScale->getToolWidget() );
+		setTool( m_ToolScale );
     }
     else
     {

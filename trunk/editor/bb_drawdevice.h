@@ -25,7 +25,7 @@ public:
     BB_DrawDevice();
 
     /**
-	 * Destrucktor
+	 * Destruktor
 	 * Löscht alle Objekte, die noch im DrawDevice sind.
 	 * @author Alex Letkemann
 	 * @date 23.11.2005

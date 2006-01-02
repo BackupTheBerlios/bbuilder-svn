@@ -35,7 +35,7 @@ BB_Terrain::BB_Terrain(const QDir& path, const QString &fileName, const QString 
 
 
 /**
- * Destrucktor
+ * Destruktor
  */
 BB_Terrain::~BB_Terrain()
 {
@@ -205,4 +205,13 @@ bool BB_Terrain::open()
 	}
 
 	return exit;
+}
+
+
+/*!
+    \fn BB_Terrain::getClassName()
+ */
+const QString BB_Terrain::getClassName()
+{
+	return QString( "BB_Terrain" );
 }

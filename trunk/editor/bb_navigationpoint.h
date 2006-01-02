@@ -30,6 +30,7 @@ public:
 	
 
 	bool getIndexed() const;
+    virtual const QString getClassName();
 	
 
 protected:

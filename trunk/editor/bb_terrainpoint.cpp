@@ -35,3 +35,12 @@ void BB_TerrainPoint::setHeight( double value )
 {
     m_Height = value;
 }
+
+
+/*!
+    \fn BB_TerrainPoint::getClassName()
+ */
+const QString BB_TerrainPoint::getClassName()
+{
+	return QString( "BB_TerrainPoint" );
+}

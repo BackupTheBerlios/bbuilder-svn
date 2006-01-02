@@ -27,7 +27,7 @@ class BB_Triangle : public BB_Line
 {
 public:
     /**
-     * Konstrucktor
+     * Konstruktor
 	 * Erstellt ein neues Dreieck mit den Übergebenen Punkten.
      * @param p1 Position des ersten Punktes
      * @param p2 Position des zweiten Punktes
@@ -38,7 +38,7 @@ public:
     BB_Triangle(BB_Point* p1, BB_Point* p2, BB_Point* p3 );
 
     /**
-     * Destrucktor
+     * Destruktor
      */
     ~BB_Triangle();
 
@@ -70,8 +70,6 @@ public:
 	/** Pointer auf die dritte Position */
 	BB_Point* m_Pos3;
 	
-	/** Beschreibt die Hintergrund-Farbe und die Art, wie der Hintergrund gezeichnet wird  */
-	QBrush m_Brush;
 };
 
 #endif

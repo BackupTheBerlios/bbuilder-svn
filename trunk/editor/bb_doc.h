@@ -45,9 +45,9 @@ public:
 	virtual bool createNew(const QString &name, const QString &desc, const QDir &path);
 	virtual bool write(QTextStream &out);
 	virtual BB_Building* newBuilding(QWidget * parent);
-	virtual BB_Level* newLevel(QWidget * parent);
+	virtual BB_Level* newLevel( BB_Building* building, QWidget * parent);
     virtual BB_Building* newBuilding(QDir& path, QString& fileName);
-    virtual BB_Level* newLevel(QDir& path, QString& fileName);
+	virtual BB_Level* newLevel( BB_Building* building, QDir& path, QString& fileName);
     virtual BB_Terrain* newTerrain(QDir& path, QString& fileName);
 	bool deleteBuilding(QListWidgetItem* item);
     BB_Building* getBuilding(QListWidgetItem* item);

@@ -31,7 +31,7 @@ class BB_AbstractToolWidget : public QWidget
         ~BB_AbstractToolWidget();
     virtual void updateWidget();
     virtual void setSelection( QVector< BB_DrawObject* >* vector );
-    virtual void clearWidget();
+    virtual void clearToolWidget();
     virtual void setWidgetEnabled( bool value );
 	
 	QVector< BB_DrawObject* >* m_Selection;

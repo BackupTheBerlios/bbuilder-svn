@@ -63,7 +63,7 @@ void BB_ToolLineNew::click( QMouseEvent* me )
             
             line->setSelected( true );
             m_Selection->append( line );
-			updateWidget();
+			
 			
             m_Tmp_Line = NULL;
         }
@@ -111,6 +111,8 @@ void BB_ToolLineNew::click( QMouseEvent* me )
             //             }
             //         }
         }
+		
+		updateWidget();
     }
 }
 
@@ -159,7 +161,8 @@ void BB_ToolLineNew::release( QMouseEvent* me )
                 m_Objects->append( m_Tmp_Line );
 				m_MovePoint.removeLinkedObject( m_Tmp_Line );
 				
-				m_Selection->clear();
+				clearSelection();
+				m_Tmp_Line->setSelected( true );
 				m_Selection->append( m_Tmp_Line );
             }
             else

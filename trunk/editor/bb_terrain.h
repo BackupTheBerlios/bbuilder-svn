@@ -35,6 +35,7 @@ public:
 	virtual bool write(QTextStream &out);
 	virtual int keyBoardEdit(QWidget* parent);
     virtual bool open();
+    virtual const QString getClassName();
 	
 private:
 	static const QString s_ClassName;

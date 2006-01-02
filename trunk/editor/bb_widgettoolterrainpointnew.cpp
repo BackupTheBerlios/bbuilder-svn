@@ -76,7 +76,7 @@ void BB_WidgetToolTerrainPointNew::slotPosFinished()
     m_ParentTool->documentChanged();
 }
 
-void BB_WidgetToolTerrainPointNew::clearWidget()
+void BB_WidgetToolTerrainPointNew::clearToolWidget()
 {
     m_Ui.lineEdit_PointName->setText( "" );
     m_Ui.textEdit_PointDesc->setPlainText( "" );

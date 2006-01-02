@@ -19,7 +19,7 @@
 using namespace std;
 
 /**
- * Konstrucktor. Erzeugt ein neues FileObjekt.
+ * Konstruktor. Erzeugt ein neues FileObjekt.
  * Falls einer der Parameter 'path' oder 'filename' NULL oder leer ist, wird der Path der Datei auf das
  * Aktuelle TEMP-Verzeichnis des Betriebsystems gesetzt und der Dateiname wird auf den Objektnamen
  * mit der Endung '.tmp' gesetzt.
@@ -50,7 +50,7 @@ BB_FileObject::BB_FileObject( const QDir &path, const QString &filename, const Q
 }
 
 
-/** Destrucktor */
+/** Destruktor */
 BB_FileObject::~BB_FileObject()
 {
 	if( m_ListWidgetItem != NULL )

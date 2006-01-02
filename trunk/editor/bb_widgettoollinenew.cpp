@@ -86,7 +86,7 @@ void BB_WidgetToolLineNew::updateWidget()
     }
     else
     {
-        clearWidget();
+        clearToolWidget();
         setWidgetEnabled( false );
     }
 
@@ -100,7 +100,7 @@ void BB_WidgetToolLineNew::setWidgetEnabled( bool value )
     m_Ui.pushButton_Delete->setEnabled( value );
 }
 
-void BB_WidgetToolLineNew::clearWidget()
+void BB_WidgetToolLineNew::clearToolWidget()
 {
     m_Ui.lineEdit_LineName->clear();
     m_Ui.textEdit_LineDesc->clear();

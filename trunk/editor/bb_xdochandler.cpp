@@ -108,7 +108,7 @@ bool BB_XDocHandler::endElement(const QString& namespaceURI, const QString& loca
 	}
 	else if(qName == "bb_level")
 	{
-		m_Doc->newLevel(m_Path, m_CurrentText);
+// 		m_Doc->newLevel(m_Path, m_CurrentText);
 	}
 		
 	

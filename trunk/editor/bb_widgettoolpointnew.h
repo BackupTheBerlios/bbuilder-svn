@@ -29,7 +29,7 @@ class BB_WidgetToolPointNew : public BB_AbstractToolWidget
 
         ~BB_WidgetToolPointNew();
         virtual void updateWidget();
-        virtual void clearWidget();
+        virtual void clearToolWidget();
         virtual void setWidgetEnabled( bool value );
 
 

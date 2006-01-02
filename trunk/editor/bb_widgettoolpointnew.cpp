@@ -121,16 +121,16 @@ void BB_WidgetToolPointNew::updateWidget()
     }
     else
     {
-        clearWidget();
+        clearToolWidget();
         setWidgetEnabled( false );
     }
 }
 
 
 /*!
-    \fn BB_AbstractToolWidget::clearWidget()
+    \fn BB_AbstractToolWidget::clearToolWidget()
  */
-void BB_WidgetToolPointNew::clearWidget()
+void BB_WidgetToolPointNew::clearToolWidget()
 {
     m_Ui.lineEdit_PointName->clear();
     // 	m_Ui.textEdit_PointDesc->clear();

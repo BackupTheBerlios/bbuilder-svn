@@ -26,7 +26,7 @@
 
 
 BB_TabTerrain::BB_TabTerrain( BB_Doc* doc, QWidget* parent, Qt::WFlags f )
-        : BB_Tab( doc, true, true, parent, f )
+        : BB_Tab( doc, parent, f )
 {
 
     if ( m_Doc != NULL && m_Doc->getTerrain() != NULL )
@@ -99,28 +99,23 @@ void BB_TabTerrain::toolChanged( QAction* action )
 
 	if ( m_ToolMove->getAction() == action )
     {
-        unsetToolButton( action );
-        action->setChecked( true );
-        m_Center->setTool( m_ToolMove );
+		setTool( m_ToolMove );
     }
+	else if( m_ToolScale->getAction() == action )
+	{
+		setTool( m_ToolScale );
+	}
     else if ( m_ToolZoom->getAction() == action )
     {
-        unsetToolButton( action );
-        action->setChecked( true );
-        m_Center->setTool( m_ToolZoom );
+		setTool( m_ToolZoom );
     }
     else if ( m_ToolTerrainPointNew->getAction() == action )
     {
-        unsetToolButton( action );
-        action->setChecked( true );
-		m_RightFrame->setCurrentWidget( m_ToolTerrainPointNew->getToolWidget() );
-        m_Center->setTool( m_ToolTerrainPointNew );
+		setTool( m_ToolTerrainPointNew );
     }
     else if ( m_ToolTriangleNew->getAction() == action )
     {
-        unsetToolButton( action );
-        action->setChecked( true );
-        m_Center->setTool( m_ToolTriangleNew );
+		setTool( m_ToolTriangleNew );
     }
     else
     {

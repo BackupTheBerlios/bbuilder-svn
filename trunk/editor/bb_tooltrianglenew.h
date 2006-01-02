@@ -24,7 +24,7 @@ class BB_ToolTriangleNew : public BB_AbstractTool
 {
 public:
     /**
-     * Konstrucktor
+     * Konstruktor
      */
     BB_ToolTriangleNew();
 

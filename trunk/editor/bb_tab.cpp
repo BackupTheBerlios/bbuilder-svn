@@ -23,18 +23,18 @@ BB_Tab::BB_Tab( BB_Doc* doc, QWidget* parent, Qt::WFlags f ) : QWidget( parent, 
     setDoc( doc );
 
     initTab();
-    initLayout( true, true );
+
 
     m_DrawObjects = NULL;
 }
 
-BB_Tab::BB_Tab( BB_Doc* doc, bool leftFrame, bool rightFrame, QWidget* parent, Qt::WFlags f ) : QWidget( parent, f )
-{
-    setDoc( doc );
-
-    initTab();
-    initLayout( leftFrame, rightFrame );
-}
+// BB_Tab::BB_Tab( BB_Doc* doc, bool leftFrame, bool rightFrame, QWidget* parent, Qt::WFlags f ) : QWidget( parent, f )
+// {
+//     setDoc( doc );
+// 
+//     initTab();
+//     initLayout( leftFrame, rightFrame );
+// }
 
 
 BB_Tab::~BB_Tab()
@@ -53,9 +53,9 @@ BB_Tab::~BB_Tab()
     // 		delete m_ToolsGridLayout;
 }
 
-/**
+/*
  * Initialisiert alle wichtigen Einstellungen des Tabs.
- * Muss als Erstes in jedem Konstrucktor aufgerufen werden.
+ * Wird als Erstes in jedem Konstruktor aufgerufen werden.
  */
 void BB_Tab::initTab()
 {
@@ -65,6 +65,8 @@ void BB_Tab::initTab()
     m_ToolsGridLayout = NULL;
     m_LeftFrame = NULL;
     m_RightFrame = NULL;
+	
+	initLayout( true, true );
 }
 
 
@@ -175,7 +177,7 @@ bool BB_Tab::createToolButton( QAction* action, BB_AbstractTool* tool )
     if ( action != NULL && tool != NULL )
     {
         action->setCheckable( true );
-		action->setIcon( tool->getIcon() );
+        action->setIcon( tool->getIcon() );
         tool->setAction( action );
         m_ToolButtonActions->append( action );
 
@@ -266,15 +268,16 @@ void BB_Tab::setDoc( BB_Doc* doc )
     }
     else
     {
-		qDebug( "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" );
+        qDebug( "BB_Tab(BB_Doc* doc, QWidget* parent, Qt::WFlags f): NULL-Pointer erhalten" );
         exit( 0 );
     }
 }
 
 /**
- * Setzt den DocComponent auf null;
+ * Setzt den DocComponent der Arbeitsfl&auml;che auf null und
+ * deaktiviert diese damit;
  */
-void BB_Tab::unsetDrawObjects()
+void BB_Tab::unsetDocComponent()
 {
     m_Center->setDocComponent( NULL );
 }
@@ -315,18 +318,13 @@ void BB_Tab::slotToolChanged( QAction* action )
  */
 void BB_Tab::toolChanged( QAction* action )
 {
-	qDebug("toolChanged(QAction* action) nicht implementiert (action: %p)\n", action);
+    qDebug( "toolChanged(QAction* action) nicht implementiert (action: %p)\n", action );
 }
 
 
-/**
- * Setzt alle DrawObject-Vektoren auf NULL
- * Und leert alles Listen. BB_Doc muss bereits geleert sein, 
- * wenn diese Funktion aufgerufen wird.
- */
 void BB_Tab::clear()
 {
-    unsetDrawObjects();
+    unsetDocComponent();
 }
 
 
@@ -360,17 +358,29 @@ void BB_Tab::resetTool()
  */
 QAction* BB_Tab::addTool( BB_AbstractTool* tool, const QString& name, const QString& info )
 {
-	if( &tool != NULL && &name != NULL && &info != NULL )
-	{
-		
-		QAction* toolAction = new QAction( name, this );
-		
-		toolAction->setStatusTip( info );
-		addWidgetRight( tool->getToolWidget() );
-		createToolButton( toolAction, tool );
-		
-		return toolAction;
-	}
-	
-	return NULL;
+    if ( &tool != NULL && &name != NULL && &info != NULL )
+    {
+
+        QAction * toolAction = new QAction( name, this );
+
+        toolAction->setStatusTip( info );
+        addWidgetRight( tool->getToolWidget() );
+        createToolButton( toolAction, tool );
+
+        return toolAction;
+    }
+
+    return NULL;
+}
+
+
+/*!
+    \fn BB_Tab::setTool( BB_AbstractTool* tool )
+ */
+void BB_Tab::setTool( BB_AbstractTool* tool )
+{
+    unsetToolButton( tool->getAction() );
+    tool->getAction() ->setChecked( true );
+    m_RightFrame->setCurrentWidget( tool->getToolWidget() );
+    m_Center->setTool( tool );
 }

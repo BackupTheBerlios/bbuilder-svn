@@ -20,13 +20,13 @@ QRegExpValidator* BB::validAlphanumeric = new QRegExpValidator( regExpAlphanumer
 QRegExpValidator* BB::validNumeric = new QRegExpValidator( regExpNumeric, NULL );
 
 
-/** Konstrucktor */
+/** Konstruktor */
 BB::BB()
 {
 }
 
 
-/** Destrucktor */
+/** Destruktor */
 BB::~BB()
 {
 }
@@ -39,7 +39,6 @@ BB::~BB()
  * @param depth Anzahl der Leerzeichen
  * @return String mit 'depth' Leerzeiche
  * @author Alex Letkemann
- * @date 19.05.2005
  */
 QString BB::indent(int depth)
 {
@@ -54,7 +53,6 @@ QString BB::indent(int depth)
  * @param str String mit zu ersetzenden Zeichen
  * @return Neuer String mit ersetzten Zeichen
  * @author Alex Letkemann
- * @date 19.05.2005
  */
 QString BB::escapedAttribute(const QString &str)
 {
@@ -72,7 +70,6 @@ QString BB::escapedAttribute(const QString &str)
  * @param str String mit zu ersetzenden Zeichen
  * @return Neuer String mit ersetzten Zeichen
  * @author Alex Letkemann
- * @date 19.05.2005
  */
 QString BB::escapedText(const QString &str)
 {

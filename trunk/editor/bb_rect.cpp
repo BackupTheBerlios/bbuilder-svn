@@ -24,7 +24,7 @@ BB_Rect::BB_Rect()
 }
 
 /**
- * Konstrucktor
+ * Konstruktor
  * Erstellt einen <i>dynamischen</i> Rechteck. D.h. wenn sich die Positionen der übergeben Punkte ändern,
  * ändert sich auch die Position bzw. die Größe des Rechtecks.
  * @param p1 Position des ersten Punktes.

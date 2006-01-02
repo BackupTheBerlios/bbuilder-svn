@@ -21,7 +21,7 @@ using namespace std;
 int BB_Object::m_Counter = 0;
 
 /**
- * Konstrucktor
+ * Konstruktor
  * Erzeugt ein neues Objekt. Name des Objektes wird aus der Objektnummer erzeugt.
  */ 
 // BB_Object::BB_Object()
@@ -34,7 +34,7 @@ int BB_Object::m_Counter = 0;
 // }
 
 /**
- * Konstrucktor
+ * Konstruktor
  * Erzeugt ein neues Objekt mit dem namen <i>name</i>
  * @param name Name des Objektes
  */
@@ -44,19 +44,17 @@ BB_Object::BB_Object( QString name )
     if ( name != NULL && name != "" )
     {
         setName( name );
-        m_AutoName = false;
     }
     else
     {
         createName();
-        m_AutoName = true;
     }
 
 
 }
 
 /**
- * Destrucktor
+ * Destruktor
  */
 BB_Object::~BB_Object()
 {}
@@ -97,7 +95,6 @@ void BB_Object::setName( const QString& name )
     {
         cout << "Object_" << m_ObjectNr << ": " << "Ungültiger Name" << endl;
         createName();
-        m_AutoName = true;
     }
 
 }
@@ -133,6 +130,7 @@ void BB_Object::setDescription( const QString& desc )
 void BB_Object::createName()
 {
     m_Name = QString( "Object_" ) + QString::number( m_ObjectNr, 10 );
+	m_AutoName = true;
 }
 
 

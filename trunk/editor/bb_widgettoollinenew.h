@@ -31,7 +31,7 @@ class BB_WidgetToolLineNew : public BB_AbstractToolWidget
     public:
         virtual void updateWidget();
         virtual void setWidgetEnabled( bool value );
-        virtual void clearWidget();
+        virtual void clearToolWidget();
 
     private slots:
         void slotNameFinished();
