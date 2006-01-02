@@ -27,8 +27,7 @@ BB_DocComponent::BB_DocComponent( const QDir& path, const QString &fileName, con
 
 
 BB_DocComponent::~BB_DocComponent()
-{
-}
+{}
 
 
 /**
@@ -45,7 +44,7 @@ bool BB_DocComponent::open()
     offset.setX( m_Map.width() / 2.0 );
     offset.setY( m_Map.height() / 2.0 );
 
-	setOffset( offset );
+    setOffset( offset );
     return exit;
 }
 

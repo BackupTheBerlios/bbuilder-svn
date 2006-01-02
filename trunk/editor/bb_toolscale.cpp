@@ -20,7 +20,7 @@ using namespace std;
 
 
 BB_ToolScale::BB_ToolScale( QWidget * parent )
-        : BB_AbstractTool()
+        : BB_AbstractTool(parent)
 {
     m_Parent = parent;
     m_MovePoint = NULL;

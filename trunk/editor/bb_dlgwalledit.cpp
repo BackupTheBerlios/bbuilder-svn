@@ -38,12 +38,15 @@ BB_DlgWallEdit::~BB_DlgWallEdit()
     delete m_ToolDoorNew;
     delete m_ToolWindowNew;
     delete m_ToolMove;
+	delete m_ToolTexture;
     // 	QScrollArea * scroll = new QScrollArea();
     // 	QVBoxLayout *layout_area_preview = new QVBoxLayout;
     // 	QVBoxLayout * layout_buttons = new QVBoxLayout;
     delete m_ButtonWindow;
     delete m_ButtonDoor;
     delete m_ButtonMove;
+	delete m_ButtonTexture;
+	delete m_Buttons;
 }
 
 void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
@@ -58,13 +61,16 @@ void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
     m_PreviewWidget = new BB_DlgWallEditPreview( wall, docComponent );
 
     //tols initialisieren
-    m_ToolDoorNew = new BB_ToolDoorNew;
+	m_ToolDoorNew = new BB_ToolDoorNew(m_CentralWidget);
     m_ToolDoorNew->setObjects( wall->getObjects() );
 
-    m_ToolWindowNew = new BB_ToolWindowNew;
+	m_ToolWindowNew = new BB_ToolWindowNew(m_CentralWidget);
     m_ToolWindowNew->setObjects( wall->getObjects() );
 
-    m_ToolMove = new BB_ToolMove;
+	m_ToolMove = new BB_ToolMove(m_CentralWidget);
+
+	m_ToolTexture = new BB_ToolTexture(m_CentralWidget);
+	m_ToolTexture->setObjects( wall->getObjects());
 
     //Scroll-Fenster mit haupt-Widget
     QScrollArea * scroll = new QScrollArea();
@@ -76,17 +82,29 @@ void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
 
     //Layout fuer Buttons
     QVBoxLayout * layout_buttons = new QVBoxLayout;
+	m_Buttons = new QVector<QToolButton *>;
     m_ButtonWindow = new QToolButton();
     m_ButtonWindow->setText( "Fenster" );
+	m_ButtonWindow->setCheckable(true);
+	m_Buttons->append(m_ButtonWindow);
     m_ButtonDoor = new QToolButton();
     m_ButtonDoor->setText( QString::fromUtf8( "Tür" ) );
+	m_ButtonDoor->setCheckable(true);
+	m_Buttons->append(m_ButtonDoor);
     m_ButtonMove = new QToolButton();
     m_ButtonMove->setText( "Move" );
+	m_ButtonMove->setCheckable(true);
+	m_Buttons->append(m_ButtonMove);
+	m_ButtonTexture = new QToolButton();
+	m_ButtonTexture->setText("Texture");
+	m_ButtonTexture->setCheckable(true);
+	m_Buttons->append(m_ButtonTexture);
 
     //buttons hinzufuegen
     layout_buttons->addWidget( m_ButtonWindow );
     layout_buttons->addWidget( m_ButtonDoor );
     layout_buttons->addWidget( m_ButtonMove );
+	layout_buttons->addWidget(m_ButtonTexture);
 
     //layout mit allen anderen Layouts
     QHBoxLayout * layout_alles_zusammen = new QHBoxLayout;
@@ -138,16 +156,25 @@ void BB_DlgWallEdit::setWall( BB_Wall* Value )
 void BB_DlgWallEdit::slotToolDoor()
 {
     m_CentralWidget->setTool( m_ToolDoorNew );
+	unsetButton( m_ButtonDoor);
 }
 
 void BB_DlgWallEdit::slotToolWindow()
 {
     m_CentralWidget->setTool( m_ToolWindowNew );
+	unsetButton( m_ButtonWindow);
 }
 
 void BB_DlgWallEdit::slotToolMove()
 {
     m_CentralWidget->setTool( m_ToolMove );
+	unsetButton( m_ButtonMove);
+}
+
+void BB_DlgWallEdit::slotToolTexture()
+{
+	m_CentralWidget->setTool( m_ToolTexture );
+	unsetButton( m_ButtonTexture);
 }
 
 
@@ -156,4 +183,17 @@ void BB_DlgWallEdit::initSingals()
     connect( m_ButtonDoor, SIGNAL( clicked( bool ) ), this, SLOT( slotToolDoor() ) );
     connect( m_ButtonWindow, SIGNAL( clicked( bool ) ), this, SLOT( slotToolWindow() ) );
     connect( m_ButtonMove, SIGNAL( clicked( bool ) ), this, SLOT( slotToolMove() ) );
+	connect( m_ButtonTexture, SIGNAL(clicked(bool)), this, SLOT(slotToolTexture()));
+}
+
+
+/*!
+    \fn BB_DlgWallEdit::usetButton(QToolButton * button)
+ */
+void BB_DlgWallEdit::unsetButton(QToolButton * button)
+{
+	for (int i=0; i< m_Buttons->count();i++){
+		if (m_Buttons->at(i) != button)
+			m_Buttons->at(i)->setChecked(false);
+	}
 }

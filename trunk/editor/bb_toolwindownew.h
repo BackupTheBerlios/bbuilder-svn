@@ -28,7 +28,7 @@
 class BB_ToolWindowNew : public BB_AbstractTool
 {
 public:
-    BB_ToolWindowNew();
+	BB_ToolWindowNew(QWidget *parent);
 
     ~BB_ToolWindowNew();
 

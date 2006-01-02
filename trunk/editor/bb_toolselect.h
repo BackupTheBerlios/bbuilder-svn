@@ -26,7 +26,7 @@ Tool, mit dem es möglich ist mehrere Objekte auszuwählen.
 class BB_ToolSelect : public BB_AbstractTool
 {
 public:
-    BB_ToolSelect();
+	BB_ToolSelect(QWidget *parent);
 
     ~BB_ToolSelect();
     virtual void click(QMouseEvent* me);

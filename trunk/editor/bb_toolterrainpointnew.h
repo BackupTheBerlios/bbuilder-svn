@@ -22,7 +22,7 @@
 class BB_ToolTerrainPointNew : public BB_ToolPointNew
 {
 public:
-    BB_ToolTerrainPointNew();
+	BB_ToolTerrainPointNew(QWidget *parent);
 
     ~BB_ToolTerrainPointNew();
 

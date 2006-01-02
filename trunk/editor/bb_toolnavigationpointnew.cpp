@@ -12,8 +12,8 @@
 #include "bb_toolnavigationpointnew.h"
 #include <bb_widgettoolnavigationpointnew.h>
 
-BB_ToolNavigationPointNew::BB_ToolNavigationPointNew()
- : BB_ToolPointNew()
+BB_ToolNavigationPointNew::BB_ToolNavigationPointNew(QWidget *parent)
+ : BB_ToolPointNew(parent)
 {
 }
 

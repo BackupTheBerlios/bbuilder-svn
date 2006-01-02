@@ -71,7 +71,7 @@ void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
     }
     else
     {
-        qDebug( "m_DrawObjects ist nichtinitialisiert: in BB_DlgWallEditArea" );
+        qDebug( "m_DrawObjects ist nicht initialisiert: in BB_DlgWallEditArea" );
     }
 
     for ( int i = 0;i < m_ToolObjects->count() ;i++ )

@@ -26,7 +26,7 @@ public:
     /**
      * Konstruktor
      */
-    BB_ToolTriangleNew();
+	BB_ToolTriangleNew(QWidget *parent);
 
 	
     /**

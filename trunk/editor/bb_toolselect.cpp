@@ -15,8 +15,8 @@
 
 using namespace std;
 
-BB_ToolSelect::BB_ToolSelect()
- : BB_AbstractTool()
+BB_ToolSelect::BB_ToolSelect(QWidget *parent)
+ : BB_AbstractTool(parent)
 {
 	m_Rect.setPos1(&m_Point1);
 	m_Rect.setPos2(&m_Point2);

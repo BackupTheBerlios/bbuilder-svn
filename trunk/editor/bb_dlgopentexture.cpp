@@ -17,45 +17,49 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "bb_constructionelement.h"
 #include "bb_dlgopentexture.h"
 
-BB_ConstructionElement::BB_ConstructionElement()
- : BB_Rect()
+#include <QFileDialog>
+
+BB_DlgOpenTexture::BB_DlgOpenTexture(QWidget * parent, Qt::WFlags f)
+ : QDialog(parent, f)
+{
+	m_Dlg.setupUi( this);
+
+	connect(m_Dlg.buttonShowDir,SIGNAL(clicked()), this, SLOT(slotTextureFileSearch()));
+}
+
+
+BB_DlgOpenTexture::~BB_DlgOpenTexture()
 {
 }
 
 
-BB_ConstructionElement::~BB_ConstructionElement()
+
+
+/*!
+    \fn BB_DlgOpenTexture::slotTextureFileSearch()
+ */
+void BB_DlgOpenTexture::slotTextureFileSearch()
 {
-}
-
-
-
-
-
-QString BB_ConstructionElement::getTextureFileName() const
-{
-    return m_TextureFileName;
-}
-
-
-void BB_ConstructionElement::setTextureFileName( const QString& Value )
-{
-    m_TextureFileName = Value;
-	if (!m_TextureFileName.isNull()){
-		m_Image.load(m_TextureFileName);
+	QString filename;
+	filename = QFileDialog::getOpenFileName(	this,
+			QString::fromUtf8("Öffnen"),
+			m_Dlg.lineEditPfad->text(),
+			"Images (*.png *.bmp *.jpg)");
+	if(!filename.isEmpty())
+	{
+		m_Dlg.lineEditPfad->setText(filename);
 	}
 }
 
 
-/*!
-    \fn BB_ConstructionElement::openTextureDlg()
- */
-void BB_ConstructionElement::openTextureDlg()
+
+QString BB_DlgOpenTexture::getTextureFile() const
 {
-	BB_DlgOpenTexture dlg;
-	dlg.setTextureFile( m_TextureFileName);
-	dlg.exec();
-	setTextureFileName( dlg.getTextureFile());
+	return m_Dlg.lineEditPfad->text();;
+}
+
+void BB_DlgOpenTexture::setTextureFile(QString pfad){
+	m_Dlg.lineEditPfad->setText(pfad);
 }

@@ -25,17 +25,13 @@
 
 using namespace std;
 
-BB_ToolLineNew::BB_ToolLineNew()
-        : BB_AbstractTool()
-{
-//     m_movedPoint = NULL;
-    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
-}
+
 
 BB_ToolLineNew::BB_ToolLineNew( QWidget *parent )
-        : BB_AbstractTool()
+        : BB_AbstractTool(parent)
 {
     m_ParentWidget = parent;
+	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
 //     m_movedPoint = NULL;
 }
 

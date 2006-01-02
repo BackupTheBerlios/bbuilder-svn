@@ -32,8 +32,7 @@ BB_Rect::BB_Rect()
  */
 BB_Rect::BB_Rect( BB_Point* p1, BB_Point* p2 )
         : BB_Line( p1, p2 )
-{
-}
+{}
 
 
 /** Destruktor */
@@ -66,4 +65,22 @@ void BB_Rect::show( BB_Transformer& transformer, QPainter& painter ) const
 
         painter.drawRect( rect );
     }
+}
+
+
+/*!
+    \fn BB_Rect::isHit(const C2dVector &hit)
+ */
+bool BB_Rect::isHit( const C2dVector &hit )
+{
+    QRect rect( ( int ) m_Pos1->getX(),
+                ( int ) m_Pos1->getY(),
+                ( int ) ( m_Pos2->getX() - m_Pos1->getX() ),
+                ( int ) ( m_Pos2->getY() - m_Pos1->getY() ) );
+    rect = rect.normalized();
+	
+	if ( hit.x() > rect.left() && hit.x() < rect.right() )
+		if ( hit.y() > rect.top() && hit.y() < rect.bottom() )
+            return true;
+    return false;
 }

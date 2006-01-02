@@ -19,8 +19,8 @@
  ***************************************************************************/
 #include "bb_abstracttoolwalledit.h"
 
-BB_AbstractToolWallEdit::BB_AbstractToolWallEdit()
- : BB_AbstractTool()
+BB_AbstractToolWallEdit::BB_AbstractToolWallEdit(QWidget *parent)
+ : BB_AbstractTool(parent)
 {
 }
 

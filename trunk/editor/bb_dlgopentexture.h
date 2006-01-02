@@ -1,6 +1,6 @@
 /***************************************************************************
-*   Copyright (C) 2005 by Vacesav Ustinov   						*
-*   v.ustinov@web.de   *
+*   Copyright (C) 2005 by Vaceslav Ustinov                                *
+*   v.ustinov@web.de                                                      *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
 *   it under the terms of the GNU General Public License as published by  *
@@ -12,42 +12,36 @@
 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
 *   GNU General Public License for more details.                          *
 *                                                                         *
+*   You should have received a copy of the GNU General Public License     *
+*   along with this program; if not, write to the                         *
+*   Free Software Foundation, Inc.,                                       *
+*   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
-#ifndef BB_TOOLLINENEW_H
-#define BB_TOOLLINENEW_H
+#ifndef BB_DLGOPENTEXTURE_H
+#define BB_DLGOPENTEXTURE_H
 
-#include <bb_abstracttool.h>
-#include "bb_wall.h" 
-//#include "bb_drawobject.h"
+#include <QDialog>
+#include "ui_textureOpenDialog.h"
 
 /**
-dokumentation
+Ein Dialog zum Offnen von Texture Bildern
  
-@author Vacesav Ustinov, Alex Letkemann (Änderungen)
+	@author Vaceslav Ustinov <v.ustinov@web.de>
 */
-class BB_ToolLineNew : public BB_AbstractTool
+class BB_DlgOpenTexture : public QDialog
 {
+        Q_OBJECT;
     public:
-        BB_ToolLineNew( QWidget *parent );
+        BB_DlgOpenTexture( QWidget * parent = 0, Qt::WFlags f = 0);
 
-        ~BB_ToolLineNew();
-
-        virtual void click( QMouseEvent* me );
-        virtual void move( QMouseEvent* me, bool overX, bool overY );
-        virtual void release( QMouseEvent* me );
-        virtual BB_AbstractToolWidget* getToolWidget();
+        ~BB_DlgOpenTexture();
+        QString getTextureFile() const;
+		void setTextureFile(QString pfad);
     protected:
-//         BB_DrawObject * m_movedPoint;
+        Ui_textureOpenDialog m_Dlg;
 
-        // EDIT: Alex Letkemann
-        // Name angepasst ...
-        BB_Line * m_Tmp_Line;
-        BB_Point m_MovePoint;
-
-    protected:
-        virtual BB_Point* getClickedPoint( C2dVector& pos );
-    virtual BB_Line* createNewLine( BB_Point* p1, BB_Point* p2 );
-	virtual BB_Line* getClickedLine( C2dVector& pos );
+    public slots:
+        void slotTextureFileSearch();
 };
 
 #endif

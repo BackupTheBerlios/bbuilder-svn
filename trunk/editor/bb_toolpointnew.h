@@ -31,7 +31,7 @@ class BB_ToolPointNew : public BB_AbstractTool
 		 * Erstellt ein neues Werkzeug zur Erstellung von Punkten
 		 * @author Alex Letkemann
          */
-        BB_ToolPointNew();
+		BB_ToolPointNew(QWidget * parent);
 
 		/**
 		 * Destruktor

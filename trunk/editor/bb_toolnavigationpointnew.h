@@ -23,7 +23,7 @@ Werkzeug zum Erstellen von Naviationspunkten
 class BB_ToolNavigationPointNew : public BB_ToolPointNew
 {
 public:
-    BB_ToolNavigationPointNew();
+	BB_ToolNavigationPointNew(QWidget *parent);
 
     ~BB_ToolNavigationPointNew();
     virtual BB_AbstractToolWidget* getToolWidget();

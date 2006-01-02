@@ -30,7 +30,7 @@
 class BB_ToolDoorNew : public BB_AbstractTool
 {
     public:
-        BB_ToolDoorNew();
+		BB_ToolDoorNew(QWidget *parent);
 
         ~BB_ToolDoorNew();
 	protected:

@@ -39,6 +39,7 @@ public:
 	
 
 	QString getTextureFileName() const;
+    void openTextureDlg();
 	
 	protected:
 		QString m_TextureFileName;

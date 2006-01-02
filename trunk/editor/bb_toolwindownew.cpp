@@ -20,8 +20,8 @@
 #include "bb_toolwindownew.h"
 #include "bb_window.h"
 
-BB_ToolWindowNew::BB_ToolWindowNew()
-	: BB_AbstractTool()
+BB_ToolWindowNew::BB_ToolWindowNew(QWidget *parent)
+	: BB_AbstractTool(parent)
 {
 }
 

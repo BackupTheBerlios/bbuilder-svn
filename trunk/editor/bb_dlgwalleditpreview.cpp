@@ -41,6 +41,7 @@ void BB_DlgWallEditPreview::initilize( BB_Wall * wall, BB_DocComponent * docComp
     QPoint p1;
     QPoint p2;
 
+	transformer.setOffset( docComponent->getOffset());
     transformer.logicalToScreen( p1, wall->getPos1() ->getPos() );
     transformer.logicalToScreen( p2, wall->getPos2() ->getPos() );
 

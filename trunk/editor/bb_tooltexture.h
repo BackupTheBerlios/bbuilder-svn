@@ -17,45 +17,25 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "bb_constructionelement.h"
-#include "bb_dlgopentexture.h"
+#ifndef BB_TOOLTEXTURE_H
+#define BB_TOOLTEXTURE_H
 
-BB_ConstructionElement::BB_ConstructionElement()
- : BB_Rect()
+#include <bb_abstracttool.h>
+
+/**
+Tool zum setzen von Texturen
+
+	@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
+class BB_ToolTexture : public BB_AbstractTool
 {
-}
+public:
+	BB_ToolTexture(QWidget *parent);
 
+    ~BB_ToolTexture();
 
-BB_ConstructionElement::~BB_ConstructionElement()
-{
-}
+	virtual void click(QMouseEvent* me);
 
+};
 
-
-
-
-QString BB_ConstructionElement::getTextureFileName() const
-{
-    return m_TextureFileName;
-}
-
-
-void BB_ConstructionElement::setTextureFileName( const QString& Value )
-{
-    m_TextureFileName = Value;
-	if (!m_TextureFileName.isNull()){
-		m_Image.load(m_TextureFileName);
-	}
-}
-
-
-/*!
-    \fn BB_ConstructionElement::openTextureDlg()
- */
-void BB_ConstructionElement::openTextureDlg()
-{
-	BB_DlgOpenTexture dlg;
-	dlg.setTextureFile( m_TextureFileName);
-	dlg.exec();
-	setTextureFileName( dlg.getTextureFile());
-}
+#endif

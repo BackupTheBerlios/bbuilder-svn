@@ -22,8 +22,9 @@
 
 using namespace std;
 
-BB_AbstractTool::BB_AbstractTool()
+BB_AbstractTool::BB_AbstractTool(QWidget * parent)
 {
+	m_ParentWidget = parent;
     m_Component = NULL;
     m_Transformer = NULL;
     m_Objects = NULL;

@@ -19,8 +19,8 @@
 
 using namespace std;
 
-BB_ToolPointNew::BB_ToolPointNew()
-        : BB_AbstractTool()
+BB_ToolPointNew::BB_ToolPointNew(QWidget * parent)
+        : BB_AbstractTool(parent)
 {
 	m_Icon = QIcon ( IMG_DIR() + SEPARATOR() + "toolPoint.png" );
 }

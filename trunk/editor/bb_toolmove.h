@@ -26,7 +26,7 @@
 class BB_ToolMove : public BB_AbstractTool
 {
 public:
-    BB_ToolMove();
+	BB_ToolMove(QWidget * parent);
 
     ~BB_ToolMove();
 

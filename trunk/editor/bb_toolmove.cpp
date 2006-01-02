@@ -19,11 +19,11 @@
 
 using namespace std;
 
-BB_ToolMove::BB_ToolMove()
-        : BB_AbstractTool()
+BB_ToolMove::BB_ToolMove(QWidget * parent)
+        : BB_AbstractTool(parent)
 {
 
-    
+
 
 
     comparePoint = NULL;
@@ -40,8 +40,8 @@ BB_ToolMove::BB_ToolMove()
     m_Rect.setBrush( b );
 
     m_select = true;
-	
-	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolSelect.png" );
+
+    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolSelect.png" );
 }
 
 
@@ -140,7 +140,10 @@ void BB_ToolMove::click( QMouseEvent* me )
                 object->setSelected( true );
                 m_Selection->append( object );
                 qDebug( "Keine Objeckte sind selectiert, ein neues wurde selektiert" );
-                m_ToolWidget->updateWidget();
+                if ( m_ToolWidget != NULL )
+                {
+                    m_ToolWidget->updateWidget();
+                }
                 return ;
             }
         }
@@ -332,7 +335,7 @@ void BB_ToolMove::release( QMouseEvent* me )
     }
     //wieder in Auswahl-Modus wechseln
     m_select = true;
-    m_ToolWidget->updateWidget();
+	updateWidget();
 }
 
 
@@ -402,10 +405,10 @@ void BB_ToolMove::selectAll()
  */
 BB_AbstractToolWidget* BB_ToolMove::getToolWidget()
 {
-	if( m_ToolWidget == NULL )
-	{
-		m_ToolWidget = new BB_WidgetToolSelect( this );
-	}
-	
-	return m_ToolWidget;
+    if ( m_ToolWidget == NULL )
+    {
+        m_ToolWidget = new BB_WidgetToolSelect( this );
+    }
+
+    return m_ToolWidget;
 }

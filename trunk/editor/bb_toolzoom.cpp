@@ -19,7 +19,7 @@
 using namespace std;
 
 BB_ToolZoom::BB_ToolZoom( BB_WorkArea* area )
-        : BB_AbstractTool()
+        : BB_AbstractTool(area)
 {
     if ( area == NULL )
     {

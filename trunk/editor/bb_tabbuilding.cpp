@@ -192,10 +192,10 @@ void BB_TabBuilding::initTools()
 	QAction* initTool;
     
 	/* Tools erzeugen */
-    m_ToolMove = new BB_ToolMove();
+    m_ToolMove = new BB_ToolMove(this);
 	m_ToolScale = new BB_ToolScale( this );
 	m_ToolZoom = new BB_ToolZoom( m_Center );
-	m_ToolPointNew = new BB_ToolPointNew();
+	m_ToolPointNew = new BB_ToolPointNew(this);
 	m_ToolWallNew = new BB_ToolWallNew( m_Center );
 	
 	

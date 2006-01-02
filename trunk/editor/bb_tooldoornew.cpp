@@ -24,8 +24,8 @@
 
 using namespace std;
 
-BB_ToolDoorNew::BB_ToolDoorNew()
-        : BB_AbstractTool()
+BB_ToolDoorNew::BB_ToolDoorNew(QWidget *parent)
+        : BB_AbstractTool(parent)
 {}
 
 

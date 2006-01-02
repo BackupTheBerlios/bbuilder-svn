@@ -13,8 +13,8 @@
 #include <bb_terrainpoint.h>
 #include <bb_widgettoolterrainpointnew.h>
 
-BB_ToolTerrainPointNew::BB_ToolTerrainPointNew()
- : BB_ToolPointNew()
+BB_ToolTerrainPointNew::BB_ToolTerrainPointNew(QWidget *parent)
+ : BB_ToolPointNew(parent)
 {
 	m_Icon = QIcon ( IMG_DIR() + SEPARATOR() + "toolPoint.png" );
 }

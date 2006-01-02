@@ -17,25 +17,38 @@
 *   Free Software Foundation, Inc.,                                       *
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
-#ifndef BB_ABSTRACTTOOLWALLEDIT_H
-#define BB_ABSTRACTTOOLWALLEDIT_H
+#include "bb_tooltexture.h"
+#include "bb_constructionelement.h"
+#include <iostream>
 
-#include <bb_abstracttool.h>
+using namespace std;
 
-/**
-Eine Abstrakte Klasse fuer alle Tools in Dialog BB_DlgWallEdit
- 
-	@author Vaceslav Ustinov <v.ustinov@web.de>
-*/
-class BB_AbstractToolWallEdit : public BB_AbstractTool
+BB_ToolTexture::BB_ToolTexture(QWidget *parent)
+        : BB_AbstractTool(parent)
+{}
+
+
+BB_ToolTexture::~BB_ToolTexture()
+{}
+
+void BB_ToolTexture::click( QMouseEvent* me )
 {
-    public:
-		BB_AbstractToolWallEdit(QWidget *parent);
+    m_pScreen = me->pos();
+    m_Transformer->screenToLogical( m_pLogic, m_pScreen );
+    BB_ConstructionElement * myElement;
+    for ( int i = 0; i < m_Objects->count();i++ )
+    {
+        myElement = dynamic_cast<BB_ConstructionElement *>( m_Objects->at( i ) );
+        if ( myElement != NULL )
+        {
+            if ( myElement->isHit( m_pLogic ) )
+            {
+                myElement->openTextureDlg();
+				m_ParentWidget->update();
+                return ;
+            }
+        }
+    }
+}
 
-        ~BB_AbstractToolWallEdit();
 
-        void setObjects( QVector <BB_DrawObject *> * objects );
-
-};
-
-#endif

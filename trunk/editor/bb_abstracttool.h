@@ -36,7 +36,7 @@ class BB_WorkFrame;
 class BB_AbstractTool
 {
     public:
-        BB_AbstractTool();
+        BB_AbstractTool(QWidget * parent);
 
         virtual ~BB_AbstractTool();
 

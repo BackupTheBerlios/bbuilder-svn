@@ -75,11 +75,11 @@ void BB_TabTerrain::initTools()
 	QAction* initTool;
 	
 	/* Tools initialisieren */
-	m_ToolMove = new BB_ToolMove();
+	m_ToolMove = new BB_ToolMove(this);
 	m_ToolScale = new BB_ToolScale( this );
 	m_ToolZoom = new BB_ToolZoom( m_Center );
-	m_ToolTerrainPointNew = new BB_ToolTerrainPointNew();
-	m_ToolTriangleNew = new BB_ToolTriangleNew();
+	m_ToolTerrainPointNew = new BB_ToolTerrainPointNew(this);
+	m_ToolTriangleNew = new BB_ToolTriangleNew(this);
 			
 	initTool = addTool( m_ToolMove, "Move", "Bewegungs Werkzeug" );
 	addTool( m_ToolScale, QString::fromUtf8("Maßstab"), QString::fromUtf8("Maßstab Werkzeug") );

@@ -36,6 +36,7 @@ public:
     ~BB_Rect();
     virtual const QString getClassName();
     virtual void show(BB_Transformer& transformer, QPainter& painter) const;
+    bool isHit(const C2dVector &hit);
 
 };
 

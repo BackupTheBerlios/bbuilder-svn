@@ -15,8 +15,8 @@
 
 using namespace std;
 
-BB_ToolTriangleNew::BB_ToolTriangleNew()
-        : BB_AbstractTool()
+BB_ToolTriangleNew::BB_ToolTriangleNew(QWidget *parent)
+        : BB_AbstractTool(parent)
 {
 	m_Triangle = NULL;
 }
