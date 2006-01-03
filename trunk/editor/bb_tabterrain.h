@@ -45,7 +45,7 @@ private:
     void initTools();
 
 protected:
-	virtual void toolChanged(QAction* action);
+// 	virtual void toolChanged(QAction* action);
     virtual bool saveCurrent();
     
 private slots:

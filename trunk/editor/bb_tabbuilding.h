@@ -39,9 +39,10 @@ public:
 
     ~BB_TabBuilding();
 //     void updateBuildingList();
-	virtual void updateWidget();
+// 	virtual void updateWidget();
 	void createBuildingList();
     virtual void clear();
+    virtual void updateLists();
 	
 private slots:
     void slotBuildingProperties();
@@ -50,10 +51,10 @@ private slots:
 //     void slotBuildingChanged(int index);    
 	void slotBuildingChanged(QListWidgetItem * current, QListWidgetItem * previous);
 protected:
-    BB_AbstractTool* m_ToolZoom;
-    BB_AbstractTool* m_ToolPointNew;
-    BB_AbstractTool* m_ToolMove;
-    BB_AbstractTool* m_ToolWallNew;
+//     BB_AbstractTool* m_ToolZoom;
+//     BB_AbstractTool* m_ToolPointNew;
+//     BB_AbstractTool* m_ToolMove;
+//     BB_AbstractTool* m_ToolWallNew;
 		
     QVector<BB_Building*>* m_Buildings;
     QListWidget* m_BuildingsListWidget;
@@ -62,13 +63,13 @@ protected:
     QPushButton* m_ButtonBuildingProperties;
 
     bool m_BuildingsListCreated;
-    BB_AbstractTool* m_ToolScale;
-    BB_AbstractTool* m_ToolNavigationPointNew;
-    BB_AbstractTool* m_ToolNavigationLineNew;
+//     BB_AbstractTool* m_ToolScale;
+//     BB_AbstractTool* m_ToolNavigationPointNew;
+//     BB_AbstractTool* m_ToolNavigationLineNew;
     
 protected:
     
-    virtual void toolChanged(QAction* action);
+//     virtual void toolChanged(QAction* action);
 private:
     void initTools();
     void initWidgetLeft();

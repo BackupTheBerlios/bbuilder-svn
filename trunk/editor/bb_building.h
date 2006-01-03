@@ -39,10 +39,14 @@ public:
     virtual void generateXElement(QTextStream &out, int depth);
     virtual const QString getClassName();
     void remove();
+    void addLevel( BB_Level* level );
+    QVector<BB_Level*>* getLevels();
+    void removeLevel( BB_Level* level );
+    BB_Level* getLevel( int index );
     
 
 protected:
-    QVector<BB_Level>* m_Levels;
+    QVector<BB_Level*> m_Levels;
     
 };
 

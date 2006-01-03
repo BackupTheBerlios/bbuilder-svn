@@ -19,13 +19,24 @@
 BB_Level::BB_Level( BB_Building* building, const QDir& path, const QString &fileName, const QString &name )
         : BB_DocComponent( path, fileName, name )
 {
+	if( building == NULL )
+	{
+		qDebug( "BB_Level kann nicht ohne building initialisiert werden." );
+		exit(1);
+	}
+	
+	m_Building = building;
+	m_Building->addLevel(this);
+	
     //Standart Hoehe
 	m_height = 3.0;
 }
 
 
 BB_Level::~BB_Level()
-{}
+{
+	m_Building->removeLevel(this);
+}
 
 
 
@@ -66,4 +77,13 @@ double BB_Level::getHeight() const
 void BB_Level::setHeight( double Value )
 {
     m_height = Value;
+}
+
+
+/*!
+    \fn BB_Level::getBuilding()
+ */
+BB_Building* BB_Level::getBuilding()
+{
+	return m_Building;
 }

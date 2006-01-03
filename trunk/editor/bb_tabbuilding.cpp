@@ -172,17 +172,6 @@ void BB_TabBuilding::slotBuildingProperties()
     }
 }
 
-
-
-/**
- * Updated das Fenster.
- */
-void BB_TabBuilding::updateWidget()
-{
-    //     updateBuildingList();
-}
-
-
 /**
  * Initialisiert alle Tools
  */
@@ -191,24 +180,15 @@ void BB_TabBuilding::initTools()
 
     QAction * initTool;
 
-    /* Tools erzeugen */
-    m_ToolMove = new BB_ToolMove( this );
-    m_ToolScale = new BB_ToolScale( this );
-    m_ToolZoom = new BB_ToolZoom( m_Center, this );
-    m_ToolPointNew = new BB_ToolPointNew( this );
-    m_ToolWallNew = new BB_ToolWallNew( this );
-    m_ToolNavigationPointNew = new BB_ToolNavigationPointNew( this );
-    m_ToolNavigationLineNew = new BB_ToolNavigationLineNew( this );
-
 
     /* Tools dem Tab hinzufügen */
-    initTool = addTool( m_ToolMove, "Move", "Bewegungs Werkzeug" );
-    addTool( m_ToolScale, QString::fromUtf8( "Maßstab" ), QString::fromUtf8( "Maßstab Werkzeug" ) );
-    addTool( m_ToolZoom, "Zoom", QString::fromUtf8( "Zoom Werkzeug" ) );
-    addTool( m_ToolPointNew, "Knoten-Werkzeug", "Werkzeug zum Erstellen von Knoten" );
-    addTool( m_ToolWallNew, "Wand-Werkzeug", QString::fromUtf8( "Werkzeug zum Erstellen von Wänden" ) );
-    addTool( m_ToolNavigationPointNew, "Navigationsknoten", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationsknoten" ) );
-    addTool( m_ToolNavigationLineNew, "Navigationslinien", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationslinien" ) );
+	initTool = addTool( new BB_ToolMove( this ), "Move", "Bewegungs Werkzeug" );
+	addTool( new BB_ToolScale( this ), QString::fromUtf8( "Maßstab" ), QString::fromUtf8( "Maßstab Werkzeug" ) );
+	addTool( new BB_ToolZoom( m_Center, this ), "Zoom", QString::fromUtf8( "Zoom Werkzeug" ) );
+	addTool( new BB_ToolPointNew( this ), "Knoten-Werkzeug", "Werkzeug zum Erstellen von Knoten" );
+	addTool( new BB_ToolWallNew( this ), "Wand-Werkzeug", QString::fromUtf8( "Werkzeug zum Erstellen von Wänden" ) );
+	addTool( new BB_ToolNavigationPointNew( this ), "Navigationsknoten", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationsknoten" ) );
+	addTool( new BB_ToolNavigationLineNew( this ), "Navigationslinien", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationslinien" ) );
 
     /* Ein Tool als Standard festlegen */
     toolChanged( initTool );
@@ -230,44 +210,44 @@ void BB_TabBuilding::initWidgetRight()
  * Verarbeitet die Tools von BB_TabBuilding und übergibt diese weiter an die Arbeitfläche.
  * @param action Aktion des Tools, welches Betätigt wurde.
  */
-void BB_TabBuilding::toolChanged( QAction* action )
-{
-
-    if ( m_ToolMove->getAction() == action )
-    {
-        setTool( m_ToolMove );
-    }
-    else if ( m_ToolZoom->getAction() == action )
-    {
-        setTool( m_ToolZoom );
-    }
-    else if ( m_ToolPointNew->getAction() == action )
-    {
-        setTool( m_ToolPointNew );
-    }
-    else if ( m_ToolWallNew->getAction() == action )
-    {
-        setTool( m_ToolWallNew );
-    }
-    else if ( m_ToolScale->getAction() == action )
-    {
-        setTool( m_ToolScale );
-    }
-    else if ( m_ToolNavigationPointNew->getAction() == action )
-    {
-        setTool( m_ToolNavigationPointNew );
-    }
-	else if( m_ToolNavigationLineNew->getAction() == action )
-	{
-		setTool( m_ToolNavigationLineNew );
-	}
-	else
-    {
-        qDebug( "Unbekanntes Tool\n" );
-    }
-
-    m_Center->update();
-}
+// void BB_TabBuilding::toolChanged( QAction* action )
+// {
+// 
+//     if ( m_ToolMove->getAction() == action )
+//     {
+//         setTool( m_ToolMove );
+//     }
+//     else if ( m_ToolZoom->getAction() == action )
+//     {
+//         setTool( m_ToolZoom );
+//     }
+//     else if ( m_ToolPointNew->getAction() == action )
+//     {
+//         setTool( m_ToolPointNew );
+//     }
+//     else if ( m_ToolWallNew->getAction() == action )
+//     {
+//         setTool( m_ToolWallNew );
+//     }
+//     else if ( m_ToolScale->getAction() == action )
+//     {
+//         setTool( m_ToolScale );
+//     }
+//     else if ( m_ToolNavigationPointNew->getAction() == action )
+//     {
+//         setTool( m_ToolNavigationPointNew );
+//     }
+// 	else if( m_ToolNavigationLineNew->getAction() == action )
+// 	{
+// 		setTool( m_ToolNavigationLineNew );
+// 	}
+// 	else
+//     {
+//         qDebug( "Unbekanntes Tool\n" );
+//     }
+// 
+//     m_Center->update();
+// }
 
 
 /**
@@ -277,7 +257,7 @@ void BB_TabBuilding::createBuildingList()
 {
     if ( !m_BuildingsListCreated )
     {
-        cout << m_Buildings->count() << endl;
+//         cout << m_Buildings->count() << endl;
         for ( int i = 0; i < m_Buildings->count(); i++ )
         {
             m_BuildingsListWidget->addItem( m_Buildings->at( i ) ->getListWidgetItem() );
@@ -341,4 +321,13 @@ bool BB_TabBuilding::saveCurrent()
     }
 
     return false;
+}
+
+
+/*!
+    \fn BB_TabBuilding::updateLists()
+ */
+void BB_TabBuilding::updateLists()
+{
+	createBuildingList();
 }

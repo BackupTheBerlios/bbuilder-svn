@@ -88,7 +88,8 @@ HEADERS += bb_abstracttool.h \
            bb_tooldelete.h \
            bb_tooltexture.h \
            bb_navigationline.h \
-           bb_toolnavigationlinenew.h 
+           bb_toolnavigationlinenew.h \
+           bb_tools.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \

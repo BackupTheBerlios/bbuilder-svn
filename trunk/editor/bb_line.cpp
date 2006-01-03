@@ -37,7 +37,8 @@ BB_Line::BB_Line( BB_Point *p1, BB_Point *p2 )
     setPos2( p2 );
 	
 	// Sonstige Einstellungen
-    m_Color.setNamedColor( "Red" );
+	m_Pen.setColor( Qt::red );
+	m_PenSelected.setColor( Qt::red );
     m_hitRange = 3;
 	
 

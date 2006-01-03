@@ -34,11 +34,13 @@ class BB_Level : public BB_DocComponent
         virtual const QString getClassName();
 		void setHeight( double Value );
 		double getHeight() const;
+    BB_Building* getBuilding();
     protected:
 		/**
 		Hohe von Etage in meter
 		*/
 		double m_height;
+    BB_Building* m_Building;
 };
 
 #endif

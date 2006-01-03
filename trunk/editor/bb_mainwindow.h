@@ -50,7 +50,7 @@ private:
 	void initMenus();
 	void initStatusBar();
 	void initMainWindow();
-    void initDoc();
+
     virtual void closeEvent ( QCloseEvent * e );
     
 	
@@ -69,8 +69,8 @@ protected:
 	
 	/** Haupt-Tabwidget des Hauptfensters */
     QTabWidget *m_TabWidget;
-	bool m_Keys[256];
-    BB_Doc* m_Doc;
+
+    BB_Doc m_Doc;
     QMenu* m_MenuProject;
 	
 	BB_Config m_Config;
@@ -85,10 +85,6 @@ protected:
     BB_TabLevel* m_TabLevel;
     QAction* m_aFileExit;
     
-	
-protected:
-	virtual void keyPressEvent ( QKeyEvent * e );
-    virtual void keyReleaseEvent ( QKeyEvent * e );
 private slots:
     void slotProjectNew();
     void slotProjectOpen();

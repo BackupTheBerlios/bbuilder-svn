@@ -90,38 +90,38 @@ void BB_TabTerrain::initTools()
 	toolChanged( initTool );
 }
 
-/**
+/* *
  * Verarbeitet die Tools von BB_TabTerrain und übergibt diese weiter an die Arbeitfläche.
  * @param action Aktion des Tools, welches Betätigt wurde.
  */
-void BB_TabTerrain::toolChanged( QAction* action )
-{
-
-	if ( m_ToolMove->getAction() == action )
-    {
-		setTool( m_ToolMove );
-    }
-	else if( m_ToolScale->getAction() == action )
-	{
-		setTool( m_ToolScale );
-	}
-    else if ( m_ToolZoom->getAction() == action )
-    {
-		setTool( m_ToolZoom );
-    }
-    else if ( m_ToolTerrainPointNew->getAction() == action )
-    {
-		setTool( m_ToolTerrainPointNew );
-    }
-    else if ( m_ToolTriangleNew->getAction() == action )
-    {
-		setTool( m_ToolTriangleNew );
-    }
-    else
-    {
-        cout << "Unbekanntes Tool" << endl;
-    }
-}
+// void BB_TabTerrain::toolChanged( QAction* action )
+// {
+// 
+// 	if ( m_ToolMove->getAction() == action )
+//     {
+// 		setTool( m_ToolMove );
+//     }
+// 	else if( m_ToolScale->getAction() == action )
+// 	{
+// 		setTool( m_ToolScale );
+// 	}
+//     else if ( m_ToolZoom->getAction() == action )
+//     {
+// 		setTool( m_ToolZoom );
+//     }
+//     else if ( m_ToolTerrainPointNew->getAction() == action )
+//     {
+// 		setTool( m_ToolTerrainPointNew );
+//     }
+//     else if ( m_ToolTriangleNew->getAction() == action )
+//     {
+// 		setTool( m_ToolTriangleNew );
+//     }
+//     else
+//     {
+//         cout << "Unbekanntes Tool" << endl;
+//     }
+// }
 
 
 /**

@@ -29,6 +29,7 @@ public:
 	BB_TabLevel(BB_Doc * doc, QWidget* parent = 0, Qt::WFlags f = 0);
 
     ~BB_TabLevel();
+    virtual void updateLists();
     
 
 protected:
@@ -36,14 +37,29 @@ protected:
     QPushButton* m_ButtonLevelDelete;
     QPushButton* m_ButtonLevelNew;
     BB_AbstractTool* m_ToolZoom;
+    QVector< BB_Building* >* m_Buildings;
+    QVector< BB_Level* >* m_Levels;
+	QListWidget* m_ListWidgetLevels;
+	QListWidget* m_ListWidgetBuildings;
+	BB_Building* m_Building;
+	
 private slots:
-    void test(QAction* action);
     void slotZoomTool(QAction* action);
 	void slotLevelNew();
 	void slotLevelProperties();
 	void slotLevelDelete();
 
 
+protected:
+    void initWidgetLeft();
+    void initWidgetRight();
+    void initTools();
+    void updateBuildingList();
+    void updateLevelList();
+    virtual void documentChanged();
+	virtual void setBuilding( BB_Building* building );
+protected slots:
+    void slotBuildingChanged( int row );
 };
 
 #endif

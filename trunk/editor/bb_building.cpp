@@ -225,3 +225,53 @@ void BB_Building::remove()
     QFile::remove( pngFile );
 }
 
+
+
+/*!
+    \fn BB_Building::addLevel( BB_Level* level )
+ */
+void BB_Building::addLevel( BB_Level* level )
+{
+	if( level != NULL && level->getBuilding() == this )
+	{
+		m_Levels.append( level );
+	}
+}
+
+
+/*!
+    \fn BB_Building::getLevels()
+ */
+QVector<BB_Level*>* BB_Building::getLevels()
+{
+	return &m_Levels;
+}
+
+
+/*!
+    \fn BB_Building::removeLevel( BB_Level* level )
+ */
+void BB_Building::removeLevel( BB_Level* level )
+{
+	for( int i = m_Levels.count() -1 ; i >= 0; i--)
+	{
+		if( m_Levels.at(i) == level )
+		{
+			m_Levels.remove( i );
+		}
+	}
+}
+
+
+/*!
+    \fn BB_Building::getLevel( int index )
+ */
+BB_Level* BB_Building::getLevel( int index )
+{
+	if( index < m_Levels.count() && index >= 0 )
+	{
+		return m_Levels.at( index );
+	}
+	
+	return NULL;
+}

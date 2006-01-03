@@ -31,7 +31,7 @@ BB_Tab::BB_Tab( BB_Doc* doc, QWidget* parent, Qt::WFlags f ) : QWidget( parent, 
 // BB_Tab::BB_Tab( BB_Doc* doc, bool leftFrame, bool rightFrame, QWidget* parent, Qt::WFlags f ) : QWidget( parent, f )
 // {
 //     setDoc( doc );
-// 
+//
 //     initTab();
 //     initLayout( leftFrame, rightFrame );
 // }
@@ -41,7 +41,7 @@ BB_Tab::~BB_Tab()
 {
     m_Doc = NULL;
 
-    delete m_ToolButtonActions;
+    //     delete m_ToolButtonActions;
     delete m_Center;
     if ( m_LeftFrame != NULL )
         delete m_LeftFrame;
@@ -60,13 +60,13 @@ BB_Tab::~BB_Tab()
 void BB_Tab::initTab()
 {
     m_ToolButtonCount = 0;
-    m_ToolButtonActions = new QList<QAction*>();
+    //     m_ToolButtonActions = new QList<QAction*>();
 
     m_ToolsGridLayout = NULL;
     m_LeftFrame = NULL;
     m_RightFrame = NULL;
-	
-	initLayout( true, true );
+
+    initLayout( true, true );
 }
 
 
@@ -179,7 +179,7 @@ bool BB_Tab::createToolButton( QAction* action, BB_AbstractTool* tool )
         action->setCheckable( true );
         action->setIcon( tool->getIcon() );
         tool->setAction( action );
-        m_ToolButtonActions->append( action );
+        //         m_ToolButtonActions->append( action );
 
         QToolButton *button = new QToolButton();
         button->setToolButtonStyle( Qt::ToolButtonIconOnly );
@@ -246,16 +246,17 @@ bool BB_Tab::addWidgetRight( QWidget *widget )
  */
 void BB_Tab::unsetToolButton( QAction *action )
 {
-    for ( int i = 0; i < m_ToolButtonActions->count(); i++ )
+    for ( int i = 0; i < m_Tools.count(); i++ )
     {
-        if ( m_ToolButtonActions->at( i ) != action )
-            ( ( QAction* ) m_ToolButtonActions->at( i ) ) ->setChecked( false );
+        if ( m_Tools.at( i )->getAction() != action )
+			 m_Tools.at( i )->getAction()->setChecked( false );
     }
 }
 
 
 /**
  * Prüft und setzt das Doc, welches verwendet wird.
+ * Meldet sich als Observer beim Dokument an.
  * @param doc Doc, welches verwendet wird.
  * @author Alex Letkemann
  * @date 22.10.2005
@@ -265,6 +266,7 @@ void BB_Tab::setDoc( BB_Doc* doc )
     if ( doc != NULL )
     {
         m_Doc = doc;
+		m_Doc->addObserver( this );
     }
     else
     {
@@ -293,32 +295,27 @@ void BB_Tab::updateWidget()
 
 
 /**
- * Setzt das Tool zurück, und ruft die Funktion toolChanged(..) auf, die das Tool weiterbearbeitet
- * Wird aufgeruffen, wenn ein neues Tool ausgewählt wird.
- * @param action Aktion des neuen Tools
+ * Wird aufgerufen, wenn ein Toolbutton angeclickt wird.
+ * Ruft die Funktion toolChanged(..) auf.
+ * @param action Aktion des ToolButtons
  */
 void BB_Tab::slotToolChanged( QAction* action )
 {
+    toolChanged( action );
+
+}
+
+
+
+void BB_Tab::toolChanged( QAction* action )
+{
+    //     qDebug( "toolChanged(QAction* action) nicht implementiert (action: %p)\n", action );
     if ( m_Center->getTool() != NULL )
     {
         m_Center->getTool() ->reset();
     }
-
-    toolChanged( action );
+    setTool( action );
     updateWidget();
-}
-
-
-/**
- * Wird ausgeführt, wenn ein Toolbuttons betätigt wird. Diese Funktion sollte in jeder 
- * abgeleiteten Klasse, die Tools enthält, überladen werden. Falls dies nicht geschechen ist
- * und ToolButton wird betätigt kommt die die Meldung <i>toolChanged(QAction* action) nicht implementiert</i> in stdout.
- * Hier werden die Tools weiter an die Arbeitsfläche übergeben.
- * @param action QAction Pointer des Tools
- */
-void BB_Tab::toolChanged( QAction* action )
-{
-    qDebug( "toolChanged(QAction* action) nicht implementiert (action: %p)\n", action );
 }
 
 
@@ -367,6 +364,8 @@ QAction* BB_Tab::addTool( BB_AbstractTool* tool, const QString& name, const QStr
         addWidgetRight( tool->getToolWidget() );
         createToolButton( toolAction, tool );
 
+        m_Tools.append( tool );
+
         return toolAction;
     }
 
@@ -383,4 +382,42 @@ void BB_Tab::setTool( BB_AbstractTool* tool )
     tool->getAction() ->setChecked( true );
     m_RightFrame->setCurrentWidget( tool->getToolWidget() );
     m_Center->setTool( tool );
+}
+
+
+/*!
+    \fn BB_Tab::setTool( QAction * action )
+ */
+void BB_Tab::setTool( QAction * action )
+{
+    BB_AbstractTool * tool;
+    for ( int i = 0; i < m_Tools.count() ; i++ )
+    {
+        tool = m_Tools.at( i );
+
+        if ( tool->getAction() == action )
+        {
+            setTool( tool );
+            return ;
+        }
+    }
+    qDebug( "Tool nicht gefunden." );
+}
+
+
+/*!
+    \fn BB_Tab::documentChanged()
+ */
+void BB_Tab::documentChanged()
+{
+	updateWidget();
+}
+
+
+/*!
+    \fn BB_Tab::updateLists()
+ */
+void BB_Tab::updateLists()
+{
+    /// @todo implement me
 }

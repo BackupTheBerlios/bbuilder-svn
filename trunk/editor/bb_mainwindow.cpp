@@ -31,25 +31,17 @@ BB_MainWindow::BB_MainWindow( QWidget* parent, Qt::WFlags flags ) : QMainWindow(
     initMenus();
     initStatusBar();
 
-    initDoc();
+//     initDoc();
 
     initMainWindow();
 
     if ( loadDoc() )
     {
-        m_TabBuilding->createBuildingList();
+//         m_TabBuilding->createBuildingList();
+		m_TabTerrain->updateLists();
+		m_TabBuilding->updateLists();
+		m_TabLevel->updateLists();
     }
-
-
-
-
-
-
-    /* Status aller Tasten auf false setzen */
-    // 	for(int i = 0; i < 256; i++)
-    // 	{
-    // 		m_Keys[i] = false;
-    // 	}
 
 }
 
@@ -124,9 +116,9 @@ void BB_MainWindow::initMainWindow()
     setWindowTitle( QString::fromUtf8( "glBuildingBuilder - Editor" ) );
 
 
-    m_TabTerrain = new BB_TabTerrain( m_Doc );
-    m_TabBuilding = new BB_TabBuilding( m_Doc );
-    m_TabLevel = new BB_TabLevel( m_Doc );
+    m_TabTerrain = new BB_TabTerrain( &m_Doc );
+    m_TabBuilding = new BB_TabBuilding( &m_Doc );
+    m_TabLevel = new BB_TabLevel( &m_Doc );
 
     m_TabWidget = new QTabWidget();
     m_TabWidget->addTab( m_TabTerrain, QString::fromUtf8( "Gelände" ) );	//TODO
@@ -138,43 +130,6 @@ void BB_MainWindow::initMainWindow()
     setStatusBar( m_StatusBar );
     setMenuBar( m_MainMenuBar );
     setCentralWidget( m_TabWidget );
-}
-
-
-/**
- * KeyPressEvent setzt den Status einer Taste auf true, falls diese gedrückt wird
- */
-void BB_MainWindow::keyPressEvent ( QKeyEvent * e )
-{
-    // 	cout << "Press! (" << e->key() << ")" << endl;
-    if ( e->key() < 256 && e->key() >= 0 )
-    {
-        m_Keys[ e->key() ] = true;
-    }
-}
-
-
-/**
- *
- */
-void BB_MainWindow::keyReleaseEvent ( QKeyEvent * e )
-{
-    // 	cout << "Release! (" << e->key() << ")" << endl;
-    if ( e->key() < 256 && e->key() >= 0 )
-    {
-        m_Keys[ e->key() ] = false;
-    }
-}
-
-
-/*!
-    \fn BB_MainWindow::initData()
- */
-void BB_MainWindow::initDoc()
-{
-    m_Doc = new BB_Doc();
-
-
 }
 
 
@@ -199,7 +154,7 @@ void BB_MainWindow::slotProjectNew()
 
         if ( result == QDialog::Accepted )
         {
-            m_Doc->close();
+            m_Doc.close();
 
             m_TabTerrain->unsetDocComponent();
             m_TabBuilding->unsetDocComponent();
@@ -207,7 +162,7 @@ void BB_MainWindow::slotProjectNew()
 
             m_TabWidget->setEnabled( false );
 
-            if ( path.mkdir( dir ) && path.cd( dir ) && m_Doc->createNew( name, desc, path ) )
+            if ( path.mkdir( dir ) && path.cd( dir ) && m_Doc.createNew( name, desc, path ) )
             {
                 m_TabWidget->setEnabled( true );
                 m_Config.setCurrentProjectPath( path.path() + QDir::separator() + dir + ".glbb" );
@@ -268,7 +223,7 @@ void BB_MainWindow::slotProjectOpen()
     if ( !filename.isEmpty() )
     {
         m_TabBuilding->clear();
-        if ( m_Doc->open( filename ) )
+        if ( m_Doc.open( filename ) )
         {
             m_TabBuilding->createBuildingList();
 
@@ -308,7 +263,7 @@ void BB_MainWindow::slotProjectClose()
 	m_TabLevel->resetTool();
 	
 	/* Dokument schliessen */
-    m_Doc->close();
+    m_Doc.close();
 
     m_TabTerrain->clear();
     m_TabBuilding->clear();
@@ -402,7 +357,7 @@ void BB_MainWindow::closeEvent ( QCloseEvent * e )
  */
 bool BB_MainWindow::loadDoc()
 {
-    if ( !m_Config.getCurrentProjectPath().isEmpty() && m_Doc->open( m_Config.getCurrentProjectPath() ) )
+    if ( !m_Config.getCurrentProjectPath().isEmpty() && m_Doc.open( m_Config.getCurrentProjectPath() ) )
     {
         m_TabWidget->setEnabled( true );
 
@@ -416,7 +371,7 @@ bool BB_MainWindow::loadDoc()
     }
     else
     {
-        m_Doc->close();
+        m_Doc.close();
         m_TabWidget->setEnabled( false );
 
         cout << "Projekt konnte nicht geladen werden: " << m_Config.getCurrentProjectPath().toStdString() << endl;

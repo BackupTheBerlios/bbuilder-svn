@@ -29,6 +29,9 @@ BB_DrawObject::BB_DrawObject( QString name )
 
 	m_Brush.setColor( Qt::red );
 	m_Brush.setStyle( Qt::SolidPattern );
+	
+	m_BrushSelected.setColor( Qt::magenta );
+	m_BrushSelected.setStyle( Qt::SolidPattern );
 
     m_Selected = false;
 }
@@ -63,20 +66,20 @@ void BB_DrawObject::moveBy( C2dVector pMove )
 /*!
     \fn BB_DrawObject::getColor()
  */
-const QColor & BB_DrawObject::getColor() const
-{
-    return m_Color;
-}
+// const QColor & BB_DrawObject::getColor() const
+// {
+//     return m_Color;
+// }
 
 
 /*!
     \fn BB_DrawObject::setColor(QColor c)
  */
-void BB_DrawObject::setColor( const QColor& value )
-{
-	m_Color = value;
-}
-
+// void BB_DrawObject::setColor( const QColor& value )
+// {
+// 	m_Color = value;
+// }
+// 
 
 /*!
     \fn BB_DrawObject::isHit(QRect rect)
