@@ -21,20 +21,12 @@
 #include "bb_point.h"
 #include "bb_globals.h"
 
-BB_Door::BB_Door()
-        : BB_ConstructionElement()
-{
-	setPos1( new BB_Point( QPoint( 0, 0 ) ) );
-	setPos2( new BB_Point( QPoint( 150, - 250 ) ) );
-	setTextureFileName( IMG_DIR() + SEPARATOR() + "Tuer.png" );
-}
 
-BB_Door::BB_Door(C2dVector v)
-	: BB_ConstructionElement()
+BB_Door::BB_Door( C2dVector v1, C2dVector v2 )
+        : BB_ConstructionElement(v1, v2)
 {
-	setPos1( new BB_Point( v ) );
-	setPos2( new BB_Point( QPoint( v.x() + 150, v.y() - 250 ) ) );
-	setTextureFileName( IMG_DIR() + SEPARATOR() + "Tuer.png" );
+	m_Image.load( IMG_DIR() + SEPARATOR() + "Tuer.png" );
+	m_Image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName(), "PNG");
 }
 
 
@@ -69,6 +61,18 @@ void BB_Door::show( BB_Transformer& transformer, QPainter& painter ) const
             m_Pos2->show( transformer, painter );
         }
     }
+}
+
+void BB_Door::generateXElement( QTextStream &out, int depth )
+{
+    QFileInfo myFile( getTextureFileName() );
+    out << BB::indent( depth + 1 ) << "<bb_door id=\"" << getObjectNr() << "\""
+    << " x1=\"" << getPos1() ->getX()
+    << "\" y1=\"" << getPos1() ->getY()
+    << "\" x2=\"" << getPos2() ->getX()
+    << "\" y2=\"" << getPos2() ->getY() << "\">\n"
+    << BB::indent( depth + 2 ) << "<texture file=\"" << myFile.fileName() << "\"/>\n"
+    << BB::indent( depth + 1 ) << "</bb_door>\n";
 }
 
 

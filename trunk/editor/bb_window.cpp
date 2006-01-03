@@ -25,20 +25,11 @@
 
 using namespace std;
 
-BB_Window::BB_Window()
-        : BB_ConstructionElement()
+BB_Window::BB_Window( C2dVector v1, C2dVector v2)
+        : BB_ConstructionElement(v1, v2)
 {
-    setPos1( new BB_Point( QPoint( 0, 0 ) ) );
-    setPos2( new BB_Point( QPoint( 50, -50 ) ) );
-    setTextureFileName( IMG_DIR() + SEPARATOR() + "Fenster.jpg" );
-}
-
-BB_Window::BB_Window( C2dVector v )
-        : BB_ConstructionElement()
-{
-    setPos1( new BB_Point( v ) );
-    setPos2( new BB_Point( QPoint( v.x() + 200, v.y() - 200 ) ) );
-    setTextureFileName( IMG_DIR() + SEPARATOR() + "Fenster.jpg" );
+	m_Image.load( IMG_DIR() + SEPARATOR() + "Fenster.jpg" );
+	m_Image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName(), "PNG");
 }
 
 
@@ -71,6 +62,7 @@ void BB_Window::show( BB_Transformer& transformer, QPainter& painter ) const
         {
             m_Pos1->show( transformer, painter );
             m_Pos2->show( transformer, painter );
+			painter.drawText(m_Pos1->getX(), m_Pos1->getY(), "test");
         }
     }
 }
@@ -82,5 +74,17 @@ bool BB_Window::isHit( QRect rect )
         return true;
     }
     return false;
+}
+
+void BB_Window::generateXElement( QTextStream &out, int depth )
+{
+    QFileInfo myFile( getTextureFileName() );
+    out << BB::indent( depth + 1 ) << "<bb_window id=\"" << getObjectNr() << "\""
+    << " x1=\"" << getPos1() ->getX()
+    << "\" y1=\"" << getPos1() ->getY()
+    << "\" x2=\"" << getPos2() ->getX()
+    << "\" y2=\"" << getPos2() ->getY() << "\">\n"
+    << BB::indent( depth + 2 ) << "<texture file=\"" << myFile.fileName() << "\"/>\n"
+    << BB::indent( depth + 1 ) << "</bb_window>\n";
 }
 

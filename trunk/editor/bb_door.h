@@ -30,9 +30,7 @@ Eine Klasse zum Darstellen von einer T&uuml;r
 class BB_Door : public BB_ConstructionElement
 {
 public:
-    BB_Door();
-	BB_Door(C2dVector v);
-
+	BB_Door(C2dVector v1, C2dVector v2);
     ~BB_Door();
 
 	/**
@@ -41,6 +39,7 @@ public:
 	@param QPainter von QT
 	 */
 	virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
+	void generateXElement( QTextStream &out, int depth );
 
 };
 

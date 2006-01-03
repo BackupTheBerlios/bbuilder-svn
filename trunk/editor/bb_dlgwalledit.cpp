@@ -92,26 +92,31 @@ void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
     m_ButtonWindow = new QToolButton();
     m_ButtonWindow->setText( "Fenster" );
 	m_ButtonWindow->setCheckable(true);
+	m_ButtonWindow->setIcon(m_ToolWindowNew->getIcon());
 	m_Buttons->append(m_ButtonWindow);
 	
     m_ButtonDoor = new QToolButton();
     m_ButtonDoor->setText( QString::fromUtf8( "Tür" ) );
 	m_ButtonDoor->setCheckable(true);
+	m_ButtonDoor->setIcon(m_ToolDoorNew->getIcon());
 	m_Buttons->append(m_ButtonDoor);
 	
     m_ButtonMove = new QToolButton();
     m_ButtonMove->setText( "Move" );
 	m_ButtonMove->setCheckable(true);
+	m_ButtonMove->setIcon(m_ToolMove->getIcon());
 	m_Buttons->append(m_ButtonMove);
 	
 	m_ButtonTexture = new QToolButton();
 	m_ButtonTexture->setText("Texture");
 	m_ButtonTexture->setCheckable(true);
+	m_ButtonTexture->setIcon(m_ToolTexture->getIcon());
 	m_Buttons->append(m_ButtonTexture);
 
 	m_ButtonDelete = new QToolButton();
 	m_ButtonDelete->setText("delete");
 	m_ButtonDelete->setCheckable(true);
+	m_ButtonDelete->setIcon(m_ToolDelete->getIcon());
 	m_Buttons->append(m_ButtonDelete);
 
     //buttons hinzufuegen

@@ -20,7 +20,14 @@
  QString IMG_DIR();
  QString CONF_DIR();
  QString SEPARATOR();
+ QString PRO_DIR();
+ QString PRO_BUILDINGS_DIR();
+ QString PRO_LEVELS_DIR();
+ QString PRO_TERRAINS_DIR();
+ QString PRO_TEXTURES_DIR();
 
+ 
+ void setPRO_DIR(QString s);
  void setDirs(char *argv0);
  
 #endif 

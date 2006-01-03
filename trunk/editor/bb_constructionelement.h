@@ -21,6 +21,7 @@
 #define BB_CONSTRUCTIONELEMENT_H
 
 #include <bb_rect.h>
+#include "QFileInfo"
 
 /**
 Eine Basis-Klasse fuer allle Konstruktion-Elemente z.B: Fenster oder T&uuml;r
@@ -31,7 +32,7 @@ In Zukunft auch m&ouml;glicherweise Bilder und Poster
 class BB_ConstructionElement : public BB_Rect
 {
     public:
-        BB_ConstructionElement();
+		BB_ConstructionElement(C2dVector v1, C2dVector v2);
 
         ~BB_ConstructionElement();
 

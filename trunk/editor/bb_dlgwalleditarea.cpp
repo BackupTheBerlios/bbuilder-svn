@@ -205,5 +205,5 @@ void BB_DlgWallEditArea::makeWallTexture( QPainter * p )
 }
 
 void BB_DlgWallEditArea::loadTexture(){
-	m_WallTexture.load( m_Wall->getTextureFile() );
+	m_WallTexture.load( PRO_TEXTURES_DIR()+SEPARATOR() + m_Wall->getTextureFileName() );
 }

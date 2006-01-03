@@ -31,14 +31,10 @@ class BB_Window : public BB_ConstructionElement
 {
     public:
         /**
-        Standart Konstruktor
-        */
-        BB_Window();
-        /**
         Konstuktor mit Parameter
         @param C2dVector
         */
-        BB_Window( C2dVector v );
+		BB_Window( C2dVector v1, C2dVector v2);
         ~BB_Window();
         /**
         Abgeleitete Funktion zum Zeichnen von einem Fenster
@@ -47,6 +43,7 @@ class BB_Window : public BB_ConstructionElement
         */
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
         virtual bool isHit( QRect rect );
+		void generateXElement( QTextStream &out, int depth );
 };
 
 #endif

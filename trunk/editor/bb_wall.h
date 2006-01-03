@@ -45,10 +45,10 @@ class BB_Wall : public BB_Line
 		void openTextureDlg();
         virtual void swap();
 
-	void setTextureFile( const QString& Value );
+	void setTextureFileName( const QString& Value );
 	
 
-	QString getTextureFile() const;
+	QString getTextureFileName() const;
 	
     private:
         virtual void showDirection( BB_Transformer& transformer, QPainter& painter, QPoint& middle ) const;
@@ -58,7 +58,7 @@ class BB_Wall : public BB_Line
         C2dVector m_Direction;
         bool m_ShowDirection;
         QPen m_PenDirection;
-		QString m_TextureFile;
+		QString m_TextureFileName;
         QVector <BB_DrawObject *> * m_Objects;
 };
 

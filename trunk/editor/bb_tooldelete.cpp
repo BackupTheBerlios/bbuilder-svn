@@ -22,7 +22,9 @@
 
 BB_ToolDelete::BB_ToolDelete( QWidget * parent )
         : BB_AbstractTool( parent )
-{}
+{
+	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolDelete.png" );
+}
 
 
 BB_ToolDelete::~BB_ToolDelete()

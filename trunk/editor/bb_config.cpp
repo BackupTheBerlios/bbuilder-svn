@@ -133,8 +133,9 @@ bool BB_Config::open()
 		if(!child.isNull())
 		{
 			m_CurrentProjectPath = child.text();
+			QFileInfo infoFile(m_CurrentProjectPath);
+			setPRO_DIR(infoFile.path());
 		}
-        
 		
 		return true;
 

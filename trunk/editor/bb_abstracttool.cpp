@@ -22,19 +22,19 @@
 
 using namespace std;
 
-BB_AbstractTool::BB_AbstractTool(QWidget * parent)
+BB_AbstractTool::BB_AbstractTool( QWidget * parent )
 {
-	m_ParentWidget = parent;
+    m_ParentWidget = parent;
     m_Component = NULL;
     m_Transformer = NULL;
     m_Objects = NULL;
     m_Action = NULL;
     m_ToolWidget = NULL;
     m_WorkFrame = NULL;
-	m_ToolObjects = NULL;
+    m_ToolObjects = NULL;
     m_ShowDrawObjects = true;
-	m_ToolWidget = NULL;
-	m_Selection = NULL;	
+    m_ToolWidget = NULL;
+    m_Selection = NULL;
 }
 
 BB_AbstractTool::~BB_AbstractTool()
@@ -42,14 +42,14 @@ BB_AbstractTool::~BB_AbstractTool()
 
 void BB_AbstractTool::move( QMouseEvent* me, bool overX, bool overY )
 {
-	overX = false;
-	overY = false;
-	me->ignore();
+    overX = false;
+    overY = false;
+    me->ignore();
 }
 
 void BB_AbstractTool::release( QMouseEvent* me )
 {
-	me->ignore();
+    me->ignore();
 }
 
 
@@ -67,10 +67,10 @@ bool BB_AbstractTool::deleteObject( BB_DrawObject * delObject )
             if ( tmpObject == delObject )
             {
                 // Falls das Objekt ein Knoten ist, werden zuerst alle abhängigen Objekte gelöscht
-//                 if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Point ) ||
-// 					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_TerrainPoint ) ||
-// 					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_NavigationPoint ))
-				if( dynamic_cast< BB_Point* >(m_Objects->at( i )) )
+                //                 if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Point ) ||
+                // 					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_TerrainPoint ) ||
+                // 					 typeid( *( m_Objects->at( i ) ) ) == typeid( BB_NavigationPoint ))
+                if ( dynamic_cast< BB_Point* >( m_Objects->at( i ) ) )
                 {
                     ( ( BB_Point* ) ( m_Objects->at( i ) ) ) ->deleteLinkedObjects( m_Component->getDrawObjects() );
                 }
@@ -122,12 +122,12 @@ void BB_AbstractTool::setSelectionVector( QVector<BB_DrawObject*>* selectionVect
     if ( selectionVector != NULL )
     {
         m_Selection = selectionVector;
-		if( m_ToolWidget != NULL )
-		{
-			m_ToolWidget->setSelection( m_Selection );
-		}
+        if ( m_ToolWidget != NULL )
+        {
+            m_ToolWidget->setSelection( m_Selection );
+        }
     }
-	
+
     else
     {
         cout << "BB_AbstractTool::setSelectionVector(): Übergebener Pointer ist NULL\n Auswahl-Vektor wurde nicht gesetzt." << endl;
@@ -261,7 +261,7 @@ void BB_AbstractTool::setObjects( QVector<BB_DrawObject*>* objects )
 {
     if ( objects != NULL )
     {
-// 		qDebug("Vector mit Points ist gesetzt!");
+        // 		qDebug("Vector mit Points ist gesetzt!");
         m_Objects = objects;
     }
     else
@@ -324,10 +324,10 @@ void BB_AbstractTool::documentChanged()
  */
 void BB_AbstractTool::updateWidget()
 {
-	if( m_ToolWidget != NULL )
-	{
-		m_ToolWidget->updateWidget();
-	}
+    if ( m_ToolWidget != NULL )
+    {
+        m_ToolWidget->updateWidget();
+    }
 }
 
 
@@ -339,16 +339,16 @@ void BB_AbstractTool::updateWidget()
  */
 void BB_AbstractTool::deleteSelection()
 {
-	if( m_Selection != NULL )
-	{
-		for(int i = m_Selection->count() -1 ; i >= 0; i--)
-		{
-			deleteObject( m_Selection->at(i) );
-			m_Selection->remove(i);
-		}
-	}
-	
-	documentChanged();
+    if ( m_Selection != NULL )
+    {
+        for ( int i = m_Selection->count() - 1 ; i >= 0; i-- )
+        {
+            deleteObject( m_Selection->at( i ) );
+            m_Selection->remove( i );
+        }
+    }
+
+    documentChanged();
 }
 
 
@@ -379,9 +379,9 @@ void BB_AbstractTool::setIcon( const QIcon& value )
  */
 void BB_AbstractTool::selectObject( BB_DrawObject * object )
 {
-	if( m_Selection != NULL )
-	{
-		object->setSelected( true );
-		m_Selection->append( object );
-	}
+    if ( m_Selection != NULL )
+    {
+        object->setSelected( true );
+        m_Selection->append( object );
+    }
 }

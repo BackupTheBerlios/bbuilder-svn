@@ -36,7 +36,7 @@ class BB_WorkFrame;
 class BB_AbstractTool
 {
     public:
-        BB_AbstractTool(QWidget * parent);
+        BB_AbstractTool( QWidget * parent );
 
         virtual ~BB_AbstractTool();
 
@@ -76,12 +76,10 @@ class BB_AbstractTool
         virtual void updateWidget();
         virtual void documentChanged();
 
-	void setIcon( const QIcon& value );
-	
+        void setIcon( const QIcon& value );
+        QIcon getIcon() const;
+        virtual void selectObject( BB_DrawObject * object );
 
-	QIcon getIcon() const;
-    virtual void selectObject( BB_DrawObject * object );
-	
 
 
 
@@ -111,9 +109,9 @@ class BB_AbstractTool
         /** Pointer auf das DocComponent, mit welchem gearbeitet wird */
         BB_DocComponent * m_Component;
         bool m_ShowDrawObjects;
-		
+
         BB_AbstractToolWidget* m_ToolWidget;
-    QIcon m_Icon;
+        QIcon m_Icon;
 
 
 };

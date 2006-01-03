@@ -19,10 +19,16 @@
 ***************************************************************************/
 #include "bb_constructionelement.h"
 #include "bb_dlgopentexture.h"
+#include "bb_point.h"
+#include "bb_globals.h"
 
-BB_ConstructionElement::BB_ConstructionElement()
+BB_ConstructionElement::BB_ConstructionElement(C2dVector v1, C2dVector v2)
         : BB_Rect()
-{}
+{
+	setPos1( new BB_Point( v1 ) );
+	setPos2( new BB_Point( v2 ) );
+	setTextureFileName( getName() + ".png" );
+}
 
 
 BB_ConstructionElement::~BB_ConstructionElement()
@@ -40,10 +46,10 @@ QString BB_ConstructionElement::getTextureFileName() const
 
 void BB_ConstructionElement::setTextureFileName( const QString& Value )
 {
-    m_TextureFileName = Value;
-    if ( !m_TextureFileName.isNull() )
+	if ( !Value.isNull() && m_TextureFileName!=Value )
     {
-        m_Image.load( m_TextureFileName );
+		m_TextureFileName = Value;
+		m_Image.load( PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName );
     }
 }
 
@@ -54,9 +60,13 @@ void BB_ConstructionElement::setTextureFileName( const QString& Value )
 void BB_ConstructionElement::openTextureDlg()
 {
     BB_DlgOpenTexture dlg;
-    dlg.setTextureFile( m_TextureFileName );
+	dlg.setTextureFile( PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName );
     dlg.exec();
-    setTextureFileName( dlg.getTextureFile() );
+	QImage image(dlg.getTextureFile());
+	if (!image.isNull()){
+		setTextureFileName(  getName()+".png");
+		image.save(PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName(), "PNG");
+		m_Image.load(PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName());
+	}
 }
-
 

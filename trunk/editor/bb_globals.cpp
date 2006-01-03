@@ -36,6 +36,29 @@ QString main_dir;
 QString img_dir;
 QString conf_dir;
 QString separator;
+QString pro_dir;
+
+QString PRO_DIR()
+{
+	return pro_dir;
+}
+ QString PRO_BUILDINGS_DIR(){
+	 return pro_dir+SEPARATOR() + "buildings";
+ }
+ QString PRO_LEVELS_DIR(){
+	 return pro_dir +SEPARATOR()+ "levels";
+ }
+ QString PRO_TERRAINS_DIR(){
+	 return pro_dir +SEPARATOR()+ "terrain";
+ }
+ QString PRO_TEXTURES_DIR(){
+	 return pro_dir +SEPARATOR()+ "textures";
+ }
+
+void setPRO_DIR(QString s)
+{
+	pro_dir = s;
+}
 
 QString BIN_DIR()
 {

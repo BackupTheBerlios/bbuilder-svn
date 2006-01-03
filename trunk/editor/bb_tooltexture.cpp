@@ -26,7 +26,9 @@ using namespace std;
 
 BB_ToolTexture::BB_ToolTexture( QWidget *parent )
         : BB_AbstractTool( parent )
-{}
+{
+	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolTexture.png" );
+}
 
 
 BB_ToolTexture::~BB_ToolTexture()

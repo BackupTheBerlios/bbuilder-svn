@@ -17,6 +17,7 @@
 
 #include "bb_point.h"
 #include "bb_wall.h"
+#include "bb_constructionelement.h"
 
 class BB_Building;
 
@@ -40,6 +41,7 @@ protected:
 	bool m_XScale;
 	
 	BB_DrawObject *m_Object;
+	BB_ConstructionElement * m_ConstructionElement;
 	int m_ScalePointIndex;
 	
     QVector<BB_DrawObject*>* m_DrawObjects;

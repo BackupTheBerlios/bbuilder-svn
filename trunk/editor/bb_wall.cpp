@@ -29,19 +29,19 @@ BB_Wall::BB_Wall( BB_Point* p1, BB_Point* p2 ) : BB_Line( p1, p2 )
 {
     m_ShowDirection = true;
 
-	m_Pen.setColor( Qt::red );
+    m_Pen.setColor( Qt::red );
     m_Pen.setWidth( 3 );
 
-	m_Brush.setColor( Qt::red );
+    m_Brush.setColor( Qt::red );
 
     m_PenDirection.setWidth( 1 );
-	m_PenDirection.setColor( Qt::red );
+    m_PenDirection.setColor( Qt::red );
 
     moveEvent();
 
     m_Objects = new QVector <BB_DrawObject *>;
 
-// 	setTextureFile(IMG_DIR() + SEPARATOR() +"brick.jpg");
+    // 	setTextureFile(IMG_DIR() + SEPARATOR() +"brick.jpg");
 }
 
 
@@ -67,6 +67,32 @@ void BB_Wall::generateXElement( QTextStream &out, int depth )
     out << BB::indent( depth ) << "<bb_wall id=\"" << getObjectNr()
     << "\" p1=\"" << getPos1() ->getObjectNr()
     << "\" p2=\"" << getPos2() ->getObjectNr() << "\">\n";
+    out << BB::indent( depth + 1 ) << "<texture file=\"" << getTextureFileName() << "\" />\n";
+    //only BB_Windows
+    for ( int i = 0;i < m_Objects->count() ;i++ )
+    {
+        if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Window ) )
+        {
+            m_Objects->at( i ) ->generateXElement( out, depth );
+        }
+    }
+    //only BB_Doors
+    for ( int i = 0;i < m_Objects->count() ;i++ )
+    {
+        if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Door ) )
+        {
+            m_Objects->at( i ) ->generateXElement( out, depth );
+        }
+    }
+    //all others
+    for ( int i = 0;i < m_Objects->count() ;i++ )
+    {
+        if ( typeid( *( m_Objects->at( i ) ) ) != typeid( BB_Window ) && typeid( *( m_Objects->at( i ) ) ) != typeid( BB_Door ) )
+        {
+            m_Objects->at( i ) ->generateXElement( out, depth );
+        }
+    }
+
 
     BB_Object::generateXElement( out, depth + 1 );
     out << BB::indent( depth ) << "</bb_wall>\n";
@@ -224,20 +250,25 @@ QVector< BB_DrawObject * >* BB_Wall::getObjectsWithPoints() const
 
 void BB_Wall::openTextureDlg()
 {
-	BB_DlgOpenTexture dlg;
-	dlg.setTextureFile( m_TextureFile);
-	dlg.exec();
-	m_TextureFile = dlg.getTextureFile();
+    BB_DlgOpenTexture dlg;
+    dlg.setTextureFile( PRO_TEXTURES_DIR()+SEPARATOR()+ m_TextureFileName );
+    dlg.exec();
+    setTextureFileName( dlg.getTextureFile() );
 }
 
 
-QString BB_Wall::getTextureFile() const
+QString BB_Wall::getTextureFileName() const
 {
-    return m_TextureFile;
+    return m_TextureFileName;
 }
 
 
-void BB_Wall::setTextureFile( const QString& Value )
+void BB_Wall::setTextureFileName( const QString& Value )
 {
-    m_TextureFile = Value;
+    if ( m_TextureFileName != Value )
+    {
+        m_TextureFileName = getName() + ".png";
+        QImage image( Value );
+        image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName(), "PNG" );
+    }
 }

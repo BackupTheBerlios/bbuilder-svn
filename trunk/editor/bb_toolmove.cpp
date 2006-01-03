@@ -41,7 +41,7 @@ BB_ToolMove::BB_ToolMove(QWidget * parent)
 
     m_select = true;
 
-    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolSelect.png" );
+    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolMove.png" );
 }
 
 
