@@ -32,15 +32,15 @@ BB_Line::BB_Line( BB_Point *p1, BB_Point *p2 )
     m_Pos1 = NULL;
     m_Pos2 = NULL;
 
-	// Positionen setzen
+    // Positionen setzen
     setPos1( p1 );
     setPos2( p2 );
-	
-	// Sonstige Einstellungen
-	m_Pen.setColor( Qt::red );
-	m_PenSelected.setColor( Qt::red );
+
+    // Sonstige Einstellungen
+    m_Pen.setColor( Qt::red );
+    m_PenSelected.setColor( Qt::red );
     m_hitRange = 3;
-	
+
 
 
 }
@@ -90,15 +90,15 @@ void BB_Line::show( BB_Transformer& transformer, QPainter& painter ) const
 {
     //     BB_DrawObject::show(transformer, painter);
 
-	if( m_Selected )
-	{
-		painter.setPen( m_PenSelected );
-	}
-	else
-	{
-		painter.setPen( m_Pen );
-	}
-	
+    if ( m_Selected )
+    {
+        painter.setPen( m_PenSelected );
+    }
+    else
+    {
+        painter.setPen( m_Pen );
+    }
+
     QPoint dest_Pos1, dest_Pos2;
 
     transformer.logicalToScreen( dest_Pos1, m_Pos1->getPos() );
@@ -128,11 +128,10 @@ bool BB_Line::setPos1( BB_Point* Value )
             m_Pos1->removeLinkedObject( this );
         m_Pos1 = Value;
         m_Pos1->addObject( this );
-        
-		// Mitte neu berechnen
-		moveEvent();
-		
-		return true;
+
+        // Mitte neu berechnen
+        moveEvent();
+        return true;
     }
     return false;
 }
@@ -146,7 +145,7 @@ BB_Point* BB_Line::getPos2() const
 
 bool BB_Line::setPos2( BB_Point* Value )
 {
-    if ( Value != NULL && Value != m_Pos1)
+    if ( Value != NULL && Value != m_Pos1 )
     {
 
         // EDIT: Alex Letkemann
@@ -156,10 +155,10 @@ bool BB_Line::setPos2( BB_Point* Value )
             m_Pos2->removeLinkedObject( this );
         m_Pos2 = Value;
         m_Pos2->addObject( this );
-		
-		// Mitte neu berechnen
-		moveEvent();
-		
+
+        // Mitte neu berechnen
+        moveEvent();
+
         return true;
     }
     return false;
@@ -168,10 +167,10 @@ bool BB_Line::setPos2( BB_Point* Value )
 
 /*!
     \fn BB_Line::delete(BB_Point * point)
- */
+ */ 
 // void BB_Line::remove( BB_Point * point )
 // {
-// 
+//
 //     cout << "void BB_Line::remove( " << point << " )" << endl;
 //     if ( m_Pos1 == point )
 //         m_Pos2->deleteLinkedObject( this );
@@ -190,21 +189,21 @@ const QString BB_Line::getClassName()
 
 bool BB_Line::isHit( const QRect& rect )
 {
-//	EDIT: Alex Letkemann
-//	Die Linie wird selektiert, wenn die linie ganz im QRect ist
-//     QRect normRect = rect;
-//     if ( rect.x() > ( rect.x() + rect.width() ) )
-//         normRect.setX( rect.x() + rect.width() );
-//     if ( rect.y() < ( rect.y() + rect.height() ) )
-//         normRect.setY( rect.y() + rect.height() );
-// 
-//     if ( m_Pos1->getX() > normRect.x() && m_Pos1->getX() < ( normRect.x() + normRect.width() ) )
-//         if ( m_Pos2->getX() > normRect.x() && m_Pos2->getX() < ( normRect.x() + normRect.width() ) )
-//             if ( m_Pos1->getY() < normRect.y() && m_Pos1->getY() > ( normRect.y() - normRect.height() ) )
-//                 if ( m_Pos2->getY() < normRect.y() && m_Pos2->getY() > ( normRect.y() - normRect.height() ) )
-//                     return true;
-//     return false;
-	return m_Pos1->isHit( rect ) && m_Pos2->isHit( rect );
+    //	EDIT: Alex Letkemann
+    //	Die Linie wird selektiert, wenn die linie ganz im QRect ist
+    //     QRect normRect = rect;
+    //     if ( rect.x() > ( rect.x() + rect.width() ) )
+    //         normRect.setX( rect.x() + rect.width() );
+    //     if ( rect.y() < ( rect.y() + rect.height() ) )
+    //         normRect.setY( rect.y() + rect.height() );
+    //
+    //     if ( m_Pos1->getX() > normRect.x() && m_Pos1->getX() < ( normRect.x() + normRect.width() ) )
+    //         if ( m_Pos2->getX() > normRect.x() && m_Pos2->getX() < ( normRect.x() + normRect.width() ) )
+    //             if ( m_Pos1->getY() < normRect.y() && m_Pos1->getY() > ( normRect.y() - normRect.height() ) )
+    //                 if ( m_Pos2->getY() < normRect.y() && m_Pos2->getY() > ( normRect.y() - normRect.height() ) )
+    //                     return true;
+    //     return false;
+    return m_Pos1->isHit( rect ) && m_Pos2->isHit( rect );
 }
 
 double BB_Line::getLength()
@@ -213,8 +212,9 @@ double BB_Line::getLength()
     return tmp.getLength();
 }
 
-double BB_Line::getWinkel() const{
-	return (m_Pos2->getPos() - m_Pos1->getPos()).getWinkel();
+double BB_Line::getWinkel() const
+{
+    return ( m_Pos2->getPos() - m_Pos1->getPos() ).getWinkel();
 }
 
 
@@ -223,7 +223,7 @@ double BB_Line::getWinkel() const{
  */
 void BB_Line::moveEvent()
 {
-	calculateMiddle();
+    calculateMiddle();
 }
 
 
@@ -233,7 +233,7 @@ void BB_Line::moveEvent()
  */
 const C2dVector& BB_Line::getMiddle()
 {
-	return m_Middle;
+    return m_Middle;
 }
 
 
@@ -243,13 +243,13 @@ const C2dVector& BB_Line::getMiddle()
  */
 void BB_Line::calculateMiddle()
 {
-	if( m_Pos1 != NULL && m_Pos2 != NULL )
-	{
-		C2dVector v1,v2;
-		
-		v1 = m_Pos1->getPos();
-		v2 = m_Pos2->getPos();
-		
-		m_Middle = v1 + ( v2 - v1 ) * 0.5;
-	}
+    if ( m_Pos1 != NULL && m_Pos2 != NULL )
+    {
+        C2dVector v1, v2;
+
+        v1 = m_Pos1->getPos();
+        v2 = m_Pos2->getPos();
+
+        m_Middle = v1 + ( v2 - v1 ) * 0.5;
+    }
 }

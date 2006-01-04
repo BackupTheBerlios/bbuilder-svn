@@ -20,6 +20,7 @@
 
 #include "bb_line.h"
 #include "bb_wall.h"
+#include "bb_stair.h"
 
 #include <iostream>
 
@@ -114,6 +115,7 @@ bool BB_Building::write( QTextStream &out )
 
     QVector<BB_Point*> points;
     QVector<BB_Wall*> walls;
+	QVector<BB_Stair*> stairs;
 
     BB_Object* object;
 
@@ -129,6 +131,10 @@ bool BB_Building::write( QTextStream &out )
         {
             walls.append( ( BB_Wall* ) object );
         }
+		else if ( typeid( *object ) == typeid( BB_Stair ) )
+		{
+			stairs.append( ( BB_Stair* ) object );
+		}
         else
         {
             cout << "Unbekanntes Objekt gefunden: " << typeid( *object ).name() << endl;
@@ -178,6 +184,22 @@ bool BB_Building::write( QTextStream &out )
     {
         out << BB::indent( depth ) << "<walls />\n";
     }
+
+	if ( stairs.count() )
+	{
+		out << BB::indent( depth ) << "<stairs>\n";
+
+		for ( int i = 0; i < stairs.count(); i++ )
+		{
+			stairs.at( i ) ->generateXElement( out, depth + 1 );
+		}
+
+		out << BB::indent( depth ) << "</stairs>\n";
+	}
+	else
+	{
+		out << BB::indent( depth ) << "<stairs />\n";
+	}
 
     out << "</bb_building>\n";
     return true;

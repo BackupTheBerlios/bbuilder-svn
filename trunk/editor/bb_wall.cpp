@@ -67,7 +67,10 @@ void BB_Wall::generateXElement( QTextStream &out, int depth )
     out << BB::indent( depth ) << "<bb_wall id=\"" << getObjectNr()
     << "\" p1=\"" << getPos1() ->getObjectNr()
     << "\" p2=\"" << getPos2() ->getObjectNr() << "\">\n";
-    out << BB::indent( depth + 1 ) << "<texture file=\"" << getTextureFileName() << "\" />\n";
+    if ( !m_TextureFileName.isNull() )
+    {
+        out << BB::indent( depth + 1 ) << "<texture file=\"" << getTextureFileName() << "\" />\n";
+    }
     //only BB_Windows
     for ( int i = 0;i < m_Objects->count() ;i++ )
     {
@@ -251,7 +254,7 @@ QVector< BB_DrawObject * >* BB_Wall::getObjectsWithPoints() const
 void BB_Wall::openTextureDlg()
 {
     BB_DlgOpenTexture dlg;
-    dlg.setTextureFile( PRO_TEXTURES_DIR()+SEPARATOR()+ m_TextureFileName );
+    dlg.setTextureFile( PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName );
     dlg.exec();
     setTextureFileName( dlg.getTextureFile() );
 }

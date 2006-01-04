@@ -33,10 +33,9 @@ class BB_ConstructionElement : public BB_Rect
 {
     public:
 		BB_ConstructionElement(C2dVector v1, C2dVector v2);
-
         ~BB_ConstructionElement();
-
         void setTextureFileName( const QString& Value );
+		void setTextureAbsoluteFileName(const QString& Value);
         QString getTextureFileName() const;
         void openTextureDlg();
     protected:

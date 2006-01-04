@@ -39,7 +39,10 @@ void BB_ToolDoorNew::click( QMouseEvent* me )
 	m_pScreen = me->pos();
 	m_Transformer->screenToLogical( m_pLogic, m_pScreen );
 	m_LastLogicMouseClick = m_pLogic;
-	m_Objects->append(new BB_Door(m_pLogic, C2dVector(m_pLogic.x() + 150, m_pLogic.y() - 250)));
+
+	BB_Door * tmpDoor = new BB_Door( m_pLogic, C2dVector( m_pLogic.x() + 150, m_pLogic.y() - 250 ) );
+	tmpDoor->setTextureAbsoluteFileName( IMG_DIR() + SEPARATOR() + "Tuer.png" );
+	m_Objects->append( tmpDoor );
 }
 
 void BB_ToolDoorNew::move( QMouseEvent* me, bool overX, bool overY )

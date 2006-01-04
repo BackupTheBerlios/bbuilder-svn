@@ -13,6 +13,7 @@
 #include "bb_building.h"
 #include "bb_door.h"
 #include "bb_window.h"
+#include "bb_stair.h"
 
 #include <iostream>
 
@@ -44,7 +45,7 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
 {
     // 	return QXmlDefaultHandler::startElement(namespaceURI, localName, qName, atts);
 
-//     cout << "event: " << namespaceURI.toStdString() << " | " << localName.toStdString() << " | " << qName.toStdString() << endl;
+    //     cout << "event: " << namespaceURI.toStdString() << " | " << localName.toStdString() << " | " << qName.toStdString() << endl;
 
     if ( !m_XBuildingTag && qName != "bb_building" )
     {
@@ -173,6 +174,57 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
             return false;
         }
     }
+    else if ( qName == "bb_stair" )
+    {
+
+        bool ok;
+        QString tmp;
+        BB_Point *point1 = NULL;
+        BB_Point *point2 = NULL;
+        double p1, p2;
+        int id;
+
+        tmp = atts.value( "id" );
+        id = tmp.toInt( &ok );
+
+        tmp = atts.value( "p1" );
+        p1 = tmp.toDouble( &ok );
+
+        tmp = atts.value( "p2" );
+        p2 = tmp.toDouble( &ok );
+
+        BB_Object *object;
+
+        for ( int i = 0; i < m_DrawObjects->count(); i++ )
+        {
+            object = m_DrawObjects->at( i );
+            if ( typeid( *object ) == typeid( BB_Point ) )
+            {
+                if ( object->getObjectNr() == p1 )
+                {
+                    point1 = ( BB_Point* ) object;
+                }
+                else if ( object->getObjectNr() == p2 )
+                {
+                    point2 = ( BB_Point* ) object;
+                }
+            }
+        }
+
+        if ( point1 != NULL && point2 != NULL )
+        {
+            m_Object = ( BB_DrawObject* ) new BB_Stair();
+            ( ( BB_Stair* ) m_Object ) ->setPos1( point1 );
+            ( ( BB_Stair* ) m_Object ) ->setPos2( point2 );
+            m_DrawObjects->append( m_Object );
+
+        }
+        else
+        {
+            qDebug() << "Fehler: BB_Stair konnte nicht erstellt werden!" << endl;
+            return false;
+        }
+    }
     else if ( qName == "bb_door" )
     {
         if ( typeid( *m_Object ) != typeid( BB_Wall ) )
@@ -244,11 +296,12 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
             qDebug( "Texture nicht im Tag <BB_Wall>" );
             return false;
         }
-		if (m_ConstructionElement!=NULL){
-        m_ConstructionElement->setTextureFileName( atts.value( "file" ) );
-		return true;
-		}
-		((BB_Wall *)m_Object)->setTextureFileName(atts.value( "file" ));
+        if ( m_ConstructionElement != NULL )
+        {
+            m_ConstructionElement->setTextureFileName( atts.value( "file" ) );
+            return true;
+        }
+        ( ( BB_Wall * ) m_Object ) ->setTextureFileName( atts.value( "file" ) );
     }
     // 	else if(qName == "levels")
     // 	{
@@ -305,6 +358,10 @@ bool BB_XBuildingHandler::endElement( const QString& namespaceURI, const QString
         m_Object = NULL;
     }
     else if ( qName == "bb_wall" )
+    {
+        m_Object = NULL;
+    }
+    else if ( qName == "bb_stair" )
     {
         m_Object = NULL;
     }

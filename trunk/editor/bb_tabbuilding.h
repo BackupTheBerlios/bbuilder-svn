@@ -26,6 +26,7 @@
 #include "bb_toolscale.h"
 #include "bb_toolnavigationpointnew.h"
 #include "bb_toolnavigationlinenew.h"
+#include "bb_toolstair.h"
 
 
 /**

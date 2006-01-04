@@ -189,6 +189,7 @@ void BB_TabBuilding::initTools()
 	addTool( new BB_ToolWallNew( this ), "Wand-Werkzeug", QString::fromUtf8( "Werkzeug zum Erstellen von Wänden" ) );
 	addTool( new BB_ToolNavigationPointNew( this ), "Navigationsknoten", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationsknoten" ) );
 	addTool( new BB_ToolNavigationLineNew( this ), "Navigationslinien", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationslinien" ) );
+	addTool( new BB_ToolStair(this), "Treppe", QString::fromUtf8("Werkzeug zur Erstellung von Treppen"));
 
     /* Ein Tool als Standard festlegen */
     toolChanged( initTool );

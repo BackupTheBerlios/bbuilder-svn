@@ -122,7 +122,7 @@ void BB_ToolMove::click( QMouseEvent* me )
         m_Transformer->screenToLogical( m_pLogic, m_pScreen );
         m_LastLogicMouseClick = m_pLogic;
 
-        //beimersten click markieren und verschiebne
+        //beim ersten click markieren und verschiebne
         for ( int i = 0;i < m_Objects->count() ;i++ )
         {
             object = m_Objects->at( i );

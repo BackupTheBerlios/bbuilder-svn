@@ -17,63 +17,68 @@
 *   Free Software Foundation, Inc.,                                       *
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
-#include "bb_constructionelement.h"
-#include "bb_dlgopentexture.h"
+#include "bb_stair.h"
 #include "bb_point.h"
-#include "bb_globals.h"
 
-BB_ConstructionElement::BB_ConstructionElement( C2dVector v1, C2dVector v2 )
+BB_Stair::BB_Stair()
         : BB_Rect()
 {
-    setPos1( new BB_Point( v1 ) );
-    setPos2( new BB_Point( v2 ) );
+    m_Pen.setColor( Qt::blue );
+    m_Brush.setColor( Qt::blue );
 }
 
 
-BB_ConstructionElement::~BB_ConstructionElement()
+BB_Stair::~BB_Stair()
 {}
 
 
-
-
-
-QString BB_ConstructionElement::getTextureFileName() const
+void BB_Stair::show( BB_Transformer& transformer, QPainter& painter ) const
 {
-    return m_TextureFileName;
-}
+    // 	painter.setPen( m_Pen );
+    // 	painter.setBrush( m_Brush );
+    QBrush brush;
+    brush.setColor( Qt::blue );
+    painter.setBrush( brush );
+    QPen pen;
+    pen.setColor( Qt::black );
+    painter.setPen( pen );
+
+    QPoint dest1;
+    QPoint dest2;
+
+    transformer.logicalToScreen( dest1, m_Pos1->getPos() );
+    transformer.logicalToScreen( dest2, m_Pos2->getPos() );
+
+    QRect rect( ( int ) dest1.x(),
+                ( int ) dest1.y(),
+                ( int ) ( dest2.x() - dest1.x() ),
+                ( int ) ( dest2.y() - dest1.y() ) );
+    rect = rect.normalized();
+    painter.drawRect( rect );
 
 
-void BB_ConstructionElement::setTextureFileName( const QString& Value )
-{
-    if ( !Value.isNull() )
+    pen.setWidth( 3 );
+    painter.setPen( pen );
+
+    int abstand = rect.height() / 10;
+    for ( int i = 1;i <= 10 ;i++ )
     {
-        m_TextureFileName = Value;
-        if ( !m_Image.load( PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName ) )
-        {
-            qDebug( "image wurde nicht geladen" );
-        }
+        painter.drawLine( rect.left(), rect.top() + abstand * i, rect.right(), rect.top() + abstand * i );
     }
+
+    ///@todo Test löschen
+    // NUR TEST
+    painter.drawText( dest1.x() , dest1.y() , getName() );
+
 }
 
-
-/*!
-    \fn BB_ConstructionElement::openTextureDlg()
- */
-void BB_ConstructionElement::openTextureDlg()
+void BB_Stair::generateXElement( QTextStream &out, int depth )
 {
-    BB_DlgOpenTexture dlg;
-    dlg.setTextureFile( PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName );
-    dlg.exec();
-    setTextureAbsoluteFileName( dlg.getTextureFile() );
+    out << BB::indent( depth ) << "<bb_stair id=\"" << getObjectNr()
+    << "\" p1=\"" << getPos1() ->getObjectNr()
+    << "\" p2=\"" << getPos2() ->getObjectNr() << "\">\n";
+    BB_Object::generateXElement( out, depth + 1 );
+    out << BB::indent( depth ) << "</bb_stair>\n";
 }
 
-void BB_ConstructionElement::setTextureAbsoluteFileName( const QString& Value )
-{
-    QImage image( Value );
-    if ( !image.isNull() )
-    {
-        image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getName() + ".png", "PNG" );
-        setTextureFileName( getName() + ".png" );
-    }
-}
 

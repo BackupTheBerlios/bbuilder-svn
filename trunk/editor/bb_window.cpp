@@ -27,9 +27,7 @@ using namespace std;
 
 BB_Window::BB_Window( C2dVector v1, C2dVector v2)
         : BB_ConstructionElement(v1, v2)
-{
-	m_Image.load( IMG_DIR() + SEPARATOR() + "Fenster.jpg" );
-	m_Image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName(), "PNG");
+{;
 }
 
 

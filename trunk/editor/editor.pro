@@ -92,7 +92,9 @@ HEADERS += bb_abstracttool.h \
            bb_toolnavigationlinenew.h \
            bb_tools.h \
            bb_dlgleveledit.h \
-           bb_xlevelhandler.h 
+           bb_xlevelhandler.h \
+           bb_toolstair.h \
+           bb_stair.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -167,7 +169,9 @@ SOURCES += bb_abstracttool.cpp \
            bb_navigationline.cpp \
            bb_toolnavigationlinenew.cpp \
            bb_dlgleveledit.cpp \
-           bb_xlevelhandler.cpp 
+           bb_xlevelhandler.cpp \
+           bb_toolstair.cpp \
+           bb_stair.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \
