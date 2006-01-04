@@ -187,10 +187,10 @@ bool BB_Building::write( QTextStream &out )
 /*!
     \fn BB_Building::generateXElement(QTextStream &out, int depth)
  */
-void BB_Building::generateXElement( QTextStream &out, int depth )
-{
-    out << BB::indent( depth ) << "<bb_building>" << BB::escapedText( getFileName() ) << "</bb_building>\n";
-}
+// void BB_Building::generateXElement( QTextStream &out, int depth )
+// {
+//     out << BB::indent( depth ) << "<bb_building>" << BB::escapedText( getFileName() ) << "</bb_building>\n";
+// }
 
 
 /*!
@@ -268,10 +268,23 @@ void BB_Building::removeLevel( BB_Level* level )
  */
 BB_Level* BB_Building::getLevel( int index )
 {
-	if( index < m_Levels.count() && index >= 0 )
+
+	int count =  m_Levels.count();
+	
+	if( index < count && index >= 0 )
 	{
 		return m_Levels.at( index );
 	}
 	
 	return NULL;
+}
+
+
+/*!
+    \fn BB_Building::getLevelCount()
+ */
+int BB_Building::getLevelCount()
+{
+	int count = m_Levels.count();
+	return count;
 }

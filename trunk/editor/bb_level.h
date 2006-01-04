@@ -35,6 +35,7 @@ class BB_Level : public BB_DocComponent
 		void setHeight( double Value );
 		double getHeight() const;
     BB_Building* getBuilding();
+    virtual int keyBoardEdit( QWidget* parent );
     protected:
 		/**
 		Hohe von Etage in meter

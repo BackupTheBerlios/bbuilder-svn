@@ -98,12 +98,16 @@ public:
 	 * @return Pixel
 	 */
 	double getPixelPerMeter(double meter);
+    virtual int keyBoardEdit( QWidget* parent );
+    virtual void generateXElement( QTextStream &out, int depth );
 	
 	
 protected:
     BB_Point m_ScalePoint_1;
     BB_Point m_ScalePoint_2;
     double m_ScaleValue;
+protected:
+    virtual void mapChanged();
 };
 
 #endif

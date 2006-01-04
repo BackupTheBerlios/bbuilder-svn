@@ -206,7 +206,7 @@ BB_DrawObject* BB_AbstractTool::getClickedObject( const C2dVector &posLogic , co
 {
 
     /// todo Fehler abfangen
-    BB_DrawObject * object;
+    BB_DrawObject * object = NULL;
     bool exit = false;
     for ( int i = 0; i < m_Objects->count() && exit == false; i++ )
     {

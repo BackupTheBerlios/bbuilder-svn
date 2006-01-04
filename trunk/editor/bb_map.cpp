@@ -41,7 +41,13 @@ QPixmap& BB_Map::getMap()
 
 void BB_Map::setMap( const QPixmap& map )
 {
-   m_Map = map;
+   
+	if( &map != NULL)
+	{
+		m_Map = map;
+		mapChanged();
+	}
+   
 }
 
 
@@ -89,6 +95,7 @@ bool BB_Map::loadMap( QDir& path )
         if ( exit )
         {
             m_Map = QPixmap::fromImage( img );
+			mapChanged();
         }
     }
     else
@@ -96,5 +103,15 @@ bool BB_Map::loadMap( QDir& path )
         exit = false;
     }
 
+	
     return exit;
+}
+
+
+/*!
+    \fn BB_Map::mapChanged()
+ */
+void BB_Map::mapChanged()
+{
+    /// @todo implement me
 }

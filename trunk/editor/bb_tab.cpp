@@ -326,15 +326,12 @@ void BB_Tab::clear()
 
 
 /**
- * Die Funktion soll das aktuelle DocComponent des abgeleiteten Tabs speichern.
- * Diese funktion muss in jedem abgeleiteten Tab überladen werden, sonst erschein immer die Meldung: <br />
- * "BB_Tab::saveCurrent(): Funktion wurde nicht überladen" und es wird immer false zurückgegeben.
+ * Speichert (nur) die Projektdatei.
  * @return Erfolg des Speicherns; true = erfolgreich, false = erfolglos
  */
 bool BB_Tab::saveCurrent()
 {
-    qDebug( "BB_Tab::saveCurrent(): Funktion wurde nicht überladen\n" );
-    return false;
+	return m_Doc->save();
 }
 
 

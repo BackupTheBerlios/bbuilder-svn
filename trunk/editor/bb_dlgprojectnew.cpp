@@ -1,17 +1,17 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Alex Letkemann   *
- *   alex@letkemann.de   *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- ***************************************************************************/
+*   Copyright (C) 2005 by Alex Letkemann   *
+*   alex@letkemann.de   *
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+*   This program is distributed in the hope that it will be useful,       *
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+*   GNU General Public License for more details.                          *
+***************************************************************************/
 #include "bb_dlgprojectnew.h"
 
 #include <iostream>
@@ -19,44 +19,43 @@
 #include <bb.h>
 using namespace std;
 
-BB_DlgProjectNew::BB_DlgProjectNew(QWidget * parent, Qt::WFlags f)
- : QDialog(parent,f)
+BB_DlgProjectNew::BB_DlgProjectNew( QWidget * parent, Qt::WFlags f )
+        : QDialog( parent, f )
 {
-	
-	m_Dlg.setupUi(this);
-	
-	m_Dlg.lineEditProjectName->setValidator( BB::validAlphanumeric );
-	
-	m_ProjectPath = QDir::homePath();
-	m_Dlg.lineEditProjectPath->setText(m_ProjectPath);
-	checkDir();
-	
-	connect(m_Dlg.buttonShowDir,
-			SIGNAL(clicked()),
-			this,
-			SLOT(slotShowDir()));
-	
-	connect(m_Dlg.lineEditProjectName,
-			SIGNAL(textChanged(const QString&)),
-			this,
-			SLOT(slotNameChanged(const QString&)));
-	
-	connect(m_Dlg.lineEditProjectPath,
-			SIGNAL(textChanged(const QString&)),
-			this,
-			SLOT(slotPathChanged(const QString&)));
-	
-	connect(m_Dlg.textEditProjectDesc,
-			SIGNAL(textChanged()),
-			this,
-			SLOT(slotDescChanged()));
+
+    m_Dlg.setupUi( this );
+
+    m_Dlg.lineEditProjectName->setValidator( BB::validAlphanumeric );
+
+    m_ProjectPath = QDir::homePath();
+    m_Dlg.lineEditProjectPath->setText( m_ProjectPath );
+    checkDir();
+
+    connect( m_Dlg.buttonShowDir,
+             SIGNAL( clicked() ),
+             this,
+             SLOT( slotShowDir() ) );
+
+    connect( m_Dlg.lineEditProjectName,
+             SIGNAL( textChanged( const QString& ) ),
+             this,
+             SLOT( slotNameChanged( const QString& ) ) );
+
+    connect( m_Dlg.lineEditProjectPath,
+             SIGNAL( textChanged( const QString& ) ),
+             this,
+             SLOT( slotPathChanged( const QString& ) ) );
+
+    connect( m_Dlg.textEditProjectDesc,
+             SIGNAL( textChanged() ),
+             this,
+             SLOT( slotDescChanged() ) );
 
 }
 
 
 BB_DlgProjectNew::~BB_DlgProjectNew()
-{
-}
+{}
 
 
 
@@ -66,43 +65,43 @@ BB_DlgProjectNew::~BB_DlgProjectNew()
  */
 void BB_DlgProjectNew::slotShowDir()
 {
-	cout << "ShowDir" << endl;
-	QFileDialog fileDialog(this);
-	fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-	fileDialog.setDirectory(QDir::home());
-	fileDialog.setFileMode(QFileDialog::DirectoryOnly);
-	fileDialog.setViewMode(QFileDialog::List);
+    cout << "ShowDir" << endl;
+    QFileDialog fileDialog( this );
+    fileDialog.setAcceptMode( QFileDialog::AcceptSave );
+    fileDialog.setDirectory( QDir::home() );
+    fileDialog.setFileMode( QFileDialog::DirectoryOnly );
+    fileDialog.setViewMode( QFileDialog::List );
 
-	
-	if(fileDialog.exec())
-	{
-		m_Dlg.lineEditProjectPath->setText(fileDialog.selectedFiles().at(0));
-	}
-	
-	
+
+    if ( fileDialog.exec() )
+    {
+        m_Dlg.lineEditProjectPath->setText( fileDialog.selectedFiles().at( 0 ) );
+    }
+
+
 }
 
 
 /*!
     \fn BB_DlgProjectNew::slotPathChanged()
  */
-void BB_DlgProjectNew::slotPathChanged(const QString & text)
+void BB_DlgProjectNew::slotPathChanged( const QString & text )
 {
 
-// 	m_ProjectPath = m_Dlg.lineEditProjectPath->text();
-	m_ProjectPath = text;
-	checkDir();
+    // 	m_ProjectPath = m_Dlg.lineEditProjectPath->text();
+    m_ProjectPath = text;
+    checkDir();
 }
 
 
 /*!
     \fn BB_DlgProjectNew::slotNameChanged()
  */
-void BB_DlgProjectNew::slotNameChanged(const QString & text)
+void BB_DlgProjectNew::slotNameChanged( const QString & text )
 {
-	m_ProjectName = text;
-	m_ProjectDir = text.toLower().remove(QRegExp("\\W"));	
-	checkDir();
+    m_ProjectName = text;
+    m_ProjectDir = text.toLower().remove( QRegExp( "\\W" ) );
+    checkDir();
 }
 
 
@@ -116,37 +115,37 @@ void BB_DlgProjectNew::slotNameChanged(const QString & text)
  */
 void BB_DlgProjectNew::checkDir()
 {
-	m_Dir = m_ProjectPath;
-	QDir fullPath(m_ProjectPath + "/" + m_ProjectDir);
+    m_Dir = m_ProjectPath;
+    QDir fullPath( m_ProjectPath + "/" + m_ProjectDir );
 
-	bool fullPathExists = fullPath.exists();
+    bool fullPathExists = fullPath.exists();
 
-	if(m_Dir.exists() && m_ProjectDir != "" && !fullPathExists)
-	{
-		m_Dlg.okButton->setEnabled(true);
-		m_Dlg.lineEditFinalPath->setText(m_Dir.path() 
-				+ "/" 
-				+ m_ProjectDir);
-	}
-	else
-	{
-		m_Dlg.okButton->setEnabled(false);
-		m_Dlg.lineEditFinalPath->setText(m_Dir.path() 
-				+ "/" 
-				+ m_ProjectDir);
-		
-		if(fullPathExists && m_ProjectDir != "")
-		{
-			m_Dlg.lineEditFinalPath->setText(m_Dlg.lineEditFinalPath->text() 
-					+ QString::fromUtf8(" ( existiert bereits )")); 
-		}
-		else
-		{
-			m_Dlg.lineEditFinalPath->setText(m_Dlg.lineEditFinalPath->text() 
-					+ QString::fromUtf8(" ( ungültig )")); 
-		}
+    if ( m_Dir.exists() && m_ProjectDir != "" && !fullPathExists )
+    {
+        m_Dlg.okButton->setEnabled( true );
+        m_Dlg.lineEditFinalPath->setText( m_Dir.path()
+                                          + "/"
+                                          + m_ProjectDir );
+    }
+    else
+    {
+        m_Dlg.okButton->setEnabled( false );
+        m_Dlg.lineEditFinalPath->setText( m_Dir.path()
+                                          + "/"
+                                          + m_ProjectDir );
 
-	}
+        if ( fullPathExists && m_ProjectDir != "" )
+        {
+            m_Dlg.lineEditFinalPath->setText( m_Dlg.lineEditFinalPath->text()
+                                              + QString::fromUtf8( " ( existiert bereits )" ) );
+        }
+        else
+        {
+            m_Dlg.lineEditFinalPath->setText( m_Dlg.lineEditFinalPath->text()
+                                              + QString::fromUtf8( " ( ungültig )" ) );
+        }
+
+    }
 }
 
 
@@ -167,7 +166,7 @@ QDir BB_DlgProjectNew::getProjectPath() const
  */
 void BB_DlgProjectNew::slotDescChanged()
 {
-	m_ProjectDescription = m_Dlg.textEditProjectDesc->toPlainText(); 
+    m_ProjectDescription = m_Dlg.textEditProjectDesc->toPlainText();
 }
 
 

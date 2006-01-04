@@ -29,7 +29,7 @@ public:
 	BB_Terrain(const QDir& path, const QString &fileName, const QString &name = QString(""));
 
     virtual ~BB_Terrain();
-	virtual void generateXElement(QTextStream &out, int depth);
+// 	virtual void generateXElement(QTextStream &out, int depth);
 	
 	/** @see virtual bool BB_FileObject::write(QTextStream &out) */
 	virtual bool write(QTextStream &out);

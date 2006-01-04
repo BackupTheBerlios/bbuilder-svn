@@ -21,8 +21,9 @@ BB_TabLevel::BB_TabLevel( BB_Doc * doc, QWidget* parent, Qt::WFlags f )
         : BB_Tab( doc, parent, f )
 {
 
+    m_Building = NULL;
     m_Buildings = m_Doc->getBuildings();
-    m_ListWidgetBuildings = NULL;
+    m_ComboBoxBuildings = NULL;
 
     m_Levels = NULL;
     m_ListWidgetLevels = NULL;
@@ -44,8 +45,14 @@ BB_TabLevel::~BB_TabLevel()
  */
 void BB_TabLevel::slotLevelNew()
 {
-    cout << "Neu!!" << endl;
+    if ( m_Building != NULL )
+    {
+        m_Doc->newLevel( m_Building, this );
+        updateLevelList();
 
+        m_ListWidgetLevels->setCurrentRow( 1000 );
+
+    }
 }
 
 
@@ -54,7 +61,14 @@ void BB_TabLevel::slotLevelNew()
  */
 void BB_TabLevel::slotLevelProperties()
 {
-    cout << "Eigenschaften!!" << endl;
+    if ( m_Building != NULL )
+    {
+        BB_Level * level = m_Building->getLevel( m_ListWidgetLevels->currentRow() );
+        if ( level != NULL )
+        {
+            level->keyBoardEdit( this );
+        }
+    }
 }
 
 
@@ -63,6 +77,14 @@ void BB_TabLevel::slotLevelProperties()
  */
 void BB_TabLevel::slotLevelDelete()
 {
+    if ( m_Building != NULL )
+    {
+        BB_Level * level = m_Building->getLevel( m_ListWidgetLevels->currentRow() );
+        if ( level != NULL )
+        {
+            m_Doc->deleteLevel( level );
+        }
+    }
     cout << "Löschen? ... ";
     if ( QMessageBox::question( this, "Frage?", "sicher?", QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
         cout << "Gelöscht!" << endl;
@@ -70,17 +92,6 @@ void BB_TabLevel::slotLevelDelete()
         cout << "Abgebrochen" << endl;
 }
 
-
-/**
- * TODO
- */
-void BB_TabLevel::slotZoomTool( QAction* action )
-{
-    unsetToolButton( action );
-    action->setChecked( true );
-    m_Center->setTool( m_ToolZoom );
-    cout << "m_ToolZoom:" << m_ToolZoom << endl;
-}
 
 
 /*!
@@ -92,13 +103,15 @@ void BB_TabLevel::initWidgetLeft()
     gB_Buildings->setTitle( QString::fromUtf8( "Gebäude" ) );
     gB_Buildings->setFlat( true );
 
-    m_ListWidgetBuildings = new QListWidget();
-	connect( m_ListWidgetBuildings, SIGNAL( currentRowChanged ( int ) ), this, SLOT( slotBuildingChanged( int ) ) );
-	
+    m_ComboBoxBuildings = new QComboBox();
+    connect( m_ComboBoxBuildings, SIGNAL( currentIndexChanged ( int ) ), this, SLOT( slotBuildingChanged( int ) ) );
+
+    //currentRowChanged
+
     QVBoxLayout *gBL_Building = new QVBoxLayout();
     gBL_Building->setMargin( 0 );
     gBL_Building->setSpacing( 2 );
-    gBL_Building->addWidget( m_ListWidgetBuildings, Qt::AlignTop );
+    gBL_Building->addWidget( m_ComboBoxBuildings, Qt::AlignTop );
 
     gB_Buildings->setLayout( gBL_Building );
     addWidgetLeft( gB_Buildings, 0 );
@@ -108,6 +121,10 @@ void BB_TabLevel::initWidgetLeft()
     gB_Levels->setFlat( true );
 
     m_ListWidgetLevels = new QListWidget();
+
+    qDebug() << "Connecting m_ListWidgetLevels ... ";
+    connect( m_ListWidgetLevels, SIGNAL( currentRowChanged ( int ) ), this, SLOT( slotLevelChanged( int ) ) );
+    qDebug() << "OK";
     m_ListWidgetLevels->addItem( "Etage 1" );
     m_ListWidgetLevels->addItem( "Etage 2" );
     m_ListWidgetLevels->addItem( "Etage 3" );
@@ -147,6 +164,8 @@ void BB_TabLevel::initWidgetLeft()
     gB_Levels->setLayout( gBL_Levels );
 
     addWidgetLeft( gB_Levels, 1 );
+
+    qDebug() << "Tab created";
 }
 
 
@@ -183,15 +202,24 @@ void BB_TabLevel::initTools()
  */
 void BB_TabLevel::updateBuildingList()
 {
-    m_ListWidgetBuildings->clear();
+    qDebug( "Updating BuildingList ... " );
+    m_ComboBoxBuildings->blockSignals( true );
+
+    m_ComboBoxBuildings->clear();
 
     if ( m_Buildings != NULL )
     {
         for ( int i = 0; i < m_Buildings->count(); i++ )
         {
-            m_ListWidgetBuildings->addItem( m_Buildings->at( i ) ->getName() );
+            m_ComboBoxBuildings->addItem( m_Buildings->at( i ) ->getName() );
         }
     }
+
+    if ( m_ComboBoxBuildings->count() == 0 )
+    {}
+
+    m_ComboBoxBuildings->blockSignals( false );
+    qDebug( "OK" );
 }
 
 
@@ -200,15 +228,21 @@ void BB_TabLevel::updateBuildingList()
  */
 void BB_TabLevel::updateLevelList()
 {
+    qDebug( "Updating LevelList ... " );
+    m_ListWidgetLevels->blockSignals( true );
+
     m_ListWidgetLevels->clear();
 
-    if ( m_ListWidgetLevels != NULL )
+    if ( m_Building != NULL )
     {
-        for ( int i = 0; i < m_ListWidgetLevels->count(); i++ )
+        for ( int i = 0; i < m_Building->getLevelCount(); i++ )
         {
-            m_ListWidgetLevels->addItem( m_Buildings->at( i ) ->getName() );
+            m_ListWidgetLevels->addItem( m_Building->getLevel( i ) ->getName() );
         }
     }
+
+    m_ListWidgetLevels->blockSignals( false );
+    qDebug( "OK" );
 }
 
 
@@ -237,7 +271,9 @@ void BB_TabLevel::updateLists()
  */
 void BB_TabLevel::slotBuildingChanged( int row )
 {
-	qDebug("dslkfjlsdkföj");
+    qDebug() << "Setting building ... ";
+    setBuilding( m_Doc->getBuilding( row ) );
+    qDebug() << "OK";
 }
 
 
@@ -246,16 +282,71 @@ void BB_TabLevel::slotBuildingChanged( int row )
  */
 void BB_TabLevel::setBuilding( BB_Building* building )
 {
-	if( building != NULL )
-	{
-		m_Building = building;
-		m_Levels = building->getLevels();
-	}
-	else
-	{
-		m_Building = NULL;
-		m_Levels = NULL;
-	}
-	
-	updateLists();
+    if ( building != NULL )
+    {
+        m_Building = building;
+        m_Levels = building->getLevels();
+
+        setWidgetEnabled( true );
+    }
+    else
+    {
+        m_Building = NULL;
+        m_Levels = NULL;
+        setWidgetEnabled( false );
+    }
+    updateLevelList();
+}
+
+
+/*!
+    \fn BB_TabLevel::setLevel()
+ */
+void BB_TabLevel::setLevel( BB_Level* level )
+{
+    qDebug() << "Setting level ... ";
+    m_Center->setDocComponent( level );
+    qDebug() << "OK";
+}
+
+
+/*!
+    \fn BB_TabLevel::setWidgetEnabled( bool value )
+ */
+void BB_TabLevel::setWidgetEnabled( bool value )
+{
+    m_ButtonLevelDelete->setEnabled( value );
+    m_ButtonLevelProperties->setEnabled( value );
+    m_ButtonLevelNew->setEnabled( value );
+
+    m_ListWidgetLevels->setEnabled( value );
+    m_Center->setEnabled( value );
+}
+
+
+/*!
+    \fn BB_TabLevel::slotLevelChanged( int row )
+ */
+void BB_TabLevel::slotLevelChanged( int row )
+{
+    if ( m_Building != NULL )
+    {
+        setLevel( m_Building->getLevel( row ) );
+    }
+}
+
+
+/*!
+    \fn BB_TabLevel::saveCurrent()
+ */
+bool BB_TabLevel::saveCurrent()
+{
+    BB_Level * level = m_Building->getLevel( m_ListWidgetLevels->currentRow( ) );
+
+    if ( level != NULL )
+    {
+        return level->save() && BB_Tab::saveCurrent();
+    }
+
+    return false;
 }

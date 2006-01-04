@@ -313,7 +313,7 @@ bool BB_TabBuilding::saveCurrent()
     building = m_Doc->getBuilding( m_BuildingsListWidget->currentItem () );
     if ( building != NULL )
     {
-        return building->save();
+		return ( building->save() && BB_Tab::saveCurrent() );
     }
     else
     {

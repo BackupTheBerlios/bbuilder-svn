@@ -34,6 +34,8 @@ protected:
     BB_Doc* m_Doc;
     bool m_XDocTag;
     QDir m_Path;
+    int m_ObjectId;
+	int m_BuidingNr;
 
 };
 

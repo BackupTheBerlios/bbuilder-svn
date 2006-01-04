@@ -154,18 +154,30 @@ bool BB_Doc::open( QString fileName )
             return false;
         }
 
-        m_Terrain->open();
+		if( m_Terrain != NULL)
+		{
+			m_Terrain->open();
+		}
+		else
+		{
+			QString newTerrainName("terrain.xml");
+			m_Terrain = newTerrain( m_ProjectPath, newTerrainName );
+		}
+		
+		
 
         for ( int i = 0; i < m_Buildings.count(); i++ )
         {
             m_Buildings.at( i ) ->open();
         }
 
-        // 		for(int i = 0; i < m_Levels.count(); i++)
-        // 		{
-        // 			m_Levels.at(i)->open();
-        // 		}
+		for(int i = 0; i < m_Levels.count(); i++)
+		{
+			m_Levels.at(i)->open();
+		}
 
+		
+		BB_Object::m_Counter = m_MaxId;
     }
     else
     {
@@ -244,6 +256,7 @@ bool BB_Doc::createNew( const QString &name, const QString &desc, const QDir &pa
  */
 bool BB_Doc::write( QTextStream &out )
 {
+	m_MaxId = BB_Object::m_Counter;
     int depth = 1;
 
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -251,7 +264,7 @@ bool BB_Doc::write( QTextStream &out )
     << "<bb_doc version=\"1.0\">\n";
 
     BB_Object::generateXElement( out, depth );
-
+	out << BB::indent( depth) << "<properties max_id=\"" << m_MaxId << "\" />" << endl;
     if ( getTerrain() != NULL )
     {
         m_Terrain->generateXElement( out, depth );
@@ -330,28 +343,37 @@ BB_Building* BB_Doc::newBuilding( QWidget * parent )
  */
 BB_Level* BB_Doc::newLevel( BB_Building* building, QWidget * parent )
 {
-    // 	QString fileName;
-    // 	QDir path = m_ProjectPath;
-    // 	path.cd("levels");
-    //
-    // 	BB_Level* level = new BB_Level(path,"tempFile");
-    //
-    // 	if(level->keyBoardEdit(parent) == QDialog::Accepted)
-    // 	{
-    // 		level->setFileName(fileName.sprintf("%08d.xml",level->getObjectNr()));
-    // 		level->save();
-    // 		m_Levels.append(level);
-    // 		save();
-	// 		documentChanged();
-    // 	}
-    // 	else
-    // 	{
-    // 		delete level;
-    // 		level = NULL;
-    // 	}
-    //
-    // 	return level;
-    return NULL;
+// 	Eine Etage kann nur mit einem Gebäude erzeugt werden 
+	if( building == NULL )
+	{
+		return NULL;
+	}
+	
+	QString fileName;
+	QDir path = m_ProjectPath;
+	path.cd( "levels" );
+
+	BB_Level* level = new BB_Level( building , path, "tempFile" );
+
+	if ( level->keyBoardEdit( parent ) == QDialog::Accepted )
+	{
+		level->setFileName( fileName.sprintf( "%08d.xml", level->getObjectNr() ) );
+		level->save();
+		m_Levels.append( level );
+
+		save();
+		documentChanged();
+	}
+	else
+	{
+		if( level != NULL)
+		{
+			delete level;
+			level = NULL;
+		}
+	}
+
+	return level;
 }
 
 
@@ -430,6 +452,7 @@ bool BB_Doc::deleteBuilding( QListWidgetItem* item )
             if ( item == building->getListWidgetItem() )
             {
                 m_Buildings.remove( i );
+				deleteLevels( building );
                 delete building;
 				documentChanged();
                 return true;
@@ -471,6 +494,56 @@ BB_Building* BB_Doc::getBuilding( int index )
 	if( index < m_Buildings.count() && index >= 0 )
 	{
 		return m_Buildings.at(index);
+	}
+	
+	return NULL;
+}
+
+
+/*!
+    \fn BB_Doc::deleteLevel( BB_Level* level )
+ */
+bool BB_Doc::deleteLevel( BB_Level* level )
+{
+	for( int i = m_Levels.count() -1; i >=0; i-- )
+	{
+		if( m_Levels.at(0) == level )
+		{
+			delete level;
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+
+/*!
+    \fn BB_Doc::deleteLevels( BB_Building* building )
+ */
+void BB_Doc::deleteLevels( BB_Building* building )
+{
+	if( building != NULL)
+	{
+		for( int i = building->getLevelCount(); i >= 0; i-- )
+		{
+			deleteLevel( building->getLevel( i ) );
+		}
+	}
+}
+
+
+/*!
+    \fn BB_Doc::getBuildingById( int objectId )
+ */
+BB_Building* BB_Doc::getBuildingById( int objectId )
+{
+	for( int i = 0; i < m_Buildings.count(); i++ )
+	{
+		if( m_Buildings.at(i)->getObjectNr() == objectId )
+		{
+			return m_Buildings.at(i);
+		}
 	}
 	
 	return NULL;

@@ -40,11 +40,6 @@ bool BB_DocComponent::open()
 {
     bool exit = ( BB_FileObject::open() && loadMap( m_FilePath ) );
 
-    C2dVector offset;
-    offset.setX( m_Map.width() / 2.0 );
-    offset.setY( m_Map.height() / 2.0 );
-
-    setOffset( offset );
     return exit;
 }
 
@@ -110,4 +105,42 @@ double BB_DocComponent::getPixelPerMeter( double meter )
     double pixel = ( meter * lenght_pixel ) / m_ScaleValue;
 
     return pixel;
+}
+
+
+/*!
+    \fn BB_DocComponent::keyBoardEdit( QWidget* parent )
+ */
+int BB_DocComponent::keyBoardEdit( QWidget* parent )
+{
+	parent = NULL;
+	
+	return 0;
+}
+
+
+/*!
+    \fn BB_DocComponent::mapChanged()
+ */
+void BB_DocComponent::mapChanged()
+{
+
+	C2dVector offset;
+	offset.setX( m_Map.width() / 2.0 );
+	offset.setY( m_Map.height() / 2.0 );
+
+	setOffset( offset );
+}
+
+
+/*!
+    \fn BB_DocComponent::generateXElement( QTextStream &out, int depth )
+ */
+void BB_DocComponent::generateXElement( QTextStream &out, int depth )
+{
+	out << BB::indent( depth ) 
+			<< "<" << getClassName().toLower() 
+			<< " id=\"" << getObjectNr() << "\">" 
+			<< BB::escapedText( getFileName() ) 
+			<< "</" << getClassName().toLower() << ">\n";
 }

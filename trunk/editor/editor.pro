@@ -16,7 +16,8 @@ FORMS += buildingEdit.ui \
          toolWidgetTriangleNew.ui \
          toolWidgetWallNew.ui \
          textureOpenDialog.ui \
-         toolWidgetNavigationPointNew.ui 
+         toolWidgetNavigationPointNew.ui \
+         levelEdit.ui 
 HEADERS += bb_abstracttool.h \
            bb_building.h \
            bb_doc.h \
@@ -89,7 +90,9 @@ HEADERS += bb_abstracttool.h \
            bb_tooltexture.h \
            bb_navigationline.h \
            bb_toolnavigationlinenew.h \
-           bb_tools.h 
+           bb_tools.h \
+           bb_dlgleveledit.h \
+           bb_xlevelhandler.h 
 SOURCES += bb_abstracttool.cpp \
            bb_building.cpp \
            bb_doc.cpp \
@@ -162,7 +165,9 @@ SOURCES += bb_abstracttool.cpp \
            bb_tooldelete.cpp \
            bb_tooltexture.cpp \
            bb_navigationline.cpp \
-           bb_toolnavigationlinenew.cpp 
+           bb_toolnavigationlinenew.cpp \
+           bb_dlgleveledit.cpp \
+           bb_xlevelhandler.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

@@ -30,6 +30,7 @@ public:
 
     ~BB_TabLevel();
     virtual void updateLists();
+    virtual bool saveCurrent();
     
 
 protected:
@@ -40,11 +41,10 @@ protected:
     QVector< BB_Building* >* m_Buildings;
     QVector< BB_Level* >* m_Levels;
 	QListWidget* m_ListWidgetLevels;
-	QListWidget* m_ListWidgetBuildings;
+	QComboBox* m_ComboBoxBuildings;
 	BB_Building* m_Building;
 	
 private slots:
-    void slotZoomTool(QAction* action);
 	void slotLevelNew();
 	void slotLevelProperties();
 	void slotLevelDelete();
@@ -56,10 +56,13 @@ protected:
     void initTools();
     void updateBuildingList();
     void updateLevelList();
-    virtual void documentChanged();
-	virtual void setBuilding( BB_Building* building );
-protected slots:
+    void documentChanged();
+	void setBuilding( BB_Building* building );
+	void setLevel( BB_Level* level );
+    void setWidgetEnabled( bool value );
+private slots:
     void slotBuildingChanged( int row );
+    void slotLevelChanged( int row );
 };
 
 #endif

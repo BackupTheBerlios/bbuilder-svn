@@ -11,7 +11,7 @@
 //
 #include "bb_xdochandler.h"
 #include "bb_doc.h"
-
+// #include <bb_object.h>
 
 #include <iostream>
 
@@ -27,6 +27,7 @@ BB_XDocHandler::BB_XDocHandler(BB_Doc* doc)
 	}
 	
 	m_XDocTag = false;
+	m_ObjectId = 0;
 }
 
 
@@ -40,7 +41,12 @@ bool BB_XDocHandler::startElement(const QString& namespaceURI, const QString& lo
 {
 // 	return QXmlDefaultHandler::startElement(namespaceURI, localName, qName, atts);
 	
-// 	cout << "event: " << namespaceURI.toStdString() << " | " << localName.toStdString() << " | " << qName.toStdString() << endl;
+	QString value;
+	bool ok;
+	int intValue;
+	
+	
+	cout << "event: " << namespaceURI.toStdString() << " | " << localName.toStdString() << " | " << qName.toStdString() << endl;
 	
 	if (!m_XDocTag && qName != "bb_doc") {
 		m_ErrorStr = QObject::tr("Dies ist keine glbb Datei");
@@ -55,21 +61,106 @@ bool BB_XDocHandler::startElement(const QString& namespaceURI, const QString& lo
 			return false;
 		}
 		m_XDocTag = true;		
-	} 
+	}
+	else if(qName == "properties")
+	{
+		QString sMaxId = atts.value("max_id");
+		int maxId;
+		bool ok;
+		
+		maxId = sMaxId.toInt(&ok);
+		
+		if( ok )
+		{
+			m_Doc->m_MaxId = maxId;
+		}
+		else
+		{
+			return false;
+		}
+		
+		
+	}
 	else if(qName == "bb_terrain")
 	{
 		m_Path = m_Doc->getFilePath();
 		m_Path.cd("terrain");
+		
+		value = atts.value("id");
+		
+		intValue = value.toInt(&ok);
+		
+		if( ok )
+		{
+			m_ObjectId = intValue;
+		}
+		else
+		{
+			return false;
+		}
+		
 	}
 	else if(qName == "buildings")
 	{
 		m_Path = m_Doc->getFilePath();
 		m_Path.cd("buildings");
 	}
+	else if( qName == "bb_building")
+	{
+			
+		value = atts.value("id");
+		
+		cout << value.toStdString() << endl;
+		
+		intValue = value.toInt(&ok);
+		
+		if( ok )
+		{
+			m_ObjectId = intValue;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	else if(qName == "levels")
 	{
 		m_Path = m_Doc->getFilePath();
 		m_Path.cd("levels");
+
+	}
+	else if(qName == "bb_level")
+	{
+				
+		value = atts.value("id");
+		
+		cout << value.toStdString() << endl;
+		
+		intValue = value.toInt(&ok);
+		
+		if( ok )
+		{
+			m_ObjectId = intValue;
+		}
+		else
+		{
+			return false;
+		}
+		
+		value = atts.value("building");
+		
+		cout << value.toStdString() << endl;
+		
+		intValue = value.toInt(&ok);
+		
+		if( ok )
+		{
+			m_BuidingNr = intValue;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	m_CurrentText.clear();
@@ -81,6 +172,10 @@ bool BB_XDocHandler::startElement(const QString& namespaceURI, const QString& lo
 
 bool BB_XDocHandler::endElement(const QString& namespaceURI, const QString& localName, const QString& qName)
 {
+	BB_Terrain* terrain;
+	BB_Building* building;
+	BB_Level* level;
+	
 	if (qName == "name") {
 		m_Doc->setName(m_CurrentText);
 		
@@ -94,7 +189,8 @@ bool BB_XDocHandler::endElement(const QString& namespaceURI, const QString& loca
 	{
 		if(m_Doc->getTerrain() == NULL)
 		{
-			m_Doc->newTerrain(m_Path, m_CurrentText);
+			terrain =m_Doc->newTerrain(m_Path, m_CurrentText);
+			terrain->m_ObjectNr = m_ObjectId;
 		}
 		else
 		{
@@ -104,11 +200,20 @@ bool BB_XDocHandler::endElement(const QString& namespaceURI, const QString& loca
 	}
 	else if(qName == "bb_building")
 	{
-		m_Doc->newBuilding(m_Path, m_CurrentText);
+		building = m_Doc->newBuilding(m_Path, m_CurrentText);
+		building->m_ObjectNr = m_ObjectId;
 	}
 	else if(qName == "bb_level")
 	{
-// 		m_Doc->newLevel(m_Path, m_CurrentText);
+		building = m_Doc->getBuildingById( m_BuidingNr );
+		
+		if( building == NULL)
+		{
+			qDebug("BB_XDocHandler: Level konnte nicht erstellt werden.\n Gebäude (%d) nicht gefunden.",m_ObjectId);
+		}
+		
+		level = m_Doc->newLevel( building, m_Path, m_CurrentText);
+		level->m_ObjectNr = m_ObjectId;
 	}
 		
 	

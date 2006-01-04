@@ -34,19 +34,20 @@ public:
 	BB_Building(const QDir& path, const QString &fileName, const QString &name = QString(""));
 
     virtual ~BB_Building();
-    int keyBoardEdit(QWidget* parent);
+    virtual int keyBoardEdit(QWidget* parent);
 	virtual bool write(QTextStream &out);
-    virtual void generateXElement(QTextStream &out, int depth);
+//     virtual void generateXElement(QTextStream &out, int depth);
     virtual const QString getClassName();
     void remove();
     void addLevel( BB_Level* level );
     QVector<BB_Level*>* getLevels();
     void removeLevel( BB_Level* level );
     BB_Level* getLevel( int index );
+    int getLevelCount();
     
 
 protected:
-    QVector<BB_Level*> m_Levels;
+	QVector<BB_Level*> m_Levels;
     
 };
 

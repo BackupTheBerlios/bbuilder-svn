@@ -47,10 +47,10 @@ BB_Terrain::~BB_Terrain()
 /*!
     \fn virtual void BB_Terrain::generateXElement(QIODevice *device, int depth)
  */
-void BB_Terrain::generateXElement(QTextStream &out, int depth)
-{
-	out << BB::indent(depth) << "<bb_terrain>" << BB::escapedText(getFileName()) << "</bb_terrain>\n";
-}
+// void BB_Terrain::generateXElement(QTextStream &out, int depth)
+// {
+// 	out << BB::indent(depth) << "<bb_terrain>" << BB::escapedText(getFileName()) << "</bb_terrain>\n";
+// }
 
 
 /*!

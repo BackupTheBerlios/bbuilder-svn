@@ -149,7 +149,7 @@ bool BB_TabTerrain::saveCurrent()
 
     if ( m_Terrain != NULL )
     {
-        return m_Terrain->save();
+		return m_Terrain->save() && BB_Tab::saveCurrent();
     }
 
     return false;

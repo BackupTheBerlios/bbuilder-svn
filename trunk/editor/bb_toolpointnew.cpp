@@ -22,6 +22,7 @@ using namespace std;
 BB_ToolPointNew::BB_ToolPointNew(QWidget * parent)
         : BB_AbstractTool(parent)
 {
+	m_Point = NULL;
 	m_Icon = QIcon ( IMG_DIR() + SEPARATOR() + "toolPoint.png" );
 }
 
@@ -136,7 +137,8 @@ BB_AbstractToolWidget* BB_ToolPointNew::getToolWidget()
  */
 BB_Point* BB_ToolPointNew::getClickedPoint( C2dVector& pos )
 {
-	return ( BB_Point * ) getClickedObject( pos, typeid( BB_Point ) );
+	BB_Point * point = ( BB_Point * ) getClickedObject( pos, typeid( BB_Point ) );
+	return point;
 }
 
 
