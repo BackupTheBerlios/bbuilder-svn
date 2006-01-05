@@ -20,6 +20,8 @@
 
 #include <QTextStream>
 
+class BB_Doc;
+
 /**
 @author Alex Letkemann
 */
@@ -36,9 +38,7 @@ public:
 	virtual int keyBoardEdit(QWidget* parent);
     virtual bool open();
     virtual const QString getClassName();
-	
-private:
-	static const QString s_ClassName;
+    void resolveBuildingIds( BB_Doc* doc );
 
 };
 

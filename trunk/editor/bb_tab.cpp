@@ -291,6 +291,13 @@ void BB_Tab::unsetDocComponent()
 void BB_Tab::updateWidget()
 {
     update();
+	BB_AbstractTool* tool;
+	
+	for( int i = 0; i < m_Tools.count() ; i++ )
+	{
+		tool = m_Tools.at( i );
+		tool->updateWidget();
+	}
 }
 
 
@@ -377,6 +384,7 @@ void BB_Tab::setTool( BB_AbstractTool* tool )
 {
     unsetToolButton( tool->getAction() );
     tool->getAction() ->setChecked( true );
+	tool->getToolWidget()->updateWidget();
     m_RightFrame->setCurrentWidget( tool->getToolWidget() );
     m_Center->setTool( tool );
 }

@@ -104,8 +104,9 @@ void BB_WidgetToolPointNew::slotNameFinished()
  */
 void BB_WidgetToolPointNew::updateWidget()
 {
+	
     if ( m_Selection != NULL &&
-            m_Selection->count() >= 1 &&
+            m_Selection->count() == 1 &&
             typeid( *( m_Selection->at( 0 ) ) ) == typeid( BB_Point ) )
     {
         m_Tmp_Point = ( ( BB_Point * ) ( m_Selection->at( 0 ) ) );

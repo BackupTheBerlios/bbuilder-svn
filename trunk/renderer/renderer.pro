@@ -20,7 +20,8 @@ FORMS += buildingEdit.ui \
          toolWidgetTerrainPointNew.ui \
          toolWidgetTriangleNew.ui \
          toolWidgetWallNew.ui \
-         toolWidgetZoom.ui 
+         toolWidgetZoom.ui \
+         toolWidgetBuildingPositionNew.ui 
 HEADERS += br_camera.h \
            br_infowidget.h \
            br_keyhandler.h \
@@ -36,7 +37,6 @@ HEADERS += br_camera.h \
            c3dvector.h \
            ccolorrgba.h \
            cgllight.h \
-           cglmatrix.h \
            br_doc.h \
            bb_doc.h \
            bb_building.h \
@@ -112,7 +112,11 @@ HEADERS += br_camera.h \
            bb_workarea.h \
            bb_workframe.h \
            bb_toolstair.h \
-           bb_stair.h 
+           bb_stair.h \
+           bb_buildingposition.h \
+           bb_toolbuildingpositionnew.h \
+           bb_widgettoolbuildingpositionnew.h \
+           cglmatrix.h 
 SOURCES += br_camera.cpp \
            br_doc.cpp \
            br_infowidget.cpp \
@@ -208,8 +212,11 @@ SOURCES += br_camera.cpp \
            bb_xdochandler.cpp \
            bb_xgenerator.cpp \
            bb_toolstair.cpp \
-           bb_stair.cpp 
-QT += xml \ 
+           bb_stair.cpp \
+           bb_buildingposition.cpp \
+           bb_widgettoolbuildingpositionnew.cpp \
+           bb_toolbuildingpositionnew.cpp 
+QT += xml \
 opengl
 TARGET = renderer.e
 DESTDIR = ../bin

@@ -166,13 +166,13 @@ bool BB_Doc::open( QString fileName )
             m_Terrain = newTerrain( m_ProjectPath, newTerrainName );
         }
 
-
-
         for ( int i = 0; i < m_Buildings.count(); i++ )
         {
             m_Buildings.at( i ) ->open();
         }
 
+		m_Terrain->resolveBuildingIds( this );
+		
         for ( int i = 0; i < m_Levels.count(); i++ )
         {
             m_Levels.at( i ) ->open();

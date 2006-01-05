@@ -21,6 +21,7 @@ BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidg
 		qDebug( "ERROR: BB_AbstractToolWidget::BB_AbstractToolWidget( NULL, .. ): Null-Pointer erhalten." );
 		exit(1);
 	}
+	m_Selection = NULL;
 	m_ParentTool = parentTool;
 }
 

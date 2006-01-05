@@ -17,6 +17,7 @@
 #include <bb_toolpointnew.h>
 #include <bb_toolterrainpointnew.h>
 #include <bb_toolnavigationpointnew.h>
+#include <bb_toolbuildingpositionnew.h>
 
 #include <bb_toollinenew.h>
 #include <bb_toolwallnew.h>

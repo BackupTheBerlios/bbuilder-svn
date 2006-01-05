@@ -19,7 +19,8 @@ FORMS += buildingEdit.ui \
          toolWidgetTerrainPointNew.ui \
          toolWidgetTriangleNew.ui \
          toolWidgetWallNew.ui \
-         toolWidgetZoom.ui 
+         toolWidgetZoom.ui \
+         toolWidgetBuildingPositionNew.ui 
 HEADERS += bb_abstracttool.h \
            bb_abstracttoolwalledit.h \
            bb_abstracttoolwidget.h \
@@ -107,9 +108,9 @@ HEADERS += bb_abstracttool.h \
            ccolorrgba.h \
            cgllight.h \
            cglmatrix.h \
-           bb_toolstair.h \
-           bb_stair.h 
-
+           bb_buildingposition.h \
+           bb_widgettoolbuildingpositionnew.h \
+           bb_toolbuildingpositionnew.h 
 SOURCES += bb_abstracttool.cpp \
            bb_abstracttoolwalledit.cpp \
            bb_abstracttoolwidget.cpp \
@@ -198,9 +199,11 @@ SOURCES += bb_abstracttool.cpp \
            cgllight.cpp \
            cglmatrix.cpp \
            c3dvector.cpp \
+           bb_buildingposition.cpp \
+           bb_stair.cpp \
            bb_toolstair.cpp \
-           bb_stair.cpp 
-
+           bb_widgettoolbuildingpositionnew.cpp \
+           bb_toolbuildingpositionnew.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

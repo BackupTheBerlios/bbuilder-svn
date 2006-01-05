@@ -104,9 +104,8 @@ void BB_TabLevel::initWidgetLeft()
     gB_Buildings->setFlat( true );
 
     m_ComboBoxBuildings = new QComboBox();
-    connect( m_ComboBoxBuildings, SIGNAL( currentIndexChanged ( int ) ), this, SLOT( slotBuildingChanged( int ) ) );
+	connect( m_ComboBoxBuildings, SIGNAL( currentIndexChanged ( int ) ), this, SLOT( slotBuildingChanged( int ) ) );
 
-    //currentRowChanged
 
     QVBoxLayout *gBL_Building = new QVBoxLayout();
     gBL_Building->setMargin( 0 );

@@ -211,7 +211,12 @@ bool BB_Building::write( QTextStream &out )
  */
 // void BB_Building::generateXElement( QTextStream &out, int depth )
 // {
-//     out << BB::indent( depth ) << "<bb_building>" << BB::escapedText( getFileName() ) << "</bb_building>\n";
+// 	out << BB::indent( depth ) << "<bb_building id=\""
+// 			<< "\" x=\"" << m_Position.x()
+// 			<< "\" y=\"" << m_Position.y()
+// 			<< "\" height=\"" << m_Height
+// 			<< "\" angle=\"" << m_Rotation
+// 			<< "\">" << BB::escapedText( getFileName() ) << "</bb_building>\n";
 // }
 
 

@@ -15,12 +15,7 @@
 #include "bb_tabterrain.h"
 
 #include "bb_globals.h"
-#include "bb_toolselect.h"
-#include "bb_toolscale.h"
-#include "bb_toolzoom.h"
-#include "bb_toolmove.h"
-#include "bb_toolterrainpointnew.h"
-#include "bb_tooltrianglenew.h"
+#include <bb_tools.h>
 
 #include <QtGui>
 
@@ -86,6 +81,7 @@ void BB_TabTerrain::initTools()
 	addTool( m_ToolZoom, "Zoom", QString::fromUtf8("Zoom Werkzeug") );
 	addTool( m_ToolTerrainPointNew, QString::fromUtf8("Geländepunkt-Werkzeug"), QString::fromUtf8("Werkzeug zum Erstellen von Geländeknoten") );
 	addTool( m_ToolTriangleNew, QString::fromUtf8("Gelände-Flächen"), QString::fromUtf8("Werkzeug zum Erstellen von Geländeflächen") );
+	addTool( new BB_ToolBuildingPositionNew(m_Doc, this), QString::fromUtf8("Gebäude"), QString::fromUtf8("Werkzeug zum plazieren von Gebäuden") );
 	
 	toolChanged( initTool );
 }

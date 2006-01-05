@@ -13,7 +13,9 @@
 
 #include <iostream>
 
-#include <ccolorrgba.h>
+
+
+
 
 using namespace std;
 
@@ -32,6 +34,17 @@ BR_View::BR_View( BB_Doc * doc, BR_InfoWidget * info, QWidget * parent )
     /* Fokus setzen, damit das Fenster die KeyPress events abfangen kann */
     setFocusPolicy( Qt::StrongFocus );
 	m_FPS = 0;
+	
+	
+	CColorRGBA tmpColor0,tmpColor1,tmpColor2;
+	tmpColor0 = cl_White * 0.0;
+	tmpColor1 = cl_White * 0.8;
+	tmpColor2 = cl_White * 0.8;
+	
+	
+	C3dVector lightPos(3.0, 10.0, 5.0);
+	// Lichtquelle erzeugen
+	m_Light = new CGLLight(lightPos,tmpColor0,tmpColor1,tmpColor2,1.0,true);
 }
 
 
@@ -86,6 +99,9 @@ void BR_View::resizeGL( int width, int height )
 void BR_View::paintGL()
 {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	
+	m_Light->switchOn();
+	
 	proceedActions();
     m_Camera.apply();
 	m_Doc->showGl();	

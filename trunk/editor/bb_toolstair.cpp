@@ -104,7 +104,7 @@ void BB_ToolStair::release( QMouseEvent* me )
     if ( m_Objects == NULL | me == NULL | m_Transformer == NULL )
     {
         qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
-        m_ToolWidget->updateWidget();
+		getToolWidget()->updateWidget();
         return ;
     }
     //Behandlung nur von Linke-Maustaste

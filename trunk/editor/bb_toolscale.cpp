@@ -69,7 +69,7 @@ void BB_ToolScale::move( QMouseEvent* me, bool overX, bool overY )
 
 void BB_ToolScale::release( QMouseEvent* me )
 {
-    ( ( BB_WidgetToolScale* ) m_ToolWidget ) ->setLogicalScale( getLogicalScale() );
+	( ( BB_WidgetToolScale* ) getToolWidget() ) ->setLogicalScale( getLogicalScale() );
     m_MovePoint = NULL;
     me->ignore();
 }
@@ -145,8 +145,8 @@ void BB_ToolScale::updateWidget()
 {
     if ( m_Component != NULL )
     {
-        ( ( BB_WidgetToolScale* ) m_ToolWidget ) ->setLogicalScale( getLogicalScale() );
-        ( ( BB_WidgetToolScale* ) m_ToolWidget ) ->setRealScale( m_Component->getScaleRealPointer() );
+		( ( BB_WidgetToolScale* ) getToolWidget() ) ->setLogicalScale( getLogicalScale() );
+		( ( BB_WidgetToolScale* ) getToolWidget() ) ->setRealScale( m_Component->getScaleRealPointer() );
     }
 }
 

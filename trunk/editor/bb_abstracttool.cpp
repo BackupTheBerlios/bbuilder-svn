@@ -125,7 +125,7 @@ void BB_AbstractTool::setSelectionVector( QVector<BB_DrawObject*>* selectionVect
         m_Selection = selectionVector;
         if ( m_ToolWidget != NULL )
         {
-            m_ToolWidget->setSelection( m_Selection );
+			getToolWidget()->setSelection( m_Selection );
         }
     }
 

@@ -19,6 +19,10 @@
 #include <br_doc.h>
 #include <br_infowidget.h>
 
+#include <c3dvector.h>
+#include <cgllight.h>
+#include <ccolorrgba.h>
+
 /**
  * Fenster, in dem die OpenGL darstellung aubläuft.
  *
@@ -59,6 +63,7 @@ protected:
 	unsigned int m_CurrentFPS;
     BR_InfoWidget* m_Info;
     BB_Doc* m_Doc;
+    CGLLight* m_Light;
 private:
     void proceedActions();
 };

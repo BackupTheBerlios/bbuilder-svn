@@ -24,6 +24,7 @@ BB_ToolPointNew::BB_ToolPointNew(QWidget * parent)
 {
 	m_Point = NULL;
 	m_Icon = QIcon ( IMG_DIR() + SEPARATOR() + "toolPoint.png" );
+	m_Selection = NULL;
 }
 
 
@@ -56,7 +57,10 @@ void BB_ToolPointNew::click( QMouseEvent* me )
         if ( m_Point == NULL )
         {
 			m_Point = createNewPoint( m_pLogic );
-            m_Objects->append( m_Point );
+			if( m_Point != NULL )
+			{
+            	m_Objects->append( m_Point );
+			}
         }
 
 		if ( me->modifiers () != Qt::ShiftModifier )
@@ -64,7 +68,10 @@ void BB_ToolPointNew::click( QMouseEvent* me )
 			clearSelection();
 		}
 
-		selectObject( m_Point );
+		if( m_Point != NULL )
+		{
+			selectObject( m_Point );
+		}
         updateWidget();
     }
 }

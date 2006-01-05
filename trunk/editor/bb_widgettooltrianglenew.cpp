@@ -48,9 +48,7 @@ void BB_WidgetToolTriangleNew::setWidgetEnabled( bool value )
 
 void BB_WidgetToolTriangleNew::updateWidget()
 {
-	
-	qDebug() << "m_Selection: " << m_Selection << " m_Selection->count(): " << m_Selection->count() <<  endl;
-	
+		
     if ( m_Selection != NULL &&
             m_Selection->count() == 1 &&
             typeid( *( m_Selection->at( 0 ) ) ) == typeid( BB_Triangle ) )

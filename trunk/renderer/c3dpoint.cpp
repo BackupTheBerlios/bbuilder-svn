@@ -109,6 +109,7 @@ void C3dPoint::show()
     glBegin( m_ClassEnum );
     draw();
     glEnd();
+	
 }
 
 
