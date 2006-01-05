@@ -74,6 +74,8 @@ void BB_ConstructionElement::setTextureAbsoluteFileName( const QString& Value )
     {
         image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getName() + ".png", "PNG" );
         setTextureFileName( getName() + ".png" );
+		return;
     }
+	qDebug("image ist nicht geladen");
 }
 

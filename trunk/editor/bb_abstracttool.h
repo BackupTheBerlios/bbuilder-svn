@@ -112,6 +112,8 @@ class BB_AbstractTool
 
         BB_AbstractToolWidget* m_ToolWidget;
         QIcon m_Icon;
+		/** Link auf ein Object der als erster selectiert wurde*/
+		BB_DrawObject * m_FirstSelectedObject;
 
 
 };

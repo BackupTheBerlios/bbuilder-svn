@@ -160,7 +160,8 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
         m_Tool = tool;
         if ( typeid( * tool ) == typeid( BB_ToolMove ) )
         {
-            m_Tool->setObjects( m_Wall->getPoints() );
+//             m_Tool->setObjects( m_Wall->getPoints() );
+			m_Tool->setObjects( m_Wall->getObjectsWithPoints() );
             for ( int i = 0; i < m_DrawObjects->count(); i++ )
             {
                 m_DrawObjects->at( i ) ->setSelected( true );

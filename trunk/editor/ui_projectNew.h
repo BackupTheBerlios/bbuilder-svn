@@ -43,7 +43,7 @@ public:
     {
     ProjectNewDialog->setObjectName(QString::fromUtf8("ProjectNewDialog"));
     ProjectNewDialog->resize(QSize(500, 400).expandedTo(ProjectNewDialog->minimumSizeHint()));
-    QSizePolicy sizePolicy(static_cast<QSizePolicy::Policy>(0), static_cast<QSizePolicy::Policy>(0));
+    QSizePolicy sizePolicy((QSizePolicy::Policy)0, (QSizePolicy::Policy)0);
     sizePolicy.setHorizontalStretch(0);
     sizePolicy.setVerticalStretch(0);
     sizePolicy.setHeightForWidth(ProjectNewDialog->sizePolicy().hasHeightForWidth());
@@ -78,7 +78,7 @@ public:
     labelPath = new QLabel(groupBox);
     labelPath->setObjectName(QString::fromUtf8("labelPath"));
     labelPath->setGeometry(QRect(53, 315, 16, 17));
-    QSizePolicy sizePolicy1(static_cast<QSizePolicy::Policy>(0), static_cast<QSizePolicy::Policy>(0));
+    QSizePolicy sizePolicy1((QSizePolicy::Policy)0, (QSizePolicy::Policy)0);
     sizePolicy1.setHorizontalStretch(0);
     sizePolicy1.setVerticalStretch(0);
     sizePolicy1.setHeightForWidth(labelPath->sizePolicy().hasHeightForWidth());
@@ -119,7 +119,7 @@ public:
 
     lineEditProjectName = new QLineEdit(groupBox);
     lineEditProjectName->setObjectName(QString::fromUtf8("lineEditProjectName"));
-    QSizePolicy sizePolicy2(static_cast<QSizePolicy::Policy>(7), static_cast<QSizePolicy::Policy>(0));
+    QSizePolicy sizePolicy2((QSizePolicy::Policy)7, (QSizePolicy::Policy)0);
     sizePolicy2.setHorizontalStretch(0);
     sizePolicy2.setVerticalStretch(0);
     sizePolicy2.setHeightForWidth(lineEditProjectName->sizePolicy().hasHeightForWidth());

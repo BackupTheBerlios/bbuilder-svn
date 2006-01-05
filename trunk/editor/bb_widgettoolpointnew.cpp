@@ -30,6 +30,8 @@ BB_WidgetToolPointNew::BB_WidgetToolPointNew( BB_AbstractTool* parentTool , QWid
     connect( m_Ui.textEdit_PointDesc, SIGNAL( textChanged() ), this, SLOT( slotDescFinished() ) );
 
     connect( m_Ui.pushButton_Delete, SIGNAL( released() ), this, SLOT( slotDelete() ) );
+	connect( m_Ui.pushButton_ToLine_H, SIGNAL( released() ), this, SLOT( slotToLine_H() ) );
+	connect( m_Ui.pushButton_ToLine_V, SIGNAL( released() ), this, SLOT( slotToLine_V() ) );
 
 }
 
@@ -43,26 +45,26 @@ BB_WidgetToolPointNew::~BB_WidgetToolPointNew()
  */
 void BB_WidgetToolPointNew::slotPosFinished()
 {
-	m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
-	m_Tmp_Vector = m_Tmp_Point->getPos();
-	double x, y;
-	bool ok;
+    m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
+    m_Tmp_Vector = m_Tmp_Point->getPos();
+    double x, y;
+    bool ok;
 
-	x = QString( m_Ui.lineEdit_X->text() ).toDouble( &ok );
-	if ( ok )
-	{
-		m_Tmp_Vector.setX( x );
-	}
+    x = QString( m_Ui.lineEdit_X->text() ).toDouble( &ok );
+    if ( ok )
+    {
+        m_Tmp_Vector.setX( x );
+    }
 
-	y = QString( m_Ui.lineEdit_Y->text() ).toDouble( &ok );
-	if ( ok )
-	{
-		m_Tmp_Vector.setY( y );
-	}
+    y = QString( m_Ui.lineEdit_Y->text() ).toDouble( &ok );
+    if ( ok )
+    {
+        m_Tmp_Vector.setY( y );
+    }
 
-	m_Tmp_Point->setPos( m_Tmp_Vector );
+    m_Tmp_Point->setPos( m_Tmp_Vector );
 
-	m_ParentTool->documentChanged();
+    m_ParentTool->documentChanged();
 }
 
 
@@ -82,8 +84,8 @@ void BB_WidgetToolPointNew::slotDelete()
  */
 void BB_WidgetToolPointNew::slotDescFinished()
 {
-	m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
-	m_Tmp_Point->setDescription( m_Ui.textEdit_PointDesc->toPlainText() );
+    m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
+    m_Tmp_Point->setDescription( m_Ui.textEdit_PointDesc->toPlainText() );
 }
 
 
@@ -92,8 +94,8 @@ void BB_WidgetToolPointNew::slotDescFinished()
  */
 void BB_WidgetToolPointNew::slotNameFinished()
 {
-	m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
-	m_Tmp_Point->setName( m_Ui.lineEdit_PointName->text() );
+    m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
+    m_Tmp_Point->setName( m_Ui.lineEdit_PointName->text() );
 }
 
 
@@ -103,7 +105,7 @@ void BB_WidgetToolPointNew::slotNameFinished()
 void BB_WidgetToolPointNew::updateWidget()
 {
     if ( m_Selection != NULL &&
-            m_Selection->count() == 1 &&
+            m_Selection->count() >= 1 &&
             typeid( *( m_Selection->at( 0 ) ) ) == typeid( BB_Point ) )
     {
         m_Tmp_Point = ( ( BB_Point * ) ( m_Selection->at( 0 ) ) );
@@ -150,4 +152,44 @@ void BB_WidgetToolPointNew::setWidgetEnabled( bool value )
     m_Ui.lineEdit_PointName->setEnabled( value );
     m_Ui.textEdit_PointDesc->setEnabled( value );
     m_Ui.pushButton_Delete->setEnabled( value );
+	m_Ui.pushButton_ToLine_H->setEnabled( value );
+	m_Ui.pushButton_ToLine_V->setEnabled( value );
+}
+
+void BB_WidgetToolPointNew::slotToLine_H()
+{
+    if ( m_Selection != NULL )
+    {
+        if ( m_Selection->count() > 1 )
+        {
+            m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
+            for ( int i = 1;i < m_Selection->count() ;i++ )
+            {
+                if ( typeid( *( m_Selection->at( i ) ) ) == typeid( BB_Point ) )
+                {
+                    ( ( BB_Point * ) m_Selection->at( i ) ) ->bringToLineHorizontal( m_Tmp_Point );
+                }
+            }
+        }
+		m_ParentTool->documentChanged();
+    }
+}
+
+void BB_WidgetToolPointNew::slotToLine_V()
+{
+	if ( m_Selection != NULL )
+	{
+		if ( m_Selection->count() > 1 )
+		{
+			m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
+			for ( int i = 1;i < m_Selection->count() ;i++ )
+			{
+				if ( typeid( *( m_Selection->at( i ) ) ) == typeid( BB_Point ) )
+				{
+					( ( BB_Point * ) m_Selection->at( i ) ) ->bringToLineVertikal( m_Tmp_Point );
+				}
+			}
+		}
+		m_ParentTool->documentChanged();
+	}
 }

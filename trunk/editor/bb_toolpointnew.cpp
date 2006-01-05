@@ -44,7 +44,7 @@ void BB_ToolPointNew::click( QMouseEvent* me )
     if ( m_Objects != NULL && me != NULL )
     {
         m_Transformer->screenToLogical( m_LastLogicMouseClick, me->pos() );
-        clearSelection();
+//         clearSelection();
 
         m_pScreen = me->pos();
         m_Transformer->screenToLogical( m_pLogic, m_pScreen );
@@ -58,6 +58,11 @@ void BB_ToolPointNew::click( QMouseEvent* me )
 			m_Point = createNewPoint( m_pLogic );
             m_Objects->append( m_Point );
         }
+
+		if ( me->modifiers () != Qt::ShiftModifier )
+		{
+			clearSelection();
+		}
 
 		selectObject( m_Point );
         updateWidget();

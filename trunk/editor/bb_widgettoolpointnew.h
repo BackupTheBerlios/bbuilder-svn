@@ -38,6 +38,8 @@ class BB_WidgetToolPointNew : public BB_AbstractToolWidget
         void slotDelete();
         void slotDescFinished();
         void slotNameFinished();
+		void slotToLine_H();
+		void slotToLine_V();
     
 	protected:
         BB_Point* m_Tmp_Point;

@@ -35,6 +35,7 @@ BB_AbstractTool::BB_AbstractTool( QWidget * parent )
     m_ShowDrawObjects = true;
     m_ToolWidget = NULL;
     m_Selection = NULL;
+	m_FirstSelectedObject = NULL;
 }
 
 BB_AbstractTool::~BB_AbstractTool()
@@ -159,6 +160,7 @@ void BB_AbstractTool::clearSelection()
     }
 
     m_Selection->clear();
+	m_FirstSelectedObject = NULL;
 }
 
 

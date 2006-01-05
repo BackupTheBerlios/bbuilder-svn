@@ -60,7 +60,7 @@ private:
     @param point zeiger auf einen BB_Point
     @date 22.10.2005
     */
-    void bringToLine(BB_Point *point);
+//     void bringToLine(BB_Point *point);
     
 };
 

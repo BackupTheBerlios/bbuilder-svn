@@ -23,8 +23,9 @@
 BB_Stair::BB_Stair()
         : BB_Rect()
 {
-    m_Pen.setColor( Qt::blue );
-    m_Brush.setColor( Qt::blue );
+    m_Pen.setColor( Qt::black );
+	m_Brush.setColor( Qt::transparent );
+	m_PenSelected.setColor(Qt::black);
 }
 
 
@@ -34,14 +35,22 @@ BB_Stair::~BB_Stair()
 
 void BB_Stair::show( BB_Transformer& transformer, QPainter& painter ) const
 {
+	if ( m_Selected )
+	{
+		painter.setPen( m_PenSelected );
+	}
+	else
+	{
+		painter.setPen( m_Pen );
+	}
     // 	painter.setPen( m_Pen );
-    // 	painter.setBrush( m_Brush );
-    QBrush brush;
-    brush.setColor( Qt::blue );
-    painter.setBrush( brush );
-    QPen pen;
-    pen.setColor( Qt::black );
-    painter.setPen( pen );
+    	painter.setBrush( m_Brush );
+//     QBrush brush;
+//     brush.setColor( Qt::blue );
+//     painter.setBrush( m_Brush );
+//     QPen pen;
+//     pen.setColor( Qt::black );
+//     painter.setPen( m_Pen );
 
     QPoint dest1;
     QPoint dest2;
@@ -55,10 +64,6 @@ void BB_Stair::show( BB_Transformer& transformer, QPainter& painter ) const
                 ( int ) ( dest2.y() - dest1.y() ) );
     rect = rect.normalized();
     painter.drawRect( rect );
-
-
-    pen.setWidth( 3 );
-    painter.setPen( pen );
 
     int abstand = rect.height() / 10;
     for ( int i = 1;i <= 10 ;i++ )

@@ -209,7 +209,7 @@ SOURCES += br_camera.cpp \
            bb_xgenerator.cpp \
            bb_toolstair.cpp \
            bb_stair.cpp 
-QT += xml \
+QT += xml \ 
 opengl
 TARGET = renderer.e
 DESTDIR = ../bin

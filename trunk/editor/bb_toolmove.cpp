@@ -19,8 +19,8 @@
 
 using namespace std;
 
-BB_ToolMove::BB_ToolMove(QWidget * parent)
-        : BB_AbstractTool(parent)
+BB_ToolMove::BB_ToolMove( QWidget * parent )
+        : BB_AbstractTool( parent )
 {
 
 
@@ -135,9 +135,13 @@ void BB_ToolMove::click( QMouseEvent* me )
             //---------ende-----------
             if ( object->isHit( m_pLogic ) && !object->isSelected() )
             {
-                clearSelection();
+                //Ausrichtung. Die Objecte werden mit Shift Taste selectiert
+                if ( me->modifiers () != Qt::ShiftModifier )
+                {
+                    clearSelection();
+                }
                 m_select = false;
-				selectObject( object );
+                selectObject( object );
                 qDebug( "Keine Objeckte sind selectiert, ein neues wurde selektiert" );
                 if ( m_ToolWidget != NULL )
                 {
@@ -302,7 +306,7 @@ void BB_ToolMove::release( QMouseEvent* me )
                 object = m_Objects->at( i );
                 if ( object->isHit( m_pLogic ) )
                 {
-					selectObject( object );
+                    selectObject( object );
                     //max 1 Object, also Abbrechen
                     break;
                 }
@@ -321,7 +325,7 @@ void BB_ToolMove::release( QMouseEvent* me )
                 object = m_Objects->at( i );
                 if ( object->isHit( rect ) )
                 {
-					selectObject( object );
+                    selectObject( object );
                 }
             }
         }
@@ -332,44 +336,7 @@ void BB_ToolMove::release( QMouseEvent* me )
     }
     //wieder in Auswahl-Modus wechseln
     m_select = true;
-	updateWidget();
-}
-
-
-
-
-
-void BB_ToolMove::bringToLine( BB_Point *point )
-{
-    if ( comparePoint != NULL )
-    {
-        if ( comparePoint == point )
-        {
-            comparePoint->setSelected( false );
-            comparePoint = NULL;
-            return ;
-        }
-        double x = point->getX() - comparePoint->getX();
-        double y = point->getY() - comparePoint->getY();
-        double winkel = atan( ( y / x ) ); //radiant
-        winkel = winkel * 180.0 / M_PI; //gradient
-        winkel = abs ( ( int ) winkel );
-        cout << "Winkel" << winkel << endl;
-        if ( winkel <= 45 )
-            point->setY( comparePoint->getY() );
-        else
-            point->setX( comparePoint->getX() );
-        comparePoint->setSelected( false );
-        comparePoint = NULL;
-        //                       cout << "ausrichten"<<endl;
-    }
-    else
-    {
-        comparePoint = ( BB_Point * ) point;
-//         point->setSelected( true );
-		selectObject( point );
-        cout << "setzen von bringToLinePoint" << endl;
-    }
+    updateWidget();
 }
 
 
@@ -388,7 +355,7 @@ void BB_ToolMove::selectAll()
         for ( int i = 0; i < m_Component->getDrawObjects() ->count() ; i++ )
         {
             object = m_Component->getDrawObjects() ->at( i );
-			selectObject( object );
+            selectObject( object );
         }
 
     }

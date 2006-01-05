@@ -65,14 +65,15 @@ void BB_Window::show( BB_Transformer& transformer, QPainter& painter ) const
     }
 }
 
-bool BB_Window::isHit( QRect rect )
-{
-    if ( rect.x() > m_Pos1->getX() && rect.y() > m_Pos2->getY() )
-    {
-        return true;
-    }
-    return false;
-}
+// bool BB_Window::isHit( QRect rect )
+// {
+//     if ( rect.x() > m_Pos1->getX() && rect.y() > m_Pos2->getY() )
+//     {
+// 		qDebug("BB_Window::isHit = true");
+//         return true;
+//     }
+//     return false;
+// }
 
 void BB_Window::generateXElement( QTextStream &out, int depth )
 {

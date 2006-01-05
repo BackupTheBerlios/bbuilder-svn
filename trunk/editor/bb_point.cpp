@@ -87,11 +87,7 @@ BB_Point::~BB_Point()
 void BB_Point::moveBy( C2dVector vMove )
 {
     m_Pos = m_Pos + vMove;
-	
-	for(int i = 0; i < m_Links.count(); i++)
-	{
-		m_Links.at(i)->moveEvent();
-	}
+	moveEvent();
 	
 }
 
@@ -271,10 +267,12 @@ const QString BB_Point::getClassName()
 void BB_Point::setX( double value )
 {
     m_Pos.setX( value );
+	moveEvent();
 }
 void BB_Point::setY( double value )
 {
     m_Pos.setY( value );
+	moveEvent();
 }
 
 
@@ -392,4 +390,25 @@ void BB_Point::addObject( BB_DrawObject * newObject )
 QPoint BB_Point::getQPoint()
 {
     return QPoint( m_Pos.x(), m_Pos.y() );
+}
+
+void BB_Point::bringToLineHorizontal( BB_Point *point )
+{
+	if ( point != NULL ){
+		setY( point->getY());
+	}
+}
+
+void BB_Point::bringToLineVertikal( BB_Point *point )
+{
+	if ( point != NULL ){
+		setX( point->getX());
+	}
+}
+
+void BB_Point::moveEvent(){
+	for(int i = 0; i < m_Links.count(); i++)
+	{
+		m_Links.at(i)->moveEvent();
+	}
 }

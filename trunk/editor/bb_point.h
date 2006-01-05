@@ -126,6 +126,10 @@ class BB_Point : public BB_DrawObject
         */
         QPoint getQPoint();
 
+		void bringToLineHorizontal(BB_Point *point);
+		void bringToLineVertikal( BB_Point *point );
+		virtual void moveEvent();
+
     private:
         int m_Radius;
         double m_scale;

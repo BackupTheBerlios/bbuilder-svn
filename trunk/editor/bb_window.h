@@ -42,7 +42,7 @@ class BB_Window : public BB_ConstructionElement
         @param QPainter von QT
         */
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
-        virtual bool isHit( QRect rect );
+//         virtual bool isHit( QRect rect );
 		void generateXElement( QTextStream &out, int depth );
 };
 

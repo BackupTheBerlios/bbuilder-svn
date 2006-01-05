@@ -46,6 +46,13 @@ public:
     virtual bool isHit( const QRect& rect);
     virtual bool isHit( const C2dVector& hit);
     virtual const QString getClassName();
+	virtual void moveEvent();
+	/**
+	Richtet die Punken so, dass Dreieck immer nach oben zeigt<br>
+	Diese Funktion wird von Renderer benoetigt.
+	@author Vaceslav Ustinov
+	*/
+	virtual void normalize();
 	
 	/**
 	 * @see virtual void BB_DrawObject::show(BB_Transformer& transformer, QPainter& painter) const=0
