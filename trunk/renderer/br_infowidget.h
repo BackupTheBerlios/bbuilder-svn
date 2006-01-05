@@ -14,7 +14,7 @@
 
 #include <QWidget>
 
-#include <br_doc.h>
+#include <bb_doc.h>
 #include <QtGui>
 
 /**
@@ -25,7 +25,7 @@ Fenster zum anzeigen der Informationen
 class BR_InfoWidget : public QWidget
 {
 public:
-	BR_InfoWidget(BR_Doc * doc, QWidget * parent = 0, Qt::WFlags f = 0 );
+	BR_InfoWidget(BB_Doc * doc, QWidget * parent = 0, Qt::WFlags f = 0 );
 
     ~BR_InfoWidget();
     void printFPS(int fps);

@@ -144,3 +144,32 @@ void BB_DocComponent::generateXElement( QTextStream &out, int depth )
 			<< BB::escapedText( getFileName() ) 
 			<< "</" << getClassName().toLower() << ">\n";
 }
+
+
+/*!
+    \fn BB_DocComponent::showGl()
+ */
+void BB_DocComponent::showGl()
+{
+	for( int i = 0; i < m_DrawObjects.count(); i++ )
+	{
+		m_DrawObjects.at( i )->showGl();
+	}
+}
+
+
+/*!
+    \fn BB_DocComponent::createGl( double scale )
+ */
+void BB_DocComponent::createGl( double scale )
+{
+	double docScale = 1 / getPixelPerMeter( 1.0 );
+	scale =  scale * docScale;
+	
+	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
+	
+	for( int i = 0; i < m_DrawObjects.count(); i++ )
+	{
+		m_DrawObjects.at( i )->createGl( scale );
+	}
+}

@@ -310,3 +310,36 @@ int BB_Building::getLevelCount()
 	int count = m_Levels.count();
 	return count;
 }
+
+
+/*!
+    \fn BB_Building::getBuildingHeight()
+ */
+double BB_Building::getBuildingHeight()
+{
+	double height = 0;
+	
+	for(int i = 0; i < m_Levels.count(); i++)
+	{
+		height += m_Levels.at( i )->getHeight();
+	}
+	
+	return height;
+}
+
+
+/*!
+    \fn BB_Building::createGl( double scale )
+ */
+void BB_Building::createGl( double scale )
+{
+	double docScale = 1 / getPixelPerMeter( 1.0 );
+	scale =  scale * docScale;
+	
+	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
+	
+	for( int i = 0; i < m_DrawObjects.count(); i++ )
+	{
+		m_DrawObjects.at( i )->createGl( scale, getBuildingHeight() );
+	}
+}

@@ -17,6 +17,8 @@
 #include <bb_tab.h>
 #include <iostream>
 
+#include <QtOpenGL>
+
 using namespace std;
 
 BB_Doc::BB_Doc()
@@ -84,7 +86,7 @@ bool BB_Doc::clear()
     }
 
     BB_DocComponent* object;
-	
+
     /* Alle Etagen löschen */
     for ( int i = m_Levels.count() - 1 ; i >= 0 ; i-- )
     {
@@ -96,7 +98,7 @@ bool BB_Doc::clear()
             object = NULL;
         }
     }
-	
+
     m_Levels.clear();
     /* Alle Gebäude löschen */
     for ( int i = m_Buildings.count() - 1 ; i >= 0 ; i-- )
@@ -110,7 +112,7 @@ bool BB_Doc::clear()
         }
         m_Buildings.remove( i );
     }
-//     cout << "m_Buildings.clear(); count: " << m_Buildings.count() << endl;
+    //     cout << "m_Buildings.clear(); count: " << m_Buildings.count() << endl;
     m_Buildings.clear();
 
 
@@ -119,8 +121,8 @@ bool BB_Doc::clear()
 
     BB_Object::m_Counter = 0;
 
-	documentChanged();
-	
+    documentChanged();
+
     return true;
 }
 
@@ -154,30 +156,30 @@ bool BB_Doc::open( QString fileName )
             return false;
         }
 
-		if( m_Terrain != NULL)
-		{
-			m_Terrain->open();
-		}
-		else
-		{
-			QString newTerrainName("terrain.xml");
-			m_Terrain = newTerrain( m_ProjectPath, newTerrainName );
-		}
-		
-		
+        if ( m_Terrain != NULL )
+        {
+            m_Terrain->open();
+        }
+        else
+        {
+            QString newTerrainName( "terrain.xml" );
+            m_Terrain = newTerrain( m_ProjectPath, newTerrainName );
+        }
+
+
 
         for ( int i = 0; i < m_Buildings.count(); i++ )
         {
             m_Buildings.at( i ) ->open();
         }
 
-		for(int i = 0; i < m_Levels.count(); i++)
-		{
-			m_Levels.at(i)->open();
-		}
+        for ( int i = 0; i < m_Levels.count(); i++ )
+        {
+            m_Levels.at( i ) ->open();
+        }
 
-		
-		BB_Object::m_Counter = m_MaxId;
+
+        BB_Object::m_Counter = m_MaxId;
     }
     else
     {
@@ -188,8 +190,8 @@ bool BB_Doc::open( QString fileName )
     // 	cout << "m_ProjectPath: " << m_ProjectPath.path().toStdString() << endl;
     // 	cout << "m_ProjectFile: " << m_ProjectFile.toStdString() << endl;
 
-	documentChanged();
-	
+    documentChanged();
+
     return true;
 }
 
@@ -246,7 +248,7 @@ bool BB_Doc::createNew( const QString &name, const QString &desc, const QDir &pa
 
 
     save();
-	documentChanged();
+    documentChanged();
     return true;
 }
 
@@ -256,7 +258,7 @@ bool BB_Doc::createNew( const QString &name, const QString &desc, const QDir &pa
  */
 bool BB_Doc::write( QTextStream &out )
 {
-	m_MaxId = BB_Object::m_Counter;
+    m_MaxId = BB_Object::m_Counter;
     int depth = 1;
 
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -264,7 +266,7 @@ bool BB_Doc::write( QTextStream &out )
     << "<bb_doc version=\"1.0\">\n";
 
     BB_Object::generateXElement( out, depth );
-	out << BB::indent( depth) << "<properties max_id=\"" << m_MaxId << "\" />" << endl;
+    out << BB::indent( depth ) << "<properties max_id=\"" << m_MaxId << "\" />" << endl;
     if ( getTerrain() != NULL )
     {
         m_Terrain->generateXElement( out, depth );
@@ -326,7 +328,7 @@ BB_Building* BB_Doc::newBuilding( QWidget * parent )
         m_Buildings.append( building );
 
         save();
-		documentChanged();
+        documentChanged();
     }
     else
     {
@@ -343,37 +345,37 @@ BB_Building* BB_Doc::newBuilding( QWidget * parent )
  */
 BB_Level* BB_Doc::newLevel( BB_Building* building, QWidget * parent )
 {
-// 	Eine Etage kann nur mit einem Gebäude erzeugt werden 
-	if( building == NULL )
-	{
-		return NULL;
-	}
-	
-	QString fileName;
-	QDir path = m_ProjectPath;
-	path.cd( "levels" );
+    // 	Eine Etage kann nur mit einem Gebäude erzeugt werden
+    if ( building == NULL )
+    {
+        return NULL;
+    }
 
-	BB_Level* level = new BB_Level( building , path, "tempFile" );
+    QString fileName;
+    QDir path = m_ProjectPath;
+    path.cd( "levels" );
 
-	if ( level->keyBoardEdit( parent ) == QDialog::Accepted )
-	{
-		level->setFileName( fileName.sprintf( "%08d.xml", level->getObjectNr() ) );
-		level->save();
-		m_Levels.append( level );
+    BB_Level* level = new BB_Level( building , path, "tempFile" );
 
-		save();
-		documentChanged();
-	}
-	else
-	{
-		if( level != NULL)
-		{
-			delete level;
-			level = NULL;
-		}
-	}
+    if ( level->keyBoardEdit( parent ) == QDialog::Accepted )
+    {
+        level->setFileName( fileName.sprintf( "%08d.xml", level->getObjectNr() ) );
+        level->save();
+        m_Levels.append( level );
 
-	return level;
+        save();
+        documentChanged();
+    }
+    else
+    {
+        if ( level != NULL )
+        {
+            delete level;
+            level = NULL;
+        }
+    }
+
+    return level;
 }
 
 
@@ -384,7 +386,7 @@ BB_Building* BB_Doc::newBuilding( QDir& path, QString& fileName )
 {
     BB_Building * building = new BB_Building( path, fileName );
     m_Buildings.append( building );
-	documentChanged();
+    documentChanged();
     return building;
 }
 
@@ -396,7 +398,7 @@ BB_Level* BB_Doc::newLevel( BB_Building* building, QDir& path, QString& fileName
 {
     BB_Level * level = new BB_Level( building, path, fileName );
     m_Levels.append( level );
-	documentChanged();
+    documentChanged();
     return level;
 }
 
@@ -407,7 +409,7 @@ BB_Level* BB_Doc::newLevel( BB_Building* building, QDir& path, QString& fileName
 BB_Terrain* BB_Doc::newTerrain( QDir& path, QString& fileName )
 {
     m_Terrain = new BB_Terrain( path, fileName, "Terrain" );
-	documentChanged();
+    documentChanged();
     return m_Terrain;
 }
 
@@ -452,9 +454,9 @@ bool BB_Doc::deleteBuilding( QListWidgetItem* item )
             if ( item == building->getListWidgetItem() )
             {
                 m_Buildings.remove( i );
-				deleteLevels( building );
+                deleteLevels( building );
                 delete building;
-				documentChanged();
+                documentChanged();
                 return true;
             }
         }
@@ -491,12 +493,12 @@ void BB_Doc::documentChanged()
  */
 BB_Building* BB_Doc::getBuilding( int index )
 {
-	if( index < m_Buildings.count() && index >= 0 )
-	{
-		return m_Buildings.at(index);
-	}
-	
-	return NULL;
+    if ( index < m_Buildings.count() && index >= 0 )
+    {
+        return m_Buildings.at( index );
+    }
+
+    return NULL;
 }
 
 
@@ -505,16 +507,16 @@ BB_Building* BB_Doc::getBuilding( int index )
  */
 bool BB_Doc::deleteLevel( BB_Level* level )
 {
-	for( int i = m_Levels.count() -1; i >=0; i-- )
-	{
-		if( m_Levels.at(0) == level )
-		{
-			delete level;
-			return true;
-		}
-	}
-	
-	return false;
+    for ( int i = m_Levels.count() - 1; i >= 0; i-- )
+    {
+        if ( m_Levels.at( 0 ) == level )
+        {
+            delete level;
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
@@ -523,13 +525,13 @@ bool BB_Doc::deleteLevel( BB_Level* level )
  */
 void BB_Doc::deleteLevels( BB_Building* building )
 {
-	if( building != NULL)
-	{
-		for( int i = building->getLevelCount(); i >= 0; i-- )
-		{
-			deleteLevel( building->getLevel( i ) );
-		}
-	}
+    if ( building != NULL )
+    {
+        for ( int i = building->getLevelCount(); i >= 0; i-- )
+        {
+            deleteLevel( building->getLevel( i ) );
+        }
+    }
 }
 
 
@@ -538,13 +540,74 @@ void BB_Doc::deleteLevels( BB_Building* building )
  */
 BB_Building* BB_Doc::getBuildingById( int objectId )
 {
-	for( int i = 0; i < m_Buildings.count(); i++ )
-	{
-		if( m_Buildings.at(i)->getObjectNr() == objectId )
-		{
-			return m_Buildings.at(i);
-		}
-	}
+    for ( int i = 0; i < m_Buildings.count(); i++ )
+    {
+        if ( m_Buildings.at( i ) ->getObjectNr() == objectId )
+        {
+            return m_Buildings.at( i );
+        }
+    }
+
+    return NULL;
+}
+
+
+/*!
+    \fn BB_Doc::showGl()
+ */
+void BB_Doc::showGl()
+{
+    if ( m_Terrain != NULL )
+    {
+        m_Terrain->showGl();
+    }
+
 	
-	return NULL;
+	/* TODO Nur zu testzwecken ..  */
+	
+    for ( int i = 0; i < m_Buildings.count(); i++ )
+    {
+        m_Buildings.at( i ) ->showGl();
+    }
+
+	BB_Level* level;
+	double height = 0;
+    for ( int i = 0; i < m_Levels.count(); i++ )
+    {
+		level = m_Levels.at(i);
+		
+		glTranslated( 0.0 , height ,0.0 );
+		
+		height = height + level->getHeight();
+		
+        m_Levels.at( i ) ->showGl();
+    }
+}
+
+
+/*!
+    \fn BB_Doc::createGlObjects()
+ */
+void BB_Doc::createGlObjects()
+{
+	double scale = 1.0;
+	
+	if ( m_Terrain != NULL )
+	{
+		m_Terrain->createGl(scale);
+	}
+
+	BB_Building *building;
+	for ( int i = 0; i < m_Buildings.count(); i++ )
+	{
+		building = m_Buildings.at( i );
+		building->createGl(scale);
+	}
+
+	BB_Level * level;
+	for ( int i = 0; i < m_Levels.count(); i++ )
+	{
+		level = m_Levels.at( i );
+		level->createGl(scale );
+	}
 }

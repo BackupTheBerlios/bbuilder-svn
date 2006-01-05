@@ -101,13 +101,15 @@ public:
     virtual int keyBoardEdit( QWidget* parent );
     virtual void generateXElement( QTextStream &out, int depth );
 	
-	
+	virtual void showGl();
+	virtual void createGl( double scale );
 protected:
     BB_Point m_ScalePoint_1;
     BB_Point m_ScalePoint_2;
     double m_ScaleValue;
 protected:
     virtual void mapChanged();
+
 };
 
 #endif

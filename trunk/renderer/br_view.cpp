@@ -17,15 +17,16 @@
 
 using namespace std;
 
-BR_View::BR_View( BR_Doc * doc, BR_InfoWidget * info, QWidget * parent )
+BR_View::BR_View( BB_Doc * doc, BR_InfoWidget * info, QWidget * parent )
         : QGLWidget( parent )
 {
 	if( doc == NULL || info == NULL)
 	{
-		cout << "Kritischer Programmfehler" << endl;
+		qDebug( " BR_View::BR_View( BB_Doc * doc, BR_InfoWidget * info ): NULL Pointer erhalten " );
 		exit(1);
 	}
 	
+	m_Doc = doc;
 	m_Info = info;
 	
     /* Fokus setzen, damit das Fenster die KeyPress events abfangen kann */
@@ -53,7 +54,7 @@ void BR_View::initializeGL()
     glEnable( GL_LIGHTING );
     glEnable( GL_COLOR_MATERIAL );
     glEnable( GL_NORMALIZE );
-    glEnable( GL_CULL_FACE );
+//     glEnable( GL_CULL_FACE );
     //   glFrontFace(GL_CCW);
 
     glPolygonMode( GL_FRONT, GL_FILL );
@@ -87,7 +88,7 @@ void BR_View::paintGL()
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	proceedActions();
     m_Camera.apply();
-	
+	m_Doc->showGl();	
     drawGrid();
 	m_FPS++;
 }

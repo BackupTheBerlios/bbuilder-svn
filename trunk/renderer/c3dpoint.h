@@ -22,7 +22,8 @@
 /**A 3d point with color, light, normal vector and texture coordinates properties
   *@author Walter Roth
   */
-#include <GL/gl.h>
+// #include <GL/gl.h>
+#include <QtOpenGL>
 #include <QVector>
 
 #include "c3dvector.h"

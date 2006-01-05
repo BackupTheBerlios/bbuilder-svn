@@ -27,7 +27,7 @@
 class BR_View : public QGLWidget
 {
 public:
-	BR_View( BR_Doc * doc, BR_InfoWidget * info, QWidget * parent = 0 );
+	BR_View( BB_Doc * doc, BR_InfoWidget * info, QWidget * parent = 0 );
 
 	~BR_View();
 
@@ -58,6 +58,7 @@ protected:
 	unsigned int m_FPS;
 	unsigned int m_CurrentFPS;
     BR_InfoWidget* m_Info;
+    BB_Doc* m_Doc;
 private:
     void proceedActions();
 };

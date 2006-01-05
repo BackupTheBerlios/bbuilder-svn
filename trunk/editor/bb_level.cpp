@@ -37,7 +37,7 @@ BB_Level::BB_Level( BB_Building* building, const QDir& path, const QString &file
 	m_Handler = new BB_XLevelHandler(this );
 	
     //Standart Hoehe
-	m_height = 3.0;
+	m_Height = 3.0;
 }
 
 
@@ -58,12 +58,12 @@ const QString BB_Level::getClassName()
 
 double BB_Level::getHeight() const
 {
-    return m_height;
+    return m_Height;
 }
 
 void BB_Level::setHeight( double Value )
 {
-    m_height = Value;
+    m_Height = Value;
 }
 
 
@@ -224,4 +224,21 @@ bool BB_Level::write( QTextStream &out )
 
 	out << "</bb_level>\n";
 	return true;
+}
+
+
+/*!
+    \fn BB_Level::createGl( double scale )
+ */
+void BB_Level::createGl( double scale )
+{
+	double docScale = 1 / getPixelPerMeter( 1.0 );
+	scale =  scale * docScale;
+	
+	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
+	
+	for( int i = 0; i < m_DrawObjects.count(); i++ )
+	{
+		m_DrawObjects.at( i )->createGl( scale, m_Height );
+	}
 }

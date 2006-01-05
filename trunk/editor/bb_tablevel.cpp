@@ -201,7 +201,7 @@ void BB_TabLevel::initTools()
     \fn BB_TabLevel::updateBuildingList()
  */
 void BB_TabLevel::updateBuildingList()
-{
+{	
     qDebug( "Updating BuildingList ... " );
     m_ComboBoxBuildings->blockSignals( true );
 
@@ -220,6 +220,7 @@ void BB_TabLevel::updateBuildingList()
 
     m_ComboBoxBuildings->blockSignals( false );
     qDebug( "OK" );
+
 }
 
 
@@ -253,6 +254,11 @@ void BB_TabLevel::documentChanged()
 {
     updateBuildingList();
     updateLevelList();
+	
+	if( m_Buildings->count() == 1 )
+	{
+		setBuilding( m_Buildings->at(0) );
+	}
 }
 
 

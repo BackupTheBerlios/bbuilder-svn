@@ -32,6 +32,7 @@ BB_XBuildingHandler::BB_XBuildingHandler( BB_Building* building )
         m_XScale = false;
         m_ScalePointIndex = 0;
 
+		m_ConstructionElement = NULL;
         m_Object = NULL;
     }
 }

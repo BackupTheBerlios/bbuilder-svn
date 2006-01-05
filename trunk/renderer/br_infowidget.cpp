@@ -13,7 +13,7 @@
 
 #include <QtGui>
 
-BR_InfoWidget::BR_InfoWidget( BR_Doc * doc,  QWidget * parent, Qt::WFlags f )
+BR_InfoWidget::BR_InfoWidget( BB_Doc * doc,  QWidget * parent, Qt::WFlags f )
  : QWidget(parent, f)
 {
 	

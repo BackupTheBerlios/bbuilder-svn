@@ -55,10 +55,12 @@ class BB_Doc : public BB_FileObject
         bool deleteBuilding( QListWidgetItem* item );
         BB_Building* getBuilding( QListWidgetItem* item );
         void addObserver( BB_Tab *tab );
-		BB_Building* getBuilding( int index );
-    bool deleteLevel( BB_Level* level );
-    void deleteLevels( BB_Building* building );
-    BB_Building* getBuildingById( int objectId );
+        BB_Building* getBuilding( int index );
+        bool deleteLevel( BB_Level* level );
+        void deleteLevels( BB_Building* building );
+        BB_Building* getBuildingById( int objectId );
+        void showGl();
+    void createGlObjects();
     protected:
         void documentChanged();
 
@@ -70,9 +72,10 @@ class BB_Doc : public BB_FileObject
         QDir m_ProjectPath;
         QString m_ProjectFile;
         QList<BB_Tab*> m_Observer;
-    int m_MaxId;
+        int m_MaxId;
 
         bool clear();
+
 
 
         friend class BB_XDocHandler;

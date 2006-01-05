@@ -47,6 +47,8 @@ BR_MainWindow::BR_MainWindow( QWidget* parent, Qt::WFlags flags )
     m_aViewFullScreen = NULL;
 
     initTimer();
+
+    slotProjectClose();
 }
 
 
@@ -78,6 +80,13 @@ void BR_MainWindow::initActions()
     m_aViewFullScreen->setStatusTip( tr( "Zeigt das Bild auf dem gesammten Bildschirm" ) );
     connect( m_aViewFullScreen, SIGNAL( toggled ( bool ) ), this, SLOT( slotViewFullScreen ( bool ) ) );
 
+    m_aProjectOpen = new QAction( QString::fromUtf8( "Projekt öffnen" ), this );
+    m_aFileExit->setStatusTip( QString::fromUtf8( "Eine Projekt öffnen" ) );
+    connect( m_aProjectOpen, SIGNAL( triggered() ), this, SLOT( slotProjectOpen() ) );
+
+    m_aProjectClose = new QAction ( QString::fromUtf8( "Projekt schliessen" ), this );
+    m_aProjectClose->setStatusTip( QString::fromUtf8( "Das geladene Projekt schliessen" ) );
+    connect( m_aProjectClose, SIGNAL( triggered() ), this, SLOT( slotProjectClose() ) );
 }
 
 
@@ -100,14 +109,14 @@ void BR_MainWindow::initMainWindow()
     QSplitter *splitter = new QSplitter( this );
 
     m_InfoWidget = new BR_InfoWidget( &m_Doc, this );
-	
-	m_InfoWidget->setFixedWidth(200);
-	
+
+    m_InfoWidget->setFixedWidth( 200 );
+
     m_ViewWidget = new BR_View( &m_Doc, m_InfoWidget, this );
-	
-	
+
+
     ///@todo Wieder Deaktivieren
-    // 	m_ViewWidget->setEnabled( false );
+    m_ViewWidget->setEnabled( false );
 
     splitter->addWidget( m_ViewWidget );
     splitter->setCollapsible( 0, false );
@@ -119,6 +128,7 @@ void BR_MainWindow::initMainWindow()
 
 
     setCentralWidget( splitter );
+    // 	setCentralWidget( m_ViewWidget );
 }
 
 
@@ -134,6 +144,9 @@ void BR_MainWindow::initMenus()
     m_MenuFile = new QMenu( QString::fromUtf8( "&Datei" ) );
 
     /* Menu 'Datei' füllen */
+    m_MenuFile->addAction( m_aProjectOpen );
+    m_MenuFile->addAction( m_aProjectClose );
+    m_MenuFile->addSeparator();
     m_MenuFile->addAction( m_aFileExit );
 
 
@@ -225,3 +238,47 @@ void BR_MainWindow::slotTimerFPS()
 }
 
 
+
+
+/*!
+    \fn BR_MainWindow::slotProjectOpen()
+ */
+void BR_MainWindow::slotProjectOpen()
+{
+    QString filename;
+    filename = QFileDialog::getOpenFileName(
+                   this,
+                   QString::fromUtf8( "Öffnen" ),
+				   QDir::homePath(),
+                   "glBB Projekt-Datei (*.glbb)" );
+
+    // 	cout << "filename : " << filename.toStdString() << endl;
+
+
+    if ( !filename.isEmpty() )
+    {
+        slotProjectClose();
+        if ( !m_Doc.open( filename ) )
+
+        {
+            QMessageBox::critical( this,
+                                   QString::fromUtf8( "Fehler beim Öffnen des Projektes" ),
+                                   QString::fromUtf8( "Projekt konnte nicht geöffnet werden" ) );
+        }
+        else
+        {
+			m_Doc.createGlObjects();
+            m_ViewWidget->setEnabled( true );
+        }
+    }
+}
+
+
+/*!
+    \fn BR_MainWindow::slotProjectClose()
+ */
+void BR_MainWindow::slotProjectClose()
+{
+    m_Doc.close();
+    m_ViewWidget->setEnabled( false );
+}

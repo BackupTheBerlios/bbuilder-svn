@@ -18,7 +18,7 @@
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
 #include "c3dbody.h"
-#include "qgl.h"
+// #include <QGL>
 
 /**
  * Konstrucktor

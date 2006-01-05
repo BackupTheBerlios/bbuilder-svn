@@ -44,6 +44,8 @@ public:
     void removeLevel( BB_Level* level );
     BB_Level* getLevel( int index );
     int getLevelCount();
+    virtual double getBuildingHeight();
+    virtual void createGl( double scale );
     
 
 protected:

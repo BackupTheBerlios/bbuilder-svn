@@ -17,11 +17,12 @@
 
 #include <QObject>
 
-#include "bb_point.h"
+#include "bb_terrainpoint.h"
 #include "bb_triangle.h"
 
 #include <iostream>
 #include "bb_xterrainhandler.h"
+#include <c3dtriangle.h>
 
 using namespace std;
 
@@ -69,7 +70,7 @@ bool BB_Terrain::write(QTextStream &out)
 	{
 		object = m_DrawObjects.at(i);
 		
-		if(typeid(*object) == typeid(BB_Point))
+		if(typeid(*object) == typeid(BB_TerrainPoint))
 		{
 			points.append((BB_Point*)object);
 		} 
@@ -90,6 +91,10 @@ bool BB_Terrain::write(QTextStream &out)
 			<< "<bb_terrain version=\"1.0\">\n";
 	BB_Object::generateXElement(out, depth);
 	out << BB::indent(depth) << "<mapfile>" << m_MapFileName << "</mapfile>\n";
+	out << BB::indent( depth ) << "<scale value=\"" << m_ScaleValue << "\">\n";
+	m_ScalePoint_1.generateXElement( out, depth + 1 );
+	m_ScalePoint_2.generateXElement( out, depth + 1 );
+	out << BB::indent( depth ) << "</scale>\n";
 	
 	if(points.count())
 	{

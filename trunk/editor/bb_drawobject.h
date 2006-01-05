@@ -22,6 +22,7 @@
 
 #include "bb_object.h"
 #include "bb_transformer.h"
+#include <c3dpoint.h>
 
 
 /**
@@ -38,8 +39,8 @@ class BB_DrawObject : public BB_Object
         virtual ~BB_DrawObject();
         virtual void moveBy( C2dVector pMove );
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const = 0;
-//         virtual const QColor & getColor() const;
-//         virtual void setColor( const QColor& _newVal = "Green" );
+        //         virtual const QColor & getColor() const;
+        //         virtual void setColor( const QColor& _newVal = "Green" );
         //void setP0(const QPoint& theValue){m_P0 = theValue;}
         //QPoint getP0() const{return m_P0;}
         virtual bool isHit( const C2dVector& hit ) = 0;
@@ -52,15 +53,20 @@ class BB_DrawObject : public BB_Object
         void setBrush( const QBrush& theValue );
         void setPen( const QPen& theValue );
         virtual void moveEvent();
+        virtual void showGl();
+		virtual void createGl( double scale, double height = 0 );
     protected:
         //QPoint m_P0;
-//         QColor m_Color;
+        //         QColor m_Color;
         int m_hitRange;
         bool m_Selected;
         QPen m_Pen;
         QPen m_PenSelected;
         QBrush m_Brush;
-		QBrush m_BrushSelected;
+        QBrush m_BrushSelected;
+		
+		C3dPoint* m_GlObject;
+    
 };
 
 #endif

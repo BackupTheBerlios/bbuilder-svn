@@ -16,6 +16,9 @@
 
 #include <iostream>
 
+
+#include <c3dtriangle.h>
+
 using namespace std;
 
 BB_DrawObject::BB_DrawObject( QString name )
@@ -34,6 +37,8 @@ BB_DrawObject::BB_DrawObject( QString name )
 	m_BrushSelected.setStyle( Qt::SolidPattern );
 
     m_Selected = false;
+	
+	m_GlObject = NULL;
 }
 
 
@@ -130,4 +135,26 @@ void BB_DrawObject::setPen( const QPen& value )
 void BB_DrawObject::moveEvent()
 {
     // Hier keine Implementierung
+}
+
+
+/*!
+    \fn BB_DrawObject::showGl()
+ */
+void BB_DrawObject::showGl()
+{
+	
+	if( m_GlObject )
+	{
+		m_GlObject->show();
+	}
+}
+
+
+/*!
+    \fn BB_DrawObject::createGl()
+ */
+void BB_DrawObject::createGl( double scale, double height )
+{
+	m_GlObject = NULL;
 }

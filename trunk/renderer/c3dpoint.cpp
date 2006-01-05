@@ -105,7 +105,7 @@ void C3dPoint::draw()
  */
 void C3dPoint::show()
 {
-    // 	   glColor3fv(m_Color.fv());
+	glColor3fv(m_Color.fv());
     glBegin( m_ClassEnum );
     draw();
     glEnd();

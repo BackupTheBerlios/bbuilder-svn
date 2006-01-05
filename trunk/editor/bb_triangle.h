@@ -70,6 +70,8 @@ public:
 	/** Pointer auf die dritte Position */
 	BB_Point* m_Pos3;
 	
+protected:
+    virtual void createGl( double scale, double height = 0);
 };
 
 #endif

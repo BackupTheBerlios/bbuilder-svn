@@ -16,7 +16,7 @@ BR_Camera::BR_Camera()
 	
 	m_Aspect = 0.75;
 	m_FoVY = 45.0;
-	m_Far = 100.0;
+	m_Far = 1000.0;
 	m_Near = 0.1;
 	
 	m_Camera = C3dVector(0.0,3.0,-3.0);

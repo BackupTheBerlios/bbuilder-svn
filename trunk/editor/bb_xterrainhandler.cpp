@@ -15,7 +15,7 @@
 #include "bb_triangle.h"
 
 
-#include "bb_point.h"
+#include "bb_terrainpoint.h"
 
 #include <iostream>
 
@@ -82,12 +82,12 @@ bool BB_XTerrainHandler::startElement( const QString& namespaceURI, const QStrin
 
         m_XScale = true;
     }
-    else if ( qName == "bb_point" )
+    else if ( qName == "bb_terrainpoint" )
     {
         bool ok;
         QString tmp;
 
-        double x, y;
+        double x, y, h;
         int id;
 
         tmp = atts.value( "id" );
@@ -99,37 +99,70 @@ bool BB_XTerrainHandler::startElement( const QString& namespaceURI, const QStrin
         tmp = atts.value( "y" );
         y = tmp.toDouble( &ok );
 
+		tmp = atts.value( "h" );
+		h = tmp.toDouble( &ok );
 
-        m_Object = new BB_Point();
+        m_Object = new BB_TerrainPoint();
         ( ( BB_Point* ) m_Object ) ->setX( x );
         ( ( BB_Point* ) m_Object ) ->setY( y );
-
+		( ( BB_TerrainPoint* ) m_Object) ->setHeight( h );
         m_Object->m_ObjectNr = id;
         m_Object->setSelected( false );
 
-        if ( m_XScale )
-        {
-            static int scalePoint = 0;
-            if ( scalePoint == 0 )
-            {
-                m_Terrain->getScalePoint_1() ->setX( x );
-                m_Terrain->getScalePoint_1() ->setY( y );
-            }
-            else if ( scalePoint == 1 )
-            {
-                m_Terrain->getScalePoint_2() ->setX( x );
-                m_Terrain->getScalePoint_2() ->setY( y );
-            }
 
-            scalePoint++;
-        }
-        else
-        {
-            m_Terrain->getDrawObjects() ->append( m_Object );
-        }
-
+		m_Terrain->getDrawObjects() ->append( m_Object );
 
     }
+	else if ( qName == "bb_point" )
+	{
+		bool ok;
+		QString tmp;
+
+		double x, y, h;
+		int id;
+
+		tmp = atts.value( "id" );
+		id = tmp.toInt( &ok );
+
+		tmp = atts.value( "x" );
+		x = tmp.toDouble( &ok );
+
+		tmp = atts.value( "y" );
+		y = tmp.toDouble( &ok );
+
+		tmp = atts.value( "h" );
+		h = tmp.toDouble( &ok );
+
+		m_Object = new BB_TerrainPoint();
+		( ( BB_Point* ) m_Object ) ->setX( x );
+		( ( BB_Point* ) m_Object ) ->setY( y );
+		( ( BB_TerrainPoint* ) m_Object) ->setHeight( h );
+		m_Object->m_ObjectNr = id;
+		m_Object->setSelected( false );
+
+		if ( m_XScale )
+		{
+			static int scalePoint = 0;
+			if ( scalePoint == 0 )
+			{
+				m_Terrain->getScalePoint_1() ->setX( x );
+				m_Terrain->getScalePoint_1() ->setY( y );
+			}
+			else if ( scalePoint == 1 )
+			{
+				m_Terrain->getScalePoint_2() ->setX( x );
+				m_Terrain->getScalePoint_2() ->setY( y );
+			}
+
+			scalePoint++;
+		}
+		else
+		{
+			m_Terrain->getDrawObjects() ->append( m_Object );
+		}
+
+
+	}
     else if ( qName == "bb_triangle" )
     {
         bool ok;
@@ -158,7 +191,7 @@ bool BB_XTerrainHandler::startElement( const QString& namespaceURI, const QStrin
         for ( int i = 0; i < m_Terrain->getDrawObjects() ->count(); i++ )
         {
             object = m_Terrain->getDrawObjects() ->at( i );
-            if ( typeid( *object ) == typeid( BB_Point ) )
+            if ( typeid( *object ) == typeid( BB_TerrainPoint ) )
             {
                 if ( object->getObjectNr() == p1 )
                 {
@@ -236,7 +269,7 @@ bool BB_XTerrainHandler::endElement( const QString& namespaceURI, const QString&
     {
         m_XScale = false;
     }
-    else if ( qName == "bb_point" )
+    else if ( qName == "bb_terrainpoint" )
     {
         m_Object = NULL;
     }

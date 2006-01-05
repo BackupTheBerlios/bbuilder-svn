@@ -17,7 +17,7 @@
 #include <QApplication>
 #include <QString>
 
-#include "br_globals.h"
+#include "bb_globals.h"
 #include "br_mainwindow.h"
 
 

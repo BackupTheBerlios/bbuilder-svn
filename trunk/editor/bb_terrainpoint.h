@@ -25,13 +25,15 @@
 class BB_TerrainPoint : public BB_Point
 {
 public:
+	
+	BB_TerrainPoint();
 	/**
 	 * Konstruktor.
 	 * Erzeugt einen neuen GeländePunkt an der Position 'pos' in der H&ouml;he 0m. 
 	 * @param pos Position an der der Punkt erstellt wird
 	 * @author Alex Letkemann
 	 */
-	BB_TerrainPoint( C2dVector& pos );
+	BB_TerrainPoint( C2dVector& pos  );
 
 	/**
 	 * Destruktor
@@ -53,6 +55,7 @@ public:
 	 */
 	double getHeight() const;
     virtual const QString getClassName();
+    virtual void generateXElement( QTextStream &out, int depth );
 	
 
 protected:

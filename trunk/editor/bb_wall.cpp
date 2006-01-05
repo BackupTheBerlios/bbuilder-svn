@@ -21,6 +21,8 @@
 #include "bb_dlgopentexture.h"
 #include "bb_globals.h"
 
+#include <c3dquad.h>
+
 #include <iostream>
 
 using namespace std;
@@ -274,4 +276,34 @@ void BB_Wall::setTextureFileName( const QString& Value )
         QImage image( Value );
         image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName(), "PNG" );
     }
+}
+
+
+/*!
+    \fn BB_Wall::createGl( double scale)
+ */
+void BB_Wall::createGl( double scale, double height )
+{
+	
+	C3dVector v1,v2,v3,v4;
+	
+	
+	v1.setX( m_Pos1->getPos().x() * scale );
+	v1.setZ( m_Pos1->getPos().y() * scale );
+	v1.setY( 0.0 );
+	
+	v2.setX( m_Pos2->getPos().x() * scale );
+	v2.setZ( m_Pos2->getPos().y() * scale );
+	v2.setY( 0.0 );
+	
+	v3.setX( m_Pos2->getPos().x() * scale );
+	v3.setZ( m_Pos2->getPos().y() * scale );
+	v3.setY( height );
+	
+	v4.setX( m_Pos1->getPos().x() * scale );
+	v4.setZ( m_Pos1->getPos().y() * scale );
+	v4.setY( height );
+	
+		
+	m_GlObject = new C3dQuad(v1,v2,v3,v4,v_Zero,v_Zero,v_Zero,v_Zero,cl_Blue);
 }
