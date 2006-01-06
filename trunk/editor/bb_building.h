@@ -45,7 +45,7 @@ public:
     BB_Level* getLevel( int index );
     int getLevelCount();
     virtual double getBuildingHeight();
-    virtual void createGl( double scale );
+	virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
     
 
 protected:

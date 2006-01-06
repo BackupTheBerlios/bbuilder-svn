@@ -19,6 +19,7 @@
 #include "bb_doccomponent.h"
 
 #include <QTextStream>
+#include <bb_building.h>
 
 class BB_Doc;
 
@@ -39,6 +40,8 @@ public:
     virtual bool open();
     virtual const QString getClassName();
     void resolveBuildingIds( BB_Doc* doc );
+    void buildingDeleted( BB_Building* building );
+    virtual void createGl( QVector<C3dTriangle>& triangles, double scale );
 
 };
 

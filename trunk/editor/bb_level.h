@@ -36,7 +36,7 @@ class BB_Level : public BB_DocComponent
 		double getHeight() const;
     BB_Building* getBuilding();
     virtual int keyBoardEdit( QWidget* parent );
-    virtual void createGl( double scale );
+	virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
     protected:
 		/**
 		Hohe von Etage in meter

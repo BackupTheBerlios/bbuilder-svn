@@ -60,11 +60,11 @@ class C3dPoint
           * For C3dPoint, only color and vertex are used.
           * To be overridden by subclassed objects.
           */
-        virtual void draw();
+        virtual void draw() const;
         /**Calls GLBegin, draw and GLEnd. Needs not be overridden for geometric primitives subclasses.
           *Override draw() in subclasses.
           */
-        virtual void show();
+        virtual void show() const;
         /** Moves the point by vMove.
           */
         virtual void moveBy( const C3dVector &vMove );
@@ -79,7 +79,7 @@ class C3dPoint
         const CColorRGBA & getColor() const;
         /** Returns address of color data for use with glColor3dv.
           */
-        GLfloat * colorFv();
+        const GLfloat * colorFv();
         /** Read property of V0
           */
         const C3dVector & getV0() const;
@@ -120,7 +120,7 @@ class C3dPoint
         void copy( const C3dPoint & toCopy );
         /** Contains the vertex calls for drawing the normals.
         */
-        virtual void drawNormals();
+        virtual void drawNormals() const;
     protected:  //Protected attributes
         /** The position of the point.
           */

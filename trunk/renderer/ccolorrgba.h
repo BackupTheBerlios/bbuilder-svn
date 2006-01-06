@@ -41,7 +41,7 @@ public:
   virtual ~CColorRGBA();
   /**Returns a pointer to fR. To be used with GLColorXXXfv functions.
     */
-  GLfloat * fv(); 
+  const GLfloat * fv() const; 
   /** For brightness adjustment. "a" value is not multiplied.
     */
   CColorRGBA operator *(double f);

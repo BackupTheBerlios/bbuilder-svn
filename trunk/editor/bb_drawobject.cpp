@@ -38,7 +38,7 @@ BB_DrawObject::BB_DrawObject( QString name )
 
     m_Selected = false;
 	
-	m_GlObject = NULL;
+// 	m_GlObject = NULL;
 }
 
 
@@ -139,22 +139,9 @@ void BB_DrawObject::moveEvent()
 
 
 /*!
-    \fn BB_DrawObject::showGl()
- */
-void BB_DrawObject::showGl()
-{
-	
-	if( m_GlObject )
-	{
-		m_GlObject->show();
-	}
-}
-
-
-/*!
     \fn BB_DrawObject::createGl()
  */
-void BB_DrawObject::createGl( double scale, double height )
+void BB_DrawObject::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
-	m_GlObject = NULL;
+// 	m_GlObject = NULL;
 }

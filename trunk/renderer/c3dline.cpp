@@ -172,7 +172,7 @@ void C3dLine::setVTex1 ( const C3dVector& _newVal )
 
 /** Contains the vertex, normal and texture calls  that draw the primitive.
 */
-void C3dLine::draw ()
+void C3dLine::draw () const
 {
 	C3dPoint::draw();
 	
@@ -183,7 +183,7 @@ void C3dLine::draw ()
 
 /** Contains the vertex calls for drawing the normals.
 */
-void C3dLine::drawNormals ()
+void C3dLine::drawNormals () const
 {
 	C3dPoint::drawNormals();
 	m_V1.vertex();

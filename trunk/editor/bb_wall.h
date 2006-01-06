@@ -53,7 +53,7 @@ class BB_Wall : public BB_Line
     private:
         virtual void showDirection( BB_Transformer& transformer, QPainter& painter, QPoint& middle ) const;
         void calculateDirection();
-    virtual void createGl( double scale, double height);
+		virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
 
     protected:
         C2dVector m_Direction;

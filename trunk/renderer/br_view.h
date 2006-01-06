@@ -16,7 +16,6 @@
 
 #include <br_camera.h>
 #include <br_keyhandler.h>
-#include <br_doc.h>
 #include <br_infowidget.h>
 
 #include <c3dvector.h>

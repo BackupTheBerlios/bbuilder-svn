@@ -279,10 +279,7 @@ void BB_Wall::setTextureFileName( const QString& Value )
 }
 
 
-/*!
-    \fn BB_Wall::createGl( double scale)
- */
-void BB_Wall::createGl( double scale, double height )
+void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
 	
 	C3dVector v1,v2,v3,v4;
@@ -298,12 +295,24 @@ void BB_Wall::createGl( double scale, double height )
 	
 	v3.setX( m_Pos2->getPos().x() * scale );
 	v3.setZ( m_Pos2->getPos().y() * scale );
-	v3.setY( height );
+	v3.setY( height * scale);
 	
 	v4.setX( m_Pos1->getPos().x() * scale );
 	v4.setZ( m_Pos1->getPos().y() * scale );
-	v4.setY( height );
+	v4.setY( height * scale);
 	
+	v1 = v1.rotateVector( v_Y, rotation );
+	v2 = v2.rotateVector( v_Y, rotation );
+	v3 = v3.rotateVector( v_Y, rotation );
+	v4 = v4.rotateVector( v_Y, rotation );
+	
+	v1 = v1 + vector;
+	v2 = v2 + vector;
+	v3 = v3 + vector;
+	v4 = v4 + vector;
 		
-	m_GlObject = new C3dQuad(v1,v2,v3,v4,v_Zero,v_Zero,v_Zero,v_Zero,cl_Blue);
+// 	m_GlObject = new C3dQuad(v1,v2,v3,v4,v_Zero,v_Zero,v_Zero,v_Zero,cl_Blue);
+	
+	triangles.append( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
+	triangles.append( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
 }

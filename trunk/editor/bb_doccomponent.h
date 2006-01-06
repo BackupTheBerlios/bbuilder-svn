@@ -101,8 +101,7 @@ public:
     virtual int keyBoardEdit( QWidget* parent );
     virtual void generateXElement( QTextStream &out, int depth );
 	
-	virtual void showGl();
-	virtual void createGl( double scale );
+	virtual void createGl( QVector<C3dTriangle>& triangles, double scale );
 protected:
     BB_Point m_ScalePoint_1;
     BB_Point m_ScalePoint_2;

@@ -190,10 +190,7 @@ void BB_Triangle::generateXElement( QTextStream &out, int depth )
 }
 
 
-/*!
-    \fn BB_Triangle::createGl()
- */
-void BB_Triangle::createGl( double scale, double height )
+void BB_Triangle::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
     C3dVector v1, v2, v3;
 
@@ -206,7 +203,7 @@ void BB_Triangle::createGl( double scale, double height )
 	}
 	else
 	{
-    	v1.setY( 0.0 );
+		v1.setY( height );
 	}
 
 	v2.setX( m_Pos2->getPos().x() * scale );
@@ -217,7 +214,7 @@ void BB_Triangle::createGl( double scale, double height )
 	}
 	else
 	{
-		v2.setY( 0.0 );
+		v2.setY( height );
 	}
 
 	v3.setX( m_Pos3->getPos().x() * scale );
@@ -228,12 +225,12 @@ void BB_Triangle::createGl( double scale, double height )
 	}
 	else
 	{
-		v3.setY( 0.0 );
+		v3.setY( height );
 	}
 
 	
 // 	qDebug( "C3dTriangle: v1 %f|%f|%f v2 %f|%f|%f v3 %f|%f|%f ",v1.x(),v1.y(),v1.z(),v2.x(),v2.y(),v2.z(),v3.x(),v3.y(),v3.z() );
-	m_GlObject = new C3dTriangle( v1, v2, v3, v_Zero,v_Zero,v_Zero, cl_Gray );
+	triangles.append(C3dTriangle( v1, v2, v3, v_Zero,v_Zero,v_Zero, cl_Gray ));
 }
 
 void BB_Triangle::normalize(){

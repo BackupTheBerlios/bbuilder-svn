@@ -455,6 +455,7 @@ bool BB_Doc::deleteBuilding( QListWidgetItem* item )
             {
                 m_Buildings.remove( i );
                 deleteLevels( building );
+				m_Terrain->buildingDeleted( building );
                 delete building;
                 documentChanged();
                 return true;
@@ -484,7 +485,6 @@ void BB_Doc::documentChanged()
     {
         m_Observer.at( i ) ->documentChanged();
     }
-
 }
 
 
@@ -512,6 +512,7 @@ bool BB_Doc::deleteLevel( BB_Level* level )
         if ( m_Levels.at( 0 ) == level )
         {
             delete level;
+			documentChanged();
             return true;
         }
     }
@@ -557,31 +558,12 @@ BB_Building* BB_Doc::getBuildingById( int objectId )
  */
 void BB_Doc::showGl()
 {
-    if ( m_Terrain != NULL )
-    {
-        m_Terrain->showGl();
-    }
-
 	
-	/* TODO Nur zu testzwecken ..  */
-	
-    for ( int i = 0; i < m_Buildings.count(); i++ )
-    {
-        m_Buildings.at( i ) ->showGl();
-    }
-
-	BB_Level* level;
-	double height = 0;
-    for ( int i = 0; i < m_Levels.count(); i++ )
-    {
-		level = m_Levels.at(i);
-		
-		glTranslated( 0.0 , height ,0.0 );
-		
-		height = height + level->getHeight();
-		
-        m_Levels.at( i ) ->showGl();
-    }
+	for( int i = 0; i < m_Triangles.count(); i++ )
+	{
+		m_Triangles.at(i).show();
+				
+	}
 }
 
 
@@ -594,20 +576,20 @@ void BB_Doc::createGlObjects()
 	
 	if ( m_Terrain != NULL )
 	{
-		m_Terrain->createGl(scale);
+		m_Terrain->createGl(m_Triangles,scale);
 	}
 
-	BB_Building *building;
-	for ( int i = 0; i < m_Buildings.count(); i++ )
-	{
-		building = m_Buildings.at( i );
-		building->createGl(scale);
-	}
-
-	BB_Level * level;
-	for ( int i = 0; i < m_Levels.count(); i++ )
-	{
-		level = m_Levels.at( i );
-		level->createGl(scale );
-	}
+// 	BB_Building *building;
+// 	for ( int i = 0; i < m_Buildings.count(); i++ )
+// 	{
+// 		building = m_Buildings.at( i );
+// 		building->createGl(m_Triangles, scale);
+// 	}
+// 
+// 	BB_Level * level;
+// 	for ( int i = 0; i < m_Levels.count(); i++ )
+// 	{
+// 		level = m_Levels.at( i );
+// 		level->createGl(m_Triangles,scale );
+// 	}
 }

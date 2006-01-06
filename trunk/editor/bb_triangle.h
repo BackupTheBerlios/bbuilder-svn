@@ -78,7 +78,7 @@ public:
 	BB_Point* m_Pos3;
 	
 protected:
-    virtual void createGl( double scale, double height = 0);
+	virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
 };
 
 #endif

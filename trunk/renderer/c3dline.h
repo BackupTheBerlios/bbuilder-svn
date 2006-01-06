@@ -44,8 +44,8 @@ public:
     virtual void setV1 ( const C3dVector& _newVal );
     virtual void setVN1 ( const C3dVector& _newVal );
     virtual void setVTex1 ( const C3dVector& _newVal );
-    virtual void draw ();
-    virtual void drawNormals ();
+    virtual void draw () const;
+    virtual void drawNormals () const;
     virtual void moveBy (const C3dVector &vMove);
     virtual void rotate (const C3dVector &vAxis, double Angle);
     virtual void stretch (double sx, double sy, double sz);

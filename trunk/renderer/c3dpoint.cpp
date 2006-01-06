@@ -94,7 +94,7 @@ void C3dPoint::setColor( const CColorRGBA &newColor )
 * For C3dPoint, only color and vertex are used.
 * To be overridden by subclassed objects.
  */
-void C3dPoint::draw()
+void C3dPoint::draw() const
 {
     glNormal3dv( m_VN0.dv() );
     glTexCoord2dv( m_VTex0.dv() );
@@ -103,7 +103,7 @@ void C3dPoint::draw()
 /**Calls GLBegin, draw and GLEnd. Needs not be overridden for geometric primitives subclasses.
 *Override draw() in subclasses.
  */
-void C3dPoint::show()
+void C3dPoint::show() const
 {
 	glColor3fv(m_Color.fv());
     glBegin( m_ClassEnum );
@@ -159,7 +159,7 @@ const CColorRGBA & C3dPoint::getColor() const
 }
 /** Returns address of color data for use with glColor3dv.
  */
-GLfloat * C3dPoint::colorFv()
+const GLfloat * C3dPoint::colorFv()
 {
     return m_Color.fv();
 }
@@ -268,7 +268,7 @@ void C3dPoint::copy( const C3dPoint & toCopy )
 
 /** Contains the vertex calls for drawing the normals.
  */
-void C3dPoint::drawNormals()
+void C3dPoint::drawNormals() const
 {
     m_V0.vertex();
     ( m_V0 + m_VN0 ).vertex();

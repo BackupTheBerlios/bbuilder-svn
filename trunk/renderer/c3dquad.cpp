@@ -172,7 +172,7 @@ GLenum C3dQuad::getClassEnum() const
 
 /** Enthält die Vertex Aufruffe für das Objekt
  */
-void C3dQuad::draw()
+void C3dQuad::draw() const
 {
     C3dTriangle::draw();
 	
@@ -182,7 +182,7 @@ void C3dQuad::draw()
 
 /** Enthält Vertex aufruffe für die Normalvektoren
  */
-void C3dQuad::drawNormals()
+void C3dQuad::drawNormals() const
 {
     C3dTriangle::drawNormals();
 	m_V3.vertex();

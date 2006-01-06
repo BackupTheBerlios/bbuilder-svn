@@ -44,7 +44,7 @@ CColorRGBA::CColorRGBA (const CColorRGBA & toCopy){
 CColorRGBA::~CColorRGBA(){ 
 }
 
-GLfloat * CColorRGBA::fv(){
+const GLfloat * CColorRGBA::fv() const {
  return &m_R;
 }
 

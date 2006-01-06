@@ -336,15 +336,27 @@ double BB_Building::getBuildingHeight()
 /*!
     \fn BB_Building::createGl( double scale )
  */
-void BB_Building::createGl( double scale )
+void BB_Building::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
 	double docScale = 1 / getPixelPerMeter( 1.0 );
 	scale =  scale * docScale;
 	
-	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
+// 	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
+	
+	qDebug( "getPixelPerMeter( getBuildingHeight() ): %f ", getPixelPerMeter( getBuildingHeight() ) );
 	
 	for( int i = 0; i < m_DrawObjects.count(); i++ )
 	{
-		m_DrawObjects.at( i )->createGl( scale, getBuildingHeight() );
+		m_DrawObjects.at( i )->createGl( triangles, vector, rotation, scale, getPixelPerMeter( getBuildingHeight() ) );
+	}
+	
+	
+	for( int i = 0; i < m_Levels.count(); i++ )
+	{
+		
+		m_Levels.at( i )->createGl( triangles, vector, rotation, scale, getPixelPerMeter( 1.0 ) );
+		vector.setY( vector.y() +  getPixelPerMeter( m_Levels.at(i)->getHeight() ) * scale );
 	}
 }
+
+

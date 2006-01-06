@@ -53,8 +53,8 @@ public:
     ~C3dTriangle();
 
 	virtual GLenum getClassEnum() const;
-    virtual void draw();
-    virtual void drawNormals();
+    virtual void draw() const;
+    virtual void drawNormals() const;
     virtual void moveBy(const C3dVector& vMove);
     virtual void rotate(const C3dVector& vAxis, double Angle);
     virtual void stretch(double sx, double sy, double sz);
@@ -65,6 +65,7 @@ public:
     virtual void setVN2(const C3dVector& _newVal);
     virtual void setVTex2(const C3dVector& _newVal);
     virtual void setV2(const C3dVector& _newVal);
+    virtual void show() const;
 	
 protected:
 	C3dVector m_V2;

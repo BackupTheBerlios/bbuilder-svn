@@ -230,15 +230,19 @@ bool BB_Level::write( QTextStream &out )
 /*!
     \fn BB_Level::createGl( double scale )
  */
-void BB_Level::createGl( double scale )
+void BB_Level::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
-	double docScale = 1 / getPixelPerMeter( 1.0 );
-	scale =  scale * docScale;
+// 	double docScale = 1 / getPixelPerMeter( 1.0 );
+// 	scale =  scale * docScale;
 	
-	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
+// 	C3dVector v(0.0 ,0.0, 0.0);
+	
+// 	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
+	
+// 	qDebug( "getPixelPerMeter( m_Height): %f",getPixelPerMeter( m_Height) );
 	
 	for( int i = 0; i < m_DrawObjects.count(); i++ )
 	{
-		m_DrawObjects.at( i )->createGl( scale, m_Height );
+		m_DrawObjects.at( i )->createGl( triangles, vector ,rotation , scale, m_Height * height  );
 	}
 }

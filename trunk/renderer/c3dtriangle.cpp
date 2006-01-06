@@ -138,7 +138,7 @@ GLenum C3dTriangle::getClassEnum() const
 
 /** Contains the vertex, normal and texture calls  that draw the primitive.
  */
-void C3dTriangle::draw()
+void C3dTriangle::draw() const
 {
     C3dLine::draw();
 	
@@ -149,7 +149,7 @@ void C3dTriangle::draw()
 
 /** Contains the vertex calls for drawing the normals.
  */
-void C3dTriangle::drawNormals()
+void C3dTriangle::drawNormals() const
 {
     C3dLine::drawNormals();
 	m_V2.vertex();
@@ -290,4 +290,16 @@ void C3dTriangle::setV2(const C3dVector& _newVal)
 	{
 		cout << "NULL-Pointer bei C3dTriangle::setV2(...)" << endl;
 	}
+}
+
+
+/**!
+ * Zeichnet das Dreieck
+ */
+void C3dTriangle::show() const
+{
+	glColor3fv(m_Color.fv());
+	glBegin( GL_TRIANGLES );
+	draw();
+	glEnd();
 }

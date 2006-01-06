@@ -61,8 +61,8 @@ public:
 	virtual const C3dVector& getVN3() const;
 	virtual const C3dVector& getVTex3() const;
     virtual GLenum getClassEnum() const;
-    virtual void draw();
-    virtual void drawNormals();
+    virtual void draw() const;
+    virtual void drawNormals() const;
     virtual void moveBy(const C3dVector& vMove);
     virtual void rotate(const C3dVector& vAxis, double Angle);
     virtual void setV3(const C3dVector& _newVal);

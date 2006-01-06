@@ -12,7 +12,6 @@ FORMS += buildingEdit.ui \
          terrainEdit.ui \
          textureOpenDialog.ui \
          toolWidgetLineNew.ui \
-         toolWidgetNavigationLineNew.ui \
          toolWidgetNavigationPointNew.ui \
          toolWidgetPointNew.ui \
          toolWidgetScale.ui \
@@ -37,7 +36,6 @@ HEADERS += br_camera.h \
            c3dvector.h \
            ccolorrgba.h \
            cgllight.h \
-           br_doc.h \
            bb_doc.h \
            bb_building.h \
            bb_doccomponent.h \
@@ -118,7 +116,6 @@ HEADERS += br_camera.h \
            bb_widgettoolbuildingpositionnew.h \
            cglmatrix.h 
 SOURCES += br_camera.cpp \
-           br_doc.cpp \
            br_infowidget.cpp \
            br_keyhandler.cpp \
            br_mainwindow.cpp \

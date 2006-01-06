@@ -27,7 +27,7 @@
 #include "bb_level.h"
 
 #include "bb_xdochandler.h"
-
+#include <c3dtriangle.h>
 class BB_Tab;
 
 /**
@@ -73,6 +73,7 @@ class BB_Doc : public BB_FileObject
         QString m_ProjectFile;
         QList<BB_Tab*> m_Observer;
         int m_MaxId;
+    QVector<C3dTriangle> m_Triangles;
 
         bool clear();
 

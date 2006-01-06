@@ -42,7 +42,7 @@ class C3dBody : public C3dQuad
         void copy( const C3dBody& toCopy );
         virtual void makeSurface();
         bool surfaceExists( void );
-        virtual void draw();
+        virtual void draw() const;
         virtual void show();
         GLuint getTexture( void );
         QString & getTextureFileName();

@@ -134,7 +134,7 @@ bool C3dBody::surfaceExists( void )
 /**
  * Zeichnet die einzelnen Quads und Triangles
  */
-void C3dBody::draw()
+void C3dBody::draw() const
 {
 
     C3dQuad * tmpQuad;

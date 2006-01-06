@@ -24,6 +24,8 @@
 #include <iostream>
 #include "bb_xterrainhandler.h"
 #include <c3dtriangle.h>
+#include <bb_building.h>
+#include <bb_drawobject.h>
 
 using namespace std;
 
@@ -256,5 +258,47 @@ void BB_Terrain::resolveBuildingIds( BB_Doc* doc )
 		{
 			((BB_BuildingPosition*) object)->resolveBuildingId( doc );
 		}
+	}
+}
+
+
+
+/*!
+    \fn BB_Terrain::buildingDeleted( BB_Building* building )
+ */
+void BB_Terrain::buildingDeleted( BB_Building* building )
+{
+	
+	BB_DrawObject* object = NULL;
+	BB_BuildingPosition* position = NULL;
+	for( int i = m_DrawObjects.count() - 1; i >= 0  ; i-- )
+	{
+		object = m_DrawObjects.at( i );
+		if( typeid(*object) == typeid( BB_BuildingPosition ) )
+		{
+			position = (BB_BuildingPosition*) object;
+			if( position->getBuilding() == building )
+			{
+				delete position;
+				m_DrawObjects.remove(i);
+				position = NULL;
+			}
+			
+		}
+	}
+}
+
+
+/*!
+    \fn BB_Terrain::createGl( QVector<C3dTriangle>& triangles, double scale )
+ */
+void BB_Terrain::createGl( QVector<C3dTriangle>& triangles, double scale )
+{
+	
+	C3dVector v(0.0,0.0,0.0);
+	
+	for( int i = 0; i < m_DrawObjects.count(); i++ )
+	{
+		m_DrawObjects.at( i )->createGl(triangles,v, 0.0, scale,0.0 );
 	}
 }

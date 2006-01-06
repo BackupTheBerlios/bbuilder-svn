@@ -22,8 +22,7 @@
 
 #include "bb_object.h"
 #include "bb_transformer.h"
-#include <c3dpoint.h>
-
+#include <c3dtriangle.h>
 
 /**
 Template-Klasse fuer weitere Objekte in diesem Projekt (z.B point, Wand, Fenster, etc)
@@ -53,8 +52,7 @@ class BB_DrawObject : public BB_Object
         void setBrush( const QBrush& theValue );
         void setPen( const QPen& theValue );
         virtual void moveEvent();
-        virtual void showGl();
-		virtual void createGl( double scale, double height = 0 );
+		virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
     protected:
         //QPoint m_P0;
         //         QColor m_Color;
@@ -64,8 +62,8 @@ class BB_DrawObject : public BB_Object
         QPen m_PenSelected;
         QBrush m_Brush;
         QBrush m_BrushSelected;
-		
-		C3dPoint* m_GlObject;
+/*		
+		C3dPoint* m_GlObject;*/
     
 };
 

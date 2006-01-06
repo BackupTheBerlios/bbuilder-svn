@@ -11,7 +11,7 @@
 //
 #include "bb_buildingposition.h"
 #include <bb_line.h>
-
+#include <math.h>
 
 BB_BuildingPosition::BB_BuildingPosition( BB_Building* building, int  buildingId, BB_DocComponent* component, C2dVector& pos, double height, double angle ) : BB_TerrainPoint()
 {
@@ -138,5 +138,26 @@ void BB_BuildingPosition::resolveBuildingId( BB_Doc * doc )
 		{
 			m_Building = building;
 		}
+	}
+}
+
+
+
+BB_Building* BB_BuildingPosition::getBuilding() const
+{
+    return m_Building;
+}
+
+
+/*!
+    \fn BB_BuildingPosition::createGl( QVector<C3dTriangle>& triangles, double scale, double height )
+ */
+void BB_BuildingPosition::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
+{
+	scale = scale * 1/m_ParentDocComponent->getMeterPerPixel( 1 );
+	C3dVector v( m_Pos.x(), m_Height , m_Pos.y() );
+	if( m_Building != NULL )
+	{
+		m_Building->createGl( triangles,v, m_Rotation, scale, 0.0 );
 	}
 }

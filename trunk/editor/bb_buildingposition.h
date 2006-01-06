@@ -39,6 +39,10 @@ public:
 
 	double getRotation() const;
     void resolveBuildingId( BB_Doc * doc );
+
+	BB_Building* getBuilding() const;
+	virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
+	
 	
 
 protected:
