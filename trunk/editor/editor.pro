@@ -110,7 +110,8 @@ HEADERS += bb_abstracttool.h \
            cglmatrix.h \
            bb_buildingposition.h \
            bb_widgettoolbuildingpositionnew.h \
-           bb_toolbuildingpositionnew.h 
+           bb_toolbuildingpositionnew.h \
+           3dmath.h 
 SOURCES += bb_abstracttool.cpp \
            bb_abstracttoolwalledit.cpp \
            bb_abstracttoolwidget.cpp \
@@ -203,7 +204,8 @@ SOURCES += bb_abstracttool.cpp \
            bb_stair.cpp \
            bb_toolstair.cpp \
            bb_widgettoolbuildingpositionnew.cpp \
-           bb_toolbuildingpositionnew.cpp 
+           bb_toolbuildingpositionnew.cpp \
+           3dmath.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

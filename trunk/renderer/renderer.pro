@@ -114,7 +114,8 @@ HEADERS += br_camera.h \
            bb_buildingposition.h \
            bb_toolbuildingpositionnew.h \
            bb_widgettoolbuildingpositionnew.h \
-           cglmatrix.h 
+           cglmatrix.h \
+           3dmath.h 
 SOURCES += br_camera.cpp \
            br_infowidget.cpp \
            br_keyhandler.cpp \
@@ -212,7 +213,8 @@ SOURCES += br_camera.cpp \
            bb_stair.cpp \
            bb_buildingposition.cpp \
            bb_widgettoolbuildingpositionnew.cpp \
-           bb_toolbuildingpositionnew.cpp 
+           bb_toolbuildingpositionnew.cpp \
+           3dmath.cpp 
 QT += xml \
 opengl
 TARGET = renderer.e

@@ -64,7 +64,7 @@ void BB_WidgetToolWallNew::updateWidget()
     BB_Wall * tmpWall;
 
     if ( m_Selection != NULL &&
-            m_Selection->count() == 1 &&
+            m_Selection->count() >= 1 &&
             typeid( *( m_Selection->at( 0 ) ) ) == typeid( BB_Wall ) )
     {
         tmpWall = ( BB_Wall* ) m_Selection->at( 0 );
@@ -139,8 +139,14 @@ void BB_WidgetToolWallNew::slotNameFinished()
  */
 void BB_WidgetToolWallNew::slotSwap()
 {
-    BB_Wall * wall = ( BB_Wall * ) m_Selection->at( 0 );
-    wall->swap();
+//     BB_Wall * wall = ( BB_Wall * ) m_Selection->at( 0 );
+//     wall->swap();
+
+	for( int i=0;i<m_Selection->count() ;i++ ){
+		if (typeid(*(m_Selection->at(i)))==typeid(BB_Wall)){
+			((BB_Wall*)m_Selection->at(i))->swap();
+		}
+	}
 
     m_ParentTool->documentChanged();
 }

@@ -35,7 +35,7 @@ BB_AbstractTool::BB_AbstractTool( QWidget * parent )
     m_ShowDrawObjects = true;
     m_ToolWidget = NULL;
     m_Selection = NULL;
-	m_FirstSelectedObject = NULL;
+    m_FirstSelectedObject = NULL;
 }
 
 BB_AbstractTool::~BB_AbstractTool()
@@ -160,7 +160,7 @@ void BB_AbstractTool::clearSelection()
     }
 
     m_Selection->clear();
-	m_FirstSelectedObject = NULL;
+    m_FirstSelectedObject = NULL;
 }
 
 
@@ -213,6 +213,10 @@ BB_DrawObject* BB_AbstractTool::getClickedObject( const C2dVector &posLogic , co
     for ( int i = 0; i < m_Objects->count() && exit == false; i++ )
     {
         object = m_Objects->at( i );
+        if ( typeid( object ) == typeid( BB_Point ) )
+        {
+            ( ( BB_Point* ) object ) ->setScale( m_Transformer->getScale() );
+        }
         if ( object != NULL && typeid( *object ) == type && object->isHit( posLogic ) )
         {
             exit = true;

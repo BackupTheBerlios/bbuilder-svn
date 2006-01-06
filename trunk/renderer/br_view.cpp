@@ -104,7 +104,8 @@ void BR_View::paintGL()
 	
 	proceedActions();
     m_Camera.apply();
-	m_Doc->showGl();	
+	m_Doc->showGl();
+	m_Camera.CheckCameraCollision( m_Doc->getCollisionVector(), m_Doc->getTriangles().count() * 3);
     drawGrid();
 	m_FPS++;
 }
@@ -228,24 +229,32 @@ void BR_View::mouseMoveEvent ( QMouseEvent * me )
  */
 void BR_View::proceedActions()
 {
-	
+// 	QVector<BB_DrawObject *> * objects =  m_Doc->getLevels()->at(0)->getDrawObjects();
 	if( m_Keys.isPressed( Qt::Key_W ) )
 	{
+// 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
+// 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
 		m_Camera.move( 0.2 );
 	}
 	
 	if( m_Keys.isPressed( Qt::Key_S ) )
 	{
+// 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
+// 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
 		m_Camera.move( -0.2 );
 	}
 	
 	if( m_Keys.isPressed( Qt::Key_A ) )
 	{
+// 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
+// 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
 		m_Camera.strafe( 0.1 );
 	}
 	
 	if( m_Keys.isPressed( Qt::Key_D ) )
 	{
+// 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
+// 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
 		m_Camera.strafe( -0.1 );
 	}
 	
@@ -263,3 +272,4 @@ void BR_View::showCurrentFPS()
 	m_Info->printFPS( m_CurrentFPS );
 	
 }
+

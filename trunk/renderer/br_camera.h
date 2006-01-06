@@ -13,6 +13,7 @@
 #define BR_CAMERA_H
 
 #include <c3dvector.h>
+#include "3dmath.h"
 #include <QtOpenGL>
 
 
@@ -34,6 +35,9 @@ public:
 	void setAspect(double aspect);
 	void strafe(double speed);
 	void move(double speed);
+	C3dVector getViewPoint();
+	C3dVector getPos();
+	void CheckCameraCollision(CVector3 *pVertices, int numOfVerts);
 
 protected:	
 	double m_Aspect;
@@ -42,6 +46,11 @@ protected:
 	double m_Far;
 	C3dVector m_ViewPoint;
 	C3dVector m_Camera;
+	
+	CVector3   m_vPosition;
+// 	CVector3   m_vView;
+	float m_Radius;
+	
 	C3dVector m_Strave;
 	C3dVector m_Up;
 

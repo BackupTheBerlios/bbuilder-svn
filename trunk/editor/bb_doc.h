@@ -28,6 +28,7 @@
 
 #include "bb_xdochandler.h"
 #include <c3dtriangle.h>
+#include "3dmath.h"
 class BB_Tab;
 
 /**
@@ -61,6 +62,8 @@ class BB_Doc : public BB_FileObject
         BB_Building* getBuildingById( int objectId );
         void showGl();
     void createGlObjects();
+	CVector3 * getCollisionVector();
+	QVector<C3dTriangle> & getTriangles();
     protected:
         void documentChanged();
 
@@ -74,6 +77,7 @@ class BB_Doc : public BB_FileObject
         QList<BB_Tab*> m_Observer;
         int m_MaxId;
     QVector<C3dTriangle> m_Triangles;
+	CVector3 * m_CollisionVector;
 
         bool clear();
 

@@ -38,10 +38,10 @@ Dieses Widget dient zum Edittieren einer Wand
 class BB_DlgWallEditArea : public QLabel
 {
     public:
-        BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent = 0, Qt::WFlags f = 0 );
+        BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, double hohe = 3.2, QWidget * parent = 0, Qt::WFlags f = 0 );
         ~BB_DlgWallEditArea();
         void setTool( BB_AbstractTool * tool );
-		void loadTexture();
+        void loadTexture();
     protected:
         BB_Map * m_currentMap;
         BB_Wall * m_Wall;

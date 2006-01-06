@@ -22,6 +22,8 @@
 #include <cgllight.h>
 #include <ccolorrgba.h>
 
+#include "3dmath.h"
+
 /**
  * Fenster, in dem die OpenGL darstellung aubläuft.
  *

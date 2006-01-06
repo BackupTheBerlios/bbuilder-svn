@@ -84,19 +84,19 @@ public:
 	C3dVector(const C3dVector&  toCopy);
   /** Read property  for x coordinate.
   */
-  double x();
+  double x() const;
   /** Write property for x coordinate.
       */
   void setX(double _newVal);
   /** Read property  for y coordinate.
   */
-  double y();
+  double y() const;
   /** Write property for y coordinate.
   */
   void setY(double _newVal);
   /** Read property  for z coordinate.
   */
-  double z();
+  double z() const;
   /** Write property for z coordinate.
   */
   void setZ(double _newVal);

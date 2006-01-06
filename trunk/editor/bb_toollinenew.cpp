@@ -28,10 +28,10 @@ using namespace std;
 
 
 BB_ToolLineNew::BB_ToolLineNew( QWidget *parent )
-        : BB_AbstractTool(parent)
+        : BB_AbstractTool( parent )
 {
 
-	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
+    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
 }
 
 
@@ -49,30 +49,33 @@ void BB_ToolLineNew::click( QMouseEvent* me )
         m_LastLogicMouseClick = m_pLogic;
         m_MovePoint.setPos( m_pLogic );
 
-        clearSelection();
+        BB_Point* point = getClickedPoint( m_pLogic );
 
-        BB_Line* line = getClickedLine( m_pLogic );
-
-        if ( line != NULL )
+        if ( point != NULL )
         {
-
-			selectObject( line );
-
-
-            m_Tmp_Line = NULL;
+            m_Tmp_Line = createNewLine( point, &m_MovePoint );
+            m_ToolObjects->append( m_Tmp_Line );
         }
         else
         {
-            BB_Point* point = getClickedPoint( m_pLogic );
-            if ( point != NULL )
+            m_Tmp_Line = NULL;
+            BB_Line* line = getClickedLine( m_pLogic );
+            if ( line != NULL )
             {
-                m_Tmp_Line = createNewLine( point, &m_MovePoint );
-                m_ToolObjects->append( m_Tmp_Line );
+                if ( me->modifiers () != Qt::ShiftModifier )
+                {
+                    clearSelection();
+                }
+                m_Tmp_Line = NULL;
+                selectObject( line );
             }
             else
             {
-                m_Tmp_Line = NULL;
+                clearSelection();
             }
+
+
+
             // EDIT: Alex Letkemann
             // Andere Implementierung
             //         BB_DrawObject * object;

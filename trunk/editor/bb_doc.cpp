@@ -30,6 +30,7 @@ BB_Doc::BB_Doc()
 {
     m_Terrain = NULL;
     m_Handler = new BB_XDocHandler( this );
+m_CollisionVector = NULL;
 
 }
 
@@ -579,6 +580,25 @@ void BB_Doc::createGlObjects()
 		m_Terrain->createGl(m_Triangles,scale);
 	}
 
+	m_CollisionVector = new CVector3[m_Triangles.count() * 3];
+
+	for( int i=0;i<m_Triangles.count() ;i++ ){
+		m_CollisionVector[i * 3].x = m_Triangles.at(i).getV0().x();
+		m_CollisionVector[i * 3].y = m_Triangles.at(i).getV0().y();
+		m_CollisionVector[i * 3].z = m_Triangles.at(i).getV0().z();
+
+		m_CollisionVector[(i*3) +1 ].x = m_Triangles.at(i).getV1().x();
+		m_CollisionVector[(i*3) +1 ].y = m_Triangles.at(i).getV1().y();
+		m_CollisionVector[(i*3) +1 ].z = m_Triangles.at(i).getV1().z();
+
+		m_CollisionVector[(i*3) +2 ].x = m_Triangles.at(i).getV2().x();
+		m_CollisionVector[(i*3) +2 ].y = m_Triangles.at(i).getV2().y();
+		m_CollisionVector[(i*3) +2 ].z = m_Triangles.at(i).getV2().z();
+	}
+
+
+
+
 // 	BB_Building *building;
 // 	for ( int i = 0; i < m_Buildings.count(); i++ )
 // 	{
@@ -592,4 +612,11 @@ void BB_Doc::createGlObjects()
 // 		level = m_Levels.at( i );
 // 		level->createGl(m_Triangles,scale );
 // 	}
+}
+
+CVector3 * BB_Doc::getCollisionVector(){
+	return m_CollisionVector;
+}
+QVector<C3dTriangle> & BB_Doc::getTriangles(){
+	return m_Triangles;
 }

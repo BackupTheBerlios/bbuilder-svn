@@ -81,7 +81,7 @@ C3dVector::C3dVector(const C3dVector& toCopy){
 
 /** Read property for x coordinate.
     */
-double C3dVector::x(){
+double C3dVector::x() const{
   return m_X;
 }
 
@@ -93,7 +93,7 @@ void C3dVector::setX(double _newVal){
 
 /** Read property for y coordinate.
     */
-double C3dVector::y(){
+double C3dVector::y() const{
    return m_Y;
 }
 
@@ -105,7 +105,7 @@ void C3dVector::setY(double _newVal){
 
 /** Read property for z coordinate.
     */
-double C3dVector::z(){
+double C3dVector::z() const{
   return m_Z;
 }
 

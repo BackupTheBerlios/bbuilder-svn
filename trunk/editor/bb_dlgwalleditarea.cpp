@@ -27,11 +27,11 @@
 
 using namespace std;
 
-BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent, Qt::WFlags f )
+BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, double hohe, QWidget * parent, Qt::WFlags f )
         : QLabel( parent, f )
 {
     //zum testen, feste hoehe von 3,2 meter
-    double hohe_meter = 3.2;
+    double hohe_meter = hohe;
     double laenge_pixel = wall->getLength();
     double laenge_meter = docComponent->getMeterPerPixel( laenge_pixel );
     m_height = hohe_meter;
