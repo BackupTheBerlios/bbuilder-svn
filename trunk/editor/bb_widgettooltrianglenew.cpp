@@ -23,7 +23,6 @@ BB_WidgetToolTriangleNew::BB_WidgetToolTriangleNew( BB_AbstractTool* parentTool,
     // sonst entsteht eine Endlosschleife, da das Signal textChanged() dabei gesendet wird.
     connect( m_Ui.textEdit_Desc, SIGNAL( textChanged() ), this, SLOT( slotDescFinished() ) );
     connect( m_Ui.pushButton_Delete, SIGNAL( released() ), this, SLOT( slotDelete() ) );
-
 }
 
 

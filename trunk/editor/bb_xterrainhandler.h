@@ -34,7 +34,7 @@ public:
     virtual bool endElement(const QString& namespaceURI, const QString& localName, const QString& qName);
 
 protected:
-    BB_DrawObject* m_Object;
+//     BB_DrawObject* m_Object;
     BB_Terrain* m_Terrain;
     
 	bool m_XTerrainTag;

@@ -15,7 +15,7 @@
 
 using namespace std;
 
-BB_XLevelHandler::BB_XLevelHandler( BB_Level* level ): BB_XHandler()
+BB_XLevelHandler::BB_XLevelHandler( BB_Level* level ): BB_XHandler(level)
 {
 	if( level == NULL )
 	{
@@ -186,7 +186,6 @@ bool BB_XLevelHandler::startElement(const QString& namespaceURI, const QString& 
 				m_Level->getScalePoint_2() ->setY( y );
 			}
 
-			m_ScalePointIndex++;
 		}
 		else
 		{

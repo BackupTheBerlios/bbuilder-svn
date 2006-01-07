@@ -262,21 +262,7 @@ void BB_Wall::openTextureDlg()
 }
 
 
-QString BB_Wall::getTextureFileName() const
-{
-    return m_TextureFileName;
-}
 
-
-void BB_Wall::setTextureFileName( const QString& Value )
-{
-    if ( m_TextureFileName != Value )
-    {
-        m_TextureFileName = getName() + ".png";
-        QImage image( Value );
-        image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName(), "PNG" );
-    }
-}
 
 
 void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
@@ -310,9 +296,68 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 	v2 = v2 + vector;
 	v3 = v3 + vector;
 	v4 = v4 + vector;
-		
-// 	m_GlObject = new C3dQuad(v1,v2,v3,v4,v_Zero,v_Zero,v_Zero,v_Zero,cl_Blue);
 	
-	triangles.append( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
-	triangles.append( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
+		
+	C3dTriangle t1( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue );
+	C3dTriangle t2( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue );
+
+	
+	if( !m_TextureFileName.isEmpty() )
+	{
+		
+		C3dVector tV1,tV2,tV3,tV4;
+		
+		QImage img;
+		
+		if( img.load(PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
+				  img.height() != 0 &&
+				  img.width() != 0)
+		{
+	
+			double x,y,l,h, factor;
+			factor = 10;
+			
+			x = img.width();
+			y = img.height();
+			l = getLength() * scale / factor;
+			h = height / factor;
+						
+			tV1.setX( 0.0 );
+			tV1.setY( y / h );
+			tV1.setZ( 0.0 );
+			
+			tV2.setX( x / l );
+			tV2.setY( y / h );
+			tV2.setZ( 0.0 );
+			
+			tV3.setX( x / l );
+			tV3.setY( 1.0 );
+			tV3.setZ( 0.0 );
+			
+			tV4.setX( 0.0 );
+			tV4.setY( 1.0 );
+			tV4.setZ( 0.0 );
+			
+			t1.setVTex0( tV4 );
+			t1.setVTex1( tV3 );
+			t1.setVTex2( tV2 );
+			
+			t2.setVTex0( tV2 );
+			t2.setVTex1( tV1 );
+			t2.setVTex2( tV4 );
+			
+			t1.createTexture( img );
+			t2.createTexture( img );
+		}
+		else
+		{
+			qDebug() << "Textur " << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() + " konnte nicht geladen werden." << endl;
+		}
+		
+	}
+	
+	triangles.append( t1 );
+	triangles.append( t2 );
+	
+		
 }

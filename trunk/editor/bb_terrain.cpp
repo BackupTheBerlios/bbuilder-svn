@@ -26,6 +26,7 @@
 #include <c3dtriangle.h>
 #include <bb_building.h>
 #include <bb_drawobject.h>
+#include <bb_terraintriangle.h>
 
 using namespace std;
 
@@ -75,7 +76,7 @@ bool BB_Terrain::write( QTextStream &out )
         {
             points.append( ( BB_Point* ) object );
         }
-        else if ( typeid( *object ) == typeid( BB_Triangle ) )
+        else if ( typeid( *object ) == typeid( BB_TerrainTriangle ) )
         {
             triangles.append( ( BB_Triangle* ) object );
         }

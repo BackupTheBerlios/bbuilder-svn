@@ -141,7 +141,7 @@ BB_AbstractToolWidget* BB_ToolTriangleNew::getToolWidget()
  */
 BB_Point* BB_ToolTriangleNew::getClickedPoint( C2dVector & pos )
 {
-	return (BB_Point*) getClickedObject( pos, typeid( BB_TerrainPoint ) );
+	return (BB_Point*) getClickedObject( pos, typeid( BB_Point ) );
 }
 
 

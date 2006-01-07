@@ -341,8 +341,7 @@ void BB_Building::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, d
 	double docScale = 1 / getPixelPerMeter( 1.0 );
 	scale =  scale * docScale;
 	
-// 	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
-	
+	// Ausßenwände erzeugen
 	qDebug( "getPixelPerMeter( getBuildingHeight() ): %f ", getPixelPerMeter( getBuildingHeight() ) );
 	
 	for( int i = 0; i < m_DrawObjects.count(); i++ )
@@ -350,7 +349,7 @@ void BB_Building::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, d
 		m_DrawObjects.at( i )->createGl( triangles, vector, rotation, scale, getPixelPerMeter( getBuildingHeight() ) );
 	}
 	
-	
+	// Innenwände der Etagen erzeugen
 	for( int i = 0; i < m_Levels.count(); i++ )
 	{
 		

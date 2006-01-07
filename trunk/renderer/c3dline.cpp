@@ -159,7 +159,7 @@ void C3dLine::setVN1 ( const C3dVector& _newVal )
  */
 void C3dLine::setVTex1 ( const C3dVector& _newVal )
 {
-	if(&_newVal == NULL)
+	if(&_newVal != NULL)
 	{
 		m_VTex1 = _newVal;
 	}

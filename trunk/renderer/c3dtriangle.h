@@ -66,11 +66,14 @@ public:
     virtual void setVTex2(const C3dVector& _newVal);
     virtual void setV2(const C3dVector& _newVal);
     virtual void show() const;
+	virtual bool createTexture( const QImage& texture );
 	
 protected:
 	C3dVector m_V2;
 	C3dVector m_VN2;
 	C3dVector m_VTex2;
+	
+	GLuint m_Texture;
 	
 };
 

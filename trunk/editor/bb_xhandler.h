@@ -13,7 +13,9 @@
 #define BB_XHANDLER_H
 
 #include <QXmlDefaultHandler>
-
+#include <bb_doccomponent.h>
+#include <bb_drawobject.h>
+#include <bb_constructionelement.h>
 /**
  * Abstrackte Klasse BB_XHandler. Wird benötigt um die XML-Dateien auszulesen.
  * @author Alex Letkemann
@@ -25,7 +27,7 @@ public:
     /**
      * Konstruktor
      */
-    BB_XHandler();
+	BB_XHandler(BB_DocComponent*  docComponent);
 
     /**
      * Destruktor
@@ -65,11 +67,24 @@ public:
 	 * Dier Fehler wird im std::cout ausgegeben
 	 */
 	virtual bool fatalError(const QXmlParseException& exception);
+    bool parseTerrainTriangle( QXmlAttributes& atts );
 
 protected:
 	/**  */
 	QString m_CurrentText;
 	QString m_ErrorStr;
+    BB_DrawObject* m_Object;
+    BB_ConstructionElement* m_ConstructionElement;
+    bool m_XScale;
+    BB_DocComponent* m_DocComponent;
+	int m_ScalePointIndex;
+protected:
+    virtual bool parseTexture( const QXmlAttributes& atts );
+    virtual bool parseTriangle( const QXmlAttributes& atts );
+	virtual bool parseTerrainTriangle( const QXmlAttributes& atts );
+	virtual bool parsePoint( const QXmlAttributes& atts );
+	virtual bool parseTerrainPoint( const QXmlAttributes& atts );
+    
 };
 
 #endif

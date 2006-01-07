@@ -19,7 +19,7 @@ using namespace std;
 
 
 BB_XDocHandler::BB_XDocHandler(BB_Doc* doc)
-	: BB_XHandler()
+	: BB_XHandler( NULL )
 {
 	if(doc != NULL)
 	{

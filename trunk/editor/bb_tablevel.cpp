@@ -251,6 +251,8 @@ void BB_TabLevel::updateLevelList()
  */
 void BB_TabLevel::documentChanged()
 {
+	setBuilding( NULL );
+	
     updateBuildingList();
     updateLevelList();
 	

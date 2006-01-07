@@ -192,7 +192,7 @@ bool BB_Doc::open( QString fileName )
     // 	cout << "m_ProjectFile: " << m_ProjectFile.toStdString() << endl;
 
     documentChanged();
-
+	setPRO_DIR( m_ProjectPath.path() );
     return true;
 }
 
@@ -204,7 +204,7 @@ bool BB_Doc::close()
 {
     m_ProjectFile = "";
     m_ProjectPath = QDir( "" );
-
+	setPRO_DIR( "" );
     return clear();
 }
 
@@ -573,6 +573,14 @@ void BB_Doc::showGl()
  */
 void BB_Doc::createGlObjects()
 {
+	
+	m_Triangles.clear();
+
+	if( m_CollisionVector != NULL )
+	{
+		delete [] m_CollisionVector;
+	}
+	
 	double scale = 1.0;
 	
 	if ( m_Terrain != NULL )

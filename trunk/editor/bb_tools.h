@@ -24,6 +24,7 @@
 #include <bb_toolnavigationlinenew.h>
 
 #include <bb_tooltrianglenew.h>
+#include <bb_toolterraintrianglenew.h>
 
 #include <bb_tooldoornew.h>
 #include <bb_toolwindownew.h>

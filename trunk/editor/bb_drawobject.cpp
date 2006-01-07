@@ -16,7 +16,7 @@
 
 #include <iostream>
 
-
+#include <bb_globals.h>
 #include <c3dtriangle.h>
 
 using namespace std;
@@ -143,5 +143,23 @@ void BB_DrawObject::moveEvent()
  */
 void BB_DrawObject::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
-// 	m_GlObject = NULL;
+	// hier keine Implementierung, einfach nichts machen ...
+}
+
+QString BB_DrawObject::getTextureFileName() const
+{
+	return m_TextureFileName;
+}
+
+
+void BB_DrawObject::setTextureFileName( const QString& Value )
+{
+// 	if ( m_TextureFileName != Value )
+// 	{
+// 		m_TextureFileName = getName() + ".png";
+// 		QImage image( Value );
+// 		image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName(), "PNG" );
+// 	}
+	
+	m_TextureFileName = Value;
 }

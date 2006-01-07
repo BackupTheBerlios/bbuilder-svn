@@ -60,6 +60,7 @@ private:
 	friend class BB_XTerrainHandler;
 	friend class BB_XDocHandler;
 	friend class BB_Doc;
+	friend class BB_XHandler;
 
 };
 

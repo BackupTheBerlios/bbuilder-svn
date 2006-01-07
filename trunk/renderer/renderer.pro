@@ -20,7 +20,8 @@ FORMS += buildingEdit.ui \
          toolWidgetTriangleNew.ui \
          toolWidgetWallNew.ui \
          toolWidgetZoom.ui \
-         toolWidgetBuildingPositionNew.ui 
+         toolWidgetBuildingPositionNew.ui \
+         toolWidgetTerrainTriangleNew.ui 
 HEADERS += br_camera.h \
            br_infowidget.h \
            br_keyhandler.h \
@@ -115,7 +116,10 @@ HEADERS += br_camera.h \
            bb_toolbuildingpositionnew.h \
            bb_widgettoolbuildingpositionnew.h \
            cglmatrix.h \
-           3dmath.h 
+           bb_terraintriangle.h \
+           bb_toolterraintrianglenew.h \
+           3dmath.h \
+           bb_widgettoolterraintrianglenew.h 
 SOURCES += br_camera.cpp \
            br_infowidget.cpp \
            br_keyhandler.cpp \
@@ -214,7 +218,10 @@ SOURCES += br_camera.cpp \
            bb_buildingposition.cpp \
            bb_widgettoolbuildingpositionnew.cpp \
            bb_toolbuildingpositionnew.cpp \
-           3dmath.cpp 
+           bb_terraintriangle.cpp \
+           bb_toolterraintrianglenew.cpp \
+           3dmath.cpp \
+           bb_widgettoolterraintrianglenew.cpp 
 QT += xml \
 opengl
 TARGET = renderer.e

@@ -74,7 +74,7 @@ void BB_TabTerrain::initTools()
 	m_ToolScale = new BB_ToolScale( this );
 	m_ToolZoom = new BB_ToolZoom( m_Center, this );
 	m_ToolTerrainPointNew = new BB_ToolTerrainPointNew(this);
-	m_ToolTriangleNew = new BB_ToolTriangleNew(this);
+	m_ToolTriangleNew = new BB_ToolTerrainTriangleNew(this);
 			
 	initTool = addTool( m_ToolMove, "Move", "Bewegungs Werkzeug" );
 	addTool( m_ToolScale, QString::fromUtf8("Maßstab"), QString::fromUtf8("Maßstab Werkzeug") );

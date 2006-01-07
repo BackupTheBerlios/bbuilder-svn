@@ -53,17 +53,23 @@ class BB_DrawObject : public BB_Object
         void setPen( const QPen& theValue );
         virtual void moveEvent();
 		virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
+		
+		
+		void setTextureFileName( const QString& Value );
+	
+
+		QString getTextureFileName() const;
     protected:
-        //QPoint m_P0;
-        //         QColor m_Color;
+
         int m_hitRange;
         bool m_Selected;
         QPen m_Pen;
         QPen m_PenSelected;
         QBrush m_Brush;
         QBrush m_BrushSelected;
-/*		
-		C3dPoint* m_GlObject;*/
+		
+		QString m_TextureFileName;
+
     
 };
 

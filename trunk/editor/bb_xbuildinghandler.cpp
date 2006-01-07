@@ -21,7 +21,7 @@ using namespace std;
 
 
 BB_XBuildingHandler::BB_XBuildingHandler( BB_Building* building )
-        : BB_XHandler()
+        : BB_XHandler( building )
 {
     if ( building != NULL )
     {
@@ -80,49 +80,51 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
     }
     else if ( qName == "bb_point" )
     {
-        bool ok;
-        QString tmp;
-
-        double x, y;
-        int id;
-
-        tmp = atts.value( "id" );
-        id = tmp.toInt( &ok );
-
-        tmp = atts.value( "x" );
-        x = tmp.toDouble( &ok );
-
-        tmp = atts.value( "y" );
-        y = tmp.toDouble( &ok );
-
-
-        m_Object = new BB_Point();
-        ( ( BB_Point* ) m_Object ) ->setX( x );
-        ( ( BB_Point* ) m_Object ) ->setY( y );
-
-        m_Object->m_ObjectNr = id;
-        m_Object->setSelected( false );
-
-        if ( m_XScale )
-        {
-
-            if ( m_ScalePointIndex == 0 )
-            {
-                m_Building->getScalePoint_1() ->setX( x );
-                m_Building->getScalePoint_1() ->setY( y );
-            }
-            else if ( m_ScalePointIndex == 1 )
-            {
-                m_Building->getScalePoint_2() ->setX( x );
-                m_Building->getScalePoint_2() ->setY( y );
-            }
-
-            m_ScalePointIndex++;
-        }
-        else
-        {
-            m_DrawObjects->append( m_Object );
-        }
+		
+		parsePoint( atts );
+//         bool ok;
+//         QString tmp;
+// 
+//         double x, y;
+//         int id;
+// 
+//         tmp = atts.value( "id" );
+//         id = tmp.toInt( &ok );
+// 
+//         tmp = atts.value( "x" );
+//         x = tmp.toDouble( &ok );
+// 
+//         tmp = atts.value( "y" );
+//         y = tmp.toDouble( &ok );
+// 
+// 
+//         m_Object = new BB_Point();
+//         ( ( BB_Point* ) m_Object ) ->setX( x );
+//         ( ( BB_Point* ) m_Object ) ->setY( y );
+// 
+//         m_Object->m_ObjectNr = id;
+//         m_Object->setSelected( false );
+// 
+//         if ( m_XScale )
+//         {
+// 
+//             if ( m_ScalePointIndex == 0 )
+//             {
+//                 m_Building->getScalePoint_1() ->setX( x );
+//                 m_Building->getScalePoint_1() ->setY( y );
+//             }
+//             else if ( m_ScalePointIndex == 1 )
+//             {
+//                 m_Building->getScalePoint_2() ->setX( x );
+//                 m_Building->getScalePoint_2() ->setY( y );
+//             }
+// 
+//             m_ScalePointIndex++;
+//         }
+//         else
+//         {
+//             m_DrawObjects->append( m_Object );
+//         }
 
     }
     else if ( qName == "bb_wall" )
@@ -292,17 +294,7 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
     }
     else if ( qName == "texture" )
     {
-        if ( m_Object == NULL )
-        {
-            qDebug( "Texture nicht im Tag <BB_Wall>" );
-            return false;
-        }
-        if ( m_ConstructionElement != NULL )
-        {
-            m_ConstructionElement->setTextureFileName( atts.value( "file" ) );
-            return true;
-        }
-        ( ( BB_Wall * ) m_Object ) ->setTextureFileName( atts.value( "file" ) );
+		parseTexture( atts );
     }
     // 	else if(qName == "levels")
     // 	{

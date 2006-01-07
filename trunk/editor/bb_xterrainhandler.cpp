@@ -21,7 +21,7 @@
 
 using namespace std;
 BB_XTerrainHandler::BB_XTerrainHandler( BB_Terrain * terrain )
-        : BB_XHandler()
+        : BB_XHandler( terrain )
 {
     if ( terrain != NULL )
     {
@@ -84,34 +84,7 @@ bool BB_XTerrainHandler::startElement( const QString& namespaceURI, const QStrin
     }
     else if ( qName == "bb_terrainpoint" )
     {
-        bool ok;
-        QString tmp;
-
-        double x, y, h;
-        int id;
-
-        tmp = atts.value( "id" );
-        id = tmp.toInt( &ok );
-
-        tmp = atts.value( "x" );
-        x = tmp.toDouble( &ok );
-
-        tmp = atts.value( "y" );
-        y = tmp.toDouble( &ok );
-
-        tmp = atts.value( "h" );
-        h = tmp.toDouble( &ok );
-
-        m_Object = new BB_TerrainPoint();
-        ( ( BB_Point* ) m_Object ) ->setX( x );
-        ( ( BB_Point* ) m_Object ) ->setY( y );
-        ( ( BB_TerrainPoint* ) m_Object ) ->setHeight( h );
-        m_Object->m_ObjectNr = id;
-        m_Object->setSelected( false );
-
-
-        m_Terrain->getDrawObjects() ->append( m_Object );
-
+		parseTerrainPoint( atts );
     }
     else if ( qName == "bb_point" )
     {
@@ -142,19 +115,22 @@ bool BB_XTerrainHandler::startElement( const QString& namespaceURI, const QStrin
 
         if ( m_XScale )
         {
-            static int scalePoint = 0;
-            if ( scalePoint == 0 )
+           
+            if ( m_ScalePointIndex == 0 )
             {
                 m_Terrain->getScalePoint_1() ->setX( x );
                 m_Terrain->getScalePoint_1() ->setY( y );
+				
+				m_ScalePointIndex = 1;
             }
-            else if ( scalePoint == 1 )
+			else if ( m_ScalePointIndex == 1 )
             {
                 m_Terrain->getScalePoint_2() ->setX( x );
                 m_Terrain->getScalePoint_2() ->setY( y );
+				
+				m_ScalePointIndex = 0;
             }
 
-            scalePoint++;
         }
         else
         {
@@ -163,62 +139,9 @@ bool BB_XTerrainHandler::startElement( const QString& namespaceURI, const QStrin
 
 
     }
-    else if ( qName == "bb_triangle" )
+    else if ( qName == "bb_terraintriangle" )
     {
-        bool ok;
-        QString tmp;
-        BB_Point *point1 = NULL;
-        BB_Point *point2 = NULL;
-        BB_Point *point3 = NULL;
-        int id;
-        int p1, p2, p3;
-
-        tmp = atts.value( "id" );
-        id = tmp.toInt( &ok );
-
-        tmp = atts.value( "p1" );
-        p1 = tmp.toInt( &ok );
-
-        tmp = atts.value( "p2" );
-        p2 = tmp.toInt( &ok );
-
-        tmp = atts.value( "p3" );
-        p3 = tmp.toInt( &ok );
-
-
-        BB_Object *object;
-
-        for ( int i = 0; i < m_Terrain->getDrawObjects() ->count(); i++ )
-        {
-            object = m_Terrain->getDrawObjects() ->at( i );
-            if ( typeid( *object ) == typeid( BB_TerrainPoint ) )
-            {
-                if ( object->getObjectNr() == p1 )
-                {
-                    point1 = ( BB_Point* ) object;
-                }
-                else if ( object->getObjectNr() == p2 )
-                {
-                    point2 = ( BB_Point* ) object;
-                }
-                else if ( object->getObjectNr() == p3 )
-                {
-                    point3 = ( BB_Point* ) object;
-                }
-            }
-        }
-
-        if ( point1 != NULL && point2 != NULL && point3 != NULL )
-        {
-            BB_DrawObject * triangle = ( BB_DrawObject* ) new BB_Triangle( point1, point2, point3 );
-            m_Terrain->getDrawObjects() ->append( triangle );
-
-        }
-        else
-        {
-            cout << "Fehler: BB_Triangle konnte nicht erstellt werden!" << endl;
-            return false;
-        }
+		parseTerrainTriangle( atts );
     }
     else if ( qName == "bb_buildingposition" )
     {
@@ -257,7 +180,10 @@ bool BB_XTerrainHandler::startElement( const QString& namespaceURI, const QStrin
 
 
         m_Terrain->getDrawObjects() ->append( m_Object );
-    }
+	} else if( qName == "texture")
+	{
+		parseTexture( atts );
+	}
 
     m_CurrentText.clear();
 
@@ -270,7 +196,7 @@ bool BB_XTerrainHandler::startElement( const QString& namespaceURI, const QStrin
  */
 bool BB_XTerrainHandler::endElement( const QString& namespaceURI, const QString& localName, const QString& qName )
 {
-    // 	cout << "</" << qName.toStdString() << ">" << endl;
+    	cout << "</" << qName.toStdString() << ">" << endl;
     if ( m_Object == NULL )
     {
         if ( qName == "name" )
@@ -311,7 +237,7 @@ bool BB_XTerrainHandler::endElement( const QString& namespaceURI, const QString&
     {
         m_Object = NULL;
     }
-    else if ( qName == "bb_triangle" )
+    else if ( qName == "bb_terraintriangle" )
     {
         m_Object = NULL;
     }

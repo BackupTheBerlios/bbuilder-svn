@@ -35,10 +35,10 @@ public:
 
 protected:
     BB_Level* m_Level;
-    BB_DrawObject* m_Object;
-    int m_ScalePointIndex;
+//     BB_DrawObject* m_Object;
+//     int m_ScalePointIndex;
     bool m_XLevelTag;
-	bool m_XScale;
+// 	bool m_XScale;
 	QVector<BB_DrawObject*>* m_DrawObjects;
 };
 

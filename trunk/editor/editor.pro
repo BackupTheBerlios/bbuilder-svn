@@ -20,7 +20,8 @@ FORMS += buildingEdit.ui \
          toolWidgetTriangleNew.ui \
          toolWidgetWallNew.ui \
          toolWidgetZoom.ui \
-         toolWidgetBuildingPositionNew.ui 
+         toolWidgetBuildingPositionNew.ui \
+         toolWidgetTerrainTriangleNew.ui 
 HEADERS += bb_abstracttool.h \
            bb_abstracttoolwalledit.h \
            bb_abstracttoolwidget.h \
@@ -111,7 +112,7 @@ HEADERS += bb_abstracttool.h \
            bb_buildingposition.h \
            bb_widgettoolbuildingpositionnew.h \
            bb_toolbuildingpositionnew.h \
-           3dmath.h 
+           bb_widgettoolterraintrianglenew.h 
 SOURCES += bb_abstracttool.cpp \
            bb_abstracttoolwalledit.cpp \
            bb_abstracttoolwidget.cpp \
@@ -205,7 +206,9 @@ SOURCES += bb_abstracttool.cpp \
            bb_toolstair.cpp \
            bb_widgettoolbuildingpositionnew.cpp \
            bb_toolbuildingpositionnew.cpp \
-           3dmath.cpp 
+           bb_widgettoolterraintrianglenew.cpp \
+           bb_toolterraintrianglenew.cpp \
+           bb_terraintriangle.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

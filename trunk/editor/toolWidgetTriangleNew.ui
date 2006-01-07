@@ -8,172 +8,170 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>507</width>
-    <height>634</height>
+    <width>222</width>
+    <height>524</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" >
-   <property name="margin" >
-    <number>0</number>
+  <widget class="QGroupBox" name="groupBox" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>222</width>
+     <height>524</height>
+    </rect>
    </property>
-   <property name="spacing" >
-    <number>5</number>
+   <property name="title" >
+    <string>Fläche</string>
    </property>
-   <item row="0" column="0" >
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="title" >
-      <string>Fläche</string>
-     </property>
-     <property name="flat" >
-      <bool>true</bool>
-     </property>
-     <layout class="QGridLayout" >
-      <property name="margin" >
-       <number>2</number>
+   <property name="flat" >
+    <bool>true</bool>
+   </property>
+   <layout class="QGridLayout" >
+    <property name="margin" >
+     <number>2</number>
+    </property>
+    <property name="spacing" >
+     <number>5</number>
+    </property>
+    <item row="3" column="0" >
+     <widget class="QGroupBox" name="groupBox_5" >
+      <property name="title" >
+       <string>Optionen</string>
       </property>
-      <property name="spacing" >
-       <number>5</number>
+      <property name="flat" >
+       <bool>true</bool>
       </property>
-      <item row="2" column="0" >
-       <widget class="QGroupBox" name="groupBox_4" >
-        <property name="title" >
-         <string>Positionen</string>
-        </property>
-        <property name="flat" >
-         <bool>true</bool>
-        </property>
-        <layout class="QGridLayout" >
-         <property name="margin" >
-          <number>2</number>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>2</number>
+       </property>
+       <property name="spacing" >
+        <number>5</number>
+       </property>
+       <item row="1" column="0" >
+        <widget class="QPushButton" name="pushButton_Delete" >
+         <property name="toolTip" >
+          <string>Löscht den Knoten</string>
          </property>
-         <property name="spacing" >
-          <number>5</number>
+         <property name="statusTip" >
+          <string>Löscht den Knoten</string>
          </property>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="label_Pos2" >
-           <property name="frameShape" >
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow" >
-            <enum>QFrame::Sunken</enum>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0" >
-          <widget class="QLabel" name="label_Pos1" >
-           <property name="frameShape" >
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow" >
-            <enum>QFrame::Sunken</enum>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" >
-          <widget class="QLabel" name="label_Pos3" >
-           <property name="frameShape" >
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow" >
-            <enum>QFrame::Sunken</enum>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="3" column="0" >
-       <widget class="QGroupBox" name="groupBox_5" >
-        <property name="title" >
-         <string>Optionen</string>
-        </property>
-        <property name="flat" >
-         <bool>true</bool>
-        </property>
-        <layout class="QGridLayout" >
-         <property name="margin" >
-          <number>2</number>
+         <property name="whatsThis" >
+          <string>Löscht den Knoten</string>
          </property>
-         <property name="spacing" >
-          <number>5</number>
+         <property name="text" >
+          <string>Löschen</string>
          </property>
-         <item row="1" column="0" >
-          <widget class="QPushButton" name="pushButton_Delete" >
-           <property name="toolTip" >
-            <string>Löscht den Knoten</string>
-           </property>
-           <property name="statusTip" >
-            <string>Löscht den Knoten</string>
-           </property>
-           <property name="whatsThis" >
-            <string>Löscht den Knoten</string>
-           </property>
-           <property name="text" >
-            <string>Löschen</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="1" column="0" >
-       <widget class="QGroupBox" name="groupBox_3" >
-        <property name="title" >
-         <string>Beschreibung</string>
-        </property>
-        <property name="flat" >
-         <bool>true</bool>
-        </property>
-        <layout class="QGridLayout" >
-         <property name="margin" >
-          <number>2</number>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0" >
+     <widget class="QGroupBox" name="groupBox_2" >
+      <property name="title" >
+       <string>Name</string>
+      </property>
+      <property name="flat" >
+       <bool>true</bool>
+      </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>2</number>
+       </property>
+       <property name="spacing" >
+        <number>5</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QLineEdit" name="lineEdit_Name" />
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" >
+     <widget class="QGroupBox" name="groupBox_3" >
+      <property name="title" >
+       <string>Beschreibung</string>
+      </property>
+      <property name="flat" >
+       <bool>true</bool>
+      </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>2</number>
+       </property>
+       <property name="spacing" >
+        <number>5</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QTextEdit" name="textEdit_Desc" />
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="0" >
+     <widget class="QGroupBox" name="groupBox_4" >
+      <property name="title" >
+       <string>Positionen</string>
+      </property>
+      <property name="flat" >
+       <bool>true</bool>
+      </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>2</number>
+       </property>
+       <property name="spacing" >
+        <number>5</number>
+       </property>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="label_Pos2" >
+         <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="spacing" >
-          <number>5</number>
+         <property name="frameShadow" >
+          <enum>QFrame::Sunken</enum>
          </property>
-         <item row="0" column="0" >
-          <widget class="QTextEdit" name="textEdit_Desc" />
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="0" >
-       <widget class="QGroupBox" name="groupBox_2" >
-        <property name="title" >
-         <string>Name</string>
-        </property>
-        <property name="flat" >
-         <bool>true</bool>
-        </property>
-        <layout class="QGridLayout" >
-         <property name="margin" >
-          <number>2</number>
+         <property name="text" >
+          <string/>
          </property>
-         <property name="spacing" >
-          <number>5</number>
+        </widget>
+       </item>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="label_Pos1" >
+         <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
          </property>
-         <item row="0" column="0" >
-          <widget class="QLineEdit" name="lineEdit_Name" />
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-  </layout>
+         <property name="frameShadow" >
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="label_Pos3" >
+         <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <pixmapfunction></pixmapfunction>
  <resources/>
