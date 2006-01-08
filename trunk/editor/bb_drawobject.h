@@ -43,7 +43,7 @@ class BB_DrawObject : public BB_Object
         //void setP0(const QPoint& theValue){m_P0 = theValue;}
         //QPoint getP0() const{return m_P0;}
         virtual bool isHit( const C2dVector& hit ) = 0;
-        virtual bool isHit( const QRect& rect );
+        virtual bool isHit( const QRectF& rect );
         virtual const QString getClassName();
 
         void setSelected( bool theValue );
@@ -52,25 +52,18 @@ class BB_DrawObject : public BB_Object
         void setBrush( const QBrush& theValue );
         void setPen( const QPen& theValue );
         virtual void moveEvent();
-		virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
-		
-		
-		void setTextureFileName( const QString& Value );
-	
-
-		QString getTextureFileName() const;
+        virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
+        void setTextureFileName( const QString& Value );
+        QString getTextureFileName() const;
+        void setTextureAbsoluteFileName( const QString& Value );
     protected:
-
         int m_hitRange;
         bool m_Selected;
         QPen m_Pen;
         QPen m_PenSelected;
         QBrush m_Brush;
         QBrush m_BrushSelected;
-		
-		QString m_TextureFileName;
-
-    
+        QString m_TextureFileName;
 };
 
 #endif

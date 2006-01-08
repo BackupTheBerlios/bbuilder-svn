@@ -34,12 +34,15 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
     double hohe_meter = hohe;
     double laenge_pixel = wall->getLength();
     double laenge_meter = docComponent->getMeterPerPixel( laenge_pixel );
-    m_height = hohe_meter;
-    m_lenght = laenge_meter;
-    double m_verhaeltniss = m_lenght / m_height;
+    m_Height = hohe_meter;
+    m_Width = laenge_meter;
+    m_Proportion = m_Width / m_Height;
     m_Wall = wall;
+    //immer Statisch
     m_PixelHeight = 400.0;
-    m_PixelWidth = m_PixelHeight * m_verhaeltniss;
+    m_PixelWidth = m_PixelHeight * m_Proportion;
+    m_ProportionHeight = m_PixelHeight / m_Height;
+    m_ProportionWidth = m_PixelWidth / m_Width;
     setFixedSize ( m_PixelWidth, m_PixelHeight );
     m_Tool = NULL;
     m_DrawObjects = NULL;
@@ -47,9 +50,12 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
 
     m_Selection = new QVector<BB_DrawObject *>;
     m_ToolObjects = new QVector<BB_DrawObject *>;
+    m_transformer.setScale( m_ProportionWidth );
+    m_transformer.setOffset( C2dVector( 0.0, m_Height ) );
     // 	setMinimumSize ( 400 * m_verhaeltniss, 400);
+    // cout << "height: "<<m_ProportionHeight << "width: "<<m_ProportionWidth<<endl;
 
-	loadTexture();
+    loadTexture();
 }
 
 
@@ -57,6 +63,7 @@ BB_DlgWallEditArea::~BB_DlgWallEditArea()
 {
     delete m_Selection;
     delete m_ToolObjects;
+    generatePositionOnWall();
     // 	delete m_WallTexture;
 }
 
@@ -99,7 +106,6 @@ void BB_DlgWallEditArea::mousePressEvent ( QMouseEvent * me )
     if ( m_Tool != NULL )
     {
         m_Tool->click( me );
-        // 		update();
     }
     else
     {
@@ -160,8 +166,8 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
         m_Tool = tool;
         if ( typeid( * tool ) == typeid( BB_ToolMove ) )
         {
-//             m_Tool->setObjects( m_Wall->getPoints() );
-			m_Tool->setObjects( m_Wall->getObjectsWithPoints() );
+            m_Tool->setObjects( m_Wall->getPoints() );
+            // 			m_Tool->setObjects( m_Wall->getObjectsWithPoints() );
             for ( int i = 0; i < m_DrawObjects->count(); i++ )
             {
                 m_DrawObjects->at( i ) ->setSelected( true );
@@ -177,6 +183,8 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
         m_Tool->setSelectionVector( m_Selection );
         m_Tool->setToolObjects( m_ToolObjects );
         m_Tool->setTransformer( &m_transformer );
+        m_Tool->setScaleHeight( m_ProportionHeight );
+        m_Tool->setScaleWidth( m_ProportionWidth );
         //         m_Tool->setTransformer( &m_Transformer );
         // 		m_Tool->setObjects(m_DrawObjects);
         //         m_Tool->setToolObjects( &m_ToolObjects );
@@ -192,9 +200,9 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
 
 void BB_DlgWallEditArea::makeWallTexture( QPainter * p )
 {
-//     p->drawPixmap( 0, 0, m_WallTexture );
+    //     p->drawPixmap( 0, 0, m_WallTexture );
     int k = m_PixelHeight / m_WallTexture.height() ;
-	int n = m_PixelWidth / m_WallTexture.width() ;
+    int n = m_PixelWidth / m_WallTexture.width() ;
     for ( int i = 0;i <= k ;i++ )
     {
         p->drawPixmap( 0, m_WallTexture.height() * i , m_WallTexture );
@@ -205,6 +213,38 @@ void BB_DlgWallEditArea::makeWallTexture( QPainter * p )
     }
 }
 
-void BB_DlgWallEditArea::loadTexture(){
-	m_WallTexture.load( PRO_TEXTURES_DIR()+SEPARATOR() + m_Wall->getTextureFileName() );
+void BB_DlgWallEditArea::loadTexture()
+{
+    m_WallTexture.load( PRO_TEXTURES_DIR() + SEPARATOR() + m_Wall->getTextureFileName() );
+}
+void BB_DlgWallEditArea::generatePositionOnWall()
+{
+    BB_ConstructionElement * myElement;
+    C2dVector ortVector;
+    C2dVector richtungsVector;
+    C2dVector elementPosition;
+    double factor;
+    C2dVector coefficient;
+    for ( int i = 0;i < m_DrawObjects->count() ;i++ )
+    {
+        myElement = ( BB_ConstructionElement * ) m_DrawObjects->at( i );
+        ortVector = m_Wall->getPos1() ->getPos();
+        richtungsVector = m_Wall->getPos2() ->getPos() - ortVector;
+		
+        factor = myElement->getPos1() ->getPos().x() / m_Width;
+        elementPosition = ortVector + ( richtungsVector * factor );		
+		coefficient.setX(myElement->getPos1()->getPos().x() / m_Width);
+		coefficient.setY(myElement->getPos1()->getPos().y() / m_Height);
+        myElement->setWallPosition1( elementPosition );
+		myElement->setCoefficientPos1(coefficient);
+		
+        factor = myElement->getPos2() ->getPos().x() / m_Width;
+        elementPosition = ortVector + ( richtungsVector * factor );
+		coefficient.setX(myElement->getPos2()->getPos().x() / m_Width);
+		coefficient.setY(myElement->getPos2()->getPos().y() / m_Height);
+        myElement->setWallPosition2( elementPosition );
+		myElement->setCoefficientPos2(coefficient);
+        //coefficient
+
+    }
 }

@@ -32,7 +32,7 @@ BB_XBuildingHandler::BB_XBuildingHandler( BB_Building* building )
         m_XScale = false;
         m_ScalePointIndex = 0;
 
-		m_ConstructionElement = NULL;
+        m_ConstructionElement = NULL;
         m_Object = NULL;
     }
 }
@@ -243,20 +243,50 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
         C2dVector v1;
         C2dVector v2;
 
+        C2dVector pv1;
+        C2dVector pv2;
+		
+		C2dVector cv1;
+		C2dVector cv2;
+
         tmp = atts.value( "id" );
         id = tmp.toInt( &ok );
 
         tmp = atts.value( "x1" );
-        v1.setX( tmp.toInt( &ok ) );
+        v1.setX( tmp.toDouble( &ok ) );
         tmp = atts.value( "y1" );
-        v1.setY( tmp.toInt( &ok ) );
+        v1.setY( tmp.toDouble( &ok ) );
+
+        tmp = atts.value( "px1" );
+        pv1.setX( tmp.toInt( &ok ) );
+        tmp = atts.value( "py1" );
+        pv1.setY( tmp.toInt( &ok ) );
+		
+		tmp = atts.value( "cx1" );
+		cv1.setX( tmp.toDouble( &ok ) );
+		tmp = atts.value( "cy1" );
+		cv1.setY( tmp.toDouble( &ok ) );
 
         tmp = atts.value( "x2" );
-        v2.setX( tmp.toInt( &ok ) );
+        v2.setX( tmp.toDouble( &ok ) );
         tmp = atts.value( "y2" );
-        v2.setY( tmp.toInt( &ok ) );
+        v2.setY( tmp.toDouble( &ok ) );
+
+        tmp = atts.value( "px2" );
+        pv2.setX( tmp.toInt( &ok ) );
+        tmp = atts.value( "py2" );
+        pv2.setY( tmp.toInt( &ok ) );
+		
+		tmp = atts.value( "cx2" );
+		cv2.setX( tmp.toDouble( &ok ) );
+		tmp = atts.value( "cy2" );
+		cv2.setY( tmp.toDouble( &ok ) );
 
         m_ConstructionElement = new BB_Door( v1, v2 );
+        m_ConstructionElement->setWallPosition1( pv1 );
+        m_ConstructionElement->setWallPosition2( pv2 );
+		m_ConstructionElement->setCoefficientPos1(cv1);
+		m_ConstructionElement->setCoefficientPos2(cv2);
         m_ConstructionElement->m_ObjectNr = id;
 
     }
@@ -275,20 +305,50 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
         C2dVector v1;
         C2dVector v2;
 
+        C2dVector pv1;
+        C2dVector pv2;
+		
+		C2dVector cv1;
+		C2dVector cv2;
+
         tmp = atts.value( "id" );
         id = tmp.toInt( &ok );
 
         tmp = atts.value( "x1" );
-        v1.setX( tmp.toInt( &ok ) );
+        v1.setX( tmp.toDouble( &ok ) );
         tmp = atts.value( "y1" );
-        v1.setY( tmp.toInt( &ok ) );
+        v1.setY( tmp.toDouble( &ok ) );
+
+        tmp = atts.value( "px1" );
+        pv1.setX( tmp.toInt( &ok ) );
+        tmp = atts.value( "py1" );
+        pv1.setY( tmp.toInt( &ok ) );
+		
+		tmp = atts.value( "cx1" );
+		cv1.setX( tmp.toDouble( &ok ) );
+		tmp = atts.value( "cy1" );
+		cv1.setY( tmp.toDouble( &ok ) );
 
         tmp = atts.value( "x2" );
-        v2.setX( tmp.toInt( &ok ) );
+        v2.setX( tmp.toDouble( &ok ) );
         tmp = atts.value( "y2" );
-        v2.setY( tmp.toInt( &ok ) );
+        v2.setY( tmp.toDouble( &ok ) );
+
+        tmp = atts.value( "px2" );
+        pv2.setX( tmp.toInt( &ok ) );
+        tmp = atts.value( "py2" );
+        pv2.setY( tmp.toInt( &ok ) );
+		
+		tmp = atts.value( "cx2" );
+		cv2.setX( tmp.toDouble( &ok ) );
+		tmp = atts.value( "cy2" );
+		cv2.setY( tmp.toDouble( &ok ) );
 
         m_ConstructionElement = new BB_Window( v1, v2 );
+        m_ConstructionElement->setWallPosition1( pv1 );
+        m_ConstructionElement->setWallPosition2( pv2 );
+		m_ConstructionElement->setCoefficientPos1(cv1);
+		m_ConstructionElement->setCoefficientPos2(cv2);
         m_ConstructionElement->m_ObjectNr = id;
 
     }

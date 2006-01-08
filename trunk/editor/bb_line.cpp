@@ -187,7 +187,7 @@ const QString BB_Line::getClassName()
     return QString( "BB_Line" );
 }
 
-bool BB_Line::isHit( const QRect& rect )
+bool BB_Line::isHit( const QRectF& rect )
 {
     //	EDIT: Alex Letkemann
     //	Die Linie wird selektiert, wenn die linie ganz im QRect ist

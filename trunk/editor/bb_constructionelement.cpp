@@ -27,6 +27,8 @@ BB_ConstructionElement::BB_ConstructionElement( C2dVector v1, C2dVector v2 )
 {
     setPos1( new BB_Point( v1 ) );
     setPos2( new BB_Point( v2 ) );
+m_Pos1->setRadius(0.07);
+m_Pos2->setRadius(0.07);
 }
 
 
@@ -50,8 +52,10 @@ void BB_ConstructionElement::setTextureFileName( const QString& Value )
         m_TextureFileName = Value;
         if ( !m_Image.load( PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName ) )
         {
-            qDebug( "image wurde nicht geladen" );
-        }
+			qDebug()<<"image "<<Value<<" wurde nicht geladen";
+		}else{
+			qDebug()<<"image "<<Value<<" wurde erfolgreich geladen";
+		}
     }
 }
 
@@ -79,3 +83,87 @@ void BB_ConstructionElement::setTextureAbsoluteFileName( const QString& Value )
 	qDebug("image ist nicht geladen");
 }
 
+void BB_ConstructionElement::show( BB_Transformer& transformer, QPainter& painter ) const
+{
+    if ( &transformer != NULL && &painter != NULL && m_Pos1 != NULL && m_Pos2 != NULL )
+    {
+        painter.setPen( m_Pen );
+        painter.setBrush( m_Brush );
+
+        QPoint dest1;
+        QPoint dest2;
+
+        transformer.logicalToScreen( dest1, m_Pos1->getPos() );
+        transformer.logicalToScreen( dest2, m_Pos2->getPos() );
+
+        QRect rect( dest1.x(),
+                     dest1.y(),
+                    ( dest2.x() - dest1.x() ),
+                    ( dest2.y() - dest1.y() ) );
+        rect = rect.normalized();
+        painter.drawRect( rect );
+
+        painter.drawImage( rect, m_Image );
+
+        if ( m_Selected )
+        {
+	    double r1 = m_Pos1->getRadius();
+	    double r2 = m_Pos2->getRadius();
+		m_Pos1->setRadius(7.0);
+		m_Pos2->setRadius(7.0);
+            m_Pos1->show( transformer, painter );
+            m_Pos2->show( transformer, painter );
+		m_Pos1->setRadius(r1);
+		m_Pos2->setRadius(r2);
+        }
+    }
+}
+
+
+
+C2dVector BB_ConstructionElement::getWallPosition1() const
+{
+  return m_WallPosition1;
+}
+
+
+void BB_ConstructionElement::setWallPosition1(const C2dVector& Value)
+{
+  m_WallPosition1 = Value;
+}
+
+
+C2dVector BB_ConstructionElement::getWallPosition2() const
+{
+  return m_WallPosition2;
+}
+
+
+void BB_ConstructionElement::setWallPosition2(const C2dVector& Value)
+{
+  m_WallPosition2 = Value;
+}
+
+
+C2dVector BB_ConstructionElement::getCoefficientPos1() const
+{
+    return m_CoefficientPos1;
+}
+
+
+void BB_ConstructionElement::setCoefficientPos1( const C2dVector& Value )
+{
+    m_CoefficientPos1 = Value;
+}
+
+
+C2dVector BB_ConstructionElement::getCoefficientPos2() const
+{
+    return m_CoefficientPos2;
+}
+
+
+void BB_ConstructionElement::setCoefficientPos2( const C2dVector& Value )
+{
+    m_CoefficientPos2 = Value;
+}

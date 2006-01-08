@@ -18,6 +18,7 @@
 
 #include "bb_line.h"
 #include "bb_doccomponent.h"
+#include "bb_door.h"
 
 #include <QPixmap>
 
@@ -40,21 +41,24 @@ class BB_Wall : public BB_Line
         virtual void moveEvent();
         void setObjects( QVector< BB_DrawObject * >* Value );
         QVector< BB_DrawObject * >* getObjects() const;
-		QVector< BB_DrawObject * >* getObjectsWithPoints() const;
+        QVector< BB_DrawObject * >* getObjectsWithPoints() const;
         QVector< BB_DrawObject * >* getPoints() const;
-		void openTextureDlg();
+        void openTextureDlg();
         virtual void swap();
-	
+        BB_Door * hastDoor();
+
     private:
         virtual void showDirection( BB_Transformer& transformer, QPainter& painter, QPoint& middle ) const;
         void calculateDirection();
-		virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
+        virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
 
     protected:
         C2dVector m_Direction;
         bool m_ShowDirection;
         QPen m_PenDirection;
         QVector <BB_DrawObject *> * m_Objects;
+        /** Hohe in meter*/
+        double m_Hight;
 };
 
 #endif

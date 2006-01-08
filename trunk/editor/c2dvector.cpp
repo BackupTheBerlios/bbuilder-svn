@@ -116,9 +116,9 @@ double C2dVector::getAbstand( C2dVector v2 )
 /**
 * Returns this * skalar
 * @author Alex Letkmann
-*/void C2dVector::print()
+*/void C2dVector::print(char c[])
 {
-    cout << "x: " << m_X << "--y: " << m_Y << endl;
+    cout << c << "x: " << m_X << "--y: " << m_Y << endl;
 }
 
 

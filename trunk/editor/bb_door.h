@@ -38,7 +38,7 @@ public:
 	@param BB_Transformer
 	@param QPainter von QT
 	 */
-	virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
+// 	virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
 	void generateXElement( QTextStream &out, int depth );
 
 };

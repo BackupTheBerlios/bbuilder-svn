@@ -94,7 +94,7 @@ void BB_Point::moveBy( C2dVector vMove )
 void BB_Point::show( BB_Transformer& transformer, QPainter& painter ) const
 {
     QPoint dest;
-    double breite = m_Radius / 3;
+    int breite = (int )m_Radius / 3;
 
     transformer.logicalToScreen( dest, m_Pos );
 
@@ -141,7 +141,7 @@ void BB_Point::show( BB_Transformer& transformer, QPainter& painter ) const
 /*!
     \fn BB_Point::getRadius()
  */
-int BB_Point::getRadius()
+double BB_Point::getRadius()
 {
     return m_Radius;
 }
@@ -150,7 +150,7 @@ int BB_Point::getRadius()
 /*!
     \fn BB_Point::setRadius(int r)
  */
-void BB_Point::setRadius( int r )
+void BB_Point::setRadius( double r )
 {
     m_Radius = r;
 }
@@ -164,12 +164,18 @@ bool BB_Point::isHit( const C2dVector& hit )
     //         return false;
 
     //isHit von Viereck
-    double abstandX = abs ( ( int ) ( hit.x() - m_Pos.x() ) );
-    double abstandY = abs ( ( int ) ( hit.y() - m_Pos.y() ) );
+    if (m_scale > 20){
+       m_scale = 1;
+       qDebug("Scale wurede auf eins gesetzt");
+    }
+    cout << "hit: x-> "<<hit.x()<<" y-> "<<hit.y()<<endl;
+    double abstandX = fabs (  ( hit.x() - m_Pos.x() ) );
+    double abstandY = fabs (  ( hit.y() - m_Pos.y() ) );
+    cout << "abstandX: " << abstandX << "abstandY : " << abstandY<<endl;
     //   cout << "scale:" << m_scale<<endl;
     if ( abstandX <= ( m_Radius / m_scale ) && abstandY <= ( m_Radius / m_scale ) )
     {
-        cout << "hittrue" << m_scale << endl;
+        cout << "point hittrue " << m_scale << endl;
         return true;
     }
     return false;
@@ -177,12 +183,10 @@ bool BB_Point::isHit( const C2dVector& hit )
 
 
 
-/*!
-    \fn BB_Point::isHit(QRect rect)
- */
-bool BB_Point::isHit( const QRect& rect )
+bool BB_Point::isHit( const QRectF& rect )
 {
-	QRect normRect = rect.normalized();
+	QRectF normRect = rect.normalized();
+	cout <<"rect: top" <<normRect.top()<<endl;
 	if ( ( getX() > normRect.x() ) && ( getX() < normRect.right() ) )
 	{
 		if ( ( getY() > normRect.top() ) && ( getY() < normRect.bottom() ) )

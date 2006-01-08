@@ -58,10 +58,10 @@ void BB_Stair::show( BB_Transformer& transformer, QPainter& painter ) const
     transformer.logicalToScreen( dest1, m_Pos1->getPos() );
     transformer.logicalToScreen( dest2, m_Pos2->getPos() );
 
-    QRect rect( ( int ) dest1.x(),
-                ( int ) dest1.y(),
-                ( int ) ( dest2.x() - dest1.x() ),
-                ( int ) ( dest2.y() - dest1.y() ) );
+    QRect rect( dest1.x(),
+                dest1.y(),
+                ( dest2.x() - dest1.x() ),
+                ( dest2.y() - dest1.y() ) );
     rect = rect.normalized();
     painter.drawRect( rect );
 

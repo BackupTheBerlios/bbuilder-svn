@@ -64,6 +64,8 @@ class BB
 		
 		/** Validator für Nummerische Eingaben */
 		static QRegExpValidator *validNumeric;
+	/** compare funktion fuer qsort*/
+	int compare (const void * a, const void * b);
 
 };
 

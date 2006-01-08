@@ -32,16 +32,28 @@ In Zukunft auch m&ouml;glicherweise Bilder und Poster
 class BB_ConstructionElement : public BB_Rect
 {
     public:
-		BB_ConstructionElement(C2dVector v1, C2dVector v2);
+        BB_ConstructionElement( C2dVector v1, C2dVector v2 );
         ~BB_ConstructionElement();
         void setTextureFileName( const QString& Value );
-		void setTextureAbsoluteFileName(const QString& Value);
+        void setTextureAbsoluteFileName( const QString& Value );
         QString getTextureFileName() const;
         void openTextureDlg();
+        void show( BB_Transformer& transformer, QPainter& painter ) const;
+        void setWallPosition1( const C2dVector& Value );
+        C2dVector getWallPosition1() const;
+        void setWallPosition2( const C2dVector& Value );
+        C2dVector getWallPosition2() const;
+        void setCoefficientPos1( const C2dVector& Value );
+        C2dVector getCoefficientPos1() const;
+        void setCoefficientPos2( const C2dVector& Value );
+        C2dVector getCoefficientPos2() const;
     protected:
         QString m_TextureFileName;
         QImage m_Image;
-
+        C2dVector m_WallPosition1;
+        C2dVector m_WallPosition2;
+        C2dVector m_CoefficientPos1;
+        C2dVector m_CoefficientPos2;
 };
 
 #endif

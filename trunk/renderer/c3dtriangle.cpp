@@ -35,6 +35,8 @@ C3dTriangle::C3dTriangle() : C3dLine()
 
     m_ClassEnum = GL_TRIANGLES;
 	m_Texture = 0;
+	m_Collision = true;
+	m_Visible = true;
 }
 
 /**
@@ -66,6 +68,8 @@ C3dTriangle::C3dTriangle( const C3dVector& v0,
     {
         cout << "NULL-Pointer bei C3dTriangle::C3dTriangle(...)" << endl;
     }
+	m_Collision = true;
+	m_Visible = true;
 }
 
 
@@ -98,6 +102,8 @@ C3dTriangle::C3dTriangle( const C3dVector& v0,
     {
         cout << "NULL-Pointer bei C3dTriangle::C3dTriangle(...)" << endl;
     }
+	m_Collision = true;
+	m_Visible = true;
 }
 
 
@@ -124,6 +130,8 @@ C3dTriangle::C3dTriangle( C3dPoint& p1, C3dPoint& p2, C3dPoint& p3, CColorRGBA& 
     {
         cout << "NULL-Pointer bei C3dTriangle::C3dTriangle(...)" << endl;
     }
+	m_Collision = true;
+	m_Visible = true;
 }
 
 
@@ -200,7 +208,7 @@ void C3dTriangle::stretch( double sx, double sy, double sz )
 /**
  * Kopierfunktion
  */
-void C3dTriangle::copy( const C3dTriangle& toCopy )
+void C3dTriangle::copy( const C3dTriangle& toCopy ) 
 {
     if ( &toCopy != NULL )
     {
@@ -365,4 +373,23 @@ bool C3dTriangle::createTexture( const QImage& texture )
 	glDisable(GL_TEXTURE_2D);
 	return exit;
 	
+}
+void C3dTriangle::setCollision(bool value){
+	m_Collision = value;
+}
+
+bool C3dTriangle::getCollision() const{
+	return m_Collision;
+}
+
+
+bool C3dTriangle::getVisible() const
+{
+    return m_Visible;
+}
+
+
+void C3dTriangle::setVisible( bool Value )
+{
+    m_Visible = Value;
 }

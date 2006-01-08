@@ -80,6 +80,10 @@ class BB_AbstractTool
         QIcon getIcon() const;
         virtual void selectObject( BB_DrawObject * object );
 
+	void setScaleHeight(double Value);
+	void setScaleWidth(double Value);
+	
+
 
 
 
@@ -113,7 +117,10 @@ class BB_AbstractTool
         BB_AbstractToolWidget* m_ToolWidget;
         QIcon m_Icon;
 		/** Link auf ein Object der als erster selectiert wurde*/
-		BB_DrawObject * m_FirstSelectedObject;
+	BB_DrawObject * m_FirstSelectedObject;
+	/** Factor zum Scalieren*/
+	double m_ScaleHeight;
+	double m_ScaleWidth;
 
 
 };

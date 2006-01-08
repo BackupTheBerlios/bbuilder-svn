@@ -46,11 +46,13 @@ class BB_DlgWallEditArea : public QLabel
         BB_Map * m_currentMap;
         BB_Wall * m_Wall;
         /**  hohe und  breite in meter */
-        double m_height;
-        double m_lenght;
+        double m_Height;
+        double m_Width;
         double m_PixelHeight;
         double m_PixelWidth;
-        double m_verhaeltniss;
+        double m_Proportion;
+	double m_ProportionWidth;
+	double m_ProportionHeight;
         BB_AbstractTool * m_Tool;
         QVector<BB_DrawObject * > * m_DrawObjects;
         QVector<BB_DrawObject * > * m_Selection;
@@ -64,6 +66,7 @@ class BB_DlgWallEditArea : public QLabel
         virtual void mouseReleaseEvent ( QMouseEvent* me );
         virtual void mouseMoveEvent ( QMouseEvent* me );
         virtual void makeWallTexture( QPainter *p );
+	virtual void generatePositionOnWall();
 };
 
 #endif

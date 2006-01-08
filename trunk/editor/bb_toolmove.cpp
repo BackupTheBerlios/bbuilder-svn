@@ -299,7 +299,8 @@ void BB_ToolMove::release( QMouseEvent* me )
         m_Transformer->screenToLogical( m_pLogic, m_pScreen );
 
         //Wenn die Position von Click und release kleiner als 10 dann werden max. ein Object ausgewaehlt
-        if ( m_ClickPos.getAbstand( m_pLogic ) < 10 )
+//         if ( m_ClickPos.getAbstand( m_pLogic ) < 10 )
+        if ( m_ClickPos.getAbstand( m_pLogic ) <  10 / m_Transformer->getScale())
         {
             for ( int i = 0; i < m_Objects->count(); i++ )
             {
@@ -315,10 +316,10 @@ void BB_ToolMove::release( QMouseEvent* me )
         //Auswahlviereck
         else
         {
-            QRect rect( ( int ) m_ClickPos.x(),
-                        ( int ) m_ClickPos.y(),
-                        ( int ) ( m_pLogic.x() - m_ClickPos.x() ),
-                        ( int ) ( m_pLogic.y() - m_ClickPos.y() ) );
+            QRectF rect( m_ClickPos.x(),
+                        m_ClickPos.y(),
+                        ( m_pLogic.x() - m_ClickPos.x() ),
+                        ( m_pLogic.y() - m_ClickPos.y() ) );
 
             for ( int i = 0; i < m_Objects->count(); i++ )
             {

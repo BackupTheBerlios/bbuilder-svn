@@ -96,11 +96,11 @@ void BB_ToolSelect::release(QMouseEvent* me)
 		{
 			
 			
-			QRect rect(	(int) m_ClickPos.x(),
-						(int) m_ClickPos.y(),
-						(int) (m_pLogic.x() - m_ClickPos.x()),
-						//(int) (m_ClickPos.y() - m_pLogic.y()));
-						(int) (m_pLogic.y() - m_ClickPos.y()));
+			QRectF rect(	m_ClickPos.x(),
+					m_ClickPos.y(),
+					(m_pLogic.x() - m_ClickPos.x()),
+					//(int) (m_ClickPos.y() - m_pLogic.y()));
+					(m_pLogic.y() - m_ClickPos.y()));
 						
 // 			cout << "rect: x=" << rect.x() << " y=" << rect.y() << " w=" << rect.width() << " h=" << rect.height() << endl;
 			

@@ -30,7 +30,7 @@ BB_Doc::BB_Doc()
 {
     m_Terrain = NULL;
     m_Handler = new BB_XDocHandler( this );
-m_CollisionVector = NULL;
+    m_CollisionVector = NULL;
 
 }
 
@@ -172,8 +172,8 @@ bool BB_Doc::open( QString fileName )
             m_Buildings.at( i ) ->open();
         }
 
-		m_Terrain->resolveBuildingIds( this );
-		
+        m_Terrain->resolveBuildingIds( this );
+
         for ( int i = 0; i < m_Levels.count(); i++ )
         {
             m_Levels.at( i ) ->open();
@@ -192,7 +192,7 @@ bool BB_Doc::open( QString fileName )
     // 	cout << "m_ProjectFile: " << m_ProjectFile.toStdString() << endl;
 
     documentChanged();
-	setPRO_DIR( m_ProjectPath.path() );
+    setPRO_DIR( m_ProjectPath.path() );
     return true;
 }
 
@@ -204,7 +204,7 @@ bool BB_Doc::close()
 {
     m_ProjectFile = "";
     m_ProjectPath = QDir( "" );
-	setPRO_DIR( "" );
+    setPRO_DIR( "" );
     return clear();
 }
 
@@ -456,7 +456,7 @@ bool BB_Doc::deleteBuilding( QListWidgetItem* item )
             {
                 m_Buildings.remove( i );
                 deleteLevels( building );
-				m_Terrain->buildingDeleted( building );
+                m_Terrain->buildingDeleted( building );
                 delete building;
                 documentChanged();
                 return true;
@@ -513,7 +513,7 @@ bool BB_Doc::deleteLevel( BB_Level* level )
         if ( m_Levels.at( 0 ) == level )
         {
             delete level;
-			documentChanged();
+            documentChanged();
             return true;
         }
     }
@@ -559,12 +559,15 @@ BB_Building* BB_Doc::getBuildingById( int objectId )
  */
 void BB_Doc::showGl()
 {
-	
-	for( int i = 0; i < m_Triangles.count(); i++ )
-	{
-		m_Triangles.at(i).show();
-				
-	}
+
+    for ( int i = 0; i < m_Triangles.count(); i++ )
+    {
+        if ( m_Triangles.at( i ).getVisible() )
+        {
+            m_Triangles.at( i ).show();
+        }
+
+    }
 }
 
 
@@ -573,58 +576,68 @@ void BB_Doc::showGl()
  */
 void BB_Doc::createGlObjects()
 {
-	
-	m_Triangles.clear();
 
-	if( m_CollisionVector != NULL )
-	{
-		delete [] m_CollisionVector;
-	}
-	
-	double scale = 1.0;
-	
-	if ( m_Terrain != NULL )
-	{
-		m_Terrain->createGl(m_Triangles,scale);
-	}
+    m_Triangles.clear();
 
-	m_CollisionVector = new CVector3[m_Triangles.count() * 3];
+    if ( m_CollisionVector != NULL )
+    {
+        delete [] m_CollisionVector;
+    }
 
-	for( int i=0;i<m_Triangles.count() ;i++ ){
-		m_CollisionVector[i * 3].x = m_Triangles.at(i).getV0().x();
-		m_CollisionVector[i * 3].y = m_Triangles.at(i).getV0().y();
-		m_CollisionVector[i * 3].z = m_Triangles.at(i).getV0().z();
+    double scale = 1.0;
 
-		m_CollisionVector[(i*3) +1 ].x = m_Triangles.at(i).getV1().x();
-		m_CollisionVector[(i*3) +1 ].y = m_Triangles.at(i).getV1().y();
-		m_CollisionVector[(i*3) +1 ].z = m_Triangles.at(i).getV1().z();
+    if ( m_Terrain != NULL )
+    {
+        m_Terrain->createGl( m_Triangles, scale );
+    }
 
-		m_CollisionVector[(i*3) +2 ].x = m_Triangles.at(i).getV2().x();
-		m_CollisionVector[(i*3) +2 ].y = m_Triangles.at(i).getV2().y();
-		m_CollisionVector[(i*3) +2 ].z = m_Triangles.at(i).getV2().z();
-	}
+    m_CollisionVector = new CVector3[ m_Triangles.count() * 3 ];
+
+    for ( int i = 0;i < m_Triangles.count() ;i++ )
+    {
+        if ( m_Triangles.at( i ).getCollision() )
+        {
+            m_CollisionVector[ i * 3 ].x = m_Triangles.at( i ).getV0().x();
+            m_CollisionVector[ i * 3 ].y = m_Triangles.at( i ).getV0().y();
+            m_CollisionVector[ i * 3 ].z = m_Triangles.at( i ).getV0().z();
+
+            m_CollisionVector[ ( i * 3 ) + 1 ].x = m_Triangles.at( i ).getV1().x();
+            m_CollisionVector[ ( i * 3 ) + 1 ].y = m_Triangles.at( i ).getV1().y();
+            m_CollisionVector[ ( i * 3 ) + 1 ].z = m_Triangles.at( i ).getV1().z();
+
+            m_CollisionVector[ ( i * 3 ) + 2 ].x = m_Triangles.at( i ).getV2().x();
+            m_CollisionVector[ ( i * 3 ) + 2 ].y = m_Triangles.at( i ).getV2().y();
+            m_CollisionVector[ ( i * 3 ) + 2 ].z = m_Triangles.at( i ).getV2().z();
+        }
+        else
+        {
+            cout << "keine collision" << endl;
+        }
+    }
 
 
 
 
-// 	BB_Building *building;
-// 	for ( int i = 0; i < m_Buildings.count(); i++ )
-// 	{
-// 		building = m_Buildings.at( i );
-// 		building->createGl(m_Triangles, scale);
-// 	}
-// 
-// 	BB_Level * level;
-// 	for ( int i = 0; i < m_Levels.count(); i++ )
-// 	{
-// 		level = m_Levels.at( i );
-// 		level->createGl(m_Triangles,scale );
-// 	}
+    // 	BB_Building *building;
+    // 	for ( int i = 0; i < m_Buildings.count(); i++ )
+    // 	{
+    // 		building = m_Buildings.at( i );
+    // 		building->createGl(m_Triangles, scale);
+    // 	}
+    //
+    // 	BB_Level * level;
+    // 	for ( int i = 0; i < m_Levels.count(); i++ )
+    // 	{
+    // 		level = m_Levels.at( i );
+    // 		level->createGl(m_Triangles,scale );
+    // 	}
 }
 
-CVector3 * BB_Doc::getCollisionVector(){
-	return m_CollisionVector;
+CVector3 * BB_Doc::getCollisionVector()
+{
+    return m_CollisionVector;
 }
-QVector<C3dTriangle> & BB_Doc::getTriangles(){
-	return m_Triangles;
+QVector<C3dTriangle> & BB_Doc::getTriangles()
+{
+    return m_Triangles;
 }

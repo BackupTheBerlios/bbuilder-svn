@@ -27,6 +27,11 @@
 
 using namespace std;
 
+int compare ( const void * a, const void * b )
+{
+    return ( *( int* ) a - *( int* ) b );
+}
+
 BB_Wall::BB_Wall( BB_Point* p1, BB_Point* p2 ) : BB_Line( p1, p2 )
 {
     m_ShowDirection = true;
@@ -42,6 +47,7 @@ BB_Wall::BB_Wall( BB_Point* p1, BB_Point* p2 ) : BB_Line( p1, p2 )
     moveEvent();
 
     m_Objects = new QVector <BB_DrawObject *>;
+    m_Hight = 3.2;
 
     // 	setTextureFile(IMG_DIR() + SEPARATOR() +"brick.jpg");
 }
@@ -98,7 +104,6 @@ void BB_Wall::generateXElement( QTextStream &out, int depth )
         }
     }
 
-
     BB_Object::generateXElement( out, depth + 1 );
     out << BB::indent( depth ) << "</bb_wall>\n";
 }
@@ -145,7 +150,7 @@ void BB_Wall::show( BB_Transformer& transformer, QPainter& painter ) const
 
 void BB_Wall::editDlg( BB_DocComponent * docComponent )
 {
-    BB_DlgWallEdit EditDlg( this, docComponent );
+    BB_DlgWallEdit EditDlg( this, docComponent, m_Hight );
     EditDlg.exec();
 }
 
@@ -258,7 +263,7 @@ void BB_Wall::openTextureDlg()
     BB_DlgOpenTexture dlg;
     dlg.setTextureFile( PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName );
     dlg.exec();
-    setTextureFileName( dlg.getTextureFile() );
+    setTextureAbsoluteFileName( dlg.getTextureFile() );
 }
 
 
@@ -267,97 +272,243 @@ void BB_Wall::openTextureDlg()
 
 void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
-	
-	C3dVector v1,v2,v3,v4;
-	
-	
-	v1.setX( m_Pos1->getPos().x() * scale );
-	v1.setZ( m_Pos1->getPos().y() * scale );
-	v1.setY( 0.0 );
-	
-	v2.setX( m_Pos2->getPos().x() * scale );
-	v2.setZ( m_Pos2->getPos().y() * scale );
-	v2.setY( 0.0 );
-	
-	v3.setX( m_Pos2->getPos().x() * scale );
-	v3.setZ( m_Pos2->getPos().y() * scale );
-	v3.setY( height * scale);
-	
-	v4.setX( m_Pos1->getPos().x() * scale );
-	v4.setZ( m_Pos1->getPos().y() * scale );
-	v4.setY( height * scale);
-	
-	v1 = v1.rotateVector( v_Y, rotation );
-	v2 = v2.rotateVector( v_Y, rotation );
-	v3 = v3.rotateVector( v_Y, rotation );
-	v4 = v4.rotateVector( v_Y, rotation );
-	
-	v1 = v1 + vector;
-	v2 = v2 + vector;
-	v3 = v3 + vector;
-	v4 = v4 + vector;
-	
-		
-	C3dTriangle t1( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue );
-	C3dTriangle t2( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue );
+    C3dVector v1, v2, v3, v4;
 
-	
-	if( !m_TextureFileName.isEmpty() )
-	{
+    BB_ConstructionElement * myElement;
+    C2dVector richtung = ( m_Pos2->getPos() - m_Pos1->getPos() );
+
+    C2dVector pos1, pos2;
+    C3dTriangle t1, t2;
+    myElement = hastDoor();
+	//Wenn eine Tuer vorhanden ist, dann mache 3 Vierecke
+    if ( myElement != NULL )
+    {
+
+		C3dTriangle tr1,tr2;
+		tr1.setVisible(false);
+		tr2.setVisible(false);
+        pos1 = m_Pos1->getPos() + ( richtung * myElement->getCoefficientPos1().x() );
+        pos2 = m_Pos1->getPos() + ( richtung * myElement->getCoefficientPos2().x() );
+
+
+        //--------------------erste Viereck
+        v1.setX( m_Pos1->getPos().x() * scale );
+        v1.setZ( m_Pos1->getPos().y() * scale );
+        v1.setY( 0.0 );
+
+        v2.setX( pos1.x() * scale );
+        v2.setZ( pos1.y() * scale );
+        v2.setY( 0.0 );
+
+        v3.setX( pos1.x() * scale );
+        v3.setZ( pos1.y() * scale );
+        v3.setY( height * scale );
+
+        v4.setX( m_Pos1->getPos().x() * scale );
+        v4.setZ( m_Pos1->getPos().y() * scale );
+        v4.setY( height * scale );
+
+        v1 = v1.rotateVector( v_Y, rotation );
+        v2 = v2.rotateVector( v_Y, rotation );
+        v3 = v3.rotateVector( v_Y, rotation );
+        v4 = v4.rotateVector( v_Y, rotation );
+
+        v1 = v1 + vector;
+        v2 = v2 + vector;
+        v3 = v3 + vector;
+        v4 = v4 + vector;
+
+//         triangles.append( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
+//         triangles.append( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
 		
-		C3dVector tV1,tV2,tV3,tV4;
+		tr1.copy(C3dTriangle(v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ));
+		tr2.copy(C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ));
+		triangles.append( tr1 );
+		triangles.append( tr2 );
+
+        //-------------------- zweite Viereckt  "mit Tuer"
+
+        v1.setX( pos1.x() * scale );
+        v1.setZ( pos1.y() * scale );
+        v1.setY( 0.0 );
+
+        v2.setX( pos2.x() * scale );
+        v2.setZ( pos2.y() * scale );
+        v2.setY( 0.0 );
+
+        v3.setX( pos2.x() * scale );
+        v3.setZ( pos2.y() * scale );
+        v3.setY( height * scale );
+
+        v4.setX( pos1.x() * scale );
+        v4.setZ( pos1.y() * scale );
+        v4.setY( height * scale );
+
+        v1 = v1.rotateVector( v_Y, rotation );
+        v2 = v2.rotateVector( v_Y, rotation );
+        v3 = v3.rotateVector( v_Y, rotation );
+        v4 = v4.rotateVector( v_Y, rotation );
+
+        v1 = v1 + vector;
+        v2 = v2 + vector;
+        v3 = v3 + vector;
+        v4 = v4 + vector;
+
+		tr1.copy(C3dTriangle(v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Red ));
+        tr1.setCollision( false );
+		tr2.copy(C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Red ));
+        tr2.setCollision( false );
+        triangles.append( tr1 );
+        triangles.append( tr2 );
+		tr1.setCollision( true );
+		tr2.setCollision( true );
+
+        //-------------------- dritte Viereckt
+
+        v1.setX( pos2.x() * scale );
+        v1.setZ( pos2.y() * scale );
+        v1.setY( 0.0 );
+
+        v2.setX( m_Pos2->getPos().x() * scale );
+        v2.setZ( m_Pos2->getPos().y() * scale );
+        v2.setY( 0.0 );
+
+        v3.setX( m_Pos2->getPos().x() * scale );
+        v3.setZ( m_Pos2->getPos().y() * scale );
+        v3.setY( height * scale );
+
+        v4.setX( pos2.x() * scale );
+        v4.setZ( pos2.y() * scale );
+        v4.setY( height * scale );
+
+        v1 = v1.rotateVector( v_Y, rotation );
+        v2 = v2.rotateVector( v_Y, rotation );
+        v3 = v3.rotateVector( v_Y, rotation );
+        v4 = v4.rotateVector( v_Y, rotation );
+
+        v1 = v1 + vector;
+        v2 = v2 + vector;
+        v3 = v3 + vector;
+        v4 = v4 + vector;
+
+//         triangles.append( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
+//         triangles.append( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
 		
-		QImage img;
+		tr1.copy(C3dTriangle(v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ));
+		tr2.copy(C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ));
+		triangles.append( tr1 );
+		triangles.append( tr2 );
 		
-		if( img.load(PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
-				  img.height() != 0 &&
-				  img.width() != 0)
-		{
-	
-			double x,y,l,h, factor;
-			factor = 10;
-			
-			x = img.width();
-			y = img.height();
-			l = getLength() * scale / factor;
-			h = height / factor;
-						
-			tV1.setX( 0.0 );
-			tV1.setY( y / h );
-			tV1.setZ( 0.0 );
-			
-			tV2.setX( x / l );
-			tV2.setY( y / h );
-			tV2.setZ( 0.0 );
-			
-			tV3.setX( x / l );
-			tV3.setY( 1.0 );
-			tV3.setZ( 0.0 );
-			
-			tV4.setX( 0.0 );
-			tV4.setY( 1.0 );
-			tV4.setZ( 0.0 );
-			
-			t1.setVTex0( tV4 );
-			t1.setVTex1( tV3 );
-			t1.setVTex2( tV2 );
-			
-			t2.setVTex0( tV2 );
-			t2.setVTex1( tV1 );
-			t2.setVTex2( tV4 );
-			
-			t1.createTexture( img );
-			t2.createTexture( img );
-		}
-		else
-		{
-			qDebug() << "Textur " << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() + " konnte nicht geladen werden." << endl;
-		}
 		
-	}
-	
-	triangles.append( t1 );
-	triangles.append( t2 );
-	
+		//Grosse Dreiecke auf notCollision setzen
+		t1.setCollision(false);
+		t2.setCollision(false);
+    }
+	//Zwei Dreiecke fuer die Ganze wand
+	//-------------------------------------
+		v1.setX( m_Pos1->getPos().x() * scale );
+		v1.setZ( m_Pos1->getPos().y() * scale );
+		v1.setY( 0.0 );
+
+		v2.setX( m_Pos2->getPos().x() * scale );
+		v2.setZ( m_Pos2->getPos().y() * scale );
+		v2.setY( 0.0 );
+
+		v3.setX( m_Pos2->getPos().x() * scale );
+		v3.setZ( m_Pos2->getPos().y() * scale );
+		v3.setY( height * scale );
+
+		v4.setX( m_Pos1->getPos().x() * scale );
+		v4.setZ( m_Pos1->getPos().y() * scale );
+		v4.setY( height * scale );
+
+		v1 = v1.rotateVector( v_Y, rotation );
+		v2 = v2.rotateVector( v_Y, rotation );
+		v3 = v3.rotateVector( v_Y, rotation );
+		v4 = v4.rotateVector( v_Y, rotation );
+
+		v1 = v1 + vector;
+		v2 = v2 + vector;
+		v3 = v3 + vector;
+		v4 = v4 + vector;
 		
+		/** Cod von Alex*/
+		t1.copy( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
+		t2.copy( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
+		/** Ende Code Von Alex*/
+
+//         triangles.append( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
+//         triangles.append( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
+
+
+	//Texture laden, es wird nur eine Textur fuer die Ganze Wand erzeugt
+    if ( !m_TextureFileName.isEmpty() )
+    {
+
+        C3dVector tV1, tV2, tV3, tV4;
+
+        QImage img;
+
+        if ( img.load( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
+                img.height() != 0 &&
+                img.width() != 0 )
+        {
+
+            double x, y, l, h, factor;
+            factor = 10;
+
+            x = img.width();
+            y = img.height();
+            l = getLength() * scale / factor;
+            h = height / factor;
+
+            tV1.setX( 0.0 );
+            tV1.setY( y / h );
+            tV1.setZ( 0.0 );
+
+            tV2.setX( x / l );
+            tV2.setY( y / h );
+            tV2.setZ( 0.0 );
+
+            tV3.setX( x / l );
+            tV3.setY( 1.0 );
+            tV3.setZ( 0.0 );
+
+            tV4.setX( 0.0 );
+            tV4.setY( 1.0 );
+            tV4.setZ( 0.0 );
+
+            t1.setVTex0( tV4 );
+            t1.setVTex1( tV3 );
+            t1.setVTex2( tV2 );
+
+            t2.setVTex0( tV2 );
+            t2.setVTex1( tV1 );
+            t2.setVTex2( tV4 );
+
+            t1.createTexture( img );
+            t2.createTexture( img );
+        }
+        else
+        {
+            qDebug() << "Textur " << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() + " konnte nicht geladen werden." << endl;
+        }
+
+    }
+
+    triangles.append( t1 );
+    triangles.append( t2 );
+
+}
+
+BB_Door * BB_Wall::hastDoor()
+{
+    for ( int i = 0;i < m_Objects->count() ;i++ )
+    {
+        if ( typeid( *( m_Objects->at( i ) ) ) == typeid( BB_Door ) )
+        {
+			return (BB_Door *)m_Objects->at( i );
+        }
+    }
+    return NULL;
 }

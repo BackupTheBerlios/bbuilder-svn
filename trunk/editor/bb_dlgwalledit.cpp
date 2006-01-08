@@ -24,10 +24,10 @@
 
 using namespace std;
 
-BB_DlgWallEdit::BB_DlgWallEdit( BB_Wall * wall, BB_DocComponent * docComponent , QWidget * parent, Qt::WFlags f )
+BB_DlgWallEdit::BB_DlgWallEdit( BB_Wall * wall, BB_DocComponent * docComponent ,double hohe, QWidget * parent, Qt::WFlags f )
         : QDialog( parent, f )
 {
-    initilize( wall, docComponent );
+    initilize( wall, docComponent, hohe );
 }
 
 
@@ -51,7 +51,7 @@ BB_DlgWallEdit::~BB_DlgWallEdit()
 	delete m_Buttons;
 }
 
-void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
+void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent ,double hohe )
 {
     //eigenschaften von Widget bearbeiten
     setWindowTitle ( tr( "Eigenschaften von einer Wand" ) );
@@ -59,7 +59,7 @@ void BB_DlgWallEdit::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
     //member-variablen zuweisen
     m_level = docComponent;
     m_wall = wall;
-    m_CentralWidget = new BB_DlgWallEditArea( wall, docComponent );
+    m_CentralWidget = new BB_DlgWallEditArea( wall, docComponent, hohe );
     m_PreviewWidget = new BB_DlgWallEditPreview( wall, docComponent );
 
     //tols initialisieren

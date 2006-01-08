@@ -69,7 +69,7 @@ class C2dVector
         */ 
         // QDomElement createDomElement(QDomDocument & doc)const;
         const char * getClassName() const;
-        void print();
+        void print(char c[] = "");
         bool operator == ( const C2dVector & v2 ) const;
 
         /**

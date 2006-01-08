@@ -391,3 +391,14 @@ void BB_AbstractTool::selectObject( BB_DrawObject * object )
         m_Selection->append( object );
     }
 }
+
+
+void BB_AbstractTool::setScaleHeight(double Value)
+{
+  m_ScaleHeight = Value;
+}
+
+void BB_AbstractTool::setScaleWidth(double Value)
+{
+  m_ScaleWidth = Value;
+}

@@ -49,7 +49,7 @@ class BB_DlgWallEdit : public QDialog
         @param QWidget von QT
         @param Qt::WFlags als Eigenschaft von Qt
         */
-        BB_DlgWallEdit( BB_Wall * wall, BB_DocComponent * docComponent , QWidget * parent = 0, Qt::WFlags f = 0 );
+        BB_DlgWallEdit( BB_Wall * wall, BB_DocComponent * docComponent ,double hohe = 3.2, QWidget * parent = 0, Qt::WFlags f = 0 );
         ~BB_DlgWallEdit();
         /**
         Legt die Etage mit der gearbeitet werden soll fest
@@ -72,7 +72,7 @@ class BB_DlgWallEdit : public QDialog
         @param BB_Wall
         @Param BB_DocComponent
         */
-        void initilize( BB_Wall * wall, BB_DocComponent * docComponent );
+        void initilize( BB_Wall * wall, BB_DocComponent * docComponent, double hohe = 3.2 );
         void initSingals();
     void unsetButton(QToolButton * button);
     protected:
@@ -80,7 +80,7 @@ class BB_DlgWallEdit : public QDialog
         BB_Wall * m_wall;
         BB_DlgWallEditArea * m_CentralWidget;
         BB_DlgWallEditPreview * m_PreviewWidget;
-        QRect m_rect;
+        QRectF m_rect;
         //buttons
         QToolButton * m_ButtonWindow;
         QToolButton * m_ButtonDoor;

@@ -35,7 +35,7 @@ class BB_Line : public BB_DrawObject
         ~BB_Line();
 
         virtual bool isHit( const C2dVector& hit );
-        virtual bool isHit( const QRect& rect );
+        virtual bool isHit( const QRectF& rect );
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
 
         /**

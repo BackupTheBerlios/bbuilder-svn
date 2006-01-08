@@ -86,10 +86,7 @@ void BB_DrawObject::moveBy( C2dVector pMove )
 // }
 // 
 
-/*!
-    \fn BB_DrawObject::isHit(QRect rect)
- */
-bool BB_DrawObject::isHit( const QRect& rect )
+bool BB_DrawObject::isHit( const QRectF& rect )
 {
 	return false;
 }
@@ -162,4 +159,16 @@ void BB_DrawObject::setTextureFileName( const QString& Value )
 // 	}
 	
 	m_TextureFileName = Value;
+}
+
+void BB_DrawObject::setTextureAbsoluteFileName( const QString& Value )
+{
+	QImage image( Value );
+	if ( !image.isNull() )
+	{
+		image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getName() + ".png", "PNG" );
+		setTextureFileName( getName() + ".png" );
+		return;
+	}
+	qDebug("image ist nicht geladen");
 }

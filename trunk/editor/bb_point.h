@@ -47,10 +47,10 @@ class BB_Point : public BB_DrawObject
         //     virtual void moveBy( QPoint pMove);
         virtual void moveBy( C2dVector pMove );
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
-        int getRadius();
-        void setRadius( int r );
+        double getRadius();
+        void setRadius( double r );
         virtual bool isHit( const C2dVector& hit );
-		virtual bool isHit( const QRect& rect );
+		virtual bool isHit( const QRectF& rect );
         void setPos( const C2dVector& theValue );
         const C2dVector& getPos() const;
         QVector<BB_Line*>* getLines();
@@ -131,7 +131,7 @@ class BB_Point : public BB_DrawObject
 		virtual void moveEvent();
 
     private:
-        int m_Radius;
+        double m_Radius;
         double m_scale;
     protected:
         C2dVector m_Pos;

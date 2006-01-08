@@ -213,7 +213,7 @@ void BR_View::mouseMoveEvent ( QMouseEvent * me )
 		x = m_MousePosX - (me->globalX());
 		y = m_MousePosY - (me->globalY());
 
-        m_Camera.rotateX( -y * 0.3 );
+        m_Camera.rotateX( y * 0.3 );
         m_Camera.rotateY( x * 0.3 );
 
         m_MousePosX = me->globalX();
@@ -248,14 +248,14 @@ void BR_View::proceedActions()
 	{
 // 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
 // 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
-		m_Camera.strafe( 0.1 );
+		m_Camera.strafe( -0.1 );
 	}
 	
 	if( m_Keys.isPressed( Qt::Key_D ) )
 	{
 // 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
 // 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
-		m_Camera.strafe( -0.1 );
+		m_Camera.strafe( 0.1 );
 	}
 	
 }

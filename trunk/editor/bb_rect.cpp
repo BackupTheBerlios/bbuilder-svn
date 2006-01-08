@@ -58,10 +58,10 @@ void BB_Rect::show( BB_Transformer& transformer, QPainter& painter ) const
         painter.setPen( m_Pen );
         painter.setBrush( m_Brush );
 
-        QRect rect( ( int ) m_Pos1->getX(),
-                    ( int ) m_Pos1->getY(),
-                    ( int ) ( m_Pos2->getX() - m_Pos1->getX() ),
-                    ( int ) ( m_Pos2->getY() - m_Pos1->getY() ) );
+        QRectF rect( m_Pos1->getX(),
+                     m_Pos1->getY(),
+                    ( m_Pos2->getX() - m_Pos1->getX() ),
+                    ( m_Pos2->getY() - m_Pos1->getY() ) );
 
         painter.drawRect( rect );
     }
@@ -73,10 +73,10 @@ void BB_Rect::show( BB_Transformer& transformer, QPainter& painter ) const
  */
 bool BB_Rect::isHit( const C2dVector &hit )
 {
-    QRect rect( ( int ) m_Pos1->getX(),
-                ( int ) m_Pos1->getY(),
-                ( int ) ( m_Pos2->getX() - m_Pos1->getX() ),
-                ( int ) ( m_Pos2->getY() - m_Pos1->getY() ) );
+    QRectF rect( m_Pos1->getX(),
+                 m_Pos1->getY(),
+                ( m_Pos2->getX() - m_Pos1->getX() ),
+                ( m_Pos2->getY() - m_Pos1->getY() ) );
     rect = rect.normalized();
 	
 	if ( hit.x() > rect.left() && hit.x() < rect.right() )

@@ -36,7 +36,7 @@ void BB_ToolWindowNew::click( QMouseEvent* me )
     m_pScreen = me->pos();
     m_Transformer->screenToLogical( m_pLogic, m_pScreen );
     m_LastLogicMouseClick = m_pLogic;
-    BB_Window * tmpWindow = new BB_Window( m_pLogic, C2dVector( m_pLogic.x() + 200, m_pLogic.y() - 200 ) );
+    BB_Window * tmpWindow = new BB_Window( m_pLogic, C2dVector( m_pLogic.x() + 1, m_pLogic.y() - 1 ) );
     tmpWindow->setTextureAbsoluteFileName( IMG_DIR() + SEPARATOR() + "Fenster.jpg" );
     m_Objects->append( tmpWindow );
 }
