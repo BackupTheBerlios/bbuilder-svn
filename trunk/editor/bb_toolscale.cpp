@@ -26,7 +26,7 @@ BB_ToolScale::BB_ToolScale( QWidget * parent )
     m_MovePoint = NULL;
     m_ScaleLine = NULL;
 
-    
+	m_Icon = QIcon(IMG_DIR() + SEPARATOR() + "toolScale.png");
 
     /* Alle Objekte ausblenden */
     m_ShowDrawObjects = false;

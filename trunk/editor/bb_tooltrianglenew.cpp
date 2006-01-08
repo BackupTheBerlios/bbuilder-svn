@@ -23,6 +23,8 @@ BB_ToolTriangleNew::BB_ToolTriangleNew(QWidget *parent)
     m_P1 = NULL;
     m_P2 = NULL;
     m_P3 = NULL;
+	
+	m_Icon = QIcon(IMG_DIR() + SEPARATOR() + "toolTriangle.png");
 }
 
 

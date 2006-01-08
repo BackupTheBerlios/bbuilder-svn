@@ -21,7 +21,6 @@
 
 BB_ToolStair::BB_ToolStair( QWidget* parent ) : BB_AbstractTool( parent )
 {
-    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWindow.png" );
     m_Rect.setPos1( &m_Point1 );
     m_Rect.setPos2( &m_Point2 );
 
@@ -35,6 +34,8 @@ BB_ToolStair::BB_ToolStair( QWidget* parent ) : BB_AbstractTool( parent )
     m_Rect.setBrush( b );
 
 // 	m_Stair = new BB_Stair();
+	m_Icon = QIcon(IMG_DIR() + SEPARATOR() + "toolStairs.png");
+	
 }
 
 

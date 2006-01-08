@@ -66,17 +66,18 @@ void BB_TerrainTriangle::createGl(QVector< C3dTriangle >& triangles, C3dVector v
 	
 	C3dTriangle triangle ( v1, v2, v3, v_Zero,v_Zero,v_Zero, cl_Gray );
 	
-	if( !m_TextureFileName.isEmpty() )
-	{
-		C3dVector tV1,tV2,tV3;
+// 	if( !m_TextureFileName.isEmpty() )
+// 	{
+		
 		
 		QImage img;
 		qDebug() << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName();
-		if( img.load(PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
+		if( (img.load(PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
 				  img.height() != 0 &&
-				  img.width() != 0)
+				   img.width() != 0) ||
+				   img.load( IMG_DIR() + SEPARATOR() + "terrain.png" )) 
 		{
-	
+			C3dVector tV1,tV2,tV3;
 // 			double x,y,l,h, factor;
 // 			factor = 10;
 			// 			
@@ -105,11 +106,11 @@ void BB_TerrainTriangle::createGl(QVector< C3dTriangle >& triangles, C3dVector v
 			
 			triangle.createTexture( img );
 		}
-		else
-		{
-			qDebug() << "Textur " << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() + " konnte nicht geladen werden." << endl;
-		}
-	}
+// 		else
+// 		{
+// 			qDebug() << "Textur " << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() + " konnte nicht geladen werden." << endl;
+// 		}
+// 	}
 	
 	
 	triangles.append(triangle);
