@@ -30,6 +30,7 @@ BB_ToolScale::BB_ToolScale( QWidget * parent )
 
     /* Alle Objekte ausblenden */
     m_ShowDrawObjects = false;
+	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolScale.png" );
 }
 
 

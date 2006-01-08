@@ -14,6 +14,7 @@
 
 BB_ToolLevelTriangleNew::BB_ToolLevelTriangleNew(QWidget* parent): BB_ToolTriangleNew(parent)
 {
+	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolTriangle.png" );
 }
 
 
