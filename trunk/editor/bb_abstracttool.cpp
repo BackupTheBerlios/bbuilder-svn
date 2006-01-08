@@ -125,7 +125,7 @@ void BB_AbstractTool::setSelectionVector( QVector<BB_DrawObject*>* selectionVect
         m_Selection = selectionVector;
         if ( m_ToolWidget != NULL )
         {
-			getToolWidget()->setSelection( m_Selection );
+            getToolWidget() ->setSelection( m_Selection );
         }
     }
 
@@ -213,9 +213,15 @@ BB_DrawObject* BB_AbstractTool::getClickedObject( const C2dVector &posLogic , co
     for ( int i = 0; i < m_Objects->count() && exit == false; i++ )
     {
         object = m_Objects->at( i );
-        if ( typeid( object ) == typeid( BB_Point ) )
+        //         if ( typeid( object ) == typeid( BB_Point ) )
+        //         {
+        //             ( ( BB_Point* ) object ) ->setScale( m_Transformer->getScale() );
+        //--------zur presentation
+        ///@todo das muss irgentwie anders geloest werden
+        if ( object->getClassName() == "BB_Point" )
         {
-            ( ( BB_Point* ) object ) ->setScale( m_Transformer->getScale() );
+            ( ( BB_Point * ) object ) ->setScale( m_Transformer->getScale() );
+            //---------ende-----------
         }
         if ( object != NULL && typeid( *object ) == type && object->isHit( posLogic ) )
         {
@@ -393,12 +399,12 @@ void BB_AbstractTool::selectObject( BB_DrawObject * object )
 }
 
 
-void BB_AbstractTool::setScaleHeight(double Value)
+void BB_AbstractTool::setScaleHeight( double Value )
 {
-  m_ScaleHeight = Value;
+    m_ScaleHeight = Value;
 }
 
-void BB_AbstractTool::setScaleWidth(double Value)
+void BB_AbstractTool::setScaleWidth( double Value )
 {
-  m_ScaleWidth = Value;
+    m_ScaleWidth = Value;
 }

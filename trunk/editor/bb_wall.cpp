@@ -137,7 +137,7 @@ void BB_Wall::show( BB_Transformer& transformer, QPainter& painter ) const
 
     ///@todo Test löschen
     // NUR TEST
-    painter.drawText( dest_Middle.x() , dest_Middle.y() , getName() );
+//     painter.drawText( dest_Middle.x() , dest_Middle.y() , getName() );
 
 
     if ( m_ShowDirection )
@@ -544,16 +544,36 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 		v3 = v3 + vector - normal;
 		v4 = v4 + vector - normal;
 
-		tr1.copy(C3dTriangle(v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Red ));
+		C3dVector tV1( 0.0,0.0,0.0 ), tV2(1.0,0.0,0.0), tV3(0.0,1.0,0.0), tV4(1.0,1.0,0.0);
+		
+		
+		
+		
+		tr1 = (C3dTriangle(v1, v2, v3, tV1, tV2, tV3, cl_White ));
 		tr1.setCollision( false );
 // 		tr1.setVisible( true );
-		tr2.copy(C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Red ));
+		tr2.copy(C3dTriangle( v3, v4, v1, tV3, tV4, tV1, cl_White ));
 		tr2.setCollision( false );
 // 		tr2.setVisible( true );
+
+		tr1.setCollision( true );
+		tr2.setCollision( true );  		
+		
+		
+		if( !myElement->getTextureFileName().isEmpty() )
+		{
+			QImage img;
+			if ( img.load( PRO_TEXTURES_DIR() + SEPARATOR() + myElement->getTextureFileName() ) &&
+						  img.height() != 0 &&
+						  img.width() != 0 )
+			{
+				t1.createTexture( img );
+				t2.createTexture( img );
+			}
+			
+		}
 		triangles.append( tr1 );
 		triangles.append( tr2 );
-		tr1.setCollision( true );
-		tr2.setCollision( true );
 	}
 
 }
