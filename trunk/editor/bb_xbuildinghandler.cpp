@@ -67,16 +67,7 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
     }
     else if ( qName == "scale" )
     {
-        bool ok;
-        QString tmp;
-        double value;
-
-        tmp = atts.value( "value" );
-        value = tmp.toDouble( &ok );
-
-        m_Building->setScaleReal( value );
-
-        m_XScale = true;
+		parseScale(atts);
     }
     else if ( qName == "bb_point" )
     {
@@ -130,227 +121,19 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
     else if ( qName == "bb_wall" )
     {
 
-        bool ok;
-        QString tmp;
-        BB_Point *point1 = NULL;
-        BB_Point *point2 = NULL;
-        double p1, p2;
-        int id;
-
-        tmp = atts.value( "id" );
-        id = tmp.toInt( &ok );
-
-        tmp = atts.value( "p1" );
-        p1 = tmp.toDouble( &ok );
-
-        tmp = atts.value( "p2" );
-        p2 = tmp.toDouble( &ok );
-
-        BB_Object *object;
-
-        for ( int i = 0; i < m_DrawObjects->count(); i++ )
-        {
-            object = m_DrawObjects->at( i );
-            if ( typeid( *object ) == typeid( BB_Point ) )
-            {
-                if ( object->getObjectNr() == p1 )
-                {
-                    point1 = ( BB_Point* ) object;
-                }
-                else if ( object->getObjectNr() == p2 )
-                {
-                    point2 = ( BB_Point* ) object;
-                }
-            }
-        }
-
-        if ( point1 != NULL && point2 != NULL )
-        {
-            m_Object = ( BB_DrawObject* ) new BB_Wall( point1, point2 );
-            m_DrawObjects->append( m_Object );
-            ( ( BB_Wall* ) m_Object ) ->setPos2( point2 );
-
-        }
-        else
-        {
-            qDebug() << "Fehler: BB_Wall konnte nicht erstellt werden!" << endl;
-            return false;
-        }
+		parseWall(atts);
     }
     else if ( qName == "bb_stair" )
     {
-
-        bool ok;
-        QString tmp;
-        BB_Point *point1 = NULL;
-        BB_Point *point2 = NULL;
-        double p1, p2;
-        int id;
-
-        tmp = atts.value( "id" );
-        id = tmp.toInt( &ok );
-
-        tmp = atts.value( "p1" );
-        p1 = tmp.toDouble( &ok );
-
-        tmp = atts.value( "p2" );
-        p2 = tmp.toDouble( &ok );
-
-        BB_Object *object;
-
-        for ( int i = 0; i < m_DrawObjects->count(); i++ )
-        {
-            object = m_DrawObjects->at( i );
-            if ( typeid( *object ) == typeid( BB_Point ) )
-            {
-                if ( object->getObjectNr() == p1 )
-                {
-                    point1 = ( BB_Point* ) object;
-                }
-                else if ( object->getObjectNr() == p2 )
-                {
-                    point2 = ( BB_Point* ) object;
-                }
-            }
-        }
-
-        if ( point1 != NULL && point2 != NULL )
-        {
-            m_Object = ( BB_DrawObject* ) new BB_Stair();
-            ( ( BB_Stair* ) m_Object ) ->setPos1( point1 );
-            ( ( BB_Stair* ) m_Object ) ->setPos2( point2 );
-            m_DrawObjects->append( m_Object );
-
-        }
-        else
-        {
-            qDebug() << "Fehler: BB_Stair konnte nicht erstellt werden!" << endl;
-            return false;
-        }
+		parseStair(atts);
     }
     else if ( qName == "bb_door" )
     {
-        if ( typeid( *m_Object ) != typeid( BB_Wall ) )
-        {
-            qDebug( "BB_Door kann nicht erstellt werden, es ligt kein BB_Wall vor" );
-            return false;
-        }
-
-        QString tmp;
-        int id;
-        bool ok;
-
-        C2dVector v1;
-        C2dVector v2;
-
-        C2dVector pv1;
-        C2dVector pv2;
-		
-		C2dVector cv1;
-		C2dVector cv2;
-
-        tmp = atts.value( "id" );
-        id = tmp.toInt( &ok );
-
-        tmp = atts.value( "x1" );
-        v1.setX( tmp.toDouble( &ok ) );
-        tmp = atts.value( "y1" );
-        v1.setY( tmp.toDouble( &ok ) );
-
-        tmp = atts.value( "px1" );
-        pv1.setX( tmp.toInt( &ok ) );
-        tmp = atts.value( "py1" );
-        pv1.setY( tmp.toInt( &ok ) );
-		
-		tmp = atts.value( "cx1" );
-		cv1.setX( tmp.toDouble( &ok ) );
-		tmp = atts.value( "cy1" );
-		cv1.setY( tmp.toDouble( &ok ) );
-
-        tmp = atts.value( "x2" );
-        v2.setX( tmp.toDouble( &ok ) );
-        tmp = atts.value( "y2" );
-        v2.setY( tmp.toDouble( &ok ) );
-
-        tmp = atts.value( "px2" );
-        pv2.setX( tmp.toInt( &ok ) );
-        tmp = atts.value( "py2" );
-        pv2.setY( tmp.toInt( &ok ) );
-		
-		tmp = atts.value( "cx2" );
-		cv2.setX( tmp.toDouble( &ok ) );
-		tmp = atts.value( "cy2" );
-		cv2.setY( tmp.toDouble( &ok ) );
-
-        m_ConstructionElement = new BB_Door( v1, v2 );
-        m_ConstructionElement->setWallPosition1( pv1 );
-        m_ConstructionElement->setWallPosition2( pv2 );
-		m_ConstructionElement->setCoefficientPos1(cv1);
-		m_ConstructionElement->setCoefficientPos2(cv2);
-        m_ConstructionElement->m_ObjectNr = id;
-
+		parseDoor(atts);
     }
     else if ( qName == "bb_window" )
     {
-        if ( typeid( *m_Object ) != typeid( BB_Wall ) )
-        {
-            qDebug( "BB_Window kann nicht erstellt werden, es ligt kein BB_Wall vor" );
-            return false;
-        }
-
-        QString tmp;
-        int id;
-        bool ok;
-
-        C2dVector v1;
-        C2dVector v2;
-
-        C2dVector pv1;
-        C2dVector pv2;
-		
-		C2dVector cv1;
-		C2dVector cv2;
-
-        tmp = atts.value( "id" );
-        id = tmp.toInt( &ok );
-
-        tmp = atts.value( "x1" );
-        v1.setX( tmp.toDouble( &ok ) );
-        tmp = atts.value( "y1" );
-        v1.setY( tmp.toDouble( &ok ) );
-
-        tmp = atts.value( "px1" );
-        pv1.setX( tmp.toInt( &ok ) );
-        tmp = atts.value( "py1" );
-        pv1.setY( tmp.toInt( &ok ) );
-		
-		tmp = atts.value( "cx1" );
-		cv1.setX( tmp.toDouble( &ok ) );
-		tmp = atts.value( "cy1" );
-		cv1.setY( tmp.toDouble( &ok ) );
-
-        tmp = atts.value( "x2" );
-        v2.setX( tmp.toDouble( &ok ) );
-        tmp = atts.value( "y2" );
-        v2.setY( tmp.toDouble( &ok ) );
-
-        tmp = atts.value( "px2" );
-        pv2.setX( tmp.toInt( &ok ) );
-        tmp = atts.value( "py2" );
-        pv2.setY( tmp.toInt( &ok ) );
-		
-		tmp = atts.value( "cx2" );
-		cv2.setX( tmp.toDouble( &ok ) );
-		tmp = atts.value( "cy2" );
-		cv2.setY( tmp.toDouble( &ok ) );
-
-        m_ConstructionElement = new BB_Window( v1, v2 );
-        m_ConstructionElement->setWallPosition1( pv1 );
-        m_ConstructionElement->setWallPosition2( pv2 );
-		m_ConstructionElement->setCoefficientPos1(cv1);
-		m_ConstructionElement->setCoefficientPos2(cv2);
-        m_ConstructionElement->m_ObjectNr = id;
-
+		parseWindow(atts);
     }
 	else if( qName == "bb_buildingtriangle" )
 	{

@@ -67,8 +67,6 @@ public:
 	 * Dier Fehler wird im std::cout ausgegeben
 	 */
 	virtual bool fatalError(const QXmlParseException& exception);
-    bool parseTerrainTriangle( QXmlAttributes& atts );
-
 protected:
 	/**  */
 	QString m_CurrentText;
@@ -84,10 +82,13 @@ protected:
 	virtual bool parseTerrainTriangle( const QXmlAttributes& atts );
 	virtual bool parsePoint( const QXmlAttributes& atts );
 	virtual bool parseTerrainPoint( const QXmlAttributes& atts );
-    
-protected:
+	virtual bool BB_XHandler::parseWindow(const QXmlAttributes& atts);
     virtual bool parseLevelTriangle( const QXmlAttributes& atts );
     virtual bool parseBuildingTriangle( const QXmlAttributes& atts );
+	virtual bool parseDoor(const QXmlAttributes& atts);
+	virtual bool parseStair(const QXmlAttributes& atts);
+	virtual bool parseWall(const QXmlAttributes& atts);
+	virtual bool parseScale(const QXmlAttributes& atts);
 };
 
 #endif

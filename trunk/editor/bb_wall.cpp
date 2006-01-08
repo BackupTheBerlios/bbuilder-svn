@@ -510,22 +510,22 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 		pos1 = m_Pos1->getPos() + ( richtung * myElement->getCoefficientPos1().x() );
 		pos2 = m_Pos1->getPos() + ( richtung * myElement->getCoefficientPos2().x() );
 		
-		v1.setX( pos1.x() * scale +0.1 );
-		v1.setZ( pos1.y() * scale);
+		v1.setX( pos1.x() * scale );
+		v1.setZ( pos1.y() * scale );
 // 		v1.setY( 0.0 );
 		v1.setY( height * myElement->getCoefficientPos2().y() * scale );
 
-		v2.setX( pos2.x() * scale +0.1);
+		v2.setX( pos2.x() * scale);
 		v2.setZ( pos2.y() * scale);
 // 		v2.setY( 0.0 );
 		v2.setY( height * myElement->getCoefficientPos2().y() * scale );
 
-		v3.setX( pos2.x() * scale +0.1);
+		v3.setX( pos2.x() * scale);
 		v3.setZ( pos2.y() * scale);
 // 		v3.setY( height * scale );
 		v3.setY( height * myElement->getCoefficientPos1().y() * scale );
 
-		v4.setX( pos1.x() * scale +0.1);
+		v4.setX( pos1.x() * scale );
 		v4.setZ( pos1.y() * scale );
 // 		v4.setY( height * scale );
 		v4.setY( height * myElement->getCoefficientPos1().y() * scale );
@@ -534,11 +534,15 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 		v2 = v2.rotateVector( v_Y, rotation );
 		v3 = v3.rotateVector( v_Y, rotation );
 		v4 = v4.rotateVector( v_Y, rotation );
+		
+		C3dVector normal = v1.getNormalVector(v2);
+		normal = normal.unitVector() / 10;
+		
 
-		v1 = v1 + vector;
-		v2 = v2 + vector;
-		v3 = v3 + vector;
-		v4 = v4 + vector;
+		v1 = v1 + vector - normal;
+		v2 = v2 + vector - normal;
+		v3 = v3 + vector - normal;
+		v4 = v4 + vector - normal;
 
 		tr1.copy(C3dTriangle(v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Red ));
 		tr1.setCollision( false );
