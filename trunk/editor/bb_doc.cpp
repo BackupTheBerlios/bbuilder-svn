@@ -157,6 +157,8 @@ bool BB_Doc::open( QString fileName )
             return false;
         }
 
+		setPRO_DIR( m_ProjectPath.path() );
+		
         if ( m_Terrain != NULL )
         {
             m_Terrain->open();
@@ -192,7 +194,7 @@ bool BB_Doc::open( QString fileName )
     // 	cout << "m_ProjectFile: " << m_ProjectFile.toStdString() << endl;
 
     documentChanged();
-    setPRO_DIR( m_ProjectPath.path() );
+    
     return true;
 }
 
@@ -510,8 +512,10 @@ bool BB_Doc::deleteLevel( BB_Level* level )
 {
     for ( int i = m_Levels.count() - 1; i >= 0; i-- )
     {
-        if ( m_Levels.at( 0 ) == level )
+        if ( m_Levels.at( i ) == level )
         {
+			level->getBuilding()->removeLevel( level );
+			m_Levels.remove(i);
             delete level;
             documentChanged();
             return true;

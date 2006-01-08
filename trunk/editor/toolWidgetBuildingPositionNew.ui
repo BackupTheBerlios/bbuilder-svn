@@ -209,7 +209,17 @@
           <number>5</number>
          </property>
          <item row="0" column="0" >
-          <widget class="QDoubleSpinBox" name="doubleSpinBox_Rotation" />
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_Rotation" >
+           <property name="decimals" >
+            <number>0</number>
+           </property>
+           <property name="maximum" >
+            <double>180</double>
+           </property>
+           <property name="minimum" >
+            <double>-180</double>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

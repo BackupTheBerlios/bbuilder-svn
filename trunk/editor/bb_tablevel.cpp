@@ -50,7 +50,7 @@ void BB_TabLevel::slotLevelNew()
         m_Doc->newLevel( m_Building, this );
         updateLevelList();
 
-        m_ListWidgetLevels->setCurrentRow( 1000 );
+        m_ListWidgetLevels->setCurrentRow( -1 );
 
     }
 }
@@ -83,13 +83,14 @@ void BB_TabLevel::slotLevelDelete()
         if ( level != NULL )
         {
             m_Doc->deleteLevel( level );
+			m_Center->setDocComponent( NULL );
         }
     }
-    cout << "Löschen? ... ";
-    if ( QMessageBox::question( this, "Frage?", "sicher?", QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
-        cout << "Gelöscht!" << endl;
-    else
-        cout << "Abgebrochen" << endl;
+//     cout << "Löschen? ... ";
+//     if ( QMessageBox::question( this, "Frage?", "sicher?", QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
+//         cout << "Gelöscht!" << endl;
+//     else
+//         cout << "Abgebrochen" << endl;
 }
 
 
@@ -121,22 +122,9 @@ void BB_TabLevel::initWidgetLeft()
 
     m_ListWidgetLevels = new QListWidget();
 
-    qDebug() << "Connecting m_ListWidgetLevels ... ";
+//     qDebug() << "Connecting m_ListWidgetLevels ... ";
     connect( m_ListWidgetLevels, SIGNAL( currentRowChanged ( int ) ), this, SLOT( slotLevelChanged( int ) ) );
-    qDebug() << "OK";
-    m_ListWidgetLevels->addItem( "Etage 1" );
-    m_ListWidgetLevels->addItem( "Etage 2" );
-    m_ListWidgetLevels->addItem( "Etage 3" );
-    m_ListWidgetLevels->addItem( "Etage 4" );
-    m_ListWidgetLevels->addItem( "Etage 5" );
-    m_ListWidgetLevels->addItem( "Etage 6" );
-    m_ListWidgetLevels->addItem( "Etage 7" );
-    m_ListWidgetLevels->addItem( "Etage 8" );
-    m_ListWidgetLevels->addItem( "Etage 9" );
-    m_ListWidgetLevels->addItem( "Etage 10" );
-    m_ListWidgetLevels->addItem( "Etage 11" );
-
-
+//     qDebug() << "OK";
 
     QVBoxLayout *gBL_Levels = new QVBoxLayout();
     gBL_Levels->setMargin( 0 );
@@ -204,6 +192,8 @@ void BB_TabLevel::updateBuildingList()
 {	
     qDebug( "Updating BuildingList ... " );
     m_ComboBoxBuildings->blockSignals( true );
+	
+	int index = m_ComboBoxBuildings->currentIndex();
 
     m_ComboBoxBuildings->clear();
 
@@ -215,9 +205,8 @@ void BB_TabLevel::updateBuildingList()
         }
     }
 
-    if ( m_ComboBoxBuildings->count() == 0 )
-    {}
-
+	m_ComboBoxBuildings->setCurrentIndex( index );
+	setBuilding( m_Doc->getBuilding( index ) );
     m_ComboBoxBuildings->blockSignals( false );
     qDebug( "OK" );
 
@@ -282,6 +271,20 @@ void BB_TabLevel::slotBuildingChanged( int row )
     qDebug() << "Setting building ... ";
     setBuilding( m_Doc->getBuilding( row ) );
     qDebug() << "OK";
+	
+	qDebug() << "info: Buildings";
+	for(int i = 0; i < m_Buildings->count(); i++ )
+	{
+		qDebug() << m_Buildings->at( i)->getName();
+	}
+	qDebug() << "info: Buildings: Ende";
+	
+	qDebug() << "info: Levels";
+	for(int i = 0; i < m_Levels->count(); i++ )
+	{
+		qDebug() << m_Levels->at( i)->getName();
+	}
+	qDebug() << "info: Levels: Ende";
 }
 
 

@@ -449,18 +449,18 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
         C3dVector tV1, tV2, tV3, tV4;
 
         QImage img;
-
+		qDebug() << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName();
         if ( img.load( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
                 img.height() != 0 &&
                 img.width() != 0 )
         {
 
             double x, y, l, h, factor;
-            factor = 10;
+			factor = 10;
 
             x = img.width();
             y = img.height();
-            l = getLength() * scale / factor;
+            l = getLength() / factor * scale;
             h = height / factor;
 
             tV1.setX( 0.0 );

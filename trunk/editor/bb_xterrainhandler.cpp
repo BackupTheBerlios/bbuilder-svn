@@ -196,7 +196,7 @@ bool BB_XTerrainHandler::startElement( const QString& namespaceURI, const QStrin
  */
 bool BB_XTerrainHandler::endElement( const QString& namespaceURI, const QString& localName, const QString& qName )
 {
-    	cout << "</" << qName.toStdString() << ">" << endl;
+//     	cout << "</" << qName.toStdString() << ">" << endl;
     if ( m_Object == NULL )
     {
         if ( qName == "name" )
