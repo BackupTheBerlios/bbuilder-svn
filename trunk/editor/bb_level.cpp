@@ -39,6 +39,9 @@ BB_Level::BB_Level( BB_Building* building, const QDir& path, const QString &file
 	
     //Standart Hoehe
 	m_Height = 3.0;
+	m_ScaleValue = building->getScaleReal();
+	m_ScalePoint_1 = building->getScalePoint_1();
+	m_ScalePoint_2 = building->getScalePoint_2();
 }
 
 

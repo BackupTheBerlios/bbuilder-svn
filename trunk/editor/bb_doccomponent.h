@@ -102,9 +102,10 @@ public:
     virtual void generateXElement( QTextStream &out, int depth );
 	
 	virtual void createGl( QVector<C3dTriangle>& triangles, double scale );
+	virtual double getHeight() const;
 protected:
-    BB_Point m_ScalePoint_1;
-    BB_Point m_ScalePoint_2;
+    BB_Point  * m_ScalePoint_1;
+    BB_Point * m_ScalePoint_2;
     double m_ScaleValue;
 protected:
     virtual void mapChanged();

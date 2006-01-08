@@ -73,11 +73,11 @@ bool BB_XLevelHandler::endElement(const QString& namespaceURI, const QString& lo
 		}
 	}
 
-// 	if ( qName == "scale" )
-// 	{
-// 		m_XScale = false;
-// 	}
-// 	else 
+	if ( qName == "scale" )
+	{
+		m_XScale = false;
+	}
+	else 
 		if ( qName == "bb_point" )
 	{
 		m_Object = NULL;
@@ -139,19 +139,19 @@ bool BB_XLevelHandler::startElement(const QString& namespaceURI, const QString& 
 		}
 		m_XLevelTag = true;
 	}
-// 	else if ( qName == "scale" )
-// 	{
-// 		bool ok;
-// 		QString tmp;
-// 		double value;
-// 		
-// 		tmp = atts.value( "value" );
-// 		value = tmp.toDouble( &ok );
-// 		
-// 		m_Level->setScaleReal( value );
-// 		
-// 		m_XScale = true;
-// 	}
+	else if ( qName == "scale" )
+	{
+		bool ok;
+		QString tmp;
+		double value;
+		
+		tmp = atts.value( "value" );
+		value = tmp.toDouble( &ok );
+		
+		m_Level->setScaleReal( value );
+		
+		m_XScale = true;
+	}
 	else if ( qName == "bb_point" )
 	{
 		bool ok;

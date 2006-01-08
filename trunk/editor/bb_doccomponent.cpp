@@ -15,13 +15,16 @@
 BB_DocComponent::BB_DocComponent( const QDir& path, const QString &fileName, const QString &name )
         : BB_FileObject( path, fileName, name ), BB_Map(), BB_DrawDevice()
 {
-    m_ScalePoint_1.setX( 0.0 );
-    m_ScalePoint_1.setY( 0.0 );
+	m_ScalePoint_1 = new BB_Point();
+	m_ScalePoint_2 = new BB_Point();
+	
+	m_ScalePoint_1->setX( 0.0 );
+    m_ScalePoint_1->setY( 0.0 );
 
-    m_ScalePoint_2.setX( 50.0 );
-    m_ScalePoint_2.setY( -50.0 );
+    m_ScalePoint_2->setX( 50.0 );
+    m_ScalePoint_2->setY( -50.0 );
 
-    m_ScaleValue = 1.0;
+    m_ScaleValue = 5.0;
 }
 
 
@@ -49,7 +52,7 @@ bool BB_DocComponent::open()
  */
 BB_Point* BB_DocComponent::getScalePoint_1()
 {
-    return & m_ScalePoint_1;
+    return m_ScalePoint_1;
 }
 
 
@@ -58,7 +61,7 @@ BB_Point* BB_DocComponent::getScalePoint_1()
  */
 BB_Point* BB_DocComponent::getScalePoint_2()
 {
-    return & m_ScalePoint_2;
+    return m_ScalePoint_2;
 }
 
 
@@ -85,7 +88,7 @@ void BB_DocComponent::setScaleReal( double value )
  */
 double BB_DocComponent::getMeterPerPixel( double pixel )
 {
-    C2dVector tmp( ( m_ScalePoint_2.getX() - m_ScalePoint_1.getX() ), ( m_ScalePoint_2.getY() - m_ScalePoint_1.getY() ) );
+    C2dVector tmp( ( m_ScalePoint_2->getX() - m_ScalePoint_1->getX() ), ( m_ScalePoint_2->getY() - m_ScalePoint_1->getY() ) );
     double lenght_pixel = tmp.getLength();
 
     double meter = pixel * ( m_ScaleValue / lenght_pixel );
@@ -99,7 +102,7 @@ double BB_DocComponent::getMeterPerPixel( double pixel )
  */
 double BB_DocComponent::getPixelPerMeter( double meter )
 {
-    C2dVector tmp( ( m_ScalePoint_2.getX() - m_ScalePoint_1.getX() ), ( m_ScalePoint_2.getY() - m_ScalePoint_1.getY() ) );
+    C2dVector tmp( ( m_ScalePoint_2->getX() - m_ScalePoint_1->getX() ), ( m_ScalePoint_2->getY() - m_ScalePoint_1->getY() ) );
     double lenght_pixel = tmp.getLength();
 
     double pixel = ( meter * lenght_pixel ) / m_ScaleValue;
@@ -158,5 +161,9 @@ void BB_DocComponent::createGl(  QVector<C3dTriangle>& triangles, double scale )
 	{
 		m_DrawObjects.at( i )->createGl( triangles,v, 0.0, scale ,0.0 );
 	}
+}
+
+double BB_DocComponent::getHeight() const{
+	return 0.0;
 }
 

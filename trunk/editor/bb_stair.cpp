@@ -86,4 +86,7 @@ void BB_Stair::generateXElement( QTextStream &out, int depth )
     out << BB::indent( depth ) << "</bb_stair>\n";
 }
 
+bool BB_Stair::isHit( const C2dVector& hit ){
+	return false;
+}
 

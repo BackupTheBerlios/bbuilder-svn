@@ -117,7 +117,7 @@ void BB_ToolStair::release( QMouseEvent* me )
 
         //beim ersten click markieren und verschiebne
 		BB_Point * point = ( BB_Point * ) getClickedObject( m_pLogic, typeid( BB_Point ) );
-		if ( point == NULL )
+		if ( point == NULL || point == m_Stair->getPos1())
 		{
 			return ;
 			delete m_Stair;

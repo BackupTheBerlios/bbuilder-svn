@@ -155,8 +155,8 @@ bool BB_Building::write( QTextStream &out )
     BB_Object::generateXElement( out, depth );
     out << BB::indent( depth ) << "<mapfile>" << m_MapFileName << "</mapfile>\n";
     out << BB::indent( depth ) << "<scale value=\"" << m_ScaleValue << "\">\n";
-    m_ScalePoint_1.generateXElement( out, depth + 1 );
-    m_ScalePoint_2.generateXElement( out, depth + 1 );
+    m_ScalePoint_1->generateXElement( out, depth + 1 );
+    m_ScalePoint_2->generateXElement( out, depth + 1 );
     out << BB::indent( depth ) << "</scale>\n";
 
     if ( points.count() )
@@ -343,7 +343,7 @@ int BB_Building::getLevelCount()
 /*!
     \fn BB_Building::getBuildingHeight()
  */
-double BB_Building::getBuildingHeight()
+double BB_Building::getHeight() const 
 {
 	double height = 0;
 	
@@ -365,11 +365,11 @@ void BB_Building::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, d
 	scale =  scale * docScale;
 	
 	// Ausßenwände erzeugen
-	qDebug( "getPixelPerMeter( getBuildingHeight() ): %f ", getPixelPerMeter( getBuildingHeight() ) );
+	qDebug( "getPixelPerMeter( getBuildingHeight() ): %f ", getPixelPerMeter( getHeight() ) );
 	
 	for( int i = 0; i < m_DrawObjects.count(); i++ )
 	{
-		m_DrawObjects.at( i )->createGl( triangles, vector, rotation, scale, getPixelPerMeter( getBuildingHeight() ) );
+		m_DrawObjects.at( i )->createGl( triangles, vector, rotation, scale, getPixelPerMeter( getHeight() ) );
 	}
 	
 	// Innenwände der Etagen erzeugen

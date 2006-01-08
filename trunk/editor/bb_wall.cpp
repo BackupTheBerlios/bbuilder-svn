@@ -279,12 +279,11 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 
     C2dVector pos1, pos2;
     C3dTriangle t1, t2;
+	C3dTriangle tr1,tr2;
     myElement = hastDoor();
 	//Wenn eine Tuer vorhanden ist, dann mache 3 Vierecke
     if ( myElement != NULL )
     {
-
-		C3dTriangle tr1,tr2;
 		tr1.setVisible(false);
 		tr2.setVisible(false);
         pos1 = m_Pos1->getPos() + ( richtung * myElement->getCoefficientPos1().x() );
@@ -356,8 +355,10 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 
 		tr1.copy(C3dTriangle(v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Red ));
         tr1.setCollision( false );
+// 		tr1.setVisible( true );
 		tr2.copy(C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Red ));
         tr2.setCollision( false );
+// 		tr2.setVisible( true );
         triangles.append( tr1 );
         triangles.append( tr2 );
 		tr1.setCollision( true );
@@ -495,9 +496,61 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
         }
 
     }
-
+	//Dreiecke fuer Wand einfuegen
     triangles.append( t1 );
     triangles.append( t2 );
+	
+	//Tueren und Fenster
+	tr1.setVisible(true);
+	tr2.setVisible(true);
+	for( int i =0;i<m_Objects->count() ;i++ ){
+		
+		myElement = (BB_ConstructionElement *)m_Objects->at(i);
+		
+		pos1 = m_Pos1->getPos() + ( richtung * myElement->getCoefficientPos1().x() );
+		pos2 = m_Pos1->getPos() + ( richtung * myElement->getCoefficientPos2().x() );
+		
+		v1.setX( pos1.x() * scale +0.1 );
+		v1.setZ( pos1.y() * scale);
+// 		v1.setY( 0.0 );
+		v1.setY( height * myElement->getCoefficientPos2().y() * scale );
+
+		v2.setX( pos2.x() * scale +0.1);
+		v2.setZ( pos2.y() * scale);
+// 		v2.setY( 0.0 );
+		v2.setY( height * myElement->getCoefficientPos2().y() * scale );
+
+		v3.setX( pos2.x() * scale +0.1);
+		v3.setZ( pos2.y() * scale);
+// 		v3.setY( height * scale );
+		v3.setY( height * myElement->getCoefficientPos1().y() * scale );
+
+		v4.setX( pos1.x() * scale +0.1);
+		v4.setZ( pos1.y() * scale );
+// 		v4.setY( height * scale );
+		v4.setY( height * myElement->getCoefficientPos1().y() * scale );
+
+		v1 = v1.rotateVector( v_Y, rotation );
+		v2 = v2.rotateVector( v_Y, rotation );
+		v3 = v3.rotateVector( v_Y, rotation );
+		v4 = v4.rotateVector( v_Y, rotation );
+
+		v1 = v1 + vector;
+		v2 = v2 + vector;
+		v3 = v3 + vector;
+		v4 = v4 + vector;
+
+		tr1.copy(C3dTriangle(v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Red ));
+		tr1.setCollision( false );
+// 		tr1.setVisible( true );
+		tr2.copy(C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Red ));
+		tr2.setCollision( false );
+// 		tr2.setVisible( true );
+		triangles.append( tr1 );
+		triangles.append( tr2 );
+		tr1.setCollision( true );
+		tr2.setCollision( true );
+	}
 
 }
 

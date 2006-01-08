@@ -35,6 +35,7 @@ public:
     ~BB_Stair();
 
 	virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
+	virtual bool isHit( const C2dVector& hit );
 	void generateXElement( QTextStream &out, int depth );
 
 };

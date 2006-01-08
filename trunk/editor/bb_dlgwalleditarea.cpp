@@ -31,7 +31,7 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
         : QLabel( parent, f )
 {
     //zum testen, feste hoehe von 3,2 meter
-    double hohe_meter = hohe;
+    double hohe_meter = docComponent->getHeight();
     double laenge_pixel = wall->getLength();
     double laenge_meter = docComponent->getMeterPerPixel( laenge_pixel );
     m_Height = hohe_meter;

@@ -33,7 +33,7 @@ class BB_Level : public BB_DocComponent
         virtual bool write( QTextStream &out );
         virtual const QString getClassName();
 		void setHeight( double Value );
-		double getHeight() const;
+		virtual double getHeight() const;
     BB_Building* getBuilding();
     virtual int keyBoardEdit( QWidget* parent );
 	virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );

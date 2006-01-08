@@ -98,8 +98,8 @@ bool BB_Terrain::write( QTextStream &out )
     BB_Object::generateXElement( out, depth );
     out << BB::indent( depth ) << "<mapfile>" << m_MapFileName << "</mapfile>\n";
     out << BB::indent( depth ) << "<scale value=\"" << m_ScaleValue << "\">\n";
-    m_ScalePoint_1.generateXElement( out, depth + 1 );
-    m_ScalePoint_2.generateXElement( out, depth + 1 );
+    m_ScalePoint_1->generateXElement( out, depth + 1 );
+    m_ScalePoint_2->generateXElement( out, depth + 1 );
     out << BB::indent( depth ) << "</scale>\n";
 
     if ( points.count() )

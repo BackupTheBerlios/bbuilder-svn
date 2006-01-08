@@ -50,6 +50,7 @@ void BB_ConstructionElement::setTextureFileName( const QString& Value )
     if ( !Value.isNull() )
     {
         m_TextureFileName = Value;
+		qDebug() << PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName;
         if ( !m_Image.load( PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName ) )
         {
 			qDebug()<<"image "<<Value<<" wurde nicht geladen";
