@@ -17,6 +17,7 @@
 
 #include <bb_dlgleveledit.h>
 #include <bb_xlevelhandler.h>
+#include <bb_leveltriangle.h>
 
 #include <iostream>
 
@@ -155,10 +156,11 @@ bool BB_Level::write( QTextStream &out )
 {
 	int depth = 1;
 
-	QVector<BB_Point*> points;
-	QVector<BB_Wall*> walls;
+	QVector<BB_DrawObject*> points;
+	QVector<BB_DrawObject*> walls;
+	QVector<BB_DrawObject*> triangles;
 
-	BB_Object* object;
+	BB_DrawObject* object;
 
 	for ( int i = 0; i < m_DrawObjects.count(); i++ )
 	{
@@ -166,11 +168,15 @@ bool BB_Level::write( QTextStream &out )
 
 		if ( typeid( *object ) == typeid( BB_Point ) )
 		{
-			points.append( ( BB_Point* ) object );
+			points.append( object );
 		}
 		else if ( typeid( *object ) == typeid( BB_Wall ) )
 		{
-			walls.append( ( BB_Wall* ) object );
+			walls.append( object );
+		}
+		else if( typeid( *object ) == typeid( BB_LevelTriangle ) )
+		{
+			triangles.append( object );
 		}
 		else
 		{
@@ -185,10 +191,10 @@ bool BB_Level::write( QTextStream &out )
 			<< "<bb_level version=\"1.0\">\n";
 	BB_Object::generateXElement( out, depth );
 	out << BB::indent( depth ) << "<mapfile>" << m_MapFileName << "</mapfile>\n";
-	out << BB::indent( depth ) << "<scale value=\"" << m_ScaleValue << "\">\n";
-	m_ScalePoint_1.generateXElement( out, depth + 1 );
-	m_ScalePoint_2.generateXElement( out, depth + 1 );
-	out << BB::indent( depth ) << "</scale>\n";
+// 	out << BB::indent( depth ) << "<scale value=\"" << m_ScaleValue << "\">\n";
+// 	m_ScalePoint_1.generateXElement( out, depth + 1 );
+// 	m_ScalePoint_2.generateXElement( out, depth + 1 );
+// 	out << BB::indent( depth ) << "</scale>\n";
 
 	if ( points.count() )
 	{
@@ -220,6 +226,21 @@ bool BB_Level::write( QTextStream &out )
 	else
 	{
 		out << BB::indent( depth ) << "<walls />\n";
+	}
+	
+	if( triangles.count() )
+	{
+		out << BB::indent( depth) << "<triangles>\n";
+		for ( int i = 0; i < triangles.count(); i++ )
+		{
+			triangles.at( i ) ->generateXElement( out, depth + 1 );
+		}
+		out << BB::indent( depth ) << "</triangles>\n";
+		
+	}
+	else
+	{
+		out << BB::indent( depth ) << "<triangles />\n";
 	}
 
 	out << "</bb_level>\n";

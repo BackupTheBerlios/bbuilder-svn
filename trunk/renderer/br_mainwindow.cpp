@@ -79,6 +79,22 @@ void BR_MainWindow::initActions()
     m_aViewFullScreen->setShortcut( QKeySequence( tr( "Shift+Ctrl+F", "Ansicht|Full-Screen" ) ) );
     m_aViewFullScreen->setStatusTip( tr( "Zeigt das Bild auf dem gesammten Bildschirm" ) );
     connect( m_aViewFullScreen, SIGNAL( toggled ( bool ) ), this, SLOT( slotViewFullScreen ( bool ) ) );
+	
+	
+	m_aViewGhostMode = new QAction( QString::fromUtf8( "Geist-Modus" ), this );
+	m_aViewGhostMode->setCheckable( true );
+	m_aViewGhostMode->setChecked( false );
+	m_aViewGhostMode->setShortcut( QKeySequence( tr( "Ctrl+G", "Ansicht|Geist-Modus" ) ) );
+	m_aViewFullScreen->setStatusTip( tr( "Ermöglich das Durchfliegen der Wände" ) );
+	connect( m_aViewGhostMode, SIGNAL( toggled(bool) ), this, SLOT( slotViewGhostMode( bool) ) );
+	
+	
+	m_aViewWireFrame = new QAction( QString::fromUtf8( "WireFrame-Modus" ), this );
+	m_aViewWireFrame->setCheckable( true );
+	m_aViewWireFrame->setChecked( false );
+	m_aViewWireFrame->setShortcut( QKeySequence( tr( "Ctrl+W", "Ansicht|WireFrame-Modus" ) ) );
+	m_aViewWireFrame->setStatusTip( tr( "Zeichnet nur die Kanten" ) );
+	connect( m_aViewWireFrame, SIGNAL( toggled(bool) ), this, SLOT( slotViewWireFrame( bool) ) );
 
     m_aProjectOpen = new QAction( QString::fromUtf8( "Projekt öffnen" ), this );
     m_aFileExit->setStatusTip( QString::fromUtf8( "Eine Projekt öffnen" ) );
@@ -152,6 +168,8 @@ void BR_MainWindow::initMenus()
 
     /* Neues Menu 'Ansicht' erzeugen */
     m_MenuView = new QMenu( QString::fromUtf8( "&Ansicht" ) );
+	m_MenuView->addAction( m_aViewGhostMode );
+	m_MenuView->addAction( m_aViewWireFrame );
     m_MenuView->addAction( m_aViewFullScreen );
 
 
@@ -269,6 +287,10 @@ void BR_MainWindow::slotProjectOpen()
         {
 			m_Doc.createGlObjects();
             m_ViewWidget->setEnabled( true );
+			
+			QString info = m_Doc.getName() + "\n\n\n" + m_Doc.getDescription();
+			
+			m_InfoWidget->setText( info );
         }
     }
 }
@@ -281,4 +303,44 @@ void BR_MainWindow::slotProjectClose()
 {
     m_Doc.close();
     m_ViewWidget->setEnabled( false );
+	QString info("Kein Projekt geladen.");
+	m_InfoWidget->setText( info );
+}
+
+
+/*!
+    \fn BR_MainWindow::slotViewGhostMode( bool value )
+ */
+void BR_MainWindow::slotViewGhostMode( bool value )
+{
+	QString info;
+	if( value )
+	{
+		info = "Geist-Modus eingeschaltet";
+	}
+	else
+	{
+		info = "Geist-Modus ausgeschaltet";
+	}
+	m_StatusBar->showMessage( info, 2000);
+	m_ViewWidget->setGhostMode( value );
+}
+
+
+/*!
+    \fn BR_MainWindow::slotViewWireFrame( bool value )
+ */
+void BR_MainWindow::slotViewWireFrame( bool value )
+{
+	QString info;
+	if( value )
+	{
+		info = "WireFrame-Modus eingeschaltet";
+	}
+	else
+	{
+		info = "WireFrame-Modus ausgeschaltet";
+	}
+	m_StatusBar->showMessage( info, 2000);
+	m_ViewWidget->setWireFrame( value );
 }

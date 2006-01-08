@@ -20,6 +20,8 @@
 
 #include "bb_point.h"
 
+#include <bb_tools.h>
+
 using namespace std;
 
 
@@ -187,8 +189,9 @@ void BB_TabBuilding::initTools()
 	addTool( new BB_ToolZoom( m_Center, this ), "Zoom", QString::fromUtf8( "Zoom Werkzeug" ) );
 	addTool( new BB_ToolPointNew( this ), "Knoten-Werkzeug", "Werkzeug zum Erstellen von Knoten" );
 	addTool( new BB_ToolWallNew( this ), "Wand-Werkzeug", QString::fromUtf8( "Werkzeug zum Erstellen von Wänden" ) );
-	addTool( new BB_ToolNavigationPointNew( this ), "Navigationsknoten", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationsknoten" ) );
-	addTool( new BB_ToolNavigationLineNew( this ), "Navigationslinien", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationslinien" ) );
+// 	addTool( new BB_ToolNavigationPointNew( this ), "Navigationsknoten", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationsknoten" ) );
+// 	addTool( new BB_ToolNavigationLineNew( this ), "Navigationslinien", QString::fromUtf8( "Werkzeug zur Erstellung von Navigationslinien" ) );
+	addTool( new BB_ToolBuildingTriangleNew(this), QString::fromUtf8( "Fläche"), QString::fromUtf8( "Werkzeug zum markieren von Flächen, wo das Dach un der Grund eines Gebäudes dargestellt werden soll" ));
 	addTool( new BB_ToolStair(this), "Treppe", QString::fromUtf8("Werkzeug zur Erstellung von Treppen"));
 
     /* Ein Tool als Standard festlegen */

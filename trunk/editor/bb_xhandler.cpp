@@ -19,6 +19,8 @@
 #include <bb_drawobject.h>
 #include <bb_triangle.h>
 #include <bb_terraintriangle.h>
+#include <bb_leveltriangle.h>
+#include <bb_buildingtriangle.h>
 
 using namespace std;
 
@@ -123,7 +125,7 @@ bool BB_XHandler::parseTriangle( const QXmlAttributes& atts )
 	for ( int i = 0; i < m_DocComponent->getDrawObjects() ->count(); i++ )
 	{
 		object = m_DocComponent->getDrawObjects() ->at( i );
-		if ( typeid( *object ) == typeid( BB_TerrainPoint ) )
+		if ( typeid( *object ) == typeid( BB_Point ) )
 		{
 			if ( object->getObjectNr() == p1 )
 			{
@@ -309,3 +311,131 @@ bool BB_XHandler::parseTerrainPoint( const QXmlAttributes& atts )
 		return true;
 }
 
+
+
+/*!
+    \fn BB_XHandler::parseLevelTriangle( const QXmlAttributes& atts )
+ */
+bool BB_XHandler::parseLevelTriangle( const QXmlAttributes& atts )
+{
+	bool ok;
+	QString tmp;
+	BB_Point *point1 = NULL;
+	BB_Point *point2 = NULL;
+	BB_Point *point3 = NULL;
+	int id;
+	int p1, p2, p3;
+
+	tmp = atts.value( "id" );
+	id = tmp.toInt( &ok );
+
+	tmp = atts.value( "p1" );
+	p1 = tmp.toInt( &ok );
+
+	tmp = atts.value( "p2" );
+	p2 = tmp.toInt( &ok );
+
+	tmp = atts.value( "p3" );
+	p3 = tmp.toInt( &ok );
+
+
+	BB_Object *object;
+
+	for ( int i = 0; i < m_DocComponent->getDrawObjects() ->count(); i++ )
+	{
+		object = m_DocComponent->getDrawObjects() ->at( i );
+		if ( typeid( *object ) == typeid( BB_Point ) )
+		{
+			if ( object->getObjectNr() == p1 )
+			{
+				point1 = ( BB_Point* ) object;
+			}
+			else if ( object->getObjectNr() == p2 )
+			{
+				point2 = ( BB_Point* ) object;
+			}
+			else if ( object->getObjectNr() == p3 )
+			{
+				point3 = ( BB_Point* ) object;
+			}
+		}
+	}
+
+	if ( point1 != NULL && point2 != NULL && point3 != NULL )
+	{
+		BB_DrawObject * triangle = ( BB_DrawObject* ) new BB_LevelTriangle( point1, point2, point3 );
+		m_DocComponent->getDrawObjects() ->append( triangle );
+
+	}
+	else
+	{
+		cout << "Fehler: BB_Triangle konnte nicht erstellt werden!" << endl;
+		return false;
+	}
+	
+	return true;
+}
+
+
+/*!
+    \fn BB_XHandler::parseBuildingTriangle( const QXmlAttributes& atts )
+ */
+bool BB_XHandler::parseBuildingTriangle( const QXmlAttributes& atts )
+{
+	bool ok;
+	QString tmp;
+	BB_Point *point1 = NULL;
+	BB_Point *point2 = NULL;
+	BB_Point *point3 = NULL;
+	int id;
+	int p1, p2, p3;
+
+	tmp = atts.value( "id" );
+	id = tmp.toInt( &ok );
+
+	tmp = atts.value( "p1" );
+	p1 = tmp.toInt( &ok );
+
+	tmp = atts.value( "p2" );
+	p2 = tmp.toInt( &ok );
+
+	tmp = atts.value( "p3" );
+	p3 = tmp.toInt( &ok );
+
+
+	BB_Object *object;
+
+	for ( int i = 0; i < m_DocComponent->getDrawObjects() ->count(); i++ )
+	{
+		object = m_DocComponent->getDrawObjects() ->at( i );
+		if ( typeid( *object ) == typeid( BB_Point ) )
+		{
+			if ( object->getObjectNr() == p1 )
+			{
+				point1 = ( BB_Point* ) object;
+			}
+			else if ( object->getObjectNr() == p2 )
+			{
+				point2 = ( BB_Point* ) object;
+			}
+			else if ( object->getObjectNr() == p3 )
+			{
+				point3 = ( BB_Point* ) object;
+			}
+		}
+	}
+
+	if ( point1 != NULL && point2 != NULL && point3 != NULL )
+	{
+		BB_DrawObject * triangle = ( BB_DrawObject* ) new BB_BuildingTriangle( point1, point2, point3 );
+		m_DocComponent->getDrawObjects() ->append( triangle );
+
+	}
+	else
+	{
+		cout << "Fehler: BB_Triangle konnte nicht erstellt werden!" << endl;
+		return false;
+	}
+	
+	return true;
+}

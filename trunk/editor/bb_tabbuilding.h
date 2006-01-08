@@ -19,15 +19,6 @@
 #include "bb_tab.h"
 #include "bb_building.h"
 
-#include "bb_toolzoom.h"
-#include "bb_toolpointnew.h"
-#include "bb_toolwallnew.h"
-#include "bb_toolmove.h"
-#include "bb_toolscale.h"
-#include "bb_toolnavigationpointnew.h"
-#include "bb_toolnavigationlinenew.h"
-#include "bb_toolstair.h"
-
 
 /**
 @author Alex Letkemann

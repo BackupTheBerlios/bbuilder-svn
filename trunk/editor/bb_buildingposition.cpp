@@ -154,8 +154,9 @@ BB_Building* BB_BuildingPosition::getBuilding() const
  */
 void BB_BuildingPosition::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
+	double docScale = scale;
 	scale = scale * 1/m_ParentDocComponent->getMeterPerPixel( 1 );
-	C3dVector v( m_Pos.x(), m_Height , m_Pos.y() );
+	C3dVector v( m_Pos.x() * docScale , m_Height * docScale , m_Pos.y() * docScale );
 	if( m_Building != NULL )
 	{
 		m_Building->createGl( triangles,v, m_Rotation, scale, 0.0 );

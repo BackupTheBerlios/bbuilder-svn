@@ -25,9 +25,12 @@
 
 #include <bb_tooltrianglenew.h>
 #include <bb_toolterraintrianglenew.h>
+#include <bb_toolbuildingtrianglenew.h>
+#include <bb_toolleveltrianglenew.h>
 
 #include <bb_tooldoornew.h>
 #include <bb_toolwindownew.h>
 #include <bb_tooldelete.h>
 
 #include <bb_tooltexture.h>
+#include <bb_toolstair.h>

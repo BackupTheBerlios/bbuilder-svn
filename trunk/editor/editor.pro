@@ -112,7 +112,11 @@ HEADERS += bb_abstracttool.h \
            bb_buildingposition.h \
            bb_widgettoolbuildingpositionnew.h \
            bb_toolbuildingpositionnew.h \
-           bb_widgettoolterraintrianglenew.h 
+           bb_widgettoolterraintrianglenew.h \
+           bb_leveltriangle.h \
+           bb_toolleveltrianglenew.h \
+           bb_toolbuildingtrianglenew.h \
+           bb_buildingtriangle.h 
 SOURCES += bb_abstracttool.cpp \
            bb_abstracttoolwalledit.cpp \
            bb_abstracttoolwidget.cpp \
@@ -208,7 +212,11 @@ SOURCES += bb_abstracttool.cpp \
            bb_toolbuildingpositionnew.cpp \
            bb_widgettoolterraintrianglenew.cpp \
            bb_toolterraintrianglenew.cpp \
-           bb_terraintriangle.cpp 
+           bb_terraintriangle.cpp \
+           bb_leveltriangle.cpp \
+           bb_toolleveltrianglenew.cpp \
+           bb_toolbuildingtrianglenew.cpp \
+           bb_buildingtriangle.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

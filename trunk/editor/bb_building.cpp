@@ -20,6 +20,7 @@
 
 #include "bb_line.h"
 #include "bb_wall.h"
+#include <bb_buildingtriangle.h>
 #include "bb_stair.h"
 
 #include <iostream>
@@ -113,11 +114,12 @@ bool BB_Building::write( QTextStream &out )
 {
     int depth = 1;
 
-    QVector<BB_Point*> points;
-    QVector<BB_Wall*> walls;
-	QVector<BB_Stair*> stairs;
+	QVector<BB_DrawObject*> points;
+	QVector<BB_DrawObject*> walls;
+	QVector<BB_DrawObject*> triangles;
+	QVector<BB_DrawObject*> stairs;
 
-    BB_Object* object;
+	BB_DrawObject* object;
 
     for ( int i = 0; i < m_DrawObjects.count(); i++ )
     {
@@ -131,6 +133,10 @@ bool BB_Building::write( QTextStream &out )
         {
             walls.append( ( BB_Wall* ) object );
         }
+		else if( typeid(*object) == typeid( BB_BuildingTriangle ) )
+		{
+			triangles.append( object );
+		}
 		else if ( typeid( *object ) == typeid( BB_Stair ) )
 		{
 			stairs.append( ( BB_Stair* ) object );
@@ -185,6 +191,23 @@ bool BB_Building::write( QTextStream &out )
         out << BB::indent( depth ) << "<walls />\n";
     }
 
+	if( triangles.count() )
+	{
+		out << BB::indent( depth ) << "<triangles>\n";
+
+		for ( int i = 0; i < triangles.count(); i++ )
+		{
+			triangles.at( i ) ->generateXElement( out, depth + 1 );
+		}
+
+		out << BB::indent( depth ) << "</triangles>\n";
+	}
+	else
+	{
+		out << BB::indent( depth ) << "<triangles />\n";
+	}
+	
+	
 	if ( stairs.count() )
 	{
 		out << BB::indent( depth ) << "<stairs>\n";

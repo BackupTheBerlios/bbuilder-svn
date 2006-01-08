@@ -85,6 +85,9 @@ protected:
 	virtual bool parsePoint( const QXmlAttributes& atts );
 	virtual bool parseTerrainPoint( const QXmlAttributes& atts );
     
+protected:
+    virtual bool parseLevelTriangle( const QXmlAttributes& atts );
+    virtual bool parseBuildingTriangle( const QXmlAttributes& atts );
 };
 
 #endif

@@ -69,6 +69,8 @@ class BR_MainWindow : public QMainWindow
         BR_InfoWidget* m_InfoWidget;
         QAction* m_aProjectClose;
         QAction* m_aProjectOpen;
+    QAction* m_aViewWireFrame;
+    QAction* m_aViewGhostMode;
 
 
     private slots:
@@ -78,6 +80,8 @@ class BR_MainWindow : public QMainWindow
         void slotTimerFPS();
         void slotProjectOpen();
         void slotProjectClose();
+    void slotViewGhostMode( bool value );
+    void slotViewWireFrame( bool value );
     private:
         void initActions();
         void initMainWindow();

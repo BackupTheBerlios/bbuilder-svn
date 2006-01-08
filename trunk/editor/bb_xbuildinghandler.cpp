@@ -352,6 +352,10 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
         m_ConstructionElement->m_ObjectNr = id;
 
     }
+	else if( qName == "bb_buildingtriangle" )
+	{
+		parseBuildingTriangle( atts );
+	}
     else if ( qName == "texture" )
     {
 		parseTexture( atts );
@@ -414,6 +418,10 @@ bool BB_XBuildingHandler::endElement( const QString& namespaceURI, const QString
     {
         m_Object = NULL;
     }
+	else if( qName == "bb_buildingtriangle" )
+	{
+		m_Object = NULL;
+	}
     else if ( qName == "bb_stair" )
     {
         m_Object = NULL;

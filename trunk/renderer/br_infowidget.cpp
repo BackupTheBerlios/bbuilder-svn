@@ -71,3 +71,13 @@ void BR_InfoWidget::printFPS(int fps)
 {
 	m_FpsLabel->setText( "FPS: " + QString::number(fps) );
 }
+
+
+/**
+ * Schreibt den übergebenen Text in das Informationsfenster.
+ * @param text Text, der in das Informationsfenster geschrieben werden soll.
+ */
+void BR_InfoWidget::setText( QString& text )
+{
+	m_Text->setPlainText( text );
+}

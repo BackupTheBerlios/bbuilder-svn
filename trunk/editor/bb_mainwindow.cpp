@@ -31,16 +31,16 @@ BB_MainWindow::BB_MainWindow( QWidget* parent, Qt::WFlags flags ) : QMainWindow(
     initMenus();
     initStatusBar();
 
-//     initDoc();
+    //     initDoc();
 
     initMainWindow();
 
     if ( loadDoc() )
     {
-//         m_TabBuilding->createBuildingList();
-		m_TabTerrain->updateLists();
-		m_TabBuilding->updateLists();
-		m_TabLevel->updateLists();
+        //         m_TabBuilding->createBuildingList();
+        m_TabTerrain->updateLists();
+        m_TabBuilding->updateLists();
+        m_TabLevel->updateLists();
     }
 
 }
@@ -154,13 +154,7 @@ void BB_MainWindow::slotProjectNew()
 
         if ( result == QDialog::Accepted )
         {
-            m_Doc.close();
-
-            m_TabTerrain->unsetDocComponent();
-            m_TabBuilding->unsetDocComponent();
-            m_TabLevel->unsetDocComponent();
-
-            m_TabWidget->setEnabled( false );
+			slotProjectClose();
 
             if ( path.mkdir( dir ) && path.cd( dir ) && m_Doc.createNew( name, desc, path ) )
             {
@@ -188,10 +182,6 @@ void BB_MainWindow::slotProjectNew()
     }
     while ( result != QDialog::Rejected );
 
-
-
-
-
 }
 
 
@@ -204,11 +194,7 @@ void BB_MainWindow::slotProjectNew()
 void BB_MainWindow::slotProjectOpen()
 {
 
-    m_TabTerrain->unsetDocComponent();
-    m_TabBuilding->unsetDocComponent();
-    m_TabLevel->unsetDocComponent();
 
-    m_TabWidget->setEnabled( false );
     // 	cout << "Projekt öffnen" << endl;
 
     QString filename;
@@ -222,6 +208,15 @@ void BB_MainWindow::slotProjectOpen()
 
     if ( !filename.isEmpty() )
     {
+
+		slotProjectClose();
+
+//         m_TabTerrain->unsetDocComponent();
+//         m_TabBuilding->unsetDocComponent();
+//         m_TabLevel->unsetDocComponent();
+
+//         m_TabWidget->setEnabled( false );
+
         m_TabBuilding->clear();
         if ( m_Doc.open( filename ) )
         {
@@ -231,6 +226,14 @@ void BB_MainWindow::slotProjectOpen()
             m_TabWidget->setEnabled( true );
             // 			cout << "test2" << endl;
             m_Config.setCurrentProjectPath( filename );
+
+
+            m_TabTerrain->updateWidget();
+            m_TabBuilding->updateWidget();
+            m_TabLevel->updateWidget();
+
+
+
         }
         else
         {
@@ -241,11 +244,6 @@ void BB_MainWindow::slotProjectOpen()
     }
 
 
-    m_TabTerrain->updateWidget();
-    m_TabBuilding->updateWidget();
-    m_TabLevel->updateWidget();
-
-    /// @todo implement me
 }
 
 
@@ -257,12 +255,12 @@ void BB_MainWindow::slotProjectOpen()
  */
 void BB_MainWindow::slotProjectClose()
 {
-	/* Alle Tools zurüksetzten damit die DocComponents 'freiggeben' werden */
-	m_TabTerrain->resetTool();
-	m_TabBuilding->resetTool();
-	m_TabLevel->resetTool();
-	
-	/* Dokument schliessen */
+    /* Alle Tools zurüksetzten damit die DocComponents 'freiggeben' werden */
+    m_TabTerrain->resetTool();
+    m_TabBuilding->resetTool();
+    m_TabLevel->resetTool();
+
+    /* Dokument schliessen */
     m_Doc.close();
 
     m_TabTerrain->clear();
@@ -371,9 +369,8 @@ bool BB_MainWindow::loadDoc()
     }
     else
     {
-        m_Doc.close();
-        m_TabWidget->setEnabled( false );
 
+		slotProjectClose();
         cout << "Projekt konnte nicht geladen werden: " << m_Config.getCurrentProjectPath().toStdString() << endl;
 
         m_Config.setCurrentProjectPath( "" );

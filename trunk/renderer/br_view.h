@@ -37,6 +37,12 @@ public:
 	~BR_View();
 
 	void showCurrentFPS();
+    void setWireFrame( bool value );
+	/**
+	 * Setzt den Status des Geist-Modus
+	 * @param value Status des Geist-Modus
+	 */
+    void setGhostMode( bool value );
 
 protected:
 	virtual void initializeGL();
@@ -65,6 +71,8 @@ protected:
     BR_InfoWidget* m_Info;
     BB_Doc* m_Doc;
     CGLLight* m_Light;
+    bool m_GhostMode;
+    bool m_WireFrame;
 private:
     void proceedActions();
 };

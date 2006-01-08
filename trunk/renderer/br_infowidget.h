@@ -29,6 +29,7 @@ public:
 
     ~BR_InfoWidget();
     void printFPS(int fps);
+    void setText( QString& text );
 
 protected:
     QTextEdit* m_Text;

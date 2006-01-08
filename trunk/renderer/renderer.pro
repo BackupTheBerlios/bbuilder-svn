@@ -119,7 +119,11 @@ HEADERS += br_camera.h \
            bb_terraintriangle.h \
            bb_toolterraintrianglenew.h \
            3dmath.h \
-           bb_widgettoolterraintrianglenew.h 
+           bb_widgettoolterraintrianglenew.h \
+           bb_leveltriangle.h \
+           bb_toolleveltrianglenew.h \
+           bb_buildingtriangle.h \
+           bb_toolbuildingtrianglenew.h 
 SOURCES += br_camera.cpp \
            br_infowidget.cpp \
            br_keyhandler.cpp \
@@ -221,7 +225,11 @@ SOURCES += br_camera.cpp \
            bb_terraintriangle.cpp \
            bb_toolterraintrianglenew.cpp \
            3dmath.cpp \
-           bb_widgettoolterraintrianglenew.cpp 
+           bb_widgettoolterraintrianglenew.cpp \
+           bb_leveltriangle.cpp \
+           bb_toolleveltrianglenew.cpp \
+           bb_buildingtriangle.cpp \
+           bb_toolbuildingtrianglenew.cpp 
 QT += xml \
 opengl
 TARGET = renderer.e

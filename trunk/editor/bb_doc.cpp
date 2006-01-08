@@ -615,22 +615,6 @@ void BB_Doc::createGlObjects()
         }
     }
 
-
-
-
-    // 	BB_Building *building;
-    // 	for ( int i = 0; i < m_Buildings.count(); i++ )
-    // 	{
-    // 		building = m_Buildings.at( i );
-    // 		building->createGl(m_Triangles, scale);
-    // 	}
-    //
-    // 	BB_Level * level;
-    // 	for ( int i = 0; i < m_Levels.count(); i++ )
-    // 	{
-    // 		level = m_Levels.at( i );
-    // 		level->createGl(m_Triangles,scale );
-    // 	}
 }
 
 CVector3 * BB_Doc::getCollisionVector()

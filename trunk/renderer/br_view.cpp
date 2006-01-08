@@ -30,6 +30,9 @@ BR_View::BR_View( BB_Doc * doc, BR_InfoWidget * info, QWidget * parent )
 	
 	m_Doc = doc;
 	m_Info = info;
+	m_WireFrame = false;
+	m_GhostMode = false;
+	
 	
     /* Fokus setzen, damit das Fenster die KeyPress events abfangen kann */
     setFocusPolicy( Qt::StrongFocus );
@@ -103,9 +106,13 @@ void BR_View::paintGL()
 	m_Light->switchOn();
 	
 	proceedActions();
+	if( !m_GhostMode )
+	{
+		m_Camera.CheckCameraCollision( m_Doc->getCollisionVector(), m_Doc->getTriangles().count() * 3);
+	}
     m_Camera.apply();
 	m_Doc->showGl();
-	m_Camera.CheckCameraCollision( m_Doc->getCollisionVector(), m_Doc->getTriangles().count() * 3);
+
     drawGrid();
 	m_FPS++;
 }
@@ -273,3 +280,31 @@ void BR_View::showCurrentFPS()
 	
 }
 
+
+
+/*!
+    \fn BR_View::setWireFrame( bool value )
+ */
+void BR_View::setWireFrame( bool value )
+{
+	if( value )
+	{
+		glDisable( GL_CULL_FACE );
+		glPolygonMode( GL_FRONT, GL_LINE );
+	}
+	else
+	{
+		glEnable( GL_CULL_FACE );
+		glPolygonMode( GL_FRONT, GL_FILL );
+	}
+}
+
+
+/**
+ * Setzt den Status des Geist-Modus
+ * @param value Status des Geist-Modus
+ */
+void BR_View::setGhostMode( bool value )
+{
+	m_GhostMode = value;
+}
