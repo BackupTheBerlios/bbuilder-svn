@@ -560,8 +560,8 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
         tr2.setCollision( false );
         // 		tr2.setVisible( true );
 
-        tr1.setCollision( true );
-        tr2.setCollision( true );
+//         tr1.setCollision( true );
+//         tr2.setCollision( true );
 
 
         if ( !myElement->getTextureFileName().isEmpty() )
