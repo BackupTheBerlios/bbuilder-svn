@@ -47,11 +47,12 @@ void BB_WidgetToolTriangleNew::setWidgetEnabled( bool value )
 
 void BB_WidgetToolTriangleNew::updateWidget()
 {
-		
+
     if ( m_Selection != NULL &&
             m_Selection->count() == 1 &&
-            typeid( *( m_Selection->at( 0 ) ) ) == typeid( BB_Triangle ) )
+            dynamic_cast<BB_Triangle*>( m_Selection->at( 0 ) ) )
     {
+
         BB_Triangle * tmpTriangle = ( ( BB_Triangle* ) ( m_Selection->at( 0 ) ) );
         BB_DrawObject* tmp_DrawObject = NULL;
 
