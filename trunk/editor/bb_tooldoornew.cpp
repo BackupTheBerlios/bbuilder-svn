@@ -41,7 +41,7 @@ void BB_ToolDoorNew::click( QMouseEvent* me )
 	m_LastLogicMouseClick = m_pLogic;
 
 	BB_Door * tmpDoor = new BB_Door( m_pLogic, C2dVector( m_pLogic.x() + 1.0, m_pLogic.y() - 2.0 ) );
-	tmpDoor->setTextureAbsoluteFileName( IMG_DIR() + SEPARATOR() + "Tuer.png" );
+	tmpDoor->setTextureAbsoluteFileName( IMG_DIR() + SEPARATOR() + "door.png" );
 	m_Objects->append( tmpDoor );
 }
 

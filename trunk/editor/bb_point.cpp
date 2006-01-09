@@ -29,8 +29,8 @@ BB_Point::BB_Point()
     m_scale = 1.0;
     m_Links.clear();
 	
-	m_Pen.setColor( Qt::red );
-	m_Brush.setColor( Qt::red );
+// 	m_Pen.setColor( Qt::red );
+// 	m_Brush.setColor( Qt::red );
 	
 	m_Pos.setX( 0.0 );
 	m_Pos.setY( 0.0 );
@@ -46,8 +46,8 @@ BB_Point::BB_Point( C2dVector p )
     m_Selected = false;
 	
 		
-	m_Pen.setColor( Qt::red );
-	m_Brush.setColor( Qt::red );
+// 	m_Pen.setColor( Qt::red );
+// 	m_Brush.setColor( Qt::red );
 	
     m_scale = 1.0;
 }
@@ -63,8 +63,8 @@ BB_Point::BB_Point( QPoint p )
 	
 	
 		
-	m_Pen.setColor( Qt::red );
-	m_Brush.setColor( Qt::red );
+// 	m_Pen.setColor( Qt::red );
+// 	m_Brush.setColor( Qt::red );
     m_scale = 1.0;
 }
 
@@ -101,13 +101,15 @@ void BB_Point::show( BB_Transformer& transformer, QPainter& painter ) const
 	if( m_Selected )
 	{
     	painter.setPen( m_PenSelected );
+		painter.setBrush( m_BrushSelected );
 	}
 	else
 	{
 		painter.setPen( m_Pen );
+		painter.setBrush( m_Brush );
 	}
 	
-	painter.setBrush( m_Brush );
+// 	painter.setBrush( m_Brush );
 
     //painter.drawEllipse(dest.x() - m_Radius, dest.y() - m_Radius, m_Radius*2, m_Radius*2);
     painter.drawRect( dest.x() - m_Radius, dest.y() - m_Radius, m_Radius * 2, breite );

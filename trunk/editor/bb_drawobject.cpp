@@ -28,12 +28,12 @@ BB_DrawObject::BB_DrawObject( QString name )
     m_Pen.setColor( Qt::red );
 
     m_PenSelected.setStyle( Qt::DashLine );
-    m_PenSelected.setColor( Qt::magenta );
+    m_PenSelected.setColor( Qt::blue );
 
 	m_Brush.setColor( Qt::red );
 	m_Brush.setStyle( Qt::SolidPattern );
 	
-	m_BrushSelected.setColor( Qt::magenta );
+	m_BrushSelected.setColor( Qt::blue );
 	m_BrushSelected.setStyle( Qt::SolidPattern );
 
     m_Selected = false;

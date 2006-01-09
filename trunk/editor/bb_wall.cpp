@@ -36,10 +36,10 @@ BB_Wall::BB_Wall( BB_Point* p1, BB_Point* p2 ) : BB_Line( p1, p2 )
 {
     m_ShowDirection = true;
 
-    m_Pen.setColor( Qt::red );
+//     m_Pen.setColor( Qt::red );
     m_Pen.setWidth( 3 );
 
-    m_Brush.setColor( Qt::red );
+//     m_Brush.setColor( Qt::red );
 
     m_PenDirection.setWidth( 1 );
     m_PenDirection.setColor( Qt::red );

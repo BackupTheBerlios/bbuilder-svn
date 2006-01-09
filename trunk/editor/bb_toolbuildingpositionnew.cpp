@@ -22,6 +22,8 @@ BB_ToolBuildingPositionNew::BB_ToolBuildingPositionNew( BB_Doc * doc, QWidget* p
 	}
 	m_Doc = doc;
 	m_Building = NULL;
+	
+	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolBuildingPosition.png" );
 }
 
 
