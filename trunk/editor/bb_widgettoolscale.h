@@ -16,15 +16,18 @@
 #include <ui_toolWidgetScale.h>
 
 /**
-Tool-Fenster für das ToolScale
- 
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Tool-Fenster für das ToolScale.
+ * Das Fenster ermöglich es den reelen Maßstab einzugeben.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_WidgetToolScale : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
-        BB_WidgetToolScale( BB_AbstractTool* parentTool );
+		/**
+		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
+		 */
+		BB_WidgetToolScale( BB_AbstractTool* parentTool, QWidget* parent = 0  );
 
         ~BB_WidgetToolScale();
         void setLogicalScale( double value );
@@ -36,8 +39,6 @@ class BB_WidgetToolScale : public BB_AbstractToolWidget
         double* m_RealScale;
     private slots:
         void slotRealFinished();
-    protected:
-        virtual void setupUi();
 };
 
 #endif

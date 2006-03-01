@@ -29,6 +29,12 @@ class BB_WidgetToolSelect : public BB_AbstractToolWidget
     public:
 		BB_WidgetToolSelect( BB_ToolMove* parentTool );
         ~BB_WidgetToolSelect();
+		
+		/**
+		 * Aktiviert oder Deaktiviert das Fenster.<br />
+		 * @param value True: Aktiviert, False: Deaktiviert
+		 * @author Alex Letkemann
+		 */
         virtual void updateWidget();
 
 

@@ -24,11 +24,24 @@ class BB_WidgetToolTerrainTriangleNew : public BB_AbstractToolWidget
         Q_OBJECT
     public:
 
+		/**
+		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
+		 */
         BB_WidgetToolTerrainTriangleNew( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
         ~BB_WidgetToolTerrainTriangleNew();
 
+		/**
+		 * Lädt die Default-Werte in das Werkzeugfenster.
+		 * @author Alex Letkemann
+		 */
         virtual void clearToolWidget();
+		
+		/**
+		 * Aktiviert oder Deaktiviert das Fenster.<br />
+		 * @param value True: Aktiviert, False: Deaktiviert
+		 * @author Alex Letkemann
+		 */
         virtual void setWidgetEnabled( bool value );
         virtual void updateWidget();
     QString getTextureFileName();

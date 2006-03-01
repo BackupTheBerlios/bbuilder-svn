@@ -24,12 +24,31 @@ class BB_WidgetToolBuildingPositionNew : public BB_AbstractToolWidget
 {
 	Q_OBJECT
     public:
+		
+		/**
+	     * Konstruktor
+		 */
         BB_WidgetToolBuildingPositionNew( BB_Doc* doc, BB_AbstractTool* parentTool, QWidget* parent = 0);
 
         ~BB_WidgetToolBuildingPositionNew();
-
+		
+		/**
+		 * Lädt die Default-Werte in das Werkzeugfenster.
+		 * @author Alex Letkemann
+		 */
         virtual void clearToolWidget();
+		
+		/**
+		 * Aktiviert oder Deaktiviert das Fenster.<br />
+		 * @param value True: Aktiviert, False: Deaktiviert
+		 * @author Alex Letkemann
+		 */
         virtual void setWidgetEnabled( bool value );
+		
+        /**
+         * Aktualisiert das Eigenschaftsfenster
+		 * @author Alex Letkemann
+         */
         virtual void updateWidget();
 
 

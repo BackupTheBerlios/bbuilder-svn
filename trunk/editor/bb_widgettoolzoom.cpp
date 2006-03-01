@@ -11,8 +11,8 @@
 //
 #include "bb_widgettoolzoom.h"
 
-BB_WidgetToolZoom::BB_WidgetToolZoom( BB_AbstractTool* parentTool )
-        : BB_AbstractToolWidget(parentTool)
+BB_WidgetToolZoom::BB_WidgetToolZoom( BB_AbstractTool* parentTool, QWidget* parent )
+        : BB_AbstractToolWidget(parentTool, parent)
 {
     m_Ui.setupUi( this );
 }
@@ -32,11 +32,3 @@ void BB_WidgetToolZoom::setZoomFaktor( double value )
     m_Ui.label_Zoom->setText( QString::number( value * 100.0 ) + "%" );
 }
 
-
-/*!
-    \fn BB_WidgetToolZoom::setupUi()
- */
-void BB_WidgetToolZoom::setupUi()
-{
-    /// @todo implement me
-}

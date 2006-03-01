@@ -24,13 +24,34 @@ class BB_WidgetToolLineNew : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
+		
+		/**
+		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
+		 */
         BB_WidgetToolLineNew( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
         virtual ~BB_WidgetToolLineNew();
 
     public:
+		
+		/**
+	     * Aktiviert oder Deaktiviert das Fenster.<br />
+	     * @param value True: Aktiviert, False: Deaktiviert
+	     * @author Alex Letkemann
+		 */
         virtual void updateWidget();
+		
+		/**
+		 * Aktiviert oder Deaktiviert das Fenster.<br />
+		 * @param value True: Aktiviert, False: Deaktiviert
+		 * @author Alex Letkemann
+		 */
         virtual void setWidgetEnabled( bool value );
+		
+		/**
+		 * Lädt die Default-Werte in das Werkzeugfenster.
+		 * @author Alex Letkemann
+		 */
         virtual void clearToolWidget();
 
     private slots:

@@ -14,18 +14,25 @@
 #include <bb_terrainpoint.h>
 #include <bb_terraintriangle.h>
 
+/**
+ * Konstruktor
+ */
 BB_ToolTerrainTriangleNew::BB_ToolTerrainTriangleNew( QWidget* parent ):
-BB_ToolTriangleNew( parent )
+	BB_ToolTriangleNew( parent )
 {
 	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolTriangle.png" );
 }
 
-
+/**
+ * Destruktor
+ */
 BB_ToolTerrainTriangleNew::~BB_ToolTerrainTriangleNew()
 {
 }
 
-
+/**
+ * @fn BB_AbstractTool::getToolWidget()
+ */
 BB_AbstractToolWidget* BB_ToolTerrainTriangleNew::getToolWidget()
 {
 	if( m_ToolWidget == NULL )
@@ -36,6 +43,12 @@ BB_AbstractToolWidget* BB_ToolTerrainTriangleNew::getToolWidget()
 	return m_ToolWidget;
 }
 
+/**
+ * Sucht und gibt den zuerst gefunden, Geländepunkt an der übergebenen Position zurück.
+ * Falls kein Geländepunkt, an der Position exitiert, wird NULL zurückgegeben.
+ * @param pos Position, an der gesucht werden soll.
+ * @return Geländepunkt oder NULL
+ */
 BB_Point* BB_ToolTerrainTriangleNew::getClickedPoint(C2dVector& pos)
 {
 	return ( BB_Point * ) getClickedObject(pos, typeid( BB_TerrainPoint ) );
@@ -44,8 +57,9 @@ BB_Point* BB_ToolTerrainTriangleNew::getClickedPoint(C2dVector& pos)
 
 
 
-/*!
-    \fn BB_ToolTerrainTriangleNew::createNewSurface()
+/**
+ * Erstellt und gibt ein neues Gelände-Dreieck zurück
+ * @return neues Gelände-Dreieck
  */
 BB_Triangle* BB_ToolTerrainTriangleNew::createNewSurface()
 {

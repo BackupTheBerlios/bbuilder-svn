@@ -17,6 +17,9 @@
 
 using namespace std;
 
+/**
+ * Konstruktor
+ */
 BB_ToolTriangleNew::BB_ToolTriangleNew(QWidget *parent)
         : BB_AbstractTool(parent)
 {
@@ -27,12 +30,19 @@ BB_ToolTriangleNew::BB_ToolTriangleNew(QWidget *parent)
 	m_Icon = QIcon(IMG_DIR() + SEPARATOR() + "toolTriangle.png");
 }
 
-
+/**
+ * Destruktor
+ */
 BB_ToolTriangleNew::~BB_ToolTriangleNew()
 {
     reset();
 }
 
+/**
+ * Prüft, ob drei verschiedene Punkte angeclick wurden.
+ * Wenn die so ist, wird die Funktion createNewSurface() afgerufen.
+ * @fn BB_AbstractTool::click(QMouseEvent* me)
+ */
 void BB_ToolTriangleNew::click( QMouseEvent* me )
 {
     if ( me != NULL )
@@ -112,7 +122,7 @@ void BB_ToolTriangleNew::click( QMouseEvent* me )
 
 
 /**
- * Setzt das Tool zurück
+ * @fn BB_AbstractTool::reset()
  */
 void BB_ToolTriangleNew::reset()
 {
@@ -124,8 +134,8 @@ void BB_ToolTriangleNew::reset()
 }
 
 
-/*!
-    \fn BB_AbstractTool::getToolWidget()
+/**
+ * @fn BB_AbstractTool::getToolWidget()
  */
 BB_AbstractToolWidget* BB_ToolTriangleNew::getToolWidget()
 {
@@ -138,8 +148,11 @@ BB_AbstractToolWidget* BB_ToolTriangleNew::getToolWidget()
 }
 
 
-/*!
-    \fn BB_ToolTriangleNew::getClickedPoint( C2dVector &pos)
+/**
+ * Sucht und gibt den zuerst gefundenen Punkt an der übergebenen Position zurück.
+ * @param pos Position, an der gesucht werden soll.
+ * @return Punkt oder NULL
+ * @author Alex Letkemann
  */
 BB_Point* BB_ToolTriangleNew::getClickedPoint( C2dVector & pos )
 {
@@ -147,8 +160,10 @@ BB_Point* BB_ToolTriangleNew::getClickedPoint( C2dVector & pos )
 }
 
 
-/*!
-    \fn BB_ToolTriangleNew::createNewSurface()
+/**
+ * Erzeugt ein neues Dreieck und gibt dieses zurück.
+ * @return Neues Dreieck.
+ * @author Alex Letkemann
  */
 BB_Triangle* BB_ToolTriangleNew::createNewSurface()
 {

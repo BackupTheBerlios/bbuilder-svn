@@ -24,12 +24,31 @@ class BB_WidgetToolTerrainPointNew : public BB_AbstractToolWidget
 {
 	Q_OBJECT
 public:
+	/**
+	 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
+	 */
     BB_WidgetToolTerrainPointNew(BB_AbstractTool* parentTool, QWidget* parent = 0);
 
     ~BB_WidgetToolTerrainPointNew();
 
+	/**
+	 * Lädt die Default-Werte in das Werkzeugfenster.
+	 * @author Alex Letkemann
+	 */
     virtual void clearToolWidget();
+	
+	/**
+	 * Aktiviert oder Deaktiviert das Fenster.<br />
+	 * @param value True: Aktiviert, False: Deaktiviert
+	 * @author Alex Letkemann
+	 */
     virtual void setWidgetEnabled(bool value);
+	
+	/**
+	 * Aktiviert oder Deaktiviert das Fenster.<br />
+	 * @param value True: Aktiviert, False: Deaktiviert
+	 * @author Alex Letkemann
+	 */
     virtual void updateWidget();
 
 	private slots:

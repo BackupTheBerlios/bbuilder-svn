@@ -24,15 +24,17 @@ class BB_WidgetToolZoom : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
-		BB_WidgetToolZoom( BB_AbstractTool* parentTool );
+		
+		/**
+		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
+		 */
+		BB_WidgetToolZoom( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
         ~BB_WidgetToolZoom();
         virtual void setZoomFaktor( double value );
 
     protected:
         Ui::WidgetToolZoom m_Ui;
-protected:
-    virtual void setupUi();
 };
 
 #endif
