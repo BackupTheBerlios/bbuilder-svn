@@ -47,7 +47,7 @@ BB_Point* BB_ToolBuildingPositionNew::createNewPoint(C2dVector& pos)
 	
 	if( m_Building != NULL )
 	{
-		point = (BB_Point*) new BB_BuildingPosition( m_Building,0,m_Doc->getTerrain(), pos, 0.0, 0.0 );
+		point = (BB_Point*) new BB_BuildingPosition( m_Building,m_Building->getObjectNr(),m_Doc->getTerrain(), pos, 0.0, 0.0 );
 	}
 	
 	return point;

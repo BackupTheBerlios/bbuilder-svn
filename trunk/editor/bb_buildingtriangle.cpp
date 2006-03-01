@@ -12,21 +12,42 @@
 #include "bb_buildingtriangle.h"
 #include <bb_globals.h>
 
+
+/**
+ * Konstrucktor.<br>
+ * Erszeugt ein neues Dreieck aus drei übergebenen Punkten
+ * @author Alex Letkemann
+ */
 BB_BuildingTriangle::BB_BuildingTriangle(BB_Point* p1, BB_Point* p2, BB_Point* p3): BB_Triangle(p1, p2, p3)
 {
 }
 
-
+/**
+ * Destruktor
+ * @author Alex Letkemann
+ */
 BB_BuildingTriangle::~BB_BuildingTriangle()
 {
 }
 
-
+/**
+ * \fn BB_Object::getClassName()
+ */
 const QString BB_BuildingTriangle::getClassName()
 {
 	return QString( "BB_BuildingTriangle" );
 }
 
+/**
+ * Erzeugt die Dreiecke für das Dach und den Grund des Gebäudes.<br>
+ * Die Erzeugten Dreiecke werden an den übergebenen Vektor 'triangles' angehängt.
+ * @param triangles Vektor, an den die Dreiecke angehängt werden.
+ * @param vector Positionsektor
+ * @param rotation Rotation der Dreiecke
+ * @param scale Skalierung der Dreiecke
+ * @param height Hier keine Funktion
+ * @author Alex Letkemann
+ */
 void BB_BuildingTriangle::createGl(QVector< C3dTriangle >& triangles, C3dVector vector, double rotation, double scale, double height)
 {
 	C3dVector v1, v2, v3;
@@ -107,7 +128,7 @@ void BB_BuildingTriangle::createGl(QVector< C3dTriangle >& triangles, C3dVector 
 		qDebug() << "Textur (" << IMG_DIR() + SEPARATOR() + "buildingRoof.png" + ") konnte nicht geladen werden.";
 	}
 
-
+	// Dreiecke an Vektor anhängen
 	triangles.append( triangleGround );
 	triangles.append( triangleRoof );
 

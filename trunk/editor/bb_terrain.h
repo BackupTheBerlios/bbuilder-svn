@@ -29,18 +29,55 @@ class BB_Doc;
 class BB_Terrain : public BB_DocComponent
 {
 public:
+	/**
+	 * Konstruktor
+	 * @param path 
+	 * @param fileName 
+	 * @param name 
+	 * @return 
+	 */
 	BB_Terrain(const QDir& path, const QString &fileName, const QString &name = QString(""));
 
     virtual ~BB_Terrain();
-// 	virtual void generateXElement(QTextStream &out, int depth);
 	
-	/** @see virtual bool BB_FileObject::write(QTextStream &out) */
+	/** 
+	 * \fn BB_FileObject::write(QTextStream &out) 
+	 */
 	virtual bool write(QTextStream &out);
+	
+	/**
+	 * \fn BB_DocComponent keyBoardEdit(QWidget* parent)
+	 */
 	virtual int keyBoardEdit(QWidget* parent);
+	
+	/**
+	 * \fn BB_FileObject::open()
+	 */
     virtual bool open();
-    virtual const QString getClassName();
-    void resolveBuildingIds( BB_Doc* doc );
+    
+	/**
+	 * \fn BB_Object::getClassName() 
+	 */
+	virtual const QString getClassName();
+    
+	/**
+	 * Löst die Gebäude IDs auf
+	 * @param doc Dokument, welches alle Gebäude enthält
+	 * @author Alex Letkemann
+	 */
+	void resolveBuildingIds( BB_Doc* doc );
+	
+	/**
+	 * Wird aufgerufen, wenn ein Gebäude gelöscht wurde.
+	 * Entfern das übergebene Gebäude vom Gelände.
+	 * @param building Das gelöschte Gebäude
+	 * @author Alex Letkemann
+	 */
     void buildingDeleted( BB_Building* building );
+	
+	/**
+	 * \fn BB_DocComponent::createGl( QVector<C3dTriangle>& triangles, double scale )
+	 */
     virtual void createGl( QVector<C3dTriangle>& triangles, double scale );
 
 };

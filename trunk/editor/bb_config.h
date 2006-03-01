@@ -26,15 +26,43 @@
  */
 class BB_Config{
 public:
+	
+    /**
+     * Konstruktor
+     */
     BB_Config();
 
+    /**
+     * Destruktor
+     */
     ~BB_Config();
 
+	/**
+	 * Setzt den Pfad auf das zuletzt geöffnete Projekt
+	 * @param path Pfad auf das zuletzt geöffnete Projekt
+	 * @author Alex Letkemann
+	 */
 	void setCurrentProjectPath(const QString& path);
 	
 
+	/**
+	 * Gibt den Pfad des zuletzt geöffneten Projektes zurück.
+	 * @return Pfad des zuletzt geöffneten Projektes
+	 * @author Alex Letkemann
+	 */
 	QString getCurrentProjectPath() const;
+	
+    /**
+	 * Speichert alle Konfigurations-Einstellungen in die Datei bb.conf im conf Ordner
+     * @return Erfolg des Speicherns
+     */
     bool save();
+	
+    /**
+	 * Lädt alle Konfigurations-Einstellungen aus der Datei bb.conf im conf Ordner
+	 * Falls die Datei nicht gefunden wird, wird eine Neue erstellt.
+     * @return Erfolg des Öffnens
+     */
     bool open();
 	
 

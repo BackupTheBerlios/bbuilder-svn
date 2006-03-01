@@ -43,6 +43,7 @@ BB_Doc::~BB_Doc()
 /**
  * Gibt einen Pointer auf einen Vector mit allen Gebäuden zurück
  * @return Pointer auf einen Vektor mit allen Gebäuden
+ * @author Alex Letkemann
  */
 QVector< BB_Building*>* BB_Doc::getBuildings()
 {
@@ -53,6 +54,7 @@ QVector< BB_Building*>* BB_Doc::getBuildings()
 /**
  * Liefert einen Vector mit allen Levels
  * @return Vector mit allen Levels
+ * @author Alex Letkemann
  */
 QVector<BB_Level*>* BB_Doc::getLevels()
 {
@@ -63,6 +65,7 @@ QVector<BB_Level*>* BB_Doc::getLevels()
 /**
  * Liefert einen Pointer auf das Terrain
  * @return Pointer auf das Terrain
+ * @author Alex Letkemann
  */
 BB_Terrain* BB_Doc::getTerrain()
 {
@@ -128,8 +131,10 @@ bool BB_Doc::clear()
 }
 
 
-/*!
-    \fn BB_Doc::open(QDir &dir)
+/**
+ * Öffnet und lädt das Projekt 'fileName'.
+ * @return Falls Projekt geladen wurde True, sonst False.
+ * @author Alex Letkemann
  */
 bool BB_Doc::open( QString fileName )
 {
@@ -199,8 +204,9 @@ bool BB_Doc::open( QString fileName )
 }
 
 
-/*!
-    \fn BB_Doc::close()
+/**
+ * Schliesst das gelade Projekt
+ * @author Alex Letkemann
  */
 bool BB_Doc::close()
 {
@@ -211,8 +217,14 @@ bool BB_Doc::close()
 }
 
 
-/*!
-    \fn BB_Doc::new(QDir &path)
+/**
+ * Erzeugt ein neues Projekt im Verzeichnis 'path'.
+ * Im angegebenen Verzeichnis werden weitere Unterverzeichnise angelegt und die Projektdatei erzeugt.
+ * @param name Name des Proketes
+ * @param desc Beschreibung des Projektes
+ * @param path Pfad, wo der neuen Projekt angelegt wird.
+ * @return Erfolg des Anlegens
+ * @author Alex Letkemann
  */
 bool BB_Doc::createNew( const QString &name, const QString &desc, const QDir &path )
 {
@@ -257,7 +269,10 @@ bool BB_Doc::createNew( const QString &name, const QString &desc, const QDir &pa
 
 
 /**
- * 
+ * Schreibt die Projektdatei in den übergeben Stream 'out
+ * @param out Stream, in den Geschrieben werden soll.
+ * @return Erfolg des Schreibens
+ * @author Alex Letkemann
  */
 bool BB_Doc::write( QTextStream &out )
 {
@@ -313,8 +328,13 @@ bool BB_Doc::write( QTextStream &out )
 }
 
 
-/*!
-    \fn BB_Doc::newBuilding()
+
+/**
+ * Startet einen Dialog zum Erstellen eines neuen Gebäudes.
+ * Nach dem Erstellen des Gebäudes, wird dieses zurückgegeben.
+ * @param parent Fenster, welches blockiert werden soll, solange der Dialog aktiv ist.
+ * @return Das neue Gebäude. Falls Gebäude nicht erstellt werden konnte, wird NULL zurückgegeben.
+ * @author Alex Letkemann
  */
 BB_Building* BB_Doc::newBuilding( QWidget * parent )
 {
@@ -343,8 +363,12 @@ BB_Building* BB_Doc::newBuilding( QWidget * parent )
 }
 
 
-/*!
-    \fn BB_Doc::newLevel()
+/**
+ * Startet einen Dialog zum Erstellen einer neuen Etage.
+ * Nach dem Erstellen der Etage, wird diese zurückgegeben.
+ * @param parent Fenster, welches blockiert werden soll, solange der Dialog aktiv ist.
+ * @return Die neue Etage. Falls die Etage nicht erstellt werden konnte, wird NULL zurückgegeben.
+ * @author Alex Letkemann
  */
 BB_Level* BB_Doc::newLevel( BB_Building* building, QWidget * parent )
 {
@@ -382,8 +406,14 @@ BB_Level* BB_Doc::newLevel( BB_Building* building, QWidget * parent )
 }
 
 
-/*!
-    \fn BB_Doc::newBuilding(QDir& path, QString& fileName)
+
+/**
+ * Reserviert ein leeres Gebäude im angegebenen Verzeichnis und Dateinamen.<br />
+ * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br />
+ * @param path Existierender Pfad
+ * @param fileName Existierende Datei
+ * @return Pointer auf das reservierte Gebäude.
+ * @author Alex Letkemann
  */
 BB_Building* BB_Doc::newBuilding( QDir& path, QString& fileName )
 {
@@ -394,8 +424,14 @@ BB_Building* BB_Doc::newBuilding( QDir& path, QString& fileName )
 }
 
 
-/*!
-    \fn BB_Doc::newLevel(QDir& path, QString& fileName)
+/**
+ * Reserviert eine leere Etage im angegebenen Verzeichnis und Dateinamen.<br />
+ * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br />
+ * @param building Gebäude, zu dem die Etage gehört.
+ * @param path Existierender Pfad
+ * @param fileName Existierende Datei
+ * @return Pointer auf die reservierte Etage.
+ * @author Alex Letkemann
  */
 BB_Level* BB_Doc::newLevel( BB_Building* building, QDir& path, QString& fileName )
 {
@@ -406,8 +442,13 @@ BB_Level* BB_Doc::newLevel( BB_Building* building, QDir& path, QString& fileName
 }
 
 
-/*!
-    \fn BB_Doc::newTerrain(QDir& path, QString& fileName)
+/**
+ * Reserviert ein leeres Gelände im angegebenen Verzeichnis und Dateinamen.<br />
+ * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br />
+ * @param path Existierender Pfad
+ * @param fileName Existierende Datei
+ * @return Pointer auf das reservierte Gelände.
+ * @author Alex Letkemann
  */
 BB_Terrain* BB_Doc::newTerrain( QDir& path, QString& fileName )
 {
@@ -417,8 +458,12 @@ BB_Terrain* BB_Doc::newTerrain( QDir& path, QString& fileName )
 }
 
 
-/*!
-    \fn BB_Doc::getBuilding(QListWidgetItem* item)
+
+/**
+ * Gibt das Gebäude mit dem angegebenen QListWidgetItem zurück.
+ * @param item QListWidgetItem
+ * @return Gebäude, falls ein solches Existiert, sonst NULL.
+ * @author Alex Letkemann
  */
 BB_Building* BB_Doc::getBuilding( QListWidgetItem* item )
 {
@@ -444,6 +489,7 @@ BB_Building* BB_Doc::getBuilding( QListWidgetItem* item )
  * Löscht das Gebäude, welches das QListWidgetItem item hat.
  * @param item QListWidgetItem des Gebäudes
  * @return True, falls das Gebäude erfolgreich gelöscht wurde, sonst false.
+ * @author Alex Letkemann
  */
 bool BB_Doc::deleteBuilding( QListWidgetItem* item )
 {
@@ -470,8 +516,11 @@ bool BB_Doc::deleteBuilding( QListWidgetItem* item )
 }
 
 
-/*!
-    \fn BB_Doc::addObserver( BB_Tab *tab )
+
+/**
+ * Fügt einen Tab als Beobachter hinzu.
+ * @param tab Tab, welches als Beobachter hinzugefügt werden soll.
+ * @author Alex Letkemann
  */
 void BB_Doc::addObserver( BB_Tab *tab )
 {
@@ -481,6 +530,10 @@ void BB_Doc::addObserver( BB_Tab *tab )
     }
 }
 
+/**
+ * Ruft die documentChanged()-Funktion der Beobachter auf.
+ * @author Alex Letkemann
+ */
 void BB_Doc::documentChanged()
 {
 
@@ -491,8 +544,12 @@ void BB_Doc::documentChanged()
 }
 
 
-/*!
-    \fn BB_Doc::getBuilding( int index )
+
+/**
+ * Gibt das Gebäude mit dem übergebenen Index zurück.
+ * Falls kein Gebäude mit dem angegebenen Index existiert, wird NULL zurückgegeben.
+ * @param index Gebäude-Index
+ * @return Gebäude mit dem übergebenen Index oder NULL. 
  */
 BB_Building* BB_Doc::getBuilding( int index )
 {
@@ -505,8 +562,12 @@ BB_Building* BB_Doc::getBuilding( int index )
 }
 
 
-/*!
-    \fn BB_Doc::deleteLevel( BB_Level* level )
+
+/**
+ * Löscht die angegebene Etage
+ * @param level Etage, welche gelöscht werden soll.
+ * @return Erfolg des Löschens. True, falls die Etage gelöscht werden konnte sonst false.
+ * @author Alex Letkemann
  */
 bool BB_Doc::deleteLevel( BB_Level* level )
 {
@@ -526,8 +587,11 @@ bool BB_Doc::deleteLevel( BB_Level* level )
 }
 
 
-/*!
-    \fn BB_Doc::deleteLevels( BB_Building* building )
+
+/**
+ * Löscht alle Etagen des angegebenen Gebäudes.
+ * @param building Gebäude, wessen etage gelöscht werden sollen.
+ * @author Alex Letkemann
  */
 void BB_Doc::deleteLevels( BB_Building* building )
 {
@@ -541,8 +605,13 @@ void BB_Doc::deleteLevels( BB_Building* building )
 }
 
 
-/*!
-    \fn BB_Doc::getBuildingById( int objectId )
+
+/**
+ * Gibt das Gebäude mit der angegeben Objekt-ID zurück.
+ * Falls kein Gebäude mit solcher ID existiert wird NULL zurückgegeben.
+ * @param objectId Objekt-ID des Gebäudes
+ * @return Gebäude oder NULL.
+ * @author Alex Letkemann
  */
 BB_Building* BB_Doc::getBuildingById( int objectId )
 {
@@ -558,8 +627,10 @@ BB_Building* BB_Doc::getBuildingById( int objectId )
 }
 
 
-/*!
-    \fn BB_Doc::showGl()
+
+/**
+ * Zeichnet das Gesamt-3D-Model.
+ * @author Alex Letkemann
  */
 void BB_Doc::showGl()
 {
@@ -575,9 +646,8 @@ void BB_Doc::showGl()
 }
 
 
-/*!
-    \fn BB_Doc::createGlObjects()
- */
+
+
 void BB_Doc::createGlObjects()
 {
 
@@ -621,10 +691,22 @@ void BB_Doc::createGlObjects()
 
 }
 
+/**
+ * Gibt den Kollisionvektor zurück.
+ * @return Kollisionvektor
+ * @author Vacelav Ustinov
+ */
 CVector3 * BB_Doc::getCollisionVector()
 {
     return m_CollisionVector;
 }
+
+
+/**
+ * Gibt den Vektor mit allen 3D-Dreiecken zurück.
+ * @return Vektor mit allen 3D-Dreiecken
+ * @author Vacelav Ustinov
+ */
 QVector<C3dTriangle> & BB_Doc::getTriangles()
 {
     return m_Triangles;

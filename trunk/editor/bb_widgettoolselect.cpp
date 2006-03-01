@@ -72,7 +72,6 @@ void BB_WidgetToolSelect::slotDescFinished()
 
 /**
  * Aktualisiert das Fenster.
- * @todo komment
  */
 void BB_WidgetToolSelect::updateWidget()
 {

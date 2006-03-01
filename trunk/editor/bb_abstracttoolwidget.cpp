@@ -13,6 +13,12 @@
 #include <bb_abstracttoolwidget.h>
 #include <bb_abstracttool.h>
 
+/**
+ * Kontrucktor
+ * @param parentTool Das Tool, wessen Fenster dies hier ist.
+ * @param parent Fenster in welchem dieses Fenster dargestellt wird.
+ * @author Alex Letkemann
+ */
 BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget *parent )
         : QWidget( parent )
 {
@@ -25,7 +31,10 @@ BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidg
 	m_ParentTool = parentTool;
 }
 
-
+/**
+ * Destruktor
+ * @author Alex Letkemann
+ */
 BB_AbstractToolWidget::~BB_AbstractToolWidget()
 {}
 
@@ -33,16 +42,19 @@ BB_AbstractToolWidget::~BB_AbstractToolWidget()
 
 
 /**
- *   \fn BB_AbstractToolWidget::updateWidget()
+ * Aktualisiert das Fenster
+ * @author Alex Letkemann
  */
 void BB_AbstractToolWidget::updateWidget()
 {
-    /// @todo implement me
+	/* Hier keine Implemetirung */
 }
 
 
-/*!
-    \fn BB_AbstractToolWidget::setSelection( QVector< BB_DrawObject* >* vector )
+/**
+ * Setzt den Selektionsvektor
+ * @param vector Selektionsvektor
+ * @author Alex Letkemann
  */
 void BB_AbstractToolWidget::setSelection( QVector< BB_DrawObject* >* vector )
 {
@@ -60,19 +72,22 @@ void BB_AbstractToolWidget::setSelection( QVector< BB_DrawObject* >* vector )
 }
 
 
-/*!
-    \fn BB_AbstractToolWidget::clearToolWidget()
+/**
+ * Leert das Fnester, bzw setzt die Default-Werte.
+ * @author Alex Letkemann
  */
 void BB_AbstractToolWidget::clearToolWidget()
 {
-    /// @todo implement me
+	/* Hier keine Implemetirung */
 }
 
 
-/*!
-    \fn BB_AbstractToolWidget::setWidgetEnabled( bool value )
+/**
+ * Aktiviert oder Deaktiviert das Fenster.
+ * @param value True Akviert, False Deaktiviert
+ * @author Alex Letkemann
  */
 void BB_AbstractToolWidget::setWidgetEnabled( bool value )
 {
-    /// @todo implement me
+	/* Hier keine Implemetirung */
 }

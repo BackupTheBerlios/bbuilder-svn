@@ -1,7 +1,7 @@
 //
 // C++ Implementation: bb
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -11,9 +11,9 @@
 //
 #include "bb.h"
 
-
-QRegExp BB::regExpAlphanumeric = QRegExp("[A-Za-z][A-Za-z0-9\\s._]+");
-QRegExp BB::regExpNumeric = QRegExp("[0-9.]+");
+/* Initialisierung der statischen Variblen */
+QRegExp BB::regExpAlphanumeric = QRegExp( "[A-Za-z][A-Za-z0-9\\s._]+" );
+QRegExp BB::regExpNumeric = QRegExp( "[0-9.]+" );
 
 
 QRegExpValidator* BB::validAlphanumeric = new QRegExpValidator( regExpAlphanumeric, NULL );
@@ -22,14 +22,12 @@ QRegExpValidator* BB::validNumeric = new QRegExpValidator( regExpNumeric, NULL )
 
 /** Konstruktor */
 BB::BB()
-{
-}
+{}
 
 
 /** Destruktor */
 BB::~BB()
-{
-}
+{}
 
 
 
@@ -40,10 +38,10 @@ BB::~BB()
  * @return String mit 'depth' Leerzeiche
  * @author Alex Letkemann
  */
-QString BB::indent(int depth)
+QString BB::indent( int depth )
 {
-	const int IndentSize = 4;
-	return QString(IndentSize * depth, ' ');
+    const int IndentSize = 4;
+    return QString( IndentSize * depth, ' ' );
 }
 
 
@@ -54,13 +52,13 @@ QString BB::indent(int depth)
  * @return Neuer String mit ersetzten Zeichen
  * @author Alex Letkemann
  */
-QString BB::escapedAttribute(const QString &str)
+QString BB::escapedAttribute( const QString &str )
 {
-	QString result = escapedText(str);
-	result.replace("\"", "&quot;");
-	result.prepend("\"");
-	result.append("\"");
-	return result; 
+    QString result = escapedText( str );
+    result.replace( "\"", "&quot;" );
+    result.prepend( "\"" );
+    result.append( "\"" );
+    return result;
 }
 
 
@@ -71,24 +69,25 @@ QString BB::escapedAttribute(const QString &str)
  * @return Neuer String mit ersetzten Zeichen
  * @author Alex Letkemann
  */
-QString BB::escapedText(const QString &str)
+QString BB::escapedText( const QString &str )
 {
-	QString result = str;
-	result.replace("&", "&amp;");
-	result.replace("<", "&lt;");
-	result.replace(">", "&gt;");
-	result.replace(QString::fromUtf8("Ä"), "&Auml;");
-	result.replace(QString::fromUtf8("Ö"), "&Ouml;");
-	result.replace(QString::fromUtf8("Ü"), "&Uuml;");
-	result.replace(QString::fromUtf8("ä"), "&auml;");
-	result.replace(QString::fromUtf8("ö"), "&ouml;");
-	result.replace(QString::fromUtf8("ü"), "&uuml;");
-	result.replace(QString::fromUtf8("ß"), "&szlig;");
-	return result;
+    QString result = str;
+    result.replace( "&", "&amp;" );
+    result.replace( "<", "&lt;" );
+    result.replace( ">", "&gt;" );
+    result.replace( QString::fromUtf8( "Ä" ), "&Auml;" );
+    result.replace( QString::fromUtf8( "Ö" ), "&Ouml;" );
+    result.replace( QString::fromUtf8( "Ü" ), "&Uuml;" );
+    result.replace( QString::fromUtf8( "ä" ), "&auml;" );
+    result.replace( QString::fromUtf8( "ö" ), "&ouml;" );
+    result.replace( QString::fromUtf8( "ü" ), "&uuml;" );
+    result.replace( QString::fromUtf8( "ß" ), "&szlig;" );
+    return result;
 }
 
-int BB::compare (const void * a, const void * b)
+/** compare funktion fuer qsort */
+int BB::compare ( const void * a, const void * b )
 {
-  return ( *(int*)a - *(int*)b );
+    return ( *( int* ) a - *( int* ) b );
 }
 

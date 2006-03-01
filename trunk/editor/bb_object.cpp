@@ -22,19 +22,6 @@ int BB_Object::m_Counter = 0;
 
 /**
  * Konstruktor
- * Erzeugt ein neues Objekt. Name des Objektes wird aus der Objektnummer erzeugt.
- */ 
-// BB_Object::BB_Object()
-// {
-// 	m_ObjectNr = m_Counter++;
-//
-// 	createName();
-//
-//
-// }
-
-/**
- * Konstruktor
  * Erzeugt ein neues Objekt mit dem namen <i>name</i>
  * @param name Name des Objektes
  */
@@ -153,8 +140,10 @@ void BB_Object::generateXElement( QTextStream &out, int depth )
 }
 
 
-/*!
-    \fn BB_Object::getClassName() const;
+
+/**
+ * Gibt den Klassennamen zurück
+ * @return Klassenname
  */
 const QString BB_Object::getClassName()
 {

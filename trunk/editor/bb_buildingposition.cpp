@@ -13,6 +13,18 @@
 #include <bb_line.h>
 #include <math.h>
 
+
+/**
+ * Konstrucktor. Erzeugt einene neuen Gebäudeposition.
+ * Falls nur die ID des Gebäudes übergebene wird, kann die ID mit Hilfe von resolveBuildingId() aufgelöst werden.
+ * @param building Das Gebäude
+ * @param buildingId Id des Gebäudes
+ * @param component Terrain
+ * @param pos Positin des gebäudes.
+ * @param height Höhe, in welcher das Gebäude dargestellt wird. Es is NICHT die Höhe des Gebäudes.
+ * @param angle Rotation des Gebäudes auf der Y-Achse in Grad
+ * @author Alex Letkemann
+ */
 BB_BuildingPosition::BB_BuildingPosition( BB_Building* building, int  buildingId, BB_DocComponent* component, C2dVector& pos, double height, double angle ) : BB_TerrainPoint()
 {
     if ( component == NULL )
@@ -40,11 +52,19 @@ BB_BuildingPosition::BB_BuildingPosition( BB_Building* building, int  buildingId
     setRotation( angle );
 }
 
-
+/**
+ * Destruktor
+ * @author Alex Letkemann
+ */
 BB_BuildingPosition::~BB_BuildingPosition()
 {}
 
-
+/**
+ * Zeichnet (2D) das Gebäude auf dem Gelände
+ * @param transformer Transformer, welcher verwendet werden soll.
+ * @param painter Painter, welcher verwendet werden soll.
+ * @author Alex Letkemann
+ */
 void BB_BuildingPosition::show( BB_Transformer& transformer, QPainter& painter ) const
 {
 
@@ -90,11 +110,20 @@ void BB_BuildingPosition::show( BB_Transformer& transformer, QPainter& painter )
 
 }
 
+/**
+ * \fn BB_Object::getClassName() 
+ */
 const QString BB_BuildingPosition::getClassName()
 {
     return QString( "BB_BuildingPosition" );
 }
 
+/**
+ * Erzeugt das 'bb_buildingposition' XML-Element
+ * @param out Stream, in den geschrieben werden soll.
+ * @param depth Einrückung
+ * @author Alex Letkemann
+ */
 void BB_BuildingPosition::generateXElement( QTextStream& out, int depth )
 {
     if ( m_Building != NULL )
@@ -112,21 +141,31 @@ void BB_BuildingPosition::generateXElement( QTextStream& out, int depth )
 }
 
 
-
+/**
+ * Gibt die Rotation des Gebäudes zurück.
+ * @return Rotation des Gebäudes in Grad.
+ * @author Alex Letkemann
+ */
 double BB_BuildingPosition::getRotation() const
 {
     return m_Rotation;
 }
 
-
+/**
+ * Setzt die Rotation des Gebäudes an der Y-Achse in Grad
+ * @param value Winkel zur Y-Achse
+ * @author Alex Letkemann
+ */
 void BB_BuildingPosition::setRotation( double value )
 {
     m_Rotation = value;
 }
 
 
-/*!
-    \fn BB_BuildingPosition::resolveBuildingIds( BB_Doc * doc )
+/**
+ * Löst die ID des Gebäudes auf und übernimmt das Gebäude mit der bekannten ID.
+ * @param doc Dokument, welches die Gebäude enthält.
+ * @author Alex Letkemann
  */
 void BB_BuildingPosition::resolveBuildingId( BB_Doc * doc )
 {
@@ -142,15 +181,26 @@ void BB_BuildingPosition::resolveBuildingId( BB_Doc * doc )
 }
 
 
-
+/**
+ * Gibt das Gebäude zurück.
+ * @return Gebäude. Falls die ID noch nicht aufgelöst wurde, wird NULL zurückggeben.
+ * @author Alex Letkemann
+ */
 BB_Building* BB_BuildingPosition::getBuilding() const
 {
     return m_Building;
 }
 
 
-/*!
-    \fn BB_BuildingPosition::createGl( QVector<C3dTriangle>& triangles, double scale, double height )
+/**
+ * Erzeugt die 3D Ansicht des Gebäudes.<br>
+ * Die 3D Ansicht wird komplett aus Dreiecken erzeugt. Die Erzeugten Dreiecke werden an den üergeben Vektor 'triangles' angehängt.
+ * @param triangles Vektor, an den die Dreiecke angehängt werden.
+ * @param vector Vektor zur Positionierung des Gebäudes.
+ * @param rotation Hier keine Funktion
+ * @param scale Skalierung des Gebäudes
+ * @param height Hier keine Funktion
+ * @author Alex Letkemann
  */
 void BB_BuildingPosition::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {

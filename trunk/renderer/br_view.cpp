@@ -113,7 +113,7 @@ void BR_View::paintGL()
     m_Camera.apply();
 	m_Doc->showGl();
 
-    drawGrid();
+//     drawGrid();
 	m_FPS++;
 }
 

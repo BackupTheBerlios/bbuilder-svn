@@ -96,25 +96,40 @@ bool BB_FileObject::save()
     return true;
 }
 
-
+/**
+ * Gibt den Dateinamen zurück.
+ * @return Dateiname
+ * @author Alex Letkemann
+ */
 QString BB_FileObject::getFileName() const
 {
     return m_FileName;
 }
 
 
+/**
+ * Gibt den Pfad zum Verzeichnis der Datei zurück.
+ * @return Pfad zum Verzeichnis der Datei.
+ * @author Alex Letkemann
+ */
 QDir BB_FileObject::getFilePath() const
 {
     return m_FilePath;
 }
 
-
+/**
+ * Setzt den Dateiname
+ * @param theValue Datenname
+ */
 void BB_FileObject::setFileName( const QString& theValue )
 {
     m_FileName = theValue;
 }
 
-
+/**
+ * Setzt den Pfad zum Verzeichnis der Datei
+ * @param theValue Pfad zum Verzeichnis der Datei
+ */
 void BB_FileObject::setFilePath( const QDir& theValue )
 {
     m_FilePath = theValue;
@@ -122,8 +137,7 @@ void BB_FileObject::setFilePath( const QDir& theValue )
 
 
 /**
- * Gibt den Namen der Klasse zurück.
- * @return Klassenname
+ * \fn BB_Object::getClassName()
  */
 const QString BB_FileObject::getClassName()
 {
@@ -236,8 +250,10 @@ QString BB_FileObject::getErrorString() const
 }
 
 
-/*!
-    \fn BB_FileObject::setModified( bool value )
+/**
+ * Markiert die Datei als Modifiziert oder als nicht Modifiziert.
+ * In der Anzeige wird ein Sternchen an den Objektnamen angehängt.
+ * @param value True: Modifiziert, False: Nicht Modifiziert
  */
 void BB_FileObject::setModified( bool value )
 {
@@ -245,12 +261,10 @@ void BB_FileObject::setModified( bool value )
 
     if ( m_Modified )
     {
-        // 		getListWidgetItem() ->setTextColor( Qt::white );
         getListWidgetItem() ->setText( getName() + "*" );
     }
     else
     {
-        // 		getListWidgetItem() ->setTextColor( Qt::black );
         getListWidgetItem() ->setText( getName() );
     }
 }

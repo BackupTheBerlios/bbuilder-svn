@@ -44,17 +44,6 @@ BB_Terrain::~BB_Terrain()
 {}
 
 
-
-
-/*!
-    \fn virtual void BB_Terrain::generateXElement(QIODevice *device, int depth)
- */ 
-// void BB_Terrain::generateXElement(QTextStream &out, int depth)
-// {
-// 	out << BB::indent(depth) << "<bb_terrain>" << BB::escapedText(getFileName()) << "</bb_terrain>\n";
-// }
-
-
 /*!
    \fn BB_FileObject::write(QTextStream &out);
  */
@@ -89,8 +78,6 @@ bool BB_Terrain::write( QTextStream &out )
             qDebug() << "Unbekanntes Objekt gefunden: " << typeid( *object ).name() << endl;
         }
     }
-
-
 
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
     << "<!DOCTYPE bb_terrain>\n"
@@ -157,7 +144,7 @@ bool BB_Terrain::write( QTextStream &out )
 
 
 /*!
-    \fn BB_Terrain::keyBoardEdit(QWidget* parent)
+    \fn BB_FileObject::keyBoardEdit(QWidget* parent)
  */
 int BB_Terrain::keyBoardEdit( QWidget* parent )
 {
@@ -217,8 +204,7 @@ int BB_Terrain::keyBoardEdit( QWidget* parent )
 
 
 /**
- * Führt die open() Funktion von BB_FileObject aus und
- * läd zusätztlich die Map Datei des Geländes.
+ * \fn BB_FileObject::open()
  */
 bool BB_Terrain::open()
 {
@@ -246,8 +232,10 @@ const QString BB_Terrain::getClassName()
 }
 
 
-/*!
-    \fn BB_Terrain::resolveBuildingIds( m_Doc* doc )
+/**
+ * Löst die Gebäude IDs auf
+ * @param doc Dokument, welches alle Gebäude enthält
+ * @author Alex Letkemann
  */
 void BB_Terrain::resolveBuildingIds( BB_Doc* doc )
 {
@@ -264,8 +252,11 @@ void BB_Terrain::resolveBuildingIds( BB_Doc* doc )
 
 
 
-/*!
-    \fn BB_Terrain::buildingDeleted( BB_Building* building )
+/**
+ * Wird aufgerufen, wenn ein Gebäude gelöscht wurde.
+ * Entfern das übergebene Gebäude vom Gelände.
+ * @param building Das gelöschte Gebäude
+ * @author Alex Letkemann
  */
 void BB_Terrain::buildingDeleted( BB_Building* building )
 {
@@ -291,7 +282,7 @@ void BB_Terrain::buildingDeleted( BB_Building* building )
 
 
 /*!
-    \fn BB_Terrain::createGl( QVector<C3dTriangle>& triangles, double scale )
+    \fn BB_DocComponent::createGl( QVector<C3dTriangle>& triangles, double scale )
  */
 void BB_Terrain::createGl( QVector<C3dTriangle>& triangles, double scale )
 {

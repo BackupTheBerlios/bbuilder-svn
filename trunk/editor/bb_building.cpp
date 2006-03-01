@@ -27,6 +27,13 @@
 
 using namespace std;
 
+/**
+ * Konstruktor
+ * @param path Verzeichnis, in dem gespeichert wird 
+ * @param fileName  Dateiname, unter welchem gepeichert wird
+ * @param name Gebäudename
+ * @author Alex Letkemann
+ */
 BB_Building::BB_Building( const QDir& path, const QString &fileName, const QString &name )
         : BB_DocComponent( path, fileName, name )
 {
@@ -37,6 +44,7 @@ BB_Building::BB_Building( const QDir& path, const QString &fileName, const QStri
 
 /**
  * Destruktor 
+ * @author Alex Letkemann
  */
 BB_Building::~BB_Building()
 {
@@ -45,8 +53,11 @@ BB_Building::~BB_Building()
 
 
 
-/*!
-    \fn BB_Building::keyBoardEdit(QWidget* parent)
+/**
+ * Rüft ein Dialog auf, mit welchem einige Eigenschaften des Gebäudes geändert werden können. 
+ * @param parent Fenster, welches Blockiert wird, solange der Dialog offen ist.
+ * @return Ergebnis des Dialoges
+ * @author Alex Letkemann
  */
 int BB_Building::keyBoardEdit( QWidget* parent )
 {
@@ -107,8 +118,11 @@ int BB_Building::keyBoardEdit( QWidget* parent )
 }
 
 
-/*!
-    \fn BB_Building::write(QIODevice *device)
+/**
+ * Schreibt das Gebäude in Form von XML in den übergebenen Stream 'out'.
+ * @param out Stream, in welchen geschrieben wird.
+ * @return Erfolg des Schreibens
+ * @author Alex Letkemann
  */
 bool BB_Building::write( QTextStream &out )
 {
@@ -121,6 +135,7 @@ bool BB_Building::write( QTextStream &out )
 
 	BB_DrawObject* object;
 
+	// Objekte auf mehrere Vektoren aufteilen
     for ( int i = 0; i < m_DrawObjects.count(); i++ )
     {
         object = m_DrawObjects.at( i );
@@ -148,7 +163,7 @@ bool BB_Building::write( QTextStream &out )
     }
 
 
-
+	
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
     << "<!DOCTYPE bb_building>\n"
     << "<bb_building version=\"1.0\">\n";
@@ -159,6 +174,8 @@ bool BB_Building::write( QTextStream &out )
     m_ScalePoint_2->generateXElement( out, depth + 1 );
     out << BB::indent( depth ) << "</scale>\n";
 
+	
+	// Knoten speichern
     if ( points.count() )
     {
         out << BB::indent( depth ) << "<points>\n";
@@ -175,6 +192,7 @@ bool BB_Building::write( QTextStream &out )
         out << "<points />";
     }
 
+	// Wände speichern
     if ( walls.count() )
     {
         out << BB::indent( depth ) << "<walls>\n";
@@ -191,6 +209,7 @@ bool BB_Building::write( QTextStream &out )
         out << BB::indent( depth ) << "<walls />\n";
     }
 
+	// Flächen speichern
 	if( triangles.count() )
 	{
 		out << BB::indent( depth ) << "<triangles>\n";
@@ -207,7 +226,7 @@ bool BB_Building::write( QTextStream &out )
 		out << BB::indent( depth ) << "<triangles />\n";
 	}
 	
-	
+	// Treppen speichern
 	if ( stairs.count() )
 	{
 		out << BB::indent( depth ) << "<stairs>\n";
@@ -228,23 +247,8 @@ bool BB_Building::write( QTextStream &out )
     return true;
 }
 
-
-/*!
-    \fn BB_Building::generateXElement(QTextStream &out, int depth)
- */
-// void BB_Building::generateXElement( QTextStream &out, int depth )
-// {
-// 	out << BB::indent( depth ) << "<bb_building id=\""
-// 			<< "\" x=\"" << m_Position.x()
-// 			<< "\" y=\"" << m_Position.y()
-// 			<< "\" height=\"" << m_Height
-// 			<< "\" angle=\"" << m_Rotation
-// 			<< "\">" << BB::escapedText( getFileName() ) << "</bb_building>\n";
-// }
-
-
-/*!
-    \fn BB_Building::getClassName()
+/**
+ * \fn BB_Object::getClassName()
  */
 const QString BB_Building::getClassName()
 {
@@ -254,11 +258,9 @@ const QString BB_Building::getClassName()
 
 
 
-
-
-
-/*!
-    \fn BB_Building::remove()
+/**
+ * Löscht alle Dateien des Gebäudes
+ * @author Alex Letkemann
  */
 void BB_Building::remove()
 {
@@ -277,8 +279,10 @@ void BB_Building::remove()
 
 
 
-/*!
-    \fn BB_Building::addLevel( BB_Level* level )
+/**
+ * Fügt die übergebene Etage dem Gebäude hinzu.
+ * @param level Etage, die dem Gebäude hinzugefügt werden soll.
+ * @author Alex Letkemann
  */
 void BB_Building::addLevel( BB_Level* level )
 {
@@ -289,8 +293,10 @@ void BB_Building::addLevel( BB_Level* level )
 }
 
 
-/*!
-    \fn BB_Building::getLevels()
+/**
+ * Gibt den Vektor mit allen Etagen zurück.
+ * @return Vektor mit allen Etagen.
+ * @author Alex Letkemann
  */
 QVector<BB_Level*>* BB_Building::getLevels()
 {
@@ -298,8 +304,10 @@ QVector<BB_Level*>* BB_Building::getLevels()
 }
 
 
-/*!
-    \fn BB_Building::removeLevel( BB_Level* level )
+/**
+ * Entfernt die übergebene Etage aus dem Gebäude.
+ * @param level Etage, die aus dem gebäude entfernt werden soll.
+ * @author Alex Letkemann
  */
 void BB_Building::removeLevel( BB_Level* level )
 {
@@ -313,8 +321,11 @@ void BB_Building::removeLevel( BB_Level* level )
 }
 
 
-/*!
-    \fn BB_Building::getLevel( int index )
+/**
+ * Gibt die Etage nach ihrem Index zurück.
+ * @param index Index der Etage.
+ * @return Pointer auf die Etage, falls diese Existiert sonst NULL.
+ * @author Alex Letkemann
  */
 BB_Level* BB_Building::getLevel( int index )
 {
@@ -330,8 +341,10 @@ BB_Level* BB_Building::getLevel( int index )
 }
 
 
-/*!
-    \fn BB_Building::getLevelCount()
+/**
+ * Gibt die Anzahl der Etagen im Gebäude zurück.
+ * @return Anzahl der Etagen im Gebäude.
+ * @author Alex Letkemann
  */
 int BB_Building::getLevelCount()
 {
@@ -340,8 +353,10 @@ int BB_Building::getLevelCount()
 }
 
 
-/*!
-    \fn BB_Building::getBuildingHeight()
+/**
+ * Gibt die Höhe des Gebäudes zurück.
+ * @return Höhe des Gebäudes.
+ * @author Alex Letkemann
  */
 double BB_Building::getHeight() const 
 {
@@ -356,8 +371,15 @@ double BB_Building::getHeight() const
 }
 
 
-/*!
-    \fn BB_Building::createGl( double scale )
+/**
+ * Erzeugt die 3D Ansicht des Gebäudes.<br>
+ * Die 3D Ansicht wird komplett aus Dreiecken erzeugt. Die Erzeugten Dreiecke werden an den üergeben Vektor 'triangles' angehängt.
+ * @param triangles Vektor, an den die Dreiecke angehängt werden.
+ * @param vector Vektor zur Positionierung des Gebäudes.
+ * @param rotation Rotation des Gebäudes in der Y-Achse
+ * @param scale Skalierung des Gebäudes
+ * @param height Hier keine Funktion
+ * @author Alex Letkemann
  */
 void BB_Building::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {

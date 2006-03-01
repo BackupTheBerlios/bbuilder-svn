@@ -80,7 +80,10 @@ public:
 	 */
 	double getScaleReal() const;
 	
-	// TODO Ändern ---
+	/**
+	 * Gibt den Pointer auf den reelen Maßstab.
+	 * @return Pointer auf den reelen Maßstab.
+	 */
 	double* getScaleRealPointer();
 	
 	
@@ -98,16 +101,52 @@ public:
 	 * @return Pixel
 	 */
 	double getPixelPerMeter(double meter);
+	
+	
+    /**
+     * Startet einen Dialog zum Bearbeiten.
+     * @param parent Fenster, welches blockert werden soll, solange der Dialog aktiv ist.
+     * @return Rückgabewert des Dialoges
+	 * @author Alex Letkemann
+     */
     virtual int keyBoardEdit( QWidget* parent );
+	
+	/**
+	 * Schreibt das XML-Element des DocComponentes in den angegeben Stream.
+	 * @param out Stream, in welchen geschrieben werden soll.
+	 * @param depth Einrückung.
+	 * @author Alex Letkemann
+	 */
     virtual void generateXElement( QTextStream &out, int depth );
 	
+	/**
+	 * Erzeugt das 3D-Model des Objektes.
+	 * @param triangles Vektor, an den die 3D-Dreiecke angehängt werden.
+	 * @param scale Maßstab
+	 * @author Alex Letkemann
+	 */
 	virtual void createGl( QVector<C3dTriangle>& triangles, double scale );
+	
+	/**
+	 * Gibt die Höhe zurück.
+	 * @return Die Höhe
+	 * @author Alex Letkemann
+	 */
 	virtual double getHeight() const;
 protected:
-    BB_Point  * m_ScalePoint_1;
+	
+	/** Maßstab-Punkte */
+    BB_Point * m_ScalePoint_1;
     BB_Point * m_ScalePoint_2;
+	
+	/** Der reele Maßstab */
     double m_ScaleValue;
 protected:
+	
+	/**
+     * Wird aufgerufen, wenn die Map sich ändert und setzt den Offset neu.
+     * @author Alex Letkemann
+	 */
     virtual void mapChanged();
 
 };

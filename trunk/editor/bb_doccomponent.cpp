@@ -11,7 +11,12 @@
 //
 #include "bb_doccomponent.h"
 
-
+/**
+ * Konstruktor
+ * @param path Verzeichnis, in dem gespeichert wird 
+ * @param fileName  Dateiname, unter welchem gepeichert wird
+ * @param name Objektname
+ */
 BB_DocComponent::BB_DocComponent( const QDir& path, const QString &fileName, const QString &name )
         : BB_FileObject( path, fileName, name ), BB_Map(), BB_DrawDevice()
 {
@@ -28,7 +33,9 @@ BB_DocComponent::BB_DocComponent( const QDir& path, const QString &fileName, con
 }
 
 
-
+/**
+ * Destruktor
+ */
 BB_DocComponent::~BB_DocComponent()
 {}
 
@@ -64,18 +71,30 @@ BB_Point* BB_DocComponent::getScalePoint_2()
     return m_ScalePoint_2;
 }
 
-
+/**
+ * Setzt den reelen Abstand zwischen den Maßstab-Punkten
+ * @param value der reele Abstand zwischen den Maßstab-Punkten
+ */
 double BB_DocComponent::getScaleReal() const
 {
     return m_ScaleValue;
 }
 
+
+/**
+ * Gibt den Pointer auf den reelen Maßstab.
+ * @return Pointer auf den reelen Maßstab.
+ */
 double* BB_DocComponent::getScaleRealPointer()
 {
     return & m_ScaleValue;
 }
 
 
+/**
+ * Setzt den reelen Abstand zwischen den Maßstab-Punkten
+ * @param value der reele Abstand zwischen den Maßstab-Punkten
+ */
 void BB_DocComponent::setScaleReal( double value )
 {
     m_ScaleValue = value;
@@ -83,8 +102,10 @@ void BB_DocComponent::setScaleReal( double value )
 
 
 
-/*!
-    \fn BB_DocComponent::getMeterPerPixel(int pixel)
+/**
+ * Gibt die Länge der Pixel in Metern zurück
+ * @param pixel Pixel
+ * @return Meter
  */
 double BB_DocComponent::getMeterPerPixel( double pixel )
 {
@@ -97,8 +118,10 @@ double BB_DocComponent::getMeterPerPixel( double pixel )
 }
 
 
-/*!
-    \fn BB_DocComponent::getPixelPerMeter(double meter)
+/**
+ * Gibt die Länge der Meter in Pixeln zurück
+ * @param meter Meter
+ * @return Pixel
  */
 double BB_DocComponent::getPixelPerMeter( double meter )
 {
@@ -111,9 +134,12 @@ double BB_DocComponent::getPixelPerMeter( double meter )
 }
 
 
-/*!
-    \fn BB_DocComponent::keyBoardEdit( QWidget* parent )
- */
+    /**
+ * Startet einen Dialog zum Bearbeiten.
+ * @param parent Fenster, welches blockert werden soll, solange der Dialog aktiv ist.
+ * @return Rückgabewert des Dialoges
+ * @author Alex Letkemann
+	 */
 int BB_DocComponent::keyBoardEdit( QWidget* parent )
 {
 	parent = NULL;
@@ -122,8 +148,9 @@ int BB_DocComponent::keyBoardEdit( QWidget* parent )
 }
 
 
-/*!
-    \fn BB_DocComponent::mapChanged()
+/**
+ * Wird aufgerufen, wenn die Map sich ändert und setzt den Offset neu.
+ * @author Alex Letkemann
  */
 void BB_DocComponent::mapChanged()
 {
@@ -136,8 +163,12 @@ void BB_DocComponent::mapChanged()
 }
 
 
-/*!
-    \fn BB_DocComponent::generateXElement( QTextStream &out, int depth )
+
+/**
+ * Schreibt das XML-Element des DocComponentes in den angegeben Stream.
+ * @param out Stream, in welchen geschrieben werden soll.
+ * @param depth Einrückung.
+ * @author Alex Letkemann
  */
 void BB_DocComponent::generateXElement( QTextStream &out, int depth )
 {
@@ -148,12 +179,18 @@ void BB_DocComponent::generateXElement( QTextStream &out, int depth )
 			<< "</" << getClassName().toLower() << ">\n";
 }
 
+/**
+ * Erzeugt das 3D-Model des Objektes.
+ * @param triangles Vektor, an den die 3D-Dreiecke angehängt werden.
+ * @param scale Maßstab
+ * @author Alex Letkemann
+ */
 void BB_DocComponent::createGl(  QVector<C3dTriangle>& triangles, double scale )
 {
 	double docScale = 1 / getPixelPerMeter( 1.0 );
 	scale =  scale * docScale;
 	
-	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
+	// qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
 	
 	C3dVector  v(0.0, 0.0, 0.0);
 	
@@ -163,7 +200,16 @@ void BB_DocComponent::createGl(  QVector<C3dTriangle>& triangles, double scale )
 	}
 }
 
+
+/**
+ * Gibt die Höhe zurück.
+ * @return Die Höhe
+ * @author Alex Letkemann
+ */
 double BB_DocComponent::getHeight() const{
-	return 0.0;
+	// DocComponent hat noch keine Höhe.
+	
+	return 0.0;	
+	
 }
 
