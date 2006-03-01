@@ -25,7 +25,6 @@
 #include "bb_map.h"
 #include "bb_wall.h"
 #include "bb_doccomponent.h"
-#include "bb_abstracttoolwalledit.h"
 #include "bb_tooldoornew.h"
 
 /**

@@ -23,7 +23,6 @@ FORMS += buildingEdit.ui \
          toolWidgetBuildingPositionNew.ui \
          toolWidgetTerrainTriangleNew.ui 
 HEADERS += bb_abstracttool.h \
-           bb_abstracttoolwalledit.h \
            bb_abstracttoolwidget.h \
            bb_building.h \
            bb_config.h \
@@ -41,7 +40,6 @@ HEADERS += bb_abstracttool.h \
            bb_door.h \
            bb_drawdevice.h \
            bb_drawobject.h \
-           bb_dwpoint.h \
            bb_fileobject.h \
            bb_globals.h \
            bb.h \
@@ -68,7 +66,6 @@ HEADERS += bb_abstracttool.h \
            bb_toolnavigationpointnew.h \
            bb_toolpointnew.h \
            bb_toolscale.h \
-           bb_toolselect.h \
            bb_tools.h \
            bb_toolterrainpointnew.h \
            bb_tooltexture.h \
@@ -118,7 +115,6 @@ HEADERS += bb_abstracttool.h \
            bb_toolbuildingtrianglenew.h \
            bb_buildingtriangle.h 
 SOURCES += bb_abstracttool.cpp \
-           bb_abstracttoolwalledit.cpp \
            bb_abstracttoolwidget.cpp \
            bb_building.cpp \
            bb_config.cpp \
@@ -137,7 +133,6 @@ SOURCES += bb_abstracttool.cpp \
            bb_door.cpp \
            bb_drawdevice.cpp \
            bb_drawobject.cpp \
-           bb_dwpoint.cpp \
            bb_fileobject.cpp \
            bb_globals.cpp \
            bb_level.cpp \
@@ -163,7 +158,6 @@ SOURCES += bb_abstracttool.cpp \
            bb_toolnavigationpointnew.cpp \
            bb_toolpointnew.cpp \
            bb_toolscale.cpp \
-           bb_toolselect.cpp \
            bb_toolterrainpointnew.cpp \
            bb_tooltexture.cpp \
            bb_tooltrianglenew.cpp \

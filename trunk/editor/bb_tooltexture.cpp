@@ -24,16 +24,29 @@
 
 using namespace std;
 
+/**
+Standart Konstruktor
+@param parent Zeiger auf ein Widget zu dem dieser Tool gehört
+@see BB_AbstractTool
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 BB_ToolTexture::BB_ToolTexture( QWidget *parent )
         : BB_AbstractTool( parent )
 {
-	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolTexture.png" );
+    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolTexture.png" );
 }
 
-
+/**
+Destruktor
+*/
 BB_ToolTexture::~BB_ToolTexture()
 {}
 
+/**
+Ein Erreignis, wird aufgerufen wenn mann auf eine Mauste-Taste druckt
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolTexture::click( QMouseEvent* me )
 {
     m_pScreen = me->pos();
@@ -53,7 +66,7 @@ void BB_ToolTexture::click( QMouseEvent* me )
         }
     }
     ( ( BB_DlgWallEdit * ) m_ParentWidget ) ->openTextureDlg();
-	m_ParentWidget->update();
+    m_ParentWidget->update();
 }
 
 

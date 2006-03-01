@@ -20,23 +20,46 @@
 #ifndef BB_TOOLDOORNEW_H
 #define BB_TOOLDOORNEW_H
 
-#include <bb_abstracttoolwalledit.h>
+#include "bb_abstracttool.h"
 
 /**
-* tool zum erstellen von neuen T&uuml;ren
+* Werkzeug zum Erstellen von neuen T&uuml;ren
 * @author Vaceslav Ustinov <v.ustinov@web.de>
 * @date 21-12-2005
 */
 class BB_ToolDoorNew : public BB_AbstractTool
 {
     public:
-		BB_ToolDoorNew(QWidget *parent);
-
+        /**
+        Standart Konstruktor
+        @param parent Zeiger auf ein Widget zu dem dieser Tool gehört
+        @see BB_AbstractTool
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
+        BB_ToolDoorNew( QWidget *parent );
+        /**
+        Destruktor
+        */
         ~BB_ToolDoorNew();
-	protected:
-		void click( QMouseEvent* me );
-		 void move( QMouseEvent* me, bool overX, bool overY );
-		 void release( QMouseEvent* me ) ;
+    protected:
+        /**
+        Ein Erreignis, wird aufgerufen wenn mann auf eine Mauste-Taste druckt
+        @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
+        void click( QMouseEvent* me );
+        /**
+        Die Methode wird aufgerufen, wenn die Maus bei beliebiger gedrückter Maustaste bewegt wird.
+        @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
+        void move( QMouseEvent* me, bool overX, bool overY );
+        /**
+        Wird aufgerufen, wenn eine Maustaste los gelassen wird.
+        @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
+        void release( QMouseEvent* me ) ;
 
 };
 

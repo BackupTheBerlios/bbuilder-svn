@@ -1,6 +1,6 @@
 /***************************************************************************
-*   Copyright (C) 2005 by Vacesav Ustinov   						*
-*   v.ustinov@web.de   *
+*   Copyright (C) 2005 by Vacesav Ustinov                                 *
+*   v.ustinov@web.de                                                      *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
 *   it under the terms of the GNU General Public License as published by  *
@@ -16,9 +16,8 @@
 #ifndef BB_TOOLLINENEW_H
 #define BB_TOOLLINENEW_H
 
-#include <bb_abstracttool.h>
-#include "bb_wall.h" 
-//#include "bb_drawobject.h"
+#include "bb_abstracttool.h"
+#include "bb_wall.h"
 
 /**
 dokumentation
@@ -37,8 +36,7 @@ class BB_ToolLineNew : public BB_AbstractTool
         virtual void release( QMouseEvent* me );
         virtual BB_AbstractToolWidget* getToolWidget();
     protected:
-//         BB_DrawObject * m_movedPoint;
-
+        //BB_DrawObject * m_movedPoint;
         // EDIT: Alex Letkemann
         // Name angepasst ...
         BB_Line * m_Tmp_Line;
@@ -46,8 +44,8 @@ class BB_ToolLineNew : public BB_AbstractTool
 
     protected:
         virtual BB_Point* getClickedPoint( C2dVector& pos );
-    virtual BB_Line* createNewLine( BB_Point* p1, BB_Point* p2 );
-	virtual BB_Line* getClickedLine( C2dVector& pos );
+        virtual BB_Line* createNewLine( BB_Point* p1, BB_Point* p2 );
+        virtual BB_Line* getClickedLine( C2dVector& pos );
 };
 
 #endif

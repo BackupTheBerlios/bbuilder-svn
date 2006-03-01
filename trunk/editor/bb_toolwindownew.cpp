@@ -20,17 +20,29 @@
 #include "bb_toolwindownew.h"
 #include "bb_window.h"
 
+/**
+Standart Konstruktor
+@param parent Zeiger auf ein Widget zu dem dieser Tool gehört
+@see BB_AbstractTool
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 BB_ToolWindowNew::BB_ToolWindowNew( QWidget *parent )
         : BB_AbstractTool( parent )
 {
     m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWindow.png" );
 }
 
-
+/**
+Destruktor
+*/
 BB_ToolWindowNew::~BB_ToolWindowNew()
 {}
 
-
+/**
+Ein Erreignis, wird aufgerufen wenn mann auf eine Mauste-Taste druckt
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolWindowNew::click( QMouseEvent* me )
 {
     m_pScreen = me->pos();
@@ -41,9 +53,19 @@ void BB_ToolWindowNew::click( QMouseEvent* me )
     m_Objects->append( tmpWindow );
 }
 
+/**
+Die Methode wird aufgerufen, wenn die Maus bei beliebiger gedrückter Maustaste bewegt wird.
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolWindowNew::move( QMouseEvent* me, bool overX, bool overY )
 {}
 
+/**
+Wird aufgerufen, wenn eine Maustaste los gelassen wird.
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolWindowNew::release( QMouseEvent* me )
 {}
 

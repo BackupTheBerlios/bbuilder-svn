@@ -342,7 +342,7 @@ void BB_Point::deleteLinkedObject( BB_DrawObject * object )
 /**
 Entfernt ein Objekt aus dem Vektor.<br>Instantz wird nicht gelöscht
 @author Vaceslav Ustinov
-@param BB_DWPoint ein Object, der vom dem Vector entfernt werden soll
+@param BB_DrawObject ein Object, der vom dem Vector entfernt werden soll
 @return pointer auf der Object der aus Vector entwert wurde
 @date 14.11.2005
 */

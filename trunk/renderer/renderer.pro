@@ -44,7 +44,6 @@ HEADERS += br_camera.h \
            bb_terrain.h \
            bb_drawdevice.h \
            bb_drawobject.h \
-           bb_dwpoint.h \
            bb_level.h \
            bb_line.h \
            bb_map.h \
@@ -93,7 +92,6 @@ HEADERS += br_camera.h \
            bb_toolnavigationpointnew.h \
            bb_toolpointnew.h \
            bb_toolscale.h \
-           bb_toolselect.h \
            bb_tools.h \
            bb_toolterrainpointnew.h \
            bb_toolwindownew.h \
@@ -166,7 +164,6 @@ SOURCES += br_camera.cpp \
            bb_tab.cpp \
            bb_abstracttool.cpp \
            bb_abstracttoolwidget.cpp \
-           bb_abstracttoolwalledit.cpp \
            bb_config.cpp \
            bb_dlgbuildingedit.cpp \
            bb_dlgleveledit.cpp \
@@ -179,7 +176,6 @@ SOURCES += br_camera.cpp \
            bb_door.cpp \
            bb_drawdevice.cpp \
            bb_drawobject.cpp \
-           bb_dwpoint.cpp \
            bb_globals.cpp \
            bb_mainwindow.cpp \
            bb_point.cpp \
@@ -195,7 +191,6 @@ SOURCES += br_camera.cpp \
            bb_toolnavigationpointnew.cpp \
            bb_toolpointnew.cpp \
            bb_toolscale.cpp \
-           bb_toolselect.cpp \
            bb_toolterrainpointnew.cpp \
            bb_tooltexture.cpp \
            bb_tooltrianglenew.cpp \

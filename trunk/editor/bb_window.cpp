@@ -41,7 +41,6 @@ Dekonstruktor
 BB_Window::~BB_Window()
 {}
 
-~BB_Window();
 /**
  * Schreibt das XML-Element des Construktionselementes in den angegeben Stream. 
  * @param out Stream, in welchen geschrieben werden soll. 

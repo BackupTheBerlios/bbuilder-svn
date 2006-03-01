@@ -24,32 +24,54 @@
 
 using namespace std;
 
-BB_ToolDoorNew::BB_ToolDoorNew(QWidget *parent)
-        : BB_AbstractTool(parent)
+/**
+Standart Konstruktor
+@param parent Zeiger auf ein Widget zu dem dieser Tool gehört
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
+BB_ToolDoorNew::BB_ToolDoorNew( QWidget *parent )
+        : BB_AbstractTool( parent )
 {
-	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolDoor.png" );
+    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolDoor.png" );
 }
 
-
+/**
+Destruktor
+*/
 BB_ToolDoorNew::~BB_ToolDoorNew()
 {}
 
+/**
+Ein Erreignis, wird aufgerufen wenn mann auf eine Mauste-Taste druckt
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolDoorNew::click( QMouseEvent* me )
 {
-	m_pScreen = me->pos();
-	m_Transformer->screenToLogical( m_pLogic, m_pScreen );
-	m_LastLogicMouseClick = m_pLogic;
+    m_pScreen = me->pos();
+    m_Transformer->screenToLogical( m_pLogic, m_pScreen );
+    m_LastLogicMouseClick = m_pLogic;
 
-	BB_Door * tmpDoor = new BB_Door( m_pLogic, C2dVector( m_pLogic.x() + 1.0, m_pLogic.y() - 2.0 ) );
-	tmpDoor->setTextureAbsoluteFileName( IMG_DIR() + SEPARATOR() + "door.png" );
-	m_Objects->append( tmpDoor );
+    BB_Door * tmpDoor = new BB_Door( m_pLogic, C2dVector( m_pLogic.x() + 1.0, m_pLogic.y() - 2.0 ) );
+    tmpDoor->setTextureAbsoluteFileName( IMG_DIR() + SEPARATOR() + "door.png" );
+    m_Objects->append( tmpDoor );
 }
 
+/**
+Die Methode wird aufgerufen, wenn die Maus bei beliebiger gedrückter Maustaste bewegt wird.
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolDoorNew::move( QMouseEvent* me, bool overX, bool overY )
 {
     cout << "::move( QMouseEvent* me, bool overX, bool overY )" << endl;
 }
 
+/**
+Wird aufgerufen, wenn eine Maustaste los gelassen wird.
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolDoorNew::release( QMouseEvent* me )
 {
     cout << "BB_ToolDoorNew::release( QMouseEvent* me ) " << endl;
