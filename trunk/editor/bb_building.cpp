@@ -385,6 +385,7 @@ void BB_Building::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, d
 {
 	double docScale = 1 / getPixelPerMeter( 1.0 );
 	scale =  scale * docScale;
+	height = 1.0;
 	
 	// Ausßenwände erzeugen
 	qDebug( "getPixelPerMeter( getBuildingHeight() ): %f ", getPixelPerMeter( getHeight() ) );

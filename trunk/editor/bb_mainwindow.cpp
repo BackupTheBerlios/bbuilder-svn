@@ -312,7 +312,8 @@ void BB_MainWindow::initActions()
 
 
 /**
- * 
+ * Speichert das aktuelle DocComponent
+ * @author Alex Letkemann
  */
 void BB_MainWindow::slotFileSave()
 {
@@ -327,8 +328,8 @@ void BB_MainWindow::slotFileSave()
 }
 
 
-/*!
-    \fn BB_MainWindow::slotFileExit()
+/**
+ * Schliesst das Fenster
  */
 void BB_MainWindow::slotFileExit()
 {
@@ -336,13 +337,17 @@ void BB_MainWindow::slotFileExit()
 }
 
 
-/*!
-    \fn BB_MainWindow::closeEvent ( QCloseEvent * e )
+/**
+ * Wird aufgerufen, wenn das Fenster geschlossen wird.
+ * Schliesst das Projekt.
+ * @param e QCloseEvent
+ * @author Alex Letkemann
  */
 void BB_MainWindow::closeEvent ( QCloseEvent * e )
 {
 
     e->accept();
+	m_Doc.close();
     cout << "Fenster wird geschlossen" << endl;
 }
 

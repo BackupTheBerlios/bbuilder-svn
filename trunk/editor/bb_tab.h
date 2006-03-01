@@ -27,8 +27,17 @@ class BB_WorkArea;
 using namespace std;
 
 /**
-@author Alex Letkemann
-*/
+ * Basisklasse für alle Weiteren Tabs. Enthält eine kleine Anzahl Methoden, die in jedem Tab gebraucht werden.<br />
+ * Das Fenster ist in drei Bereiche unterteil:<br />
+ * Links: Bereich für Tools, listen, etc.<br />
+ * Mitte: Arbeitsbereich.<br />
+ * Rechts: Platz für die Eigenschaftsfenster der Tools.<br />
+ * Das Tab-Fenster lässt sich mit den Funktionen addWidgetLeft und addWidgetRight gestalten.<br />
+ * Mit addWidgetLeft werden die Fenster von oben nach unten nach einander aufgelistet.
+ * Mit addWidgetRightkommen die Fenster in einen Stack, wo nur das Oberste Fenster angezeigt wird.
+ * Beim Erstellen des Tabs müssen die Eigenschaftsfenster aller Tools mit addWidgetRight hinzugefügt werden.
+ * @author Alex Letkemann
+ */
 class BB_Tab : public QWidget
 {
         Q_OBJECT
@@ -44,7 +53,6 @@ class BB_Tab : public QWidget
          * @param f QtFlags
          */
         BB_Tab( BB_Doc* doc, QWidget* parent = 0, Qt::WFlags f = 0 );
-        //         BB_Tab( BB_Doc* doc, bool leftFrame, bool rightFrame, QWidget* parent = 0, Qt::WFlags f = 0 );
 
         /**
          * Destruktor
@@ -99,6 +107,9 @@ class BB_Tab : public QWidget
         virtual void documentChanged();
 		
 		
+		/**
+		 * Aktualisiert das Tab-Fenster
+		 */
 		virtual void updateLists();
 
     private:
@@ -186,22 +197,33 @@ class BB_Tab : public QWidget
          */
         bool addWidgetRight( QWidget *widget );
 
+	protected:
 
-
+		/** Dokument */
         BB_Doc * m_Doc;
+		
+		/** Vektor mit allen Objekten des aktuellen DocComponents */
         QVector<BB_DrawObject*>* m_DrawObjects;
+		
+		
+		/** Selektionsvektor */
         QVector<BB_DrawObject*> m_Selection;
 
 
+		/** Arbeitsbereich */
         BB_WorkArea *m_Center;
 
+		/** Fenster links, für Tools, etc. */
         QFrame *m_LeftFrame;
+		
+		/** Fenster Rechts, für Eigenschaftsfenster */
         QStackedWidget *m_RightFrame;
 
+		/* Layout */
         QGridLayout* m_ToolsGridLayout;
+		
+		/** Anzahl der Tool-Buttons */
         int m_ToolButtonCount;
-
-        //         QList<QAction*> *m_ToolButtonActions;
 
         /** Liste mit allen Tools */
         QList<BB_AbstractTool*> m_Tools;

@@ -19,6 +19,12 @@
 
 using namespace std;
 
+/**
+ * Konstruktor
+ * Erzeugt einen scrollbaren Arbeitbereich.
+ * @param selectVector Selektions-Vektor
+ * @param parent Eltern-Fenster
+ */
 BB_WorkArea::BB_WorkArea( QVector<BB_DrawObject*>* selectVector, QWidget *parent )
         : QScrollArea( parent )
 {
@@ -26,14 +32,6 @@ BB_WorkArea::BB_WorkArea( QVector<BB_DrawObject*>* selectVector, QWidget *parent
     m_WorkFrame = new BB_WorkFrame( selectVector );
     m_WorkFrame->setFrameShape( QFrame::NoFrame );
     m_WorkFrame->setFrameShadow( QFrame::Plain );
-
-    //      /**** Image zum Testen *****/
-    //      QImage  *bg = new QImage();
-    //
-    //      bg->load(IMG_DIR() + SEPARATOR() + "RettungsPlan.png");
-    //
-    //      /***************/
-    //      m_WorkFrame->setPixmap(QPixmap(QPixmap::fromImage(*bg)));
     m_WorkFrame->setBackgroundRole( QPalette::Background );
     m_WorkFrame->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
     m_WorkFrame->setScaledContents( true );
@@ -42,12 +40,17 @@ BB_WorkArea::BB_WorkArea( QVector<BB_DrawObject*>* selectVector, QWidget *parent
 }
 
 
+/**
+ * Destruktor
+ */
 BB_WorkArea::~BB_WorkArea()
 {}
 
 
-/*!
-    \fn BB_WorkArea::zoom(double faktor)
+/**
+ * Zoom um den übergeben Faktor.
+ * @param factor Zoomfaktor, um den gezoomt werden soll.
+ * @author Alex Letkemann
  */
 void BB_WorkArea::zoom( double faktor )
 {
@@ -86,6 +89,7 @@ void BB_WorkArea::zoom( double faktor )
 /**
  * Gibt das Tool zurück, welches im Workframe verwendet wird.
  * @return Das Tool, welches im Workframe benutzt wird.
+ * @author Alex Letkemann
  */
 BB_AbstractTool* BB_WorkArea::getTool()
 {
@@ -96,6 +100,7 @@ BB_AbstractTool* BB_WorkArea::getTool()
 /**
  * Setzt das Tool des Workframes auf <i>tool</i>.
  * @param tool Tool, welches im Workframe benutzt werden soll.
+ * @author Alex Letkemann
  */
 void BB_WorkArea::setTool( BB_AbstractTool* tool )
 {
@@ -107,8 +112,9 @@ void BB_WorkArea::setTool( BB_AbstractTool* tool )
 
 
 /**
- * Setzt den Zoomfaktor
+ * Setzt den Zoom auf den übergebenen Zoomfaktor
  * @param zoom Zoomfaktor
+ * @author Alex Letkemann
  */
 void BB_WorkArea::setZoomFaktor( double z )
 {
@@ -120,68 +126,12 @@ void BB_WorkArea::setZoomFaktor( double z )
 }
 
 
-/* *
- * Setzt den Hintergrund des Arbeitsbereiches
- * @return map Map welche als Hintergrund hinterlegt wird.
- */ 
-// bool BB_WorkArea::setMap(BB_Map* map)
-// {
-//         if(map != NULL)
-//         {
-//                 m_Map = map;
-//
-//                 m_WorkFrame->setPixmap(m_Map->getMap());
-//
-//                 m_WorkFrame->setFrameShape(QFrame::Box);
-//                 m_WorkFrame->setBackgroundRole(QPalette::Background);
-//                 m_WorkFrame->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-//                 m_WorkFrame->setScaledContents(true);
-//                 m_WorkFrame->setEnabled(true);
-//
-//                 setZoomFaktor(m_Map->getZoom());
-//                 return true;
-//         }
-//         else
-//         {
-//                 m_WorkFrame->setEnabled(false);
-//                 m_WorkFrame->setFrameShape(QFrame::NoFrame);
-//                 return false;
-//         }
-//
-// }
-
-
-/* *
- * Setzt das Objekt, auf welchem gezeichnet wird.
- * @param device Objekt, auf welchem gezeichnet wird
- */ 
-// void BB_WorkArea::setDrawDevice(BB_DrawDevice * device)
-// {
-//         if(device == NULL)
-//         {
-//                 m_WorkFrame->setEnabled(false);
-//                 m_WorkFrame->setDrawObjects(NULL);
-//         }
-//         else
-//         {
-//                 m_WorkFrame->setDrawObjects( device->getDrawObjects() );
-//                 m_WorkFrame->setEnabled(true);
-//
-//         }
-//         m_WorkFrame->update();
-// }
-
-
-// BB_Map* BB_WorkArea::getMap() const
-// {
-//     return m_Map;
-// }
-
 
 /**
  * Gibt das Komponent zurück, welches gerade bearbeitet wird.
  * Falls kein Komponent eingestellt ist wird NULL zurückgegeben
  * @return Das aktuelle DocComponent
+ * @author Alex Letkemann
  */
 BB_DocComponent* BB_WorkArea::getDocComponent()
 {
@@ -189,8 +139,12 @@ BB_DocComponent* BB_WorkArea::getDocComponent()
 }
 
 
-/*!
-    \fn BB_WorkArea::setDocComponent(BB_DocComponent* component)
+
+/**
+ * Setzt das DocComponent, welches bearbeitet werden soll.
+ * Falls NULL übergeben wird, wird der Arbeitbereich deaktiviert.
+ * @param component DocComponent, welches bearbeitet werden soll.
+ * @author Alex Letkemann
  */
 void BB_WorkArea::setDocComponent( BB_DocComponent* component )
 {
@@ -222,6 +176,8 @@ void BB_WorkArea::setDocComponent( BB_DocComponent* component )
 
 /**
  * Gibt den Zoomfaktor zurück
+ * @return Zoomfaktor
+ * @author Alex Letkemann
  */
 double BB_WorkArea::getZoom()
 {

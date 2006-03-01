@@ -32,8 +32,11 @@
 class BB_Tab;
 
 /**
-@author Alex Letkemann
-*/
+ * Die BB_Doc Klasse stellt das Projekt an sich dar.<br>
+ * Sie kontrolliert und speichert die gesamten Daten wie Gelände, Gebäude und Etagen.<br>
+ * Alle diese Objekte werden durch diese Klasse erstellt und auch wieder gelöscht.
+ * @author Alex Letkemann
+ */
 class BB_Doc : public BB_FileObject
 {
     public:

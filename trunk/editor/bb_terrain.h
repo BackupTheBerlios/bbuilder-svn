@@ -24,17 +24,19 @@
 class BB_Doc;
 
 /**
-@author Alex Letkemann
-*/
+ * Stellt ein Gelände dar, auf dem mehrere Gebäude plaziert werden können.
+ * Das Gelände wird durch Dreiecke, die durch Verbinden von drei Konten entstehen, aufgebaut.
+ * @author Alex Letkemann
+ */
 class BB_Terrain : public BB_DocComponent
 {
 public:
 	/**
 	 * Konstruktor
-	 * @param path 
-	 * @param fileName 
-	 * @param name 
-	 * @return 
+     * @param path Verzeichnis, in dem gespeichert wird 
+     * @param fileName  Dateiname, unter welchem gepeichert wird
+     * @param name Geländename
+	 * @author Alex Letkemann 
 	 */
 	BB_Terrain(const QDir& path, const QString &fileName, const QString &name = QString(""));
 

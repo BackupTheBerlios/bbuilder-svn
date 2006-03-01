@@ -16,26 +16,41 @@
 #include "ui_terrainEdit.h"
 
 /**
-@author Alex Letkemann
-*/
+ * Dialog zum Bearbeiten des Geländes.
+ * Mit dem Dialog lassen sich der Name, die Beschreibung und der Pfad zur Bilddatei ändern.
+ * @author Alex Letkemann
+ */
 class BB_DlgTerrainEdit : public QDialog
 {
 	Q_OBJECT
 	
 public:
+	/** Konstruktor */
 	BB_DlgTerrainEdit(QWidget * parent = 0, Qt::WFlags f = 0);
 
+	/** Destruktor */
     ~BB_DlgTerrainEdit();
 
-	
+	/** Gibt den Namen zurück */
 	const QString getName();
+	
+	/** Gibt die Beschreibung zurück */
 	const QString getDescription();
+	
+	/** Setzt die Beschreibung */
 	void setDescription(const QString& desc);
+	
+	/** Setzt den Namen */
 	void setName(const QString& name);
+	
+	/** Gibt den Pfad zur Bilddatei zurück */
 	QString getPlanFile();
+	
+	/** Setzt den Pfad zur Bilddatei */
 	void setPlanFile(QString& file);
 
 private slots:
+	/** Ruft einen Datei-Dialog auf, mit welchem eine Bilddatei ausgewählt werden kann */
 	void slotPlanFileSearch();
 	
 protected:

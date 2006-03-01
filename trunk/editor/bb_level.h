@@ -21,28 +21,93 @@
 class BB_Building;
 
 /**
-@author Alex Letkemann
-*/
+ * Stellt eine Etage dar.<br />
+ * Die Etage kennt das Gebäude zu welchem sie gehört und besitzt eine Höhe.
+ * @author Alex Letkemann
+ */
 class BB_Level : public BB_DocComponent
 {
     public:
+        /**
+         * Konstrucktor<br />
+		 * Erstellt eine neue Etage
+         * @param building Gebäude, welchem die Etage zugeteilt wird.
+         * @param path Pfad zur Datei
+         * @param fileName Dateiname
+         * @param name Etagen-Name
+	     * @author Alex Letkemann
+         */
         BB_Level( BB_Building* building, const QDir& path, const QString &fileName, const QString &name = QString( "" ) );
 
-        virtual ~BB_Level();
-        virtual void generateXElement( QTextStream &out, int depth );
-        virtual bool write( QTextStream &out );
-        virtual const QString getClassName();
-		void setHeight( double Value );
-		virtual double getHeight() const;
-    BB_Building* getBuilding();
-    virtual int keyBoardEdit( QWidget* parent );
-	virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
-    protected:
 		/**
-		Hohe von Etage in meter
-		*/
-		double m_Height;
-    BB_Building* m_Building;
+		 * Destruktor
+		 */
+        virtual ~BB_Level();
+		
+        /**
+         * Erstellt den 'bb_level' XML-Element
+         * @param out Stream, in den geschrieben werden soll-.
+         * @param depth Eirückung
+		 * @author Alex Letkemann
+         */
+        virtual void generateXElement( QTextStream &out, int depth );
+        
+		/**
+		 * \fn BB_FileObject::write( QTextStream &out )
+		 */
+		virtual bool write( QTextStream &out );
+		
+		
+        /**
+         * \fn BB_Object::getClassName()
+         */
+        virtual const QString getClassName();
+		
+		
+        /**
+         * Setzt die Höhe der Etage
+         * @param Value Höhe der Etage
+		 * @author Alex Letkemann
+         */
+        void setHeight( double Value );
+		
+        /**
+         * Gibt die Höhe zurück
+         * @return Höhe der Etage
+		 * @author Alex Letkemann
+         */
+        virtual double getHeight() const;
+		
+        /**
+         * Gibt das Gebäude zurück, welchem die Etage zugehört.
+         * @return Gebäude
+		 * @author Alex Letkemann
+         */
+        BB_Building* getBuilding();
+		
+		
+        /**
+		 * \fn BB_DocComponent::keyBoardEdit( QWidget* parent )
+         */
+        virtual int keyBoardEdit( QWidget* parent );
+		
+		
+        /**
+         * Erzeugt das 3D-Model der Etage.
+		 * Das Model wird komplett aus Dreiecken erstellt, welche an den übergebene Vektor 'triangles' angehängt wird.
+         * @param triangles Vektor, an den die Dreiecke angehängt werden.
+         * @param vector Positionvektor
+         * @param rotation Rotation der Etage in Grad
+         * @param scale Maßstab
+         * @param height Höhe eines Meters in Pixel
+         */
+        virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
+    protected:
+        /** Hohe der Etage in Meter */
+        double m_Height;
+		
+		/** Gebäude, dem die Etage gehört */
+        BB_Building* m_Building;
 };
 
 #endif

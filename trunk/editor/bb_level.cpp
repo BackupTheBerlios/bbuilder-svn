@@ -23,6 +23,16 @@
 
 using namespace std;
 
+
+/**
+ * Konstrucktor<br />
+ * Erstellt eine neue Etage
+ * @param building Gebäude, welchem die Etage zugeteilt wird.
+ * @param path Pfad zur Datei
+ * @param fileName Dateiname
+ * @param name Etagen-Name
+ * @author Alex Letkemann
+ */
 BB_Level::BB_Level( BB_Building* building, const QDir& path, const QString &fileName, const QString &name )
         : BB_DocComponent( path, fileName, name )
 {
@@ -44,44 +54,56 @@ BB_Level::BB_Level( BB_Building* building, const QDir& path, const QString &file
 	m_ScalePoint_2 = building->getScalePoint_2();
 }
 
-
+/**
+ * Destruktor
+ */
 BB_Level::~BB_Level()
 {
 	m_Building->removeLevel(this);
 }
 
 
-/*!
-    \fn BB_Object::getClassName()
+/**
+ * \fn BB_Object::getClassName()
  */
 const QString BB_Level::getClassName()
 {
     return QString( "BB_Level" );
 }
 
-
+/**
+ * Gibt die Höhe zurück
+ * @return Höhe der Etage
+ * @author Alex Letkemann
+ */
 double BB_Level::getHeight() const
 {
     return m_Height;
 }
 
+/**
+ * Setzt die Höhe der Etage
+ * @param Value Höhe der Etage
+ * @author Alex Letkemann
+ */
 void BB_Level::setHeight( double Value )
 {
     m_Height = Value;
 }
 
 
-/*!
-    \fn BB_Level::getBuilding()
+/**
+ * Gibt das Gebäude zurück, welchem die Etage zugehört.
+ * @return Gebäude
+ * @author Alex Letkemann
  */
 BB_Building* BB_Level::getBuilding()
 {
 	return m_Building;
 }
 
-
-/*!
-    \fn BB_Level::keyBoardEdit( QWidget* parent )
+/**
+ * \fn BB_DocComponent::keyBoardEdit( QWidget* parent )
  */
 int BB_Level::keyBoardEdit( QWidget* parent )
 {
@@ -139,8 +161,11 @@ int BB_Level::keyBoardEdit( QWidget* parent )
 }
 
 
-/*!
-    \fn BB_Level::BB_DocComponent::generateXElement( QTextStream &out, int depth )
+/**
+ * Erstellt den 'bb_level' XML-Element
+ * @param out Stream, in den geschrieben werden soll-.
+ * @param depth Eirückung
+ * @author Alex Letkemann
  */
 void BB_Level::generateXElement( QTextStream &out, int depth )
 {
@@ -152,8 +177,8 @@ void BB_Level::generateXElement( QTextStream &out, int depth )
 }
 
 
-/*!
-    \fn BB_Level::write( QTextStream &out )
+/**
+ * \fn BB_FileObject::write( QTextStream &out )
  */
 bool BB_Level::write( QTextStream &out )
 {
@@ -251,20 +276,17 @@ bool BB_Level::write( QTextStream &out )
 }
 
 
-/*!
-    \fn BB_Level::createGl( double scale )
+/**
+ * Erzeugt das 3D-Model der Etage.
+ * Das Model wird komplett aus Dreiecken erstellt, welche an den übergebene Vektor 'triangles' angehängt wird.
+ * @param triangles Vektor, an den die Dreiecke angehängt werden.
+ * @param vector Positionvektor
+ * @param rotation Rotation der Etage in Grad
+ * @param scale Maßstab
+ * @param height Höhe eines Meters in Pixel
  */
 void BB_Level::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
-// 	double docScale = 1 / getPixelPerMeter( 1.0 );
-// 	scale =  scale * docScale;
-	
-// 	C3dVector v(0.0 ,0.0, 0.0);
-	
-// 	qDebug() << getName() << " Scale: " << scale <<  " DocScale: " << docScale;
-	
-// 	qDebug( "getPixelPerMeter( m_Height): %f",getPixelPerMeter( m_Height) );
-	
 	for( int i = 0; i < m_DrawObjects.count(); i++ )
 	{
 		m_DrawObjects.at( i )->createGl( triangles, vector ,rotation , scale, m_Height * height  );

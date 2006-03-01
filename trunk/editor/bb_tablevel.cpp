@@ -17,6 +17,15 @@
 
 #include <bb_tools.h>
 
+
+/**
+ * Konstruktor.
+ * Erstellt ein neues Etagen-Tab.
+ * @param doc Dokument, welches die Daten enthält.
+ * @param parent Das Parent-Fenster
+ * @param f QtWindowFlags
+ * @author Alex Letkemann
+ */
 BB_TabLevel::BB_TabLevel( BB_Doc * doc, QWidget* parent, Qt::WFlags f )
         : BB_Tab( doc, parent, f )
 {
@@ -33,15 +42,18 @@ BB_TabLevel::BB_TabLevel( BB_Doc * doc, QWidget* parent, Qt::WFlags f )
     initTools();
 }
 
-
+/**
+ * Destruktor
+ */
 BB_TabLevel::~BB_TabLevel()
 {}
 
 
 
 
-/*!
-    \fn BB_TabLevel::slotLevelNew()
+/**
+ * Startet ein Dialog zum erstellen einer neuen Etage
+ * @author Alex Letkemann
  */
 void BB_TabLevel::slotLevelNew()
 {
@@ -56,8 +68,9 @@ void BB_TabLevel::slotLevelNew()
 }
 
 
-/*!
-    \fn BB_TabLevel::slotLevelProperties()
+/**
+ * Startet ein Dialog zum Bearbeiten der aktuellen Etage
+ * @author Alex Letkemann
  */
 void BB_TabLevel::slotLevelProperties()
 {
@@ -72,8 +85,9 @@ void BB_TabLevel::slotLevelProperties()
 }
 
 
-/*!
-    \fn BB_TabLevel::slotLevelDelete()
+/**
+ * Löscht die Aktuelle Etage
+ * @author Alex Letkemann
  */
 void BB_TabLevel::slotLevelDelete()
 {
@@ -86,17 +100,13 @@ void BB_TabLevel::slotLevelDelete()
 			m_Center->setDocComponent( NULL );
         }
     }
-//     cout << "Löschen? ... ";
-//     if ( QMessageBox::question( this, "Frage?", "sicher?", QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
-//         cout << "Gelöscht!" << endl;
-//     else
-//         cout << "Abgebrochen" << endl;
 }
 
 
 
-/*!
-    \fn BB_TabLevel::initWidgetLeft()
+/**
+ * Initialisiert das linke Fenster
+ * @author Alex Letkemann
  */
 void BB_TabLevel::initWidgetLeft()
 {
@@ -122,9 +132,7 @@ void BB_TabLevel::initWidgetLeft()
 
     m_ListWidgetLevels = new QListWidget();
 
-//     qDebug() << "Connecting m_ListWidgetLevels ... ";
     connect( m_ListWidgetLevels, SIGNAL( currentRowChanged ( int ) ), this, SLOT( slotLevelChanged( int ) ) );
-//     qDebug() << "OK";
 
     QVBoxLayout *gBL_Levels = new QVBoxLayout();
     gBL_Levels->setMargin( 0 );
@@ -134,10 +142,8 @@ void BB_TabLevel::initWidgetLeft()
     m_ButtonLevelNew = new QPushButton( QString::fromUtf8( "Hinzufügen" ) );
 
     m_ButtonLevelDelete = new QPushButton( QString::fromUtf8( "Löschen" ) );
-    // 	m_ButtonLevelDelete->setEnabled(false);
 
     m_ButtonLevelProperties = new QPushButton( QString::fromUtf8( "Eigenschaften" ) );
-    // 	m_ButtonLevelProperties->setEnabled(false);
 
     connect( m_ButtonLevelNew, SIGNAL( clicked( bool ) ), this, SLOT( slotLevelNew() ) );
     connect( m_ButtonLevelDelete, SIGNAL( clicked( bool ) ), this, SLOT( slotLevelDelete() ) );
@@ -151,22 +157,12 @@ void BB_TabLevel::initWidgetLeft()
     gB_Levels->setLayout( gBL_Levels );
 
     addWidgetLeft( gB_Levels, 1 );
-
-    qDebug() << "Tab created";
 }
 
 
-/*!
-    \fn BB_TabLevel::initWidgetRight()
- */
-void BB_TabLevel::initWidgetRight()
-{
-    /// @todo implement me
-}
-
-
-/*!
-    \fn BB_TabLevel::initTools()
+/**
+ * Initialisiert die Tools
+ * @author Alex Letkemann
  */
 void BB_TabLevel::initTools()
 {
@@ -185,8 +181,9 @@ void BB_TabLevel::initTools()
 }
 
 
-/*!
-    \fn BB_TabLevel::updateBuildingList()
+/**
+ * Aktualisert die Gebäudeliste
+ * @author Alex Letkemann
  */
 void BB_TabLevel::updateBuildingList()
 {	
@@ -213,8 +210,9 @@ void BB_TabLevel::updateBuildingList()
 }
 
 
-/*!
-    \fn BB_TabLevel::updateLevelList()
+/**
+ * Aktualisert die Etagenliste
+ * @author Alex Letkemann
  */
 void BB_TabLevel::updateLevelList()
 {
@@ -236,8 +234,9 @@ void BB_TabLevel::updateLevelList()
 }
 
 
-/*!
-    \fn BB_TabLevel::documentChanged()
+/**
+ * Wird aufgerufen, wenn das Dokument (m_Doc) sich ändert.
+ * @author Alex Letkemann
  */
 void BB_TabLevel::documentChanged()
 {
@@ -253,8 +252,9 @@ void BB_TabLevel::documentChanged()
 }
 
 
-/*!
-    \fn BB_TabLevel::updateLists()
+/**
+ * Aktualisert die Listen
+ * @author Alex Letkemann
  */
 void BB_TabLevel::updateLists()
 {
@@ -263,15 +263,20 @@ void BB_TabLevel::updateLists()
 }
 
 
-/*!
-    \fn BB_TabLevel::slotBuildingChanged( int row )
+/**
+ * Wird aufgerufen, wenn das Geböude geändert wird.
+ * Aktualisert die Listen.
+ * @param row Index des Gebäudes.
+ * @author Alex Letkemann
  */
 void BB_TabLevel::slotBuildingChanged( int row )
 {
-    qDebug() << "Setting building ... ";
+//     qDebug() << "Setting building ... ";
     setBuilding( m_Doc->getBuilding( row ) );
-    qDebug() << "OK";
+//     qDebug() << "OK";
 	
+	
+	/* == DEBUG ==
 	qDebug() << "info: Buildings";
 	for(int i = 0; i < m_Buildings->count(); i++ )
 	{
@@ -285,11 +290,14 @@ void BB_TabLevel::slotBuildingChanged( int row )
 		qDebug() << m_Levels->at( i)->getName();
 	}
 	qDebug() << "info: Levels: Ende";
+	*/
 }
 
 
-/*!
-    \fn BB_TabLevel::setBuilding()
+/**
+ * Setzt das Gebäude, dessen Etagen bearbeitet werden sollen.
+ * @param building Gebäude, dessen Etagen bearbeitet werden sollen
+ * @author Alex Letkemann
  */
 void BB_TabLevel::setBuilding( BB_Building* building )
 {
@@ -310,8 +318,10 @@ void BB_TabLevel::setBuilding( BB_Building* building )
 }
 
 
-/*!
-    \fn BB_TabLevel::setLevel()
+/**
+ * Setzt die Etage, die Bearbeitet werden soll.
+ * @param level Etage, die Bearbeitet werden soll
+ * @author Alex Letkemann
  */
 void BB_TabLevel::setLevel( BB_Level* level )
 {
@@ -321,8 +331,10 @@ void BB_TabLevel::setLevel( BB_Level* level )
 }
 
 
-/*!
-    \fn BB_TabLevel::setWidgetEnabled( bool value )
+/**
+ * Aktiviert oder Deaktiviert das Tab-Fenster
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
  */
 void BB_TabLevel::setWidgetEnabled( bool value )
 {
@@ -335,9 +347,12 @@ void BB_TabLevel::setWidgetEnabled( bool value )
 }
 
 
-/*!
-    \fn BB_TabLevel::slotLevelChanged( int row )
- */
+ /**
+ * Wird aufgerufen, wenn die Etage geändert wird.
+ * Aktualisert die Arbeitsfläche.
+ * @param row Index der Etage.
+ * @author Alex Letkemann
+  */
 void BB_TabLevel::slotLevelChanged( int row )
 {
     if ( m_Building != NULL )
@@ -347,8 +362,10 @@ void BB_TabLevel::slotLevelChanged( int row )
 }
 
 
-/*!
-    \fn BB_TabLevel::saveCurrent()
+/**
+ * Speichert die Aktuelle Etage
+ * @return Erfolg des Seicherns. True im Erfolg, sonst false
+ * @author Alex Letkemann
  */
 bool BB_TabLevel::saveCurrent()
 {

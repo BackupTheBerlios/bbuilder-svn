@@ -89,5 +89,6 @@ void BB_AbstractToolWidget::clearToolWidget()
  */
 void BB_AbstractToolWidget::setWidgetEnabled( bool value )
 {
+	value = false;
 	/* Hier keine Implemetirung */
 }

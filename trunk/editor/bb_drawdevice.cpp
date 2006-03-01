@@ -16,11 +16,19 @@
 
 using namespace std;
 
+/**
+ * Konstruktor
+ */
 BB_DrawDevice::BB_DrawDevice()
 {}
 
 
-
+/**
+ * Destruktor
+ * Löscht alle Objekte, die noch im DrawDevice sind.
+ * @author Alex Letkemann
+ * @date 23.11.2005
+ */
 BB_DrawDevice::~BB_DrawDevice()
 {
 
@@ -45,27 +53,36 @@ BB_DrawDevice::~BB_DrawDevice()
 
     if ( m_DrawObjects.count() > 0 )
     {
-
-        ///@todo Auf qDebug umstellen
-        cout << "BB_Terrain::~BB_Terrain(): Nicht alle Objekte konnten gelöscht werden" << endl;
+		qDebug("BB_Terrain::~BB_Terrain(): Nicht alle Objekte konnten gelöscht werden");
     }
 
     m_DrawObjects.clear();
 }
 
-
+/**
+ * Gibt den Pointer auf einen Vektor mit allen Objekten zurück 
+ * @return Pointer auf einen Vektor mit allen Objekten
+ * @author Alex Letkemann
+ */
 QVector<BB_DrawObject*>* BB_DrawDevice::getDrawObjects()
 {
     return & m_DrawObjects;
 }
 
-
+/**
+ * Gibt den Offset zurück
+ * @return Offset
+ */
 const C2dVector& BB_DrawDevice::getOffset() const
 {
     return m_Offset;
 }
 
-
+/**
+ * Setzt den Offset
+ * @param value Offset
+ * @author Alex Letkemann
+ */
 void BB_DrawDevice::setOffset( const C2dVector& value )
 {
     m_Offset = value;

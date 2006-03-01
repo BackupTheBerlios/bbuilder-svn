@@ -21,6 +21,10 @@
 
 using namespace std;
 
+
+/**
+ * Konstruktor 
+ */
 BB_Doc::BB_Doc()
 // Bei der Initialisierung hat das Projekt noch keinen Path und keinen Dateiname,
 // deswegen wird ein leerer Path und ein leerer Dateiname übergeben.
@@ -35,6 +39,9 @@ BB_Doc::BB_Doc()
 }
 
 
+/**
+ * Destruktor
+ */
 BB_Doc::~BB_Doc()
 {}
 
@@ -195,9 +202,6 @@ bool BB_Doc::open( QString fileName )
         return false;
     }
 
-    // 	cout << "m_ProjectPath: " << m_ProjectPath.path().toStdString() << endl;
-    // 	cout << "m_ProjectFile: " << m_ProjectFile.toStdString() << endl;
-
     documentChanged();
     
     return true;
@@ -264,6 +268,7 @@ bool BB_Doc::createNew( const QString &name, const QString &desc, const QDir &pa
 
     save();
     documentChanged();
+	setPRO_DIR( m_ProjectPath.path() );
     return true;
 }
 

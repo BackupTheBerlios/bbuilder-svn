@@ -16,8 +16,10 @@
 #include <QDir>
 
 /**
-@author Alex Letkemann
-*/
+ * Die Map ist der Hintergrund der in die Arbeitsfläche gestellt wird.
+ * Die Klasse steuert das Laden und das Zoomen der Map.
+ * @author Alex Letkemann
+ */
 class BB_Map
 {
     public:

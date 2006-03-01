@@ -16,6 +16,11 @@
 
 using namespace std;
 
+/**
+ * Konstruktor
+ * Erstellt ein leeres Rechteck, welchem die beiden Punkte erst noch zugewiesen werden müssen.
+ * @author Alex Letkemann
+ */
 BB_Rect::BB_Rect()
         : BB_Line( NULL, NULL )
 {
@@ -29,6 +34,7 @@ BB_Rect::BB_Rect()
  * ändert sich auch die Position bzw. die Größe des Rechtecks.
  * @param p1 Position des ersten Punktes.
  * @param p2 Position des zweiten, <b>quer gegenüber liegenden</b> Punktes.
+ * @author Alex Letkemann
  */
 BB_Rect::BB_Rect( BB_Point* p1, BB_Point* p2 )
         : BB_Line( p1, p2 )
@@ -42,8 +48,8 @@ BB_Rect::~BB_Rect()
 
 
 
-/*!
-    \fn BB_Rect::getClassName()
+/**
+ *  \fn BB_Object::getClassName()
  */
 const QString BB_Rect::getClassName()
 {
@@ -51,6 +57,11 @@ const QString BB_Rect::getClassName()
 }
 
 
+/**
+ * Zeichnet den Rechteck auf der Arbeitsfläche
+ * @param transformer Transformer, welcher benutzt werden soll.
+ * @param painter Painter, mit welchem gezeichnet werden soll.
+ */
 void BB_Rect::show( BB_Transformer& transformer, QPainter& painter ) const
 {
     if ( &transformer != NULL && &painter != NULL && m_Pos1 != NULL && m_Pos2 != NULL )
@@ -68,8 +79,11 @@ void BB_Rect::show( BB_Transformer& transformer, QPainter& painter ) const
 }
 
 
-/*!
-    \fn BB_Rect::isHit(const C2dVector &hit)
+/**
+ * Prüft, ob der Rechteck angeclickt wurde.
+ * @param hit Position, an der geprüft werden soll.
+ * @return Wenn angeclickt true, sonst false.
+ * @author Alex Letkemann
  */
 bool BB_Rect::isHit( const C2dVector &hit )
 {
@@ -85,6 +99,11 @@ bool BB_Rect::isHit( const C2dVector &hit )
     return false;
 }
 
+/**
+ * Bewegt den Rechteck um den übergebenen Vektor
+ * @param pMove Vektor, um den der Rechteck bewegt werden soll.
+ * @author Alex Letkemann
+ */
 void BB_Rect::moveBy( C2dVector pMove )
 {
 	m_Pos1->setX( m_Pos1->getX() + pMove.x() );

@@ -17,7 +17,16 @@
 #include <QHBoxLayout>
 #include "bb_workarea.h"
 
-
+/**
+ * Konstruktor
+ * Erstellt ein neues Tab mit drei Bereichen.<br />
+ * Links: Das Fenster, in dem die Toolbuttons angezeigt werden (QFrame).<br />
+ * Mitte: Die Arbeitsfl&auml;che (BB_WorkArea).<br />
+ * Rechts: Das Fenster für die Eigenschaften der Tools (QStackedWidget).<br />
+ * @param doc Das Dokument, mit welchem gearbeitet werden soll
+ * @param parent Fenster in dem der Tab erstellt wird.
+ * @param f QtFlags
+ */
 BB_Tab::BB_Tab( BB_Doc* doc, QWidget* parent, Qt::WFlags f ) : QWidget( parent, f )
 {
     setDoc( doc );
@@ -28,15 +37,9 @@ BB_Tab::BB_Tab( BB_Doc* doc, QWidget* parent, Qt::WFlags f ) : QWidget( parent, 
     m_DrawObjects = NULL;
 }
 
-// BB_Tab::BB_Tab( BB_Doc* doc, bool leftFrame, bool rightFrame, QWidget* parent, Qt::WFlags f ) : QWidget( parent, f )
-// {
-//     setDoc( doc );
-//
-//     initTab();
-//     initLayout( leftFrame, rightFrame );
-// }
-
-
+/**
+ * Destruktor
+ */
 BB_Tab::~BB_Tab()
 {
     m_Doc = NULL;
@@ -48,12 +51,9 @@ BB_Tab::~BB_Tab()
     if ( m_RightFrame != NULL )
         delete m_RightFrame;
 
-    // TODO m_ToolsGridLayout lässt sich nicht löschen
-    // 	if(m_ToolsGridLayout != NULL)
-    // 		delete m_ToolsGridLayout;
 }
 
-/*
+/**
  * Initialisiert alle wichtigen Einstellungen des Tabs.
  * Wird als Erstes in jedem Konstruktor aufgerufen werden.
  */
@@ -312,8 +312,13 @@ void BB_Tab::slotToolChanged( QAction* action )
 
 }
 
-
-
+/**
+ * Wird ausgeführt, wenn ein Toolbuttons betätigt wird. Diese Funktion sollte in jeder 
+ * abgeleiteten Klasse, die Tools enthält, überladen werden. Falls dies nicht geschechen ist
+ * und ToolButton wird betätigt kommt die die Meldung <i>toolChanged(QAction* action) nicht implementiert</i> in stdout.
+ * Hier werden die Tools weiter an die Arbeitsfläche übergeben.
+ * @param action QAction Pointer des Tools
+ */
 void BB_Tab::toolChanged( QAction* action )
 {
     //     qDebug( "toolChanged(QAction* action) nicht implementiert (action: %p)\n", action );
@@ -326,6 +331,11 @@ void BB_Tab::toolChanged( QAction* action )
 }
 
 
+/**
+ * Setzt alle DrawObject-Vektoren auf NULL
+ * Und leert alles Listen. BB_Doc muss bereits geleert sein, 
+ * wenn diese Funktion aufgerufen wird.
+ */
 void BB_Tab::clear()
 {
     unsetDocComponent();
@@ -354,8 +364,12 @@ void BB_Tab::resetTool()
 }
 
 
-/*!
-    \fn BB_Tab::addTool( BB_AbstractTool& tool, QIcon& icon, QString& name, QString& info )
+/**
+ * Fügt ein Tool zum Linken Fenster hinzu
+ * @param tool Tool, welches hinzugef&uuml;gt werden soll
+ * @param name Name des Tools
+ * @param info Informationen zum Tool
+ * @return Die Aktion des erzeugten Tools
  */
 QAction* BB_Tab::addTool( BB_AbstractTool* tool, const QString& name, const QString& info )
 {
@@ -377,8 +391,9 @@ QAction* BB_Tab::addTool( BB_AbstractTool* tool, const QString& name, const QStr
 }
 
 
-/*!
-    \fn BB_Tab::setTool( BB_AbstractTool* tool )
+/**
+ * Setzt das Tool 'tool' in der WorkArea.
+ * @param tool Tool welches benutzt werden soll.
  */
 void BB_Tab::setTool( BB_AbstractTool* tool )
 {
@@ -390,8 +405,9 @@ void BB_Tab::setTool( BB_AbstractTool* tool )
 }
 
 
-/*!
-    \fn BB_Tab::setTool( QAction * action )
+/**
+ * Setzt das Tool, welches die Aktion 'action' besitzt.
+ * @param action Aktion des Tools
  */
 void BB_Tab::setTool( QAction * action )
 {
@@ -410,8 +426,8 @@ void BB_Tab::setTool( QAction * action )
 }
 
 
-/*!
-    \fn BB_Tab::documentChanged()
+/**
+ * Wird aufgerufen, wenn sich das Dokument ( m_Doc ) geändert hat.
  */
 void BB_Tab::documentChanged()
 {
@@ -419,10 +435,10 @@ void BB_Tab::documentChanged()
 }
 
 
-/*!
-    \fn BB_Tab::updateLists()
+/**
+ * Aktualisiert das Tab-Fenster
  */
 void BB_Tab::updateLists()
 {
-    /// @todo implement me
+	/* Hier keine Implementierung, muss in abgeleiteten Klasse überladen werden */
 }

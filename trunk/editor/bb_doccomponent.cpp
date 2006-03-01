@@ -134,12 +134,12 @@ double BB_DocComponent::getPixelPerMeter( double meter )
 }
 
 
-    /**
+/**
  * Startet einen Dialog zum Bearbeiten.
  * @param parent Fenster, welches blockert werden soll, solange der Dialog aktiv ist.
  * @return Rückgabewert des Dialoges
  * @author Alex Letkemann
-	 */
+ */
 int BB_DocComponent::keyBoardEdit( QWidget* parent )
 {
 	parent = NULL;

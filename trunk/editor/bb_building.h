@@ -27,7 +27,7 @@
 #include "bb_doccomponent.h"
 
 /**
- * Klasse stellt eine Gebäude dar.<br>
+ * Klasse stellt ein Gebäude dar.<br>
  * Das Gebäude kann mehrere Etagen haben, die im Vektor m_Levels gespeichert werden.<br>
  * @author Alex Letkemann
  */

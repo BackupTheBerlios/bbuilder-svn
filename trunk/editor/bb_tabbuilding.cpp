@@ -50,7 +50,6 @@ BB_TabBuilding::BB_TabBuilding( BB_Doc * doc, QWidget* parent, Qt::WFlags f )
 
     initTools();
 
-    // 	updateBuildingList();
 }
 
 
@@ -105,6 +104,7 @@ void BB_TabBuilding::initWidgetLeft()
 /**
  * Wird aufgerufen, wenn der Button 'Löschen' auf der linken Seite gedrückt wird.
  * Löscht das aüsgewählte Gebäude.
+ * @author Alex Letkemann
  */
 void BB_TabBuilding::slotBuildingDelete()
 {
@@ -135,12 +135,6 @@ void BB_TabBuilding::slotBuildingDelete()
             // Änderung speichern
             m_Doc->save();
 
-
-            //             m_Center->setEnabled( false );
-            if ( m_BuildingsListWidget->count() > 0 )
-            {
-                // 				m_BuildingsListWidget->setCurrentRow( - 1 );
-            }
         }
     }
 }
@@ -149,6 +143,7 @@ void BB_TabBuilding::slotBuildingDelete()
 /**
  * Wird aufgerufen, wenn der Button 'Neu' auf der linken Seite gedrückt wird.
  * Lässt ein neues Gebäude erstellen.
+ * @author Alex Letkemann
  */
 void BB_TabBuilding::slotBuildingNew()
 {
@@ -163,6 +158,7 @@ void BB_TabBuilding::slotBuildingNew()
 
 /**
  * Startet einen Dialog zum Bearbeiten der Eigenschaften eines Gebäudes
+ * @author Alex Letkemann
  */
 void BB_TabBuilding::slotBuildingProperties()
 {
@@ -204,64 +200,19 @@ void BB_TabBuilding::initTools()
  */
 void BB_TabBuilding::initWidgetRight()
 {
-    //     m_PropertyWidget = new BB_PropertyWidget();
-
-    //     addWidgetRight( m_PropertyWidget );
+	
 }
 
 
-/**
- * Verarbeitet die Tools von BB_TabBuilding und übergibt diese weiter an die Arbeitfläche.
- * @param action Aktion des Tools, welches Betätigt wurde.
- */
-// void BB_TabBuilding::toolChanged( QAction* action )
-// {
-// 
-//     if ( m_ToolMove->getAction() == action )
-//     {
-//         setTool( m_ToolMove );
-//     }
-//     else if ( m_ToolZoom->getAction() == action )
-//     {
-//         setTool( m_ToolZoom );
-//     }
-//     else if ( m_ToolPointNew->getAction() == action )
-//     {
-//         setTool( m_ToolPointNew );
-//     }
-//     else if ( m_ToolWallNew->getAction() == action )
-//     {
-//         setTool( m_ToolWallNew );
-//     }
-//     else if ( m_ToolScale->getAction() == action )
-//     {
-//         setTool( m_ToolScale );
-//     }
-//     else if ( m_ToolNavigationPointNew->getAction() == action )
-//     {
-//         setTool( m_ToolNavigationPointNew );
-//     }
-// 	else if( m_ToolNavigationLineNew->getAction() == action )
-// 	{
-// 		setTool( m_ToolNavigationLineNew );
-// 	}
-// 	else
-//     {
-//         qDebug( "Unbekanntes Tool\n" );
-//     }
-// 
-//     m_Center->update();
-// }
-
 
 /**
- * Erzeugt die Gebäude-Liste. 
+ * Erzeugt die Gebäude-Liste.
+ * @author Alex Letkemann
  */
 void BB_TabBuilding::createBuildingList()
 {
     if ( !m_BuildingsListCreated )
     {
-//         cout << m_Buildings->count() << endl;
         for ( int i = 0; i < m_Buildings->count(); i++ )
         {
             m_BuildingsListWidget->addItem( m_Buildings->at( i ) ->getListWidgetItem() );
@@ -278,6 +229,7 @@ void BB_TabBuilding::createBuildingList()
 /**
  * Leert die aktuelle Liste und löscht das 'Luste-Erstellt'-Flag,
  * damit eine neue Liste erstellt werden kann.
+ * @author Alex Letkemann
  */
 void BB_TabBuilding::clear()
 {
@@ -287,10 +239,16 @@ void BB_TabBuilding::clear()
 
 
 /**
- ///@todo ???
+ * Wird aufgerufen, wenn der User ein anderes Gebäude in der Liste auswählt.
+ * Setzt das neue DocComponent in die Arbeitsfläche.
+ * @param current Das QListWidgetItem des neuen Gebäudes.
+ * @param previous Das QListWidgetItem des letzen Gebäudes.
+ * @author Alex Letkemann
  */
 void BB_TabBuilding::slotBuildingChanged( QListWidgetItem * current, QListWidgetItem * previous )
 {
+	
+	previous = NULL;
     BB_Building * building = m_Doc->getBuilding( current );
 
     // Das Tool zurücksetzen
@@ -309,6 +267,8 @@ void BB_TabBuilding::slotBuildingChanged( QListWidgetItem * current, QListWidget
 
 /**
  * Speichert das aktuelle Gebäude
+ * @return Erfolg des Speicherns. True im Erfolg, sonst false.
+ * @author Alex Letkemann
  */
 bool BB_TabBuilding::saveCurrent()
 {
@@ -328,8 +288,9 @@ bool BB_TabBuilding::saveCurrent()
 }
 
 
-/*!
-    \fn BB_TabBuilding::updateLists()
+/**
+ * Aktualisiert die Gebäudeliste
+ * @author Alex Letkemann
  */
 void BB_TabBuilding::updateLists()
 {

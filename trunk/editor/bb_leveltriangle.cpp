@@ -12,10 +12,15 @@
 #include "bb_leveltriangle.h"
 #include <bb_globals.h>
 
+/**
+ * Konstruktor. Erstellt ein 3D-Dreieck aus drei übergebenen Punkten. 
+ */
 BB_LevelTriangle::BB_LevelTriangle( BB_Point* p1, BB_Point* p2, BB_Point* p3 ) : BB_Triangle( p1, p2, p3 )
 {}
 
-
+/**
+ * Destruktor
+ */
 BB_LevelTriangle::~BB_LevelTriangle()
 {}
 
@@ -118,8 +123,8 @@ void BB_LevelTriangle::createGl( QVector< C3dTriangle >& triangles, C3dVector ve
 
 
 
-/*!
-    \fn BB_LevelTriangle::getClassName()
+/**
+ * \fn BB_LevelTriangle::getClassName()
  */
 const QString BB_LevelTriangle::getClassName()
 {

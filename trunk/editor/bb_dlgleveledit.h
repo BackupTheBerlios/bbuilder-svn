@@ -16,25 +16,44 @@
 #include <QDialog>
 
 /**
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Dialog zum Bearbeiten von Etagen.
+ * Mit dem Dialog lassen sich der Name, die Beschreibung und der Pfad zur Bilddatei ändern.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_DlgLevelEdit : public QDialog
 {
 Q_OBJECT
 public:
+	
+	/** Konstruktor */
     BB_DlgLevelEdit( QWidget* parent );
 
+	/** Destruktor */
     ~BB_DlgLevelEdit();
+	
+	
+	/** Gibt die Beschreibung der Etage zurück */
     const QString getDescription() const;
-    const QString getName() const;
+    
+	/** Gibt den Namen der Etage zurück */
+	const QString getName() const;
+	
+	/** Gibt den Pfad zur Bilddatei zurück */
     const QString getPlanFile() const;
-    void setDescription( const QString& desc );
+    
+	/** Setzt die Beschreibung der Etage */
+	void setDescription( const QString& desc );
+	
+	/** Setzt den Namen der Etage */
     void setName( const QString& name );
+	
+	/** Setzt den Pfad zur Bilddatei */
     void setPlanFile( const QString& file );
 
 protected:
     Ui::LevelEditDialog m_Dlg;
 private slots:
+	/** Ruft einen Datei-Dialog auf, mit dem man eine Bilddatei auswählen kann */
     void slotPlanFileSearch();
 };
 

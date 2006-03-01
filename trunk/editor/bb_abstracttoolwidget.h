@@ -19,7 +19,7 @@ class BB_AbstractTool;
 
 /**
  * Basisklasse für alle Tool-Fenster.<br>
- * Enthält alle Methoden, die ein Fenser haben muss.
+ * Enthält alle Methoden, die ein Eingenschaftsfenser haben muss.
  * @author Alex Letkemann <alex@letkemann.de>
  */
 class BB_AbstractToolWidget : public QWidget
