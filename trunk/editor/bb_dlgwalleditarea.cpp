@@ -27,6 +27,16 @@
 
 using namespace std;
 
+
+/**
+Standart Konstruktor: <br>
+Es wird ein Dialog erzeugt, das die Objekte von BB_Wall verwalten kann<br>
+Deafult Wert für Höhe einer Wand ist 3.2 Meter
+@param BB_Wall Obejekt von einer Wand. Für diese Wand wird dann ein Dialog erzeugt
+@Param BB_DocComponent Etage mit der gearbeitet werden soll
+@param QWidget Benötigt von QT
+@param Qt::WFlags als Eigenschaft von Qt
+*/
 BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, double hohe, QWidget * parent, Qt::WFlags f )
         : QLabel( parent, f )
 {
@@ -58,7 +68,10 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
     loadTexture();
 }
 
-
+/**
+Standart Dekonstruktor. Hier werden alle Objekte, 
+die in deisem Class erzeugt wurden, gelöscht
+*/
 BB_DlgWallEditArea::~BB_DlgWallEditArea()
 {
     delete m_Selection;
@@ -67,7 +80,10 @@ BB_DlgWallEditArea::~BB_DlgWallEditArea()
     // 	delete m_WallTexture;
 }
 
-
+/**
+Abgeleitete Funktion zum Zeichen
+@param QPaintEvent
+*/
 void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
 {
     QLabel::paintEvent( pe );
@@ -94,6 +110,11 @@ void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
     }
 }
 
+/**
+Abgeleitete Funktion zum Anpassen von Breite und Höhe<br>
+Wird aufgerufen wenn die Größe von Fenster geändert wurde
+@param QResizeEvent
+*/
 void BB_DlgWallEditArea::resizeEvent ( QResizeEvent * re )
 {}
 
@@ -154,6 +175,11 @@ void BB_DlgWallEditArea::mouseMoveEvent( QMouseEvent* me )
     }
 }
 
+
+/**
+Setzt das Tool <b>tool</b> als aktiv (ausgewählt) ein
+@param BB_AbstractTool
+*/
 void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
 {
     if ( tool != NULL )
@@ -167,7 +193,7 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
         if ( typeid( * tool ) == typeid( BB_ToolMove ) )
         {
             m_Tool->setObjects( m_Wall->getPoints() );
-            // 			m_Tool->setObjects( m_Wall->getObjectsWithPoints() );
+            //m_Tool->setObjects( m_Wall->getObjectsWithPoints() );
             for ( int i = 0; i < m_DrawObjects->count(); i++ )
             {
                 m_DrawObjects->at( i ) ->setSelected( true );
@@ -193,11 +219,14 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
     }
     else
     {
-        QMessageBox::critical ( this, "Fehler (BB_WorkFrame)", "Fehler beim setzten des Tools.\nNULL-Pointer erhalten", QMessageBox::Ok, QMessageBox::NoButton );
+        QMessageBox::critical ( this, "Fehler (BB_DlgWallEditArea)", "Fehler beim setzten des Tools.\nNULL-Pointer erhalten", QMessageBox::Ok, QMessageBox::NoButton );
     }
     update();
 }
 
+/**
+Funktion zum Generieren einer großer Hitergrund-Image, das auf ganze Fenster passt
+*/
 void BB_DlgWallEditArea::makeWallTexture( QPainter * p )
 {
     //     p->drawPixmap( 0, 0, m_WallTexture );
@@ -213,10 +242,17 @@ void BB_DlgWallEditArea::makeWallTexture( QPainter * p )
     }
 }
 
+/**
+Lädt die Textur für die Wand herunter
+*/
 void BB_DlgWallEditArea::loadTexture()
 {
     m_WallTexture.load( PRO_TEXTURES_DIR() + SEPARATOR() + m_Wall->getTextureFileName() );
 }
+
+/**
+Diese Funktion Generiert Positionen von Objekten von aktueller Wand
+*/
 void BB_DlgWallEditArea::generatePositionOnWall()
 {
     BB_ConstructionElement * myElement;
@@ -230,20 +266,20 @@ void BB_DlgWallEditArea::generatePositionOnWall()
         myElement = ( BB_ConstructionElement * ) m_DrawObjects->at( i );
         ortVector = m_Wall->getPos1() ->getPos();
         richtungsVector = m_Wall->getPos2() ->getPos() - ortVector;
-		
+
         factor = myElement->getPos1() ->getPos().x() / m_Width;
-        elementPosition = ortVector + ( richtungsVector * factor );		
-		coefficient.setX(myElement->getPos1()->getPos().x() / m_Width);
-		coefficient.setY(myElement->getPos1()->getPos().y() / m_Height);
+        elementPosition = ortVector + ( richtungsVector * factor );
+        coefficient.setX( myElement->getPos1() ->getPos().x() / m_Width );
+        coefficient.setY( myElement->getPos1() ->getPos().y() / m_Height );
         myElement->setWallPosition1( elementPosition );
-		myElement->setCoefficientPos1(coefficient);
-		
+        myElement->setCoefficientPos1( coefficient );
+
         factor = myElement->getPos2() ->getPos().x() / m_Width;
         elementPosition = ortVector + ( richtungsVector * factor );
-		coefficient.setX(myElement->getPos2()->getPos().x() / m_Width);
-		coefficient.setY(myElement->getPos2()->getPos().y() / m_Height);
+        coefficient.setX( myElement->getPos2() ->getPos().x() / m_Width );
+        coefficient.setY( myElement->getPos2() ->getPos().y() / m_Height );
         myElement->setWallPosition2( elementPosition );
-		myElement->setCoefficientPos2(coefficient);
+        myElement->setCoefficientPos2( coefficient );
         //coefficient
 
     }

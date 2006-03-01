@@ -22,12 +22,23 @@
 #include "bb_dlgwalleditpreview.h"
 #include "bb_transformer.h"
 
+/**
+* Standart Konstruktor
+* @param BB_Wall * Zeiger auf ein Wand zu dem dieser Dialog geh&ouml;rt
+* @param BB_DocComponent * Zeiger auf Etage
+*/
 BB_DlgWallEditPreview::BB_DlgWallEditPreview( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent , Qt::WFlags f )
         : QLabel( parent, f )
 {
     initilize( wall, docComponent );
 }
 
+/**
+* Rutine zum initiliasieren aller wichtigen einstellungen
+* es ist eine private Funktion und es wird nur im Konstruktor aufgerufen
+* @author Vaceslav Ustinov
+* @date 2005-12-20
+*/
 void BB_DlgWallEditPreview::initilize( BB_Wall * wall, BB_DocComponent * docComponent )
 {
 
@@ -41,7 +52,7 @@ void BB_DlgWallEditPreview::initilize( BB_Wall * wall, BB_DocComponent * docComp
     QPoint p1;
     QPoint p2;
 
-	transformer.setOffset( docComponent->getOffset());
+    transformer.setOffset( docComponent->getOffset() );
     transformer.logicalToScreen( p1, wall->getPos1() ->getPos() );
     transformer.logicalToScreen( p2, wall->getPos2() ->getPos() );
 
@@ -97,6 +108,9 @@ void BB_DlgWallEditPreview::initilize( BB_Wall * wall, BB_DocComponent * docComp
 BB_DlgWallEditPreview::~BB_DlgWallEditPreview()
 {}
 
+/**
+*&Uuml;berladene Funktion. @see QLabel::paintEvent();
+ */
 void BB_DlgWallEditPreview::paintEvent ( QPaintEvent * pe )
 {
     QLabel::paintEvent( pe );

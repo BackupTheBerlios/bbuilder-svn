@@ -23,26 +23,31 @@
 #include <bb_constructionelement.h>
 
 /**
-Implementierung von Fenster
- 
-	@author Vaceslav Ustinov <v.ustinov@web.de>
+Dieses Class dient zum Darstellen von einem Fenster<br>
+@author Vaceslav Ustinov <v.ustinov@web.de>
+@see BB_ConstructionElement
 */
 class BB_Window : public BB_ConstructionElement
 {
     public:
         /**
-        Konstuktor mit Parameter
-        @param C2dVector
+        Standart Konstruktor
+        @param C2dVector v1 Position von obere-linke Ecke
+        @param C2dVector v2 Position von untere-rechte Ecke
+        @author Vaceslav Ustinov
         */
-		BB_Window( C2dVector v1, C2dVector v2);
+        BB_Window( C2dVector v1, C2dVector v2 );
+        /**
+        Dekonstruktor
+        */
         ~BB_Window();
         /**
-        Abgeleitete Funktion zum Zeichnen von einem Fenster
-        @param BB_Transformer
-        @param QPainter von QT
+         * Schreibt das XML-Element des Construktionselementes in den angegeben Stream. 
+         * @param out Stream, in welchen geschrieben werden soll. 
+         * @param depth Einrückung. 
+         * @author Vaceslav Ustinov
         */
-//         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
-		void generateXElement( QTextStream &out, int depth );
+        void generateXElement( QTextStream &out, int depth );
 };
 
 #endif

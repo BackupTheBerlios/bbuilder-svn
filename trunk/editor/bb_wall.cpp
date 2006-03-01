@@ -32,14 +32,21 @@ int compare ( const void * a, const void * b )
     return ( *( int* ) a - *( int* ) b );
 }
 
+
+/**
+Standart Konstruktor mit zwei Punkte als Parametern
+@param BB_Point p1 Position 1
+@param BB_Point p2 Position 2
+@author Vaceslav Ustinov
+*/
 BB_Wall::BB_Wall( BB_Point* p1, BB_Point* p2 ) : BB_Line( p1, p2 )
 {
     m_ShowDirection = true;
 
-//     m_Pen.setColor( Qt::red );
+    //     m_Pen.setColor( Qt::red );
     m_Pen.setWidth( 3 );
 
-//     m_Brush.setColor( Qt::red );
+    //     m_Brush.setColor( Qt::red );
 
     m_PenDirection.setWidth( 1 );
     m_PenDirection.setColor( Qt::red );
@@ -52,24 +59,32 @@ BB_Wall::BB_Wall( BB_Point* p1, BB_Point* p2 ) : BB_Line( p1, p2 )
     // 	setTextureFile(IMG_DIR() + SEPARATOR() +"brick.jpg");
 }
 
-
+/**
+Dekonstruktor
+@author Vaceslav Ustinov
+*/
 BB_Wall::~BB_Wall()
 {}
 
 
 
-/*!
-    \fn BB_Wall::getClassName()
- */
+/**
+Gibt die Name von Klasse zurück
+@return QString Name
+@author Vaceslav Ustinov
+*/
 const QString BB_Wall::getClassName()
 {
     return QString( "BB_Wall" );
 }
 
 
-/*!
-    \fn BB_Wall::generateXElement(QTextStream &out, int depth)
- */
+/**
+ * Schreibt das XML-Element von der Wand in den angegeben Stream. 
+ * @param out Stream, in welchen geschrieben werden soll. 
+ * @param depth Einrückung. 
+ * @author Vaceslav Ustinov
+*/
 void BB_Wall::generateXElement( QTextStream &out, int depth )
 {
     out << BB::indent( depth ) << "<bb_wall id=\"" << getObjectNr()
@@ -108,6 +123,12 @@ void BB_Wall::generateXElement( QTextStream &out, int depth )
     out << BB::indent( depth ) << "</bb_wall>\n";
 }
 
+/**
+Funktion zum Zeichnen.
+@param BB_Transformer Transformation-Tool, damit es korrekt gezeichnet wird
+@param QPainter Werkzeug zum Zeichnen @see QT::QPainter
+@author Vaceslav Ustinov
+*/
 void BB_Wall::show( BB_Transformer& transformer, QPainter& painter ) const
 {
     //     BB_DrawObject::show(transformer, painter);
@@ -147,19 +168,34 @@ void BB_Wall::show( BB_Transformer& transformer, QPainter& painter ) const
 }
 
 
-
+/**
+Funktion startet ein Dialog zum Editieren von Wand-Eigenschften
+@param BB_DocComponent Link auf eine Etage
+@author Vaceslav Ustinov
+*/
 void BB_Wall::editDlg( BB_DocComponent * docComponent )
 {
     BB_DlgWallEdit EditDlg( this, docComponent, m_Hight );
     EditDlg.exec();
 }
 
-
+/**
+Gibt den Vector mit Objekten, die zu dieser Wand gehoeren, zurück.
+z.B. Fenster und Türen
+@return QVector< BB_DrawObject * >* Vector mit BB_DrawObject ´s
+@author Vaceslav Ustinov
+*/
 QVector< BB_DrawObject * >* BB_Wall::getObjects() const
 {
     return m_Objects;
 }
 
+/**
+Gibt den Vector mit Positions-Punkten von Objekten, die zu dieser Wand gehoeren, zurück.
+z.B. Position von Fenster und Position von Tür
+@return QVector< BB_DrawObject * >* Vector mit BB_DrawObject ´s
+@author Vaceslav Ustinov
+*/
 QVector< BB_DrawObject * >* BB_Wall::getPoints() const
 {
     BB_Rect * tmpObject;
@@ -176,7 +212,12 @@ QVector< BB_DrawObject * >* BB_Wall::getPoints() const
     return vectorMitpoints;
 }
 
-
+/**
+Setzt ein Vector mit Objekten fest.
+Die Objekte sin BB_Window oder BB_Door
+@param QVector< BB_DrawObject * > * Zeiger auf ein Vector mit Objekten
+@author Vaceslav Ustinov
+*/
 void BB_Wall::setObjects( QVector< BB_DrawObject * >* Value )
 {
     m_Objects = Value;
@@ -203,7 +244,8 @@ void BB_Wall::showDirection( BB_Transformer& transformer, QPainter& painter, QPo
 
 
 /**
- * Berechnet die 'Richtung' der Wand
+ * Berechnet die Mitte der Linie und speichert diese im m_Middle Vektor.
+ * @author Alex Letkemann
  */
 void BB_Wall::calculateDirection()
 {
@@ -216,20 +258,21 @@ void BB_Wall::calculateDirection()
 }
 
 
-/*!
-    \fn BB_Line::moveEvent()
- */
+/**
+Ein Erreignis, das aufgerufen wird, wenn das Objekt durch abhängige Objekte bewegt wird.
+@author Vaceslav Ustinov
+*/
 void BB_Wall::moveEvent()
 {
     BB_Line::moveEvent();
     calculateDirection();
-
 }
 
 
-/*!
-    \fn BB_Wall::swap()
- */
+/**
+Ändert die Richtung von der Wand
+@author Vaceslav Ustinov
+*/
 void BB_Wall::swap()
 {
     BB_Point * tmp;
@@ -241,6 +284,13 @@ void BB_Wall::swap()
     calculateDirection();
 }
 
+/**
+Gibt den Vector mit Objekten, die zu dieser Wand gehoeren, zurück.<br>
+Hier gehören auch die Positions-Punkte von einzelnen Objekten dazu<br>
+z.B. Fenster und Türen, Position von Fenster, Position von Tür
+@return QVector< BB_DrawObject * >* Vector mit BB_DrawObject ´s
+@author Vaceslav Ustinov
+*/
 QVector< BB_DrawObject * >* BB_Wall::getObjectsWithPoints() const
 {
     QVector< BB_DrawObject * >* points = getPoints();;
@@ -258,6 +308,11 @@ QVector< BB_DrawObject * >* BB_Wall::getObjectsWithPoints() const
     return objectsWithPoints;
 }
 
+/**
+Diese Funktion öffnet ein kleines Dialog.<br>
+In diesem Dialog kann man dann die Textur fuer die Wand auswählen.
+@author Vaceslav Ustinov
+*/
 void BB_Wall::openTextureDlg()
 {
     BB_DlgOpenTexture dlg;
@@ -266,10 +321,16 @@ void BB_Wall::openTextureDlg()
     setTextureAbsoluteFileName( dlg.getTextureFile() );
 }
 
-
-
-
-
+/**
+ * Erzeugt die Dreiecke für das Dach und den Grund des Gebäudes.<br>
+ * Die Erzeugten Dreiecke werden an den übergebenen Vektor 'triangles' angehängt.
+ * @param triangles Vektor, an den die Dreiecke angehängt werden.
+ * @param vector Positionsektor
+ * @param rotation Rotation der Dreiecke
+ * @param scale Skalierung der Dreiecke
+ * @param height Hier keine Funktion
+ * @author Alex Letkemann
+ */
 void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
     C3dVector v1, v2, v3, v4;
@@ -443,62 +504,62 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 
 
     //Texture laden, es wird nur eine Textur fuer die Ganze Wand erzeugt
-//     if ( !m_TextureFileName.isEmpty() )
-//     {
+    //     if ( !m_TextureFileName.isEmpty() )
+    //     {
 
-        
 
-        QImage img;
-//         qDebug() << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName();
-        if ( (img.load( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
-                img.height() != 0 &&
-			  img.width() != 0 ) ||
-			  img.load( IMG_DIR() + SEPARATOR() + "building.png" )) 
-        {
-			C3dVector tV1, tV2, tV3, tV4;
-			
 
-            double x, y, l, h, factor;
-            factor = 10;
+    QImage img;
+    //         qDebug() << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName();
+    if ( ( img.load( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
+           img.height() != 0 &&
+           img.width() != 0 ) ||
+         img.load( IMG_DIR() + SEPARATOR() + "building.png" ) )
+    {
+        C3dVector tV1, tV2, tV3, tV4;
 
-            x = img.width();
-            y = img.height();
-            l = getLength() / factor * scale;
-            h = height / factor;
 
-            tV1.setX( 0.0 );
-            tV1.setY( y / h );
-            tV1.setZ( 0.0 );
+        double x, y, l, h, factor;
+        factor = 10;
 
-            tV2.setX( x / l );
-            tV2.setY( y / h );
-            tV2.setZ( 0.0 );
+        x = img.width();
+        y = img.height();
+        l = getLength() / factor * scale;
+        h = height / factor;
 
-            tV3.setX( x / l );
-            tV3.setY( 1.0 );
-            tV3.setZ( 0.0 );
+        tV1.setX( 0.0 );
+        tV1.setY( y / h );
+        tV1.setZ( 0.0 );
 
-            tV4.setX( 0.0 );
-            tV4.setY( 1.0 );
-            tV4.setZ( 0.0 );
+        tV2.setX( x / l );
+        tV2.setY( y / h );
+        tV2.setZ( 0.0 );
 
-            t1.setVTex0( tV4 );
-            t1.setVTex1( tV3 );
-            t1.setVTex2( tV2 );
+        tV3.setX( x / l );
+        tV3.setY( 1.0 );
+        tV3.setZ( 0.0 );
 
-            t2.setVTex0( tV2 );
-            t2.setVTex1( tV1 );
-            t2.setVTex2( tV4 );
+        tV4.setX( 0.0 );
+        tV4.setY( 1.0 );
+        tV4.setZ( 0.0 );
 
-            t1.createTexture( img );
-            t2.createTexture( img );
-        }
-        else
-        {
-            qDebug() << "Textur " << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() + " konnte nicht geladen werden." << endl;
-        }
+        t1.setVTex0( tV4 );
+        t1.setVTex1( tV3 );
+        t1.setVTex2( tV2 );
 
-//     }
+        t2.setVTex0( tV2 );
+        t2.setVTex1( tV1 );
+        t2.setVTex2( tV4 );
+
+        t1.createTexture( img );
+        t2.createTexture( img );
+    }
+    else
+    {
+        qDebug() << "Textur " << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() + " konnte nicht geladen werden." << endl;
+    }
+
+    //     }
     //Dreiecke fuer Wand einfuegen
     triangles.append( t1 );
     triangles.append( t2 );
@@ -560,17 +621,17 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
         tr2.setCollision( false );
         // 		tr2.setVisible( true );
 
-//         tr1.setCollision( true );
-//         tr2.setCollision( true );
+        //         tr1.setCollision( true );
+        //         tr2.setCollision( true );
 
 
         if ( !myElement->getTextureFileName().isEmpty() )
         {
             QImage img;
-// 			qDebug()  << PRO_TEXTURES_DIR() + SEPARATOR() + myElement->getTextureFileName();
-            if ( (img.load( PRO_TEXTURES_DIR() + SEPARATOR() + myElement->getTextureFileName() ) &&
-                    img.height() != 0 &&
-				  img.width() != 0 ))
+            // 			qDebug()  << PRO_TEXTURES_DIR() + SEPARATOR() + myElement->getTextureFileName();
+            if ( ( img.load( PRO_TEXTURES_DIR() + SEPARATOR() + myElement->getTextureFileName() ) &&
+                   img.height() != 0 &&
+                   img.width() != 0 ) )
             {
                 tr1.createTexture( img );
                 tr2.createTexture( img );
@@ -583,6 +644,12 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 
 }
 
+/**
+Gibt die erste im Vector stehende Tür zurück<br>
+Falls es uberhaupt keine Türen gibts, wird ein NULL-Pointer zurückgegeben,
+@return BB_Door
+@author Vaceslav Ustinov
+*/
 BB_Door * BB_Wall::hastDoor()
 {
     for ( int i = 0;i < m_Objects->count() ;i++ )

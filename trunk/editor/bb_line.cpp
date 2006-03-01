@@ -19,7 +19,12 @@
 
 using namespace std;
 
-
+/**
+Standart Konstruktor mit zwei Punkte als Parametern
+@param BB_Point p1 Position 1
+@param BB_Point p2 Position 2
+@author Vaceslav Ustinov
+*/
 BB_Line::BB_Line( BB_Point *p1, BB_Point *p2 )
 {
     // Edit: Alex Letkemann
@@ -37,21 +42,29 @@ BB_Line::BB_Line( BB_Point *p1, BB_Point *p2 )
     setPos2( p2 );
 
     // Sonstige Einstellungen
-//     m_Pen.setColor( Qt::red );
-//     m_PenSelected.setColor( Qt::blue );
+    //     m_Pen.setColor( Qt::red );
+    //     m_PenSelected.setColor( Qt::blue );
     m_hitRange = 3;
 
 
 
 }
 
-
+/**
+Dekonstruktor
+@author Vaceslav Ustinov
+*/
 BB_Line::~BB_Line()
 {
     m_Pos1->removeLinkedObject( this );
     m_Pos2->removeLinkedObject( this );
 }
 
+/**
+Funktion uberprüft ob der Punkt "hit" auf der Linie liegt
+@param C2dVector Klick-Position
+@author Vaceslav Ustinov
+*/
 bool BB_Line::isHit( const C2dVector& hit )
 {
     //Richtungsvektor von Pos1 zu Pos2
@@ -86,6 +99,12 @@ bool BB_Line::isHit( const C2dVector& hit )
     return false;
 }
 
+/**
+Funktion zum Zeichnen.
+@param BB_Transformer Transformation-Tool, damit es korrekt gezeichnet wird
+@param QPainter Werkzeug zum Zeichnen @see QT::QPainter
+@author Vaceslav Ustinov
+*/
 void BB_Line::show( BB_Transformer& transformer, QPainter& painter ) const
 {
     //     BB_DrawObject::show(transformer, painter);
@@ -110,13 +129,21 @@ void BB_Line::show( BB_Transformer& transformer, QPainter& painter ) const
 
 
 
-
+/**
+Gibt Pointer von Position 1 zurück
+@author Vaceslav Ustinov
+@return BB_Point *
+*/
 BB_Point* BB_Line::getPos1() const
 {
     return m_Pos1;
 }
 
-
+/**
+Setzt Pointer "Value" auf Position 1
+@author Vacelav Ustinov
+@param BB_Point
+*/
 bool BB_Line::setPos1( BB_Point* Value )
 {
     if ( Value != NULL && Value != m_Pos2 )
@@ -136,13 +163,21 @@ bool BB_Line::setPos1( BB_Point* Value )
     return false;
 }
 
-
+/**
+Gibt Pointer Position 2 zurück
+@author Vaceslav Ustinov
+@return BB_Point *.
+*/
 BB_Point* BB_Line::getPos2() const
 {
     return m_Pos2;
 }
 
-
+/**
+Setzt Pointer "Value" auf Position 2
+@author Vacelav Ustinov
+@param BB_Point
+*/
 bool BB_Line::setPos2( BB_Point* Value )
 {
     if ( Value != NULL && Value != m_Pos1 )
@@ -165,28 +200,21 @@ bool BB_Line::setPos2( BB_Point* Value )
 }
 
 
-/*!
-    \fn BB_Line::delete(BB_Point * point)
- */ 
-// void BB_Line::remove( BB_Point * point )
-// {
-//
-//     cout << "void BB_Line::remove( " << point << " )" << endl;
-//     if ( m_Pos1 == point )
-//         m_Pos2->deleteLinkedObject( this );
-//     else
-//         m_Pos1->deleteLinkedObject( this );
-// }
-
-
-/*!
-    \fn BB_Line::getClassName()
- */
+/**
+Gibt die Name von Klasse zurück
+@return QString Name
+@author Vaceslav Ustinov
+*/
 const QString BB_Line::getClassName()
 {
     return QString( "BB_Line" );
 }
 
+/**
+Funktion uberprüft ob die Linie in angegebenen Rechteck "rect" liegt
+@param QRectF Ausgewählte Rechteck
+@author Vaceslav Ustinov
+*/
 bool BB_Line::isHit( const QRectF& rect )
 {
     //	EDIT: Alex Letkemann
@@ -206,12 +234,20 @@ bool BB_Line::isHit( const QRectF& rect )
     return m_Pos1->isHit( rect ) && m_Pos2->isHit( rect );
 }
 
+/**
+Gibt die Länge von der Linie zurück
+*/
 double BB_Line::getLength()
 {
     C2dVector tmp( ( m_Pos2->getX() - m_Pos1->getX() ), ( m_Pos2->getY() - m_Pos1->getY() ) );
     return tmp.getLength();
 }
 
+/**
+* Gibt den Winkel zu x-Achse
+* @author Vaceslav Ustinov
+* @return double Winkel
+*/
 double BB_Line::getWinkel() const
 {
     return ( m_Pos2->getPos() - m_Pos1->getPos() ).getWinkel();
@@ -219,8 +255,9 @@ double BB_Line::getWinkel() const
 
 
 /**
- *  \fn BB_DrawObject::moveEvent()
- */
+Ein Erreignis, das aufgerufen wird, wenn das Objekt durch abhängige Objekte bewegt wird.
+@author Vaceslav Ustinov
+*/
 void BB_Line::moveEvent()
 {
     calculateMiddle();
@@ -229,6 +266,7 @@ void BB_Line::moveEvent()
 
 /**
  * Gibt die Mitte der Linie zurück
+ * @return C2dVector Position von der Linien-Mitte
  * @author Alex Letkemann
  */
 const C2dVector& BB_Line::getMiddle()

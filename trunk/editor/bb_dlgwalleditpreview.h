@@ -29,15 +29,25 @@
 	@author Vaceslav Ustinov <v.ustinov@web.de>
 	@date 2005-12-19
 */
+
+/**
+Preview Widget in BB_DlgWallEdit.<br>
+BB_DlgWallEditPreview ist von QLabel abgeleitet.<br>
+Dieses Widget dient zum Anzeigen eines Abschnites von der Wand.
+@author Vaceslav Ustinov
+*/
 class BB_DlgWallEditPreview : public QLabel
 {
     public:
         /**
         * Standart Konstruktor
         * @param BB_Wall * Zeiger auf ein Wand zu dem dieser Dialog geh&ouml;rt
-        * @param BB_DocComponent * Zeiger auf DocComponent (bzw  @link BB_DocComponent @endlink )
+        * @param BB_DocComponent * Zeiger auf Etage
         */
         BB_DlgWallEditPreview( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent = 0, Qt::WFlags f = 0 );
+        /**
+        Standart Dekonstruktor.
+        */
         ~BB_DlgWallEditPreview();
     protected:
         /**
@@ -52,6 +62,9 @@ class BB_DlgWallEditPreview : public QLabel
          */
         void paintEvent ( QPaintEvent * pe );
     private:
+        /**
+        Grösse vom Ausschnitt
+        */
         QRect m_rect;
 
 };

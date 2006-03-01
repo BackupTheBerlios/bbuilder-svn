@@ -25,77 +25,45 @@
 
 using namespace std;
 
-BB_Window::BB_Window( C2dVector v1, C2dVector v2)
-        : BB_ConstructionElement(v1, v2)
-{;
-}
+/**
+Standart Konstruktor
+@param C2dVector v1 Position von obere-linke Ecke
+@param C2dVector v2 Position von untere-rechte Ecke
+@author Vaceslav Ustinov
+*/
+BB_Window::BB_Window( C2dVector v1, C2dVector v2 )
+        : BB_ConstructionElement( v1, v2 )
+{}
 
-
+/**
+Dekonstruktor
+*/
 BB_Window::~BB_Window()
 {}
 
-// void BB_Window::show( BB_Transformer& transformer, QPainter& painter ) const
-// {
-//     if ( &transformer != NULL && &painter != NULL && m_Pos1 != NULL && m_Pos2 != NULL )
-//     {
-//         painter.setPen( m_Pen );
-//         painter.setBrush( m_Brush );
-// 
-//         QPoint dest1;
-//         QPoint dest2;
-// 
-//         transformer.logicalToScreen( dest1, m_Pos1->getPos() );
-//         transformer.logicalToScreen( dest2, m_Pos2->getPos() );
-// 
-//         QRect rect( dest1.x(),
-//                     dest1.y(),
-//                     ( dest2.x() - dest1.x() ),
-//                     ( dest2.y() - dest1.y() ) );
-//         rect = rect.normalized();
-//         painter.drawRect( rect );
-// 
-//         painter.drawImage( rect, m_Image );
-// 
-//         if ( m_Selected )
-//         {
-// 	    double r1 = m_Pos1->getRadius();
-// 	    double r2 = m_Pos2->getRadius();
-// 		m_Pos1->setRadius(7.0);
-// 		m_Pos2->setRadius(7.0);
-//             m_Pos1->show( transformer, painter );
-//             m_Pos2->show( transformer, painter );
-// 		m_Pos1->setRadius(r1);
-// 		m_Pos2->setRadius(r2);
-//         }
-//     }
-// }
-
-// bool BB_Window::isHit( QRect rect )
-// {
-//     if ( rect.x() > m_Pos1->getX() && rect.y() > m_Pos2->getY() )
-//     {
-// 		qDebug("BB_Window::isHit = true");
-//         return true;
-//     }
-//     return false;
-// }
-
+~BB_Window();
+/**
+ * Schreibt das XML-Element des Construktionselementes in den angegeben Stream. 
+ * @param out Stream, in welchen geschrieben werden soll. 
+ * @param depth Einrückung. 
+ * @author Vaceslav Ustinov
+*/
 void BB_Window::generateXElement( QTextStream &out, int depth )
 {
     QFileInfo myFile( getTextureFileName() );
     out << BB::indent( depth + 1 ) << "<bb_window id=\"" << getObjectNr() << "\""
-	<< " x1=\"" << getPos1() ->getX()
-	<< "\" y1=\"" << getPos1() ->getY()
-	<< "\" px1=\"" << (int)getWallPosition1().x()
-	<< "\" py1=\"" << (int)getWallPosition1().y()
-	<< "\" cx1=\"" << getCoefficientPos1().x()
-	<< "\" cy1=\"" << getCoefficientPos1().y()
-	<< "\" x2=\"" << getPos2() ->getX()
-	<< "\" y2=\"" << getPos2() ->getY()
-	<< "\" px2=\"" << (int)getWallPosition2().x()
-	<< "\" py2=\"" << (int)getWallPosition2().y()
-	<< "\" cx2=\"" << getCoefficientPos2().x()
-	<< "\" cy2=\"" << getCoefficientPos2().y() << "\">\n"
+    << " x1=\"" << getPos1() ->getX()
+    << "\" y1=\"" << getPos1() ->getY()
+    << "\" px1=\"" << ( int ) getWallPosition1().x()
+    << "\" py1=\"" << ( int ) getWallPosition1().y()
+    << "\" cx1=\"" << getCoefficientPos1().x()
+    << "\" cy1=\"" << getCoefficientPos1().y()
+    << "\" x2=\"" << getPos2() ->getX()
+    << "\" y2=\"" << getPos2() ->getY()
+    << "\" px2=\"" << ( int ) getWallPosition2().x()
+    << "\" py2=\"" << ( int ) getWallPosition2().y()
+    << "\" cx2=\"" << getCoefficientPos2().x()
+    << "\" cy2=\"" << getCoefficientPos2().y() << "\">\n"
     << BB::indent( depth + 2 ) << "<texture file=\"" << myFile.fileName() << "\"/>\n"
     << BB::indent( depth + 1 ) << "</bb_window>\n";
 }
