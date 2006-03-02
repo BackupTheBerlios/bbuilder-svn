@@ -37,8 +37,6 @@ BB_DrawObject::BB_DrawObject( QString name )
 	m_BrushSelected.setStyle( Qt::SolidPattern );
 
     m_Selected = false;
-	
-// 	m_GlObject = NULL;
 }
 
 
@@ -55,7 +53,7 @@ BB_DrawObject::~BB_DrawObject()
  */
 void BB_DrawObject::moveBy( C2dVector pMove )
 {
-    /// @todo implement me
+	// Hier keine Implementierung
 }
 
 

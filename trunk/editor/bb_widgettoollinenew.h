@@ -43,8 +43,7 @@ class BB_WidgetToolLineNew : public BB_AbstractToolWidget
     public:
 		
 		/**
-	     * Aktiviert oder Deaktiviert das Fenster.<br />
-	     * @param value True: Aktiviert, False: Deaktiviert
+	     * Aktualisiert das Fenster
 	     * @author Alex Letkemann
 		 */
         virtual void updateWidget();

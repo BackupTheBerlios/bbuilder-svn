@@ -22,33 +22,69 @@
 #include "bb_abstracttool.h"
 
 /**
- * 
+ * Tab-Fenster, in dem das Gelände bearbeitet wird.
+ * Links befinden sich die Werkzeuge und der Button für das Eingenschafts-Dialog des Geländes.
+ * In der Mitte ist die Arbeitsfläche und rechts werden die Eigenschaftsfenter der Werkzeuge angezeigt.
  * @author Alex Letkemann
  */
 class BB_TabTerrain : public BB_Tab
 {
 	Q_OBJECT
 public:
+	/**
+	 * Konstruktor.
+	 * Erstellt ein neues Gelände-Tab.
+	 * @param doc Dokument, welches die Daten enthält.
+	 * @param parent Das Parent-Fenster
+	 * @param f QtWindowFlags
+	 * @author Alex Letkemann
+	 */
     BB_TabTerrain(BB_Doc* doc, QWidget* parent = 0, Qt::WFlags f = 0);
 
+	/**
+	 * Destruktor
+	 */
     ~BB_TabTerrain();
+	
+	
+	/**
+	 * Aktualisiert die Arbeitfläche
+	 * @author Alex Letkemann
+	 */
 	virtual void updateWidget();
 	
 protected:
+	
+	/* Werkzeuge */
 	BB_AbstractTool* m_ToolZoom;
 	BB_AbstractTool* m_ToolTerrainPointNew;
 	BB_AbstractTool* m_ToolMove;
 	BB_AbstractTool* m_ToolTriangleNew;
 	BB_AbstractTool* m_ToolScale;
-    BB_Terrain* m_Terrain;
+    
+	/* Gelände */
+	BB_Terrain* m_Terrain;
 
 private:
+    /**
+     * Initialisiert die Werkzeuge
+	 * @author Alex Letkemann
+     */
     void initTools();
 
 protected:
+    /**
+     * Speichert das Gelände
+     * @return Erfolg des Speicherns
+     */
     virtual bool saveCurrent();
     
 private slots:
+    
+	/**
+     * Ruft ein Dialog auf, mit die Eigenschaften des Geländes geändert werden können.
+	 * @author Alex Letkemann
+     */
     void slotTerrainEdit();
 };
 

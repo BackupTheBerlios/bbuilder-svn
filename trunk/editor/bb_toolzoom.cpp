@@ -18,6 +18,12 @@
 
 using namespace std;
 
+/**
+ * Konstruktor. Erzeugt ein neues Zoomwerkzeug für die angegebene Arbeitsfläche. 
+ * @param area Arbeitsfläche, mit der geareitet Wird.
+ * @param paret Parent-Fenster
+ * @author Alex Letkemann
+ */
 BB_ToolZoom::BB_ToolZoom( BB_WorkArea* area, QWidget* parent )
         : BB_AbstractTool( parent )
 {
@@ -31,11 +37,17 @@ BB_ToolZoom::BB_ToolZoom( BB_WorkArea* area, QWidget* parent )
     m_Icon = QIcon ( IMG_DIR() + SEPARATOR() + "toolZoom.png" );
 }
 
-
+/**
+ * Destruktor
+ */
 BB_ToolZoom::~BB_ToolZoom()
 {}
 
-
+/**
+ * Mit der linken Maustaste wird die Arbeitsfläche um 25% vergrößert.
+ * Die mittlere Maustaste setzt die Arbeitsfläche zurück auf die Originalgröße.
+ * Mir der rechten Maustaste wird die Arbeitsfläche um 25% verkleinert.
+ */
 void BB_ToolZoom::click( QMouseEvent* me )
 {
     if ( me->button() == Qt::LeftButton )
@@ -55,8 +67,10 @@ void BB_ToolZoom::click( QMouseEvent* me )
 }
 
 
-/*!
-    \fn BB_ToolZoom::setDocComponent( BB_DocComponent* component )
+/**
+ * @fn BB_AbstractTool::( BB_DocComponent* component )
+ * Setzt zusätzlich den Zoomfaktor der Arbeitsfläche.
+ * @author Alex Letkemann
  */
 void BB_ToolZoom::setDocComponent( BB_DocComponent* component )
 {
@@ -69,8 +83,8 @@ void BB_ToolZoom::setDocComponent( BB_DocComponent* component )
 }
 
 
-/*!
-    \fn BB_ToolZoom::getToolWidget()
+/**
+ * @fn BB_AbstractTool::getToolWidget() 
  */
 BB_AbstractToolWidget* BB_ToolZoom::getToolWidget()
 {

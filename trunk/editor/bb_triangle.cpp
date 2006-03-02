@@ -198,18 +198,21 @@ void BB_Triangle::generateXElement( QTextStream &out, int depth )
 
 void BB_Triangle::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
-    
+	/* Hier keine Implementation */    
 	
 }
 
 void BB_Triangle::normalize(){
+	
 	//Positionsvectoren
 	C3dVector p1(m_Pos1->getX(), m_Pos1->getY(), 0.0);
 	C3dVector p2(m_Pos2->getX(), m_Pos2->getY(), 0.0);
 	C3dVector p3(m_Pos3->getX(), m_Pos3->getY(), 0.0);
+	
 	//Richtungsvektoren
 	C3dVector vr1 =p1 - p2;
 	C3dVector vr2 =p1 - p3;
+	
 	//NormalVektor
 	C3dVector n= vr1.getNormalVector( vr2);
 	if (n.z() > 0){
@@ -218,21 +221,7 @@ void BB_Triangle::normalize(){
 		m_Pos2 = m_Pos3;
 		m_Pos3 = tmp;
 		
-// 		p2.setX( m_Pos2->getX());
-// 		p2.setY( m_Pos2->getY());
-// 		p3.setX( m_Pos3->getX());
-// 		p3.setY( m_Pos3->getY());
-// 		vr1 =p1 - p2;
-// 		vr2 =p1 - p3;
-// 		cout << "vr1: x->"<< vr1.x() <<"y->" <<vr1.y() <<"z->"<<vr1.z()<<endl;
-// 		cout << "vr2: x->" <<vr2.x() <<"y->" <<vr2.y() <<"z->"<<vr2.z()<<endl;
-// 		n= vr1.getNormalVector( vr2);
-// 		
-// 		if (n.z()<0){
-// 			qDebug("Punkten-Vertausch missgelungen");
-// 		}else{
-// 			qDebug("Punkten-Vertausch erfolgreich");
-// 		}
+
 	}
 }
 void BB_Triangle::moveEvent(){

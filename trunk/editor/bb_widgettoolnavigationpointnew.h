@@ -54,8 +54,7 @@ class BB_WidgetToolNavigationPointNew : public BB_AbstractToolWidget
         virtual void setWidgetEnabled( bool value );
 		
 		/**
-		 * Aktiviert oder Deaktiviert das Fenster.<br />
-		 * @param value True: Aktiviert, False: Deaktiviert
+		 * Aktualisiert das Fenster
 		 * @author Alex Letkemann
 		 */
         virtual void updateWidget();

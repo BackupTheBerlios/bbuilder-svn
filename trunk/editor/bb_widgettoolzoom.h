@@ -16,24 +16,37 @@
 #include <ui_toolWidgetZoom.h>
 
 /**
-Fenster des Zoom-Werkzeuges
- 
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Fenster des Zoom-Werkzeuges.
+ * Im Fenter wird der aktuelle Zoomfaktor angezeigt.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_WidgetToolZoom : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
 		
 		/**
-		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
+		 * Konstruktor. Erzeugt das Fenster für das Zoom-Werkzeug.
+		 * @param parentTool Zoom-Werkzeug
+		 * @param parent Parent-Fenster, wo dieses Fenster plaziert wird.
+		 * @author Alex Letkemann
 		 */
 		BB_WidgetToolZoom( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
+		/**
+		 * Destruktor
+		 */
         ~BB_WidgetToolZoom();
+		
+        /**
+         * Setzt den Zoomfaktor im Fenster
+         * @param value Zoomfaktor der Arbeistfläche.
+		 * @author Alex Letkemann
+         */
         virtual void setZoomFaktor( double value );
 
     protected:
+		/* Form */
         Ui::WidgetToolZoom m_Ui;
 };
 

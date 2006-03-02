@@ -21,20 +21,53 @@
 #include <bb_widgettoolzoom.h>
 
 /**
-@author Alex Letkemann
-*/
+ * Vergrößerungs-Werkzeug.
+ * Das Werkzeug zoomt das Hintergrundbild der Arbeitsfläche und Scalliert die Positionen aller Objekte auf der Arbeitsfläche.
+ * Mit der linken Maustaste wird die Arbeitsfläche um 25% vergrößert.
+ * Die mittlere Maustaste setzt die Arbeitsfläche zurück auf die Originalgröße.
+ * Mir der rechten Maustaste wird die Arbeitsfläche um 25% verkleinert.
+ * @author Alex Letkemann
+ */
 class BB_ToolZoom : public BB_AbstractTool
 {
 public:
+	
+	
+	/**
+	 * Konstruktor. Erzeugt ein neues Zoomwerkzeug für die angegebene Arbeitsfläche. 
+     * @param area Arbeitsfläche, mit der geareitet Wird.
+	 * @param paret Parent-Fenster
+	 * @author Alex Letkemann
+	 */
 	BB_ToolZoom(BB_WorkArea* area, QWidget* paret);
 
+	/**
+	 * Destruktor
+	 */
     ~BB_ToolZoom();
 
+	/**
+	 * Mit der linken Maustaste wird die Arbeitsfläche um 25% vergrößert.
+	 * Die mittlere Maustaste setzt die Arbeitsfläche zurück auf die Originalgröße.
+	 * Mir der rechten Maustaste wird die Arbeitsfläche um 25% verkleinert.
+	 */
     virtual void click(QMouseEvent* me);
-    virtual void setDocComponent( BB_DocComponent* component );
-    virtual BB_AbstractToolWidget* getToolWidget();
+    
+	/**
+	 * @fn BB_AbstractTool::( BB_DocComponent* component )
+	 * Setzt zusätzlich den Zoomfaktor der Arbeitsfläche.
+	 * @author Alex Letkemann
+	 */
+	virtual void setDocComponent( BB_DocComponent* component );
+    
+	/**
+	 * @fn BB_AbstractTool::getToolWidget() 
+	 */
+	virtual BB_AbstractToolWidget* getToolWidget();
 
 protected:
+	
+	/* Arbeitsfläche */
     BB_WorkArea* m_WorkArea;
 };
 

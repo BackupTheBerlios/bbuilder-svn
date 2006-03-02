@@ -78,6 +78,11 @@ public:
 	BB_Point* m_Pos3;
 	
 protected:
+	
+	/**
+	 * Virtuelle Funktion für weitere abgeleitete Klassen.
+	 * 
+	 */
 	virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
 };
 

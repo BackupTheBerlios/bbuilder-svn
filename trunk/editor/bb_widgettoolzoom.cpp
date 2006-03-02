@@ -11,13 +11,21 @@
 //
 #include "bb_widgettoolzoom.h"
 
+/**
+ * Konstruktor. Erzeugt das Fenster für das Zoom-Werkzeug.
+ * @param parentTool Zoom-Werkzeug
+ * @param parent Parent-Fenster, wo dieses Fenster plaziert wird.
+ * @author Alex Letkemann
+ */
 BB_WidgetToolZoom::BB_WidgetToolZoom( BB_AbstractTool* parentTool, QWidget* parent )
         : BB_AbstractToolWidget(parentTool, parent)
 {
     m_Ui.setupUi( this );
 }
 
-
+/**
+ * Destruktor
+ */
 BB_WidgetToolZoom::~BB_WidgetToolZoom()
 {}
 
@@ -25,7 +33,9 @@ BB_WidgetToolZoom::~BB_WidgetToolZoom()
 
 
 /**
- * Setzt den Zoomfaktor, der im Label im Fenster angezeigt wird
+ * Setzt den Zoomfaktor im Fenster
+ * @param value Zoomfaktor der Arbeistfläche.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolZoom::setZoomFaktor( double value )
 {

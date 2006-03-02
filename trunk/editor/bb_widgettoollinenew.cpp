@@ -77,8 +77,7 @@ void BB_WidgetToolLineNew::slotDelete()
 }
 
 /**
- * Aktiviert oder Deaktiviert das Fenster.<br />
- * @param value True: Aktiviert, False: Deaktiviert
+ * Aktualisiert das Fenster
  * @author Alex Letkemann
  */
 void BB_WidgetToolLineNew::updateWidget()

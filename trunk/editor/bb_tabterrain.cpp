@@ -19,7 +19,14 @@
 
 #include <QtGui>
 
-
+/**
+ * Konstruktor.
+ * Erstellt ein neues Gelände-Tab.
+ * @param doc Dokument, welches die Daten enthält.
+ * @param parent Das Parent-Fenster
+ * @param f QtWindowFlags
+ * @author Alex Letkemann
+ */
 BB_TabTerrain::BB_TabTerrain( BB_Doc* doc, QWidget* parent, Qt::WFlags f )
         : BB_Tab( doc, parent, f )
 {
@@ -50,13 +57,17 @@ BB_TabTerrain::BB_TabTerrain( BB_Doc* doc, QWidget* parent, Qt::WFlags f )
 }
 
 
+/**
+ * Destruktor
+ */
 BB_TabTerrain::~BB_TabTerrain()
 {}
 
 
 
 /**
- * Initialisiert alle Tools
+ * Initialisiert die Werkzeuge
+ * @author Alex Letkemann
  */
 void BB_TabTerrain::initTools()
 {
@@ -83,7 +94,8 @@ void BB_TabTerrain::initTools()
 
 
 /**
- * Editiert das Gelände
+ * Ruft ein Dialog auf, mit die Eigenschaften des Geländes geändert werden können.
+ * @author Alex Letkemann
  */
 void BB_TabTerrain::slotTerrainEdit()
 {
@@ -100,6 +112,7 @@ void BB_TabTerrain::slotTerrainEdit()
 
 /**
  * Speichert das Gelände
+ * @return Erfolg des Speicherns
  */
 bool BB_TabTerrain::saveCurrent()
 {
@@ -115,7 +128,8 @@ bool BB_TabTerrain::saveCurrent()
 
 
 /**
- *
+ * Aktualisiert die Arbeitfläche
+ * @author Alex Letkemann
  */
 void BB_TabTerrain::updateWidget()
 {
@@ -127,7 +141,7 @@ void BB_TabTerrain::updateWidget()
     }
     else
     {
-        m_Center->setDocComponent( m_Terrain );
+        m_Center->setDocComponent( NULL );
     }
 
 }
