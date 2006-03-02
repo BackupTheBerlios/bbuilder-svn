@@ -4,7 +4,7 @@
 // Description:
 //
 //
-// Author: Alex Letkemann <alex@letkemann.de>, (C) 2006
+// Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -14,7 +14,16 @@
 #include <bb_abstracttool.h>
 #include <bb_toolbuildingpositionnew.h>
 
-BB_WidgetToolBuildingPositionNew::BB_WidgetToolBuildingPositionNew( BB_Doc* doc, BB_AbstractTool* parentTool, QWidget* parent ) : BB_AbstractToolWidget( parentTool, parent )
+
+/**
+ * Konstruktor.<br />
+ * Erstellt ein neues Fenster für das Gebäudepositionierungs-Werkzeug.
+ * @param doc Dockument, welches das Gelände und die Gebäude enthält.
+ * @param parentTool Gebäudepositionierungs-Werkzeug.
+ * @param parent Parent-Fenster, in den das neue Fenster angelegt wird.
+ * @author Alex Letkemann
+ */
+BB_WidgetToolBuildingPositionNew::BB_WidgetToolBuildingPositionNew( BB_Doc* doc, BB_AbstractTool* parentTool, QWidget* parent ) : 						BB_AbstractToolWidget( parentTool, parent )
 {
     if ( doc == NULL )
     {
@@ -41,10 +50,17 @@ BB_WidgetToolBuildingPositionNew::BB_WidgetToolBuildingPositionNew( BB_Doc* doc,
 }
 
 
+/**
+ * Destruktor
+ */
 BB_WidgetToolBuildingPositionNew::~BB_WidgetToolBuildingPositionNew()
 {}
 
 
+/**
+ * Lädt die Default-Werte in das Werkzeugfenster.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolBuildingPositionNew::clearToolWidget()
 {
     m_Ui.lineEdit_Name->clear();
@@ -56,6 +72,11 @@ void BB_WidgetToolBuildingPositionNew::clearToolWidget()
     m_Ui.listWidget_Buildings->clear();
 }
 
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolBuildingPositionNew::setWidgetEnabled( bool value )
 {
     m_Ui.lineEdit_Name->setEnabled( value );
@@ -67,6 +88,10 @@ void BB_WidgetToolBuildingPositionNew::setWidgetEnabled( bool value )
     m_Ui.pushButton_Delete->setEnabled( value );
 }
 
+/**
+ * Aktualisiert das Eigenschaftsfenster
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolBuildingPositionNew::updateWidget()
 {
     m_Ui.listWidget_Buildings->clear();
@@ -103,17 +128,32 @@ void BB_WidgetToolBuildingPositionNew::updateWidget()
     }
 }
 
+/**
+ * Löscht die Selektion
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolBuildingPositionNew::slotDelete()
 {
     m_ParentTool->deleteSelection();
 }
 
+
+/**
+ * Wird aufgerufen, wenn die Beschreibung geändert wird.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolBuildingPositionNew::slotDescFinished()
 {
     m_BPos = ( ( BB_BuildingPosition* ) ( m_Selection->at( 0 ) ) );
     m_BPos->setDescription( m_Ui.textEdit_Desc->toPlainText() );
 }
 
+
+/**
+ * Wird aufgerufen, wenn die Höhenposition des Gebäudes geändert wurde.
+ * Änder die Höhenposition des Gebäudes.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolBuildingPositionNew::slotHeightFinished()
 {
     m_BPos = ( ( BB_BuildingPosition* ) ( m_Selection->at( 0 ) ) );
@@ -129,12 +169,23 @@ void BB_WidgetToolBuildingPositionNew::slotHeightFinished()
     }
 }
 
+/**
+ * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+ * Speichert den neuen Namen im Objekt.
+ * @author Alex Letkemann 
+ */
 void BB_WidgetToolBuildingPositionNew::slotNameFinished()
 {
     m_BPos = ( ( BB_BuildingPosition* ) ( m_Selection->at( 0 ) ) );
     m_BPos->setName( m_Ui.lineEdit_Name->text() );
 }
 
+
+/**
+ * Wird aufgerufen, wenn die Position des Gebäudes im Fenster geändert wird.
+ * Ändert die Position des Gebäudes.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolBuildingPositionNew::slotPosFinished()
 {
     m_BPos = ( ( BB_BuildingPosition* ) ( m_Selection->at( 0 ) ) );
@@ -161,8 +212,10 @@ void BB_WidgetToolBuildingPositionNew::slotPosFinished()
 
 
 
-/*!
-    \fn BB_WidgetToolBuildingPositionNew::slotRotationFinished()
+/**
+ * Wird aufgerufen, wenn die Rotationswinkel des Gebäudes im Fenster geändert wird.
+ * Ändert den Rotationswinkel des Gebäudes.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolBuildingPositionNew::slotRotationChanged( double value )
 {
@@ -174,8 +227,9 @@ void BB_WidgetToolBuildingPositionNew::slotRotationChanged( double value )
 }
 
 
-/*!
-    \fn BB_WidgetToolBuildingPositionNew::slotBuildingChanged( int index )
+/**
+ * Wird aufgerufen, wenn ein Gebäudes zur Plazierung ausgewählt wird.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolBuildingPositionNew::slotBuildingChanged( int index )
 {

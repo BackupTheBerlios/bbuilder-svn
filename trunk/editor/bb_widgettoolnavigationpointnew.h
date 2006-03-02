@@ -17,18 +17,27 @@
 #include <bb_point.h>
 
 /**
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Werkzeugfenster für das Navigations-Knoten Werkzeug.
+ * Im Fenster lassen sich der Name, die Beschreibung und die Position des Navigationsknotens ändern.
+ * Ein ausgewählter Navigationsknoten lässt sich als Indiziert oder als nicht Indiziert markieren oder auch löschen.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_WidgetToolNavigationPointNew : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
 		
-		/**
-		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
-		 */
+		
+        /**
+         * Konstruktor. Erstellt ein neues Werkzeugfenster für das Navigations-Knoten Werkzeug.
+		 * @param parentTool Navigations-Knoten Werkzeug
+         * @param parent Parent-Fenster, in dem diese Fenster positionier wird.
+         */
         BB_WidgetToolNavigationPointNew( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
+        /**
+         * Destruktor
+         */
         ~BB_WidgetToolNavigationPointNew();
 		
         /**
@@ -52,10 +61,39 @@ class BB_WidgetToolNavigationPointNew : public BB_AbstractToolWidget
         virtual void updateWidget();
 
     private slots:
+		
+		/**
+	     * Wird aufgerufen, wenn die Beschreibung geändert wird.
+         * @author Alex Letkemann
+		 */
         void slotDescFinished();
+		
+		/**
+		 * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+		 * Speichert den neuen Namen im Objekt.
+		 * @author Alex Letkemann 
+		 */
         void slotNameFinished();
+		
+        /**
+         * Wird aufgerufen, wenn die Position des Knotens im Fenster geändert wird.
+		 * Ändert die Position des Knotens.
+		 * @author Alex Letkemann
+         */
         void slotPosFinished();
+		
+		
+        /**
+         * Markiert den asugewählten Knoten als Indiziert oder als nicht Indiziert.
+         * @param index True: Indiziert, False: nicht Indiziert.
+		 * @author Alex Letkemann
+         */
         void slotIndexChanged( int index );
+		
+		/**
+		 * Löscht die Selektion
+		 * @author Alex Letkemann
+		 */
         void slotDelete();
 
     protected:

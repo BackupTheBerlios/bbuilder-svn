@@ -14,7 +14,7 @@
 
 
 /**
- * Konstruktor
+ * Konstruktor. Erstellt ein neues Werkzeug zur Markieren von Dächern und Gründen.
  */
 BB_ToolBuildingTriangleNew::BB_ToolBuildingTriangleNew(QWidget* parent): BB_ToolTriangleNew(parent)
 {

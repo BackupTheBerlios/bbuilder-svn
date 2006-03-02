@@ -16,17 +16,28 @@
 #include <ui_toolWidgetWallNew.h>
 
 /**
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Werkzeugfenster für das Wand-Erstellungs-Werkzeug.
+ * Im Fenster lassen sich der Name, die Beschreibung und die 'Richtung' der Wand ändern.
+ * Für eine ausgewählte Wand lässt sich ein weiterer Dialog starten, 
+ * in dem die sichtbare Seite der Wand bearbeitet werden kann.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_WidgetToolWallNew : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
-		/**
-		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
-		 */
+		
+        /**
+		 * Konstruktor. Erstellt ein neues Wand-Erstellungs-Werkzeug.
+		 * @param parentTool Wand-Erstellungs-Werkzeug
+         * @param parent Parent-Fenster, in den dieses Fenster plaziert wird.
+         * @author Alex Letkemann
+         */
         BB_WidgetToolWallNew( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
+		/**
+		 * Destruktor
+		 */
         ~BB_WidgetToolWallNew();
 
 		/**
@@ -44,19 +55,47 @@ class BB_WidgetToolWallNew : public BB_AbstractToolWidget
         virtual void setWidgetEnabled( bool value );
 		
 		/**
-		 * Aktiviert oder Deaktiviert das Fenster.<br />
-		 * @param value True: Aktiviert, False: Deaktiviert
+		 * Aktualisiert das Fenster
 		 * @author Alex Letkemann
 		 */
         virtual void updateWidget();
 
     private slots:
-        void slotDelete();
+		/**
+         * Löscht die Selektion
+         * @author Alex Letkemann
+		 */
+		void slotDelete();
+		
+		/**
+		 * Wird aufgerufen, wenn die Beschreibung geändert wird.
+		 * @author Alex Letkemann
+		 */
         void slotDescFinished();
+		
+		/**
+		 * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+		 * Speichert den neuen Namen im Objekt.
+		 * @author Alex Letkemann 
+		 */
         void slotNameFinished();
-        void slotSwap();
+        
+		/**
+		 * Änder die Richtung der Wand.
+		 * Dadurch wird die sichtbare Seite der Wand ungedreht.
+		 * @author Alex Letkemann
+		 */
+		void slotSwap();
+		
+		
+        /**
+         * Startet ein weiteres Dialog, in dem die sichtbare Seite der Wand bearbeitet werden kann.
+		 * @author Alex Letkemann
+         */
         void slotEdit();
 	protected:
+		
+		/* Form */
         Ui::WidgetToolWallNew m_Ui;
 };
 

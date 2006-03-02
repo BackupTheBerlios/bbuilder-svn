@@ -29,13 +29,9 @@ BB_TabTerrain::BB_TabTerrain( BB_Doc* doc, QWidget* parent, Qt::WFlags f )
         m_Terrain = m_Doc->getTerrain();
 
         m_Center->setDocComponent( m_Terrain );
-        // 		m_Center->setDrawDevice(m_Terrain);
-        // 		m_Center->setMap(m_Terrain);
     }
 
     initTools();
-
-    /***** <Debug> *****/
 
     QGroupBox* box = new QGroupBox();
     box->setFlat( true );
@@ -50,8 +46,6 @@ BB_TabTerrain::BB_TabTerrain( BB_Doc* doc, QWidget* parent, Qt::WFlags f )
     addWidgetLeft( box, 1 );
 
     connect( button, SIGNAL( clicked( bool ) ), this, SLOT( slotTerrainEdit() ) );
-
-    /***** </Debug> *****/
 
 }
 
@@ -86,38 +80,6 @@ void BB_TabTerrain::initTools()
 	toolChanged( initTool );
 }
 
-/* *
- * Verarbeitet die Tools von BB_TabTerrain und übergibt diese weiter an die Arbeitfläche.
- * @param action Aktion des Tools, welches Betätigt wurde.
- */
-// void BB_TabTerrain::toolChanged( QAction* action )
-// {
-// 
-// 	if ( m_ToolMove->getAction() == action )
-//     {
-// 		setTool( m_ToolMove );
-//     }
-// 	else if( m_ToolScale->getAction() == action )
-// 	{
-// 		setTool( m_ToolScale );
-// 	}
-//     else if ( m_ToolZoom->getAction() == action )
-//     {
-// 		setTool( m_ToolZoom );
-//     }
-//     else if ( m_ToolTerrainPointNew->getAction() == action )
-//     {
-// 		setTool( m_ToolTerrainPointNew );
-//     }
-//     else if ( m_ToolTriangleNew->getAction() == action )
-//     {
-// 		setTool( m_ToolTriangleNew );
-//     }
-//     else
-//     {
-//         cout << "Unbekanntes Tool" << endl;
-//     }
-// }
 
 
 /**
@@ -162,14 +124,10 @@ void BB_TabTerrain::updateWidget()
     if ( m_Terrain != NULL )
     {
         m_Center->setDocComponent( m_Terrain );
-        // 		m_Center->setMap(m_Terrain);
-        // 		m_Center->setDrawDevice(m_Terrain);
     }
     else
     {
         m_Center->setDocComponent( m_Terrain );
-        // 		m_Center->setMap(NULL);
-        // 		m_Center->setDrawDevice(NULL);
     }
 
 }

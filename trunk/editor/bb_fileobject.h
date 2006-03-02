@@ -21,8 +21,10 @@
 #include <QXmlDefaultHandler>
 
 /**
-@author Alex Letkemann
-*/
+ * Diese Klasse stellt eine Datei dar. Die hat einen Dateinamen und einen Pfad, wo sie gespeichert wird.
+ * Die Datei kann geladen und gespeichert werden. Zum laden wird ein XML-Handler benötigt, der die Datei interprätiert.
+ * @author Alex Letkemann
+ */
 class BB_FileObject : public BB_Object
 {
 public:

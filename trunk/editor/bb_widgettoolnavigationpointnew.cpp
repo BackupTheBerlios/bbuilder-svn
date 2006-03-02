@@ -13,6 +13,12 @@
 #include "bb_navigationpoint.h"
 #include "bb_abstracttool.h"
 
+
+/**
+ * Konstruktor. Erstellt ein neues Werkzeugfenster für das Navigations-Knoten Werkzeug.
+ * @param parentTool Navigations-Knoten Werkzeug
+ * @param parent Parent-Fenster, in dem diese Fenster positionier wird.
+ */
 BB_WidgetToolNavigationPointNew::BB_WidgetToolNavigationPointNew( BB_AbstractTool* parentTool, QWidget* parent ) : BB_AbstractToolWidget( parentTool, parent )
 {
     m_Ui.setupUi( this );
@@ -26,10 +32,16 @@ BB_WidgetToolNavigationPointNew::BB_WidgetToolNavigationPointNew( BB_AbstractToo
 }
 
 
+/**
+ * Destruktor
+ */
 BB_WidgetToolNavigationPointNew::~BB_WidgetToolNavigationPointNew()
 {}
 
-
+/**
+ * Lädt die Default-Werte in das Werkzeugfenster.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolNavigationPointNew::clearToolWidget()
 {
 
@@ -45,6 +57,11 @@ void BB_WidgetToolNavigationPointNew::clearToolWidget()
 	m_Ui.checkBox_Index->setCheckState( Qt::Unchecked );
 }
 
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolNavigationPointNew::setWidgetEnabled( bool value )
 {
     m_Ui.lineEdit_Name->setEnabled( value );
@@ -55,6 +72,12 @@ void BB_WidgetToolNavigationPointNew::setWidgetEnabled( bool value )
     m_Ui.pushButton_Delete->setEnabled( value );
 }
 
+
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolNavigationPointNew::updateWidget()
 {
 
@@ -93,8 +116,9 @@ void BB_WidgetToolNavigationPointNew::updateWidget()
 
 
 
-/*!
-    \fn BB_WidgetToolNavigationPointNew::slotDescFinished()
+/**
+ * Wird aufgerufen, wenn die Beschreibung geändert wird.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolNavigationPointNew::slotDescFinished()
 {
@@ -107,8 +131,10 @@ void BB_WidgetToolNavigationPointNew::slotDescFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolNavigationPointNew::slotNameFinished()
+/**
+ * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+ * Speichert den neuen Namen im Objekt.
+ * @author Alex Letkemann 
  */
 void BB_WidgetToolNavigationPointNew::slotNameFinished()
 {
@@ -121,8 +147,10 @@ void BB_WidgetToolNavigationPointNew::slotNameFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolNavigationPointNew::slotPosFinished()
+/**
+ * Wird aufgerufen, wenn die Position des Knotens im Fenster geändert wird.
+ * Ändert die Position des Knotens.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolNavigationPointNew::slotPosFinished()
 {
@@ -149,8 +177,10 @@ void BB_WidgetToolNavigationPointNew::slotPosFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolNavigationPointNew::slotIndexChanged( int index )
+/**
+ * Markiert den asugewählten Knoten als Indiziert oder als nicht Indiziert.
+ * @param index True: Indiziert, False: nicht Indiziert.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolNavigationPointNew::slotIndexChanged( int index )
 {
@@ -164,9 +194,10 @@ void BB_WidgetToolNavigationPointNew::slotIndexChanged( int index )
 }
 
 
-/*!
-	\fn BB_WidgetToolNavigationPointNew::slotDelete()
-*/
+/**
+ * Löscht die Selektion
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolNavigationPointNew::slotDelete()
 {
 	m_ParentTool->deleteSelection();

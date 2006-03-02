@@ -13,6 +13,12 @@
 #include <bb_wall.h>
 #include <bb_abstracttool.h>
 
+/**
+ * Konstruktor. Erstellt ein neues Wand-Erstellungs-Werkzeug.
+ * @param parentTool Wand-Erstellungs-Werkzeug
+ * @param parent Parent-Fenster, in den dieses Fenster plaziert wird.
+ * @author Alex Letkemann
+ */
 BB_WidgetToolWallNew::BB_WidgetToolWallNew( BB_AbstractTool* parentTool, QWidget* parent ) : BB_AbstractToolWidget( parentTool, parent )
 {
     m_Ui.setupUi( this );
@@ -32,10 +38,17 @@ BB_WidgetToolWallNew::BB_WidgetToolWallNew( BB_AbstractTool* parentTool, QWidget
 }
 
 
+/**
+ * Destruktor
+ */
 BB_WidgetToolWallNew::~BB_WidgetToolWallNew()
 {}
 
 
+/**
+ * Lädt die Default-Werte in das Werkzeugfenster.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolWallNew::clearToolWidget()
 {
     m_Ui.lineEdit_WallName->clear();
@@ -48,6 +61,12 @@ void BB_WidgetToolWallNew::clearToolWidget()
     m_Ui.label_Pos2->clear();
 }
 
+
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolWallNew::setWidgetEnabled( bool value )
 {
     m_Ui.lineEdit_WallName->setEnabled( value );
@@ -58,6 +77,10 @@ void BB_WidgetToolWallNew::setWidgetEnabled( bool value )
     m_Ui.pushButton_Swap->setEnabled( value );
 }
 
+/**
+ * Aktualisiert das Fenster
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolWallNew::updateWidget()
 {
 	
@@ -97,8 +120,9 @@ void BB_WidgetToolWallNew::updateWidget()
 
 
 
-/*!
-    \fn BB_WidgetToolWallNew::slotDelete()
+/**
+ * Löscht die Selektion
+ * @author Alex Letkemann
  */
 void BB_WidgetToolWallNew::slotDelete()
 {
@@ -106,8 +130,9 @@ void BB_WidgetToolWallNew::slotDelete()
 }
 
 
-/*!
-    \fn BB_WidgetToolWallNew::slotDescFinished()
+/**
+ * Wird aufgerufen, wenn die Beschreibung geändert wird.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolWallNew::slotDescFinished()
 {
@@ -120,8 +145,10 @@ void BB_WidgetToolWallNew::slotDescFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolWallNew::slotNameFinished()
+/**
+ * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+ * Speichert den neuen Namen im Objekt.
+ * @author Alex Letkemann 
  */
 void BB_WidgetToolWallNew::slotNameFinished()
 {
@@ -134,8 +161,10 @@ void BB_WidgetToolWallNew::slotNameFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolWallNew::slotSwap()
+/**
+ * Änder die Richtung der Wand.
+ * Dadurch wird die sichtbare Seite der Wand ungedreht.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolWallNew::slotSwap()
 {
@@ -152,8 +181,9 @@ void BB_WidgetToolWallNew::slotSwap()
 }
 
 
-/*!
-    \fn BB_WidgetToolWallNew::slotEdit()
+/**
+ * Startet ein weiteres Dialog, in dem die sichtbare Seite der Wand bearbeitet werden kann.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolWallNew::slotEdit()
 {

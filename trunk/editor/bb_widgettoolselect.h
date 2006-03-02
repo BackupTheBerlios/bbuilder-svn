@@ -29,10 +29,9 @@ class BB_WidgetToolSelect : public BB_AbstractToolWidget
     public:
 		BB_WidgetToolSelect( BB_ToolMove* parentTool );
         ~BB_WidgetToolSelect();
-		
+
 		/**
-		 * Aktiviert oder Deaktiviert das Fenster.<br />
-		 * @param value True: Aktiviert, False: Deaktiviert
+		 * Aktualisiert das Eigenschaftsfenster
 		 * @author Alex Letkemann
 		 */
         virtual void updateWidget();
@@ -40,7 +39,16 @@ class BB_WidgetToolSelect : public BB_AbstractToolWidget
 
     private slots:
         void slotNameFinished();
+		
+		/**
+		 * Wird aufgerufen, wenn die Beschreibung geändert wird.
+		 * @author Alex Letkemann
+		 */
         void slotDescFinished();
+		/**
+		 * Löscht die Selektion
+		 * @author Alex Letkemann
+		 */
     void slotDeleteSelection();
 
     protected:

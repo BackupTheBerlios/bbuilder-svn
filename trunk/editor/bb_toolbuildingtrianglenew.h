@@ -25,7 +25,7 @@ class BB_ToolBuildingTriangleNew : public BB_ToolTriangleNew
 {
 public:
 	/**
-	 * Konstruktor
+	 * Konstruktor. Erstellt ein neues Werkzeug zur Markieren von Dächern und Gründen.
 	 */
     BB_ToolBuildingTriangleNew(QWidget* parent);
 

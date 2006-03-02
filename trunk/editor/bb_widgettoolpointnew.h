@@ -17,21 +17,34 @@
 #include <bb_point.h>
 
 /**
-Fenster für das Punkt-Erstellungs-Werkzeug
- 
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Fenster für das Punkt-Erstellungs-Werkzeug.
+ * Im Genster lassen sich der Name, die Beschreibung und die Position des Punktes ändern.
+ * Ein ausgewählter Punkt lässt sich auch löschen.
+ * @author Alex Letkemann <alex@letkemann.de>, Vaceslav Ustinov
+ */
 class BB_WidgetToolPointNew : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
 		
-		/**
-		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
-		 */
+
+        /**
+         * Konstruktor. Erzeugt ein neues Werkzeugfenster für das Punkt-Erstellungs-Werkzeug.
+		 * @param parentTool Punkt-Erstellungs-Werkzeug.
+         * @param parent Parent-Fenster in dem dieses Fenster plaziert wird.
+		 * @author Alex Letkemann
+         */
         BB_WidgetToolPointNew( BB_AbstractTool* parentTool, QWidget *parent = 0 );
 
+		/**
+		 * Destruktor 
+		 */
         ~BB_WidgetToolPointNew();
+		
+		/**
+		 * Aktualisiert das Eigenschaftsfenster
+		 * @author Alex Letkemann
+		 */
         virtual void updateWidget();
 		
 		/**
@@ -39,8 +52,6 @@ class BB_WidgetToolPointNew : public BB_AbstractToolWidget
 		 * @author Alex Letkemann
 		 */
         virtual void clearToolWidget();
-		
-		
 		
 		/**
 		 * Aktiviert oder Deaktiviert das Fenster.<br />
@@ -51,11 +62,42 @@ class BB_WidgetToolPointNew : public BB_AbstractToolWidget
 
 
     private slots:
+        /**
+         * Wird aufgerufen, wenn die Position des Punktes im Fenster geändert wird.
+		 * Ändert die Position des Punktes.
+		 * @author Alex Letkemann
+         */
         void slotPosFinished();
+		
+		/**
+		 * Löscht die Selektion
+		 * @author Alex Letkemann
+		 */
         void slotDelete();
+		
+		/**
+		 * Wird aufgerufen, wenn die Beschreibung geändert wird.
+		 * @author Alex Letkemann
+		 */
         void slotDescFinished();
+		
+		/**
+		 * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+		 * Speichert den neuen Namen im Objekt.
+		 * @author Alex Letkemann 
+		 */
         void slotNameFinished();
+		
+		
+		/**
+		 * @todo doku
+		 * @author Vaceslav Ustinov
+		 */
 		void slotToLine_H();
+		/**
+		 * @todo doku
+		 * @author Vaceslav Ustinov
+		 */
 		void slotToLine_V();
     
 	protected:
@@ -63,6 +105,7 @@ class BB_WidgetToolPointNew : public BB_AbstractToolWidget
         C2dVector m_Tmp_Vector;    
 	
 	private:
+		/* Dialog Form */
         Ui::WidgetToolPointNew m_Ui;
 };
 

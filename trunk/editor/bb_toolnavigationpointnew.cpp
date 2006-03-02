@@ -12,21 +12,29 @@
 #include "bb_toolnavigationpointnew.h"
 #include <bb_widgettoolnavigationpointnew.h>
 
+/**
+ * Konstruktor. Erzeugt ein neues Werkzeug zur Erstellung von Navigationsknoten.
+ * @param parent Parent-Fenster
+ * @author Alex Letkemann
+ */
 BB_ToolNavigationPointNew::BB_ToolNavigationPointNew(QWidget *parent)
  : BB_ToolPointNew(parent)
 {
 }
 
 
+/**
+ * Destruktor
+ */
 BB_ToolNavigationPointNew::~BB_ToolNavigationPointNew()
 {
 }
 
-
-
-
-/*!
-    \fn BB_ToolNavigationPointNew::createNewPoint( C2dVector& pos )
+/**
+ * Erstellund und gibt einen neuen Navigationsknoten an der übergebenen Position.
+ * @param pos Position, an der der Knoten erstellt werden soll.
+ * @return Neuer Navigationsknoten.
+ * @author Alex Letkemann
  */
 BB_Point* BB_ToolNavigationPointNew::createNewPoint( C2dVector& pos )
 {
@@ -34,8 +42,12 @@ BB_Point* BB_ToolNavigationPointNew::createNewPoint( C2dVector& pos )
 }
 
 
-/*!
-    \fn BB_ToolNavigationPointNew::getClickedPoint( C2dVector& pos )
+/**
+ * Sucht und gibt den zuerst gefundenen Knoten an der übergebenen Position zurück.
+ * Falls kein Knoten an der übergebenen Position gefundenen wird, wird NULL zurückgegeben.
+ * @param pos Position, an der gesucht werden soll.
+ * @return Navigationsknoten oder NULL.
+ * @author Alex Letkemann
  */
 BB_Point* BB_ToolNavigationPointNew::getClickedPoint( C2dVector& pos )
 {
@@ -43,8 +55,8 @@ BB_Point* BB_ToolNavigationPointNew::getClickedPoint( C2dVector& pos )
 }
 
 
-/*!
-    \fn BB_ToolNavigationPointNew::getToolWidget()
+/**
+ * @fn BB_AbstractTool::getToolWidget()
  */
 BB_AbstractToolWidget* BB_ToolNavigationPointNew::getToolWidget()
 {

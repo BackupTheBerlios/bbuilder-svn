@@ -14,6 +14,12 @@
 #include <bb_abstracttool.h>
 #include <bb_terraintriangle.h>
 
+/**
+ * Konstruktor. Erstellt ein neues Fenster für das Geländeflächen-Erstellungs-Werkzeug.
+ * @param parentTool Geländeflächen-Erstellungs-Werkzeug.
+ * @param parent Parent-Fenster, in dem das neue Fenster positioniert wird.
+ * @return 
+ */
 BB_WidgetToolTerrainTriangleNew::BB_WidgetToolTerrainTriangleNew( BB_AbstractTool* parentTool, QWidget* parent ) : BB_AbstractToolWidget( parentTool, parent )
 {
     m_Ui.setupUi( this );
@@ -27,10 +33,16 @@ BB_WidgetToolTerrainTriangleNew::BB_WidgetToolTerrainTriangleNew( BB_AbstractToo
 }
 
 
+/**
+ * Destruktor
+ */
 BB_WidgetToolTerrainTriangleNew::~BB_WidgetToolTerrainTriangleNew()
 {}
 
-
+/**
+ * Lädt die Default-Werte in das Werkzeugfenster.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainTriangleNew::clearToolWidget()
 {
     m_Ui.lineEdit_Name->clear();
@@ -39,6 +51,11 @@ void BB_WidgetToolTerrainTriangleNew::clearToolWidget()
     m_Ui.textEdit_Desc->blockSignals( false );
 }
 
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainTriangleNew::setWidgetEnabled( bool value )
 {
     m_Ui.lineEdit_Name->setEnabled( value );
@@ -46,6 +63,10 @@ void BB_WidgetToolTerrainTriangleNew::setWidgetEnabled( bool value )
     m_Ui.pushButton_Delete->setEnabled( value );
 }
 
+/**
+ * Aktualisiert das Eigenschaftsfenster
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainTriangleNew::updateWidget()
 {
     if ( m_Selection != NULL &&
@@ -91,8 +112,9 @@ void BB_WidgetToolTerrainTriangleNew::updateWidget()
 
 
 
-/*!
-    \fn BB_WidgetToolTerrainTriangleNew::slotDelete()
+/**
+ * Löscht die Selektion
+ * @author Alex Letkemann
  */
 void BB_WidgetToolTerrainTriangleNew::slotDelete()
 {
@@ -100,8 +122,10 @@ void BB_WidgetToolTerrainTriangleNew::slotDelete()
 }
 
 
-/*!
-    \fn BB_WidgetToolTerrainTriangleNew::slotDescFinished()
+/**
+ * Wird aufgerufen, wenn die Beschreibung geändert wird.
+ * Ändert die Beschreibung.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolTerrainTriangleNew::slotDescFinished()
 {
@@ -114,8 +138,10 @@ void BB_WidgetToolTerrainTriangleNew::slotDescFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolTerrainTriangleNew::slotNameFinished()
+/**
+ * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+ * Speichert den neuen Namen im Objekt.
+ * @author Alex Letkemann 
  */
 void BB_WidgetToolTerrainTriangleNew::slotNameFinished()
 {
@@ -128,8 +154,10 @@ void BB_WidgetToolTerrainTriangleNew::slotNameFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolTerrainTriangleNew::slotTextureFinished()
+/**
+ * Wird aufgerufen, wenn die Bearbeitung des Textur-Dateinamen abgeschlossen ist.
+ * Ändert den Text-Dateinamen der Fläche.
+ * @author Alex Letkemann 
  */
 void BB_WidgetToolTerrainTriangleNew::slotTextureFinished()
 {
@@ -162,8 +190,9 @@ void BB_WidgetToolTerrainTriangleNew::slotTextureFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolTerrainTriangleNew::slotTextureSearch()
+/**
+ * Ruft einen Datei-Dialog auf, mit dem man eine Bilddatei als Textur auswählen kann.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolTerrainTriangleNew::slotTextureSearch()
 {
@@ -183,8 +212,10 @@ void BB_WidgetToolTerrainTriangleNew::slotTextureSearch()
 }
 
 
-/*!
-    \fn BB_WidgetToolTerrainTriangleNew::getTextureFileName()
+/**
+ * Gibt den Textur-Dateinamen zurück.
+ * @return Textur-Dateiname
+ * @author Alex Letkemann
  */
 QString BB_WidgetToolTerrainTriangleNew::getTextureFileName()
 {

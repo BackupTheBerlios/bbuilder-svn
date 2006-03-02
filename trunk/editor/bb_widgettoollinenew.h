@@ -18,18 +18,26 @@
 
 
 /**
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Werkzeugfenster für dasd Linienerstellungs-Werkzeug.
+ * Im Fenster lassen sich der Name und die Beschreibung der Linie ändern.
+ * Aßerdem lässt sich eine ausgewählte Linie löschen.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_WidgetToolLineNew : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
 		
 		/**
-		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
+		 * Konstruktor. Erstellt ein neues Werkzeugfenster für das Linienerstellungs-Werkzeug.
+		 * @param parentTool Linienerstellungs-Werkzeug
+		 * @param parent Parent-Fenster, in dem dieses Fenster Positioniert werden soll.
 		 */
         BB_WidgetToolLineNew( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
+		/**
+		 * Destruktor
+		 */
         virtual ~BB_WidgetToolLineNew();
 
     public:
@@ -55,8 +63,23 @@ class BB_WidgetToolLineNew : public BB_AbstractToolWidget
         virtual void clearToolWidget();
 
     private slots:
+		
+		/**
+         * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+         * Speichert den neuen Namen im Objekt.
+         * @author Alex Letkemann 
+		 */
         void slotNameFinished();
+		/**
+		 * Wird aufgerufen, wenn die Beschreibung geändert wird.
+		 * @author Alex Letkemann
+		 */
         void slotDescFinished();
+		
+		/**
+		 * Löscht die Selektion
+		 * @author Alex Letkemann
+		 */
         void slotDelete();
 
 	private:

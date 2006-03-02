@@ -21,8 +21,10 @@
 #include "bb_drawobject.h"
 
 /**
-@author Alex Letkemann
-*/
+ * Werkzeug zur Erstellung von Punkten auf der Arbeitsfläche.
+ * Ein Punkt wird durch einen
+ * @author Alex Letkemann
+ */
 class BB_ToolPointNew : public BB_AbstractTool
 {
     public:
@@ -45,18 +47,27 @@ class BB_ToolPointNew : public BB_AbstractTool
         virtual BB_AbstractToolWidget* getToolWidget();
 
     protected:
+		
 		/**
-	 	 * \fn BB_AbstractTool::click( QMouseEvent* me )
+	     * Pr&uuml;ft, ob ein Punkt angeclickt wurde und selektiert diesen.
+	     * Wenn kein Punkt angeclickt wurde, wird ein neuer erzeigt und dieser selectiert.
+         * @param me MouseClickEvent
+         * @author Alex Letkemann, Vaceslav Ustinov
+         * @date 27.12.2005
 		 */
 		virtual void click( QMouseEvent* me );
         
 		/**
-		 * \fn BB_AbstractTool::release( QMouseEvent* me )
+		 * Wird aufgerufen, wenn die Maustaste losgelassen wird.
+		 * @param me MausReleaseEvent
 		 */
 		virtual void release( QMouseEvent* me );
 		
 		/**
-		 * \fn move( QMouseEvent* me, bool overX, bool overY )
+		 * Bewegt den selektierten Punkt.
+		 * @param me MouseMoveEvent
+		 * @param overX Gibt an wenn der Maus-Zeiger horizontal außerhalb des Workframes ist.
+		 * @param overY Gibt an wenn der Maus-Zeiger vertikal außerhalb des Workframes ist.
 		 */
 		virtual void move( QMouseEvent* me, bool overX, bool overY );
 		
@@ -80,6 +91,7 @@ class BB_ToolPointNew : public BB_AbstractTool
 
 
     protected:
+		/* Selektierter Punkt */
         BB_Point* m_Point;
 };
 

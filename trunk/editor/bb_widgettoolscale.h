@@ -24,20 +24,45 @@ class BB_WidgetToolScale : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
+
 		/**
-		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
+		 * Konstruktor. Erstellt ein neues Werkzeugfenster für das Maßstab-Werkzeug.
+		 * @param parentTool Maßstab-Werkzeug
+		 * @param parent Parent-Wenster, in dem dieses Fenster plaziert wird.
+		 * @author Alex Letkemann
 		 */
 		BB_WidgetToolScale( BB_AbstractTool* parentTool, QWidget* parent = 0  );
 
+		/**
+		 * Destruktor
+		 */
         ~BB_WidgetToolScale();
+		
+		/**
+		 * Setzt den logischen Maßstab.
+		 * @param value Logischer Maßstab.
+		 */
         void setLogicalScale( double value );
+		
+		/**
+		 * Setzt den Pointer auf den reelen Maßstab.
+		 * @param real Pointer auf den reelen Maßstab.
+		 * @author Alex Letkemann
+		 */
         void setRealScale( double *real );
 
 
     protected:
         Ui::WidgetToolScale m_Ui;
         double* m_RealScale;
+		
     private slots:
+		
+        /**
+         * Wird aufgerufen, wenn das Bearbeiten des reelen Maßstabes beendet wurde.
+		 * Ändert den reelen Maßstab des DocComponentes.
+		 * @author Alex Letkemann
+         */
         void slotRealFinished();
 };
 

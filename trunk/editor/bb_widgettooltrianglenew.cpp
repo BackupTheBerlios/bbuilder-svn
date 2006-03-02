@@ -13,6 +13,12 @@
 #include <bb_triangle.h>
 #include <bb_abstracttool.h>
 
+/**
+ * Konstruktor. Erzeugt ein neues Fenster für das Flächenerstellungs-Werkzeug.
+ * @param parentTool Flächenerstellungs-Werkzeug.
+ * @param parent Parent-Fenster, in dem dieses Fenster plaziert wird.
+ * @author Alex Letkemann
+ */
 BB_WidgetToolTriangleNew::BB_WidgetToolTriangleNew( BB_AbstractTool* parentTool, QWidget* parent ) : BB_AbstractToolWidget( parentTool, parent )
 {
     m_Ui.setupUi( this );
@@ -25,11 +31,16 @@ BB_WidgetToolTriangleNew::BB_WidgetToolTriangleNew( BB_AbstractTool* parentTool,
     connect( m_Ui.pushButton_Delete, SIGNAL( released() ), this, SLOT( slotDelete() ) );
 }
 
-
+/**
+ * Destruktor
+ */
 BB_WidgetToolTriangleNew::~BB_WidgetToolTriangleNew()
 {}
 
-
+/**
+ * Lädt die Default-Werte in das Werkzeugfenster.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTriangleNew::clearToolWidget()
 {
     m_Ui.lineEdit_Name->clear();
@@ -38,6 +49,11 @@ void BB_WidgetToolTriangleNew::clearToolWidget()
     m_Ui.textEdit_Desc->blockSignals( false );
 }
 
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTriangleNew::setWidgetEnabled( bool value )
 {
     m_Ui.lineEdit_Name->setEnabled( value );
@@ -45,6 +61,10 @@ void BB_WidgetToolTriangleNew::setWidgetEnabled( bool value )
     m_Ui.pushButton_Delete->setEnabled( value );
 }
 
+/**
+ * Aktualisiert das Fenster.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTriangleNew::updateWidget()
 {
 
@@ -92,8 +112,9 @@ void BB_WidgetToolTriangleNew::updateWidget()
 
 
 
-/*!
-    \fn BB_WidgetToolTriangleNew::slotDelete()
+/**
+ * Löscht die Selektion
+ * @author Alex Letkemann
  */
 void BB_WidgetToolTriangleNew::slotDelete()
 {
@@ -101,8 +122,10 @@ void BB_WidgetToolTriangleNew::slotDelete()
 }
 
 
-/*!
-    \fn BB_WidgetToolTriangleNew::slotNameFinished()
+/**
+ * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+ * Speichert den neuen Namen im Objekt.
+ * @author Alex Letkemann 
  */
 void BB_WidgetToolTriangleNew::slotNameFinished()
 {
@@ -115,8 +138,9 @@ void BB_WidgetToolTriangleNew::slotNameFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolTriangleNew::slotDescFinished()
+/**
+ * Wird aufgerufen, wenn die Beschreibung geändert wird.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolTriangleNew::slotDescFinished()
 {

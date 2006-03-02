@@ -13,6 +13,13 @@
 #include <bb.h>
 #include <QMessageBox>
 
+
+/**
+ * Konstruktor. Erstellt ein neues Werkzeugfenster für das Maßstab-Werkzeug.
+ * @param parentTool Maßstab-Werkzeug
+ * @param parent Parent-Wenster, in dem dieses Fenster plaziert wird.
+ * @author Alex Letkemann
+ */
 BB_WidgetToolScale::BB_WidgetToolScale( BB_AbstractTool* parentTool, QWidget* parent )
         : BB_AbstractToolWidget(parentTool, parent)
 {
@@ -25,13 +32,16 @@ BB_WidgetToolScale::BB_WidgetToolScale( BB_AbstractTool* parentTool, QWidget* pa
 	connect(m_Ui.real, SIGNAL(editingFinished()), this, SLOT(slotRealFinished()));
 }
 
-
+/**
+ * Desruktor
+ */
 BB_WidgetToolScale::~BB_WidgetToolScale()
 {}
 
 
 /**
- * Setzt den logischen Maß
+ * Setzt den logischen Maßstab.
+ * @param value Logischer Maßstab.
  */
 void BB_WidgetToolScale::setLogicalScale( double value )
 {
@@ -40,8 +50,9 @@ void BB_WidgetToolScale::setLogicalScale( double value )
 
 
 /**
- * Setzt den Pointer auf den Reelen Maß
- * @param real Pointer auf den Reelen Maß
+ * Setzt den Pointer auf den reelen Maßstab.
+ * @param real Pointer auf den reelen Maßstab.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolScale::setRealScale( double *real )
 {
@@ -54,8 +65,9 @@ void BB_WidgetToolScale::setRealScale( double *real )
 
 
 /**
- * Wird aufgeruffen, wenn im 'real'-LineEdit die Taste 'Enter' gedrückt wird 
- * oder das LineEdit den Fokus verliert.
+ * Wird aufgerufen, wenn das Bearbeiten des reelen Maßstabes beendet wurde.
+ * Ändert den reelen Maßstab des DocComponentes.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolScale::slotRealFinished()
 {

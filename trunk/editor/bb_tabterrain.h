@@ -22,8 +22,9 @@
 #include "bb_abstracttool.h"
 
 /**
-@author Alex Letkemann
-*/
+ * 
+ * @author Alex Letkemann
+ */
 class BB_TabTerrain : public BB_Tab
 {
 	Q_OBJECT
@@ -45,7 +46,6 @@ private:
     void initTools();
 
 protected:
-// 	virtual void toolChanged(QAction* action);
     virtual bool saveCurrent();
     
 private slots:

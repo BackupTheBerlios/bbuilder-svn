@@ -15,19 +15,28 @@
 #include <bb_abstracttoolwidget.h>
 #include <ui_toolWidgetTriangleNew.h> 
 /**
-Eigenschaftsfenster für das Werkzeugt zur Flächenerstellung
- 
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Eigenschaftsfenster für das Werkzeug zur Flächenerstellung
+ * Im Fenster lassen sich der Name und die Beschreibung ändern.
+ * Eine ausgewählte Fläche lässt dich auch löschen.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_WidgetToolTriangleNew : public BB_AbstractToolWidget
 {
         Q_OBJECT
     public:
-		/**
-		 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
-		 */
+		
+        /**
+         * Konstruktor. Erzeugt ein neues Fenster für das Flächenerstellungs-Werkzeug.
+		 * @param parentTool Flächenerstellungs-Werkzeug.
+         * @param parent Parent-Fenster, in dem dieses Fenster plaziert wird.
+         * @author Alex Letkemann
+         */
         BB_WidgetToolTriangleNew( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
+		
+        /**
+         * Destruktor
+         */
         ~BB_WidgetToolTriangleNew();
 
 		/**
@@ -44,18 +53,37 @@ class BB_WidgetToolTriangleNew : public BB_AbstractToolWidget
         virtual void setWidgetEnabled( bool value );
 		
 		/**
-		 * Aktiviert oder Deaktiviert das Fenster.<br />
-		 * @param value True: Aktiviert, False: Deaktiviert
+		 * Aktualisiert das Fenster.
 		 * @author Alex Letkemann
 		 */
         virtual void updateWidget();
 
-        Ui::WidgetToolTriangleNew m_Ui;
 
     private slots:
+		
+		/**
+         * Löscht die Selektion
+	     * @author Alex Letkemann
+		 */
         void slotDelete();
+		
+		/**
+		 * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+		 * Speichert den neuen Namen im Objekt.
+		 * @author Alex Letkemann 
+		 */
         void slotNameFinished();
+		
+		/**
+		 * Wird aufgerufen, wenn die Beschreibung geändert wird.
+		 * @author Alex Letkemann
+		 */
         void slotDescFinished();
+		
+	protected:
+		
+		/* Form */
+		Ui::WidgetToolTriangleNew m_Ui;
 };
 
 #endif

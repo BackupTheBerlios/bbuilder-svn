@@ -1,7 +1,7 @@
 //
 // C++ Interface: bb_widgettoolterrainpointnew
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -14,53 +14,91 @@
 
 #include <bb_abstracttoolwidget.h>
 #include <bb_point.h>
-#include <ui_toolWidgetTerrainPointNew.h>
+#include <ui_toolWidgetTerrainPointNew.h> 
 /**
-Fenster für das Geländepunkt-Erstellungs-Werkzeug
-
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Fenster für das Geländepunkt-Erstellungs-Werkzeug.
+ * Im Fenster lassen sich der Name, die Beschreibung, die Position und die Höhenposition ändern.
+ * Ein ausgewählter Punkt lässt sich auch löschen.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_WidgetToolTerrainPointNew : public BB_AbstractToolWidget
 {
-	Q_OBJECT
-public:
-	/**
-	 * @fn BB_AbstractToolWidget::BB_AbstractToolWidget( BB_AbstractTool* parentTool, QWidget* parent = 0 )
-	 */
-    BB_WidgetToolTerrainPointNew(BB_AbstractTool* parentTool, QWidget* parent = 0);
+        Q_OBJECT
+    public:
+        
+		
+        /**
+		 * Konstruktor. Erstellt ein neues Fenster für das Geländepunkt-Erstellungs-Werkzeug.
+		 * @param parentTool Geländepunkt-Erstellungs-Werkzeug.
+         * @param parent Parent-Fenster, in dem dieses Fenster plaziert wird.
+         * @author Alex Letkemann
+         */
+        BB_WidgetToolTerrainPointNew( BB_AbstractTool* parentTool, QWidget* parent = 0 );
 
-    ~BB_WidgetToolTerrainPointNew();
+		/**
+		 * Destruktor
+		 */
+        ~BB_WidgetToolTerrainPointNew();
 
-	/**
-	 * Lädt die Default-Werte in das Werkzeugfenster.
-	 * @author Alex Letkemann
-	 */
-    virtual void clearToolWidget();
-	
-	/**
-	 * Aktiviert oder Deaktiviert das Fenster.<br />
-	 * @param value True: Aktiviert, False: Deaktiviert
-	 * @author Alex Letkemann
-	 */
-    virtual void setWidgetEnabled(bool value);
-	
-	/**
-	 * Aktiviert oder Deaktiviert das Fenster.<br />
-	 * @param value True: Aktiviert, False: Deaktiviert
-	 * @author Alex Letkemann
-	 */
-    virtual void updateWidget();
+        /**
+         * Lädt die Default-Werte in das Werkzeugfenster.
+         * @author Alex Letkemann
+         */
+        virtual void clearToolWidget();
 
-	private slots:
-		void slotPosFinished();
-		void slotDelete();
-		void slotDescFinished();
-		void slotNameFinished();
-protected:
-    BB_Point* m_Tmp_Point;
-	Ui::WidgetToolTerrainPointNew m_Ui;
-private slots:
-    void slotHeightFinished();
+        /**
+         * Aktiviert oder Deaktiviert das Fenster.<br />
+         * @param value True: Aktiviert, False: Deaktiviert
+         * @author Alex Letkemann
+         */
+        virtual void setWidgetEnabled( bool value );
+
+        /**
+         * Aktualisiert das Eigenschaftsfenster
+         * @author Alex Letkemann
+         */
+        virtual void updateWidget();
+
+    private slots:
+        
+		/**
+         * Wird aufgerufen, wenn die Position des Punktes im Fenster geändert wurde.
+		 * Ändert die Position des Punktes.
+		 * @author Alex Letkemann
+         */
+        void slotPosFinished();
+
+        /**
+         * Löscht die Selektion
+         * @author Alex Letkemann
+         */
+        void slotDelete();
+
+        /**
+         * Wird aufgerufen, wenn die Beschreibung geändert wird.
+         * @author Alex Letkemann
+         */
+        void slotDescFinished();
+
+        /**
+         * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+         * Speichert den neuen Namen im Objekt.
+         * @author Alex Letkemann 
+         */
+        void slotNameFinished();
+
+        /**
+         * Wird aufgerufen, wenn die Bearbeitung der Höhenposition des Punktes abgeschlossen wurde.
+		 * Ändert die Höhenposition des Punktes.
+		 * @author Alex Letkemann
+         */
+        void slotHeightFinished();
+		
+    protected:
+        BB_Point* m_Tmp_Point;
+		
+		/* Form */
+        Ui::WidgetToolTerrainPointNew m_Ui;
 };
 
 #endif

@@ -21,8 +21,8 @@
 
 /**
 dokumentation
- 
-@author Vacesav Ustinov, Alex Letkemann (Änderungen)
+ @todo doku
+@author Vacesav Ustinov
 */
 class BB_ToolLineNew : public BB_AbstractTool
 {
@@ -36,9 +36,7 @@ class BB_ToolLineNew : public BB_AbstractTool
         virtual void release( QMouseEvent* me );
         virtual BB_AbstractToolWidget* getToolWidget();
     protected:
-        //BB_DrawObject * m_movedPoint;
-        // EDIT: Alex Letkemann
-        // Name angepasst ...
+
         BB_Line * m_Tmp_Line;
         BB_Point m_MovePoint;
 

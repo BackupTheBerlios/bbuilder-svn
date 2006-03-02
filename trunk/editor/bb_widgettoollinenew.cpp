@@ -14,6 +14,11 @@
 #include <bb_point.h>
 #include <bb_line.h>
 
+/**
+ * Konstruktor. Erstellt ein neues Werkzeugfenster für das Linienerstellungs-Werkzeug.
+ * @param parentTool Linienerstellungs-Werkzeug
+ * @param parent Parent-Fenster, in dem dieses Fenster Positioniert werden soll.
+ */
 BB_WidgetToolLineNew::BB_WidgetToolLineNew( BB_AbstractTool* parentTool , QWidget *parent )
         : BB_AbstractToolWidget( parentTool, parent )
 {
@@ -28,11 +33,17 @@ BB_WidgetToolLineNew::BB_WidgetToolLineNew( BB_AbstractTool* parentTool , QWidge
 
 }
 
-
+/**
+ * Destruktor
+ */
 BB_WidgetToolLineNew::~BB_WidgetToolLineNew()
 {}
 
-
+/**
+ * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+ * Speichert den neuen Namen im Objekt.
+ * @author Alex Letkemann 
+ */
 void BB_WidgetToolLineNew::slotNameFinished()
 {
 	if ( m_Selection != NULL && m_Selection->count() == 1 )
@@ -42,6 +53,10 @@ void BB_WidgetToolLineNew::slotNameFinished()
 	}
 }
 
+/**
+ * Wird aufgerufen, wenn die Beschreibung geändert wird.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolLineNew::slotDescFinished()
 {
 	if ( m_Selection != NULL && m_Selection->count() == 1 )
@@ -51,12 +66,21 @@ void BB_WidgetToolLineNew::slotDescFinished()
 	}
 }
 
+
+/**
+ * Löscht die Selektion
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolLineNew::slotDelete()
 {
     m_ParentTool->deleteSelection();
 }
 
-
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolLineNew::updateWidget()
 {
     BB_Line * tmpLine;
@@ -92,6 +116,11 @@ void BB_WidgetToolLineNew::updateWidget()
 
 }
 
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolLineNew::setWidgetEnabled( bool value )
 {
     m_Ui.lineEdit_Name->setEnabled( value );
@@ -100,6 +129,10 @@ void BB_WidgetToolLineNew::setWidgetEnabled( bool value )
     m_Ui.pushButton_Delete->setEnabled( value );
 }
 
+/**
+ * Lädt die Default-Werte in das Werkzeugfenster.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolLineNew::clearToolWidget()
 {
     m_Ui.lineEdit_Name->clear();

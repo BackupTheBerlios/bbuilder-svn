@@ -15,10 +15,9 @@
 #include <bb_toollinenew.h>
 
 /**
-Werkzeug zum erstellen von Wänden
-
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Werkzeug zum erstellen von Wänden.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_ToolWallNew : public BB_ToolLineNew
 {
 public:

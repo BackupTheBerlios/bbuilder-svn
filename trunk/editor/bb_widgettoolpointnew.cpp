@@ -18,6 +18,12 @@
 using namespace std;
 
 
+/**
+ * Konstruktor. Erzeugt ein neues Werkzeugfenster für das Punkt-Erstellungs-Werkzeug.
+ * @param parentTool Punkt-Erstellungs-Werkzeug.
+ * @param parent Parent-Fenster in dem dieses Fenster plaziert wird.
+ * @author Alex Letkemann
+ */
 BB_WidgetToolPointNew::BB_WidgetToolPointNew( BB_AbstractTool* parentTool , QWidget *parent )
         : BB_AbstractToolWidget( parentTool, parent )
 {
@@ -35,13 +41,17 @@ BB_WidgetToolPointNew::BB_WidgetToolPointNew( BB_AbstractTool* parentTool , QWid
 
 }
 
-
+/**
+ * Destruktor 
+ */
 BB_WidgetToolPointNew::~BB_WidgetToolPointNew()
 {}
 
 
-/*!
-    \fn BB_WidgetToolPointNew::slotPosFinished()
+/**
+ * Wird aufgerufen, wenn die Position des Punktes im Fenster geändert wird.
+ * Ändert die Position des Punktes.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolPointNew::slotPosFinished()
 {
@@ -70,8 +80,9 @@ void BB_WidgetToolPointNew::slotPosFinished()
 
 
 
-/*!
-    \fn BB_WidgetToolPointNew::slotDelete()
+/**
+ * Löscht die Selektion
+ * @author Alex Letkemann
  */
 void BB_WidgetToolPointNew::slotDelete()
 {
@@ -79,8 +90,9 @@ void BB_WidgetToolPointNew::slotDelete()
 }
 
 
-/*!
-    \fn BB_WidgetToolPointNew::slotDescFinished()
+/**
+ * Wird aufgerufen, wenn die Beschreibung geändert wird.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolPointNew::slotDescFinished()
 {
@@ -89,8 +101,10 @@ void BB_WidgetToolPointNew::slotDescFinished()
 }
 
 
-/*!
-    \fn BB_WidgetToolPointNew::slotNameFinished()
+/**
+ * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+ * Speichert den neuen Namen im Objekt.
+ * @author Alex Letkemann 
  */
 void BB_WidgetToolPointNew::slotNameFinished()
 {
@@ -99,8 +113,9 @@ void BB_WidgetToolPointNew::slotNameFinished()
 }
 
 
-/*!
-    \fn BB_AbstractToolWidget::updateWidget()
+/**
+ * Aktualisiert das Eigenschaftsfenster
+ * @author Alex Letkemann
  */
 void BB_WidgetToolPointNew::updateWidget()
 {
@@ -130,21 +145,23 @@ void BB_WidgetToolPointNew::updateWidget()
 }
 
 
-/*!
-    \fn BB_AbstractToolWidget::clearToolWidget()
+/**
+ * Lädt die Default-Werte in das Werkzeugfenster.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolPointNew::clearToolWidget()
 {
     m_Ui.lineEdit_PointName->clear();
-    // 	m_Ui.textEdit_PointDesc->clear();
 
     m_Ui.lineEdit_X->clear();
     m_Ui.lineEdit_Y->clear();
 }
 
 
-/*!
-    \fn BB_AbstractToolWidget::setWidgetEnabled( bool value )
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
  */
 void BB_WidgetToolPointNew::setWidgetEnabled( bool value )
 {

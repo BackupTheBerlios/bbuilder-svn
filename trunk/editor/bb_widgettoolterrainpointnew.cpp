@@ -13,7 +13,14 @@
 #include <bb_abstracttool.h>
 #include <bb_terrainpoint.h>
 
-BB_WidgetToolTerrainPointNew::BB_WidgetToolTerrainPointNew( BB_AbstractTool* parentTool, QWidget* parent ) : BB_AbstractToolWidget( parentTool, parent )
+/**
+ * Konstruktor. Erstellt ein neues Fenster für das Geländepunkt-Erstellungs-Werkzeug.
+ * @param parentTool Geländepunkt-Erstellungs-Werkzeug.
+ * @param parent Parent-Fenster, in dem dieses Fenster plaziert wird.
+ * @author Alex Letkemann
+ */
+BB_WidgetToolTerrainPointNew::BB_WidgetToolTerrainPointNew( BB_AbstractTool* parentTool, QWidget* parent ) 
+	: BB_AbstractToolWidget( parentTool, parent )
 {
     // 	m_Ui.checkBox_Index->setTristate( false );
     m_Ui.setupUi( this );
@@ -30,28 +37,48 @@ BB_WidgetToolTerrainPointNew::BB_WidgetToolTerrainPointNew( BB_AbstractTool* par
 
 }
 
-
+/**
+ * Destructor
+ */
 BB_WidgetToolTerrainPointNew::~BB_WidgetToolTerrainPointNew()
 {}
 
+/**
+ * Löscht die Selektion
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainPointNew::slotDelete()
 {
     m_ParentTool->deleteSelection();
 }
 
-
+/**
+ * Wird aufgerufen, wenn die Beschreibung geändert wird.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainPointNew::slotDescFinished()
 {
     m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
     m_Tmp_Point->setDescription( m_Ui.textEdit_PointDesc->toPlainText() );
 }
 
+/**
+ * Wird aufgerufen, wenn die Bearbeitung des Namen abgeschlossen ist.
+ * Speichert den neuen Namen im Objekt.
+ * @author Alex Letkemann 
+ */
 void BB_WidgetToolTerrainPointNew::slotNameFinished()
 {
     m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
     m_Tmp_Point->setName( m_Ui.lineEdit_PointName->text() );
 }
 
+
+/**
+ * Wird aufgerufen, wenn die Position des Punktes im Fenster geändert wurde.
+ * Ändert die Position des Punktes.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainPointNew::slotPosFinished()
 {
     m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );
@@ -76,6 +103,10 @@ void BB_WidgetToolTerrainPointNew::slotPosFinished()
     m_ParentTool->documentChanged();
 }
 
+/**
+ * Lädt die Default-Werte in das Werkzeugfenster.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainPointNew::clearToolWidget()
 {
     m_Ui.lineEdit_PointName->setText( "" );
@@ -86,9 +117,13 @@ void BB_WidgetToolTerrainPointNew::clearToolWidget()
     m_Ui.lineEdit_Y->setText( "" );
     m_Ui.lineEdit_Height->setText( "" );
 
-    // 	m_Ui.checkBox_Index->setCheckState( false );
 }
 
+/**
+ * Aktiviert oder Deaktiviert das Fenster.<br />
+ * @param value True: Aktiviert, False: Deaktiviert
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainPointNew::setWidgetEnabled( bool value )
 {
     m_Ui.lineEdit_PointName->setEnabled( value );
@@ -97,9 +132,12 @@ void BB_WidgetToolTerrainPointNew::setWidgetEnabled( bool value )
     m_Ui.textEdit_PointDesc->setEnabled( value );
     m_Ui.lineEdit_Height->setEnabled( value );
     m_Ui.pushButton_Delete->setEnabled( value );
-    // 	m_Ui.checkBox_Index->setEnabled( value );
 }
 
+/**
+ * Aktualisiert das Eigenschaftsfenster
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainPointNew::updateWidget()
 {
     if ( m_Selection != NULL &&
@@ -116,7 +154,6 @@ void BB_WidgetToolTerrainPointNew::updateWidget()
         m_Ui.lineEdit_Y->setText( QString::number( m_Tmp_Point->getPos().y() ) );
 
         m_Ui.lineEdit_Height->setText( QString::number( ( ( BB_TerrainPoint* ) ( m_Tmp_Point ) ) ->getHeight() ) );
-        // 		m_Ui.checkBox_Index->setCheckState( ((BB_NavigationPoint)(m_Tmp_Point))->getIndexed() );
 
         setWidgetEnabled( true );
     }
@@ -127,6 +164,11 @@ void BB_WidgetToolTerrainPointNew::updateWidget()
 }
 
 
+/**
+ * Wird aufgerufen, wenn die Bearbeitung der Höhenposition des Punktes abgeschlossen wurde.
+ * Ändert die Höhenposition des Punktes.
+ * @author Alex Letkemann
+ */
 void BB_WidgetToolTerrainPointNew::slotHeightFinished()
 {
     m_Tmp_Point = ( ( BB_Point* ) ( m_Selection->at( 0 ) ) );

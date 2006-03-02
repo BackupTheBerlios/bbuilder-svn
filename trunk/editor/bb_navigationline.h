@@ -16,16 +16,27 @@
 #include <bb_navigationpoint.h>
 
 /**
-Navigationslinie. Verbindet zwei Navigationsknoten.
-
-	@author Alex Letkemann <alex@letkemann.de>
-*/
+ * Navigationslinie. Verbindet zwei Navigationsknoten.
+ * @author Alex Letkemann <alex@letkemann.de>
+ */
 class BB_NavigationLine : public BB_Line
 {
 public:
+	/**
+	 * Konstruktor.<br/>
+	 * Erstellt eine Navigationslinie zwischen den zwei übergebenen Navigationspunkten
+	 * @author Alex Letkemann
+	 */
     BB_NavigationLine(BB_Point* p1, BB_Point* p2);
 
+	/**
+	 * Destruktor 
+	 */
     ~BB_NavigationLine();
+	
+	/**
+	 * @fn BB_Object::getClassName()
+	 */
     virtual const QString getClassName();
 
 };

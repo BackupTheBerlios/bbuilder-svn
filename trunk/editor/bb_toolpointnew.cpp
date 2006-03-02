@@ -19,6 +19,11 @@
 
 using namespace std;
 
+/**
+ * Konstruktor.
+ * Erstellt ein neues Werkzeug zur Erstellung von Punkten
+ * @author Alex Letkemann
+ */
 BB_ToolPointNew::BB_ToolPointNew(QWidget * parent)
         : BB_AbstractTool(parent)
 {
@@ -27,7 +32,9 @@ BB_ToolPointNew::BB_ToolPointNew(QWidget * parent)
 	m_Selection = NULL;
 }
 
-
+/**
+ * Destruktor
+ */
 BB_ToolPointNew::~BB_ToolPointNew()
 {}
 
@@ -144,8 +151,12 @@ BB_AbstractToolWidget* BB_ToolPointNew::getToolWidget()
 }
 
 
-/*!
-    \fn BB_ToolPointNew::getClickedPoint( C2dVector& pos )
+/**
+ * Die Funktion such nach einem Punkt an der Position 'pos'.
+ * Wird ein Punkt an der angegebenen Position gefunden, wird der 
+ * Zeiger des Punktes zur&uumlckgegeben. Falls nicht wird NULL zurückgegeben.
+ * @param pos Position an der nach dem Punkt gesucht wird
+ * @return Zeiger auf den gefundenen Punkt.
  */
 BB_Point* BB_ToolPointNew::getClickedPoint( C2dVector& pos )
 {
@@ -154,8 +165,11 @@ BB_Point* BB_ToolPointNew::getClickedPoint( C2dVector& pos )
 }
 
 
-/*!
-    \fn BB_ToolPointNew::createNewPoint( C2dVector& pos )
+/**
+ * Die Funktion erzeugt einen neuen Punkt an der Position 'pos' und gibt den Zeiger
+ * auf den neuen Punkt zur&uuml;ck
+ * @param pos Position, an der der neue Punkt erzeugt wird.
+ * @return Zeiger auf den neuen Punkt
  */
 BB_Point* BB_ToolPointNew::createNewPoint( C2dVector& pos )
 {

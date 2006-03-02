@@ -11,6 +11,12 @@
 //
 #include "bb_navigationline.h"
 
+
+/**
+ * Konstruktor.<br/>
+ * Erstellt eine Navigationslinie zwischen den zwei übergebenen Navigationspunkten
+ * @author Alex Letkemann
+ */
 BB_NavigationLine::BB_NavigationLine( BB_Point* p1, BB_Point* p2 )
         : BB_Line( p1, p2 )
 {
@@ -18,15 +24,17 @@ BB_NavigationLine::BB_NavigationLine( BB_Point* p1, BB_Point* p2 )
 	m_Brush.setColor( Qt::blue );
 }
 
-
+/**
+ * Destruktor 
+ */
 BB_NavigationLine::~BB_NavigationLine()
 {}
 
 
 
 
-/*!
-    \fn BB_Object::getClassName()
+/**
+ * @fn BB_Object::getClassName()
  */
 const QString BB_NavigationLine::getClassName()
 {
