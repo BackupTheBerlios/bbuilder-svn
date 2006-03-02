@@ -19,6 +19,12 @@
 ***************************************************************************/
 #include "bb_toolstair.h"
 
+/**
+Standart Konstruktor
+@param parent Zeiger auf ein Widget zu dem dieser Tool gehört
+@see BB_AbstractTool
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 BB_ToolStair::BB_ToolStair( QWidget* parent ) : BB_AbstractTool( parent )
 {
     m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolStair.png" );
@@ -34,16 +40,23 @@ BB_ToolStair::BB_ToolStair( QWidget* parent ) : BB_AbstractTool( parent )
     QColor b( 255, 221, 118, 150 );
     m_Rect.setBrush( b );
 
-// 	m_Stair = new BB_Stair();
-	m_Icon = QIcon(IMG_DIR() + SEPARATOR() + "toolStairs.png");
-	
+    // 	m_Stair = new BB_Stair();
+    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolStairs.png" );
+
 }
 
-
+/**
+Destruktor
+*/
 BB_ToolStair::~BB_ToolStair()
 {}
 
 
+/**
+ * Wird aufgerufen, wenn eine Maustaste gedrückt wird.
+ * @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+ * @author Alex Letkemann
+ */
 void BB_ToolStair::click( QMouseEvent* me )
 {
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
@@ -60,14 +73,14 @@ void BB_ToolStair::click( QMouseEvent* me )
         m_LastLogicMouseClick = m_pLogic;
 
         //beim ersten click markieren und verschiebne
-		BB_Point * point = ( BB_Point* ) getClickedObject( m_pLogic, typeid( BB_Point ) );
+        BB_Point * point = ( BB_Point* ) getClickedObject( m_pLogic, typeid( BB_Point ) );
         if ( point == NULL )
         {
             return ;
         }
-		m_Stair = new BB_Stair();
-		m_Stair->setPos1( point);
-		
+        m_Stair = new BB_Stair();
+        m_Stair->setPos1( point );
+
         //clearSelection();
         m_ClickPos = m_pLogic;
 
@@ -84,6 +97,13 @@ void BB_ToolStair::click( QMouseEvent* me )
     }
 }
 
+/**
+ * Die Methode wird aufgerufen, wenn die Maus bei beliebiger gedrückter Maustaste bewegt wird.
+ * @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+ * @param overX Gibt an, ob der Mauszeiger horizontal außerhalb der Arbeitsfläche ist (true).
+ * @param overY Gibt an, ob der Mauszeiger vertikal außerhalb der Arbeitsfläche ist (true).
+ * @author Alex Letkemann
+ */
 void BB_ToolStair::move( QMouseEvent* me, bool overX, bool overY )
 {
     //Behandlung von Linke-maustaste
@@ -95,42 +115,52 @@ void BB_ToolStair::move( QMouseEvent* me, bool overX, bool overY )
     }
 }
 
+/**
+ * Wird aufgerufen, wenn eine Maustaste los gelassen wird.
+ * @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+ * @author Alex	Letkemann
+ */
 void BB_ToolStair::release( QMouseEvent* me )
 {
-	//alle Objekte desektieren
-	if ( m_ToolObjects != NULL )
-	{
-		m_ToolObjects->clear();
-	}
+    //alle Objekte desektieren
+    if ( m_ToolObjects != NULL )
+    {
+        m_ToolObjects->clear();
+    }
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
     if ( m_Objects == NULL | me == NULL | m_Transformer == NULL )
     {
         qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
-		getToolWidget()->updateWidget();
+        getToolWidget() ->updateWidget();
         return ;
     }
     //Behandlung nur von Linke-Maustaste
     if ( me->button() == Qt::LeftButton )
     {
 
-		m_pScreen = me->pos();
-		m_Transformer->screenToLogical( m_pLogic, m_pScreen );
-		m_LastLogicMouseClick = m_pLogic;
+        m_pScreen = me->pos();
+        m_Transformer->screenToLogical( m_pLogic, m_pScreen );
+        m_LastLogicMouseClick = m_pLogic;
 
         //beim ersten click markieren und verschiebne
-		BB_Point * point = ( BB_Point * ) getClickedObject( m_pLogic, typeid( BB_Point ) );
-		if ( point == NULL || point == m_Stair->getPos1())
-		{
-			return ;
-			delete m_Stair;
-		}
-		m_Stair->setPos2( point);
-		m_Objects->append(m_Stair);
-		m_Stair = NULL;
+        BB_Point * point = ( BB_Point * ) getClickedObject( m_pLogic, typeid( BB_Point ) );
+        if ( point == NULL || point == m_Stair->getPos1() )
+        {
+            return ;
+            delete m_Stair;
+        }
+        m_Stair->setPos2( point );
+        m_Objects->append( m_Stair );
+        m_Stair = NULL;
     }
     updateWidget();
 }
 
+/**
+ * Gibt das Eigenschftsfenster des Tools zurück.
+ * @return Eigenschftsfenster des Tools.
+ * @author Alex Letkemann
+ */
 BB_AbstractToolWidget* BB_ToolStair::getToolWidget()
 {
     if ( m_ToolWidget == NULL )

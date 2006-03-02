@@ -20,17 +20,31 @@
 #include "bb_tooldelete.h"
 #include "bb_constructionelement.h"
 
+/**
+Standart Konstruktor
+@param parent Zeiger auf ein Widget zu dem dieser Tool gehört
+@see BB_AbstractTool
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 BB_ToolDelete::BB_ToolDelete( QWidget * parent )
         : BB_AbstractTool( parent )
 {
-	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolDelete.png" );
+    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolDelete.png" );
 }
 
 
+/**
+Destruktor
+*/
 BB_ToolDelete::~BB_ToolDelete()
 {}
 
 
+/**
+ * Wird aufgerufen, wenn eine Maustaste gedrückt wird.
+ * @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+ * @author Vaceslav Ustinov
+ */
 void BB_ToolDelete::click( QMouseEvent* me )
 {
     m_pScreen = me->pos();

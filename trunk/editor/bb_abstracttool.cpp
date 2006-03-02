@@ -453,14 +453,14 @@ void BB_AbstractTool::selectObject( BB_DrawObject * object )
     }
 }
 
-//TODO
-void BB_AbstractTool::setScaleHeight( double Value )
-{
-    m_ScaleHeight = Value;
-}
+// //TODO
+// void BB_AbstractTool::setScaleHeight( double Value )
+// {
+//     m_ScaleHeight = Value;
+// }
 
-//TODO
-void BB_AbstractTool::setScaleWidth( double Value )
-{
-    m_ScaleWidth = Value;
-}
+// //TODO
+// void BB_AbstractTool::setScaleWidth( double Value )
+// {
+//     m_ScaleWidth = Value;
+// }

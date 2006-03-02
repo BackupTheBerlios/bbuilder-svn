@@ -280,20 +280,6 @@
       <anchor>a28</anchor>
       <arglist>(BB_DrawObject *object)</arglist>
     </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setScaleHeight</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a29</anchor>
-      <arglist>(double Value)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setScaleWidth</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>a30</anchor>
-      <arglist>(double Value)</arglist>
-    </member>
     <member kind="variable" protection="protected">
       <type>C2dVector</type>
       <name>m_LastLogicMouseClick</name>
@@ -398,39 +384,6 @@
       <anchorfile>classBB__AbstractTool.html</anchorfile>
       <anchor>p14</anchor>
       <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>double</type>
-      <name>m_ScaleHeight</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>p15</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>double</type>
-      <name>m_ScaleWidth</name>
-      <anchorfile>classBB__AbstractTool.html</anchorfile>
-      <anchor>p16</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>BB_AbstractToolWallEdit</name>
-    <filename>classBB__AbstractToolWallEdit.html</filename>
-    <base>BB_AbstractTool</base>
-    <member kind="function">
-      <type></type>
-      <name>BB_AbstractToolWallEdit</name>
-      <anchorfile>classBB__AbstractToolWallEdit.html</anchorfile>
-      <anchor>a0</anchor>
-      <arglist>(QWidget *parent)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setObjects</name>
-      <anchorfile>classBB__AbstractToolWallEdit.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>(QVector&lt; BB_DrawObject * &gt; *objects)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -2354,32 +2307,6 @@
     </member>
   </compound>
   <compound kind="class">
-    <name>BB_DWPoint</name>
-    <filename>classBB__DWPoint.html</filename>
-    <base>BB_DrawObject</base>
-    <member kind="function">
-      <type></type>
-      <name>BB_DWPoint</name>
-      <anchorfile>classBB__DWPoint.html</anchorfile>
-      <anchor>a0</anchor>
-      <arglist>(BB_Wall *wall, bool first=false)</arglist>
-    </member>
-    <member kind="function">
-      <type>bool</type>
-      <name>isFirst</name>
-      <anchorfile>classBB__DWPoint.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual const QString</type>
-      <name>getClassName</name>
-      <anchorfile>classBB__DWPoint.html</anchorfile>
-      <anchor>a3</anchor>
-      <arglist>()</arglist>
-    </member>
-  </compound>
-  <compound kind="class">
     <name>BB_FileObject</name>
     <filename>classBB__FileObject.html</filename>
     <base>BB_Object</base>
@@ -4267,6 +4194,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolDoorNew</name>
+      <anchorfile>classBB__ToolDoorNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>click</name>
@@ -4325,6 +4259,13 @@
       <anchorfile>classBB__ToolLineNew.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolLineNew</name>
+      <anchorfile>classBB__ToolLineNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -4401,6 +4342,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolMove</name>
+      <anchorfile>classBB__ToolMove.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>click</name>
@@ -4438,7 +4386,7 @@
     </member>
     <member kind="variable" protection="protected">
       <type>BB_Point *</type>
-      <name>comparePoint</name>
+      <name>m_ComparePoint</name>
       <anchorfile>classBB__ToolMove.html</anchorfile>
       <anchor>p0</anchor>
       <arglist></arglist>
@@ -4624,6 +4572,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent=0)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolScale</name>
+      <anchorfile>classBB__ToolScale.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>click</name>
@@ -4706,67 +4661,6 @@
       <name>m_Tmp_v2</name>
       <anchorfile>classBB__ToolScale.html</anchorfile>
       <anchor>p4</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>BB_ToolSelect</name>
-    <filename>classBB__ToolSelect.html</filename>
-    <base>BB_AbstractTool</base>
-    <member kind="function">
-      <type></type>
-      <name>BB_ToolSelect</name>
-      <anchorfile>classBB__ToolSelect.html</anchorfile>
-      <anchor>a0</anchor>
-      <arglist>(QWidget *parent)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>click</name>
-      <anchorfile>classBB__ToolSelect.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>(QMouseEvent *me)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>release</name>
-      <anchorfile>classBB__ToolSelect.html</anchorfile>
-      <anchor>a3</anchor>
-      <arglist>(QMouseEvent *me)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>move</name>
-      <anchorfile>classBB__ToolSelect.html</anchorfile>
-      <anchor>a4</anchor>
-      <arglist>(QMouseEvent *me, bool overX, bool overY)</arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>BB_Point</type>
-      <name>m_Point2</name>
-      <anchorfile>classBB__ToolSelect.html</anchorfile>
-      <anchor>p0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>BB_Point</type>
-      <name>m_Point1</name>
-      <anchorfile>classBB__ToolSelect.html</anchorfile>
-      <anchor>p1</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>BB_Rect</type>
-      <name>m_Rect</name>
-      <anchorfile>classBB__ToolSelect.html</anchorfile>
-      <anchor>p2</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>C2dVector</type>
-      <name>m_ClickPos</name>
-      <anchorfile>classBB__ToolSelect.html</anchorfile>
-      <anchor>p3</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -4856,6 +4750,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolTerrainPointNew</name>
+      <anchorfile>classBB__ToolTerrainPointNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_AbstractToolWidget *</type>
       <name>getToolWidget</name>
@@ -4889,6 +4790,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolTerrainTriangleNew</name>
+      <anchorfile>classBB__ToolTerrainTriangleNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_AbstractToolWidget *</type>
       <name>getToolWidget</name>
@@ -4921,6 +4829,13 @@
       <anchorfile>classBB__ToolTexture.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolTexture</name>
+      <anchorfile>classBB__ToolTexture.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -5049,6 +4964,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolWindowNew</name>
+      <anchorfile>classBB__ToolWindowNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>click</name>
@@ -5114,6 +5036,20 @@
   <compound kind="class">
     <name>BB_Transformer</name>
     <filename>classBB__Transformer.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>BB_Transformer</name>
+      <anchorfile>classBB__Transformer.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_Transformer</name>
+      <anchorfile>classBB__Transformer.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function">
       <type>void</type>
       <name>setOffset</name>
@@ -5595,7 +5531,7 @@
       <name>BB_WidgetToolScale</name>
       <anchorfile>classBB__WidgetToolScale.html</anchorfile>
       <anchor>a0</anchor>
-      <arglist>(BB_AbstractTool *parentTool)</arglist>
+      <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -5610,13 +5546,6 @@
       <anchorfile>classBB__WidgetToolScale.html</anchorfile>
       <anchor>a3</anchor>
       <arglist>(double *real)</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>setupUi</name>
-      <anchorfile>classBB__WidgetToolScale.html</anchorfile>
-      <anchor>b0</anchor>
-      <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>Ui::WidgetToolScale</type>
@@ -5849,7 +5778,7 @@
       <name>BB_WidgetToolZoom</name>
       <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
       <anchor>a0</anchor>
-      <arglist>(BB_AbstractTool *parentTool)</arglist>
+      <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -5857,13 +5786,6 @@
       <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
       <anchor>a2</anchor>
       <arglist>(double value)</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>setupUi</name>
-      <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
-      <anchor>b0</anchor>
-      <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>Ui::WidgetToolZoom</type>
@@ -8824,8 +8746,6 @@
     <file>bb.h</file>
     <file>bb_abstracttool.cpp</file>
     <file>bb_abstracttool.h</file>
-    <file>bb_abstracttoolwalledit.cpp</file>
-    <file>bb_abstracttoolwalledit.h</file>
     <file>bb_abstracttoolwidget.cpp</file>
     <file>bb_abstracttoolwidget.h</file>
     <file>bb_building.cpp</file>
@@ -8864,8 +8784,6 @@
     <file>bb_drawdevice.h</file>
     <file>bb_drawobject.cpp</file>
     <file>bb_drawobject.h</file>
-    <file>bb_dwpoint.cpp</file>
-    <file>bb_dwpoint.h</file>
     <file>bb_fileobject.cpp</file>
     <file>bb_fileobject.h</file>
     <file>bb_globals.cpp</file>
@@ -8929,8 +8847,6 @@
     <file>bb_tools.h</file>
     <file>bb_toolscale.cpp</file>
     <file>bb_toolscale.h</file>
-    <file>bb_toolselect.cpp</file>
-    <file>bb_toolselect.h</file>
     <file>bb_toolstair.cpp</file>
     <file>bb_toolstair.h</file>
     <file>bb_toolterrainpointnew.cpp</file>
@@ -8998,7 +8914,47 @@
     <file>c2dvector.cpp</file>
     <file>c2dvector.h</file>
     <file>main.cpp</file>
+    <file>moc_bb_abstracttoolwidget.cpp</file>
+    <file>moc_bb_dlgbuildingedit.cpp</file>
+    <file>moc_bb_dlgleveledit.cpp</file>
+    <file>moc_bb_dlgopentexture.cpp</file>
+    <file>moc_bb_dlgprojectnew.cpp</file>
+    <file>moc_bb_dlgterrainedit.cpp</file>
+    <file>moc_bb_dlgwalledit.cpp</file>
+    <file>moc_bb_mainwindow.cpp</file>
+    <file>moc_bb_tab.cpp</file>
+    <file>moc_bb_tabbuilding.cpp</file>
+    <file>moc_bb_tablevel.cpp</file>
+    <file>moc_bb_tabterrain.cpp</file>
+    <file>moc_bb_widgettoolbuildingpositionnew.cpp</file>
+    <file>moc_bb_widgettoollinenew.cpp</file>
+    <file>moc_bb_widgettoolnavigationpointnew.cpp</file>
+    <file>moc_bb_widgettoolpointnew.cpp</file>
+    <file>moc_bb_widgettoolscale.cpp</file>
+    <file>moc_bb_widgettoolselect.cpp</file>
+    <file>moc_bb_widgettoolterrainpointnew.cpp</file>
+    <file>moc_bb_widgettoolterraintrianglenew.cpp</file>
+    <file>moc_bb_widgettooltrianglenew.cpp</file>
+    <file>moc_bb_widgettoolwallnew.cpp</file>
+    <file>moc_bb_widgettoolzoom.cpp</file>
+    <file>moc_bb_workarea.cpp</file>
+    <file>ui_buildingEdit.h</file>
+    <file>ui_fileOptions.h</file>
+    <file>ui_levelEdit.h</file>
     <file>ui_projectNew.h</file>
+    <file>ui_terrainEdit.h</file>
+    <file>ui_textureOpenDialog.h</file>
+    <file>ui_toolWidgetBuildingPositionNew.h</file>
+    <file>ui_toolWidgetLineNew.h</file>
+    <file>ui_toolWidgetNavigationPointNew.h</file>
+    <file>ui_toolWidgetPointNew.h</file>
+    <file>ui_toolWidgetScale.h</file>
+    <file>ui_toolWidgetSelect.h</file>
+    <file>ui_toolWidgetTerrainPointNew.h</file>
+    <file>ui_toolWidgetTerrainTriangleNew.h</file>
+    <file>ui_toolWidgetTriangleNew.h</file>
+    <file>ui_toolWidgetWallNew.h</file>
+    <file>ui_toolWidgetZoom.h</file>
   </compound>
   <compound kind="dir">
     <name>renderer/</name>
@@ -9041,5 +8997,46 @@
     <file>cglmatrix.cpp</file>
     <file>cglmatrix.h</file>
     <file>main.cpp</file>
+    <file>moc_bb_abstracttoolwidget.cpp</file>
+    <file>moc_bb_dlgbuildingedit.cpp</file>
+    <file>moc_bb_dlgleveledit.cpp</file>
+    <file>moc_bb_dlgopentexture.cpp</file>
+    <file>moc_bb_dlgprojectnew.cpp</file>
+    <file>moc_bb_dlgterrainedit.cpp</file>
+    <file>moc_bb_dlgwalledit.cpp</file>
+    <file>moc_bb_mainwindow.cpp</file>
+    <file>moc_bb_tab.cpp</file>
+    <file>moc_bb_tabbuilding.cpp</file>
+    <file>moc_bb_tablevel.cpp</file>
+    <file>moc_bb_tabterrain.cpp</file>
+    <file>moc_bb_widgettoolbuildingpositionnew.cpp</file>
+    <file>moc_bb_widgettoollinenew.cpp</file>
+    <file>moc_bb_widgettoolnavigationpointnew.cpp</file>
+    <file>moc_bb_widgettoolpointnew.cpp</file>
+    <file>moc_bb_widgettoolscale.cpp</file>
+    <file>moc_bb_widgettoolselect.cpp</file>
+    <file>moc_bb_widgettoolterrainpointnew.cpp</file>
+    <file>moc_bb_widgettoolterraintrianglenew.cpp</file>
+    <file>moc_bb_widgettooltrianglenew.cpp</file>
+    <file>moc_bb_widgettoolwallnew.cpp</file>
+    <file>moc_bb_widgettoolzoom.cpp</file>
+    <file>moc_bb_workarea.cpp</file>
+    <file>moc_br_mainwindow.cpp</file>
+    <file>ui_buildingEdit.h</file>
+    <file>ui_fileOptions.h</file>
+    <file>ui_levelEdit.h</file>
+    <file>ui_terrainEdit.h</file>
+    <file>ui_textureOpenDialog.h</file>
+    <file>ui_toolWidgetBuildingPositionNew.h</file>
+    <file>ui_toolWidgetLineNew.h</file>
+    <file>ui_toolWidgetNavigationPointNew.h</file>
+    <file>ui_toolWidgetPointNew.h</file>
+    <file>ui_toolWidgetScale.h</file>
+    <file>ui_toolWidgetSelect.h</file>
+    <file>ui_toolWidgetTerrainPointNew.h</file>
+    <file>ui_toolWidgetTerrainTriangleNew.h</file>
+    <file>ui_toolWidgetTriangleNew.h</file>
+    <file>ui_toolWidgetWallNew.h</file>
+    <file>ui_toolWidgetZoom.h</file>
   </compound>
 </tagfile>

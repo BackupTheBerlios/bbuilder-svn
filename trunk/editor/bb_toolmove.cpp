@@ -19,6 +19,12 @@
 
 using namespace std;
 
+/**
+Standart Konstruktor
+@param parent Zeiger auf ein Widget zu dem dieser Tool gehört
+@see BB_AbstractTool
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 BB_ToolMove::BB_ToolMove( QWidget * parent )
         : BB_AbstractTool( parent )
 {
@@ -26,7 +32,7 @@ BB_ToolMove::BB_ToolMove( QWidget * parent )
 
 
 
-    comparePoint = NULL;
+    m_ComparePoint = NULL;
     m_Rect.setPos1( &m_Point1 );
     m_Rect.setPos2( &m_Point2 );
 
@@ -44,6 +50,9 @@ BB_ToolMove::BB_ToolMove( QWidget * parent )
     m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolMove.png" );
 }
 
+/**
+Destruktor
+*/
 
 BB_ToolMove::~BB_ToolMove()
 {}
@@ -104,6 +113,12 @@ BB_ToolMove::~BB_ToolMove()
 //         }
 //     }
 // }
+
+/**
+ * Wird aufgerufen, wenn eine Maustaste gedrückt wird.
+ * @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+ * @author Alex Letkemann
+ */
 
 void BB_ToolMove::click( QMouseEvent* me )
 {
@@ -214,6 +229,14 @@ void BB_ToolMove::click( QMouseEvent* me )
 //     }
 // }
 
+/**
+ * Die Methode wird aufgerufen, wenn die Maus bei beliebiger gedrückter Maustaste bewegt wird.
+ * @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+ * @param overX Gibt an, ob der Mauszeiger horizontal außerhalb der Arbeitsfläche ist (true).
+ * @param overY Gibt an, ob der Mauszeiger vertikal außerhalb der Arbeitsfläche ist (true).
+ * @author Alex Letkemann
+ */
+
 void BB_ToolMove::move( QMouseEvent* me, bool overX, bool overY )
 {
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
@@ -264,11 +287,17 @@ void BB_ToolMove::move( QMouseEvent* me, bool overX, bool overY )
 // {
 //     /* Übergebene Variablen, die nicht verwendet werden */
 //     me->ignore();
-//     //     if (comparePoint != NULL){
-//     //       comparePoint->setSelected(false);
-//     //       comparePoint = NULL;
+//     //     if (m_ComparePoint != NULL){
+//     //       m_ComparePoint->setSelected(false);
+//     //       m_ComparePoint = NULL;
 //     //     }
 // }
+
+/**
+ * Wird aufgerufen, wenn eine Maustaste los gelassen wird.
+ * @param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+ * @author Alex	Letkemann
+ */
 
 void BB_ToolMove::release( QMouseEvent* me )
 {
@@ -299,8 +328,8 @@ void BB_ToolMove::release( QMouseEvent* me )
         m_Transformer->screenToLogical( m_pLogic, m_pScreen );
 
         //Wenn die Position von Click und release kleiner als 10 dann werden max. ein Object ausgewaehlt
-//         if ( m_ClickPos.getAbstand( m_pLogic ) < 10 )
-        if ( m_ClickPos.getAbstand( m_pLogic ) <  10 / m_Transformer->getScale())
+        //         if ( m_ClickPos.getAbstand( m_pLogic ) < 10 )
+        if ( m_ClickPos.getAbstand( m_pLogic ) < 10 / m_Transformer->getScale() )
         {
             for ( int i = 0; i < m_Objects->count(); i++ )
             {
@@ -317,9 +346,9 @@ void BB_ToolMove::release( QMouseEvent* me )
         else
         {
             QRectF rect( m_ClickPos.x(),
-                        m_ClickPos.y(),
-                        ( m_pLogic.x() - m_ClickPos.x() ),
-                        ( m_pLogic.y() - m_ClickPos.y() ) );
+                         m_ClickPos.y(),
+                         ( m_pLogic.x() - m_ClickPos.x() ),
+                         ( m_pLogic.y() - m_ClickPos.y() ) );
 
             for ( int i = 0; i < m_Objects->count(); i++ )
             {
@@ -340,11 +369,12 @@ void BB_ToolMove::release( QMouseEvent* me )
     updateWidget();
 }
 
-
-
 /**
- * Selektiert alle Objekte
- */
+Selektiert alle Objekte in Vector m_Obejcts<br>
+So können alle Objekte Verschoben oder gelösch werden
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
+
 void BB_ToolMove::selectAll()
 {
     if ( m_Selection != NULL && m_Component != NULL )
@@ -365,8 +395,10 @@ void BB_ToolMove::selectAll()
 }
 
 
-/*!
-    \fn BB_AbstractTool::getToolWidget()
+/**
+ * Gibt das Eigenschftsfenster des Tools zurück.
+ * @return Eigenschftsfenster des Tools.
+ * @author Alex Letkemann
  */
 BB_AbstractToolWidget* BB_ToolMove::getToolWidget()
 {

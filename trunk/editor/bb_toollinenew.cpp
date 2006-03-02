@@ -20,13 +20,15 @@
 #include <bb_workarea.h>
 #include <bb_widgettoollinenew.h>
 
-
-///@todo m_Tmp_Line auf m_TmpWall umstellen
-
 using namespace std;
 
 
-
+/**
+Standart Konstruktor
+@param parent Zeiger auf ein Widget zu dem dieser Tool gehört
+@see BB_AbstractTool
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 BB_ToolLineNew::BB_ToolLineNew( QWidget *parent )
         : BB_AbstractTool( parent )
 {
@@ -34,11 +36,17 @@ BB_ToolLineNew::BB_ToolLineNew( QWidget *parent )
     m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolWall.png" );
 }
 
-
+/**
+Destruktor
+*/
 BB_ToolLineNew::~BB_ToolLineNew()
 {}
 
-
+/**
+Ein Erreignis, wird aufgerufen wenn mann auf eine Mauste-Taste druckt
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolLineNew::click( QMouseEvent* me )
 {
     if ( m_Objects != NULL && me != NULL && m_Transformer != NULL )
@@ -113,13 +121,18 @@ void BB_ToolLineNew::click( QMouseEvent* me )
     }
 }
 
+/**
+Die Methode wird aufgerufen, wenn die Maus bei beliebiger gedrückter Maustaste bewegt wird.
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolLineNew::move( QMouseEvent* me, bool overX, bool overY )
 {
     if ( m_Objects != NULL &&
-            me != NULL &&
-            m_Transformer != NULL &&
-            !overX &&
-            !overY )
+         me != NULL &&
+         m_Transformer != NULL &&
+         !overX &&
+         !overY )
     {
 
         C2dVector moveTmp;
@@ -143,6 +156,11 @@ void BB_ToolLineNew::move( QMouseEvent* me, bool overX, bool overY )
     }
 }
 
+/**
+Wird aufgerufen, wenn eine Maustaste los gelassen wird.
+@param me Qt-MouseEvent, welches weitere Informationen enthält. Siehe Qt-Dokumentation.
+@author Vaceslav Ustinov <v.ustinov@web.de>
+*/
 void BB_ToolLineNew::release( QMouseEvent* me )
 {
     if ( m_Objects != NULL && me != NULL && m_Transformer != NULL )
@@ -215,8 +233,10 @@ void BB_ToolLineNew::release( QMouseEvent* me )
 
 
 
-/*!
-    \fn BB_AbstractTool::getToolWidget()
+/**
+ * Gibt das Eigenschftsfenster des Tools zurück.
+ * @return Eigenschftsfenster des Tools.
+ * @author Alex Letkemann
  */
 BB_AbstractToolWidget* BB_ToolLineNew::getToolWidget()
 {
@@ -228,28 +248,41 @@ BB_AbstractToolWidget* BB_ToolLineNew::getToolWidget()
     return m_ToolWidget;
 }
 
-
-/*!
-    \fn BB_ToolLineNew::getClickedPoint( C2dVector& pos )
- */
+/**
+Gibt zeiger auf ein Punkt, auf den man geklickt hat.<br>
+Gibt es Zwei Punkte auf gleiche Position, 
+dann wird nur der erster in Vector m_Objects von BB_AbstractTool stehende Punkt zurückgeliefert<br>
+Falss es keine Punkte auf gesuchte Position gibts, wird ein Null-Pointer zurückgegeben
+@param pos gesuchte logische Position
+@return Zeiger auf ein Punkt, der auf gesuchte Position liegt oder NULL
+@author Vacesav Ustinov
+*/
 BB_Point* BB_ToolLineNew::getClickedPoint( C2dVector& pos )
 {
     return ( BB_Point* ) getClickedObject( pos, typeid( BB_Point ) );
 }
 
 
-/*!
-    \fn BB_ToolLineNew::createNewLine( BB_Point* p1, BB_Point* p2 )
- */
+/**
+Liefert Zeiger auf frisch erzeugte Linie zurück
+@param p1 Zeiger auf ein Punkt, wird als Position 1 implementiert
+@param p2 Zeiger auf ein Punkt, wird als Position 2 implementiert
+@author Vacesav Ustinov
+*/
 BB_Line* BB_ToolLineNew::createNewLine( BB_Point* p1, BB_Point* p2 )
 {
     return new BB_Line( p1, p2 );
 }
 
-
-/*!
-    \fn BB_ToolLineNew::getClickedLine()
- */
+/**
+Gibt Zeiger auf eine Linie, auf die man geklickt hat.<br>
+Gibt es zwei Linie auf gleiche Position, 
+dann wird nur die erste in Vector m_Objects von BB_AbstractTool stehende Linie zurückgeliefert<br>
+Falss es keine Punkte auf gesuchte Position gibts, wird ein Null-Pointer zurückgegeben
+@param pos gesuchte logische Position
+@return Zeiger auf eine Linie, die auf gesuchte Position liegt oder NULL
+@author Vacesav Ustinov
+*/
 BB_Line* BB_ToolLineNew::getClickedLine( C2dVector& pos )
 {
     return ( BB_Line* ) getClickedObject( pos, typeid( BB_Line ) );

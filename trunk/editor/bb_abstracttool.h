@@ -244,8 +244,8 @@ class BB_AbstractTool
          */
         virtual void selectObject( BB_DrawObject * object );
 
-        void setScaleHeight( double Value );
-        void setScaleWidth( double Value );
+//         void setScaleHeight( double Value );
+//         void setScaleWidth( double Value );
 
 
 
@@ -296,8 +296,8 @@ class BB_AbstractTool
         BB_DrawObject * m_FirstSelectedObject;
 
         /** Factor zum Scalieren */
-        double m_ScaleHeight;
-        double m_ScaleWidth;
+//         double m_ScaleHeight;
+//         double m_ScaleWidth;
 
 
 };

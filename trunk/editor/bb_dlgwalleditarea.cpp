@@ -209,8 +209,8 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
         m_Tool->setSelectionVector( m_Selection );
         m_Tool->setToolObjects( m_ToolObjects );
         m_Tool->setTransformer( &m_transformer );
-        m_Tool->setScaleHeight( m_ProportionHeight );
-        m_Tool->setScaleWidth( m_ProportionWidth );
+//         m_Tool->setScaleHeight( m_ProportionHeight );
+//         m_Tool->setScaleWidth( m_ProportionWidth );
         //         m_Tool->setTransformer( &m_Transformer );
         // 		m_Tool->setObjects(m_DrawObjects);
         //         m_Tool->setToolObjects( &m_ToolObjects );
