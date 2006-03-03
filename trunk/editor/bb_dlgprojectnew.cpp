@@ -19,6 +19,7 @@
 #include <bb.h>
 using namespace std;
 
+/** Konstruktor */
 BB_DlgProjectNew::BB_DlgProjectNew( QWidget * parent, Qt::WFlags f )
         : QDialog( parent, f )
 {
@@ -53,16 +54,14 @@ BB_DlgProjectNew::BB_DlgProjectNew( QWidget * parent, Qt::WFlags f )
 
 }
 
-
+/** Destruktor */
 BB_DlgProjectNew::~BB_DlgProjectNew()
 {}
 
 
 
 
-/*!
-    \fn BB_DlgProjectNew::slotShowDir()
- */
+/** Wird aufgerufen, wenn der 'Suchen'-Button gedrückt wird */
 void BB_DlgProjectNew::slotShowDir()
 {
     cout << "ShowDir" << endl;
@@ -82,21 +81,15 @@ void BB_DlgProjectNew::slotShowDir()
 }
 
 
-/*!
-    \fn BB_DlgProjectNew::slotPathChanged()
- */
+/** Wird aufgerufen, wenn das Verzeichnis geändert wird */
 void BB_DlgProjectNew::slotPathChanged( const QString & text )
 {
-
-    // 	m_ProjectPath = m_Dlg.lineEditProjectPath->text();
     m_ProjectPath = text;
     checkDir();
 }
 
 
-/*!
-    \fn BB_DlgProjectNew::slotNameChanged()
- */
+/** Wird aufgerufen, wenn der Name geändert wird */
 void BB_DlgProjectNew::slotNameChanged( const QString & text )
 {
     m_ProjectName = text;
@@ -148,12 +141,13 @@ void BB_DlgProjectNew::checkDir()
     }
 }
 
-
+/** Gibt den Projekt-Verzeichnis-Namen zurück */
 QString BB_DlgProjectNew::getProjectDir() const
 {
     return m_ProjectDir;
 }
 
+/** Gibt den Pfad zum Projekt-Verzeichnis zurück */
 QDir BB_DlgProjectNew::getProjectPath() const
 {
     return m_Dir;
@@ -161,21 +155,19 @@ QDir BB_DlgProjectNew::getProjectPath() const
 
 
 
-/*!
-    \fn BB_DlgProjectNew::slotDescChanged(const QString & text)
- */
+/** Wird aufgerufen, wenn die Beschreibung geändert wird */
 void BB_DlgProjectNew::slotDescChanged()
 {
     m_ProjectDescription = m_Dlg.textEditProjectDesc->toPlainText();
 }
 
-
+/** Gibt den Projektnamen zurück */
 QString BB_DlgProjectNew::getProjectName() const
 {
     return m_ProjectName;
 }
 
-
+/** Gibt die Projektbeschreibung zurück */
 QString BB_DlgProjectNew::getProjectDescription() const
 {
     return m_ProjectDescription;

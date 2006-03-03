@@ -82,15 +82,6 @@ C2dVector C2dVector::operator - ( const C2dVector & v2 ) const
                       m_Y - v2.m_Y );
 }
 
-/** Adds object data as a node to the QDomDocument. */
-/*
-QDomElement C2dVector::createDomElement(QDomDocument & doc)const{
-  QDomElement tag = doc.createElement( getClassName() ); 
-  tag.setAttribute("x",x());  
-  tag.setAttribute("y",y());  
-  return tag;
- }
- */
 
 /** Virtual function, that returns the classname
 */
@@ -99,7 +90,8 @@ const char * C2dVector::getClassName() const
     return C2dVector::ClassName;
 }
 
-
+/** Gibt den Abstand zwischen zwei Punkten zurück.
+ */
 double C2dVector::getAbstand( C2dVector v2 )
 {
     double abstand = sqrt( ( double ) ( ( m_X - v2.x() ) * ( m_X - v2.x() ) ) + ( ( m_Y - v2.y() ) * ( m_Y - v2.y() ) ) );
@@ -108,28 +100,26 @@ double C2dVector::getAbstand( C2dVector v2 )
 
 
 
-
-
-/*!
-    \fn C2dVector::print()
+/** Prints the vector to console
  */
-/**
-* Returns this * skalar
-* @author Alex Letkmann
-*/void C2dVector::print(char c[])
+void C2dVector::print(char c[])
 {
     cout << c << "x: " << m_X << "--y: " << m_Y << endl;
 }
 
 
-/*!
-    \fn C2dVector::operator == (const C2dVector & v2) const
+/**
+ * Compares the vector with an another vector
+ * @param v2 second vector to compare
+ * @return true if its equal
  */
 bool C2dVector::operator == ( const C2dVector & v2 ) const
 {
     return ( m_X == v2.x() && m_Y == v2.y() );
 }
 
+/** Returns vector sum this + v2.
+ */
 double C2dVector::getWinkel()
 {
     //Umwandlung von radiant in degrees
@@ -137,7 +127,10 @@ double C2dVector::getWinkel()
 }
 
 
-
+/**
+ * Returns this * skalar
+ * @author Alex Letkmann
+ */
 C2dVector C2dVector::operator * ( const double value ) const
 {
     return C2dVector( m_X * value , m_Y * value );

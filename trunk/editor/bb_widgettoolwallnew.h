@@ -48,7 +48,7 @@ class BB_WidgetToolWallNew : public BB_AbstractToolWidget
 		
 
         /**
-         * Aktiviert oder Deaktiviert das Fenster.<br />
+         * Aktiviert oder Deaktiviert das Fenster.<br>
 		 * @param value True: Aktiviert, False: Deaktiviert
 		 * @author Alex Letkemann
          */
@@ -95,7 +95,7 @@ class BB_WidgetToolWallNew : public BB_AbstractToolWidget
         void slotEdit();
 	protected:
 		
-		/* Form */
+		/** Form */
         Ui::WidgetToolWallNew m_Ui;
 };
 

@@ -86,9 +86,10 @@ public:
 	 */
 	void setFilePath(const QDir& theValue);
 	
-	/**
-	 * \fn BB_Object::getClassName()
-	 */
+    /**
+     * Gibt den Klassennamen zurück.
+     * @return Klassenname
+     */
     virtual const QString getClassName();
 	
 	/**
@@ -153,7 +154,11 @@ protected:
 	/** Errorstring */
     QString m_ErrorString;
 protected:
-	/** Schreibt die Datei in den Stream out */ 
+	/** 
+	 * Schreibt die Datei in den angegeben Stream
+	 * @param out Stream in den gweschrieben werden soll
+	 * @author Alex Letkemann
+	 */ 
 	virtual bool write(QTextStream &out)  = 0;
 
 

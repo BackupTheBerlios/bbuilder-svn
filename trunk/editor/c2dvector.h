@@ -53,7 +53,7 @@ class C2dVector
         /** Returns vector length.
         */
         virtual double getLength() const;
-        /**Returns Abstand von Zwei Punkten
+        /** Gibt den Abstand zwischen zwei Punkten zurück.
         */
         virtual double getAbstand( C2dVector v2 );
         /**Return: Winkel von diesem Vektror zum X-Achse
@@ -65,11 +65,19 @@ class C2dVector
         /** Returns: this - v2.
         */
         virtual C2dVector operator - ( const C2dVector & v2 ) const;
-        /**XML
-        */ 
-        // QDomElement createDomElement(QDomDocument & doc)const;
+
         const char * getClassName() const;
+		
+		/** Prints the vector to console
+		 */
         void print(char c[] = "");
+		
+		
+        /**
+         * Compares the vector with an another vector
+         * @param v2 second vector to compare
+         * @return true if its equal
+         */
         bool operator == ( const C2dVector & v2 ) const;
 
         /**

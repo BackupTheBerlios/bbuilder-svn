@@ -19,6 +19,13 @@
 
 using namespace std;
 
+/**
+ * Konstruktor
+ * @param doc Dokument
+ * @param info Informationsfenster
+ * @param parent Parent-Fenster
+ * @author Alex Letkemann
+ */
 BR_View::BR_View( BB_Doc * doc, BR_InfoWidget * info, QWidget * parent )
         : QGLWidget( parent )
 {
@@ -50,7 +57,9 @@ BR_View::BR_View( BB_Doc * doc, BR_InfoWidget * info, QWidget * parent )
 	m_Light = new CGLLight(lightPos,tmpColor0,tmpColor1,tmpColor2,1.0,true);
 }
 
-
+/**
+ * Destruktor
+ */
 BR_View::~BR_View()
 {}
 
@@ -59,6 +68,7 @@ BR_View::~BR_View()
 
 /**
  * Initialisiert OpenGL
+ * @author Alex Letkemann
  */
 void BR_View::initializeGL()
 {
@@ -70,16 +80,19 @@ void BR_View::initializeGL()
     glEnable( GL_LIGHTING );
     glEnable( GL_COLOR_MATERIAL );
     glEnable( GL_NORMALIZE );
-//     glEnable( GL_CULL_FACE );
-    //   glFrontFace(GL_CCW);
+    glEnable( GL_CULL_FACE );
 
     glPolygonMode( GL_FRONT, GL_FILL );
     glPolygonMode( GL_BACK, GL_LINE );
 }
 
 
-/*!
-    \fn BR_View::resizeGL()
+/**
+ * Wird aufgerufen, wenn das OpenGL Fenster die Größe ändert.
+ * Passt den Aspekt an.
+ * @param width Neue Breite des Fensters
+ * @param height Neuen Höhe des Fensters
+ * @author Alex Letkemann
  */
 void BR_View::resizeGL( int width, int height )
 {
@@ -96,8 +109,9 @@ void BR_View::resizeGL( int width, int height )
 }
 
 
-/*!
-    \fn BR_View::paintGL()
+/**
+ * Zeichnet die 3D-Scene
+ * @author Alex Letkemann
  */
 void BR_View::paintGL()
 {
@@ -113,11 +127,13 @@ void BR_View::paintGL()
     m_Camera.apply();
 	m_Doc->showGl();
 
-//     drawGrid();
 	m_FPS++;
 }
 
-
+/**
+ * Zeichet ein Gitter auf der XZ-Ebene 
+ * @author Alex Letkemann
+ */
 void BR_View::drawGrid( void )
 {
 
@@ -154,8 +170,11 @@ void BR_View::drawGrid( void )
 }
 
 
-/*!
-    \fn BR_View::keyPressEvent ( QKeyEvent * )
+/**
+ * Wird aufgerufen, wenn eine Taste gedrückt wird.
+ * Setzt den Status der Taste
+ * @param ke QKeyEvent
+ * @author Alex Letkemann
  */
 void BR_View::keyPressEvent ( QKeyEvent * ke )
 {
@@ -174,8 +193,11 @@ void BR_View::keyPressEvent ( QKeyEvent * ke )
 
 
 
-/*!
-    \fn BR_View::keyReleaseEvent ( QKeyEvent * ke )
+/**
+ * Wird aufgerufen, wenn eine Taste los gelassen wird.
+ * Setzt den Status der Taste
+ * @param ke QKeyEvent
+ * @author Alex Letkemann
  */
 void BR_View::keyReleaseEvent ( QKeyEvent * ke )
 {
@@ -191,31 +213,32 @@ void BR_View::keyReleaseEvent ( QKeyEvent * ke )
 }
 
 
-/*!
-    \fn BR_View::mousePressEvent ( QMouseEvent * me)
+/**
+ * Wird aufgerufen, wenn eine Maustatste gedrückt wird.
+ * @param me QMouseEvent
+ * @author Alex Letkemann
  */
 void BR_View::mousePressEvent ( QMouseEvent * me )
 {
-    //     cout << me->button() << endl;
-    //     setCursor ( Qt::BlankCursor );
-    // 	setMouseTracking( true );
-    //     grabMouse();
 
     m_MousePosX = me->globalX();
     m_MousePosY = me->globalY();
 }
 
+
+/**
+ * Wird aufgerufen, wenn die Maus mit gedrückter Maustatste bewegt wird
+ * Setzt die Rotation der Kamera
+ * @param me QMouseEvent
+ * @author Alex Letkemann
+ */
 void BR_View::mouseMoveEvent ( QMouseEvent * me )
 {
 
-    // 	cout << me ->buttons() << " ? " << Qt::LeftButton << endl;
     if ( me->buttons() == Qt::LeftButton )
     {
-        //cout << "move " << e->x() << "|" << e->y() << endl;
+
         double x, y;
-
-//         cout << me->x() << " | " << me->y() << endl;
-
 
 		x = m_MousePosX - (me->globalX());
 		y = m_MousePosY - (me->globalY());
@@ -236,40 +259,33 @@ void BR_View::mouseMoveEvent ( QMouseEvent * me )
  */
 void BR_View::proceedActions()
 {
-// 	QVector<BB_DrawObject *> * objects =  m_Doc->getLevels()->at(0)->getDrawObjects();
+
 	if( m_Keys.isPressed( Qt::Key_W ) )
 	{
-// 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
-// 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
 		m_Camera.move( 0.2 );
 	}
 	
 	if( m_Keys.isPressed( Qt::Key_S ) )
 	{
-// 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
-// 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
 		m_Camera.move( -0.2 );
 	}
 	
 	if( m_Keys.isPressed( Qt::Key_A ) )
 	{
-// 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
-// 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
 		m_Camera.strafe( -0.1 );
 	}
 	
 	if( m_Keys.isPressed( Qt::Key_D ) )
 	{
-// 		cout << "CameraViewPoint: " <<m_Camera.getViewPoint().x() <<"-"<<m_Camera.getViewPoint().y() <<"-"<<m_Camera.getViewPoint().z() <<endl;
-// 		cout << "CameraPos: " <<m_Camera.getPos().x() <<"-"<<m_Camera.getPos().y() <<"-"<<m_Camera.getPos().z() <<endl;
 		m_Camera.strafe( 0.1 );
 	}
 	
 }
 
 
-/*!
-    \fn BR_MainWindow::showCurrentFPS()
+/**
+ * Zeigt die aktuelle Framerate im Informationsfenster an
+ * @author Alex Letkemann
  */
 void BR_View::showCurrentFPS()
 {
@@ -282,8 +298,10 @@ void BR_View::showCurrentFPS()
 
 
 
-/*!
-    \fn BR_View::setWireFrame( bool value )
+/**
+ * Aktiviert oder deaktiviert den Wireframe-Modus
+ * @param value True: Wireframe aktiviert, False: deaktiviert
+ * @author Alex Letkemann
  */
 void BR_View::setWireFrame( bool value )
 {

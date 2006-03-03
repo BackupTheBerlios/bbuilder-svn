@@ -27,7 +27,10 @@
 
 using namespace std;
 
-
+/**
+ * Erzeugt einen neuen XML-Handler
+ * @param docComponent Dokument-Komponent welches gelesen und Interprätiert werden soll.
+ */
 BB_XHandler::BB_XHandler(BB_DocComponent*  docComponent)
  : QXmlDefaultHandler()
 {
@@ -45,12 +48,19 @@ BB_XHandler::BB_XHandler(BB_DocComponent*  docComponent)
 	
 }
 
-
+/**
+ * Destruktor
+ */
 BB_XHandler::~BB_XHandler()
 {
 }
 
 
+/**
+ * Hängt den Strting ch an den Member-String 'm_CurrentText' an.
+ * @param ch String, welcher angehängt werden soll
+ * @return false im Fehlerfall sonst true
+ */
 bool BB_XHandler::characters(const QString& ch)
 {
 	m_CurrentText += ch;
@@ -60,6 +70,7 @@ bool BB_XHandler::characters(const QString& ch)
 /**
  * Wird aufgeruffen, wenn während des Parsens ein Fehler auftritt.
  * Dier Fehler wird im std::cout ausgegeben
+ * @param exception QXmlParseException
  */
 bool BB_XHandler::fatalError(const QXmlParseException& exception)
 {
@@ -73,8 +84,11 @@ bool BB_XHandler::fatalError(const QXmlParseException& exception)
 }
 
 
-/*!
-    \fn BB_XHandler::parseTexture( QXmlAttributes& atts )
+/**
+ * Interpretiert die das 'texture'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
  */
 bool BB_XHandler::parseTexture( const QXmlAttributes& atts )
 {
@@ -89,7 +103,7 @@ bool BB_XHandler::parseTexture( const QXmlAttributes& atts )
 	}
 	else
 	{
-		qDebug() << atts.value( "file" );
+// 		qDebug() << atts.value( "file" );
 		m_Object->setTextureFileName( atts.value( "file" ) );
 	}
 	
@@ -97,8 +111,11 @@ bool BB_XHandler::parseTexture( const QXmlAttributes& atts )
 }
 
 
-/*!
-    \fn BB_XHandler::parseTriangle( const QXmlAttributes& atts )
+/**
+ * Interpretiert die das 'bb_triangle'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
  */
 bool BB_XHandler::parseTriangle( const QXmlAttributes& atts )
 {
@@ -161,8 +178,11 @@ bool BB_XHandler::parseTriangle( const QXmlAttributes& atts )
 }
 
 
-/*!
-    \fn BB_XHandler::parseTerrainTriangle( QXmlAttributes& atts )
+/**
+ * Interpretiert die das 'bb_terraintriangle'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
  */
 bool BB_XHandler::parseTerrainTriangle( const QXmlAttributes& atts )
 {
@@ -225,7 +245,12 @@ bool BB_XHandler::parseTerrainTriangle( const QXmlAttributes& atts )
 }
 
 
-
+/**
+ * Interpretiert die das 'bb_point'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
+ */
 bool BB_XHandler::parsePoint( const QXmlAttributes& atts )
 {
 
@@ -250,7 +275,6 @@ bool BB_XHandler::parsePoint( const QXmlAttributes& atts )
 	m_Object = new BB_Point();
 	( ( BB_Point* ) m_Object ) ->setX( x );
 	( ( BB_Point* ) m_Object ) ->setY( y );
-// 	( ( BB_TerrainPoint* ) m_Object ) ->setHeight( h );
 	m_Object->m_ObjectNr = id;
 	m_Object->setSelected( false );
 
@@ -279,7 +303,12 @@ bool BB_XHandler::parsePoint( const QXmlAttributes& atts )
 	return true;	
 }
 
-
+/**
+ * Interpretiert die das 'bb_terrainpoint'-Punkt-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
+ */
 bool BB_XHandler::parseTerrainPoint( const QXmlAttributes& atts )
 {
         bool ok;
@@ -316,8 +345,11 @@ bool BB_XHandler::parseTerrainPoint( const QXmlAttributes& atts )
 
 
 
-/*!
-    \fn BB_XHandler::parseLevelTriangle( const QXmlAttributes& atts )
+/**
+ * Interpretiert die das 'bb_leveltriangle'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
  */
 bool BB_XHandler::parseLevelTriangle( const QXmlAttributes& atts )
 {
@@ -380,8 +412,11 @@ bool BB_XHandler::parseLevelTriangle( const QXmlAttributes& atts )
 }
 
 
-/*!
-    \fn BB_XHandler::parseBuildingTriangle( const QXmlAttributes& atts )
+/**
+ * Interpretiert die das 'bb_buildingtriangle'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
  */
 bool BB_XHandler::parseBuildingTriangle( const QXmlAttributes& atts )
 {
@@ -443,6 +478,13 @@ bool BB_XHandler::parseBuildingTriangle( const QXmlAttributes& atts )
 	return true;
 }
 
+
+/**
+ * Interpretiert die das 'bb_window'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
+ */
 bool BB_XHandler::parseWindow(const QXmlAttributes& atts){
 	if ( typeid( *m_Object ) != typeid( BB_Wall ) )
 	{
@@ -503,8 +545,17 @@ bool BB_XHandler::parseWindow(const QXmlAttributes& atts){
 	m_ConstructionElement->setCoefficientPos2(cv2);
 	m_ConstructionElement->m_ObjectNr = id;
 
+	
+	return true;
 }
 
+
+/**
+ * Interpretiert die das 'bb_door'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
+ */
 bool BB_XHandler::parseDoor(const QXmlAttributes& atts){
 	if ( typeid( *m_Object ) != typeid( BB_Wall ) )
 	{
@@ -564,9 +615,18 @@ bool BB_XHandler::parseDoor(const QXmlAttributes& atts){
 	m_ConstructionElement->setCoefficientPos1(cv1);
 	m_ConstructionElement->setCoefficientPos2(cv2);
 	m_ConstructionElement->m_ObjectNr = id;
+	
+	
+	return true;
 
 }
 
+/**
+ * Interpretiert die das 'bb_stair'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
+ */
 bool BB_XHandler::parseStair(const QXmlAttributes& atts){
 	bool ok;
 	QString tmp;
@@ -615,8 +675,16 @@ bool BB_XHandler::parseStair(const QXmlAttributes& atts){
 		qDebug() << "Fehler: BB_Stair konnte nicht erstellt werden!" << endl;
 		return false;
 	}
+	
+	return true;
 }
 
+/**
+ * Interpretiert die das 'bb_wall'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
+ */
 bool BB_XHandler::parseWall(const QXmlAttributes& atts){
 	bool ok;
 	QString tmp;
@@ -664,8 +732,17 @@ bool BB_XHandler::parseWall(const QXmlAttributes& atts){
 		qDebug() << "Fehler: BB_Wall konnte nicht erstellt werden!" << endl;
 		return false;
 	}
+	
+	return true;
 }
 
+
+/**
+ * Interpretiert die das 'scale'-Element aus den angegebenen XML-Attributen.
+ * @param atts XML-Attribute
+ * @return Erfolg der Interpretation. True, wenn das Element erfolgreich interpretiert werden konnte, sonst false.
+ * @author Alex Letkemann
+ */
 bool BB_XHandler::parseScale(const QXmlAttributes& atts){
 	bool ok;
 	QString tmp;
@@ -677,4 +754,6 @@ bool BB_XHandler::parseScale(const QXmlAttributes& atts){
 	m_DocComponent->setScaleReal( value );
 
 	m_XScale = true;
+	
+	return true;
 }

@@ -23,8 +23,8 @@
 #include "bb_drawdevice.h"
 
 /**
- * Die Klasse stellt einen Arbeitsbereich, welcher die eigedliche Arbeitsfläche enthält.<br />
- * Die Arbeitsfläche ist mit Scrollbalken versehen und kann somit größer sein als der Arbeitsbereich.<br />
+ * Die Klasse stellt einen Arbeitsbereich, welcher die eigedliche Arbeitsfläche enthält.<br>
+ * Die Arbeitsfläche ist mit Scrollbalken versehen und kann somit größer sein als der Arbeitsbereich.<br>
  * Hintergrund der Arbeitsfläche wird zusammen mit dem DocComponent geändert.
  * @author Alex Letkemann
  */
@@ -48,7 +48,7 @@ class BB_WorkArea : public QScrollArea
 		
 		/**
 		 * Zoom um den übergeben Faktor.
-		 * @param factor Zoomfaktor, um den gezoomt werden soll.
+		 * @param faktor Zoomfaktor, um den gezoomt werden soll.
 		 * @author Alex Letkemann
 		 */
         void zoom( double faktor );

@@ -14,6 +14,12 @@
 
 using namespace std;
 
+/** 
+ * Konstruktor
+ * @param parent Fenster, welches blockiert wird, solnage der Dialog aktiv ist.
+ * @param Qt-Window-Flags
+ * @author Alex Letkemann
+ */
 BB_DlgBuildingEdit::BB_DlgBuildingEdit(QWidget * parent, Qt::WFlags f)
  : QDialog(parent,f)
 {
@@ -24,6 +30,9 @@ BB_DlgBuildingEdit::BB_DlgBuildingEdit(QWidget * parent, Qt::WFlags f)
 }
 
 
+/**
+ * Destruktor
+ */
 BB_DlgBuildingEdit::~BB_DlgBuildingEdit()
 {
 }
@@ -31,8 +40,9 @@ BB_DlgBuildingEdit::~BB_DlgBuildingEdit()
 
 
 
-/*!
-    \fn BB_DlgBuildingEdit::slotPlanFileSearch()
+/** 
+ * Ruft einen Datei-Dialog auf, mit dem man eine Bilddatei auswählen kann 
+ * @author Alex Letkemann
  */
 void BB_DlgBuildingEdit::slotPlanFileSearch()
 {
@@ -48,8 +58,10 @@ void BB_DlgBuildingEdit::slotPlanFileSearch()
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::getName()
+/** 
+ * Gibt den Namen des Gebäudes zurück
+ * @return Name des Gebäudes
+ * @author Alex Letkemann
  */
 const QString BB_DlgBuildingEdit::getName()
 {
@@ -57,8 +69,10 @@ const QString BB_DlgBuildingEdit::getName()
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::getDescription()
+/** 
+ * Gibt die Beschreibung des Gebäudes zurück .
+ * @return Beschreibung des Gebäudes.
+ * @author Alex Letkemann
  */
 const QString BB_DlgBuildingEdit::getDescription()
 {
@@ -66,8 +80,10 @@ const QString BB_DlgBuildingEdit::getDescription()
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::setDescription(QString& desc)
+/**
+ * Setzt die Beschreibung des Gebäudes
+ * @param desc Beschreibung des Gebäudes
+ * @author Alex Letkemann
  */
 void BB_DlgBuildingEdit::setDescription(const QString& desc)
 {
@@ -75,8 +91,10 @@ void BB_DlgBuildingEdit::setDescription(const QString& desc)
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::setName(QString& name)
+/**
+ * Setzt den Namen des Gebäudes
+ * @param name Namen des Gebäudes
+ * @author Alex Letkemann
  */
 void BB_DlgBuildingEdit::setName(const QString& name)
 {
@@ -84,8 +102,10 @@ void BB_DlgBuildingEdit::setName(const QString& name)
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::getPlanFile()
+/**
+ * Gibt den Pfad zur Bilddatei zurück.
+ * @return Pfad zur Bilddatei.
+ * @author Alex Letkemann
  */
 QString BB_DlgBuildingEdit::getPlanFile()
 {
@@ -93,8 +113,10 @@ QString BB_DlgBuildingEdit::getPlanFile()
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::setPlanFile(QString& file)
+/**
+ * Setzt den Pfad zur Bilddatei.
+ * @param file Pfad zur Bilddatei.
+ * @author Alex Letkemann
  */
 void BB_DlgBuildingEdit::setPlanFile(QString& file)
 {

@@ -41,7 +41,7 @@ public:
 	
 	/**
 	 * Setzt den Status einer Taste auf gedrückt
-	 * @param Qt-Taste 
+	 * @param key Qt-Taste 
 	 */
     virtual void pressed( int key );
 	

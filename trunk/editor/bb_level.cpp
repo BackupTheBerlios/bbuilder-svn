@@ -25,7 +25,7 @@ using namespace std;
 
 
 /**
- * Konstrucktor<br />
+ * Konstrucktor<br>
  * Erstellt eine neue Etage
  * @param building Gebäude, welchem die Etage zugeteilt wird.
  * @param path Pfad zur Datei

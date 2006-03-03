@@ -16,7 +16,7 @@
 
 /**
  * BB_DrawDevice enthält alle Objekte, die auf der Arbeitoberfläche gezeichnet werden 
- * und ist vor allem für die saubere Abräuming der Objekte zuständig.<br />
+ * und ist vor allem für die saubere Abräuming der Objekte zuständig.<br>
  * Per Offset können alle Objekte verschoben werden.
  * @author Alex Letkemann
  */

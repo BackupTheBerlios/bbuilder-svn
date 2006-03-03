@@ -33,8 +33,8 @@ class BB_ConstructionElement : public BB_Rect
     public:
         /**
         Standart Konstruktor
-        @param C2dVector v1 Position von obere-linke Ecke
-        @param C2dVector v2 Position von untere-rechte Ecke
+        @param v1 Position von obere-linke Ecke
+        @param v2 Position von untere-rechte Ecke
         */
         BB_ConstructionElement( C2dVector v1, C2dVector v2 );
         /**
@@ -44,13 +44,13 @@ class BB_ConstructionElement : public BB_Rect
         /**
         Setzt das TextureFileName fest.<br>
         Das Pfad soll relativ zum Verzeichniss "textures" in Projekt-Ordner sein
-        @param QString relative Pfad Angabe
+		@param Value relative Pfad Angabe
         */
         void setTextureFileName( const QString& Value );
         /**
         Setzt das TextureFileName fest.<br>
         Das Pfad soll Absolut sein
-        @param QString absolute Pfad Angabe
+		@param Value absolute Pfad Angabe
         */
         void setTextureAbsoluteFileName( const QString& Value );
         /**
@@ -65,8 +65,8 @@ class BB_ConstructionElement : public BB_Rect
         void openTextureDlg();
         /**
         Funktion zum Zeichnen.
-        @param BB_Transformer Transformation-Tool, damit es korrekt gezeichnet wird
-        @param QPainter Werkzeug zum Zeichnen @see QT::QPainter
+		@param transformer Transformation-Tool, damit es korrekt gezeichnet wird
+		@param painter Werkzeug zum Zeichnen @see QT::QPainter
         */
         void show( BB_Transformer& transformer, QPainter& painter ) const;
         /**
@@ -90,7 +90,7 @@ class BB_ConstructionElement : public BB_Rect
         z.B. Die Wand hat Länge 100. Die Positionen von Unserem Element sind 10 und 50.
         Dann ergeben sich folgende Proportionen: P1 10 /100 = 0.1 und P2 50 / 100 = 0,5<br>
         Hier werden Positionen auf X und Y - Achse gespeichert
-        @param C2dVector Proportionen von X und Y
+		@param Value Proportionen von X und Y
         */
         void setCoefficientPos1( const C2dVector& Value );
         /**
@@ -100,7 +100,7 @@ class BB_ConstructionElement : public BB_Rect
         C2dVector getCoefficientPos1() const;
         /**
         Legt die erste Position in Proportion an der Wand fest
-        @param C2dVector Proportionen von X und Y
+		@param Value von X und Y
         @see setCoefficientPos1()
         */
         void setCoefficientPos2( const C2dVector& Value );

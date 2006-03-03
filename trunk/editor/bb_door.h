@@ -32,8 +32,8 @@ class BB_Door : public BB_ConstructionElement
     public:
         /**
         Standart Konstruktor
-        @param C2dVector v1 Position von obere-linke Ecke
-        @param C2dVector v2 Position von untere-rechte Ecke
+        @param v1 Position von obere-linke Ecke
+        @param v2 Position von untere-rechte Ecke
         @author Vaceslav Ustinov
         */
         BB_Door( C2dVector v1, C2dVector v2 );

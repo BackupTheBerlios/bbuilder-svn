@@ -68,7 +68,7 @@ void BB_ToolZoom::click( QMouseEvent* me )
 
 
 /**
- * @fn BB_AbstractTool::( BB_DocComponent* component )
+ * @fn BB_AbstractTool::setDocComponent( BB_DocComponent* component )
  * Setzt zusätzlich den Zoomfaktor der Arbeitsfläche.
  * @author Alex Letkemann
  */

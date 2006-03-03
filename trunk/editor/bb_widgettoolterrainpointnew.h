@@ -47,7 +47,7 @@ class BB_WidgetToolTerrainPointNew : public BB_AbstractToolWidget
         virtual void clearToolWidget();
 
         /**
-         * Aktiviert oder Deaktiviert das Fenster.<br />
+         * Aktiviert oder Deaktiviert das Fenster.<br>
          * @param value True: Aktiviert, False: Deaktiviert
          * @author Alex Letkemann
          */
@@ -95,9 +95,10 @@ class BB_WidgetToolTerrainPointNew : public BB_AbstractToolWidget
         void slotHeightFinished();
 		
     protected:
+		/** Hilfsvariable */
         BB_Point* m_Tmp_Point;
 		
-		/* Form */
+		/** Form */
         Ui::WidgetToolTerrainPointNew m_Ui;
 };
 

@@ -46,7 +46,7 @@ class BB_WidgetToolTerrainTriangleNew : public BB_AbstractToolWidget
         virtual void clearToolWidget();
 
         /**
-         * Aktiviert oder Deaktiviert das Fenster.<br />
+         * Aktiviert oder Deaktiviert das Fenster.<br>
          * @param value True: Aktiviert, False: Deaktiviert
          * @author Alex Letkemann
          */
@@ -105,7 +105,7 @@ class BB_WidgetToolTerrainTriangleNew : public BB_AbstractToolWidget
         void slotTextureSearch();
 		
 	protected:
-		/* Form */
+		/** Form */
 		Ui::WidgetToolTerrainTriangleNew m_Ui;
 };
 

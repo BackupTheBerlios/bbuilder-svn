@@ -159,7 +159,7 @@ void BB_WidgetToolPointNew::clearToolWidget()
 
 
 /**
- * Aktiviert oder Deaktiviert das Fenster.<br />
+ * Aktiviert oder Deaktiviert das Fenster.<br>
  * @param value True: Aktiviert, False: Deaktiviert
  * @author Alex Letkemann
  */

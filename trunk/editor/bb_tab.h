@@ -27,12 +27,12 @@ class BB_WorkArea;
 using namespace std;
 
 /**
- * Basisklasse für alle Weiteren Tabs. Enthält eine kleine Anzahl Methoden, die in jedem Tab gebraucht werden.<br />
- * Das Fenster ist in drei Bereiche unterteil:<br />
- * Links: Bereich für Tools, listen, etc.<br />
- * Mitte: Arbeitsbereich.<br />
- * Rechts: Platz für die Eigenschaftsfenster der Tools.<br />
- * Das Tab-Fenster lässt sich mit den Funktionen addWidgetLeft und addWidgetRight gestalten.<br />
+ * Basisklasse für alle Weiteren Tabs. Enthält eine kleine Anzahl Methoden, die in jedem Tab gebraucht werden.<br>
+ * Das Fenster ist in drei Bereiche unterteil:<br>
+ * Links: Bereich für Tools, listen, etc.<br>
+ * Mitte: Arbeitsbereich.<br>
+ * Rechts: Platz für die Eigenschaftsfenster der Tools.<br>
+ * Das Tab-Fenster lässt sich mit den Funktionen addWidgetLeft und addWidgetRight gestalten.<br>
  * Mit addWidgetLeft werden die Fenster von oben nach unten nach einander aufgelistet.
  * Mit addWidgetRightkommen die Fenster in einen Stack, wo nur das Oberste Fenster angezeigt wird.
  * Beim Erstellen des Tabs müssen die Eigenschaftsfenster aller Tools mit addWidgetRight hinzugefügt werden.
@@ -44,10 +44,10 @@ class BB_Tab : public QWidget
     public:
         /**
          * Konstruktor
-        * Erstellt ein neues Tab mit drei Bereichen.<br />
-        * Links: Das Fenster, in dem die Toolbuttons angezeigt werden (QFrame).<br />
-        * Mitte: Die Arbeitsfl&auml;che (BB_WorkArea).<br />
-        * Rechts: Das Fenster für die Eigenschaften der Tools (QStackedWidget).<br />
+        * Erstellt ein neues Tab mit drei Bereichen.<br>
+        * Links: Das Fenster, in dem die Toolbuttons angezeigt werden (QFrame).<br>
+        * Mitte: Die Arbeitsfl&auml;che (BB_WorkArea).<br>
+        * Rechts: Das Fenster für die Eigenschaften der Tools (QStackedWidget).<br>
          * @param doc Das Dokument, mit welchem gearbeitet werden soll
          * @param parent Fenster in dem der Tab erstellt wird.
          * @param f QtFlags

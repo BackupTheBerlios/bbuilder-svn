@@ -16,7 +16,7 @@
 
 
 /**
- * Konstruktor.<br />
+ * Konstruktor.<br>
  * Erstellt ein neues Fenster für das Gebäudepositionierungs-Werkzeug.
  * @param doc Dockument, welches das Gelände und die Gebäude enthält.
  * @param parentTool Gebäudepositionierungs-Werkzeug.
@@ -73,7 +73,7 @@ void BB_WidgetToolBuildingPositionNew::clearToolWidget()
 }
 
 /**
- * Aktiviert oder Deaktiviert das Fenster.<br />
+ * Aktiviert oder Deaktiviert das Fenster.<br>
  * @param value True: Aktiviert, False: Deaktiviert
  * @author Alex Letkemann
  */

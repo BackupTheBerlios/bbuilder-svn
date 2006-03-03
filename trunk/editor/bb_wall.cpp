@@ -351,7 +351,7 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
         pos2 = m_Pos1->getPos() + ( richtung * myElement->getCoefficientPos2().x() );
 
 
-        //--------------------erste Viereck
+
         v1.setX( m_Pos1->getPos().x() * scale );
         v1.setZ( m_Pos1->getPos().y() * scale );
         v1.setY( 0.0 );
@@ -377,9 +377,6 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
         v2 = v2 + vector;
         v3 = v3 + vector;
         v4 = v4 + vector;
-
-        //         triangles.append( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
-        //         triangles.append( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
 
         tr1.copy( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
         tr2.copy( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
@@ -416,10 +413,10 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 
         tr1.copy( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Red ) );
         tr1.setCollision( false );
-        // 		tr1.setVisible( true );
+
         tr2.copy( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Red ) );
         tr2.setCollision( false );
-        // 		tr2.setVisible( true );
+
         triangles.append( tr1 );
         triangles.append( tr2 );
         tr1.setCollision( true );
@@ -452,9 +449,6 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
         v2 = v2 + vector;
         v3 = v3 + vector;
         v4 = v4 + vector;
-
-        //         triangles.append( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
-        //         triangles.append( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
 
         tr1.copy( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
         tr2.copy( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
@@ -494,19 +488,9 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
     v3 = v3 + vector;
     v4 = v4 + vector;
 
-    /** Cod von Alex*/
+
     t1.copy( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
     t2.copy( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
-    /** Ende Code Von Alex*/
-
-    //         triangles.append( C3dTriangle( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Blue ) );
-    //         triangles.append( C3dTriangle( v3, v4, v1, v_Zero, v_Zero, v_Zero, cl_Blue ) );
-
-
-    //Texture laden, es wird nur eine Textur fuer die Ganze Wand erzeugt
-    //     if ( !m_TextureFileName.isEmpty() )
-    //     {
-
 
 
     QImage img;

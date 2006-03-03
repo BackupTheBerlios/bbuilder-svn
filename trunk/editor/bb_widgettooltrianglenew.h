@@ -46,7 +46,7 @@ class BB_WidgetToolTriangleNew : public BB_AbstractToolWidget
         virtual void clearToolWidget();
 		
 		/**
-		 * Aktiviert oder Deaktiviert das Fenster.<br />
+		 * Aktiviert oder Deaktiviert das Fenster.<br>
 		 * @param value True: Aktiviert, False: Deaktiviert
 		 * @author Alex Letkemann
 		 */
@@ -82,7 +82,7 @@ class BB_WidgetToolTriangleNew : public BB_AbstractToolWidget
 		
 	protected:
 		
-		/* Form */
+		/** Form */
 		Ui::WidgetToolTriangleNew m_Ui;
 };
 

@@ -32,8 +32,8 @@ class BB_Line : public BB_DrawObject
     public:
         /**
         Standart Konstruktor mit zwei Punkte als Parametern
-        @param BB_Point p1 Position 1
-        @param BB_Point p2 Position 2
+        @param p1 Position 1
+        @param p2 Position 2
         @author Vaceslav Ustinov
         */
         BB_Line( BB_Point *p1, BB_Point *p2 );
@@ -44,27 +44,27 @@ class BB_Line : public BB_DrawObject
         ~BB_Line();
         /**
         Funktion uberprüft ob der Punkt "hit" auf der Linie liegt
-        @param C2dVector Klick-Position
+        @param hit Klick-Position
         @author Vaceslav Ustinov
         */
         virtual bool isHit( const C2dVector& hit );
         /**
         Funktion uberprüft ob die Linie in angegebenen Rechteck "rect" liegt
-        @param QRectF Ausgewählte Rechteck
+        @param rect Ausgewählte Rechteck
         @author Vaceslav Ustinov
         */
         virtual bool isHit( const QRectF& rect );
         /**
         Funktion zum Zeichnen.
-        @param BB_Transformer Transformation-Tool, damit es korrekt gezeichnet wird
-        @param QPainter Werkzeug zum Zeichnen @see QT::QPainter
+        @param transformer Transformation-Tool, damit es korrekt gezeichnet wird
+        @param painter Werkzeug zum Zeichnen @see QT::QPainter
         @author Vaceslav Ustinov
         */
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
         /**
         Setzt Pointer "Value" auf Position 1
         @author Vacelav Ustinov
-        @param BB_Point
+        @param Value Point
         */
         bool setPos1( BB_Point* Value );
         /**
@@ -76,7 +76,7 @@ class BB_Line : public BB_DrawObject
         /**
         Setzt Pointer "Value" auf Position 2
         @author Vacelav Ustinov
-        @param BB_Point
+        @param Value BB_Point
         */
         bool setPos2( BB_Point* Value );
 

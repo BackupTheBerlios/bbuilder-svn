@@ -53,7 +53,10 @@ class BB_WidgetToolScale : public BB_AbstractToolWidget
 
 
     protected:
+		/** Form */
         Ui::WidgetToolScale m_Ui;
+		
+		/** Pointer auf den reelen Maßstab */
         double* m_RealScale;
 		
     private slots:

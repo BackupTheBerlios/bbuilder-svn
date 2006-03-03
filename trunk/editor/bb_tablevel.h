@@ -61,14 +61,29 @@ public:
     
 
 protected:
+	
+	/** Button für Eigenschaften der Etagen */
     QPushButton* m_ButtonLevelProperties;
+	
+	/** Button für Löschen */
     QPushButton* m_ButtonLevelDelete;
+	
+	/** Button für Neu */
     QPushButton* m_ButtonLevelNew;
-    BB_AbstractTool* m_ToolZoom;
+	
+	/** Gebäudevektor */
     QVector< BB_Building* >* m_Buildings;
+	
+	/** Etagenvektor */
     QVector< BB_Level* >* m_Levels;
+	
+	/** Liste für Etagen */
 	QListWidget* m_ListWidgetLevels;
+	
+	/** Combo-Box für Gebäude */
 	QComboBox* m_ComboBoxBuildings;
+	
+	/** Eingestelltes Gebäude */
 	BB_Building* m_Building;
 	
 private slots:

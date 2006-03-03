@@ -116,7 +116,7 @@ void BB_WidgetToolLineNew::updateWidget()
 }
 
 /**
- * Aktiviert oder Deaktiviert das Fenster.<br />
+ * Aktiviert oder Deaktiviert das Fenster.<br>
  * @param value True: Aktiviert, False: Deaktiviert
  * @author Alex Letkemann
  */

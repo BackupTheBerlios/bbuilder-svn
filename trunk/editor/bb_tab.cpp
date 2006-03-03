@@ -19,10 +19,10 @@
 
 /**
  * Konstruktor
- * Erstellt ein neues Tab mit drei Bereichen.<br />
- * Links: Das Fenster, in dem die Toolbuttons angezeigt werden (QFrame).<br />
- * Mitte: Die Arbeitsfl&auml;che (BB_WorkArea).<br />
- * Rechts: Das Fenster für die Eigenschaften der Tools (QStackedWidget).<br />
+ * Erstellt ein neues Tab mit drei Bereichen.<br>
+ * Links: Das Fenster, in dem die Toolbuttons angezeigt werden (QFrame).<br>
+ * Mitte: Die Arbeitsfl&auml;che (BB_WorkArea).<br>
+ * Rechts: Das Fenster für die Eigenschaften der Tools (QStackedWidget).<br>
  * @param doc Das Dokument, mit welchem gearbeitet werden soll
  * @param parent Fenster in dem der Tab erstellt wird.
  * @param f QtFlags

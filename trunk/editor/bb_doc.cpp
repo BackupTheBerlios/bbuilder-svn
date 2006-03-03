@@ -413,8 +413,8 @@ BB_Level* BB_Doc::newLevel( BB_Building* building, QWidget * parent )
 
 
 /**
- * Reserviert ein leeres Gebäude im angegebenen Verzeichnis und Dateinamen.<br />
- * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br />
+ * Reserviert ein leeres Gebäude im angegebenen Verzeichnis und Dateinamen.<br>
+ * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br>
  * @param path Existierender Pfad
  * @param fileName Existierende Datei
  * @return Pointer auf das reservierte Gebäude.
@@ -430,8 +430,8 @@ BB_Building* BB_Doc::newBuilding( QDir& path, QString& fileName )
 
 
 /**
- * Reserviert eine leere Etage im angegebenen Verzeichnis und Dateinamen.<br />
- * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br />
+ * Reserviert eine leere Etage im angegebenen Verzeichnis und Dateinamen.<br>
+ * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br>
  * @param building Gebäude, zu dem die Etage gehört.
  * @param path Existierender Pfad
  * @param fileName Existierende Datei
@@ -448,8 +448,8 @@ BB_Level* BB_Doc::newLevel( BB_Building* building, QDir& path, QString& fileName
 
 
 /**
- * Reserviert ein leeres Gelände im angegebenen Verzeichnis und Dateinamen.<br />
- * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br />
+ * Reserviert ein leeres Gelände im angegebenen Verzeichnis und Dateinamen.<br>
+ * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br>
  * @param path Existierender Pfad
  * @param fileName Existierende Datei
  * @return Pointer auf das reservierte Gelände.
@@ -652,7 +652,10 @@ void BB_Doc::showGl()
 
 
 
-
+/**
+ * Erzeugt alle 3D-Objekte.
+ * @author Alex Letkemann
+ */
 void BB_Doc::createGlObjects()
 {
 
@@ -687,10 +690,6 @@ void BB_Doc::createGlObjects()
             m_CollisionVector[ ( i * 3 ) + 2 ].x = m_Triangles.at( i ).getV2().x();
             m_CollisionVector[ ( i * 3 ) + 2 ].y = m_Triangles.at( i ).getV2().y();
             m_CollisionVector[ ( i * 3 ) + 2 ].z = m_Triangles.at( i ).getV2().z();
-        }
-        else
-        {
-            cout << "keine collision" << endl;
         }
     }
 

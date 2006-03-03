@@ -45,7 +45,7 @@ BB_Terrain::~BB_Terrain()
 
 
 /*!
-   \fn BB_FileObject::write(QTextStream &out);
+   \fn BB_Terrain::write(QTextStream &out);
  */
 bool BB_Terrain::write( QTextStream &out )
 {
@@ -144,7 +144,7 @@ bool BB_Terrain::write( QTextStream &out )
 
 
 /*!
-    \fn BB_FileObject::keyBoardEdit(QWidget* parent)
+    \fn BB_Terrain::keyBoardEdit(QWidget* parent)
  */
 int BB_Terrain::keyBoardEdit( QWidget* parent )
 {

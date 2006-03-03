@@ -53,9 +53,7 @@ HEADERS += br_camera.h \
            bb_triangle.h \
            bb_wall.h \
            bb_xbuildinghandler.h \
-           bb_xdocgenerator.h \
            bb_xdochandler.h \
-           bb_xgenerator.h \
            bb_xhandler.h \
            bb_xlevelhandler.h \
            bb_xterrainhandler.h \
@@ -100,7 +98,6 @@ HEADERS += br_camera.h \
            bb_widgettoolnavigationpointnew.h \
            bb_widgettoolpointnew.h \
            bb_widgettoolscale.h \
-           bb_widgettoolselect.h \
            bb_widgettoolterrainpointnew.h \
            bb_widgettooltrianglenew.h \
            bb_widgettoolwallnew.h \
@@ -121,7 +118,8 @@ HEADERS += br_camera.h \
            bb_leveltriangle.h \
            bb_toolleveltrianglenew.h \
            bb_buildingtriangle.h \
-           bb_toolbuildingtrianglenew.h 
+           bb_toolbuildingtrianglenew.h \
+           bb_widgettoolselect.h 
 SOURCES += br_camera.cpp \
            br_infowidget.cpp \
            br_keyhandler.cpp \
@@ -201,7 +199,6 @@ SOURCES += br_camera.cpp \
            bb_widgettoolnavigationpointnew.cpp \
            bb_widgettoolpointnew.cpp \
            bb_widgettoolscale.cpp \
-           bb_widgettoolselect.cpp \
            bb_widgettoolterrainpointnew.cpp \
            bb_widgettooltrianglenew.cpp \
            bb_widgettoolwallnew.cpp \
@@ -209,9 +206,7 @@ SOURCES += br_camera.cpp \
            bb_window.cpp \
            bb_workarea.cpp \
            bb_workframe.cpp \
-           bb_xdocgenerator.cpp \
            bb_xdochandler.cpp \
-           bb_xgenerator.cpp \
            bb_toolstair.cpp \
            bb_stair.cpp \
            bb_buildingposition.cpp \
@@ -224,7 +219,8 @@ SOURCES += br_camera.cpp \
            bb_leveltriangle.cpp \
            bb_toolleveltrianglenew.cpp \
            bb_buildingtriangle.cpp \
-           bb_toolbuildingtrianglenew.cpp 
+           bb_toolbuildingtrianglenew.cpp \
+           bb_widgettoolselect.cpp 
 QT += xml \
 opengl
 TARGET = renderer.e

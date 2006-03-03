@@ -99,13 +99,13 @@ class BB_TabBuilding : public BB_Tab
         void slotBuildingChanged( QListWidgetItem * current, QListWidgetItem * previous );
     protected:
 
-		/* Vektor mit allen Gebäuden */
+		/** Vektor mit allen Gebäuden */
         QVector<BB_Building*>* m_Buildings;
 		
-		/* ListenFenster */
+		/** ListenFenster */
         QListWidget* m_BuildingsListWidget;
 		
-		/* Buttons */
+		/** Buttons */
         QPushButton* m_ButtonBuildingDelete;
         QPushButton* m_ButtonBuildingNew;
         QPushButton* m_ButtonBuildingProperties;

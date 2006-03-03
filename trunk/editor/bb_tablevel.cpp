@@ -187,7 +187,7 @@ void BB_TabLevel::initTools()
  */
 void BB_TabLevel::updateBuildingList()
 {	
-    qDebug( "Updating BuildingList ... " );
+//     qDebug( "Updating BuildingList ... " );
     m_ComboBoxBuildings->blockSignals( true );
 	
 	int index = m_ComboBoxBuildings->currentIndex();
@@ -205,7 +205,7 @@ void BB_TabLevel::updateBuildingList()
 	m_ComboBoxBuildings->setCurrentIndex( index );
 	setBuilding( m_Doc->getBuilding( index ) );
     m_ComboBoxBuildings->blockSignals( false );
-    qDebug( "OK" );
+//     qDebug( "OK" );
 
 }
 
@@ -216,7 +216,7 @@ void BB_TabLevel::updateBuildingList()
  */
 void BB_TabLevel::updateLevelList()
 {
-    qDebug( "Updating LevelList ... " );
+//     qDebug( "Updating LevelList ... " );
     m_ListWidgetLevels->blockSignals( true );
 
     m_ListWidgetLevels->clear();
@@ -230,7 +230,7 @@ void BB_TabLevel::updateLevelList()
     }
 
     m_ListWidgetLevels->blockSignals( false );
-    qDebug( "OK" );
+//     qDebug( "OK" );
 }
 
 
@@ -275,22 +275,6 @@ void BB_TabLevel::slotBuildingChanged( int row )
     setBuilding( m_Doc->getBuilding( row ) );
 //     qDebug() << "OK";
 	
-	
-	/* == DEBUG ==
-	qDebug() << "info: Buildings";
-	for(int i = 0; i < m_Buildings->count(); i++ )
-	{
-		qDebug() << m_Buildings->at( i)->getName();
-	}
-	qDebug() << "info: Buildings: Ende";
-	
-	qDebug() << "info: Levels";
-	for(int i = 0; i < m_Levels->count(); i++ )
-	{
-		qDebug() << m_Levels->at( i)->getName();
-	}
-	qDebug() << "info: Levels: Ende";
-	*/
 }
 
 

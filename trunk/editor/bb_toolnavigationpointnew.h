@@ -38,7 +38,7 @@ public:
     ~BB_ToolNavigationPointNew();
 	
 	/**
-	 * @fn BB_AbstractTool::getToolWidget()
+	 * @fn getToolWidget()
 	 */
     virtual BB_AbstractToolWidget* getToolWidget();
 

@@ -51,11 +51,6 @@ BB_DrawDevice::~BB_DrawDevice()
     }
 
 
-    if ( m_DrawObjects.count() > 0 )
-    {
-		qDebug("BB_Terrain::~BB_Terrain(): Nicht alle Objekte konnten gelöscht werden");
-    }
-
     m_DrawObjects.clear();
 }
 

@@ -40,7 +40,7 @@ BB_XLevelHandler::~BB_XLevelHandler()
 
 bool BB_XLevelHandler::endElement( const QString& namespaceURI, const QString& localName, const QString& qName )
 {
-    cout << "BB_XLevelHandler::endElement(" << qName.toStdString() << ") - Start" << endl;
+
     if ( m_Object == NULL )
     {
         if ( qName == "name" )
@@ -98,42 +98,18 @@ bool BB_XLevelHandler::endElement( const QString& namespaceURI, const QString& l
         ( ( BB_Wall * ) m_Object ) ->getObjects() ->append( m_ConstructionElement );
         m_ConstructionElement = NULL;
     }
-    // 	else if(qName == "bb_terrain")
-    // 	{
-    // 		if(m_Doc->getTerrain() == NULL)
-    // 		{
-    // 			m_Doc->newTerrain(m_Path, m_CurrentText);
-    // 		}
-    // 		else
-    // 		{
-    // 			m_Doc->getTerrain()->setFileName(m_CurrentText);
-    // 			m_Doc->getTerrain()->setFilePath(m_Path);
-    // 		}
-    // 	}
-    // 	else if(qName == "bb_building")
-    // 	{
-    // 		m_Doc->newBuilding(m_Path, m_CurrentText);
-    // 	}
-    // 	else if(qName == "bb_level")
-    // 	{
-    // 		m_Doc->newLevel(m_Path, m_CurrentText);
-    // 	}
-    cout << "BB_XLevelHandler::endElement(" << qName.toStdString() << ") - Ende" << endl;
+
     return true;
 
 }
 
 bool BB_XLevelHandler::startElement( const QString& namespaceURI, const QString& localName, const QString& qName, const QXmlAttributes& atts )
 {
-    cout << "BB_XLevelHandler::startElement(" << qName.toStdString() << ") - Start" << endl;
-    // 	return QXmlDefaultHandler::startElement(namespaceURI, localName, qName, atts);
-
-    // 	cout << "event: " << namespaceURI.toStdString() << " | " << localName.toStdString() << " | " << qName.toStdString() << endl;
 
     if ( !m_XLevelTag && qName != "bb_level" )
     {
         m_ErrorStr = QObject::tr( "Dies ist keine gültige bb_level Datei" );
-        // 		cout << m_ErrorStr.toStdString() << endl;
+
         return false;
     }
 
@@ -213,53 +189,6 @@ bool BB_XLevelHandler::startElement( const QString& namespaceURI, const QString&
     {
 
         parseWall( atts );
-        // 		bool ok;
-        // 		QString tmp;
-        // 		BB_Point *point1 = NULL;
-        // 		BB_Point *point2 = NULL;
-        // 		double p1, p2;
-        // 		int id;
-        //
-        // 		tmp = atts.value( "id" );
-        // 		id = tmp.toInt( &ok );
-        //
-        // 		tmp = atts.value( "p1" );
-        // 		p1 = tmp.toDouble( &ok );
-        //
-        // 		tmp = atts.value( "p2" );
-        // 		p2 = tmp.toDouble( &ok );
-        //
-        // 		BB_Object *object;
-        //
-        // 		for ( int i = 0; i < m_DrawObjects->count(); i++ )
-        // 		{
-        // 			object = m_DrawObjects->at( i );
-        // 			if ( typeid( *object ) == typeid( BB_Point ) )
-        // 			{
-        // 				if ( object->getObjectNr() == p1 )
-        // 				{
-        // 					point1 = ( BB_Point* ) object;
-        // 				}
-        // 				else if ( object->getObjectNr() == p2 )
-        // 				{
-        // 					point2 = ( BB_Point* ) object;
-        // 				}
-        // 			}
-        // 		}
-        /*
-        		if ( point1 != NULL && point2 != NULL )
-        		{
-        			m_Object = ( BB_DrawObject* ) new BB_Wall( point1, point2 );
-        			m_DrawObjects->append( m_Object );
-        			( ( BB_Wall* ) m_Object ) ->setPos2( point2 );
-         
-        		}
-        		else
-        		{
-        			qDebug("Fehler: BB_Wall konnte nicht erstellt werden!");
-        			return false;
-        		}                */
-
 
     }
     else if ( qName == "bb_leveltriangle" )
@@ -278,14 +207,10 @@ bool BB_XLevelHandler::startElement( const QString& namespaceURI, const QString&
     {
         parseTexture( atts );
     }
-    // 	else if(qName == "levels")
-    // 	{
-    // 		m_Path = m_Doc->getFilePath();
-    // 		m_Path.cd("levels");
-    // 	}
+
 
     m_CurrentText.clear();
-    cout << "BB_XLevelHandler::startElement(" << qName.toStdString() << ") - Ende" << endl;
+
     return true;
 }
 

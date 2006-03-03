@@ -13,6 +13,13 @@
 
 #include <QtGui>
 
+/**
+ * Konstruktor
+ * @param doc Dokument
+ * @param parent Parent-Fenster, in der dieses Fenster plaziert wird.
+ * @param f Qt Fenster Flags
+ * @author Alex Letkemann
+ */
 BR_InfoWidget::BR_InfoWidget( BB_Doc * doc,  QWidget * parent, Qt::WFlags f )
  : QWidget(parent, f)
 {
@@ -56,7 +63,9 @@ BR_InfoWidget::BR_InfoWidget( BB_Doc * doc,  QWidget * parent, Qt::WFlags f )
 	setLayout( outerLayout );
 }
 
-
+/**
+ * Destruktor
+ */
 BR_InfoWidget::~BR_InfoWidget()
 {
 }
@@ -65,7 +74,9 @@ BR_InfoWidget::~BR_InfoWidget()
 
 
 /**
- * Schreibt die Frameanzahl in das Label 'm_FpsLabel'
+ * Stelt die Anzahl der Bilder pro Sekunde in unteren Bereich des Fensters dar.
+ * @param fps Anzahl der Bilder pro Sekunde
+ * @author Alex Letkemann
  */
 void BR_InfoWidget::printFPS(int fps)
 {
@@ -74,8 +85,9 @@ void BR_InfoWidget::printFPS(int fps)
 
 
 /**
- * Schreibt den übergebenen Text in das Informationsfenster.
- * @param text Text, der in das Informationsfenster geschrieben werden soll.
+ * Setzt den Text in den Informationsbereich.
+ * @param text Text
+ * @author Alex Letkemann
  */
 void BR_InfoWidget::setText( QString& text )
 {

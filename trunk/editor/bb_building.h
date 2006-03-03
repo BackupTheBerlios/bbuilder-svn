@@ -67,8 +67,9 @@ class BB_Building : public BB_DocComponent
         virtual bool write( QTextStream &out );
 
         /**
-         * \fn BB_Object::getClassName()
-         */
+		 * Gibt den Klassennamen zurück
+		 * @return Klassenname
+		 */
         virtual const QString getClassName();
 
 

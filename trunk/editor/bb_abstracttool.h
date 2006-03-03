@@ -264,8 +264,10 @@ class BB_AbstractTool
         /** Arbeitsfläche */
         BB_WorkFrame* m_WorkFrame;
 
-        /** Hilfsvariablen */
+        /** Hilfsvariable */
         C2dVector m_pLogic;
+		
+		/** Hilfsvariable */
         QPoint m_pScreen;
 
         /** Vektor mit Objekten, die bearbeitet werden sollen. */

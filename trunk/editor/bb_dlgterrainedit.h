@@ -54,6 +54,7 @@ private slots:
 	void slotPlanFileSearch();
 	
 protected:
+	/** From */
     Ui_TerrainEditDialog m_Dlg;
 };
 

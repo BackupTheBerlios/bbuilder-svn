@@ -53,7 +53,8 @@ public:
     virtual void show(BB_Transformer& transformer, QPainter& painter) const;
     
 	/**
-	 * \fn BB_Object::getClassName() 
+	 * Gibt den Klassennamen zurück.
+	 * @return Klassenname
 	 */
 	virtual const QString getClassName();
 	

@@ -20,6 +20,11 @@
 using namespace std;
 
 
+/**
+ * Konstrukto.
+ * @param building Gebäude, in dem die Daten gespeichert werden sollen.
+ * @author Alex Letkemann
+ */
 BB_XBuildingHandler::BB_XBuildingHandler( BB_Building* building )
         : BB_XHandler( building )
 {
@@ -38,15 +43,16 @@ BB_XBuildingHandler::BB_XBuildingHandler( BB_Building* building )
 }
 
 
+/** Destruktor */
 BB_XBuildingHandler::~BB_XBuildingHandler()
 {}
 
 
+/**
+ * @fn BB_XBuildingHandler::startElement(const QString& namespaceURI, const QString& localName, const QString& qName, const QXmlAttributes& atts)
+ */
 bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QString& localName, const QString& qName, const QXmlAttributes& atts )
 {
-    // 	return QXmlDefaultHandler::startElement(namespaceURI, localName, qName, atts);
-
-    //     cout << "event: " << namespaceURI.toStdString() << " | " << localName.toStdString() << " | " << qName.toStdString() << endl;
 
     if ( !m_XBuildingTag && qName != "bb_building" )
     {
@@ -73,51 +79,8 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
     {
 		
 		parsePoint( atts );
-//         bool ok;
-//         QString tmp;
-// 
-//         double x, y;
-//         int id;
-// 
-//         tmp = atts.value( "id" );
-//         id = tmp.toInt( &ok );
-// 
-//         tmp = atts.value( "x" );
-//         x = tmp.toDouble( &ok );
-// 
-//         tmp = atts.value( "y" );
-//         y = tmp.toDouble( &ok );
-// 
-// 
-//         m_Object = new BB_Point();
-//         ( ( BB_Point* ) m_Object ) ->setX( x );
-//         ( ( BB_Point* ) m_Object ) ->setY( y );
-// 
-//         m_Object->m_ObjectNr = id;
-//         m_Object->setSelected( false );
-// 
-//         if ( m_XScale )
-//         {
-// 
-//             if ( m_ScalePointIndex == 0 )
-//             {
-//                 m_Building->getScalePoint_1() ->setX( x );
-//                 m_Building->getScalePoint_1() ->setY( y );
-//             }
-//             else if ( m_ScalePointIndex == 1 )
-//             {
-//                 m_Building->getScalePoint_2() ->setX( x );
-//                 m_Building->getScalePoint_2() ->setY( y );
-//             }
-// 
-//             m_ScalePointIndex++;
-//         }
-//         else
-//         {
-//             m_DrawObjects->append( m_Object );
-//         }
-
-    }
+    
+	}
     else if ( qName == "bb_wall" )
     {
 
@@ -143,19 +106,15 @@ bool BB_XBuildingHandler::startElement( const QString& namespaceURI, const QStri
     {
 		parseTexture( atts );
     }
-    // 	else if(qName == "levels")
-    // 	{
-    // 		m_Path = m_Doc->getFilePath();
-    // 		m_Path.cd("levels");
-    // 	}
-
     m_CurrentText.clear();
 
     return true;
 }
 
 
-
+/**
+ * @fn BB_XBuildingHandler::endElement(const QString& namespaceURI, const QString& localName, const QString& qName)
+ */
 bool BB_XBuildingHandler::endElement( const QString& namespaceURI, const QString& localName, const QString& qName )
 {
     if ( m_Object == NULL )
@@ -219,26 +178,6 @@ bool BB_XBuildingHandler::endElement( const QString& namespaceURI, const QString
         ( ( BB_Wall * ) m_Object ) ->getObjects() ->append( m_ConstructionElement );
         m_ConstructionElement = NULL;
     }
-    // 	else if(qName == "bb_terrain")
-    // 	{
-    // 		if(m_Doc->getTerrain() == NULL)
-    // 		{
-    // 			m_Doc->newTerrain(m_Path, m_CurrentText);
-    // 		}
-    // 		else
-    // 		{
-    // 			m_Doc->getTerrain()->setFileName(m_CurrentText);
-    // 			m_Doc->getTerrain()->setFilePath(m_Path);
-    // 		}
-    // 	}
-    // 	else if(qName == "bb_building")
-    // 	{
-    // 		m_Doc->newBuilding(m_Path, m_CurrentText);
-    // 	}
-    // 	else if(qName == "bb_level")
-    // 	{
-    // 		m_Doc->newLevel(m_Path, m_CurrentText);
-    // 	}
 
     return true;
 

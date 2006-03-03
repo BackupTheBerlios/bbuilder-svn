@@ -41,8 +41,8 @@ class BB_DlgWallEditPreview : public QLabel
     public:
         /**
         * Standart Konstruktor
-        * @param BB_Wall * Zeiger auf ein Wand zu dem dieser Dialog geh&ouml;rt
-        * @param BB_DocComponent * Zeiger auf Etage
+        * @param wall BB_Wall * Zeiger auf ein Wand zu dem dieser Dialog geh&ouml;rt
+        * @param docComponent BB_DocComponent * Zeiger auf Etage
         */
         BB_DlgWallEditPreview( BB_Wall * wall, BB_DocComponent * docComponent, QWidget * parent = 0, Qt::WFlags f = 0 );
         /**

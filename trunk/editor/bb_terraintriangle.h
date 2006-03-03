@@ -43,8 +43,9 @@ public:
     virtual void createGl(QVector< C3dTriangle >& triangles, C3dVector vector, double rotation, double scale, double height);
 	
     /**
-     * \fn BB_OBject::getClassName()
-     */
+	 * Gibt den Klassennamen zurück
+	 * @return Klassenname
+	 */
     virtual const QString getClassName();
 
 };

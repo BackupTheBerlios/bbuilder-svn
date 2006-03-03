@@ -11,6 +11,7 @@
 //
 #include "bb_dlgterrainedit.h"
 
+/** Konstruktor */
 BB_DlgTerrainEdit::BB_DlgTerrainEdit(QWidget * parent, Qt::WFlags f)
  : QDialog(parent,f)
 {
@@ -21,15 +22,13 @@ BB_DlgTerrainEdit::BB_DlgTerrainEdit(QWidget * parent, Qt::WFlags f)
 }
 
 
-
+/** Destruktor */
 BB_DlgTerrainEdit::~BB_DlgTerrainEdit()
 {
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::slotPlanFileSearch()
- */
+/** Ruft einen Datei-Dialog auf, mit welchem eine Bilddatei ausgewählt werden kann */
 void BB_DlgTerrainEdit::slotPlanFileSearch()
 {
 	QString filename;
@@ -44,54 +43,42 @@ void BB_DlgTerrainEdit::slotPlanFileSearch()
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::getName()
- */
+/** Gibt den Namen zurück */
 const QString BB_DlgTerrainEdit::getName()
 {
 	return m_Dlg.lineEditName->text();
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::getDescription()
- */
+/** Gibt die Beschreibung zurück */
 const QString BB_DlgTerrainEdit::getDescription()
 {
 	return m_Dlg.lineEditDesc->text();
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::setDescription(QString& desc)
- */
+/** Setzt die Beschreibung */
 void BB_DlgTerrainEdit::setDescription(const QString& desc)
 {
 	m_Dlg.lineEditDesc->setText(desc);
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::setName(QString& name)
- */
+/** Setzt den Namen */
 void BB_DlgTerrainEdit::setName(const QString& name)
 {
 	m_Dlg.lineEditName->setText(name);
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::getPlanFile()
- */
+/** Gibt den Pfad zur Bilddatei zurück */
 QString BB_DlgTerrainEdit::getPlanFile()
 {
 	return m_Dlg.lineEditPlanFile->text();
 }
 
 
-/*!
-    \fn BB_DlgBuildingEdit::setPlanFile(QString& file)
- */
+/** Setzt den Pfad zur Bilddatei */
 void BB_DlgTerrainEdit::setPlanFile(QString& file)
 {
 	m_Dlg.lineEditPlanFile->setText(file);

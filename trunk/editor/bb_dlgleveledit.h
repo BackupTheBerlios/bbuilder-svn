@@ -51,7 +51,8 @@ public:
     void setPlanFile( const QString& file );
 
 protected:
-    Ui::LevelEditDialog m_Dlg;
+	/** Form */
+	Ui::LevelEditDialog m_Dlg;
 private slots:
 	/** Ruft einen Datei-Dialog auf, mit dem man eine Bilddatei auswählen kann */
     void slotPlanFileSearch();

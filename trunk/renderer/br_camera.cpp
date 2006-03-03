@@ -15,6 +15,10 @@
 
 using namespace std;
 
+/**
+ * Konstruktor
+ * @author Alex Letkemann
+ */
 BR_Camera::BR_Camera()
 {
 
@@ -39,35 +43,43 @@ BR_Camera::BR_Camera()
 }
 
 
+/**
+ * Destruktor
+ */
 BR_Camera::~BR_Camera()
 {}
 
 
 
 
-/*!
-    \fn BR_Camera::rotateY(double angle)
+/**
+ * Rotiert die Kamera um die Y-Achse um den angegebenen Winkel
+ * @param angle Winkel
+ * @author Alex Letkemann
  */
 void BR_Camera::rotateY( double angle )
 {
     m_ViewPoint = m_ViewPoint.rotateVector( v_Y, angle ).unitVector();
     m_Strave = m_Strave.rotateVector( v_Y, angle ).unitVector();
-//     m_Up = m_Up.rotateVector( v_Y, angle ).unitVector();
+
 }
 
 
-/*!
-    \fn BR_Camera::rotateX(double angle)
+/**
+ * Rotiert die Kamera um die X-Achse um den angegebenen Winkel
+ * @param angle Winkel
+ * @author Alex Letkemann
  */
 void BR_Camera::rotateX( double angle )
 {
     m_ViewPoint = m_ViewPoint.rotateVector( m_Strave, angle ).unitVector();
-//     m_Up = m_Up.rotateVector( m_Strave, angle ).unitVector();
 }
 
 
-/*!
-    \fn BR_Camera::apply()
+/**
+ * Erstellt die Pespektive.
+ * Führ die OpenGl operationen aus.
+ * @author Alex Letkemann
  */
 void BR_Camera::apply()
 {
@@ -91,8 +103,10 @@ void BR_Camera::apply()
 }
 
 
-/*!
-    \fn BR_Camera::setAspect(double aspect)
+/**
+ * Setzt den Aspekt
+ * @param aspect Aspekt zwischen der Höhe und der Breite des Fensters.
+ * @author Alex Letkemann
  */
 void BR_Camera::setAspect( double aspect )
 {
@@ -100,32 +114,51 @@ void BR_Camera::setAspect( double aspect )
 }
 
 
-/*!
-    \fn BR_Camera::strafe(double speed)
+/**
+ * Bewegt die Kamera seitwärts.
+ * Positive Geschwindigkeit bewegt die Kamera rechts, negative Links.
+ * @param speed Geschwindigkeit.
+ * @author Alex Letkemann
  */
 void BR_Camera::strafe( double speed )
 {
     m_Camera = m_Camera + speed * m_Strave;
-    // 	m_ViewPoint = m_ViewPoint + speed * m_Strave;
 }
 
 
-/*!
-    \fn BR_Camera::move(double speed)
+/**
+ * Bewegt die Kamera nach vonr und zurück.
+ * Positive Geschwindigkeit bewegt die Kamera vor, negative zurück.
+ * @param speed Geschwindigkeit.
+ * @author Alex Letkemann
  */
 void BR_Camera::move( double speed )
 {
     m_Camera = m_Camera + speed * m_ViewPoint;
 }
 
+/**
+ * Geibt den Punkt zurück, auf den die Kamera gerichtet ist.
+ * @return Punkt, auf den die Kamera gerichtet ist.
+ * @author Alex Letkemann
+ */
 C3dVector BR_Camera::getViewPoint()
 {
     return m_ViewPoint;
 }
+
+
+/**
+ * Gibt die Position der Kamera zurück.
+ * @return Position der Kamera.
+ * @author Alex Letkemann
+ */
 C3dVector BR_Camera::getPos()
 {
     return m_Camera;
 }
+
+
 ///////////////////////////////// CHECK CAMERA COLLISION \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 /////
 /////   This checks all the polygons in our list and offsets the camera if collided
@@ -182,7 +215,7 @@ void BR_Camera::CheckCameraCollision( CVector3 *pVertices, int numOfVerts )
 
             // Once we have the offset to the plane, we just subtract it from the center
             // of the sphere.  "vIntersection" is now a point that lies on the plane of the triangle.
-            CVector3 vIntersection = m_vPosition - vOffset;
+            CVector3 vIntersection =  - vOffset;
 
             // 3) STEP THREE - Check if the intersection point is inside the triangles perimeter
 

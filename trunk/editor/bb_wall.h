@@ -57,14 +57,14 @@ class BB_Wall : public BB_Line
         virtual void generateXElement( QTextStream &out, int depth );
         /**
         Funktion zum Zeichnen.
-        @param BB_Transformer Transformation-Tool, damit es korrekt gezeichnet wird
-        @param QPainter Werkzeug zum Zeichnen @see QT::QPainter
+        @param transformer Transformation-Tool, damit es korrekt gezeichnet wird
+        @param painter Werkzeug zum Zeichnen @see QT::QPainter
         @author Vaceslav Ustinov
         */
         virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
         /**
         Funktion startet ein Dialog zum Editieren von Wand-Eigenschften
-        @param BB_DocComponent Link auf eine Etage
+		@param docComponent Link auf eine Etage
         @author Vaceslav Ustinov
         */
         void editDlg( BB_DocComponent * docComponent );
@@ -76,7 +76,7 @@ class BB_Wall : public BB_Line
         /**
         Setzt ein Vector mit Objekten fest.
         Die Objekte sin BB_Window oder BB_Door
-        @param QVector< BB_DrawObject * > * Zeiger auf ein Vector mit Objekten
+		@param Value< BB_DrawObject * > * Zeiger auf ein Vector mit Objekten
         @author Vaceslav Ustinov
         */
         void setObjects( QVector< BB_DrawObject * >* Value );

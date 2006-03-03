@@ -21,8 +21,13 @@
 
 using namespace std;
 
-///@todo alle m_DrawObjects gegen m_DocComponent->getDrawObjects() tauschen
-
+/**
+ * Konstruktor. Erzeugt eine neue Arbeitsfläche.
+ * @param selectVector Selektionsvektor, der verwendet werden soll.
+ * @param parent Fenster, in dem dieses Fenster plaziert wird.
+ * @param f Qt-Window-Flags
+ * @author Alex Letkemann
+ */
 BB_WorkFrame::BB_WorkFrame( QVector<BB_DrawObject*>* selectVector, QWidget * parent, Qt::WFlags f )
         : QLabel( parent, f )
 {
@@ -31,14 +36,15 @@ BB_WorkFrame::BB_WorkFrame( QVector<BB_DrawObject*>* selectVector, QWidget * par
     {
         m_Selection = selectVector;
     }
-    // 	exit(0);
 
     m_Component = NULL;
     m_Tool = NULL;
     m_DrawObjects = NULL;
 }
 
-
+/**
+ * Destruktor
+ */
 BB_WorkFrame::~BB_WorkFrame()
 {}
 
@@ -166,13 +172,16 @@ void BB_WorkFrame::setTool( BB_AbstractTool* tool )
 
 /**
  * Wird aufgerufen, wenn eine Maustaste gedrückt wird.
+ * Leitet den Event an das eingestellte Werkzeug.
+ * @param me QMouseEvent
+ * @author Alex Letkemann
  */
 void BB_WorkFrame::mousePressEvent ( QMouseEvent * me )
 {
     if ( m_Tool != NULL )
     {
         m_Tool->click( me );
-        // 		update();
+
     }
     else
     {
@@ -182,6 +191,9 @@ void BB_WorkFrame::mousePressEvent ( QMouseEvent * me )
 
 /**
  * Wird aufgerufen, wenn eine Maustaste losgelassen wird.
+ * Leitet den Event an das eingestellte Werkzeug.
+ * @param me QMouseEvent
+ * @author Alex Letkemann
  */
 void BB_WorkFrame::mouseReleaseEvent( QMouseEvent* me )
 {
@@ -201,7 +213,10 @@ void BB_WorkFrame::mouseReleaseEvent( QMouseEvent* me )
 
 
 /**
- * Wird aufgerufen, wenn die Maus mit einer gedrückten Maustaste bewegt wird.
+ * Wird aufgerufen, wen die Maus mit gedrückter Maustaste bewegt wird.
+ * Leitet den Event an das eingestellte Werkzeug
+ * @param me QMouseEvent
+ * @author Alex Letkemann
  */
 void BB_WorkFrame::mouseMoveEvent( QMouseEvent* me )
 {
@@ -220,36 +235,6 @@ void BB_WorkFrame::mouseMoveEvent( QMouseEvent* me )
         qDebug() << "Kein Tool ausgewählt" << endl;
     }
 }
-
-
-/* *
- * Gibt einen Pointer des Objektvectors oder NULL, falls dieser nicht gesetzt ist.
- * @return Pointer des Objektvectors.
- */ 
-// QVector< BB_DrawObject *>* BB_WorkFrame::getDrawObjects() const
-// {
-//     return m_DrawObjects;
-// }
-
-
-/* *
- * Setzt den Pointer des Workframe auf den Vector mit den Objekten.
- * Es findet keine Überprüfung statt, ob der Pointer NULL ist oder nicht.
- * @param objects Pointer auf den Objektvector.
- */ 
-// void BB_WorkFrame::setDrawObjects(QVector< BB_DrawObject *>* objects)
-// {
-// 	/* Keine überprüfung auf null, da NULL die darstellung der Objekte deaktiviert*/
-// 	m_DrawObjects = objects;
-//
-// 	if(m_Tool != NULL)
-// 	{
-// 		m_Tool->setDocComponent( m_Component );
-// // 		m_Tool->setObjects(m_DrawObjects);
-// // 		m_Tool->setTransformer(&m_Transformer);
-// 	}
-// }
-
 
 /**
  * Zeichnet einen blauen Kreutz am logischen Koordinatenursprung
@@ -271,13 +256,20 @@ void BB_WorkFrame::drawCenter( QPainter &painter )
     painter.restore();
 }
 
-
+/**
+ * Gibt das Dokument-Kompenent zurück, welche zur Zeit bearbeitet wird.
+ * @return Dokument-Kompenent, welche zur Zeit bearbeitet wird.
+ */
 BB_DocComponent* BB_WorkFrame::getDocComponent() const
 {
     return m_Component;
 }
 
-
+ /**
+ * Setzt das Dokument-Kompenent, welches bearbeitet werden soll.
+ * @param theValue Dokument-Kompenent, welches bearbeitet werden soll
+ * @author Alex Letkemann
+  */
 void BB_WorkFrame::setDocComponent( BB_DocComponent* component )
 {
     m_Component = component;
@@ -299,8 +291,10 @@ void BB_WorkFrame::setDocComponent( BB_DocComponent* component )
 }
 
 
-/*!
-    \fn BB_WorkFrame::documentChanged()
+/**
+ * Wird aufgerufen, wenn das Dokument-Kompenent geändert wird.
+ * Aktualisiert die Arbeitsfläche.
+ * @author Alex Letkemann
  */
 void BB_WorkFrame::documentChanged()
 {

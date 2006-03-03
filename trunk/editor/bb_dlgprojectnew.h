@@ -21,7 +21,7 @@
 #include "ui_projectNew.h"
 
 /**
- * Dialog zum Erstellen eines neuen Projektes.<br />
+ * Dialog zum Erstellen eines neuen Projektes.<br>
  * Im Dialog lassen sich der Name, die Beschreibung und das Verzeichnis, in welchem der Projekt erstellt werden soll, angeben.
  * Der Projektname muss mit einem Buchstaben beginen und darf keine Sonderzeichen enthalten.
  * Im angegeben Verzeichnis darf kein Projekt mit dem angegebenen Namen existieren.
@@ -66,16 +66,32 @@ private slots:
 	void slotDescChanged();
 	
 protected:
-    Ui_ProjectNewDialog m_Dlg;
+	/** Form */
+	Ui_ProjectNewDialog m_Dlg;
 	
+	/** Gesamtpfad */
     QDir m_Dir;
+	
+	/** Projekt-Pfad */
     QString m_ProjectPath;
+	
+	/** Projekt-Verzeichnis */
     QString m_ProjectDir;
+	
+	/** Projektname */
     QString m_ProjectName;
+	
+	/** Projektbeschreibung */
 	QString m_ProjectDescription;
 	
 private:
-	/** Prüft, ob das angegebene Verzeichnis gültig ist. */
+	/**
+	 * Prüft ob, der angegebene Pfad für das neue Projekt gültig ist,
+	 * schaltet den OK Button ein bzw. aus und
+	 * Setzt schreibt ein "Ungültig" hinter dem Pfad im Anzeigelabel im Dialog.
+	 * @author Alex Letkemann
+	 * @date 17.09.2005
+	 */
     void checkDir();
 };
 

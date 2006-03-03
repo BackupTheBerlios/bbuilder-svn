@@ -80,7 +80,6 @@ HEADERS += bb_abstracttool.h \
            bb_widgettoolnavigationpointnew.h \
            bb_widgettoolpointnew.h \
            bb_widgettoolscale.h \
-           bb_widgettoolselect.h \
            bb_widgettoolterrainpointnew.h \
            bb_widgettooltrianglenew.h \
            bb_widgettoolwallnew.h \
@@ -89,9 +88,7 @@ HEADERS += bb_abstracttool.h \
            bb_workarea.h \
            bb_workframe.h \
            bb_xbuildinghandler.h \
-           bb_xdocgenerator.h \
            bb_xdochandler.h \
-           bb_xgenerator.h \
            bb_xhandler.h \
            bb_xlevelhandler.h \
            bb_xterrainhandler.h \
@@ -113,7 +110,8 @@ HEADERS += bb_abstracttool.h \
            bb_leveltriangle.h \
            bb_toolleveltrianglenew.h \
            bb_toolbuildingtrianglenew.h \
-           bb_buildingtriangle.h 
+           bb_buildingtriangle.h \
+           bb_widgettoolselect.h 
 SOURCES += bb_abstracttool.cpp \
            bb_abstracttoolwidget.cpp \
            bb_building.cpp \
@@ -171,7 +169,6 @@ SOURCES += bb_abstracttool.cpp \
            bb_widgettoolnavigationpointnew.cpp \
            bb_widgettoolpointnew.cpp \
            bb_widgettoolscale.cpp \
-           bb_widgettoolselect.cpp \
            bb_widgettoolterrainpointnew.cpp \
            bb_widgettooltrianglenew.cpp \
            bb_widgettoolwallnew.cpp \
@@ -180,9 +177,7 @@ SOURCES += bb_abstracttool.cpp \
            bb_workarea.cpp \
            bb_workframe.cpp \
            bb_xbuildinghandler.cpp \
-           bb_xdocgenerator.cpp \
            bb_xdochandler.cpp \
-           bb_xgenerator.cpp \
            bb_xhandler.cpp \
            bb_xlevelhandler.cpp \
            bb_xterrainhandler.cpp \
@@ -210,7 +205,8 @@ SOURCES += bb_abstracttool.cpp \
            bb_leveltriangle.cpp \
            bb_toolleveltrianglenew.cpp \
            bb_toolbuildingtrianglenew.cpp \
-           bb_buildingtriangle.cpp 
+           bb_buildingtriangle.cpp \
+           bb_widgettoolselect.cpp 
 TARGET = editor.e
 DESTDIR = ../bin
 CONFIG += debug \

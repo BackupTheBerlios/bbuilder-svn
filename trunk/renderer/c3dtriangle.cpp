@@ -332,7 +332,7 @@ void C3dTriangle::show() const
 
 
 /*!
-    \fn C3dTriangle::createTexture()
+    \fn C3dTriangle::createTexture( const QImage& texture )
  */
 bool C3dTriangle::createTexture( const QImage& texture )
 {

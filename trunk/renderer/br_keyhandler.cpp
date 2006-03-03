@@ -18,6 +18,9 @@
 
 using namespace std;
 
+/**
+ * Konstruktor
+ */
 BR_KeyHandler::BR_KeyHandler()
 {
 	
@@ -28,13 +31,21 @@ BR_KeyHandler::BR_KeyHandler()
 	}
 }
 
-
+/**
+ * Destruktor
+ */
 BR_KeyHandler::~BR_KeyHandler()
 {
 }
 
 
-
+/**
+ * Rechnet die Qt-Keys in den Internen ArrayIndex um.
+ * Diese Funktion ist notwendig, da Qt eine 32Bit Key-Maske liefert.
+ * Die Klasse kann aber nur 256 Tasten behandeln.
+ * @param key Qt-Key
+ * @return Internet ArrayIndex
+ */
 int BR_KeyHandler::keyToArray( int key )
 {
 	int index;
@@ -53,19 +64,29 @@ int BR_KeyHandler::keyToArray( int key )
 	return index;
 }
 
-
+/**
+ * Gibt den Status einer Taste zurück
+ * @param key Qt-Taste
+ * @return Status der Qt-Taste
+ */
 bool BR_KeyHandler::isPressed( int key )
 {
 	return m_Keys[ keyToArray( key ) ];
 }
 
-
+/**
+ * Setzt den Status einer Taste auf gedrückt
+ * @param Qt-Taste 
+ */
 void BR_KeyHandler::pressed( int key )
 {
 	m_Keys [ keyToArray( key ) ] = true;
 }
 
-
+/**
+ * Setzt den Status einer Taste auf NICHT gedrückt
+ * @param key Qt-Taste
+ */
 void BR_KeyHandler::released( int key )
 {
 	m_Keys [ keyToArray( key ) ] = false;

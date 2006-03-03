@@ -281,7 +281,7 @@ bool BB_TabBuilding::saveCurrent()
     }
     else
     {
-        qDebug( "Kein Gebäude ausgewählt\n" );
+        qDebug( "Kein Gebäude ausgewählt" );
     }
 
     return false;

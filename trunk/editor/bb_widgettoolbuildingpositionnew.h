@@ -29,7 +29,7 @@ class BB_WidgetToolBuildingPositionNew : public BB_AbstractToolWidget
     public:
 
         /**
-		 * Konstruktor.<br />
+		 * Konstruktor.<br>
 		 * Erstellt ein neues Fenster für das Gebäudepositionierungs-Werkzeug.
 		 * @param doc Dockument, welches das Gelände und die Gebäude enthält.
 		 * @param parentTool Gebäudepositionierungs-Werkzeug.
@@ -50,7 +50,7 @@ class BB_WidgetToolBuildingPositionNew : public BB_AbstractToolWidget
         virtual void clearToolWidget();
 
         /**
-         * Aktiviert oder Deaktiviert das Fenster.<br />
+         * Aktiviert oder Deaktiviert das Fenster.<br>
          * @param value True: Aktiviert, False: Deaktiviert
          * @author Alex Letkemann
          */
@@ -64,16 +64,16 @@ class BB_WidgetToolBuildingPositionNew : public BB_AbstractToolWidget
 
 
     protected:
-		/* Dialog-Form */
+		/** Dialog-Form */
         Ui::WidgetToolBuildingPositionNew m_Ui;
 		
-		/* Gebäude, welches Position werden soll */
+		/** Gebäude, welches Position werden soll */
         BB_Building* m_Building;
 		
-		/* Gebäudeposition, der bearbeitet werden soll */
+		/** Gebäudeposition, der bearbeitet werden soll */
         BB_BuildingPosition *m_BPos;
 		
-		/* Dokument */
+		/** Dokument */
         BB_Doc* m_Doc;
     private slots:
 

@@ -16,7 +16,7 @@
 #include <QWidget> 
 
 /**
- * Werkzeug zum Einstellen von Maßstäben in den DocComponents.<br />
+ * Werkzeug zum Einstellen von Maßstäben in den DocComponents.<br>
  * Der Maßstab wird durch zwei Punkte gebildet, 
  * dabei wird der logische Abstand zwischen den Punkten berechnet und mit dem reelem Abstand, 
  * der über das Werkzeug-Fenster eingegeben werden kann ins Verhältnis gesetzt.
@@ -37,7 +37,7 @@ public:
     ~BB_ToolScale();
 
 	/**
-	 * \fn BB_AbstractTool::click(QMouseEvent* me)
+	 * \fn click(QMouseEvent* me)
 	 */
     virtual void click(QMouseEvent* me);
 	
@@ -48,27 +48,27 @@ public:
     virtual void move(QMouseEvent* me, bool overX, bool overY);
 	
 	/**
-	 * \fn BB_AbstractTool::release(QMouseEvent* me)
+	 * \fn release(QMouseEvent* me)
 	 */
     virtual void release(QMouseEvent* me);
     
 	/**
-	 * \fn BB_AbstractTool::setDocComponent( BB_DocComponent* component )
+	 * \fn setDocComponent( BB_DocComponent* component )
 	 */
 	virtual void setDocComponent( BB_DocComponent* component );
 	
 	/**
-	 * \fn BB_AbstractTool::reset()
+	 * \fn reset()
 	 */
     virtual void reset();
 	
 	/**
-	 *  \fn BB_AbstractTool::updateWidget()
+	 *  \fn updateWidget()
 	 */
     virtual void updateWidget();
 	
 	/**
-	 * \fn BB_AbstractTool::getToolWidget()
+	 * \fn getToolWidget()
 	 */
 	virtual BB_AbstractToolWidget* getToolWidget();
 protected:

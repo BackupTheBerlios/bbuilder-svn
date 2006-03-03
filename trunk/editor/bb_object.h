@@ -49,7 +49,7 @@ public:
 
 	/**
 	 * Setzt den Namen des Objektes. Falls der Name leer ist, wird ein Name aus der Objektnummer erzeugt.
-	 * @param name Name des Objektes 
+	 * @param theValue Name des Objektes 
 	 * @author Alex Letkemann
 	 * @date 23.10.2005
 	 */
@@ -63,7 +63,7 @@ public:
 	
 	/**
 	 * Setzt die Beschreibung des Objektes.
-	 * @param desc Beschreibung des Objektes. 
+	 * @param theValue Beschreibung des Objektes. 
 	 */
 	void BB_Object::setDescription(const QString& theValue);
 	

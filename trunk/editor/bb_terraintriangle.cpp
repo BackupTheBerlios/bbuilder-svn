@@ -1,7 +1,7 @@
 //
 // C++ Implementation: bb_terraintriangle
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2006
@@ -13,109 +13,98 @@
 #include <bb_terrainpoint.h>
 #include <bb_globals.h>
 
-BB_TerrainTriangle::BB_TerrainTriangle(BB_Point* p1, BB_Point* p2, BB_Point* p3): BB_Triangle(p1, p2, p3)
-{
-}
+/**
+ * Erstellt einen Dreieck aus den drei übergebenen Punkten
+ * @author Alex Letkemann
+ */
+BB_TerrainTriangle::BB_TerrainTriangle( BB_Point* p1, BB_Point* p2, BB_Point* p3 ) : BB_Triangle( p1, p2, p3 )
+{}
 
-
+/** Destruktor */
 BB_TerrainTriangle::~BB_TerrainTriangle()
+{}
+
+
+/**
+ * Erstellt einen 3D-Dreieck und hängt diesen an den übergebenen Vektor 'triangles' an.
+ * @param triangles Vektor mit 3D Dreiecken
+ * @param vector Position des Dreiecks
+ * @param rotation Rotation des Dreiecks
+ * @param scale Maßstab des Dreiecks
+ * @param height Hier keine Funktion
+ */
+void BB_TerrainTriangle::createGl( QVector< C3dTriangle >& triangles, C3dVector vector, double rotation, double scale, double height )
 {
-}
+    C3dVector v1, v2, v3;
+
+    v1.setX( m_Pos1->getPos().x() * scale );
+    v1.setZ( m_Pos1->getPos().y() * scale );
+    if ( typeid( *m_Pos1 ) == typeid( BB_TerrainPoint ) )
+    {
+        v1.setY( ( ( BB_TerrainPoint* ) ( m_Pos1 ) ) ->getHeight() );
+    }
+    else
+    {
+        v1.setY( height );
+    }
+
+    v2.setX( m_Pos2->getPos().x() * scale );
+    v2.setZ( m_Pos2->getPos().y() * scale );
+    if ( typeid( *m_Pos2 ) == typeid( BB_TerrainPoint ) )
+    {
+        v2.setY( ( ( BB_TerrainPoint* ) ( m_Pos2 ) ) ->getHeight() );
+    }
+    else
+    {
+        v2.setY( height );
+    }
+
+    v3.setX( m_Pos3->getPos().x() * scale );
+    v3.setZ( m_Pos3->getPos().y() * scale );
+    if ( typeid( *m_Pos3 ) == typeid( BB_TerrainPoint ) )
+    {
+        v3.setY( ( ( BB_TerrainPoint* ) ( m_Pos3 ) ) ->getHeight() );
+    }
+    else
+    {
+        v3.setY( height );
+    }
+
+    C3dTriangle triangle ( v1, v2, v3, v_Zero, v_Zero, v_Zero, cl_Gray );
+
+    QImage img;
+//     qDebug() << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName();
+    if ( ( img.load( PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
+            img.height() != 0 &&
+            img.width() != 0 ) ||
+            img.load( IMG_DIR() + SEPARATOR() + "terrain.png" ) )
+    {
+        C3dVector tV1, tV2, tV3;
 
 
-void BB_TerrainTriangle::createGl(QVector< C3dTriangle >& triangles, C3dVector vector, double rotation, double scale, double height)
-{
-	C3dVector v1, v2, v3;
+        tV1.setX( m_Pos1->getX() * 0.5 );
+        tV1.setY( m_Pos1->getY() * 0.5 );
+        tV1.setZ( 0.0 );
 
-	v1.setX( m_Pos1->getPos().x() * scale );
-	v1.setZ( m_Pos1->getPos().y() * scale );
-	
-	if( typeid(*m_Pos1) == typeid( BB_TerrainPoint ) )
-	{
-		v1.setY( (( BB_TerrainPoint* )( m_Pos1))->getHeight() );
-	}
-	else
-	{
-		v1.setY( height );
-	}
+        tV2.setX( m_Pos2->getX() * 0.5 );
+        tV2.setY( m_Pos2->getY() * 0.5 );
+        tV2.setZ( 0.0 );
 
-	v2.setX( m_Pos2->getPos().x() * scale );
-	v2.setZ( m_Pos2->getPos().y() * scale );
-	if( typeid(*m_Pos2) == typeid( BB_TerrainPoint ) )
-	{
-		v2.setY( (( BB_TerrainPoint* )( m_Pos2))->getHeight() );
-	}
-	else
-	{
-		v2.setY( height );
-	}
+        tV3.setX( m_Pos3->getX() * 0.5 );
+        tV3.setY( m_Pos3->getY() * 0.5 );
+        tV3.setZ( 0.0 );
 
-	v3.setX( m_Pos3->getPos().x() * scale );
-	v3.setZ( m_Pos3->getPos().y() * scale );
-	if( typeid(*m_Pos3) == typeid( BB_TerrainPoint ) )
-	{
-		v3.setY( (( BB_TerrainPoint* )( m_Pos3))->getHeight() );
-	}
-	else
-	{
-		v3.setY( height );
-	}
 
-	
-// 	qDebug( "C3dTriangle: v1 %f|%f|%f v2 %f|%f|%f v3 %f|%f|%f ",v1.x(),v1.y(),v1.z(),v2.x(),v2.y(),v2.z(),v3.x(),v3.y(),v3.z() );
-	
-	C3dTriangle triangle ( v1, v2, v3, v_Zero,v_Zero,v_Zero, cl_Gray );
-	
-// 	if( !m_TextureFileName.isEmpty() )
-// 	{
-		
-		
-		QImage img;
-		qDebug() << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName();
-		if( (img.load(PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() ) &&
-				  img.height() != 0 &&
-				   img.width() != 0) ||
-				   img.load( IMG_DIR() + SEPARATOR() + "terrain.png" )) 
-		{
-			C3dVector tV1,tV2,tV3;
-// 			double x,y,l,h, factor;
-// 			factor = 10;
-			// 			
-// 			x = img.width();
-// 			y = img.height();
-// 			l = getLength() * scale / factor;
-// 			h = height / factor;
-						
-			tV1.setX( m_Pos1->getX() * 0.5 );
-			tV1.setY( m_Pos1->getY() * 0.5 );
-			tV1.setZ( 0.0 );
-			
-			tV2.setX( m_Pos2->getX() * 0.5 );
-			tV2.setY( m_Pos2->getY() * 0.5 );
-			tV2.setZ( 0.0 );
-			
-			tV3.setX( m_Pos3->getX() * 0.5 );
-			tV3.setY( m_Pos3->getY() * 0.5 );
-			tV3.setZ( 0.0 );
-			
-			
-			triangle.setVTex0( tV1 );
-			triangle.setVTex1( tV2 );
-			triangle.setVTex2( tV3 );
-			
-			
-			triangle.createTexture( img );
-		}
-// 		else
-// 		{
-// 			qDebug() << "Textur " << PRO_TEXTURES_DIR() + SEPARATOR() + getTextureFileName() + " konnte nicht geladen werden." << endl;
-// 		}
-// 	}
-	
-	
-	triangles.append(triangle);
-	
-	
+        triangle.setVTex0( tV1 );
+        triangle.setVTex1( tV2 );
+        triangle.setVTex2( tV3 );
+
+
+        triangle.createTexture( img );
+    }
+
+    triangles.append( triangle );
+
 }
 
 
@@ -125,5 +114,5 @@ void BB_TerrainTriangle::createGl(QVector< C3dTriangle >& triangles, C3dVector v
  */
 const QString BB_TerrainTriangle::getClassName()
 {
-	return QString("BB_TerrainTriangle");
+    return QString( "BB_TerrainTriangle" );
 }

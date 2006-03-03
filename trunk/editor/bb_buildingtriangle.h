@@ -35,8 +35,9 @@ class BB_BuildingTriangle : public BB_Triangle
         ~BB_BuildingTriangle();
 
         /**
-         * \fn BB_Object::getClassName()
-         */
+		 * Gibt den Klassennamen zurück
+		 * @return Klassenname
+		 */
         virtual const QString getClassName();
 
         /**

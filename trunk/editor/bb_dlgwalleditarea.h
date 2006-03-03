@@ -41,10 +41,11 @@ class BB_DlgWallEditArea : public QLabel
         Standart Konstruktor: <br>
         Es wird ein Dialog erzeugt, das die Objekte von BB_Wall verwalten kann<br>
         Deafult Wert für Höhe einer Wand ist 3.2 Meter
-        @param BB_Wall Obejekt von einer Wand. Für diese Wand wird dann ein Dialog erzeugt
-        @Param BB_DocComponent Etage mit der gearbeitet werden soll
-        @param QWidget Benötigt von QT
-        @param Qt::WFlags als Eigenschaft von Qt
+        @param wall BB_Wall Obejekt von einer Wand. Für diese Wand wird dann ein Dialog erzeugt
+        @Param docComponent BB_DocComponent Etage mit der gearbeitet werden soll
+        @param hohe Höhe der Wand
+		@param parent QWidget Benötigt von QT
+        @param f Qt::WFlags als Eigenschaft von Qt
         */
         BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docComponent, double hohe = 3.2, QWidget * parent = 0, Qt::WFlags f = 0 );
         /**
@@ -54,7 +55,7 @@ class BB_DlgWallEditArea : public QLabel
         ~BB_DlgWallEditArea();
         /**
         Setzt das Tool <b>tool</b> als aktiv (ausgewählt) ein
-        @param BB_AbstractTool
+        @param tool BB_AbstractTool
         */
         void setTool( BB_AbstractTool * tool );
         /**
@@ -119,15 +120,15 @@ class BB_DlgWallEditArea : public QLabel
     protected:
         /**
         Abgeleitete Funktion zum Zeichen
-        @param QPaintEvent
+        @param re QPaintEvent
         */
-        virtual void paintEvent ( QPaintEvent * );
+        virtual void paintEvent ( QPaintEvent * re);
         /**
         Abgeleitete Funktion zum Anpassen von Breite und Höhe<br>
         Wird aufgerufen wenn die Größe von Fenster geändert wurde
-        @param QResizeEvent
+        @param re QResizeEvent
         */
-        virtual void resizeEvent ( QResizeEvent * );
+        virtual void resizeEvent ( QResizeEvent * re);
         /**
         Ein Erreigniss, das aufgerufen wird, wenn eine von  Maus-tasten gedrükt wird
         */

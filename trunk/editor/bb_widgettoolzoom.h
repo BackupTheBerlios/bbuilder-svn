@@ -46,7 +46,7 @@ class BB_WidgetToolZoom : public BB_AbstractToolWidget
         virtual void setZoomFaktor( double value );
 
     protected:
-		/* Form */
+		/** Form */
         Ui::WidgetToolZoom m_Ui;
 };
 

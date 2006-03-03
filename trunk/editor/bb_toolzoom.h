@@ -54,14 +54,14 @@ public:
     virtual void click(QMouseEvent* me);
     
 	/**
-	 * @fn BB_AbstractTool::( BB_DocComponent* component )
+	 * @fn setDocComponent( BB_DocComponent* component )
 	 * Setzt zusätzlich den Zoomfaktor der Arbeitsfläche.
 	 * @author Alex Letkemann
 	 */
 	virtual void setDocComponent( BB_DocComponent* component );
     
 	/**
-	 * @fn BB_AbstractTool::getToolWidget() 
+	 * @fn getToolWidget() 
 	 */
 	virtual BB_AbstractToolWidget* getToolWidget();
 

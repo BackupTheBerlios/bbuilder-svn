@@ -52,9 +52,14 @@ class BB_WidgetToolSelect : public BB_AbstractToolWidget
     void slotDeleteSelection();
 
     protected:
+		/** Form */
         Ui::WidgetToolSelect m_Ui;
 		
 private slots:
+    /**
+     * Selektiert alle Objekte auf der Arbeisfläche.
+	 * @author Alex Letkemann
+     */
     void slotSelectAll();
 };
 

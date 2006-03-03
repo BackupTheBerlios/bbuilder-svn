@@ -47,7 +47,7 @@ class BB_WidgetToolNavigationPointNew : public BB_AbstractToolWidget
         virtual void clearToolWidget();
 		
 		/**
-		 * Aktiviert oder Deaktiviert das Fenster.<br />
+		 * Aktiviert oder Deaktiviert das Fenster.<br>
 		 * @param value True: Aktiviert, False: Deaktiviert
 		 * @author Alex Letkemann
 		 */
@@ -96,8 +96,13 @@ class BB_WidgetToolNavigationPointNew : public BB_AbstractToolWidget
         void slotDelete();
 
     protected:
+		/** Form */
         Ui::WidgetToolNavigationPointNew m_Ui;
+		
+		/** Hilfsvariable */
 		BB_Point* m_Tmp_Point;
+		
+		/** Hilfsvariable */
         C2dVector m_Tmp_Vector;
 
 };

@@ -42,7 +42,7 @@ class BB_ToolPointNew : public BB_AbstractTool
 
         
         /**
-		 * \fn BB_AbstractTool::getToolWidget()
+		 * \fn getToolWidget()
          */
         virtual BB_AbstractToolWidget* getToolWidget();
 

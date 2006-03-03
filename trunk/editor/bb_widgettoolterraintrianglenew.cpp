@@ -52,7 +52,7 @@ void BB_WidgetToolTerrainTriangleNew::clearToolWidget()
 }
 
 /**
- * Aktiviert oder Deaktiviert das Fenster.<br />
+ * Aktiviert oder Deaktiviert das Fenster.<br>
  * @param value True: Aktiviert, False: Deaktiviert
  * @author Alex Letkemann
  */
@@ -178,7 +178,7 @@ void BB_WidgetToolTerrainTriangleNew::slotTextureFinished()
 
         if ( m_Selection != NULL && m_Selection->count() == 1 )
         {
-			qDebug() << fileName;
+// 			qDebug() << fileName;
             m_Tmp_DrawObject = m_Selection->at( 0 );
 			m_Tmp_DrawObject->setTextureFileName( fileInfo.fileName() );
         }

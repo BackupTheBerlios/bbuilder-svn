@@ -54,16 +54,16 @@ BB_DrawObject::~BB_DrawObject()
 }
 
 
-// void BB_DrawObject::moveBy( C2dVector pMove )
-// {
-// 	// Hier keine Implementierung
-// }
+void BB_DrawObject::moveBy( C2dVector pMove )
+{
+	// Hier keine Implementierung
+}
 
 
-// void BB_DrawObject::show(BB_Transformer& transformer,QPainter& painter) const
-// {
-//     /// @todo implement me
-// }
+void BB_DrawObject::show(BB_Transformer& transformer,QPainter& painter) const
+{
+    /// @todo implement me
+}
 
 
 
@@ -71,19 +71,19 @@ BB_DrawObject::~BB_DrawObject()
 // {
 //     return m_Color;
 // }
-
-
-
+// 
+// 
+// 
 // void BB_DrawObject::setColor( const QColor& value )
 // {
 // 	m_Color = value;
 // }
-//
 
-// bool BB_DrawObject::isHit( const QRectF& rect )
-// {
-// 	return false;
-// }
+
+bool BB_DrawObject::isHit( const QRectF& rect )
+{
+	return false;
+}
 
 /**
 Gibt die Name von Klasse zurück
@@ -147,16 +147,16 @@ void BB_DrawObject::setPen( const QPen& value )
  * Wird aufgerufen, wenn das Objekt durch abhängige Objekte bewegt wird.
  * @author Alex Letkemann
  */ 
-// void BB_DrawObject::moveEvent()
-// {
-//     // Hier keine Implementierung
-// }
+void BB_DrawObject::moveEvent()
+{
+    // Hier keine Implementierung
+}
 
 
-// void BB_DrawObject::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
-// {
-// 	// hier keine Implementierung, einfach nichts machen ...
-// }
+void BB_DrawObject::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
+{
+	// hier keine Implementierung, einfach nichts machen ...
+}
 
 /**
 Gibt relative Bild-Dateiname zurück
@@ -193,12 +193,13 @@ Setzt Texture-dateiname ein
 */
 void BB_DrawObject::setTextureAbsoluteFileName( const QString& Value )
 {
-    QImage image( Value );
-    if ( !image.isNull() )
-    {
-        image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getName() + ".png", "PNG" );
-        setTextureFileName( getName() + ".png" );
-        return ;
-    }
-    qDebug( "image ist nicht geladen" );
+	QImage image( Value );
+	if ( !image.isNull() )
+	{
+		image.save( PRO_TEXTURES_DIR() + SEPARATOR() + getName() + ".png", "PNG" );
+		setTextureFileName( getName() + ".png" );
+		return;
+	}
+	qDebug("Image wurde nicht geladen.");
+
 }

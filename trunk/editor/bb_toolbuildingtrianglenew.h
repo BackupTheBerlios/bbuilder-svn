@@ -15,8 +15,8 @@
 #include <bb_tooltrianglenew.h>
 
 /**
- * Werkzeug zur Markieren von Dächern und Gründen von Gebäuden.<br />
- * Die Gesamte Fläche wird aus mehreren Dreiecken zusamengesetzt.<br />
+ * Werkzeug zur Markieren von Dächern und Gründen von Gebäuden.<br>
+ * Die Gesamte Fläche wird aus mehreren Dreiecken zusamengesetzt.<br>
  * Ein Dreieck lässt sich druch anclicken von drei verschiedenen Knoten auf der Arbeitsfläche erstellen.
  * 
  * @author Alex Letkemann <alex@letkemann.de>

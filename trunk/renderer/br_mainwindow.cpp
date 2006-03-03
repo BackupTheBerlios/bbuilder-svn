@@ -196,8 +196,8 @@ void BR_MainWindow::initStatusBar()
 
 
 /**
- * Beendet das Programm
- * Wird durch die Aktion m_aFileExit aufgeruffen.
+ * Schliesst das Programm
+ * @author Alex Letkemann
  */
 void BR_MainWindow::slotFileExit()
 {
@@ -205,8 +205,10 @@ void BR_MainWindow::slotFileExit()
 }
 
 
-/*!
-    \fn BR_MainWindow::slotViewFullScreen ( bool value )
+/**
+ * Aktiviert / Deaktiviert Vollbild
+ * @param value True: Activiert, False: Deaktiviert
+ * @author Alex Letkemann
  */
 void BR_MainWindow::slotViewFullScreen ( bool value )
 {
@@ -238,8 +240,9 @@ void BR_MainWindow::initTimer()
 }
 
 
-/*!
-    \fn BR_MainWindow::slotTimerAnimation()
+/**
+ * Führ die Animation aus
+ * @author Alex Letkemann
  */
 void BR_MainWindow::slotTimerAnimation()
 {
@@ -247,8 +250,9 @@ void BR_MainWindow::slotTimerAnimation()
 }
 
 
-/*!
-    \fn BR_MainWindow::slotTimerFPS()
+/**
+ * Sendet die FPS an das Informationsfenster
+ * @author Alex Letkemann
  */
 void BR_MainWindow::slotTimerFPS()
 {
@@ -258,8 +262,9 @@ void BR_MainWindow::slotTimerFPS()
 
 
 
-/*!
-    \fn BR_MainWindow::slotProjectOpen()
+/**
+ * Startet ein Dialog zu Öffnen eines Projektes
+ * @author Alex Letkemann
  */
 void BR_MainWindow::slotProjectOpen()
 {
@@ -295,9 +300,9 @@ void BR_MainWindow::slotProjectOpen()
     }
 }
 
-
-/*!
-    \fn BR_MainWindow::slotProjectClose()
+/**
+ * Schliesst das Projekt
+ * @author Alex Letkemann
  */
 void BR_MainWindow::slotProjectClose()
 {
@@ -308,8 +313,10 @@ void BR_MainWindow::slotProjectClose()
 }
 
 
-/*!
-    \fn BR_MainWindow::slotViewGhostMode( bool value )
+/**
+ * Aktiviert / Deaktiviert den Geist-Modus
+ * @param value True: Activiert, False: Deaktiviert
+ * @author Alex Letkemann
  */
 void BR_MainWindow::slotViewGhostMode( bool value )
 {
@@ -327,8 +334,10 @@ void BR_MainWindow::slotViewGhostMode( bool value )
 }
 
 
-/*!
-    \fn BR_MainWindow::slotViewWireFrame( bool value )
+/**
+ * Aktiviert / Deaktiviert den Wireframe-Modus
+ * @param value True: Activiert, False: Deaktiviert
+ * @author Alex Letkemann
  */
 void BR_MainWindow::slotViewWireFrame( bool value )
 {

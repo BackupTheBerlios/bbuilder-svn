@@ -23,7 +23,7 @@ class BB_NavigationLine : public BB_Line
 {
 public:
 	/**
-	 * Konstruktor.<br/>
+	 * Konstruktor.<br>
 	 * Erstellt eine Navigationslinie zwischen den zwei übergebenen Navigationspunkten
 	 * @author Alex Letkemann
 	 */
@@ -35,7 +35,8 @@ public:
     ~BB_NavigationLine();
 	
 	/**
-	 * @fn BB_Object::getClassName()
+	 * Gibt den Klassennamen zurück
+	 * @return Klassenname
 	 */
     virtual const QString getClassName();
 

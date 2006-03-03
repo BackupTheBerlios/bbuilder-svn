@@ -110,7 +110,8 @@ void BB_WidgetToolSelect::slotDeleteSelection()
 
 
 /**
- * Selektiert alle Objekte
+ * Selektiert alle Objekte auf der Arbeisfläche.
+ * @author Alex Letkemann
  */
 void BB_WidgetToolSelect::slotSelectAll()
 {

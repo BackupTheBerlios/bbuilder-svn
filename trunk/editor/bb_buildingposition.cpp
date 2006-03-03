@@ -196,7 +196,7 @@ BB_Building* BB_BuildingPosition::getBuilding() const
  * Erzeugt die 3D Ansicht des Gebäudes.<br>
  * Die 3D Ansicht wird komplett aus Dreiecken erzeugt. Die Erzeugten Dreiecke werden an den üergeben Vektor 'triangles' angehängt.
  * @param triangles Vektor, an den die Dreiecke angehängt werden.
- * @param vector Vektor zur Positionierung des Gebäudes.
+ * @param vector Hier keine Funktion
  * @param rotation Hier keine Funktion
  * @param scale Skalierung des Gebäudes
  * @param height Hier keine Funktion
@@ -211,4 +211,5 @@ void BB_BuildingPosition::createGl( QVector<C3dTriangle>& triangles, C3dVector v
 	{
 		m_Building->createGl( triangles,v, m_Rotation, scale, 0.0 );
 	}
+	
 }

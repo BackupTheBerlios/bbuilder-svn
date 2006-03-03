@@ -62,7 +62,7 @@ void BB_ToolStair::click( QMouseEvent* me )
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
     if ( m_Objects == NULL | me == NULL | m_Transformer == NULL )
     {
-        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
+        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
         return ;
     }
     //Behandlung von linke Maustaste
@@ -107,9 +107,9 @@ void BB_ToolStair::click( QMouseEvent* me )
 void BB_ToolStair::move( QMouseEvent* me, bool overX, bool overY )
 {
     //Behandlung von Linke-maustaste
-    if ( me->buttons() == Qt::LeftButton )
+    if ( me->buttons() == Qt::LeftButton && !overX && !overY )
     {
-        //wenn Slected-mode ausgewaehlt, dann einfach viereck weiter schieben
+        //wenn Selected-mode ausgewaehlt, dann einfach viereck weiter schieben
         m_Point2.setX( me->x() );
         m_Point2.setY( me->y() );
     }
@@ -130,7 +130,7 @@ void BB_ToolStair::release( QMouseEvent* me )
     //wenn die noetigen objekte nicht da sind, sofort abbrechen
     if ( m_Objects == NULL | me == NULL | m_Transformer == NULL )
     {
-        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da!!!! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
+        qDebug( "BB_ToolMove::click()->Nicht alle objecte sind da! m_Objects: %p \tme: %p\tm_Transformer: %p", m_Objects, me, m_Transformer );
         getToolWidget() ->updateWidget();
         return ;
     }

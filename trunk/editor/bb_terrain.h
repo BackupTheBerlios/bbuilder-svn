@@ -43,22 +43,23 @@ public:
     virtual ~BB_Terrain();
 	
 	/** 
-	 * \fn BB_FileObject::write(QTextStream &out) 
+	 * \fn write(QTextStream &out) 
 	 */
 	virtual bool write(QTextStream &out);
 	
 	/**
-	 * \fn BB_DocComponent keyBoardEdit(QWidget* parent)
+	 * \fn keyBoardEdit(QWidget* parent)
 	 */
 	virtual int keyBoardEdit(QWidget* parent);
 	
 	/**
-	 * \fn BB_FileObject::open()
+	 * \fn open()
 	 */
     virtual bool open();
     
 	/**
-	 * \fn BB_Object::getClassName() 
+	 * Gibt den Klassennamen zurück
+	 * @return Klassenname
 	 */
 	virtual const QString getClassName();
     
@@ -78,7 +79,7 @@ public:
     void buildingDeleted( BB_Building* building );
 	
 	/**
-	 * \fn BB_DocComponent::createGl( QVector<C3dTriangle>& triangles, double scale )
+	 * \fn createGl( QVector<C3dTriangle>& triangles, double scale )
 	 */
     virtual void createGl( QVector<C3dTriangle>& triangles, double scale );
 

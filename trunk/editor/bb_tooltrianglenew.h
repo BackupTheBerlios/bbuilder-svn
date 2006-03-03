@@ -16,8 +16,8 @@
 #include <bb_triangle.h>
 
 /**
- * Tool zum Erzeugen von Dreieckecn.<br />
- * Ein Dreieck wird in drei Schritten erzeugt.<br />
+ * Tool zum Erzeugen von Dreieckecn.<br>
+ * Ein Dreieck wird in drei Schritten erzeugt.<br>
  * Dabei müssen drei verschiedene Punkte nacheinander angeclick werden. Erst nach dem dritten Click wird das Dreieck erzeugt.
  *
  * @author Alex Letkemann
@@ -37,17 +37,17 @@ public:
     ~BB_ToolTriangleNew();
 	
 	/**
-	 * @fn BB_AbstractTool::click(QMouseEvent* me)
+	 * @fn click(QMouseEvent* me)
 	 */
 	virtual void click(QMouseEvent* me);
 	
 	/**
-	 * @fn BB_AbstractTool::reset()
+	 * @fn reset()
 	 */
 	virtual void reset();
 	
 	/**
-	 * @fn BB_AbstractTool::getToolWidget()
+	 * @fn getToolWidget()
 	 */
 	virtual BB_AbstractToolWidget* getToolWidget();
 

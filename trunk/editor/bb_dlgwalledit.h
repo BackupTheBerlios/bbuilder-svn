@@ -46,10 +46,11 @@ class BB_DlgWallEdit : public QDialog
         Standart Konstruktor: <br>
         Es wird ein Dialog erzeugt, das die Objekte von BB_Wall verwalten kann<br>
         Deafult Wert für Höhe einer Wand ist 3.2 Meter
-        @param BB_Wall Obejekt von einer Wand. Für diese Wand wird dann ein Dialog erzeugt
-        @Param BB_DocComponent Etage mit der gearbeitet werden soll
-        @param QWidget Benötigt von QT
-        @param Qt::WFlags als Eigenschaft von Qt
+		@param wall Obejekt von einer Wand. Für diese Wand wird dann ein Dialog erzeugt
+		@Param docComponent Etage mit der gearbeitet werden soll
+		@param hohe Höhe der Wand
+		@param parent Benötigt von QT
+		@param f als Eigenschaft von Qt
         @author Vaceslav Ustinov
         */
         BB_DlgWallEdit( BB_Wall * wall, BB_DocComponent * docComponent , double hohe = 3.2, QWidget * parent = 0, Qt::WFlags f = 0 );
@@ -61,7 +62,7 @@ class BB_DlgWallEdit : public QDialog
         ~BB_DlgWallEdit();
         /**
         Legt die Etage mit der gearbeitet werden soll fest
-        @param BB_DocComponent Zeiger auf eine Etage
+        @param Value Zeiger auf eine Etage
         @author Vaceslav Ustinov
         */
         void setLevel( BB_DocComponent* Value );
@@ -73,7 +74,7 @@ class BB_DlgWallEdit : public QDialog
         BB_DocComponent* getLevel() const;
         /**
         Setzt die Wand mit der gearbeitet werden soll
-        @param BB_Wall Zeiger auf eine Wand
+        @param Value Zeiger auf eine Wand
         @author Vaceslav Ustinov
         */
         void setWall( BB_Wall* Value );
@@ -92,22 +93,22 @@ class BB_DlgWallEdit : public QDialog
     protected:
         /**
         Abgeleitete Funktion zum Zeichen
-        @param QPaintEvent
+        @param pe QPaintEvent
         @author Vaceslav Ustinov
         */
         void paintEvent ( QPaintEvent * pe );
         /**
         Abgeleitete Funktion zum Anpassen von Breite und Höhe<br>
         Wird aufgerufen wenn die Größe von Fenster geändert wurde
-        @param QResizeEvent
+        @param re QResizeEvent
         @author Vaceslav Ustinov
         */
         void resizeEvent ( QResizeEvent * re );
         /**
         Funktion zum Initialisieren, wird vom Konstruktor verwendet.<br>
         Hintergrund: Debuger kann nicht auf Konstruktoren und Destruktren zugreifen
-        @param BB_Wall Zeiger auf eine Wand
-        @param BB_DocComponent Zeiger auf eine Etage
+        @param wall BB_Wall Zeiger auf eine Wand
+        @param docComponent BB_DocComponent Zeiger auf eine Etage
         @param hohe hohe von der Wand, Default 3.2 Meter
         @author Vaceslav Ustinov
         */
@@ -119,7 +120,7 @@ class BB_DlgWallEdit : public QDialog
         void initSingals();
         /**
         Setzt die Eigenschaft checked allen, ausser in "button", Buttons auf false
-        @param QToolButton Zeiger auf einen Button. Dieser Button wird nicht auf False gesetzt
+        @param button QToolButton Zeiger auf einen Button. Dieser Button wird nicht auf False gesetzt
         @author Vaceslav Ustinov
         */
         void unsetButton( QToolButton * button );

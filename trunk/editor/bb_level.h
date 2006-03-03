@@ -21,7 +21,7 @@
 class BB_Building;
 
 /**
- * Stellt eine Etage dar.<br />
+ * Stellt eine Etage dar.<br>
  * Die Etage kennt das Gebäude zu welchem sie gehört und besitzt eine Höhe.
  * @author Alex Letkemann
  */
@@ -29,7 +29,7 @@ class BB_Level : public BB_DocComponent
 {
     public:
         /**
-         * Konstrucktor<br />
+         * Konstrucktor<br>
 		 * Erstellt eine neue Etage
          * @param building Gebäude, welchem die Etage zugeteilt wird.
          * @param path Pfad zur Datei
@@ -53,14 +53,15 @@ class BB_Level : public BB_DocComponent
         virtual void generateXElement( QTextStream &out, int depth );
         
 		/**
-		 * \fn BB_FileObject::write( QTextStream &out )
+		 * \fn write( QTextStream &out )
 		 */
 		virtual bool write( QTextStream &out );
 		
 		
         /**
-         * \fn BB_Object::getClassName()
-         */
+		 * Gibt den Klassennamen zurück
+		 * @return Klassenname
+		 */
         virtual const QString getClassName();
 		
 		
@@ -87,7 +88,7 @@ class BB_Level : public BB_DocComponent
 		
 		
         /**
-		 * \fn BB_DocComponent::keyBoardEdit( QWidget* parent )
+		 * \fn keyBoardEdit( QWidget* parent )
          */
         virtual int keyBoardEdit( QWidget* parent );
 		

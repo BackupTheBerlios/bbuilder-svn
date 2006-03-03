@@ -22,6 +22,7 @@
 
 using namespace std;
 
+/** Konstucktor */
 BB_AbstractTool::BB_AbstractTool( QWidget * parent )
 {
     m_ParentWidget = parent;
@@ -38,6 +39,7 @@ BB_AbstractTool::BB_AbstractTool( QWidget * parent )
     m_FirstSelectedObject = NULL;
 }
 
+/** Destructor */
 BB_AbstractTool::~BB_AbstractTool()
 {}
 

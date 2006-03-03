@@ -62,15 +62,15 @@ void BB_ConstructionElement::setTextureFileName( const QString& Value )
     if ( !Value.isNull() )
     {
         m_TextureFileName = Value;
-        qDebug() << PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName;
+//         qDebug() << PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName;
         if ( !m_Image.load( PRO_TEXTURES_DIR() + SEPARATOR() + m_TextureFileName ) )
         {
             qDebug() << "image " << Value << " wurde nicht geladen";
         }
-        else
-        {
-            qDebug() << "image " << Value << " wurde erfolgreich geladen";
-        }
+//         else
+//         {
+//             qDebug() << "image " << Value << " wurde erfolgreich geladen";
+//         }
     }
 }
 
@@ -101,7 +101,7 @@ void BB_ConstructionElement::setTextureAbsoluteFileName( const QString& Value )
         setTextureFileName( getName() + ".png" );
         return ;
     }
-    qDebug( "image ist nicht geladen" );
+	qDebug( "Image wurde nicht geladen" );
 }
 
 /**

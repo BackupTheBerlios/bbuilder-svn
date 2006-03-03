@@ -123,8 +123,8 @@ class BB_Doc : public BB_FileObject
         BB_Level* newLevel( BB_Building* building, QWidget * parent );
 		
 		/**
-		 * Reserviert ein leeres Gebäude im angegebenen Verzeichnis und Dateinamen.<br />
-		 * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br />
+		 * Reserviert ein leeres Gebäude im angegebenen Verzeichnis und Dateinamen.<br>
+		 * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br>
 		 * @param path Existierender Pfad
 		 * @param fileName Existierende Datei
 		 * @return Pointer auf das reservierte Gebäude.
@@ -133,8 +133,8 @@ class BB_Doc : public BB_FileObject
         BB_Building* newBuilding( QDir& path, QString& fileName );
 		
 		/**
-		 * Reserviert eine leere Etage im angegebenen Verzeichnis und Dateinamen.<br />
-		 * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br />
+		 * Reserviert eine leere Etage im angegebenen Verzeichnis und Dateinamen.<br>
+		 * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br>
 		 * @param building Gebäude, zu dem die Etage gehört.
 		 * @param path Existierender Pfad
 		 * @param fileName Existierende Datei
@@ -144,8 +144,8 @@ class BB_Doc : public BB_FileObject
         BB_Level* newLevel( BB_Building* building, QDir& path, QString& fileName );
 		
 		/**
-		 * Reserviert ein leeres Gelände im angegebenen Verzeichnis und Dateinamen.<br />
-		 * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br />
+		 * Reserviert ein leeres Gelände im angegebenen Verzeichnis und Dateinamen.<br>
+		 * Die Datei muss an der stelle bereits existieren, damit diese geladen werden kann.<br>
 		 * @param path Existierender Pfad
 		 * @param fileName Existierende Datei
 		 * @return Pointer auf das reservierte Gelände.

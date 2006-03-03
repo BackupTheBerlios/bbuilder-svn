@@ -1489,14 +1489,14 @@
       <name>paintEvent</name>
       <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
       <anchor>b0</anchor>
-      <arglist>(QPaintEvent *)</arglist>
+      <arglist>(QPaintEvent *re)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
       <name>resizeEvent</name>
       <anchorfile>classBB__DlgWallEditArea.html</anchorfile>
       <anchor>b1</anchor>
-      <arglist>(QResizeEvent *)</arglist>
+      <arglist>(QResizeEvent *re)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
@@ -3819,45 +3819,38 @@
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>BB_AbstractTool *</type>
-      <name>m_ToolZoom</name>
-      <anchorfile>classBB__TabLevel.html</anchorfile>
-      <anchor>p3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
       <type>QVector&lt; BB_Building * &gt; *</type>
       <name>m_Buildings</name>
       <anchorfile>classBB__TabLevel.html</anchorfile>
-      <anchor>p4</anchor>
+      <anchor>p3</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QVector&lt; BB_Level * &gt; *</type>
       <name>m_Levels</name>
       <anchorfile>classBB__TabLevel.html</anchorfile>
-      <anchor>p5</anchor>
+      <anchor>p4</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QListWidget *</type>
       <name>m_ListWidgetLevels</name>
       <anchorfile>classBB__TabLevel.html</anchorfile>
-      <anchor>p6</anchor>
+      <anchor>p5</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>QComboBox *</type>
       <name>m_ComboBoxBuildings</name>
       <anchorfile>classBB__TabLevel.html</anchorfile>
-      <anchor>p7</anchor>
+      <anchor>p6</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_Building *</type>
       <name>m_Building</name>
       <anchorfile>classBB__TabLevel.html</anchorfile>
-      <anchor>p8</anchor>
+      <anchor>p7</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -6046,6 +6039,13 @@
       <arglist>(QVector&lt; BB_DrawObject * &gt; *selectVector, QWidget *parent=0, Qt::WFlags f=0)</arglist>
     </member>
     <member kind="function">
+      <type></type>
+      <name>~BB_WorkFrame</name>
+      <anchorfile>classBB__WorkFrame.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
       <type>void</type>
       <name>setZoomFaktor</name>
       <anchorfile>classBB__WorkFrame.html</anchorfile>
@@ -6176,6 +6176,13 @@
       <anchor>a0</anchor>
       <arglist>(BB_Building *building)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_XBuildingHandler</name>
+      <anchorfile>classBB__XBuildingHandler.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
       <name>endElement</name>
@@ -6205,43 +6212,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>int</type>
-      <name>m_ScalePointIndex</name>
-      <anchorfile>classBB__XBuildingHandler.html</anchorfile>
-      <anchor>p2</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
       <type>QVector&lt; BB_DrawObject * &gt; *</type>
       <name>m_DrawObjects</name>
       <anchorfile>classBB__XBuildingHandler.html</anchorfile>
-      <anchor>p3</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>BB_XDocGenerator</name>
-    <filename>classBB__XDocGenerator.html</filename>
-    <base>BB_XGenerator</base>
-    <member kind="function">
-      <type></type>
-      <name>BB_XDocGenerator</name>
-      <anchorfile>classBB__XDocGenerator.html</anchorfile>
-      <anchor>a0</anchor>
-      <arglist>(BB_Doc *doc)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual bool</type>
-      <name>write</name>
-      <anchorfile>classBB__XDocGenerator.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>(QIODevice *device)</arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>BB_Doc *</type>
-      <name>m_Doc</name>
-      <anchorfile>classBB__XDocGenerator.html</anchorfile>
-      <anchor>p0</anchor>
+      <anchor>p2</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -6255,6 +6229,13 @@
       <anchorfile>classBB__XDocHandler.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_Doc *doc)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_XDocHandler</name>
+      <anchorfile>classBB__XDocHandler.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
@@ -6303,45 +6284,6 @@
       <name>m_BuidingNr</name>
       <anchorfile>classBB__XDocHandler.html</anchorfile>
       <anchor>p4</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>BB_XGenerator</name>
-    <filename>classBB__XGenerator.html</filename>
-    <member kind="function">
-      <type></type>
-      <name>BB_XGenerator</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>a0</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual</type>
-      <name>~BB_XGenerator</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>a1</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual bool</type>
-      <name>write</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>a2</anchor>
-      <arglist>(QIODevice *device)=0</arglist>
-    </member>
-    <member kind="function" static="yes">
-      <type>static QString</type>
-      <name>indent</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>e0</anchor>
-      <arglist>(int depth)</arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>QTextStream</type>
-      <name>m_Stream</name>
-      <anchorfile>classBB__XGenerator.html</anchorfile>
-      <anchor>p0</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -6535,6 +6477,13 @@
       <anchor>a0</anchor>
       <arglist>(BB_Level *level)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_XLevelHandler</name>
+      <anchorfile>classBB__XLevelHandler.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
       <name>endElement</name>
@@ -6582,6 +6531,13 @@
       <anchor>a0</anchor>
       <arglist>(BB_Terrain *terrain)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_XTerrainHandler</name>
+      <anchorfile>classBB__XTerrainHandler.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual bool</type>
       <name>startElement</name>
@@ -6610,17 +6566,24 @@
       <anchor>p1</anchor>
       <arglist></arglist>
     </member>
-    <member kind="variable" protection="protected">
-      <type>bool</type>
-      <name>m_XScale</name>
-      <anchorfile>classBB__XTerrainHandler.html</anchorfile>
-      <anchor>p2</anchor>
-      <arglist></arglist>
-    </member>
   </compound>
   <compound kind="class">
     <name>BR_Camera</name>
     <filename>classBR__Camera.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>BR_Camera</name>
+      <anchorfile>classBR__Camera.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BR_Camera</name>
+      <anchorfile>classBR__Camera.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function">
       <type>void</type>
       <name>rotateY</name>
@@ -6785,6 +6748,13 @@
       <anchorfile>classBR__InfoWidget.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_Doc *doc, QWidget *parent=0, Qt::WFlags f=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BR_InfoWidget</name>
+      <anchorfile>classBR__InfoWidget.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -6993,6 +6963,13 @@
       <anchorfile>classBR__View.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_Doc *doc, BR_InfoWidget *info, QWidget *parent=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BR_View</name>
+      <anchorfile>classBR__View.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -8873,7 +8850,7 @@
   </compound>
   <compound kind="dir">
     <name>editor/</name>
-    <path>/home/high/programming/bbuilder/editor/</path>
+    <path>/home/alex/Studium/SE.Projekt/glbb/editor/</path>
     <filename>dir_000000.html</filename>
     <file>bb.cpp</file>
     <file>bb.h</file>
@@ -9032,12 +9009,8 @@
     <file>bb_workframe.h</file>
     <file>bb_xbuildinghandler.cpp</file>
     <file>bb_xbuildinghandler.h</file>
-    <file>bb_xdocgenerator.cpp</file>
-    <file>bb_xdocgenerator.h</file>
     <file>bb_xdochandler.cpp</file>
     <file>bb_xdochandler.h</file>
-    <file>bb_xgenerator.cpp</file>
-    <file>bb_xgenerator.h</file>
     <file>bb_xhandler.cpp</file>
     <file>bb_xhandler.h</file>
     <file>bb_xlevelhandler.cpp</file>
@@ -9047,51 +9020,10 @@
     <file>c2dvector.cpp</file>
     <file>c2dvector.h</file>
     <file>main.cpp</file>
-    <file>moc_bb_abstracttoolwidget.cpp</file>
-    <file>moc_bb_dlgbuildingedit.cpp</file>
-    <file>moc_bb_dlgleveledit.cpp</file>
-    <file>moc_bb_dlgopentexture.cpp</file>
-    <file>moc_bb_dlgprojectnew.cpp</file>
-    <file>moc_bb_dlgterrainedit.cpp</file>
-    <file>moc_bb_dlgwalledit.cpp</file>
-    <file>moc_bb_mainwindow.cpp</file>
-    <file>moc_bb_tab.cpp</file>
-    <file>moc_bb_tabbuilding.cpp</file>
-    <file>moc_bb_tablevel.cpp</file>
-    <file>moc_bb_tabterrain.cpp</file>
-    <file>moc_bb_widgettoolbuildingpositionnew.cpp</file>
-    <file>moc_bb_widgettoollinenew.cpp</file>
-    <file>moc_bb_widgettoolnavigationpointnew.cpp</file>
-    <file>moc_bb_widgettoolpointnew.cpp</file>
-    <file>moc_bb_widgettoolscale.cpp</file>
-    <file>moc_bb_widgettoolselect.cpp</file>
-    <file>moc_bb_widgettoolterrainpointnew.cpp</file>
-    <file>moc_bb_widgettoolterraintrianglenew.cpp</file>
-    <file>moc_bb_widgettooltrianglenew.cpp</file>
-    <file>moc_bb_widgettoolwallnew.cpp</file>
-    <file>moc_bb_widgettoolzoom.cpp</file>
-    <file>moc_bb_workarea.cpp</file>
-    <file>ui_buildingEdit.h</file>
-    <file>ui_fileOptions.h</file>
-    <file>ui_levelEdit.h</file>
-    <file>ui_projectNew.h</file>
-    <file>ui_terrainEdit.h</file>
-    <file>ui_textureOpenDialog.h</file>
-    <file>ui_toolWidgetBuildingPositionNew.h</file>
-    <file>ui_toolWidgetLineNew.h</file>
-    <file>ui_toolWidgetNavigationPointNew.h</file>
-    <file>ui_toolWidgetPointNew.h</file>
-    <file>ui_toolWidgetScale.h</file>
-    <file>ui_toolWidgetSelect.h</file>
-    <file>ui_toolWidgetTerrainPointNew.h</file>
-    <file>ui_toolWidgetTerrainTriangleNew.h</file>
-    <file>ui_toolWidgetTriangleNew.h</file>
-    <file>ui_toolWidgetWallNew.h</file>
-    <file>ui_toolWidgetZoom.h</file>
   </compound>
   <compound kind="dir">
     <name>renderer/</name>
-    <path>/home/high/programming/bbuilder/renderer/</path>
+    <path>/home/alex/Studium/SE.Projekt/glbb/renderer/</path>
     <filename>dir_000001.html</filename>
     <file>3dmath.cpp</file>
     <file>3dmath.h</file>
@@ -9130,47 +9062,5 @@
     <file>cglmatrix.cpp</file>
     <file>cglmatrix.h</file>
     <file>main.cpp</file>
-    <file>moc_bb_abstracttoolwidget.cpp</file>
-    <file>moc_bb_dlgbuildingedit.cpp</file>
-    <file>moc_bb_dlgleveledit.cpp</file>
-    <file>moc_bb_dlgopentexture.cpp</file>
-    <file>moc_bb_dlgprojectnew.cpp</file>
-    <file>moc_bb_dlgterrainedit.cpp</file>
-    <file>moc_bb_dlgwalledit.cpp</file>
-    <file>moc_bb_mainwindow.cpp</file>
-    <file>moc_bb_tab.cpp</file>
-    <file>moc_bb_tabbuilding.cpp</file>
-    <file>moc_bb_tablevel.cpp</file>
-    <file>moc_bb_tabterrain.cpp</file>
-    <file>moc_bb_widgettoolbuildingpositionnew.cpp</file>
-    <file>moc_bb_widgettoollinenew.cpp</file>
-    <file>moc_bb_widgettoolnavigationpointnew.cpp</file>
-    <file>moc_bb_widgettoolpointnew.cpp</file>
-    <file>moc_bb_widgettoolscale.cpp</file>
-    <file>moc_bb_widgettoolselect.cpp</file>
-    <file>moc_bb_widgettoolterrainpointnew.cpp</file>
-    <file>moc_bb_widgettoolterraintrianglenew.cpp</file>
-    <file>moc_bb_widgettooltrianglenew.cpp</file>
-    <file>moc_bb_widgettoolwallnew.cpp</file>
-    <file>moc_bb_widgettoolzoom.cpp</file>
-    <file>moc_bb_workarea.cpp</file>
-    <file>moc_br_mainwindow.cpp</file>
-    <file>ui_buildingEdit.h</file>
-    <file>ui_fileOptions.h</file>
-    <file>ui_levelEdit.h</file>
-    <file>ui_projectNew.h</file>
-    <file>ui_terrainEdit.h</file>
-    <file>ui_textureOpenDialog.h</file>
-    <file>ui_toolWidgetBuildingPositionNew.h</file>
-    <file>ui_toolWidgetLineNew.h</file>
-    <file>ui_toolWidgetNavigationPointNew.h</file>
-    <file>ui_toolWidgetPointNew.h</file>
-    <file>ui_toolWidgetScale.h</file>
-    <file>ui_toolWidgetSelect.h</file>
-    <file>ui_toolWidgetTerrainPointNew.h</file>
-    <file>ui_toolWidgetTerrainTriangleNew.h</file>
-    <file>ui_toolWidgetTriangleNew.h</file>
-    <file>ui_toolWidgetWallNew.h</file>
-    <file>ui_toolWidgetZoom.h</file>
   </compound>
 </tagfile>

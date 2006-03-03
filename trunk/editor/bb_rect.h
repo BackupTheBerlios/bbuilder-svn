@@ -51,7 +51,8 @@ public:
     ~BB_Rect();
 	
 	/**
-	 *  \fn BB_Object::getClassName()
+	 * Gibt den Klassennamen zurück
+	 * @return Klassenname
 	 */
     virtual const QString getClassName();
 	

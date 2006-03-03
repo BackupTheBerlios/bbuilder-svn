@@ -45,7 +45,9 @@ BB_Triangle::BB_Triangle( BB_Point* p1, BB_Point* p2, BB_Point* p3 ) : BB_Line( 
     }
 }
 
-
+/**
+ * Destruktor
+ */ 
 BB_Triangle::~BB_Triangle()
 {
     m_Pos1->removeLinkedObject( this );
@@ -64,6 +66,11 @@ bool BB_Triangle::isHit( const QRectF& rect )
     return BB_Line::isHit( rect ) && m_Pos3->isHit( rect );
 }
 
+/**
+ * Prüft, ob das Dreieck auf der angegebenen Position liegt.
+ * @param hit Position, auf die geprüft werden soll.
+ * @return True, wenn das Dreieck auf der angegebenen Position liegt, sonst false.
+ */
 bool BB_Triangle::isHit( const C2dVector& hit )
 {
 
@@ -72,14 +79,19 @@ bool BB_Triangle::isHit( const C2dVector& hit )
 }
 
 /**
- * Gibt den Klassennamen zurück
+ * @fn BB_Object::getClassName()
  */
 const QString BB_Triangle::getClassName()
 {
     return "BB_Triangle";
 }
 
-
+/**
+ * Zeichnet das Dreieck auf der Arbeitsfläche.
+ * @param transformer Transformer, der Benutzt werden soll.
+ * @param painter Painter, der Benutzt werden soll.
+ * @author Alex Letkemann
+ */
 void BB_Triangle::show( BB_Transformer& transformer, QPainter& painter ) const
 {
     if ( m_Pos1 != NULL && m_Pos2 != NULL && m_Pos3 != NULL )
@@ -102,39 +114,6 @@ void BB_Triangle::show( BB_Transformer& transformer, QPainter& painter ) const
     }
 }
 
-/*
-void BB_Triangle::remove(BB_Point* point)
-{
-	cout << "void BB_Triangle::remove(" << point << ")" << endl;
-	
-	if (m_Pos1 == point)
-	{
-		cout << "m_Pos2( " << m_Pos2 << " )->deleteLinkedObject( " << this << " );" << endl;
-		m_Pos2->deleteLinkedObject( this );
-		
-		cout << "m_Pos3( " << m_Pos3 << " )->deleteLinkedObject( " << this << " );" << endl;
-		m_Pos3->deleteLinkedObject( this );
-	}
-	else if(m_Pos2 == point)
-	{
-		cout << "m_Pos1( " << m_Pos1 << " )->deleteLinkedObject( " << this << " );" << endl;
-		m_Pos1->deleteLinkedObject( this );
-		
-		cout << "m_Pos3( " << m_Pos3 << " )->deleteLinkedObject( " << this << " );" << endl;
-		m_Pos3->deleteLinkedObject( this );
-	}
-	else if(m_Pos3 == point)
-	{
-		cout << "m_Pos1( " << m_Pos1 << " )->deleteLinkedObject( " << this << " );" << endl;
-		m_Pos1->deleteLinkedObject( this );
-		
-		cout << "m_Pos2( " << m_Pos2 << " )->deleteLinkedObject( " << this << " );" << endl;
-		m_Pos2->deleteLinkedObject( this );
-	}
- 
-}
- 
-*/
 
 /**
  * Gibt die Position der dritten Ecke des Dreiecks zurück
@@ -195,13 +174,20 @@ void BB_Triangle::generateXElement( QTextStream &out, int depth )
 	out << BB::indent( depth ) << "</" << getClassName().toLower() << ">\n";
 }
 
-
+/**
+ * @fn BB_DrawObject::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
+ */
 void BB_Triangle::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height )
 {
 	/* Hier keine Implementation */    
 	
 }
 
+/**
+ * Richtet die Punken so, dass Dreieck immer nach oben zeigt<br>
+ * Diese Funktion wird von Renderer benoetigt.
+ * @author Vaceslav Ustinov
+ */
 void BB_Triangle::normalize(){
 	
 	//Positionsvectoren
@@ -216,7 +202,7 @@ void BB_Triangle::normalize(){
 	//NormalVektor
 	C3dVector n= vr1.getNormalVector( vr2);
 	if (n.z() > 0){
-		qDebug("Falsche Richtung beim Dreieck");
+// 		qDebug("Falsche Richtung beim Dreieck");
 		BB_Point * tmp =m_Pos2;
 		m_Pos2 = m_Pos3;
 		m_Pos3 = tmp;
@@ -224,7 +210,12 @@ void BB_Triangle::normalize(){
 
 	}
 }
+
+
+/**
+ * Wird aufgerufen, wenn das Dreieck bewegt oder verändert wird.
+ * @author Alex Letkemann
+ */
 void BB_Triangle::moveEvent(){
-// 	BB_Line::moveEvent();
 	normalize();
 }

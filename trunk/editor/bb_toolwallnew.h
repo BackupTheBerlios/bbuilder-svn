@@ -38,7 +38,7 @@ public:
     ~BB_ToolWallNew();
 
 	/**
-	 * @fn BB_AbstractTool::getToolWidget()
+	 * @fn getToolWidget()
 	 */
     virtual BB_AbstractToolWidget* getToolWidget();
 

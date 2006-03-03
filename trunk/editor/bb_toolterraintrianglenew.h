@@ -15,8 +15,8 @@
 #include <bb_tooltrianglenew.h>
 
 /**
- * Werkzeug zum Erstellen von Geländeflächen.<br />
- * Die Geländefläche wird durch mehrere Dreiecke markiert.<br />
+ * Werkzeug zum Erstellen von Geländeflächen.<br>
+ * Die Geländefläche wird durch mehrere Dreiecke markiert.<br>
  * Diese Geländefläche-Dreiecke werden durch Anclicken von drei verschiedenen Geländepunkten erstellt.
  * @author Alex Letkemann <alex@letkemann.de>
  */
@@ -34,7 +34,7 @@ public:
     ~BB_ToolTerrainTriangleNew();
 
 	/**
-	 * @fn BB_AbstractTool::getToolWidget()
+	 * @fn getToolWidget()
 	 */
     virtual BB_AbstractToolWidget* getToolWidget();
 	

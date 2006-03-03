@@ -15,7 +15,7 @@
 #include <bb_point.h>
 
 /**
- * Navigationspunkt.<br />
+ * Navigationspunkt.<br>
  * Ein Navigationspunkt kann Indizierte werden, oder auch nicht.
  * Indizierte Navigationspunkte sind die Stellen, die man im Menu des Renderers auswählen kann und sich dahin leiten lassen kann.
  * Die nicht Indizierten Punkte tauchen im Menu nicht auf, sie dienen nur als Zwischenpunkte auf der Route.
@@ -49,7 +49,8 @@ public:
 	bool getIndexed() const;
 	
 	/**
-	 * @fn BB_Object::getClassName()
+	 * Gibt den Klassennamen zurück
+	 * @return Klassenname
 	 */
     virtual const QString getClassName();
 	
