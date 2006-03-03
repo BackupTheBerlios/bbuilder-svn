@@ -24,23 +24,47 @@
 #include "ui_textureOpenDialog.h"
 
 /**
-Ein Dialog zum Offnen von Texture Bildern
- 
-	@author Vaceslav Ustinov <v.ustinov@web.de>
+Ein Dialog zum Offnen von Texturen
+Dieser Dialog benutzt in QT-Designer erstelte GUI und abgeleitet von QDialog
+@see QT::QDialog
+@author Vaceslav Ustinov <v.ustinov@web.de>
 */
 class BB_DlgOpenTexture : public QDialog
 {
         Q_OBJECT;
     public:
-        BB_DlgOpenTexture( QWidget * parent = 0, Qt::WFlags f = 0);
-
+        /**
+        Standart Konstruktor
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
+        BB_DlgOpenTexture( QWidget * parent = 0, Qt::WFlags f = 0 );
+        /**
+        Dekonstruktor
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
         ~BB_DlgOpenTexture();
+        /**
+        Gibt ausgewählte Dateiname zurück
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
         QString getTextureFile() const;
-		void setTextureFile(QString pfad);
+        /**
+        Setzt in GUI-Dialog schon vorausgewählte Dateiname
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
+        void setTextureFile( QString pfad );
     protected:
+        /**
+        GUI
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
         Ui_textureOpenDialog m_Dlg;
-
     public slots:
+        /**
+        Wird aufgerufen, wenn beim Dateiauswahl auf "OK" geklick wurde<br>
+        Setzt ausgewählte Dateiname in Dialog fest
+        @author Vaceslav Ustinov <v.ustinov@web.de>
+        */
         void slotTextureFileSearch();
 };
 

@@ -20,37 +20,52 @@
 #include "bb_stair.h"
 #include "bb_point.h"
 
+/**
+Konstruktor ohne Parameter<br>
+Die Positionen werden auf (0;0) gesetzt
+@author Vaceslav Ustinov
+*/
 BB_Stair::BB_Stair()
         : BB_Rect()
 {
     m_Pen.setColor( Qt::black );
-	m_Brush.setColor( Qt::transparent );
-	m_PenSelected.setColor(Qt::black);
+    m_Brush.setColor( Qt::transparent );
+    m_PenSelected.setColor( Qt::black );
 }
 
 
+/**
+Dekonstruktor
+@author Vaceslav Ustinov
+*/
 BB_Stair::~BB_Stair()
 {}
 
 
+/**
+Funktion zum Zeichnen.
+@param BB_Transformer Transformation-Tool, damit es korrekt gezeichnet wird
+@param QPainter Werkzeug zum Zeichnen @see QT::QPainter
+@author Vaceslav Ustinov
+*/
 void BB_Stair::show( BB_Transformer& transformer, QPainter& painter ) const
 {
-	if ( m_Selected )
-	{
-		painter.setPen( m_PenSelected );
-	}
-	else
-	{
-		painter.setPen( m_Pen );
-	}
+    if ( m_Selected )
+    {
+        painter.setPen( m_PenSelected );
+    }
+    else
+    {
+        painter.setPen( m_Pen );
+    }
     // 	painter.setPen( m_Pen );
-    	painter.setBrush( m_Brush );
-//     QBrush brush;
-//     brush.setColor( Qt::blue );
-//     painter.setBrush( m_Brush );
-//     QPen pen;
-//     pen.setColor( Qt::black );
-//     painter.setPen( m_Pen );
+    painter.setBrush( m_Brush );
+    //     QBrush brush;
+    //     brush.setColor( Qt::blue );
+    //     painter.setBrush( m_Brush );
+    //     QPen pen;
+    //     pen.setColor( Qt::black );
+    //     painter.setPen( m_Pen );
 
     QPoint dest1;
     QPoint dest2;
@@ -77,6 +92,12 @@ void BB_Stair::show( BB_Transformer& transformer, QPainter& painter ) const
 
 }
 
+/**
+ * Schreibt das XML-Element von der Treppe in den angegeben Stream. 
+ * @param out Stream, in welchen geschrieben werden soll. 
+ * @param depth Einrückung. 
+ * @author Vaceslav Ustinov
+*/
 void BB_Stair::generateXElement( QTextStream &out, int depth )
 {
     out << BB::indent( depth ) << "<bb_stair id=\"" << getObjectNr()
@@ -86,7 +107,14 @@ void BB_Stair::generateXElement( QTextStream &out, int depth )
     out << BB::indent( depth ) << "</bb_stair>\n";
 }
 
-bool BB_Stair::isHit( const C2dVector& hit ){
-	return false;
+/**
+Funktion uberprüft ob der Punkt auf angegebene Position "hit" liegt
+@param hit Klick-Position
+@author Vaceslav Ustinov
+@return true falls Hit in Treppe liegt, false falls nicht
+*/
+bool BB_Stair::isHit( const C2dVector& hit )
+{
+    return false;
 }
 

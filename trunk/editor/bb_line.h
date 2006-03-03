@@ -81,7 +81,7 @@ class BB_Line : public BB_DrawObject
         bool setPos2( BB_Point* Value );
 
         /**
-        Gibt Pointer Position 2 zurück
+        Gibt Pointer von Position 2 zurück
         @author Vaceslav Ustinov
         @return BB_Point *.
         */

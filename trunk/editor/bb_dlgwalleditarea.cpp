@@ -44,6 +44,7 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
     double hohe_meter = docComponent->getHeight();
     double laenge_pixel = wall->getLength();
     double laenge_meter = docComponent->getMeterPerPixel( laenge_pixel );
+    m_Height = hohe; //*w*
     m_Height = hohe_meter;
     m_Width = laenge_meter;
     m_Proportion = m_Width / m_Height;
@@ -53,7 +54,7 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
     m_PixelWidth = m_PixelHeight * m_Proportion;
     m_ProportionHeight = m_PixelHeight / m_Height;
     m_ProportionWidth = m_PixelWidth / m_Width;
-    setFixedSize ( m_PixelWidth, m_PixelHeight );
+    setFixedSize ( ( int ) m_PixelWidth, ( int ) m_PixelHeight );
     m_Tool = NULL;
     m_DrawObjects = NULL;
     m_DrawObjects = wall->getObjects();
@@ -116,7 +117,9 @@ Wird aufgerufen wenn die Größe von Fenster geändert wurde
 @param QResizeEvent
 */
 void BB_DlgWallEditArea::resizeEvent ( QResizeEvent * re )
-{}
+{
+    re->ignore();
+}
 
 
 /**
@@ -209,8 +212,8 @@ void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
         m_Tool->setSelectionVector( m_Selection );
         m_Tool->setToolObjects( m_ToolObjects );
         m_Tool->setTransformer( &m_transformer );
-//         m_Tool->setScaleHeight( m_ProportionHeight );
-//         m_Tool->setScaleWidth( m_ProportionWidth );
+        //         m_Tool->setScaleHeight( m_ProportionHeight );
+        //         m_Tool->setScaleWidth( m_ProportionWidth );
         //         m_Tool->setTransformer( &m_Transformer );
         // 		m_Tool->setObjects(m_DrawObjects);
         //         m_Tool->setToolObjects( &m_ToolObjects );
@@ -230,8 +233,8 @@ Funktion zum Generieren einer großer Hitergrund-Image, das auf ganze Fenster pa
 void BB_DlgWallEditArea::makeWallTexture( QPainter * p )
 {
     //     p->drawPixmap( 0, 0, m_WallTexture );
-    int k = m_PixelHeight / m_WallTexture.height() ;
-    int n = m_PixelWidth / m_WallTexture.width() ;
+    int k = ( int ) m_PixelHeight / m_WallTexture.height() ;
+    int n = ( int ) m_PixelWidth / m_WallTexture.width() ;
     for ( int i = 0;i <= k ;i++ )
     {
         p->drawPixmap( 0, m_WallTexture.height() * i , m_WallTexture );

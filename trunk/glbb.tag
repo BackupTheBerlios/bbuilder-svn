@@ -2954,6 +2954,13 @@
       <anchor>a0</anchor>
       <arglist>(BB_Point *p1, BB_Point *p2)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_NavigationLine</name>
+      <anchorfile>classBB__NavigationLine.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual const QString</type>
       <name>getClassName</name>
@@ -2972,6 +2979,13 @@
       <anchorfile>classBB__NavigationPoint.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(C2dVector p)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_NavigationPoint</name>
+      <anchorfile>classBB__NavigationPoint.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -3858,6 +3872,13 @@
       <anchor>a0</anchor>
       <arglist>(BB_Doc *doc, QWidget *parent=0, Qt::WFlags f=0)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_TabTerrain</name>
+      <anchorfile>classBB__TabTerrain.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>updateWidget</name>
@@ -4175,6 +4196,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolDelete</name>
+      <anchorfile>classBB__ToolDelete.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>click</name>
@@ -4438,6 +4466,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolNavigationLineNew</name>
+      <anchorfile>classBB__ToolNavigationLineNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_Line *</type>
       <name>createNewLine</name>
@@ -4470,6 +4505,13 @@
       <anchorfile>classBB__ToolNavigationPointNew.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolNavigationPointNew</name>
+      <anchorfile>classBB__ToolNavigationPointNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_AbstractToolWidget *</type>
@@ -4675,6 +4717,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolStair</name>
+      <anchorfile>classBB__ToolStair.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>click</name>
@@ -4712,14 +4761,14 @@
     </member>
     <member kind="variable" protection="protected">
       <type>BB_Point</type>
-      <name>m_Point2</name>
+      <name>m_Point1</name>
       <anchorfile>classBB__ToolStair.html</anchorfile>
       <anchor>p1</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>BB_Point</type>
-      <name>m_Point1</name>
+      <name>m_Point2</name>
       <anchorfile>classBB__ToolStair.html</anchorfile>
       <anchor>p2</anchor>
       <arglist></arglist>
@@ -4931,6 +4980,13 @@
       <anchor>a0</anchor>
       <arglist>(QWidget *parent=0)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolWallNew</name>
+      <anchorfile>classBB__ToolWallNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual BB_AbstractToolWidget *</type>
       <name>getToolWidget</name>
@@ -5003,6 +5059,13 @@
       <anchorfile>classBB__ToolZoom.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_WorkArea *area, QWidget *paret)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_ToolZoom</name>
+      <anchorfile>classBB__ToolZoom.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -5338,6 +5401,13 @@
       <anchor>a0</anchor>
       <arglist>(BB_Doc *doc, BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolBuildingPositionNew</name>
+      <anchorfile>classBB__WidgetToolBuildingPositionNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>clearToolWidget</name>
@@ -5359,32 +5429,32 @@
       <anchor>a4</anchor>
       <arglist>()</arglist>
     </member>
-    <member kind="variable">
+    <member kind="variable" protection="protected">
       <type>Ui::WidgetToolBuildingPositionNew</type>
       <name>m_Ui</name>
       <anchorfile>classBB__WidgetToolBuildingPositionNew.html</anchorfile>
-      <anchor>o0</anchor>
+      <anchor>p0</anchor>
       <arglist></arglist>
     </member>
-    <member kind="variable">
+    <member kind="variable" protection="protected">
       <type>BB_Building *</type>
       <name>m_Building</name>
       <anchorfile>classBB__WidgetToolBuildingPositionNew.html</anchorfile>
-      <anchor>o1</anchor>
+      <anchor>p1</anchor>
       <arglist></arglist>
     </member>
-    <member kind="variable">
+    <member kind="variable" protection="protected">
       <type>BB_BuildingPosition *</type>
       <name>m_BPos</name>
       <anchorfile>classBB__WidgetToolBuildingPositionNew.html</anchorfile>
-      <anchor>o2</anchor>
+      <anchor>p2</anchor>
       <arglist></arglist>
     </member>
-    <member kind="variable">
+    <member kind="variable" protection="protected">
       <type>BB_Doc *</type>
       <name>m_Doc</name>
       <anchorfile>classBB__WidgetToolBuildingPositionNew.html</anchorfile>
-      <anchor>o3</anchor>
+      <anchor>p3</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -5398,6 +5468,13 @@
       <anchorfile>classBB__WidgetToolLineNew.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~BB_WidgetToolLineNew</name>
+      <anchorfile>classBB__WidgetToolLineNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -5431,6 +5508,13 @@
       <anchorfile>classBB__WidgetToolNavigationPointNew.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolNavigationPointNew</name>
+      <anchorfile>classBB__WidgetToolNavigationPointNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -5486,6 +5570,13 @@
       <anchor>a0</anchor>
       <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolPointNew</name>
+      <anchorfile>classBB__WidgetToolPointNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>updateWidget</name>
@@ -5532,6 +5623,13 @@
       <anchorfile>classBB__WidgetToolScale.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolScale</name>
+      <anchorfile>classBB__WidgetToolScale.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -5606,6 +5704,13 @@
       <anchor>a0</anchor>
       <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolTerrainPointNew</name>
+      <anchorfile>classBB__WidgetToolTerrainPointNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>clearToolWidget</name>
@@ -5653,6 +5758,13 @@
       <anchor>a0</anchor>
       <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
     </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolTerrainTriangleNew</name>
+      <anchorfile>classBB__WidgetToolTerrainTriangleNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>clearToolWidget</name>
@@ -5681,11 +5793,11 @@
       <anchor>a5</anchor>
       <arglist>()</arglist>
     </member>
-    <member kind="variable">
+    <member kind="variable" protection="protected">
       <type>Ui::WidgetToolTerrainTriangleNew</type>
       <name>m_Ui</name>
       <anchorfile>classBB__WidgetToolTerrainTriangleNew.html</anchorfile>
-      <anchor>o0</anchor>
+      <anchor>p0</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -5699,6 +5811,13 @@
       <anchorfile>classBB__WidgetToolTriangleNew.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolTriangleNew</name>
+      <anchorfile>classBB__WidgetToolTriangleNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -5721,11 +5840,11 @@
       <anchor>a4</anchor>
       <arglist>()</arglist>
     </member>
-    <member kind="variable">
+    <member kind="variable" protection="protected">
       <type>Ui::WidgetToolTriangleNew</type>
       <name>m_Ui</name>
       <anchorfile>classBB__WidgetToolTriangleNew.html</anchorfile>
-      <anchor>o0</anchor>
+      <anchor>p0</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -5739,6 +5858,13 @@
       <anchorfile>classBB__WidgetToolWallNew.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolWallNew</name>
+      <anchorfile>classBB__WidgetToolWallNew.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -5779,6 +5905,13 @@
       <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(BB_AbstractTool *parentTool, QWidget *parent=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_WidgetToolZoom</name>
+      <anchorfile>classBB__WidgetToolZoom.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -9025,6 +9158,7 @@
     <file>ui_buildingEdit.h</file>
     <file>ui_fileOptions.h</file>
     <file>ui_levelEdit.h</file>
+    <file>ui_projectNew.h</file>
     <file>ui_terrainEdit.h</file>
     <file>ui_textureOpenDialog.h</file>
     <file>ui_toolWidgetBuildingPositionNew.h</file>

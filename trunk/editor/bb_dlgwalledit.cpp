@@ -172,6 +172,7 @@ Abgeleitete Funktion zum Zeichen
 void BB_DlgWallEdit::paintEvent ( QPaintEvent * pe )
 {
     m_CentralWidget->repaint();
+pe->ignore();
 }
 
 /**
@@ -183,6 +184,7 @@ Wird aufgerufen wenn die Größe von Fenster geändert wurde
 void BB_DlgWallEdit::resizeEvent ( QResizeEvent * re )
 {
     m_CentralWidget->update();
+re->ignore();
 }
 
 

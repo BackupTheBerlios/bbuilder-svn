@@ -79,8 +79,9 @@ class BB_Point : public BB_DrawObject
         void setRadius( double r );
         /**
         Funktion uberprüft ob der Punkt auf angegebene Position "hit" liegt
-        @param C2dVector Klick-Position
+        @param hit Klick-Position
         @author Vaceslav Ustinov
+        @return true falls Punkt und hit die gleiche Position haben, false falls nicht
         */
         virtual bool isHit( const C2dVector& hit );
         /**

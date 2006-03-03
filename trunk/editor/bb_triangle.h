@@ -1,7 +1,7 @@
 //
 // C++ Interface: bb_triangle
 //
-// Description: 
+// Description:
 //
 //
 // Author: Alex Letkemann <alex@letkemann.de>, (C) 2005
@@ -25,65 +25,70 @@
  */
 class BB_Triangle : public BB_Line
 {
-public:
-    /**
-     * Konstruktor
-	 * Erstellt ein neues Dreieck mit den Übergebenen Punkten.
-     * @param p1 Position des ersten Punktes
-     * @param p2 Position des zweiten Punktes
-     * @param p3 Position des dritten Punktes
-	 * @author Alex Letkemann
-	 * @date 12.12.2005
-     */
-    BB_Triangle(BB_Point* p1, BB_Point* p2, BB_Point* p3 );
+    public:
+        /**
+         * Konstruktor
+        * Erstellt ein neues Dreieck mit den Übergebenen Punkten.
+         * @param p1 Position des ersten Punktes
+         * @param p2 Position des zweiten Punktes
+         * @param p3 Position des dritten Punktes
+        * @author Alex Letkemann
+        * @date 12.12.2005
+         */
+        BB_Triangle( BB_Point* p1, BB_Point* p2, BB_Point* p3 );
 
-    /**
-     * Destruktor
-     */
-    ~BB_Triangle();
+        /**
+         * Destruktor
+         */
+        ~BB_Triangle();
 
-	
-    virtual bool isHit( const QRectF& rect);
-    virtual bool isHit( const C2dVector& hit);
-    virtual const QString getClassName();
-	virtual void moveEvent();
-	/**
-	Richtet die Punken so, dass Dreieck immer nach oben zeigt<br>
-	Diese Funktion wird von Renderer benoetigt.
-	@author Vaceslav Ustinov
-	*/
-	virtual void normalize();
-	
-	/**
-	 * @see virtual void BB_DrawObject::show(BB_Transformer& transformer, QPainter& painter) const=0
-	 */
-    virtual void show(BB_Transformer& transformer, QPainter& painter) const;
-    
-	/**
-	 * Setzt die dritte Position (Ecke) der Trinagle.
-	 * @param point Pointer auf einen Punkt. Wird auf NULL geprüft.
-	 * @return False im Fehlerfall, sonst true
-	 */
-	bool setPos3(BB_Point* value);
-	
 
-	/**
-	 * Gibt einen Pointer auf den Punkt der dritten Position zurück.
-	 * @return Pointer auf den Punkt der dritten Position.
-	 */
-	BB_Point* getPos3() const;
-    virtual void generateXElement(QTextStream &out, int depth);
-	
-	/** Pointer auf die dritte Position */
-	BB_Point* m_Pos3;
-	
-protected:
-	
-	/**
-	 * Virtuelle Funktion für weitere abgeleitete Klassen.
-	 * 
-	 */
-	virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
+        virtual bool isHit( const QRectF& rect );
+        virtual bool isHit( const C2dVector& hit );
+        virtual const QString getClassName();
+        virtual void moveEvent();
+        /**
+        Richtet die Punken so, dass Dreieck immer nach oben zeigt<br>
+        Diese Funktion wird von Renderer benoetigt.
+        @author Vaceslav Ustinov
+        */
+        virtual void normalize();
+
+        /**
+         * @see virtual void BB_DrawObject::show(BB_Transformer& transformer, QPainter& painter) const=0
+         */
+        virtual void show( BB_Transformer& transformer, QPainter& painter ) const;
+
+        /**
+         * Setzt die dritte Position (Ecke) der Trinagle.
+         * @param point Pointer auf einen Punkt. Wird auf NULL geprüft.
+         * @return False im Fehlerfall, sonst true
+         */
+        bool setPos3( BB_Point* value );
+
+
+        /**
+         * Gibt einen Pointer auf den Punkt der dritten Position zurück.
+         * @return Pointer auf den Punkt der dritten Position.
+         */
+        BB_Point* getPos3() const;
+        virtual void generateXElement( QTextStream &out, int depth );
+
+        /** Pointer auf die dritte Position */
+        BB_Point* m_Pos3;
+
+    protected:
+
+        /**
+        * Virtuelle Funktion für weitere abgeleitete Klassen.
+        * @param triangles Vektor, an den die Dreiecke angehängt werden.
+        * @param vector Positionsektor
+        * @param rotation Rotation der Dreiecke
+        * @param scale Skalierung der Dreiecke
+        * @param height Hier keine Funktion
+        * @author Alex Letkemann
+        */
+        virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
 };
 
 #endif
