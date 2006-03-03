@@ -59,7 +59,9 @@ Die Methode wird aufgerufen, wenn die Maus bei beliebiger gedrückter Maustaste 
 @author Vaceslav Ustinov <v.ustinov@web.de>
 */
 void BB_ToolWindowNew::move( QMouseEvent* me, bool overX, bool overY )
-{}
+{
+me->ignore();
+}
 
 /**
 Wird aufgerufen, wenn eine Maustaste los gelassen wird.
@@ -67,5 +69,7 @@ Wird aufgerufen, wenn eine Maustaste los gelassen wird.
 @author Vaceslav Ustinov <v.ustinov@web.de>
 */
 void BB_ToolWindowNew::release( QMouseEvent* me )
-{}
+{
+me->ignore();
+}
 

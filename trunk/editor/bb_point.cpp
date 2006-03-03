@@ -129,10 +129,10 @@ void BB_Point::show( BB_Transformer& transformer, QPainter& painter ) const
     // 	painter.setBrush( m_Brush );
 
     //painter.drawEllipse(dest.x() - m_Radius, dest.y() - m_Radius, m_Radius*2, m_Radius*2);
-    painter.drawRect( dest.x() - m_Radius, dest.y() - m_Radius, m_Radius * 2, breite );
-    painter.drawRect( dest.x() - m_Radius, dest.y() + m_Radius - breite, m_Radius * 2, breite );
-    painter.drawRect( dest.x() - m_Radius, dest.y() - m_Radius + breite, breite, m_Radius * 2 - breite * 2 );
-    painter.drawRect( dest.x() + m_Radius - breite, dest.y() - m_Radius + breite, breite, m_Radius * 2 - breite * 2 );
+    painter.drawRect( ( int ) ( dest.x() - m_Radius ), ( int ) ( dest.y() - m_Radius ), ( int ) ( m_Radius * 2 ), breite );
+    painter.drawRect( ( int ) ( dest.x() - m_Radius ), ( int ) ( dest.y() + m_Radius - breite ), ( int ) ( m_Radius * 2 ), breite );
+    painter.drawRect( ( int ) ( dest.x() - m_Radius ), ( int ) ( dest.y() - m_Radius + breite ), breite, ( int ) ( m_Radius * 2 - breite * 2 ) );
+    painter.drawRect( ( int ) ( dest.x() + m_Radius - breite ), ( int ) ( dest.y() - m_Radius + breite ), breite, ( int ) ( m_Radius * 2 - breite * 2 ) );
     //     painter.setBrush( QColor( 0, 200, 0 ) );
     //     painter.setPen( QColor( 0, 200, 0 ) );
     painter.drawRect( dest.x() - breite, dest.y() - breite,
@@ -418,7 +418,7 @@ void BB_Point::addObject( BB_DrawObject * newObject )
 */
 QPoint BB_Point::getQPoint()
 {
-    return QPoint( m_Pos.x(), m_Pos.y() );
+    return QPoint( ( int ) m_Pos.x(), ( int ) m_Pos.y() );
 }
 
 /**

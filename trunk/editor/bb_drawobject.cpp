@@ -62,7 +62,6 @@ void BB_DrawObject::moveBy( C2dVector pMove )
 
 void BB_DrawObject::show(BB_Transformer& transformer,QPainter& painter) const
 {
-    /// @todo implement me
 }
 
 
