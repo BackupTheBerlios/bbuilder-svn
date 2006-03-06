@@ -174,15 +174,15 @@ void BR_MainWindow::initMenus()
 
 
     /* Neues Menu 'Navigation' erzeugen*/
-    m_MenuNavi = new QMenu( QString::fromUtf8( "&Navigation" ) );
+//     m_MenuNavi = new QMenu( QString::fromUtf8( "&Navigation" ) );
 
     /* Menu 'Navigation' deaktivieren, da es erst beim Laden eines Projektes gefüllt wird */
-    m_MenuNavi->setEnabled( false );
+//     m_MenuNavi->setEnabled( false );
 
     /* Menus in die Menubar einhängen */
     m_MainMenuBar->addMenu( m_MenuFile );
     m_MainMenuBar->addMenu( m_MenuView );
-    m_MainMenuBar->addMenu( m_MenuNavi );
+//     m_MainMenuBar->addMenu( m_MenuNavi );
 }
 
 

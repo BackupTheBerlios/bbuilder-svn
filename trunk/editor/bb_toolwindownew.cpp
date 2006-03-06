@@ -60,7 +60,9 @@ Die Methode wird aufgerufen, wenn die Maus bei beliebiger gedrückter Maustaste 
 */
 void BB_ToolWindowNew::move( QMouseEvent* me, bool overX, bool overY )
 {
-me->ignore();
+	overX = false;
+	overY = false;
+	me->ignore();
 }
 
 /**

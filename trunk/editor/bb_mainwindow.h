@@ -112,7 +112,7 @@ protected:
 	QMenu *m_MenuFile;
 	
 	/** 'Ansicht'-Menu der Menubar*/
-	QMenu *m_MenuView;
+// 	QMenu *m_MenuView;
 	
 	/** 'Projekt'-Menu der Menubar */
     QMenu* m_MenuProject;
@@ -121,7 +121,7 @@ protected:
     QAction* m_aProjectClose;
     QAction* m_aProjectNew;
     QAction* m_aProjectOpen;
-    QAction* m_aViewOptions;
+//     QAction* m_aViewOptions;
 	QAction* m_aFileSave;
 	QAction* m_aFileExit;
 	

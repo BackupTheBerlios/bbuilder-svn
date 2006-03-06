@@ -64,7 +64,9 @@ Die Methode wird aufgerufen, wenn die Maus bei beliebiger gedrückter Maustaste 
 */
 void BB_ToolDoorNew::move( QMouseEvent* me, bool overX, bool overY )
 {
-    cout << "::move( QMouseEvent* me, bool overX, bool overY )" << endl;
+//     cout << "::move( QMouseEvent* me, bool overX, bool overY )" << endl;
+	overX = false;
+	overY = false;
     me->ignore();
 }
 

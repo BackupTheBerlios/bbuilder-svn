@@ -64,7 +64,7 @@ void BB_MainWindow::initMenus()
 {
     m_MenuFile = new QMenu( QString::fromUtf8( "Datei" ) );
 
-    m_MenuView = new QMenu( QString::fromUtf8( "Ansicht" ) );
+//     m_MenuView = new QMenu( QString::fromUtf8( "Ansicht" ) );
 
     m_MenuProject = new QMenu( QString::fromUtf8( "Projekt" ) );
 
@@ -72,7 +72,7 @@ void BB_MainWindow::initMenus()
     m_MenuFile->addSeparator();
     m_MenuFile->addAction( m_aFileExit );
 
-    m_MenuView->addAction( m_aViewOptions );
+//     m_MenuView->addAction( m_aViewOptions );
 
     m_MenuProject->addAction( m_aProjectNew );
     m_MenuProject->addAction( m_aProjectOpen );
@@ -81,7 +81,7 @@ void BB_MainWindow::initMenus()
     m_MainMenuBar = new QMenuBar();
 
     m_MainMenuBar->addMenu( m_MenuFile );
-    m_MainMenuBar->addMenu( m_MenuView );
+//     m_MainMenuBar->addMenu( m_MenuView );
     m_MainMenuBar->addMenu( m_MenuProject );
 
 
@@ -306,8 +306,8 @@ void BB_MainWindow::initActions()
     m_aProjectClose = new QAction( QString::fromUtf8( "Projekt schliessen" ), this );
     connect( m_aProjectClose, SIGNAL( triggered() ), this, SLOT( slotProjectClose() ) );
 
-    m_aViewOptions = new QAction( QString::fromUtf8( "Einstellungen" ), this );
-    connect( m_aViewOptions, SIGNAL( triggered() ), this, SLOT( slotViewOptions() ) );
+//     m_aViewOptions = new QAction( QString::fromUtf8( "Einstellungen" ), this );
+//     connect( m_aViewOptions, SIGNAL( triggered() ), this, SLOT( slotViewOptions() ) );
 }
 
 
