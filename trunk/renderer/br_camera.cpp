@@ -215,7 +215,7 @@ void BR_Camera::CheckCameraCollision( CVector3 *pVertices, int numOfVerts )
 
             // Once we have the offset to the plane, we just subtract it from the center
             // of the sphere.  "vIntersection" is now a point that lies on the plane of the triangle.
-            CVector3 vIntersection = m_vPosition - vOffset;
+			CVector3 vIntersection = m_vPosition - vOffset;
 
             // 3) STEP THREE - Check if the intersection point is inside the triangles perimeter
 
@@ -251,10 +251,6 @@ void BR_Camera::CheckCameraCollision( CVector3 *pVertices, int numOfVerts )
                 m_Camera.setY( m_vPosition.y );
                 m_Camera.setZ( m_vPosition.z );
 
-//                 m_vView = m_vView + vOffset;
-//                 m_ViewPoint.setX( m_vView.x );
-//                 m_ViewPoint.setY( m_vView.y );
-//                 m_ViewPoint.setZ( 1 );
             }
         }
     }

@@ -21,7 +21,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle" >
-   <string>Gelände bearbeiten</string>
+   <string>Etage bearbeiten</string>
   </property>
   <layout class="QGridLayout" >
    <property name="margin" >

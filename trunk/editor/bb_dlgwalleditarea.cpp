@@ -233,8 +233,8 @@ Funktion zum Generieren einer großer Hitergrund-Image, das auf ganze Fenster pa
 void BB_DlgWallEditArea::makeWallTexture( QPainter * p )
 {
     //     p->drawPixmap( 0, 0, m_WallTexture );
-    int k = ( int ) m_PixelHeight / m_WallTexture.height() ;
-    int n = ( int ) m_PixelWidth / m_WallTexture.width() ;
+	int k = (int) (m_PixelHeight / m_WallTexture.height()) ;
+	int n = (int) (m_PixelWidth / m_WallTexture.width()) ;
     for ( int i = 0;i <= k ;i++ )
     {
         p->drawPixmap( 0, m_WallTexture.height() * i , m_WallTexture );

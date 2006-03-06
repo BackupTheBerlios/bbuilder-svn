@@ -30,10 +30,10 @@ int main(int argc, char *argv[])
 	
     app.setQuitOnLastWindowClosed(true);
 	
-	QFont f;
-	f.setStyleHint(QFont::System, QFont::PreferDefault);
+// 	QFont f;
+// 	f.setStyleHint(QFont::System, QFont::PreferDefault);
 			
-	app.setFont(f);
+// 	app.setFont(f);
 
 	BB_MainWindow MainWindow;
 	MainWindow.show();

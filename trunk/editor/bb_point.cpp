@@ -126,33 +126,12 @@ void BB_Point::show( BB_Transformer& transformer, QPainter& painter ) const
         painter.setBrush( m_Brush );
     }
 
-    // 	painter.setBrush( m_Brush );
-
-    //painter.drawEllipse(dest.x() - m_Radius, dest.y() - m_Radius, m_Radius*2, m_Radius*2);
     painter.drawRect( ( int ) ( dest.x() - m_Radius ), ( int ) ( dest.y() - m_Radius ), ( int ) ( m_Radius * 2 ), breite );
     painter.drawRect( ( int ) ( dest.x() - m_Radius ), ( int ) ( dest.y() + m_Radius - breite ), ( int ) ( m_Radius * 2 ), breite );
     painter.drawRect( ( int ) ( dest.x() - m_Radius ), ( int ) ( dest.y() - m_Radius + breite ), breite, ( int ) ( m_Radius * 2 - breite * 2 ) );
     painter.drawRect( ( int ) ( dest.x() + m_Radius - breite ), ( int ) ( dest.y() - m_Radius + breite ), breite, ( int ) ( m_Radius * 2 - breite * 2 ) );
-    //     painter.setBrush( QColor( 0, 200, 0 ) );
-    //     painter.setPen( QColor( 0, 200, 0 ) );
-    painter.drawRect( dest.x() - breite, dest.y() - breite,
-                      breite * 2, breite * 2 );
+    painter.drawRect( dest.x() - breite, dest.y() - breite, breite * 2, breite * 2 );
 
-    //  EDIT: Alex Letkemann: Andere Selektionsmarkierung implementiert
-    //     if ( m_Selected )
-    //     {
-    //         painter.setBrush( QColor( 0, 0, 200 ) );
-    //         painter.setPen( QColor( 0, 0, 200 ) );
-    //         painter.drawText( dest.x() - m_Radius - breite, dest.y() - m_Radius - breite, "->" );
-    //         painter.drawRect( dest.x() - m_Radius - breite, dest.y() - m_Radius - breite,
-    //                           breite, breite );
-    //         painter.drawRect( dest.x() - m_Radius - breite, dest.y() + m_Radius,
-    //                           breite, breite );
-    //         painter.drawRect( dest.x() + m_Radius, dest.y() - m_Radius - breite,
-    //                           breite, breite );
-    //         painter.drawRect( dest.x() + m_Radius, dest.y() + m_Radius,
-    //                           breite, breite );
-    //     }
 }
 
 
@@ -184,11 +163,6 @@ Funktion uberprüft ob der Punkt auf angegebene Position "hit" liegt
 */
 bool BB_Point::isHit( const C2dVector& hit )
 {
-    //isHit von Kreis
-    //         double abstand = m_Pos.getAbstand(hit);
-    //         if(abstand <= (m_Radius + m_hitRange))
-    //                 return true;
-    //         return false;
 
     //isHit von Viereck
     if ( m_scale > 20 )
@@ -196,14 +170,13 @@ bool BB_Point::isHit( const C2dVector& hit )
         m_scale = 1;
         qDebug( "Scale wurede auf eins gesetzt" );
     }
-    cout << "hit: x-> " << hit.x() << " y-> " << hit.y() << endl;
+
     double abstandX = fabs ( ( hit.x() - m_Pos.x() ) );
     double abstandY = fabs ( ( hit.y() - m_Pos.y() ) );
-    cout << "abstandX: " << abstandX << "abstandY : " << abstandY << endl;
-    //   cout << "scale:" << m_scale<<endl;
+
     if ( abstandX <= ( m_Radius / m_scale ) && abstandY <= ( m_Radius / m_scale ) )
     {
-        cout << "point hittrue " << m_scale << endl;
+
         return true;
     }
     return false;
@@ -305,7 +278,6 @@ QStandardItemModel * BB_Point::getItemModel()
 {
     QStandardItemModel * model = new QStandardItemModel( 4, 2 );
     QModelIndex index = model->index( 0, 0, QModelIndex() );
-    //model->setData(index, QVariant((row+1) * (column+1)));
     model->setData( index, QVariant( "m_Color" ) );
     index = model->index( 0, 1, QModelIndex() );
     model->setData( index, QVariant( "Red" ) );
@@ -324,18 +296,16 @@ Löscht vollständig ein Objekt aus dem Vektor.
 */
 void BB_Point::deleteLinkedObject( BB_DrawObject * object )
 {
-    cout << "deleteLinkedObject( " << object << " )" << endl;
+
 
     if ( object == NULL )
     {
         cout << "Null Pointer an Funktion 'BB_Point::deleteLinkedObject(BB_DrawObject * object)' ubergeben" << endl;
         return ;
     }
-    //     if ( removeLinkedObject( object ) != NULL )
-    //     {
-    cout << "delete " << object << ";" << endl;
+
     delete object;
-    //     }
+
 }
 
 
@@ -348,7 +318,7 @@ Entfernt ein Objekt aus dem Vektor.<br>Instantz wird nicht gelöscht
 */
 void BB_Point::removeLinkedObject( BB_DrawObject * object )
 {
-    //     cout << "BB_Point::removeLinkedObject( " << object << " )" << endl;
+
     if ( object == NULL )
     {
         cout << "Null Pointer an Funktion 'BB_Point::removeLinkedObject(BB_DrawObject * object)' ubergeben" << endl;
@@ -391,7 +361,7 @@ void BB_Point::deleteLinkedObjects( QVector< BB_DrawObject * >* objects )
             tmp_object = objects->at( j );
             if ( tmp_object == tmp )
             {
-                // 				cout << "delete " << tmp << endl;
+
                 objects->remove( j );
                 delete tmp;
             }
