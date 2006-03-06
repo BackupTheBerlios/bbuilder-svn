@@ -1049,6 +1049,13 @@
       <arglist>(QWidget *parent=0, Qt::WFlags f=0)</arglist>
     </member>
     <member kind="function">
+      <type></type>
+      <name>~BB_DlgOpenTexture</name>
+      <anchorfile>classBB__DlgOpenTexture.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
       <type>QString</type>
       <name>getTextureFile</name>
       <anchorfile>classBB__DlgOpenTexture.html</anchorfile>
@@ -2157,6 +2164,13 @@
       <anchorfile>classBB__DrawObject.html</anchorfile>
       <anchor>a0</anchor>
       <arglist>(QString name=&quot;&quot;)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~BB_DrawObject</name>
+      <anchorfile>classBB__DrawObject.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
@@ -3405,6 +3419,20 @@
     <name>BB_Stair</name>
     <filename>classBB__Stair.html</filename>
     <base>BB_Rect</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_Stair</name>
+      <anchorfile>classBB__Stair.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>~BB_Stair</name>
+      <anchorfile>classBB__Stair.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>show</name>
@@ -6220,6 +6248,32 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>BB_XDocGenerator</name>
+    <filename>classBB__XDocGenerator.html</filename>
+    <base>BB_XGenerator</base>
+    <member kind="function">
+      <type></type>
+      <name>BB_XDocGenerator</name>
+      <anchorfile>classBB__XDocGenerator.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>(BB_Doc *doc)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>write</name>
+      <anchorfile>classBB__XDocGenerator.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(QIODevice *device)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>BB_Doc *</type>
+      <name>m_Doc</name>
+      <anchorfile>classBB__XDocGenerator.html</anchorfile>
+      <anchor>p0</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>BB_XDocHandler</name>
     <filename>classBB__XDocHandler.html</filename>
     <base>BB_XHandler</base>
@@ -6284,6 +6338,45 @@
       <name>m_BuidingNr</name>
       <anchorfile>classBB__XDocHandler.html</anchorfile>
       <anchor>p4</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BB_XGenerator</name>
+    <filename>classBB__XGenerator.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>BB_XGenerator</name>
+      <anchorfile>classBB__XGenerator.html</anchorfile>
+      <anchor>a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~BB_XGenerator</name>
+      <anchorfile>classBB__XGenerator.html</anchorfile>
+      <anchor>a1</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual bool</type>
+      <name>write</name>
+      <anchorfile>classBB__XGenerator.html</anchorfile>
+      <anchor>a2</anchor>
+      <arglist>(QIODevice *device)=0</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static QString</type>
+      <name>indent</name>
+      <anchorfile>classBB__XGenerator.html</anchorfile>
+      <anchor>e0</anchor>
+      <arglist>(int depth)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>QTextStream</type>
+      <name>m_Stream</name>
+      <anchorfile>classBB__XGenerator.html</anchorfile>
+      <anchor>p0</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -8850,7 +8943,7 @@
   </compound>
   <compound kind="dir">
     <name>editor/</name>
-    <path>/home/alex/Studium/SE.Projekt/glbb/editor/</path>
+    <path>/home/high/programming/bbuilder/editor/</path>
     <filename>dir_000000.html</filename>
     <file>bb.cpp</file>
     <file>bb.h</file>
@@ -9009,8 +9102,12 @@
     <file>bb_workframe.h</file>
     <file>bb_xbuildinghandler.cpp</file>
     <file>bb_xbuildinghandler.h</file>
+    <file>bb_xdocgenerator.cpp</file>
+    <file>bb_xdocgenerator.h</file>
     <file>bb_xdochandler.cpp</file>
     <file>bb_xdochandler.h</file>
+    <file>bb_xgenerator.cpp</file>
+    <file>bb_xgenerator.h</file>
     <file>bb_xhandler.cpp</file>
     <file>bb_xhandler.h</file>
     <file>bb_xlevelhandler.cpp</file>
@@ -9023,7 +9120,7 @@
   </compound>
   <compound kind="dir">
     <name>renderer/</name>
-    <path>/home/alex/Studium/SE.Projekt/glbb/renderer/</path>
+    <path>/home/high/programming/bbuilder/renderer/</path>
     <filename>dir_000001.html</filename>
     <file>3dmath.cpp</file>
     <file>3dmath.h</file>

@@ -20,6 +20,7 @@
 #include "bb_dlgwalleditarea.h"
 #include "bb_dlgwalledit.h"
 #include "bb_level.h"
+#include "bb_building.h"
 #include "bb_window.h"
 
 #include <iostream>
@@ -43,7 +44,8 @@ BB_DlgWallEditArea::BB_DlgWallEditArea( BB_Wall * wall, BB_DocComponent * docCom
     //zum testen, feste hoehe von 3,2 meter
     double hohe_meter = docComponent->getHeight();
     double laenge_pixel = wall->getLength();
-    double laenge_meter = docComponent->getMeterPerPixel( laenge_pixel );
+    double laenge_meter;
+    laenge_meter = docComponent->getMeterPerPixel( laenge_pixel );
     m_Height = hohe; //*w*
     m_Height = hohe_meter;
     m_Width = laenge_meter;
@@ -83,7 +85,7 @@ BB_DlgWallEditArea::~BB_DlgWallEditArea()
 
 /**
 Abgeleitete Funktion zum Zeichen
-@param QPaintEvent
+@param pe QPaintEvent
 */
 void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
 {
@@ -114,7 +116,7 @@ void BB_DlgWallEditArea::paintEvent ( QPaintEvent * pe )
 /**
 Abgeleitete Funktion zum Anpassen von Breite und Höhe<br>
 Wird aufgerufen wenn die Größe von Fenster geändert wurde
-@param QResizeEvent
+@param re QResizeEvent
 */
 void BB_DlgWallEditArea::resizeEvent ( QResizeEvent * re )
 {
@@ -181,7 +183,7 @@ void BB_DlgWallEditArea::mouseMoveEvent( QMouseEvent* me )
 
 /**
 Setzt das Tool <b>tool</b> als aktiv (ausgewählt) ein
-@param BB_AbstractTool
+@param tool BB_AbstractTool
 */
 void BB_DlgWallEditArea::setTool( BB_AbstractTool * tool )
 {
@@ -233,8 +235,8 @@ Funktion zum Generieren einer großer Hitergrund-Image, das auf ganze Fenster pa
 void BB_DlgWallEditArea::makeWallTexture( QPainter * p )
 {
     //     p->drawPixmap( 0, 0, m_WallTexture );
-	int k = (int) (m_PixelHeight / m_WallTexture.height()) ;
-	int n = (int) (m_PixelWidth / m_WallTexture.width()) ;
+    int k = ( int ) ( m_PixelHeight / m_WallTexture.height() ) ;
+    int n = ( int ) ( m_PixelWidth / m_WallTexture.width() ) ;
     for ( int i = 0;i <= k ;i++ )
     {
         p->drawPixmap( 0, m_WallTexture.height() * i , m_WallTexture );

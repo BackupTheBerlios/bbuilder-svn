@@ -34,9 +34,9 @@ C3dTriangle::C3dTriangle() : C3dLine()
     m_VN2 = ( m_V2 - m_V0 ).getNormalVector( m_V0 - m_V1 ).unitVector();
 
     m_ClassEnum = GL_TRIANGLES;
-	m_Texture = 0;
-	m_Collision = true;
-	m_Visible = true;
+    m_Texture = 0;
+    m_Collision = true;
+    m_Visible = true;
 }
 
 /**
@@ -52,7 +52,7 @@ C3dTriangle::C3dTriangle( const C3dVector& v0,
                           const CColorRGBA& color ) : C3dLine( v0, v1, v_X, v_X, t0, t1, color )
 {
     if ( &v2 != NULL &&
-            &t2 != NULL )
+         &t2 != NULL )
     {
         m_V2 = v2;
 
@@ -62,14 +62,14 @@ C3dTriangle::C3dTriangle( const C3dVector& v0,
         m_VTex2 = t2;
 
         m_ClassEnum = GL_TRIANGLES;
-		m_Texture = 0;
+        m_Texture = 0;
     }
     else
     {
         cout << "NULL-Pointer bei C3dTriangle::C3dTriangle(...)" << endl;
     }
-	m_Collision = true;
-	m_Visible = true;
+    m_Collision = true;
+    m_Visible = true;
 }
 
 
@@ -85,8 +85,8 @@ C3dTriangle::C3dTriangle( const C3dVector& v0,
                           const CColorRGBA& color ) : C3dLine( v0, v1, n0, n1, t0, t1, color )
 {
     if ( &v2 != NULL &&
-            &n2 != NULL &&
-            &t2 != NULL )
+         &n2 != NULL &&
+         &t2 != NULL )
     {
         m_V2 = v2;
 
@@ -96,14 +96,14 @@ C3dTriangle::C3dTriangle( const C3dVector& v0,
         m_VTex2 = t2;
 
         m_ClassEnum = GL_TRIANGLES;
-		m_Texture = 0;
+        m_Texture = 0;
     }
     else
     {
         cout << "NULL-Pointer bei C3dTriangle::C3dTriangle(...)" << endl;
     }
-	m_Collision = true;
-	m_Visible = true;
+    m_Collision = true;
+    m_Visible = true;
 }
 
 
@@ -124,20 +124,19 @@ C3dTriangle::C3dTriangle( C3dPoint& p1, C3dPoint& p2, C3dPoint& p3, CColorRGBA& 
         m_VTex2 = p3.getVTex0();
 
         m_ClassEnum = GL_TRIANGLES;
-		m_Texture = 0;
+        m_Texture = 0;
     }
     else
     {
         cout << "NULL-Pointer bei C3dTriangle::C3dTriangle(...)" << endl;
     }
-	m_Collision = true;
-	m_Visible = true;
+    m_Collision = true;
+    m_Visible = true;
 }
 
 
 C3dTriangle::~C3dTriangle()
-{
-}
+{}
 
 /** Returns the GL_XXX constant that has to be used with glBegin to draw the object. e.g. GL_TRIANGLES
  */
@@ -208,7 +207,7 @@ void C3dTriangle::stretch( double sx, double sy, double sz )
 /**
  * Kopierfunktion
  */
-void C3dTriangle::copy( const C3dTriangle& toCopy ) 
+void C3dTriangle::copy( const C3dTriangle& toCopy )
 {
     if ( &toCopy != NULL )
     {
@@ -303,31 +302,31 @@ void C3dTriangle::setV2( const C3dVector& _newVal )
 }
 
 
-/**!
+/**
  * Zeichnet das Dreieck
  */
 void C3dTriangle::show() const
 {
     glColor3fv( m_Color.fv() );
-		
-	if(m_Texture != 0)
-	{
-		glEnable(GL_TEXTURE_2D);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glBindTexture(GL_TEXTURE_2D, m_Texture);
-	}
-	else
-	{
-		glDisable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
-	
+
+    if ( m_Texture != 0 )
+    {
+        glEnable( GL_TEXTURE_2D );
+        glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+        glBindTexture( GL_TEXTURE_2D, m_Texture );
+    }
+    else
+    {
+        glDisable( GL_TEXTURE_2D );
+        glBindTexture( GL_TEXTURE_2D, 0 );
+    }
+
     glBegin( GL_TRIANGLES );
     draw();
     glEnd();
-	
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glDisable(GL_TEXTURE_2D);
+
+    glBindTexture( GL_TEXTURE_2D, 0 );
+    glDisable( GL_TEXTURE_2D );
 }
 
 
@@ -336,23 +335,23 @@ void C3dTriangle::show() const
  */
 bool C3dTriangle::createTexture( const QImage& texture )
 {
-	bool exit = false;
+    bool exit = false;
 
-	if( texture.width() != 0 && texture.height() != 0 )
+    if ( texture.width() != 0 && texture.height() != 0 )
     {
 
 
         QImage tex1, buf;
 
-		buf = texture;
-		if ( texture.depth() == 32 )
+        buf = texture;
+        if ( texture.depth() == 32 )
         {
-			tex1 = QGLWidget::convertToGLFormat( buf );
+            tex1 = QGLWidget::convertToGLFormat( buf );
         }
         else
         {
-			buf = buf.convertToFormat( QImage::Format_RGB32 );
-			tex1 = QGLWidget::convertToGLFormat( buf );
+            buf = buf.convertToFormat( QImage::Format_RGB32 );
+            tex1 = QGLWidget::convertToGLFormat( buf );
         }
 
         glGenTextures( 1, &m_Texture );
@@ -368,18 +367,21 @@ bool C3dTriangle::createTexture( const QImage& texture )
         m_Color = cl_White;
         exit = true;
     }
-	
-	glBindTexture( GL_TEXTURE_2D, 0 );
-	glDisable(GL_TEXTURE_2D);
-	return exit;
-	
-}
-void C3dTriangle::setCollision(bool value){
-	m_Collision = value;
+
+    glBindTexture( GL_TEXTURE_2D, 0 );
+    glDisable( GL_TEXTURE_2D );
+    return exit;
+
 }
 
-bool C3dTriangle::getCollision() const{
-	return m_Collision;
+void C3dTriangle::setCollision( bool value )
+{
+    m_Collision = value;
+}
+
+bool C3dTriangle::getCollision() const
+{
+    return m_Collision;
 }
 
 

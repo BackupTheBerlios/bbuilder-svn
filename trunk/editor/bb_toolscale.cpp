@@ -20,17 +20,14 @@ using namespace std;
 
 
 BB_ToolScale::BB_ToolScale( QWidget * parent )
-        : BB_AbstractTool(parent)
+        : BB_AbstractTool( parent )
 {
     m_Parent = parent;
     m_MovePoint = NULL;
     m_ScaleLine = NULL;
-
-	m_Icon = QIcon(IMG_DIR() + SEPARATOR() + "toolScale.png");
-
     /* Alle Objekte ausblenden */
     m_ShowDrawObjects = false;
-	m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolScale.png" );
+    m_Icon = QIcon( IMG_DIR() + SEPARATOR() + "toolScale.png" );
 }
 
 
@@ -70,7 +67,7 @@ void BB_ToolScale::move( QMouseEvent* me, bool overX, bool overY )
 
 void BB_ToolScale::release( QMouseEvent* me )
 {
-	( ( BB_WidgetToolScale* ) getToolWidget() ) ->setLogicalScale( getLogicalScale() );
+    ( ( BB_WidgetToolScale* ) getToolWidget() ) ->setLogicalScale( getLogicalScale() );
     m_MovePoint = NULL;
     me->ignore();
 }
@@ -146,8 +143,8 @@ void BB_ToolScale::updateWidget()
 {
     if ( m_Component != NULL )
     {
-		( ( BB_WidgetToolScale* ) getToolWidget() ) ->setLogicalScale( getLogicalScale() );
-		( ( BB_WidgetToolScale* ) getToolWidget() ) ->setRealScale( m_Component->getScaleRealPointer() );
+        ( ( BB_WidgetToolScale* ) getToolWidget() ) ->setLogicalScale( getLogicalScale() );
+        ( ( BB_WidgetToolScale* ) getToolWidget() ) ->setRealScale( m_Component->getScaleRealPointer() );
     }
 }
 
@@ -157,10 +154,10 @@ void BB_ToolScale::updateWidget()
  */
 BB_AbstractToolWidget* BB_ToolScale::getToolWidget()
 {
-	if( m_ToolWidget == NULL )
-	{
-		m_ToolWidget = new BB_WidgetToolScale( this );
-	}
-	
-	return m_ToolWidget;
+    if ( m_ToolWidget == NULL )
+    {
+        m_ToolWidget = new BB_WidgetToolScale( this );
+    }
+
+    return m_ToolWidget;
 }

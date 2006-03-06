@@ -504,11 +504,11 @@ void BB_Wall::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doubl
 
 
         double x, y, l, h, factor;
-        factor = 10;
+        factor = 0.3;
 
         x = img.width();
         y = img.height();
-        l = getLength() / factor * scale;
+        l = getLength() / factor;
         h = height / factor;
 
         tV1.setX( 0.0 );

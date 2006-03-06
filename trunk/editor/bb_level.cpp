@@ -292,3 +292,24 @@ void BB_Level::createGl( QVector<C3dTriangle>& triangles, C3dVector vector, doub
 		m_DrawObjects.at( i )->createGl( triangles, vector ,rotation , scale, m_Height * height  );
 	}
 }
+/**
+ * Gibt die Länge der Pixel in Metern zurück
+ * @param pixel Pixel
+ * @return Meter
+ * @author Vaceslav Ustinov
+ */
+double BB_Level::getMeterPerPixel( double pixel )
+{
+    return getBuilding()->getMeterPerPixel(pixel);
+}
+
+/**
+ * Gibt die Länge der Meter in Pixeln zurück
+ * @param meter Meter
+ * @return Pixel
+ * @author Vaceslav Ustinov
+ */
+double BB_Level::getPixelPerMeter( double meter )
+{
+    return getBuilding()->getPixelPerMeter(meter);
+}

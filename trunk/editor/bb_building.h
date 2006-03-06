@@ -46,7 +46,7 @@ class BB_Building : public BB_DocComponent
 
         /**
          * Destruktor
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         virtual ~BB_Building();
 
@@ -54,7 +54,7 @@ class BB_Building : public BB_DocComponent
          * Rüft ein Dialog auf, mit welchem einige Eigenschaften des Gebäudes geändert werden können. 
          * @param parent Fenster, welches Blockiert wird, solange der Dialog offen ist.
          * @return Ergebnis des Dialoges
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         virtual int keyBoardEdit( QWidget* parent );
 
@@ -62,41 +62,41 @@ class BB_Building : public BB_DocComponent
          * Schreibt das Gebäude in Form von XML in den übergebenen Stream 'out'.
          * @param out Stream, in welchen geschrieben wird.
          * @return Erfolg des Schreibens
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         virtual bool write( QTextStream &out );
 
         /**
-		 * Gibt den Klassennamen zurück
-		 * @return Klassenname
-		 */
+        * Gibt den Klassennamen zurück
+        * @return Klassenname
+        */
         virtual const QString getClassName();
 
 
         /**
          * Löscht alle Dateien des Gebäudes
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         void remove();
 
         /**
          * Fügt die übergebene Etage dem Gebäude hinzu.
          * @param level Etage, die dem Gebäude hinzugefügt werden soll.
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         void addLevel( BB_Level* level );
 
         /**
          * Gibt den Vektor mit allen Etagen zurück.
          * @return Vektor mit allen Etagen.
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         QVector<BB_Level*>* getLevels();
 
         /**
          * Entfernt die übergebene Etage aus dem Gebäude.
          * @param level Etage, die aus dem gebäude entfernt werden soll.
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         void removeLevel( BB_Level* level );
 
@@ -104,21 +104,21 @@ class BB_Building : public BB_DocComponent
          * Gibt die Etage nach ihrem Index zurück.
          * @param index Index der Etage.
          * @return Pointer auf die Etage, falls diese Existiert sonst NULL.
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         BB_Level* getLevel( int index );
 
         /**
          * Gibt die Anzahl der Etagen im Gebäude zurück.
          * @return Anzahl der Etagen im Gebäude.
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         int getLevelCount();
 
         /**
          * Gibt die Höhe des Gebäudes zurück.
          * @return Höhe des Gebäudes.
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         virtual double getHeight() const;
 
@@ -130,7 +130,7 @@ class BB_Building : public BB_DocComponent
          * @param rotation Rotation des Gebäudes in der Y-Achse
          * @param scale Skalierung des Gebäudes
          * @param height Hier keine Funktion
-		 * @author Alex Letkemann
+        * @author Alex Letkemann
          */
         virtual void createGl( QVector<C3dTriangle>& triangles, C3dVector vector, double rotation, double scale, double height );
 
